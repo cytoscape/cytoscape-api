@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:osgi="http://www.springframework.org/schema/osgi"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+		http://www.springframework.org/schema/osgi 
+		http://www.springframework.org/schema/osgi/spring-osgi-1.0.xsd"
+	default-lazy-init="false">
+
+
+	<!--
+	This code registers the bean we just created "sampleAnalyzerImpl" as an 
+	OSGi service of a particular type (org.cytoscape.task.NetworkTaskFactory).
+	By registering your bean as a service, it will become available to all
+	users interested in services of that particular type.
+	The service properties are metadata that can be used elsewhere in the
+	system to identify and otherwise control how the service gets use 
+	(like determining which menu to put the service in).
+	-->
+	
+
+</beans>
