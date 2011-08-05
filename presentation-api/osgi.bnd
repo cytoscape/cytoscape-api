@@ -1,0 +1,6 @@
+#-----------------------------------------------------------------
+# Use this file to add customized Bnd instructions for the bundle
+#-----------------------------------------------------------------
+
+Import-Package: *
+Export-Package: org.cytoscape.view.presentation, org.cytoscape.view.presentation.property, org.cytoscape.view.presentation.events, org.cytoscape.view.presentation.property.values
