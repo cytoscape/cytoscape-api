@@ -1,0 +1,7 @@
+#-----------------------------------------------------------------
+# Use this file to add customized Bnd instructions for the bundle
+#-----------------------------------------------------------------
+
+
+Export-Package: ${bundle.namespace}, ${bundle.namespace}.*, ${bundle.namespace}.table.*
+
