@@ -3,9 +3,8 @@
 
   <parent>
     <groupId>org.cytoscape</groupId>
-    <artifactId>parent</artifactId>
-    <version>3.0.0-alpha7</version>
-		<relativePath>../parent</relativePath>
+    <artifactId>api-parent</artifactId>
+    <version>3.0.0-alpha6-SNAPSHOT</version>
   </parent>
 
   <properties>
@@ -16,7 +15,6 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.cytoscape</groupId>
   <artifactId>layout-api</artifactId>
-  <version>3.0.0-alpha3-SNAPSHOT</version>
 
   <name>${bundle.symbolicName}</name>
 
