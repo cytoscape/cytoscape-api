@@ -1,0 +1,60 @@
+<project 
+	xmlns="http://maven.apache.org/POM/4.0.0" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>parent</artifactId>
+		<groupId>org.cytoscape</groupId>
+		<version>3.0.0-alpha8-SNAPSHOT</version>
+		<relativePath>../parent</relativePath>
+	</parent>
+
+	<groupId>org.cytoscape</groupId>
+	<artifactId>api-parent</artifactId>
+	<packaging>pom</packaging>
+	<version>3.0.0-alpha6-SNAPSHOT</version>
+	<name>Cytoscape API Parent Project POM</name>
+
+	<modules>
+		<module>event-api</module>
+		<module>model-api</module>
+		<module>viewmodel-api</module>
+		<module>core-task-api</module>
+		<module>dnd-api</module>
+		<module>equations-api</module>
+		<module>io-api</module>
+		<module>layout-api</module>
+		<module>plugin-api</module>
+		<module>presentation-api</module>
+		<module>property-api</module>
+		<module>session-api</module>
+		<module>swing-application-api</module>
+		<module>vizmap-api</module>
+		<module>vizmap-gui-api</module>
+		<module>webservice-api</module>
+		<module>work-api</module>
+		<module>work-swing-api</module>
+		<module>service-api</module>
+		<module>swing-util-api</module>
+		<module>work-spring-api</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-all</artifactId>
+				<version>${mockito.version}</version> 
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+</project> 
