@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:osgi="http://www.springframework.org/schema/osgi"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+                      http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi-1.0.xsd"
+	default-lazy-init="false">
+
+	<osgi:reference id="cytoscapePropertiesServiceRef" 
+		interface="org.cytoscape.property.CyProperty"
+		filter="(cyPropertyName=coreSettings)" />
+		
+	<osgi:service id="fileUtilService" ref="fileUtil"
+		interface="org.cytoscape.util.swing.FileUtil" />
+		
+	<osgi:service id="openBrowserService" ref="openBrowser"
+		interface="org.cytoscape.util.swing.OpenBrowser" />		
+</beans>
