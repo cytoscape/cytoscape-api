@@ -20,12 +20,6 @@
 
 	<packaging>bundle</packaging>
 
-	<scm>
-		<connection>scm:svn:http://chianti.ucsd.edu/svn/core3/work-swing-api/trunk</connection>
-		<developerConnection>scm:svn:svn+ssh://grenache.ucsd.edu/cellar/common/svn/core3/work-swing-api/trunk</developerConnection>
-		<url>http://chianti.ucsd.edu/svn/core3/work-swing-api/trunk</url>
-	</scm>
-
 	<repositories>
 		<!--
 			bootstrap for cytoscape dependencies, namely the parent POM snapshots

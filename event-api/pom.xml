@@ -20,12 +20,6 @@
 
 	<packaging>bundle</packaging>
 
-	<scm>
-	  <connection>scm:svn:http://chianti.ucsd.edu/svn/core3/event-api/trunk</connection>
-	  <developerConnection>scm:svn:svn+ssh://grenache.ucsd.edu/cellar/common/svn/core3/event-api/trunk</developerConnection>
-	  <url>http://chianti.ucsd.edu/svn/core3/event-api/trunk</url>
-	</scm>
-
 
 	<build>
 	  <resources>

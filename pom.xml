@@ -57,4 +57,10 @@
 		</dependencies>
 	</dependencyManagement>
 
+	<scm>
+		<connection>${scm.connection.root}/api/trunk</connection>
+		<developerConnection>${scm.dev.connection.root}/api/trunk</developerConnection>
+		<url>${scm.url.root}/api/trunk</url>
+	</scm>
+
 </project> 

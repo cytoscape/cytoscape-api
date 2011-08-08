@@ -18,12 +18,6 @@
 
   <name>${bundle.symbolicName}</name>
 
-    <scm>
-        <connection>scm:svn:http://chianti.ucsd.edu/svn/core3/layout-api/trunk</connection>
-        <developerConnection>scm:svn:svn+ssh://grenache.ucsd.edu/cellar/common/svn/core3/layout-api/trunk</developerConnection>
-        <url>http://chianti.ucsd.edu/svn/core3/layout-api/trunk</url>
-    </scm>
-
   <packaging>bundle</packaging>
 
 	<build>

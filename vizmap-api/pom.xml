@@ -21,12 +21,6 @@
 
 	<packaging>bundle</packaging>
 
-	<scm>
-		<connection>scm:svn:http://chianti.ucsd.edu/svn/core3/vizmap-api/trunk</connection>
-		<developerConnection>scm:svn:svn+ssh://grenache.ucsd.edu/cellar/common/svn/core3/vizmap-api/trunk</developerConnection>
-		<url>http://chianti.ucsd.edu/svn/core3/vizmap-api/trunk</url>
-	</scm>
-
 	<build>
 		<plugins>
 			<plugin>
