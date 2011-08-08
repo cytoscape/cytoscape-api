@@ -112,20 +112,18 @@
 		<dependency>
 			<groupId>org.cytoscape</groupId>
 			<artifactId>viewmodel-api</artifactId>
-			<version>3.0.0-alpha5-SNAPSHOT</version>
+			<version>${project.version}</version>
 		</dependency>
 
 		<!-- For Testing -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>${junit.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
-			<version>1.8.1</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
