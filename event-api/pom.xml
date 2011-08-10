@@ -13,7 +13,6 @@
 	</properties>
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.cytoscape</groupId>
 	<artifactId>event-api</artifactId>
 
 	<name>${bundle.symbolicName} [${bundle.namespace}]</name>
@@ -39,26 +38,21 @@
 	    </resource>
 	  </resources>
 	  <plugins>
-	    <plugin>
-              <groupId>org.ops4j</groupId>
-              <artifactId>maven-pax-plugin</artifactId>
-              <version>${maven-pax-plugin.version}</version>
-              <extensions>true</extensions>
-	    </plugin>
-	    <plugin>
-              <groupId>org.apache.felix</groupId>
-              <artifactId>maven-bundle-plugin</artifactId>
-              <version>${maven-bundle-plugin.version}</version>
-              <configuration>
-		<instructions>
-		  <Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
-		  <Bundle-Version>${project.version}</Bundle-Version>
-		  <Export-Package>!${bundle.namespace}.internal.*,${bundle.namespace}.*;version="${project.version}"</Export-Package>
-		  <Private-Package>${bundle.namespace}.internal.*</Private-Package>
-		  <_include>-osgi.bnd</_include>
-		</instructions>
-              </configuration>
-	    </plugin>
+		    <plugin>
+		<groupId>org.apache.felix</groupId>
+		<artifactId>maven-bundle-plugin</artifactId>
+		<version>${maven-bundle-plugin.version}</version>
+		<extensions>true</extensions>
+		<configuration>
+			<instructions>
+				<Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
+				<Bundle-Version>${project.version}</Bundle-Version>
+				<Export-Package>!${bundle.namespace}.internal.*,${bundle.namespace}.*;version="${project.version}"</Export-Package>
+				<Private-Package>${bundle.namespace}.internal.*</Private-Package>
+				<_include>-osgi.bnd</_include>
+			</instructions>
+		</configuration>
+	</plugin>
 	    <plugin>
               <groupId>org.apache.maven.plugins</groupId>
               <artifactId>maven-jar-plugin</artifactId>
