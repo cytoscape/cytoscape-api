@@ -57,6 +57,16 @@
 		</dependencies>
 	</dependencyManagement>
 
+    <!-- Shared dependency for all projects. -->
+    <dependencies>
+        <dependency>
+            <groupId>org.ops4j.pax.logging</groupId>
+            <artifactId>pax-logging-api</artifactId>
+            <version>1.5.2</version>
+            <scope>provided</scope>
+        </dependency>
+    </dependencies>
+
 	<scm>
 		<connection>${scm.connection.root}/api/trunk</connection>
 		<developerConnection>${scm.dev.connection.root}/api/trunk</developerConnection>
