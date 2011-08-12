@@ -25,6 +25,7 @@
 	<context:annotation-config/>
 
 	<bean id="cyServiceRegistrar" class="org.cytoscape.service.util.internal.CyServiceRegistrarImpl">
+		<constructor-arg ref="bundleContext" />
 	</bean>
 
 </beans>

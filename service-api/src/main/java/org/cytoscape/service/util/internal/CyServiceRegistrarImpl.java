@@ -9,21 +9,17 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration; 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.osgi.context.BundleContextAware;
 
-public class CyServiceRegistrarImpl implements CyServiceRegistrar, BundleContextAware {
+public class CyServiceRegistrarImpl implements CyServiceRegistrar {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CyServiceRegistrarImpl.class);
 	
-	private BundleContext bc;
+	private final BundleContext bc;
 	private Map<Class,Map<Object,ServiceRegistration>> refs;
 	
-	public CyServiceRegistrarImpl() {
-		refs = new HashMap<Class,Map<Object,ServiceRegistration>>();
-	}
-
-	public void setBundleContext(BundleContext bc) {
+	public CyServiceRegistrarImpl(BundleContext bc) {
 		this.bc = bc;
+		refs = new HashMap<Class,Map<Object,ServiceRegistration>>();
 	}
 
 	public void registerAllServices(Object o, Dictionary props) {
