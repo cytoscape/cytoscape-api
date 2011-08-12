@@ -38,8 +38,8 @@ public abstract class AbstractCyEdgeTest {
 	
 	protected CyNetwork net;
 
-	private CyEdge eDir;
-	private CyEdge eUndir;
+	protected CyEdge eDir;
+	protected CyEdge eUndir;
 	private CyNode n1;
 	private CyNode n2;
 	private CyNode n3;
