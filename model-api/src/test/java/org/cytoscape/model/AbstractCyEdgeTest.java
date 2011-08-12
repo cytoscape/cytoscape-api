@@ -29,10 +29,13 @@ package org.cytoscape.model;
 
 
 import static org.junit.Assert.*;
+
+import org.junit.Before;
 import org.junit.Test;
 
 
 public abstract class AbstractCyEdgeTest {
+	
 	protected CyNetwork net;
 
 	private CyEdge eDir;
@@ -41,7 +44,7 @@ public abstract class AbstractCyEdgeTest {
 	private CyNode n2;
 	private CyNode n3;
 
-	private void defaultSetUp() {
+	protected void defaultSetUp() {
 		n1 = net.addNode();
 		n2 = net.addNode();
 		n3 = net.addNode();
@@ -53,21 +56,18 @@ public abstract class AbstractCyEdgeTest {
 
 	@Test
 	public void testIsDirected() {
-		defaultSetUp();
 		assertTrue("eDir is directed", eDir.isDirected());
 		assertFalse("eUndir is undirected", eUndir.isDirected());
 	}
 
 	@Test
 	public void testGetIndex() {
-		defaultSetUp();
 		assertTrue("edge index >= 0", eDir.getIndex() >= 0);
 		assertTrue("edge index >= 0", eUndir.getIndex() >= 0);
 	}
 
 	@Test
 	public void testGetSource() {
-		defaultSetUp();
 		assertNotNull("source exists", eDir.getSource());
 		assertTrue("source is a CyNode", eDir.getSource() instanceof CyNode);
 
@@ -83,7 +83,6 @@ public abstract class AbstractCyEdgeTest {
 
 	@Test
 	public void testGetTarget() {
-		defaultSetUp();
 		assertNotNull("target exists", eDir.getTarget());
 		assertTrue("target is a CyNode", eDir.getTarget() instanceof CyNode);
 
@@ -99,7 +98,6 @@ public abstract class AbstractCyEdgeTest {
 
 	@Test
 	public void testToString() {
-		defaultSetUp();
 		assertNotNull("string is not null", eDir.toString());
 		assertNotNull("string is not null", eUndir.toString());
 		assertTrue("string has non zero length", eDir.toString().length() > 0);
@@ -108,8 +106,6 @@ public abstract class AbstractCyEdgeTest {
 
 	@Test
 	public void testDefaultAttributes() {
-		defaultSetUp();
-
 		CyNode n1 = net.addNode();
 		CyNode n2 = net.addNode();
 		CyEdge e1 = net.addEdge(n1,n2,true);
