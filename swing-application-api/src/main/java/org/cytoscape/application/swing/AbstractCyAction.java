@@ -37,10 +37,10 @@ import javax.swing.KeyStroke;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.PopupMenuEvent;
 
+import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
-import org.cytoscape.session.CyApplicationManager;
 import org.cytoscape.view.model.CyNetworkView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

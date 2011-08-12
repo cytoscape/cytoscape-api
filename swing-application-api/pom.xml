@@ -12,9 +12,9 @@
 	</properties>
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.cytoscape</groupId>
 	<artifactId>swing-application-api</artifactId>
 	<name>Cytoscape Swing Application API</name>
+	
 	<packaging>bundle</packaging>
 
 	<build>
@@ -78,6 +78,11 @@
 		<dependency>
 			<groupId>org.cytoscape</groupId>
 			<artifactId>session-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.cytoscape</groupId>
+			<artifactId>application-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		
