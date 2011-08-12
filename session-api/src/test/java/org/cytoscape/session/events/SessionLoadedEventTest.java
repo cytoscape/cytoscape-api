@@ -1,9 +1,9 @@
 package org.cytoscape.session.events;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -12,7 +12,6 @@ import java.util.Set;
 import org.cytoscape.model.CyTableMetadata;
 import org.cytoscape.property.bookmark.Bookmarks;
 import org.cytoscape.property.session.Cysession;
-import org.cytoscape.session.CyApplicationManager;
 import org.cytoscape.session.CySession;
 import org.cytoscape.session.CySessionManager;
 import org.cytoscape.view.model.CyNetworkView;
