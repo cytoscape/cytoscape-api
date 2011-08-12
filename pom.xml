@@ -1,7 +1,5 @@
-<project 
-	xmlns="http://maven.apache.org/POM/4.0.0" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
 	<modelVersion>4.0.0</modelVersion>
 
@@ -39,6 +37,7 @@
 		<module>service-api</module>
 		<module>swing-util-api</module>
 		<module>work-spring-api</module>
+		<module>application-api</module>
 	</modules>
 
 	<dependencyManagement>
@@ -72,4 +71,4 @@
 		<url>${scm.url.root}/api/trunk</url>
 	</scm>
 
-</project> 
+</project>
