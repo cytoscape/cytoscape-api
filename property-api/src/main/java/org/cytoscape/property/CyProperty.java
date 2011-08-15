@@ -10,7 +10,6 @@ package org.cytoscape.property;
  * property objects of other types to be registered in this way as well.
  */
 public interface CyProperty<P> {
-	public static final String DEFAULT_CONFIG_DIR = ".cytoscape";
 
 	enum SavePolicy {
 		/** These properties are preset by Cytoscape to some default value and

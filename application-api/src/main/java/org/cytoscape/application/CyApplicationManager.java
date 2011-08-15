@@ -30,7 +30,10 @@
 package org.cytoscape.application;
 
 
+import java.io.File;
+import java.net.URL;
 import java.util.List;
+import java.util.Set;
 
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyTable;
@@ -43,6 +46,7 @@ import org.cytoscape.view.presentation.RenderingEngine;
  * views and rendering engines in an instance of Cytoscape.
  */
 public interface CyApplicationManager {
+	
 	/**
 	 * Provides access to the current network.
 	 * @return the current network or null if there is no current network
@@ -117,4 +121,6 @@ public interface CyApplicationManager {
 	 * @param table The table that should be made current.
 	 */
 	public void setCurrentTable(CyTable table);
+	
+	
 }
