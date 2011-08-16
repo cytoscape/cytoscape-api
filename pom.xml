@@ -36,7 +36,6 @@
 		<module>work-swing-api</module>
 		<module>service-api</module>
 		<module>swing-util-api</module>
-		<module>work-spring-api</module>
 		<module>application-api</module>
 		<module>di-util-api</module>
 	</modules>
