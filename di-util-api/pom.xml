@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
-
 	<parent>
 		<artifactId>api-parent</artifactId>
 		<groupId>org.cytoscape</groupId>
@@ -8,13 +7,13 @@
 	</parent>
 
 	<properties>
-		<bundle.symbolicName>org.cytoscape.work-spring-api</bundle.symbolicName>
-		<bundle.namespace>org.cytoscape.work.spring</bundle.namespace>
+		<bundle.symbolicName>org.cytoscape.di-util-api</bundle.symbolicName>
+		<bundle.namespace>org.cytoscape.di.util</bundle.namespace>
 	</properties>
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>org.cytoscape</groupId>
-	<artifactId>work-spring-api</artifactId>
+	<artifactId>di-util-api</artifactId>
 
 	<name>${bundle.symbolicName}</name>
 
@@ -58,8 +57,7 @@
 					<instructions>
 						<Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
 						<Bundle-Version>${project.version}</Bundle-Version>
-						<Export-Package>!${bundle.namespace}.internal.*,${bundle.namespace}.*;version="${project.version}"</Export-Package>
-						<Private-Package>${bundle.namespace}.internal.*</Private-Package>
+						<Export-Package>${bundle.namespace}.*;version="${project.version}"</Export-Package>
 					</instructions>
 				</configuration>
 			</plugin>
@@ -68,17 +66,10 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.cytoscape</groupId>
-			<artifactId>work-api</artifactId>
-			<version>${project.version}</version>
-			<scope>provided</scope>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-core</artifactId>
 			<version>${spring.version}</version>
 			<scope>provided</scope>
 		</dependency>
 	</dependencies>
-
 </project>

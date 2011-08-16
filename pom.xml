@@ -38,6 +38,7 @@
 		<module>swing-util-api</module>
 		<module>work-spring-api</module>
 		<module>application-api</module>
+		<module>di-util-api</module>
 	</modules>
 
 	<dependencyManagement>
