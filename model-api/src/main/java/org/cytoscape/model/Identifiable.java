@@ -44,6 +44,11 @@ package org.cytoscape.model;
 public interface Identifiable {
 	
 	/**
+	 * This will be used as column name of SUID.
+	 */
+	static final String SUID = "SUID";
+	
+	/**
 	 * Returns the SUID of the implementing object.
 	 * @return the SUID of the implementing object.
 	 */
