@@ -157,7 +157,8 @@ class FileUtilImpl implements FileUtil {
 					return results;
 				}
 			} finally {
-				System.setProperty("apple.awt.fileDialogForDirectories", fileDialogForDirectories);
+				if(fileDialogForDirectories != null)
+					System.setProperty("apple.awt.fileDialogForDirectories", fileDialogForDirectories);
 			}
 
 			return null;
