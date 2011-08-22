@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2010, The Cytoscape Consortium (www.cytoscape.org)
+ Copyright (c) 2010-2011, The Cytoscape Consortium (www.cytoscape.org)
 
  This library is free software; you can redistribute it and/or modify it
  under the terms of the GNU Lesser General Public License as published
@@ -91,8 +91,16 @@ public abstract class AbstractCyTableManagerTest {
 
 	@Test
 	public void testReset() {
+		mgr.addTable(goodNetwork.getDefaultNodeTable());
 		assertFalse(mgr.getAllTables(true).isEmpty());
 		mgr.reset();
 		assertTrue(mgr.getAllTables(true).isEmpty());
+	}
+
+	@Test
+	public void testAddTable() {
+		mgr.addTable(goodNetwork.getDefaultNodeTable());
+		assertEquals(goodNetwork.getDefaultNodeTable(),
+		             mgr.getTable(goodNetwork.getDefaultNodeTable().getSUID()));
 	}
 }

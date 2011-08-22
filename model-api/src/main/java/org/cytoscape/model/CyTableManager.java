@@ -59,6 +59,11 @@ public interface CyTableManager {
 	 */
 	Set<CyTableMetadata> getAllTables(boolean includePrivate);
 
+	/** Registers a new table with the manager and fires a TableAddedEvent event.
+	 *  @param table a non-null CyTable that will be added to the manager
+	 */
+	void addTable(CyTable table);
+
 	/**
 	 * Returns the table with the specified SUID. 
 	 * @param suid The SUID identifying the CyTable.
