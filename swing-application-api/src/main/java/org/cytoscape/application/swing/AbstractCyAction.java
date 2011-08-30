@@ -432,11 +432,12 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		}
 
 		// If any of nodes are selected, enable this.
-		if (network.getDefaultNodeTable().getMatchingRows(CyNetwork.SELECTED, Boolean.class).isEmpty()
-		    && network.getDefaultEdgeTable().getMatchingRows(CyNetwork.SELECTED, Boolean.class).isEmpty())
+		if (network.getDefaultNodeTable().getMatchingRows(CyNetwork.SELECTED, Boolean.TRUE).isEmpty() &&
+		    network.getDefaultEdgeTable().getMatchingRows(CyNetwork.SELECTED, Boolean.TRUE).isEmpty()) 
 			setEnabled(false);
-		else
+		else 
 			setEnabled(true);
+		
 	}
 
 	/**
@@ -453,7 +454,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 			return;
 		}
 
-		setEnabled(!network.getDefaultNodeTable().getMatchingRows(CyNetwork.SELECTED, Boolean.class).isEmpty());
+		setEnabled(!network.getDefaultNodeTable().getMatchingRows(CyNetwork.SELECTED, Boolean.TRUE).isEmpty());
 	}
 
 	/**
@@ -471,7 +472,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 			return;
 		}
 
-		setEnabled(!network.getDefaultEdgeTable().getMatchingRows(CyNetwork.SELECTED, Boolean.class).isEmpty());
+		setEnabled(!network.getDefaultEdgeTable().getMatchingRows(CyNetwork.SELECTED, Boolean.TRUE).isEmpty());
 	}
 
 	private void enableForTable() {
