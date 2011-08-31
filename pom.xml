@@ -66,11 +66,11 @@
 	</dependencies>
 
 	<scm>
-		<connection>scm:svn:http://chianti.ucsd.edu/svn/core3/api/trunk</connection>
-		<developerConnection>scm:svn:svn+ssh://grenache.ucsd.edu/cellar/common/svn/core3/api/trunk</developerConnection>
-		<url>http://chianti.ucsd.edu/svn/core3/api/trunk</url>
+		<connection>${scm.connection.root}/api/trunk</connection>
+		<developerConnection>${scm.dev.connection.root}/api/trunk</developerConnection>
+		<url>${scm.url.root}/api/trunk</url>
 	</scm>
-
+	
 	<build>
 		<plugins>
 			<plugin>
