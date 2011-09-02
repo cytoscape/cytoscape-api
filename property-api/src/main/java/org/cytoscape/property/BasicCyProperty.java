@@ -13,7 +13,7 @@ public final class BasicCyProperty implements CyProperty<Properties> {
 	/**
 	 * Core Cytoscape Property (Cytoscpae System Property)
 	 */
-	public static final String CORE_PROPRERTY_NAME = "cytoscape.props";
+	public static final String CORE_PROPRERTY_NAME = "cytoscape3.props";
 	
 	private final Properties properties;
 	private final CyProperty.SavePolicy savePolicy;
