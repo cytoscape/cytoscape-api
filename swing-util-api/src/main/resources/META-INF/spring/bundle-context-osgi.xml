@@ -7,7 +7,7 @@
 
 	<osgi:reference id="cytoscapePropertiesServiceRef" 
 		interface="org.cytoscape.property.CyProperty"
-		filter="(cyPropertyName=cytoscape.props)" />
+		filter="(cyPropertyName=cytoscape3.props)" />
 		
 	<osgi:service id="fileUtilService" ref="fileUtil"
 		interface="org.cytoscape.util.swing.FileUtil" />
