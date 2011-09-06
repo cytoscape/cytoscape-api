@@ -6,13 +6,13 @@
 	<parent>
 		<artifactId>parent</artifactId>
 		<groupId>org.cytoscape</groupId>
-		<version>3.0.0-alpha9-SNAPSHOT</version>
+		<version>3.0.0-alpha8</version>
 		<relativePath>../parent</relativePath>
 	</parent>
 
 	<artifactId>api-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>3.0.0-alpha7-SNAPSHOT</version>
+	<version>3.0.0-alpha7</version>
 	<name>Cytoscape API Parent Project POM</name>
 
 	<modules>
@@ -66,9 +66,9 @@
 	</dependencies>
 
 	<scm>
-		<connection>${scm.connection.root}/api/trunk</connection>
-		<developerConnection>${scm.dev.connection.root}/api/trunk</developerConnection>
-		<url>${scm.url.root}/api/trunk</url>
+		<connection>${scm.connection.root}/api/tags/api-parent-3.0.0-alpha7</connection>
+		<developerConnection>${scm.dev.connection.root}/api/tags/api-parent-3.0.0-alpha7</developerConnection>
+		<url>${scm.url.root}/api/tags/api-parent-3.0.0-alpha7</url>
 	</scm>
 	
 	<build>
