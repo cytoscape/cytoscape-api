@@ -2,8 +2,6 @@ package org.cytoscape.view.vizmap.mappings;
 
 import java.util.List;
 
-import org.cytoscape.model.CyTableEntry;
-import org.cytoscape.view.model.View;
 import org.cytoscape.view.vizmap.VisualMappingFunction;
 
 public interface ContinuousMapping<K, V> extends VisualMappingFunction<K,V>{
