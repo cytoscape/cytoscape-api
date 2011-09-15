@@ -3,6 +3,7 @@ package org.cytoscape.equations;
 
 import java.util.HashSet;
 import java.util.Set;
+import java.util.TreeMap;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -22,7 +23,8 @@ public class EquationTest {
 		variableReferences.add("B");
 		code = new Object[2];
 		sourceLocations = new int[] { 12, 117 };
-		eqn = new Equation("=$A+$B", variableReferences, code, sourceLocations, Long.class);
+		eqn = new Equation("=$A+$B", variableReferences, new TreeMap<String, Object>(), code,
+		                   sourceLocations, Long.class);
 	}
 
 	@Test
@@ -52,7 +54,9 @@ public class EquationTest {
 
 	@Test
 	public void testEqualsWithExpectedSuccess() {
-		final Equation other = new Equation("=$A+$B", variableReferences, code, sourceLocations, Long.class);
+		final Equation other =
+			new Equation("=$A+$B", variableReferences, new TreeMap<String, Object>(),
+			             code, sourceLocations, Long.class);
 		assertTrue("equals() failed!", eqn.equals(other));
 	}
 

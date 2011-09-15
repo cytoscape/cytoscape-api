@@ -1,7 +1,7 @@
 /*
   File: Equation.java
 
-  Copyright (c) 2010, The Cytoscape Consortium (www.cytoscape.org)
+  Copyright (c) 2010-2011, The Cytoscape Consortium (www.cytoscape.org)
 
   This library is free software; you can redistribute it and/or modify it
   under the terms of the GNU Lesser General Public License as published
@@ -38,27 +38,31 @@ import java.util.Set;
 public final class Equation {
 	private final String equation;
 	private final Set<String> variableReferences;
+	private final Map<String, Object> defaultVariableValues;
 	private final Object[] code;
 	private final int[] sourceLocations;
 	private final Class type;
 
 	/**
 	 *  Constructs an <code>Equation</code>.
-	 *  @param equation            the string representing this equation
-	 *  @param variableReferences  other variables that are referenced by this equation
-	 *  @param code                the instruction sequence representing the compiled equation
-	 *  @param sourceLocations     the starting points in the original equation for each node in the parse tree that resulted from
-	 *                             the original equation
-	 *  @param type                the type of the equation, String.class, Boolean.class or Double.class
+	 *  @param equation              the string representing this equation
+	 *  @param variableReferences    other variables that are referenced by this equation
+	 *  @param defaultVariableValues 
+	 *  @param code                  the instruction sequence representing the compiled equation
+	 *  @param sourceLocations       the starting points in the original equation for each node
+	 *                               in the parse tree that resulted from the original equation
+	 *  @param type                  the type of the equation, String.class, Boolean.class or Double.class
 	 */
-	public Equation(final String equation, final Set<String> variableReferences, final Object[] code,
-	               final int[] sourceLocations, final Class type)
+	public Equation(final String equation, final Set<String> variableReferences,
+	                final Map<String, Object> defaultVariableValues, final Object[] code,
+	                final int[] sourceLocations, final Class type)
 	{
-		this.equation           = equation;
-		this.variableReferences = variableReferences;
-		this.code               = code;
-		this.sourceLocations    = sourceLocations;
-		this.type               = type;
+		this.equation              = equation;
+		this.variableReferences    = variableReferences;
+		this.defaultVariableValues = defaultVariableValues;
+		this.code                  = code;
+		this.sourceLocations       = sourceLocations;
+		this.type                  = type;
 	}
 
 	/** Returns a textual representation of an <code>Equation</code>.
@@ -85,6 +89,11 @@ public final class Equation {
 	 *  @return a set of variables referenced by this <code>Equation</code>
 	 */
 	public Set<String> getVariableReferences() { return variableReferences; }
+
+	/** Returns default values for variable references, if any.
+	 *  @return a map of variable names to their default values, if any
+	 */
+	public Map<String, Object> getDefaultVariableValues() { return defaultVariableValues; }
 
 	/** Returns the compiled code (not Java byte code!) for the VM representing this <code>Equation</code>.
 	 *  @return the code representing this <code>Equation</code>
