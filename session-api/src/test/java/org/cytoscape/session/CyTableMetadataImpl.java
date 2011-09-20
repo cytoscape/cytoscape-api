@@ -1,7 +1,5 @@
 package org.cytoscape.session;
 
-import java.util.Set;
-
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.model.CyTableMetadata;
@@ -35,7 +33,7 @@ public class CyTableMetadataImpl implements CyTableMetadata {
 	}
 
 	@Override
-	public Set<CyNetwork> getCyNetworks() {
+	public CyNetwork getCyNetwork() {
 		return null;
 	}
 
