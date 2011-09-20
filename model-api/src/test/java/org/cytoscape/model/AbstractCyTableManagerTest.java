@@ -28,13 +28,12 @@
 package org.cytoscape.model;
 
 
-import static org.mockito.Mockito.mock;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
-import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.util.Map;
 
 
 public abstract class AbstractCyTableManagerTest {
@@ -48,45 +47,8 @@ public abstract class AbstractCyTableManagerTest {
 	 */
 	protected CyNetwork goodNetwork;
 
-	private CyNetwork badNetwork;
-
 	@Before
 	public void setUp() {
-		badNetwork = mock(CyNetwork.class);
-	}
-
-	@Test
-	public void testGoodNetwork() {
-		assertNotNull( mgr.getTableMap(CyNetwork.class, goodNetwork) );
-		assertNotNull( mgr.getTableMap(CyNode.class, goodNetwork) );
-		assertNotNull( mgr.getTableMap(CyEdge.class, goodNetwork) );
-	}
-
-	@Test
-	public void testBadNetwork() {
-		assertNull( mgr.getTableMap(CyNetwork.class,badNetwork) );
-		assertNull( mgr.getTableMap(CyNode.class,badNetwork) );
-		assertNull( mgr.getTableMap(CyEdge.class,badNetwork) );
-	}
-
-	@Test
-	public void testNullNetwork() {
-		assertNull( mgr.getTableMap(CyNetwork.class,null) );
-		assertNull( mgr.getTableMap(CyNode.class,null) );
-		assertNull( mgr.getTableMap(CyEdge.class,null) );
-	}
-
-	public void testTableNetworkMapHasExpectedTables() throws Exception {
-		checkTableMap( mgr.getTableMap(CyNetwork.class, goodNetwork) );
-		checkTableMap( mgr.getTableMap(CyNode.class, goodNetwork) );
-		checkTableMap( mgr.getTableMap(CyEdge.class, goodNetwork) );
-	}
-
-	private void checkTableMap(Map<String,CyTable> tableMap) {
-		// we should have at least the two default, but others may exist
-		assertTrue(tableMap.size() >= 2);
-		assertTrue(tableMap.keySet().contains(CyNetwork.DEFAULT_ATTRS));
-		assertTrue(tableMap.keySet().contains(CyNetwork.HIDDEN_ATTRS));
 	}
 
 	@Test

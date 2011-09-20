@@ -28,7 +28,6 @@
 package org.cytoscape.model;
 
 
-import java.util.Map;
 import java.util.Set;
 
 
@@ -38,18 +37,6 @@ import java.util.Set;
  */
 public interface CyTableManager {
 	/**
-	 * Returns a map of table names to tables, which contain the attributes 
-	 * for the specified network.
-	 * 
-	 * @param type The type of map to retrieve: CyNode, CyEdge, or CyNetwork (for now).
-	 * @param network The network associated with the map.
-	 * 
-	 * @return a map of table names to tables, which contain the attributes 
-	 * for the specified network.
-	 */
-	public Map<String, CyTable> getTableMap(Class<?> type, CyNetwork network);
-
-	/**
 	 * Returns a Set of all tables with the specified visibility.
 	 * @param includePrivate Whether to include private CyTables
 	 * in the list (i.e. all possible CyTables) or not.
@@ -57,7 +44,7 @@ public interface CyTableManager {
 	 * including private CyTables (i.e. meaning all possible
 	 * CyTables) or just public CyTables.
 	 */
-	Set<CyTableMetadata> getAllTables(boolean includePrivate);
+	Set<CyTable> getAllTables(boolean includePrivate);
 
 	/** Registers a new table with the manager and fires a TableAddedEvent event.
 	 *  @param table a non-null CyTable that will be added to the manager

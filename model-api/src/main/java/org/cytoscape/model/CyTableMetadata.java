@@ -1,10 +1,8 @@
 package org.cytoscape.model;
 
-import java.util.Set;
-
 /**
- * A snapshot of information about the relationships shared between a CyTable
- * instance and any associated CyNetworks.
+ * A snapshot of information about a relationship shared between a CyTable
+ * instance and an associated CyNetworks.
  */
 public interface CyTableMetadata {
 	/**
@@ -25,7 +23,7 @@ public interface CyTableMetadata {
 	 * Returns all the networks associated with this object's table.
 	 * @return all the networks associated with this object's table.
 	 */
-	Set<CyNetwork> getCyNetworks();
+	CyNetwork getCyNetwork();
 	
 	/**
 	 * Returns the namespace used as the key to this object's table in
