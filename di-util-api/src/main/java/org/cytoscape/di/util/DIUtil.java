@@ -1,7 +1,7 @@
 package org.cytoscape.di.util;
 
 
-import org.springframework.core.InfrastructureProxy;
+//import org.springframework.core.InfrastructureProxy;
 
 
 public final class DIUtil {
@@ -14,9 +14,9 @@ public final class DIUtil {
 	 *  @return If "possibleProxy" was a proxy, the underlying wrapped object otherwise "possibleProxy" itself.
 	 */
 	public static <T> T stripProxy(final T possibleProxy) {
-		if (possibleProxy instanceof InfrastructureProxy)
-			return (T)((InfrastructureProxy)possibleProxy).getWrappedObject();
-		else
+//		if (possibleProxy instanceof InfrastructureProxy)
+//			return (T)((InfrastructureProxy)possibleProxy).getWrappedObject();
+//		else
 			return possibleProxy;
 	}
 
@@ -27,11 +27,12 @@ public final class DIUtil {
 	 *  @return the unwrapped proxy objects if they were proxies otherwise the original objects
 	 */
 	public static <T> T[] stripProxies(final T... possibleProxies) {
-		final Object[] unwrappedObjs = new Object[possibleProxies.length];
-		int i = 0;
-		for (final T possibleProxy : possibleProxies)
-			unwrappedObjs[i++] = stripProxy(possibleProxy);
+//		final Object[] unwrappedObjs = new Object[possibleProxies.length];
+//		int i = 0;
+//		for (final T possibleProxy : possibleProxies)
+//			unwrappedObjs[i++] = stripProxy(possibleProxy);
 
-		return (T[])unwrappedObjs;
+//		return (T[])unwrappedObjs;
+		return possibleProxies;
 	}
 }

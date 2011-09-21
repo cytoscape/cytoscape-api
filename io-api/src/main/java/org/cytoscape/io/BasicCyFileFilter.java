@@ -8,6 +8,7 @@ import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URLConnection;
 import java.util.Set;
+import java.util.HashSet;
 import javax.swing.filechooser.FileFilter;
 import org.cytoscape.io.util.StreamUtil;
 import org.slf4j.Logger;
@@ -55,6 +56,28 @@ public class BasicCyFileFilter implements CyFileFilter {
 		this.description = d;
 		this.streamUtil = streamUtil;
 
+	}
+
+	/**
+	 * Creates a file filter from the specified arguments. 
+	 * Note that a "." before the extension is not needed and will be ignored.
+	 * @param extensions The set of valid extensions for this filter.
+	 * @param contentTypes The set of valid MIME content types that this filter should recognize. 
+	 * @param description A human readable description of the filter.
+	 * @param category The type of data this filter is meant to support.
+	 * @param streamUtil An instance of the StreamUtil service.
+	 */
+	public BasicCyFileFilter(final String[] extensions,
+			final String[] contentTypes, final String description,
+			final DataCategory category, StreamUtil streamUtil) {
+		this(createSet(extensions), createSet(contentTypes), description, category, streamUtil);
+	}
+
+	private static Set<String> createSet(String[] values) {
+		Set<String> set = new HashSet<String>();
+		for ( String v : values )
+			set.add(v);
+		return set;
 	}
 
 	/**

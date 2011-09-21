@@ -23,7 +23,7 @@ public class CyServiceRegistrarImpl implements CyServiceRegistrar {
 	}
 
 	public void registerAllServices(Object o, Dictionary props) {
-		for ( Class c : o.getClass().getInterfaces() ) 
+		for ( Class c : RegisterUtil.getAllInterfaces(o.getClass()) ) 
 			registerService(o,c,props);
 	}
 

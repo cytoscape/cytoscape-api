@@ -2,6 +2,6 @@ package org.cytoscape.work.swing;
 
 import org.cytoscape.work.TunableHandlerFactory;
 
-public interface GUITunableHandlerFactory extends TunableHandlerFactory<GUITunableHandler> {
+public interface GUITunableHandlerFactory<T extends GUITunableHandler> extends TunableHandlerFactory<T> {
 
 }

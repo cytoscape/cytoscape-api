@@ -65,11 +65,13 @@
 	</build>
 
 	<dependencies>
+	<!--
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>org.springframework.core</artifactId>
 			<version>${spring.version}</version>
 			<scope>provided</scope>
 		</dependency>
+		-->
 	</dependencies>
 </project>
