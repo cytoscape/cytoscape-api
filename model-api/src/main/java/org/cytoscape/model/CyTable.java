@@ -118,23 +118,45 @@ public interface CyTable extends Identifiable {
 
 	/**
 	 * Create a column of the specified name and the specified type. The column
-	 * type is limited to Integer, Long, Double, String, and Boolean.
+	 * type is limited to Integer, Long, Double, String, and Boolean. The
+	 * default value for the column will be null.
 	 * @param columnName The name identifying the attribute.
 	 * @param type The type of the column.
 	 * @param isImmutable  if true, this column can never be deleted
 	 */
-	<T> void createColumn(String columnName, Class<?extends T> type,
-			      boolean isImmutable);
+	<T> void createColumn(String columnName, Class<?extends T> type, boolean isImmutable);
+
+	/**
+	 * Create a column of the specified name and the specified type. The column
+	 * type is limited to Integer, Long, Double, String, and Boolean.
+	 * @param columnName The name identifying the attribute.
+	 * @param type The type of the column.
+	 * @param isImmutable  if true, this column can never be deleted
+	 * @param defaultValue The default value for the column. Must be of 
+	 * the specified type or null.
+	 */
+	<T> void createColumn(String columnName, Class<?extends T> type, boolean isImmutable, T defaultValue);
 
 	/**
 	 * Create a column of Lists with the specified name and the specified element type.
-	 * The column type is limited to Integer, Long, Double, String, and Boolean.
+	 * The column type is limited to Integer, Long, Double, String, and Boolean. The
+	 * default value for the column will be null.
 	 * @param columnName The name identifying the attribute.
 	 * @param listElementType The type of the elements of the list.
 	 * @param isImmutable  if true, this column can never be deleted
 	 */
-	<T> void createListColumn(String columnName, Class<T> listElementType,
-				  boolean isImmutable);
+	<T> void createListColumn(String columnName, Class<T> listElementType, boolean isImmutable);
+
+	/**
+	 * Create a column of Lists with the specified name and the specified element type.
+	 * The column type is limited to Integer, Long, Double, String, and Boolean. 
+	 * @param columnName The name identifying the attribute.
+	 * @param listElementType The type of the elements of the list.
+	 * @param isImmutable  if true, this column can never be deleted
+	 * @param defaultValue A default list for the column. Must be a List of 
+	 * the specified element type or null.
+	 */
+	<T> void createListColumn(String columnName, Class<T> listElementType, boolean isImmutable, List<T> defaultValue );
 
 	/**
 	 * Returns the row specified by the primary key object and if a row

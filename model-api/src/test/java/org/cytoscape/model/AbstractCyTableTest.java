@@ -866,4 +866,65 @@ public abstract class AbstractCyTableTest {
 		assertNotNull(table.getColumn("someOtherInt"));
 		assertNotNull(table2.getColumn("someInt"));
 	}
+
+	@Test
+	public void testDefaultCyColumn() {
+		table.createColumn("someInt", Integer.class, false, 5);
+		assertEquals(Integer.valueOf(5),attrs.get("someInt",Integer.class));
+	}
+
+	@Test
+	public void testNullDefaultCyColumn() {
+		table.createColumn("someInt", Integer.class, false, null);
+		assertNull(attrs.get("someInt",Integer.class));
+	}
+
+	@Test
+	public void testDefaultListCyColumn() {
+		List<Integer> l = new ArrayList<Integer>();
+		l.add(5);
+		table.createListColumn("someInt", Integer.class, false, l);
+		assertEquals(l,attrs.getList("someInt",Integer.class));
+	}
+
+	@Test
+	public void testNullDefaultListCyColumn() {
+		table.createListColumn("someInt", Integer.class, false, null);
+		assertNull(attrs.getList("someInt",Integer.class));
+	}
+
+	@Test
+	public void testOverrideDefaultCyColumn() {
+		table.createColumn("someInt", Integer.class, false, 5);
+		assertEquals(Integer.valueOf(3),attrs.get("someInt",Integer.class,3));
+	}
+
+	@Test
+	public void testOverrideDefaultListCyColumn() {
+		List<Integer> l1 = new ArrayList<Integer>();
+		l1.add(5);
+		List<Integer> l2 = new ArrayList<Integer>();
+		l2.add(3);
+		table.createListColumn("someInt", Integer.class, false, l1);
+		assertEquals(l2,attrs.getList("someInt",Integer.class,l2));
+	}
+
+	@Test
+	public void testNullCantOverrideDefaultCyColumn() {
+		table.createColumn("someInt", Integer.class, false, 5);
+		assertEquals(Integer.valueOf(5),attrs.get("someInt",Integer.class,null));
+	}
+
+	@Test
+	public void testNullCantOverrideDefaultListCyColumn() {
+		List<Integer> l1 = new ArrayList<Integer>();
+		l1.add(5);
+		table.createListColumn("someInt", Integer.class, false, l1);
+		assertEquals(l1,attrs.getList("someInt",Integer.class,null));
+	}
+
+	@Test
+	public void testGetAttrBeforeColumnExists() {
+		assertNull(attrs.get("nonexistentColumnX",Integer.class));
+	}
 }

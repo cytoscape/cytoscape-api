@@ -50,11 +50,33 @@ public interface CyRow {
 	 * Returns the value found for this row in the specified column
 	 * with the specified type.
 	 * @param columnName The name identifying the attribute.
+	 * @param type The type of the column.
+	 * @param defaultValue The value to return if the column has not previously been set. 
+	 * @return the value found for this row in the specified column
+	 * Please not that this method cannot be used to retrieve values that are Lists!
+	 */
+	<T> T get(String columnName, Class<?extends T> type, T defaultValue);
+
+	/**
+	 * Returns the value found for this row in the specified column
+	 * with the specified type.
+	 * @param columnName The name identifying the attribute.
 	 * @param listElementType  The type of the elements of the list that we wish to retrieve.
 	 * @return the value found for this row in the specified column
 	 * Please not that this method can only be used to retrieve values that are Lists!
 	 */
 	<T> List<T> getList(String columnName, Class<T> listElementType);
+
+	/**
+	 * Returns the value found for this row in the specified column
+	 * with the specified type.
+	 * @param columnName The name identifying the attribute.
+	 * @param listElementType  The type of the elements of the list that we wish to retrieve.
+	 * @param defaultValue The List to return if the column has not previously been set. 
+	 * @return the value found for this row in the specified column
+	 * Please not that this method can only be used to retrieve values that are Lists!
+	 */
+	<T> List<T> getList(String columnName, Class<T> listElementType, List<T> defaultValue);
 
 	/**
 	 * Set the specified column for this row to the specified value.

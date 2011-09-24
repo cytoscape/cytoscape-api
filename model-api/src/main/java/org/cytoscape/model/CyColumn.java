@@ -72,4 +72,10 @@ public interface CyColumn {
 	 * This method will return an instance even if the column is not virtual.
 	 */
 	VirtualColumnInfo getVirtualColumnInfo();
+
+	/**
+	 * Returns the default value for the column, possibly null.
+	 * @return The default value for the column, possibly null.
+	 */
+	 Object getDefaultValue();
 }
