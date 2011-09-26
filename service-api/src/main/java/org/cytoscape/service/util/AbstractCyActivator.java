@@ -126,14 +126,15 @@ public abstract class AbstractCyActivator implements BundleActivator {
 	 * @param methodClass There are situations where, because of the use of generics and type
 	 * erasure that the serviceClass is a subclass of the class used by the registration method,
 	 * in which case, this extra argument allows that class to be specified. 
+	 * @param additionalFilter An additional filter to be applied to the OSGi services 
 	 */
-	protected final void registerServiceListener(final BundleContext bc, final Object listener, final String registerMethodName, final String unregisterMethodName, final Class<?> serviceClass, final Class<?> methodClass) {
+	protected final void registerServiceListener(final BundleContext bc, final Object listener, final String registerMethodName, final String unregisterMethodName, final Class<?> serviceClass, final Class<?> methodClass, final String additionalFilter) {
 		try {
-			CyServiceListener serviceListener = new CyServiceListener(bc, listener, registerMethodName, unregisterMethodName, serviceClass, methodClass);
+			CyServiceListener serviceListener = new CyServiceListener(bc, listener, registerMethodName, unregisterMethodName, serviceClass, methodClass, additionalFilter);
 			serviceListener.open();
 			serviceListeners.add( serviceListener );
 		} catch (Exception e) {
-			throw new RuntimeException("Could not listen to services for object: " + listener + " with methods: " + registerMethodName + " and " + unregisterMethodName + " and service type: " + serviceClass, e); 
+			throw new RuntimeException("Could not listen to services for object: " + listener + " with methods: " + registerMethodName + ", " + unregisterMethodName + ", service type: " + serviceClass + ", and additional filter: " + additionalFilter, e); 
 		}
 	}
 
@@ -148,9 +149,40 @@ public abstract class AbstractCyActivator implements BundleActivator {
 	 * @param serviceClass The class defining the type of service desired.
 	 */
 	protected final void registerServiceListener(final BundleContext bc, final Object listener, final String registerMethodName, final String unregisterMethodName, final Class<?> serviceClass) {
-		registerServiceListener(bc,listener,registerMethodName,unregisterMethodName,serviceClass,serviceClass);
+		registerServiceListener(bc,listener,registerMethodName,unregisterMethodName,serviceClass,serviceClass,null);
 	}
 
+	/**
+	 * A method that will cause the specified register/unregister methods on the listener
+	 * object to be called any time that a service of the specified type is registered or
+	 * unregistered. 
+	 * @param bc The BundleContext used to find services.
+	 * @param listener Your object listening for service registrations.
+	 * @param registerMethodName The name of the method to be called when a service is registered.
+	 * @param unregisterMethodName The name of the method to be called when a service is unregistered.
+	 * @param serviceClass The class defining the type of service desired.
+	 * @param additionalFilter An additional filter to be applied to the OSGi services 
+	 */
+	protected final void registerServiceListener(final BundleContext bc, final Object listener, final String registerMethodName, final String unregisterMethodName, final Class<?> serviceClass, final String additionalFilter) {
+		registerServiceListener(bc,listener,registerMethodName,unregisterMethodName,serviceClass,serviceClass, additionalFilter);
+	}
+
+	/**
+	 * A method that will cause the specified register/unregister methods on the listener
+	 * object to be called any time that a service of the specified type is registered or
+	 * unregistered. 
+	 * @param bc The BundleContext used to find services.
+	 * @param listener Your object listening for service registrations.
+	 * @param registerMethodName The name of the method to be called when a service is registered.
+	 * @param unregisterMethodName The name of the method to be called when a service is unregistered.
+	 * @param serviceClass The class defining the type of service desired.
+	 * @param methodClass There are situations where, because of the use of generics and type
+	 * erasure that the serviceClass is a subclass of the class used by the registration method,
+	 * in which case, this extra argument allows that class to be specified. 
+	 */
+	protected final void registerServiceListener(final BundleContext bc, final Object listener, final String registerMethodName, final String unregisterMethodName, final Class<?> serviceClass, final Class<?> methodClass) {
+		registerServiceListener(bc,listener,registerMethodName,unregisterMethodName,serviceClass,methodClass,null);
+	}
 
 	/**
 	 * A utility method that registers the specified service object as an OSGi service for

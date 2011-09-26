@@ -37,7 +37,10 @@ package org.cytoscape.service.util.internal;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
+import org.osgi.framework.Constants;
+import org.osgi.framework.Filter;
 import org.osgi.util.tracker.ServiceTracker;
+import org.osgi.framework.InvalidSyntaxException;
 
 import java.lang.reflect.Method;
 import java.lang.NoSuchMethodException;
@@ -61,14 +64,32 @@ public class CyServiceListener extends ServiceTracker {
 	private final Class<?> methodClass;
 	private static final Logger logger = LoggerFactory.getLogger(CyServiceListener.class);
 	
-	public CyServiceListener(BundleContext bc, Object target, String registerMethodName, String unregisterMethodName, Class<?> serviceClass, Class<?> methodClass) throws NoSuchMethodException {
-		super(bc, serviceClass.getName(), null);
+	public CyServiceListener(BundleContext bc, Object target, String registerMethodName, String unregisterMethodName, Class<?> serviceClass, Class<?> methodClass, String additionalFilter) throws NoSuchMethodException {
+		super(bc, genFilter(bc,serviceClass, additionalFilter), null);
 		this.bc = bc;
 		this.target = target;
 		this.serviceClass = serviceClass;
 		this.methodClass = methodClass;
 		this.registerMethod = getMethod(registerMethodName);
 		this.unregisterMethod = getMethod(unregisterMethodName);
+	}
+
+	private static Filter genFilter(BundleContext context, Class<?> serviceClass, String additionalFilter) {
+		// create class filter
+		String filter = "(" + Constants.OBJECTCLASS + "=" + serviceClass.getName() + ")";
+
+		// append any additional filter
+		if ( additionalFilter != null && !additionalFilter.isEmpty() )
+			filter = "(&" + filter + additionalFilter + ")";
+
+		// create OSGi filter
+		try {
+			return context.createFilter(filter);
+		} catch (InvalidSyntaxException e) {
+			IllegalArgumentException iae = new IllegalArgumentException( "Invalid filter syntax: " + filter, e);
+			iae.initCause(e);
+			throw iae;
+		}
 	}
 
 	/**
