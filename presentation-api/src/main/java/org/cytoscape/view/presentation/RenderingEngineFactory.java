@@ -9,7 +9,7 @@ import org.cytoscape.view.model.VisualLexicon;
  * 
  * @param <T>
  *            Compatible data model for this factory. For example, if this
- *            parameter is set to {@linkplain CyNetwork}, the factory creates rendering
+ *            parameter is set to {@linkplain org.cytoscape.model.CyNetwork}, the factory creates rendering
  *            engine for CyNetwork objects.
  */
 public interface RenderingEngineFactory<T> {
@@ -22,7 +22,7 @@ public interface RenderingEngineFactory<T> {
 	 * 
 	 * @param visualizationContainer
 	 *            Window component which contains the rendered view. In most
-	 *            cases, {@linkplain Window} components in Swing will be used.
+	 *            cases, {@linkplain java.awt.Window} components in Swing will be used.
 	 * @param viewModel
 	 *            view-model to be rendered by the RenderingEngine.
 	 * 
