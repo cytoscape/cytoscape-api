@@ -58,7 +58,7 @@ public interface View<S> extends Identifiable {
 	 * @param vp the VisualProperty (Node Color, Edge Width, etc.)
 	 * @param value actual value stored in this visual property.
 	 */
-	public <T, V extends T> void setVisualProperty(VisualProperty<? extends T> vp, V value);
+	<T, V extends T> void setVisualProperty(VisualProperty<? extends T> vp, V value);
 	
 
 	/**
@@ -69,7 +69,7 @@ public interface View<S> extends Identifiable {
 	 * @param vp the VisualProperty
 	 * @return Value associated with this View and Visual Property pair.
 	 */
-	public <T> T getVisualProperty(VisualProperty<T> vp);
+	<T> T getVisualProperty(VisualProperty<T> vp);
 	
 
 	/**
@@ -79,14 +79,14 @@ public interface View<S> extends Identifiable {
 	 * @param vp the VisualProperty
 	 * @param value DOCUMENT ME!
 	 */
-	public <T, V extends T> void setLockedValue(VisualProperty<? extends T> vp, V value);
+	<T, V extends T> void setLockedValue(VisualProperty<? extends T> vp, V value);
 
 	
 	/**
 	 * @param vp the VisualProperty
 	 * @return true if current VisualProperty value is locked
 	 */
-	public boolean isValueLocked(VisualProperty<?> vp);
+	boolean isValueLocked(VisualProperty<?> vp);
 
 	
 	/**
@@ -94,7 +94,7 @@ public interface View<S> extends Identifiable {
 	 *
 	 * @param vp the VisualProperty
 	 */
-	public void clearValueLock(VisualProperty<?> vp);
+	void clearValueLock(VisualProperty<?> vp);
 
 	
 	/**
@@ -102,6 +102,6 @@ public interface View<S> extends Identifiable {
 	 *
 	 * @return Data object of this view.
 	 */
-	public S getModel();
+	S getModel();
 	
 }
