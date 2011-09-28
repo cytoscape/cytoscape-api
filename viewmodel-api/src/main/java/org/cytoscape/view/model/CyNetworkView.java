@@ -112,18 +112,12 @@ public interface CyNetworkView extends View<CyNetwork> {
 	 */
 	void updateView();
 
+	 
 	/**
 	 * Sets the default value to be used for the specified visual property.
 	 * @param vp The visual property whose default value we're specifying.
 	 * @param defaultValue The default value to be used for this visual property for this view. 
 	 */
-	 <T, V extends T> void setNodeViewDefault(VisualProperty<? extends T> vp, V defaultValue);
-
-	/**
-	 * Sets the default value to be used for the specified visual property.
-	 * @param vp The visual property whose default value we're specifying.
-	 * @param defaultValue The default value to be used for this visual property for this view. 
-	 */
-	 <T, V extends T> void setEdgeViewDefault(VisualProperty<? extends T> vp, V defaultValue);
+	 <T, V extends T> void setViewDefault(final VisualProperty<? extends T> vp, final V defaultValue);
 
 }
