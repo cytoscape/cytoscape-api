@@ -11,7 +11,7 @@ import java.util.Properties;
 public final class BasicCyProperty implements CyProperty<Properties> {
 	
 	/**
-	 * Core Cytoscape Property (Cytoscpae System Property)
+	 * Core Cytoscape Property (Cytoscape System Property)
 	 */
 	public static final String CORE_PROPRERTY_NAME = "cytoscape3.props";
 	

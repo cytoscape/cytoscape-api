@@ -11,16 +11,16 @@ public interface BookmarksUtil {
 	 * category.
 	 * 
 	 * @param categoryName
-	 * @return
+	 * @return a list of data sources from the specified category.
 	 */
 	List<DataSource> getDataSourceList(String categoryName, List<Category> categoryList);
 
 	/**
 	 * Select specific category from a list of categories.
 	 * 
-	 * @param categoryName
-	 * @param categoryList
-	 * @return
+	 * @param categoryName the category to select.
+	 * @param categoryList the list of categories to select from.
+	 * @return the {@link Category} that was selected.
 	 */
 	Category getCategory(String categoryName, List<Category> categoryList);
 
