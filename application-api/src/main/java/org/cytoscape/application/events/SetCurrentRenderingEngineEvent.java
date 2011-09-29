@@ -23,6 +23,10 @@ public final class SetCurrentRenderingEngineEvent extends
 		this.engine = engine;
 	}
 	
+	/**
+	 * Return the rendering engine (presentation) that has been set as current.
+	 * @return the rendering engine (presentation) that has been set as current.
+	 */
 	public RenderingEngine<CyNetwork> getRenderingEngine() {
 		return this.engine;
 	}

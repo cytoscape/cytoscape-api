@@ -56,6 +56,7 @@ public interface CytoscapeVersion {
 	
 	/**
 	 * The full version as a string, for example "3.2.5-alpha".  
+	 * @return the full version as a string.
 	 */
 	public String getVersion();
 
@@ -74,7 +75,7 @@ public interface CytoscapeVersion {
 	 * The second of the three numbers defining the version of the 
 	 * software, meaning "2" if the version is "3.2.5". This number
 	 * changes as new functionality or a new API is added to the software.  
-	 * Minor version APIs are guaranteed to be backwards compatibile for 
+	 * Minor version APIs are guaranteed to be backwards compatible for 
 	 * all previous versions within the major version (i.e. version 3.2
 	 * will be completely compatible with all 3.1.x, and 3.0.x code).
 	 * @return The integer describing the minor version of this application.
@@ -88,7 +89,7 @@ public interface CytoscapeVersion {
 	 * changes as bug fixes are made but no new features or APIs are 
 	 * added. Bug fix versions contain NO NEW FEATRURES!
 	 * Bug fix version APIs are guaranteed to be backwards 
-	 * compatibile for all previous versions within the major version 
+	 * compatible for all previous versions within the major version 
 	 * (i.e. version 3.2.5 will be completely compatible with all 3.x 
 	 * versions of the code).
 	 * @return The integer describing the bug fix version of this application.

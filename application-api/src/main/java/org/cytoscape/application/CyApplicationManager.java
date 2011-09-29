@@ -62,12 +62,12 @@ public interface CyApplicationManager {
 	/**
 	 * Returns the current network view.
 	 * @return the current network view or null if no network 
-	 * is currently being visualised
+	 * is currently being visualized
 	 */
 	public CyNetworkView getCurrentNetworkView();
 
 	/**
-	 * Sets the current network view based on the specified id.
+	 * Sets the current network view based on the specified ID.
 	 * @param view_id The <i>network</i> SUID of the network view to
 	 * be made current.
 	 */
@@ -87,14 +87,14 @@ public interface CyApplicationManager {
 
 	/**
 	 * Sets the network views associated with the specified network 
-	 * ids as selected.
+	 * IDs as selected.
 	 * @param modelIDs The <i>model</i> SUIDs of the networks that have 
 	 * been selected.
 	 */
 	public void setSelectedNetworkViews(final List<Long> modelIDs);
 
 	/**
-	 * Sets the networks associated with the specified ids as selected.
+	 * Sets the networks associated with the specified IDs as selected.
 	 * @param ids The SUIDs of the networks that have been selected.
 	 */
 	public void setSelectedNetworks(final List<Long> ids);
@@ -113,6 +113,7 @@ public interface CyApplicationManager {
 
 	/**
 	 * Returns the currently active table.
+	 * @return the currently active {@link CyTable}.
 	 */
 	public CyTable getCurrentTable();
 	
