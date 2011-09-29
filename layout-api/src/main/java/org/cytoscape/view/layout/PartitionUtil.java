@@ -72,7 +72,6 @@ public final class PartitionUtil {
 	 * arrays as a byproduct.  The algorithm for this was taken from
 	 * algorithms/graphPartition/SGraphPartition.java.
 	 *
-	 * @param network the GraphPerspective containing the graph
 	 * @param networkView the CyNetworkView representing the graph
 	 * @param selectedOnly only consider selected nodes
 	 * @param edgeWeighter the weighter to use for edge weighting
@@ -92,7 +91,6 @@ public final class PartitionUtil {
 	 * arrays as a byproduct.  The algorithm for this was taken from
 	 * algorithms/graphPartition/SGraphPartition.java.
 	 *
-	 * @param network the GraphPerspective containing the graph
 	 * @param networkView the CyNetworkView representing the graph
 	 * @param nodeSet the set of nodes to consider
 	 * @param edgeWeighter the weighter to use for edge weighting

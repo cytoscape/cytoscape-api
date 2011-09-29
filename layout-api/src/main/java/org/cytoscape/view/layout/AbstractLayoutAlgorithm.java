@@ -88,6 +88,8 @@ abstract public class AbstractLayoutAlgorithm implements CyLayoutAlgorithm {
 
 	/**
 	 * The Constructor.
+	 * @param computerName a computer readable name used to construct property strings.
+	 * @param humanName a user visible name of the layout.
 	 */
 	public AbstractLayoutAlgorithm(final UndoSupport undo, final String computerName, final String humanName, boolean supportsSelectedOnly) {
 		this.undo = undo;
