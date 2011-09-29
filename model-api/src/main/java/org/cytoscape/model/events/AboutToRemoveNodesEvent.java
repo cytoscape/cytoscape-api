@@ -45,7 +45,7 @@ import org.cytoscape.model.CyNode;
 
 /**
  * Fired before a node is actually removed so that listeners
- * have a chance to clean up before the node object disappaears.
+ * have a chance to clean up before the node object disappears.
  * Note that this event also <i>implies</i> an AboutToRemoveEdgesEvent
  * for every edge adjacent to the node in question (because all
  * adjacent edges are removed as a consequence of removing
@@ -60,7 +60,7 @@ public final class AboutToRemoveNodesEvent extends AbstractCyEvent<CyNetwork> {
 	/**
 	 * Constructs event.
 	 * @param source the network firing this event.
-	 * @param node the node about to be removed. 
+	 * @param nodes the collection of nodes about to be removed. 
 	 */
 	public AboutToRemoveNodesEvent(final CyNetwork source, final Collection<CyNode> nodes) {
 		super( source, AboutToRemoveNodesListener.class);
@@ -69,6 +69,10 @@ public final class AboutToRemoveNodesEvent extends AbstractCyEvent<CyNetwork> {
 		this.nodes = nodes;
 	}
 	
+	/**
+	 * Returns the collection of nodes about to be removed.
+	 * @return the collection of nodes about to be removed.
+	 */
 	public Collection<CyNode> getNodes() {
 			return nodes;
 	}

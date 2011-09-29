@@ -98,6 +98,7 @@ public interface CyRootNetwork extends CyNetwork {
 	/**
 	 * The initial network of {@link CyNode}s and {@link CyEdge}s. Every root network
 	 * began with something, and this network is that something.
+	 * @return the {@link CySubNetwork} that the root network began with.
 	 */
 	CySubNetwork getBaseNetwork();
 
@@ -105,6 +106,8 @@ public interface CyRootNetwork extends CyNetwork {
 	 * Returns true if the network to be checked is a subnetwork of this root network and
 	 * returns false otherwise. Will return false if the network is null.
 	 * @param n The network to be checked.
+	 * @return true if the network to be checked is a subnetwork of this root network and
+	 * returns false otherwise or if the network is null.
 	 */
 	boolean containsNetwork(CyNetwork n);
 }

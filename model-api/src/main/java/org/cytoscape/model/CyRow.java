@@ -109,6 +109,7 @@ public interface CyRow {
 	/**
 	 * Note that the returned object may well not be of the type that get() for this column might
 	 * return!  You should therefore almost always use get() instead!
+	 * @param columnName The name identifying the attribute.
 	 * @return The row Object that represents the value in a column.
 	 */
 	Object getRaw(String columnName);

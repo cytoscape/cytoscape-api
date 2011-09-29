@@ -52,7 +52,7 @@ public final class AddedNodesEvent extends AbstractCyPayloadEvent<CyNetwork,CyNo
 	/**
 	 * Constructs event.
 	 * @param source The CyNetwork the node was added to.
-	 * @param node The node that was added to the network.
+	 * @param nodes The collection of nodes that were added to the network.
 	 */
 	public AddedNodesEvent(final CyNetwork source, final Collection<CyNode> nodes) {
 		super(source, AddedNodesListener.class, nodes);

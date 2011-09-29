@@ -45,7 +45,7 @@ import org.cytoscape.model.CyNetwork;
 
 /**
  * Fired before an edge is actually removed so that listeners
- * have a chance to clean up before the edge object disappaears.
+ * have a chance to clean up before the edge object disappears.
  */
 public final class AboutToRemoveEdgesEvent extends AbstractCyEvent<CyNetwork> {
 	
@@ -53,7 +53,7 @@ public final class AboutToRemoveEdgesEvent extends AbstractCyEvent<CyNetwork> {
 	/**
 	 * Constructs event.
 	 * @param source the network firing this event.
-	 * @param edge the collection of edges about to be removed. 
+	 * @param edges the collection of edges about to be removed. 
 	 */
 	public AboutToRemoveEdgesEvent(final CyNetwork source, final Collection<CyEdge> edges) {
 		super(source, AboutToRemoveEdgesListener.class);
@@ -62,6 +62,10 @@ public final class AboutToRemoveEdgesEvent extends AbstractCyEvent<CyNetwork> {
 		this.edges = edges;
 	}
 	
+	/**
+	 * Returns the collection of edges about to be removed.
+	 * @return the collection of edges about to be removed.
+	 */
 	public Collection<CyEdge> getEdges() {
 			return edges;
 	}

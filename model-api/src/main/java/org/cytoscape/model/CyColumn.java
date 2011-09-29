@@ -70,6 +70,7 @@ public interface CyColumn {
 	/**
 	 * Returns information about the virtual column definition of this column.
 	 * This method will return an instance even if the column is not virtual.
+	 * @return an instance of {@link VirtualColumnInfo}.
 	 */
 	VirtualColumnInfo getVirtualColumnInfo();
 

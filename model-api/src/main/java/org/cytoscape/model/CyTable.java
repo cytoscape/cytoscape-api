@@ -245,7 +245,7 @@ public interface CyTable extends Identifiable {
 	/** Swaps the contents and properties, like mutability etc. of "otherTable" with this table.
 	 *  @param otherTable  the table that we're being swapped with.
 	 *  Note: the one "property" that is not being swapped is the SUID!  Also, no events are being
-	 *        fired to give any listners a chance to react to the exchange!
+	 *        fired to give any listeners a chance to react to the exchange!
 	 */
 	void swap(CyTable otherTable);
 }

@@ -14,6 +14,8 @@ public interface CyNetworkTableManager {
 	/**
 	 * Returns the table with the specified namespace and type from the
 	 * network.
+	 * @return the table with the specified namespace and type from the
+	 * network.
 	 */
 	CyTable getTable(CyNetwork network, Class<? extends CyTableEntry> type, String namespace);
 	
@@ -26,6 +28,8 @@ public interface CyNetworkTableManager {
 	/**
 	 * Returns a read-only map of all of the tables for the specified type
 	 * from the network.  Each table is keyed by its namespace.
+	 * @return a read-only map of all the tables for the specified type 
+	 * from the network.
 	 */
 	Map<String, CyTable> getTables(CyNetwork network, Class<? extends CyTableEntry> type);
 	
