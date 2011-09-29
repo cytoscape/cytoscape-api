@@ -40,6 +40,8 @@ public abstract class CyPlugin {
 	 *    }
 	 * }
 	 * </pre></blockquote>
+	 * @param adapter a {@link CyPluginAdapter} reference provided as an
+	 * argument to the constructor.
 	 */
 	public CyPlugin(final CyPluginAdapter adapter) {
 		if ( adapter == null )

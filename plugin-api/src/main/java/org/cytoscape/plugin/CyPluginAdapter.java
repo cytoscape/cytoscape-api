@@ -171,8 +171,8 @@ public interface CyPluginAdapter {
 	// layout api
 	//
 	/**
-	 * Returns an instance of {@link CyLayouts}.
-	 * @return an instance of {@link CyLayouts}.
+	 * Returns an instance of {@link CyLayoutAlgorithmManager}.
+	 * @return an instance of {@link CyLayoutAlgorithmManager}.
 	 */
 	CyLayoutAlgorithmManager getCyLayouts();
 
@@ -190,8 +190,8 @@ public interface CyPluginAdapter {
 	// property api
 	//
 	/**
-	 * Returns an instance of {@link CyProperty<Properties>}.
-	 * @return an instance of {@link CyProperty<Properties>}.
+	 * Returns an instance of {@link CyProperty} of type Properties.
+	 * @return an instance of {@link CyProperty} of type Properties.
 	 */
 	CyProperty<Properties> getCoreProperties();
 
@@ -199,8 +199,8 @@ public interface CyPluginAdapter {
 	// io api
 	//
 	/**
-	 * Returns an instance of {@link CyNetworkViewReaderManager}.
-	 * @return an instance of {@link CyNetworkViewReaderManager}.
+	 * Returns an instance of {@link CyNetworkReaderManager}.
+	 * @return an instance of {@link CyNetworkReaderManager}.
 	 */
 	CyNetworkReaderManager getCyNetworkViewReaderManager();
 
