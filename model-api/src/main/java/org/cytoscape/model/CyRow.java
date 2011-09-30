@@ -39,6 +39,7 @@ public interface CyRow {
 	/**
 	 * Returns the value found for this row in the specified column
 	 * with the specified type.
+	 * @param <T> The generic type of the specified column.
 	 * @param columnName The name identifying the attribute.
 	 * @param type The type of the column.
 	 * @return the value found for this row in the specified column
@@ -49,6 +50,7 @@ public interface CyRow {
 	/**
 	 * Returns the value found for this row in the specified column
 	 * with the specified type.
+	 * @param <T> The generic type of the specified column.
 	 * @param columnName The name identifying the attribute.
 	 * @param type The type of the column.
 	 * @param defaultValue The value to return if the column has not previously been set. 
@@ -60,6 +62,7 @@ public interface CyRow {
 	/**
 	 * Returns the value found for this row in the specified column
 	 * with the specified type.
+	 * @param <T> the generic type of the elements of the list we wish to retrieve.
 	 * @param columnName The name identifying the attribute.
 	 * @param listElementType  The type of the elements of the list that we wish to retrieve.
 	 * @return the value found for this row in the specified column
@@ -70,6 +73,7 @@ public interface CyRow {
 	/**
 	 * Returns the value found for this row in the specified column
 	 * with the specified type.
+	 * @param <T> the generic type of the elements of the list we wish to retrieve.
 	 * @param columnName The name identifying the attribute.
 	 * @param listElementType  The type of the elements of the list that we wish to retrieve.
 	 * @param defaultValue The List to return if the column has not previously been set. 
@@ -81,6 +85,7 @@ public interface CyRow {
 	/**
 	 * Set the specified column for this row to the specified value.
 	 * To unset a column entry use null for value.
+	 * @param <T> The generic type of the value to assign the specified column in this row.
 	 * @param columnName The name identifying the attribute.
 	 * @param value The value to assign the specified column in this row
 	 * Please note that if "value" is a List it is your responsibility that all the

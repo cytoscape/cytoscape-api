@@ -27,9 +27,9 @@ public interface CyTableMetadata {
 	
 	/**
 	 * Returns the namespace used as the key to this object's table in
-	 * {@link CyTableManager.getTableMap()}. 
+	 * {@link CyNetworkTableManager#getTables}. 
 	 * @return the namespace used as the key to this object's table in
-	 * {@link CyTableManager.getTableMap()}. 
+	 * {@link CyNetworkTableManager#getTables}. 
 	 */
 	String getNamespace();
 }

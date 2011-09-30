@@ -1,7 +1,13 @@
 package org.cytoscape.model;
 
+/**
+ * Information object for columns that stores extra Virtual Column information
+ * if applicable.
+ *
+ */
 public interface VirtualColumnInfo {
 	/**
+	 * Returns true if the column is virtual, otherwise false.
 	 * @return true if the column is virtual, otherwise false.
 	 */
 	boolean isVirtual();

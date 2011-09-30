@@ -53,7 +53,7 @@ public interface CyTableEntry extends Identifiable {
 	/**
 	 * A convenience method that returns the row in the default table 
 	 * for this object. This method is equivalent to calling 
-	 * getCyRow({@link CyNetwork.DEFAULT_ATTRS}).
+	 * getCyRow({@link CyNetwork#DEFAULT_ATTRS}).
 	 * @return the row in the default table for this object. 
 	 */
 	CyRow getCyRow();

@@ -28,6 +28,8 @@ public interface CyNetworkTableManager {
 	/**
 	 * Returns a read-only map of all of the tables for the specified type
 	 * from the network.  Each table is keyed by its namespace.
+	 * @param network The network to return the tables of.
+	 * @param type The type of the tables to return.
 	 * @return a read-only map of all the tables for the specified type 
 	 * from the network.
 	 */

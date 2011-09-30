@@ -120,6 +120,7 @@ public interface CyTable extends Identifiable {
 	 * Create a column of the specified name and the specified type. The column
 	 * type is limited to Integer, Long, Double, String, and Boolean. The
 	 * default value for the column will be null.
+	 * @param <T> The generic type of the column.
 	 * @param columnName The name identifying the attribute.
 	 * @param type The type of the column.
 	 * @param isImmutable  if true, this column can never be deleted
@@ -129,6 +130,7 @@ public interface CyTable extends Identifiable {
 	/**
 	 * Create a column of the specified name and the specified type. The column
 	 * type is limited to Integer, Long, Double, String, and Boolean.
+	 * @param <T> The generic type of the column.
 	 * @param columnName The name identifying the attribute.
 	 * @param type The type of the column.
 	 * @param isImmutable  if true, this column can never be deleted
@@ -141,6 +143,7 @@ public interface CyTable extends Identifiable {
 	 * Create a column of Lists with the specified name and the specified element type.
 	 * The column type is limited to Integer, Long, Double, String, and Boolean. The
 	 * default value for the column will be null.
+	 * @param <T> The generic type of the elements of the list.
 	 * @param columnName The name identifying the attribute.
 	 * @param listElementType The type of the elements of the list.
 	 * @param isImmutable  if true, this column can never be deleted
@@ -150,6 +153,7 @@ public interface CyTable extends Identifiable {
 	/**
 	 * Create a column of Lists with the specified name and the specified element type.
 	 * The column type is limited to Integer, Long, Double, String, and Boolean. 
+	 * @param <T> The generic type of the elements of the list.
 	 * @param columnName The name identifying the attribute.
 	 * @param listElementType The type of the elements of the list.
 	 * @param isImmutable  if true, this column can never be deleted

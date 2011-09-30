@@ -33,7 +33,10 @@ import java.util.List;
 
 /** This class describes a column in a CyTable. */
 public interface CyColumn {
-	/** @return the name of the column. */
+	/** 
+	 * Returns the name of the column.
+	 * @return the name of the column. 
+	 */
 	String getName();
 
 	/** Change the name of this column.
@@ -42,16 +45,27 @@ public interface CyColumn {
 	 */
 	void setName(String newName);
 
-	/** @return the data type of the column. */
+	/** 
+	 * Returns the data type of the column.
+	 * @return the data type of the column. 
+	 */
 	Class<?> getType();
 
-	/** @return the data type of the list elements if the column type is List.class otherwise null */
+	/** 
+	 * Returns the data type of the list elements if the column type is List.class otherwise null.
+	 * @return the data type of the list elements if the column type is List.class otherwise null 
+	 */
 	Class<?> getListElementType(); 
 
-	/** @return true if the column is the primary key, otherwise false. */
+	/** 
+	 * Returns true if the column is the primary key, otherwise false.
+	 * @return true if the column is the primary key, otherwise false. 
+	 */
 	boolean isPrimaryKey();
 
-	/** @return true if the column is immutable i.e. cannot be deleted or renamed, otherwise false.
+	/** 
+	 * Returns true if the column is immutable i.e. cannot be deleted or renamed, otherwise false.
+	 * @return true if the column is immutable i.e. cannot be deleted or renamed, otherwise false.
 	 *  Please note that this does not affect the ability to add or modify values in this column!
 	 */
 	boolean isImmutable();
@@ -62,6 +76,7 @@ public interface CyColumn {
 	CyTable getTable();
 
 	/** Returns all the values, some of which may be null, for this given column.
+	 * @param <T> the generic type of the column.
 	 *  @param type  the datatype of this column.  (You can use getType() to obtain it.)
 	 *  @return the values in this column in some arbitrary but consistent order
 	 */
