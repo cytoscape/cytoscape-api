@@ -39,6 +39,8 @@ import java.util.Collections;
 
 /**
  * A base implementation of CyPayloadEvent that can be used by events.
+ * @param <T> the generic type of the source object.
+ * @param <P> the generic type of the payloads.
  */
 public abstract class AbstractCyPayloadEvent<T,P> extends AbstractCyEvent<T> implements CyPayloadEvent<T,P> {
 

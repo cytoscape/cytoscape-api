@@ -39,6 +39,7 @@ package org.cytoscape.event;
  * All Cytoscape events should extend this interface.  An implementing
  * event can add additional methods to provide access to information
  * relevant to that specific event.
+ * @param <T> the generic type of the CyEvent.
  */
 public interface CyEvent<T> {
 	

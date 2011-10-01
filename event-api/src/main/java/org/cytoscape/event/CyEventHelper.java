@@ -56,6 +56,9 @@ public interface CyEventHelper {
 	 * after an event has fired simply trigger a new event to fire at the next time
 	 * point. All accumulated CyPayloadEvents are guaranteed to be fired before any
 	 * normal CyEvents are fired.
+	 * @param <S> the generic type of the object firing the event.
+	 * @param <P> the generic type of the data payload to be added to the event.
+	 * @param <E> the generic type of the event that the payload will be added to.
 	 * @param source The object firing the event.
 	 * @param payload The data payload to be added to the event that will
 	 * eventually be fired.
