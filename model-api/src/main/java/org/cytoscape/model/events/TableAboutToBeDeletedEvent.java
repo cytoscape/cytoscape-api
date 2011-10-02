@@ -47,6 +47,10 @@ public final class TableAboutToBeDeletedEvent extends AbstractCyEvent<CyTableMan
 	}
 
 
+	/**
+	 * Retursn the table that is about to be delegted from the table manager.
+	 * @return the table that is about to be deleted from the table manager.
+	 */
 	public final CyTable getTable() {
 		return table;
 	}

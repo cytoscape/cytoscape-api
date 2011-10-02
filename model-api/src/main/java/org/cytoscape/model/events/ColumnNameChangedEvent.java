@@ -32,10 +32,20 @@ import org.cytoscape.event.AbstractCyEvent;
 import org.cytoscape.model.CyTable;
 
 
+/**
+ * This event signals that a columns name has been changed.
+ *
+ */
 public class ColumnNameChangedEvent extends AbstractCyEvent<CyTable> {
 	private final String oldColumnName;
 	private final String newColumnName;
 
+	/**
+	 * Constructs event.
+	 * @param source the source table of the column.
+	 * @param oldColumnName the columns old name before the change.
+	 * @param newColumnName the name the column name was changed to.
+	 */
 	public ColumnNameChangedEvent(final CyTable source, final String oldColumnName,
 				      final String newColumnName)
 	{

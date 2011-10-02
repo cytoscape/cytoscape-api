@@ -6,9 +6,14 @@ import org.cytoscape.model.CyNetwork;
 
 
 /**
- * 
+ * This event signals that a network is about to be destroyed.
  */
 public final class  NetworkAboutToBeDestroyedEvent extends AbstractNetworkEvent {
+	/**
+	 * Constructs event.
+	 * @param source the {@link CyNetworkManager} of the network about to be destroyed.
+	 * @param net the {@link CyNetwork} about to be destroyed.
+	 */
 	public NetworkAboutToBeDestroyedEvent(final CyNetworkManager source, final CyNetwork net) {
 		super(source, NetworkAboutToBeDestroyedListener.class, net);
 	}

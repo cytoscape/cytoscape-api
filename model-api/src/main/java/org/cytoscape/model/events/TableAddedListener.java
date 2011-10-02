@@ -7,7 +7,10 @@ import org.cytoscape.event.CyListener;
  * 
  */
 public interface TableAddedListener extends CyListener {
-	
+	/**
+	 * The method that should handle the specified event.
+	 * @param e The event to be handled.
+	 */
 	public void handleEvent(final TableAddedEvent e);
 
 }

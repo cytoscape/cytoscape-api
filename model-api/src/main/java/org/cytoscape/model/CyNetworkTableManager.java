@@ -8,12 +8,15 @@ import java.util.Map;
 public interface CyNetworkTableManager {
 	/**
 	 * Associates the given table to the network using the specified namespace and type.
+	 * @param network the {@link CyNetwork} to associate the given table to.
+	 * @param table the table to associate to the network with the specified namespace and type.
 	 */
 	void setTable(CyNetwork network, Class<? extends CyTableEntry> type, String namespace, CyTable table);
 	
 	/**
 	 * Returns the table with the specified namespace and type from the
 	 * network.
+	 * @param network the network to check for the table.
 	 * @return the table with the specified namespace and type from the
 	 * network.
 	 */
@@ -22,6 +25,7 @@ public interface CyNetworkTableManager {
 	/**
 	 * Removes the table with the specified namespace and type from
 	 * the network.
+	 * @param network the network to remove the table from.
 	 */
 	void removeTable(CyNetwork network, Class<? extends CyTableEntry> type, String namespace);
 	

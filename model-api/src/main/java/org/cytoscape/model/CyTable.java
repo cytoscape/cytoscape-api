@@ -72,7 +72,7 @@ public interface CyTable extends Identifiable {
 
 	/** The table can be deleted if this returns Mutability.MUTABLE, otherwise it cannot be
 	 *  deleted!
-	 *  @return the current mutablity state
+	 *  @return the current mutability state
 	 */
 	Mutability getMutability();
 
