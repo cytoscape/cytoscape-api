@@ -5,6 +5,10 @@ import org.cytoscape.event.AbstractCyEvent;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.presentation.RenderingEngine;
 
+/**
+ * This event signals that a {@link RenderingEngine} has been set as current.
+ *
+ */
 public final class SetCurrentRenderingEngineEvent extends
 		AbstractCyEvent<CyApplicationManager>{
 	
@@ -13,10 +17,8 @@ public final class SetCurrentRenderingEngineEvent extends
 	/**
 	 * Constructor.
 	 * 
-	 * @param source
-	 *            The application manager firing this event.
-	 * @param engine
-	 *            The rendering engine (presentation) that has been set as current.
+	 * @param source The application manager firing this event.
+	 * @param engine The rendering engine (presentation) that has been set as current.
 	 */
 	public SetCurrentRenderingEngineEvent(final CyApplicationManager source, final RenderingEngine<CyNetwork> engine) {
 		super(source, SetCurrentRenderingEngineListener.class);
