@@ -34,10 +34,12 @@ import org.cytoscape.work.AbstractTask;
 
 /** A base class for Tasks that need to operate on a single CyTable cell. */
 public abstract class AbstractTableCellTask extends AbstractTask {
+	/** The {@link CyColumn} of the {@link org.cytoscape.model.CyTable} cell */
 	protected final CyColumn column;
+	/** The primary key of the {@link org.cytoscape.model.CyTable} cell */
 	protected final Object primaryKeyValue;
 
-	/** Initialises a Task that needs to operate on a CyTable cell entry.
+	/** Initializes a Task that needs to operate on a CyTable cell entry.
 	 *  @param column  a non-null CyColumn
 	 *  @param primaryKeyValue  a non-null primary key value
 	 */

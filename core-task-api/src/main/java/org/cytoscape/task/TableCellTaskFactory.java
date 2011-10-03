@@ -37,7 +37,7 @@ import org.cytoscape.model.CyColumn;
  * in question operates on the specified table entry identified by the column and primary key value.'
  */
 public interface TableCellTaskFactory extends TaskFactory {
-	/** Used to provision this factory with a {@param CyColumn} and a primary key that will be
+	/** Used to provision this factory with a {@link CyColumn} and a primary key that will be
 	 *  used to create tasks.
 	 *  @param column  a non-null CyColumn
 	 *  @param primaryKeyValue  a non-null primary key value

@@ -31,14 +31,19 @@ package org.cytoscape.task;
 
 
 import org.cytoscape.model.CyNetwork;
+import org.cytoscape.view.model.CyNetworkView;
+
 import java.util.Collection;
 
-
+/** 
+ * Base class for all task factories that create tasks that need to be provisioned with a Collection
+ * of {@link CyNetwork}s.
+ */
 public abstract class AbstractNetworkCollectionTaskFactory implements NetworkCollectionTaskFactory {
-	/** The collection of networks that will be passed to any task constructed by descendents of this factory. */
+	/** The collection of networks that will be passed to any task constructed by descendants of this factory. */
 	protected Collection<CyNetwork> networks;
 
-	/** Provisions descendents of this factory with a collection of networks to be passed into any constructed tasks.
+	/** Provisions descendants of this factory with a collection of networks to be passed into any constructed tasks.
 	 *  @param networks a collection of networks
 	 */
 	public void setNetworkCollection(final Collection<CyNetwork> networks) {

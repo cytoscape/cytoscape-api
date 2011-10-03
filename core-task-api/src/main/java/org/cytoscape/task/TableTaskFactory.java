@@ -37,7 +37,7 @@ import org.cytoscape.model.CyTable;
  * operates on the specified CyTable. 
  */
 public interface TableTaskFactory extends TaskFactory {
-	/** Used to provision this factory with a {@param Cytable} that will be used to create tasks.
+	/** Used to provision this factory with a {@link CyTable} that will be used to create tasks.
 	 *  @param table a non-null CyTable
 	 */
 	public void setTable(CyTable table);

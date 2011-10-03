@@ -37,10 +37,14 @@ import org.cytoscape.model.CyColumn;
  * in question operates on the specified table entry identified by the column and primary key value.'
  */
 abstract public class AbstractTableCellTaskFactory implements TableCellTaskFactory {
+	/** The {@link CyColumn} of the cell that will be used to provision tasks that are being created by descendants 
+	 * of this class. */
 	protected CyColumn column;
+	/** The primary key of the cell that will be used to provision tasks that are being created by descendants 
+	 * of this class. */
 	protected Object primaryKeyValue;
 
-	/** Used to provision this factory with a {@param CyColumn} and a primary key that will be
+	/** Used to provision this factory with a {@link CyColumn} and a primary key that will be
 	 *  used to create tasks.
 	 *  @param column  a non-null CyColumn
 	 *  @param primaryKeyValue  a non-null primary key value

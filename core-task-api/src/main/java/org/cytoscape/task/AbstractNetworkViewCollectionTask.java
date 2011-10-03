@@ -33,9 +33,11 @@ import org.cytoscape.work.AbstractTask;
 
 import java.util.Collection;
 
-
+/** 
+ * The base class for all tasks that need to operate on a Collection of {@link CyNetworkView}s.
+ */
 public abstract class AbstractNetworkViewCollectionTask extends AbstractTask {
-	/** A collection of network views to operate on for any descendents of this class. */
+	/** A collection of network views to operate on for any descendants of this class. */
 	final protected Collection<CyNetworkView> networkViews;
 
 	/** Base class for any tasks that need to operate on a collection of network views.

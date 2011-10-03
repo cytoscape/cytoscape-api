@@ -34,6 +34,8 @@ import org.cytoscape.work.AbstractTask;
 
 /** A base class for Tasks that need to operate on an entire CyTable. */
 public abstract class AbstractTableTask extends AbstractTask {
+	
+	/** The table that descendants of this class will operate on. */
 	protected final CyTable table;
 	
 	/** Initializes a Task that needs to operate on a CyTable.

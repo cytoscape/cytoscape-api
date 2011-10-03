@@ -34,11 +34,11 @@ import org.cytoscape.work.AbstractTask;
 
 /** Base class for all tasks that need to operate on a {@link CyRow}. */
 public abstract class AbstractRowTask extends AbstractTask {
-	/** The row that descendents will operate on. */
+	/** The row that descendants will operate on. */
 	final protected CyRow row;
 
 	/** Base class constructor for all tasks that need to be provisioned with a CyRow.
-	 *  @param row  a non-null CyRow that descendents will operate on
+	 *  @param row  a non-null CyRow that descendants will operate on
 	 */
 	public AbstractRowTask(final CyRow row) {
 		if (row == null)

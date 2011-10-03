@@ -30,7 +30,9 @@ package org.cytoscape.task;
 
 import org.cytoscape.model.CyTable;
 
-
+/** 
+ * Base class for all task factories that create tasks that need to be provisioned with a {@link CyTable}.
+ */
 public abstract class AbstractTableTaskFactory implements TableTaskFactory {
 	/** The table that will be passed into any Task constructor.
 	 */

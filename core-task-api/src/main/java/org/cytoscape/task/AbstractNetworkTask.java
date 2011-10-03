@@ -30,18 +30,21 @@
 package org.cytoscape.task;
 
 import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyRow;
 import org.cytoscape.work.AbstractTask;
 
+/** Base class for all tasks that need to operate on a {@link CyNetwork}. */
 public abstract class AbstractNetworkTask extends AbstractTask {
 
-    // The network that descendants of this class will operate on.
+    /**
+     * The network that descendants of this class will operate on.
+     */
     final protected CyNetwork network;
 
     /**
      * Base class for tasks that need to operate on a {@link CyNetwork}
      * 
-     * @param net
-     *            must be a non-null CyNetwork
+     * @param network the {@link CyNetwork} the tasks need to operate on. Must be a non-null CyNetwork.
      */
     public AbstractNetworkTask(final CyNetwork network) {
 	if (network == null)

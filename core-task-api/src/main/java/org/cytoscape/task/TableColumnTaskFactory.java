@@ -37,8 +37,8 @@ import org.cytoscape.model.CyColumn;
  * operates on the specified CyColumn. 
  */
 public interface TableColumnTaskFactory extends TaskFactory {
-	/** Used to provision this factory with a {@param CyColumn} that will be used to create tasks.
-	 *  @param column a non-null CyColumn
+	/** Used to provision this factory with a {@link CyColumn} that will be used to create tasks.
+	 *  @param column a non-null CyColumn.
 	 */
 	public void setColumn(final CyColumn column);
 }

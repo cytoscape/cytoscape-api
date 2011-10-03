@@ -32,7 +32,10 @@ import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.model.CyEdge;
 
-
+/** 
+ * Base class for all task factories that create tasks that need to be provisioned with an edge view
+ *  and its associated network view.
+ */
 public abstract class AbstractEdgeViewTaskFactory implements EdgeViewTaskFactory {
 	/** The network view passed into any task constructed by this factory. */
 	protected CyNetworkView netView; // TODO: should be renamed to networkView

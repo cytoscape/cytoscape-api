@@ -31,12 +31,15 @@ package org.cytoscape.task;
 
 
 import org.cytoscape.model.CyNetwork;
+import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.work.AbstractTask;
 import java.util.Collection;
 
-
+/** 
+ * The base class for all tasks that need to operate on a Collection of {@link CyNetwork}s.
+ */
 public abstract class AbstractNetworkCollectionTask extends AbstractTask {
-	/** The collection of networks that descendents will operate on. */
+	/** The collection of networks that descendants will operate on. */
 	final protected Collection<CyNetwork> networks;
 
 	/** Base Constructor for a task that will operate on a collection of networks
