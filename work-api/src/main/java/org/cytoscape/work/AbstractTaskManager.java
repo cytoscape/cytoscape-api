@@ -8,7 +8,7 @@ public abstract class AbstractTaskManager implements TaskManager {
 	protected final TunableInterceptor tunableInterceptor;
 
 	/**
-	 *  Initialises an <code>AbstractTaskManager</code> object by setting its <code>TunableInterceptor</code>.
+	 *  Initializes an <code>AbstractTaskManager</code> object by setting its <code>TunableInterceptor</code>.
 	 *
 	 *  @param tunableInterceptor The <code>TunableInterceptor</code> to be used by this <code>TaskManager</code>.
 	 */

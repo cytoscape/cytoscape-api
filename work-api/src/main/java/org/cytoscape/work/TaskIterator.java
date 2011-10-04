@@ -17,6 +17,7 @@ public final class TaskIterator implements Iterator<Task> {
 
 	/** Constructs an iterator that will yield Tasks in the order that they were passed into
 	 *  this constructor.
+	 * @param initialTasks the Tasks to place into the iterator.
 	 */
 	public TaskIterator(final Task... initialTasks) {
 		this.tasks = new ArrayList<Task>(initialTasks.length);
@@ -29,6 +30,8 @@ public final class TaskIterator implements Iterator<Task> {
 	}
 
 	/** Inserts "newTasks" immediately after "referenceTask".
+	 * @param referenceTask task to insert newTasks after.
+	 * @param newTasks tasks to insert after referenceTask.
 	 *  @throws IllegalStateException if "referenceTask" is not known to the iterator.
 	 */
 	public void insertTasksAfter(final Task referenceTask, final Task... newTasks) throws IllegalStateException {
@@ -44,6 +47,8 @@ public final class TaskIterator implements Iterator<Task> {
 	}
 
 	/** Inserts "newTasks" immediately after "referenceTask".
+	 * @param referenceTask the {@link Task} to insert "newTasks" after.
+	 * @param newTasks the {@link TaskIterator} the tasks to insert.
 	 *  @throws IllegalStateException if "referenceTask" is not known to the iterator.
 	 */
 	public void insertTasksAfter(final Task referenceTask, final TaskIterator newTasks) throws IllegalStateException {

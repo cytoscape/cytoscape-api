@@ -11,6 +11,7 @@ import java.util.concurrent.TimeoutException;
  * This class is analogous to <code>java.util.concurrency.FutureTask</code>.
  * 
  * @author Pasteur
+ * @param <V> The Generic type of this ValuedTaskExecutor.
  */
 public final class ValuedTaskExecutor<V> implements Task {
 
@@ -147,7 +148,7 @@ public final class ValuedTaskExecutor<V> implements Task {
 	 * while waiting
 	 * @throws ExecutionException if the <code>ValueTask</code> threw an
 	 * exception
-	 * @throws CancellationException if the user cancelled the
+	 * @throws CancellationException if the user canceled the
 	 * <code>ValueTask</code>
 	 * @throws TimeoutException if the wait period specified timed out
 	 */

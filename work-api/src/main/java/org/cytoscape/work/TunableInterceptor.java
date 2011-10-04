@@ -37,7 +37,7 @@ public interface TunableInterceptor<TH extends TunableHandler> {
 	Map<String, TH> getHandlers(Object o);
 
 	/**
-	 * Display the identified tunables to a user in order to allow her/him to modify their values.
+	 * Display the identified Tunables to a user in order to allow her/him to modify their values.
 	 * <p><pre>
 	 * Create the UI with JPanels for each <code>GUIHandler</code>, and display it to the user :
 	 * 	1) In a <i>parent</i> JPanel if <code>setParent()</code> method has been called before
@@ -78,6 +78,7 @@ public interface TunableInterceptor<TH extends TunableHandler> {
 
 	/** 
 	 * Tests an object for having tunable annotations.
+	 * @param o Object to test for having tunable annotations.
 	 *
 	 *  @return true if "o" has tunable annotations and else false.
 	 */

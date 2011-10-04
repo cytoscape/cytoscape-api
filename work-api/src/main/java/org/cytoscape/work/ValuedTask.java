@@ -12,6 +12,7 @@ package org.cytoscape.work;
  * executed by a <code>TaskManager</code>.
  *
  * @author Pasteur
+ * @param <V> The generic type of this ValuedTask.
  */
 public interface ValuedTask<V> {
 	/**

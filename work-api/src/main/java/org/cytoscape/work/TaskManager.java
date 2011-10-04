@@ -8,6 +8,7 @@ public interface TaskManager {
 
 	/** 
 	 * Tests an object for having tunable annotations.
+	 * @param o object to test for having tunable annotations.
 	 * @return true if "o" has tunable annotations and else false.
 	 */
 	boolean hasTunables(final Object o);
