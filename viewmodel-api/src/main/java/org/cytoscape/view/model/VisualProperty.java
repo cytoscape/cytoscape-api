@@ -78,12 +78,17 @@ public interface VisualProperty<T> {
 	/**
 	 * Returns a string of the specified value suitable for serializing to XML
 	 * other text output.
+	 * @param value the specified value.
+	 * @return a string of the specified value suitable for serializing to XML
+	 * other text output.
 	 */
 	String toSerializableString(final T value);
 
 	
 	/**
 	 * Returns an object of type T given a string serialized from the getSerializableString(T value)
+	 * method.
+	 * @return an object of type T given a string serialized from the getSerializableString(T value)
 	 * method.
 	 */
 	T parseSerializableString(final String value);
@@ -100,7 +105,7 @@ public interface VisualProperty<T> {
 	
 	/**
 	 * VisualProperty is always associated with a data type.  For example, EDGE_COLOR is associated with 
-	 * {@link CyEdge} data object.  In that case, this returns Class<CyEdge>.  
+	 * {@link org.cytoscape.model.CyEdge} data object.  In that case, this returns Class<CyEdge>.  
 	 * For now, return data types are CyNode, CyEdge, and CyNetwork.
 	 * 
 	 * @return target data type of this visual property.  CyNode, CyEdge, or CyNetwork.

@@ -12,7 +12,7 @@ public interface AddedEdgeViewsListener extends CyListener {
 	/**
 	 * Process event
 	 * 
-	 * @param e
+	 * @param e the {@link AddedEdgeViewsEvent} to be handled.
 	 */
 	public void handleEvent(AddedEdgeViewsEvent e);
 

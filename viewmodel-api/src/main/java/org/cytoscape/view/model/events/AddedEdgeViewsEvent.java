@@ -16,10 +16,10 @@ public final class AddedEdgeViewsEvent extends AbstractCyPayloadEvent<CyNetworkV
 	
 	
 	/**
-	 * Creates the event for a new edge view.
+	 * Creates the event for new edge views.
 	 * 
 	 * @param source network view which includes the new edge view.
-	 * @param edgeView Newly created view object for an edge.
+	 * @param edgeViews Collection of newly created view object for an edge.
 	 * 
 	 */
 	public AddedEdgeViewsEvent(final CyNetworkView source, final Collection<View<CyEdge>> edgeViews) {

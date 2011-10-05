@@ -38,6 +38,7 @@ package org.cytoscape.view.model;
 /**
  * An abstract implementation of VisualProperty that omits the methods dealing
  * with serializing data.
+ * @param <T> the generic type for this AbstractVisualProperty.
  * 
  */
 public abstract class AbstractVisualProperty<T> implements VisualProperty<T> {
@@ -64,7 +65,7 @@ public abstract class AbstractVisualProperty<T> implements VisualProperty<T> {
 	 * 
 	 * @param defaultValue default value for this visual property.
 	 * @param id unique string for serialization.
-	 * @param name human-readable name for this visual property.
+	 * @param displayName human-readable name for this visual property.
 	 * 
 	 */
 	@SuppressWarnings("unchecked")

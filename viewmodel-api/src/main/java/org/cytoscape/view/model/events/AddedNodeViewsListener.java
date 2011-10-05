@@ -10,9 +10,9 @@ import org.cytoscape.event.CyListener;
 public interface AddedNodeViewsListener extends CyListener {
 	
 	/**
-	 * Process event.
+	 * Process event
 	 * 
-	 * @param e
+	 * @param e the {@link AddedNodeViewsEvent} to be handled.
 	 */
 	public void handleEvent(AddedNodeViewsEvent e);
 }

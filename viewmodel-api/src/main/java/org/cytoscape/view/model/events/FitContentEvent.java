@@ -8,7 +8,7 @@ import org.cytoscape.view.model.CyNetworkView;
  * <p>
  * This event should
  * be created and fired by the view being updated and not anyone else,
- * instead call the {@link CyNetworkView.fitContent()} method.
+ * instead call the {@link CyNetworkView#fitContent()} method.
  */
 public final class FitContentEvent extends AbstractCyEvent<CyNetworkView> {
 	
@@ -17,7 +17,7 @@ public final class FitContentEvent extends AbstractCyEvent<CyNetworkView> {
      * <p>
      * This event should
      * be created and fired by the view being updated and not anyone else,
-     * instead call the {@link CyNetworkView.fitContent()} method.
+     * instead call the {@link CyNetworkView#fitContent()} method.
 	 * 
 	 * @param source network view to be fitted to the container.
 	 */

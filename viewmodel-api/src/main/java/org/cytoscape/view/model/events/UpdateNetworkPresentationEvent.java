@@ -12,7 +12,7 @@ import org.cytoscape.view.model.CyNetworkView;
  * <p>
  * This event should
  * be created and fired by the view being updated and not anyone else,
- * instead call the {@link CyNetworkView.updateView()} method.
+ * instead call the {@link CyNetworkView#updateView()} method.
  */
 public final class UpdateNetworkPresentationEvent extends
 		AbstractCyEvent<CyNetworkView> {
@@ -22,7 +22,7 @@ public final class UpdateNetworkPresentationEvent extends
      * <p>
      * This event should
      * be created and fired by the view being updated and not anyone else,
-     * instead call the {@link CyNetworkView.updateView()} method.
+     * instead call the {@link CyNetworkView#updateView()} method.
 	 * 
 	 * @param source source network view-model.  Presentations 
 	 * associated with this view-model use this event.

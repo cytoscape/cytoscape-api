@@ -39,9 +39,9 @@ import java.util.Set;
 
 /**
  * 
- * A {@linkplain RenderingEngine} should provide <strong>one, immutable</strong> lexicon implementing this interface.
+ * A {@linkplain org.cytoscape.view.presentation.RenderingEngine} should provide <strong>one, immutable</strong> lexicon implementing this interface.
  * 
- * This is a pre-defined tree of VisualProperties designed by the {@linkplain RenderingEngine} developer.
+ * This is a pre-defined tree of VisualProperties designed by the {@linkplain org.cytoscape.view.presentation.RenderingEngine} developer.
  * 
  * @since Cytoscape 3.0
  * 

@@ -18,7 +18,7 @@ public final class AddedNodeViewsEvent extends AbstractCyPayloadEvent<CyNetworkV
 	 * Creates the event for a new node view.
 	 * 
 	 * @param source network view which includes the new node view.
-	 * @param nodeView Newly created view object for a node.
+	 * @param nodeViews Collection of newly created view object for a node.
 	 * 
 	 */
 	public AddedNodeViewsEvent(final CyNetworkView source, final Collection<View<CyNode>> nodeViews) {
