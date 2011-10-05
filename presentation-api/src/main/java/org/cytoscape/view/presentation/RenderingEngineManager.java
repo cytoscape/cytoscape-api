@@ -11,7 +11,7 @@ import org.cytoscape.view.model.VisualLexicon;
  * manager.
  * <P>
  * Register/unregister engines are handled through
- * {@linkplain RenderingEngineAddedEvent}s.
+ * {@linkplain org.cytoscape.view.presentation.events.RenderingEngineAddedEvent}s.
  * 
  */
 public interface RenderingEngineManager {
@@ -57,7 +57,7 @@ public interface RenderingEngineManager {
 	 * Remove a rendering engine.
 	 * 
 	 * <p>
-	 * This method fires {@link VisualStyleAboutToBeRemovedEvent}.
+	 * This method fires {@link org.cytoscape.view.vizmap.events.VisualStyleAboutToBeRemovedEvent}.
 	 * 
 	 * @param engine engine to be removed.
 	 */

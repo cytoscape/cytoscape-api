@@ -28,6 +28,10 @@ public final class RenderingEngineAboutToBeRemovedEvent extends AbstractCyEvent<
 		this.engine = engine;
 	}
 
+	/**
+	 * Returns the {@link RenderingEngine} associated with the deleted presentation.
+	 * @return the {@link RenderingEngine} associated with the deleted presentation.
+	 */
 	public RenderingEngine<?> getRenderingEngine() {
 		return this.engine;
 	}

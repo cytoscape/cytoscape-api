@@ -31,7 +31,9 @@ public abstract class AbstractVisualLexicon implements VisualLexicon {
 	//
 	private final Map<VisualProperty<?>, VisualLexiconNode> visualPropertyMap;
 	
-	// Root of this tree.
+	/**
+	 * The Root of this tree.
+	 */
 	protected final VisualProperty<NullDataType> rootVisualProperty;
 	
 
