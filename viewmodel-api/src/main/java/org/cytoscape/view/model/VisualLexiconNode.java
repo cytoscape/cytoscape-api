@@ -45,12 +45,12 @@ public final class VisualLexiconNode {
 	}
 	
 	/**
-	 * Returns wrapped {@linkplain VisualProerty} object.
+	 * Returns wrapped {@linkplain VisualProperty} object.
 	 * 
 	 * Since VisualProperty itself does not have any hierarchical structure, 
 	 * such relationship is implemented by this wrapper.
 	 * 
-	 * @return wrapped {@linkplain VisualProeprty} object.
+	 * @return wrapped {@linkplain VisualProperty} object.
 	 */
 	public VisualProperty<?> getVisualProperty() {
 		return vp;

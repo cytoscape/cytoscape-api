@@ -70,6 +70,7 @@ public interface CyNetworkView extends View<CyNetwork> {
 
 	/**
 	 * Returns a View for a specified Edge.
+	 * @param edge the edge to return the view for.
 	 * 
 	 * @param n
 	 *          Edge data model
