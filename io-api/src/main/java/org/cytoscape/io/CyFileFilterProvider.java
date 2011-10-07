@@ -7,7 +7,8 @@ package org.cytoscape.io;
  */
 public interface CyFileFilterProvider {
 	/**
-	 * Return the file filter associated with the IOFactory
+	 * Return the file filter associated with the IOFactory.
+	 * @return the {@link CyFileFilter} associated with the IOFactory.
 	 */
 	CyFileFilter getCyFileFilter();
 

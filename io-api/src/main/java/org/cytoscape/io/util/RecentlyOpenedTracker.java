@@ -19,7 +19,8 @@ public interface RecentlyOpenedTracker {
 	
 	
 	/**
-	 * @returns the current list of recently opened file names
+	 * Returns the current list of recently opened file names.
+	 * @return the current list of recently opened file names
 	 */
 	List<URL> getRecentlyOpenedURLs();
 
@@ -27,6 +28,7 @@ public interface RecentlyOpenedTracker {
 	/**
 	 * Adds "newURL" to the list of recently opened file names and trims the
 	 * list if it has exceeded its maximum length.
+	 * @param newURL the URL to add to the list of recently opened file names.
 	 */
 	void add(final URL newURL);
 
@@ -34,6 +36,7 @@ public interface RecentlyOpenedTracker {
 	/**
 	 * Writes the list of recently opened files to the file specified by the
 	 * constructor argument.
+	 * @throws FileNotFoundException 
 	 */
 	void writeOut() throws FileNotFoundException;
 

@@ -30,7 +30,7 @@ public interface StreamUtil {
 	InputStream getBasicInputStream(URL source) throws IOException;
 
 	/**
-	 * Obtain a {@link java.net.URLConnectio} for a given {@link java.net.URL}.
+	 * Obtain a {@link java.net.URLConnection} for a given {@link java.net.URL}.
 	 * @param source The URL from which to generate the URLConnection.
 	 * @return An URLConnection from the specified URL.
 	 */

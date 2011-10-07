@@ -192,6 +192,7 @@ public class BasicCyFileFilter implements CyFileFilter {
 	/**
 	 * Returns a string containing the specified number of lines from the
 	 * beginning of the file.  This is useful for testing input streams. 
+	 * @param numLines the number of lines from the beginning of the file.
 	 * @return a string containing the specified number of lines from the
 	 * beginning of the file.
 	 */
