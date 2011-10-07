@@ -15,12 +15,16 @@ public interface TunableHandler {
 	 * @Tunable or null if no field has been associated with this handler.
 	 * @return an object describing a field annotated with @Tunable 
 	 * or null if no field has been associated with this handler
+	 * @throws IllegalAccessException 
+	 * @throws InvocationTargetException 
 	 */
 	Object getValue() throws IllegalAccessException, InvocationTargetException;
 
 	/** 
 	 * Attempts to set the value "newValue" on the associated Tunable.
 	 * @param newValue the value to be written into the tunable property
+	 * @throws IllegalAccessException 
+	 * @throws InvocationTargetException 
 	 */
 	void setValue(final Object newValue) throws IllegalAccessException, InvocationTargetException;
 

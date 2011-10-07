@@ -102,10 +102,6 @@ public abstract class AbstractTunableInterceptor<TH extends TunableHandler> impl
 
 	/**
 	 * Creates a new AbstractTunableInterceptor object.
-	 *
-	 * @param tunableHandlerFactory  Factory of <code>Handlers</code> = can be <code>GUIHandlerFactory</code> to make the GUI with the <code>Handlers</code>,
-	 * 	<code>CLHandlerFactory</code> to get the <code>Handlers</code> that will create the <i>Options</i> for the <code>Tasks</code> runnable through the CommandLine Interface,
-	 *  or <code>PropHandlerFactory</code> to get the <code>Handlers</code> for Properties.
 	 */
 	public AbstractTunableInterceptor() {
 		throwException = false;
