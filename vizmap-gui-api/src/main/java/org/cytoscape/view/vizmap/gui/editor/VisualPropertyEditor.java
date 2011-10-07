@@ -51,21 +51,22 @@ import javax.swing.table.TableCellRenderer;
  */
 public interface VisualPropertyEditor<T> {
 
+	/**
+	 * Returns the type of object managed in the Visual property.
+	 * @return the type of object managed in the Visual property.
+	 */
 	Class<T> getType();
 
 	/**
 	 * Returns continuous mapping editor for the Visual Property. Return value
-	 * is null is Continuous Editor does not exist.
-	 * 
-	 * @param parent
-	 * @param type
+	 * is null is Continuous Editor does not exist. #ASKMIKE
+	 * @return a continuous mapping editor for the Visual Property.
 	 */
 	PropertyEditor getContinuousMappingEditor();
 
 	/**
-	 * Returns Property Editor object for this data type.
-	 * 
-	 * @return
+	 * Returns {@link PropertyEditor} object for this data type.
+	 * @return {@link PropertyEditor} object for this data type.
 	 */
 	PropertyEditor getPropertyEditor();
 
@@ -74,15 +75,14 @@ public interface VisualPropertyEditor<T> {
 	 * type (String, Number, Color...), so we do not need to provide
 	 * VisualProperty as parameter.
 	 * 
-	 * @param parent
-	 *            parent component of this window
+	 * @param parent parent component of this window
 	 * @return
 	 */
 	T showVisualPropertyValueEditor();
 
 	/**
 	 * Provide Cell renderer for JTable or JList. Developers can implement
-	 * custom cell renderers my using returned component.
+	 * custom cell renderers by using returned component.
 	 * 
 	 * @param type
 	 * @param width
@@ -99,8 +99,6 @@ public interface VisualPropertyEditor<T> {
 	/**
 	 * This is for default view editor.
 	 * 
-	 * @param vp
-	 *            DOCUMENT ME!
 	 * @param width
 	 *            DOCUMENT ME!
 	 * @param height
