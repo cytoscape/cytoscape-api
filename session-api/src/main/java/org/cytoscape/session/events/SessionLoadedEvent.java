@@ -7,7 +7,7 @@ import org.cytoscape.session.CySessionManager;
 
 /**
  * This event is fired after a new session has been set in the 
- * {@link CySessionManager#setCurrentCySession(session,filename)} 
+ * {@link CySessionManager#setCurrentSession(CySession, String)} 
  * method and is used to notify interested parties in the change 
  * of state. 
  */
@@ -20,6 +20,7 @@ public final class SessionLoadedEvent extends AbstractCyEvent<CySessionManager> 
 	 * Constructor.
 	 * @param source The CySessionManager that is the source of this event.
 	 * @param session The CySession object that was just loaded.
+	 * @param fileName the name of the file representing the session.
 	 */
 	public SessionLoadedEvent(final CySessionManager source, final CySession session, final String fileName) {
 		super(source,SessionLoadedListener.class);

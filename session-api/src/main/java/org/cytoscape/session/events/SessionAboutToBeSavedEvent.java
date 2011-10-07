@@ -15,7 +15,7 @@ import org.cytoscape.session.CySessionManager;
 
 /**
  * This event is fired synchronously by the CySessionManager at beginning of the
- * {@link CySessionManager#getCySession()} method.  The intent is to allow
+ * {@link CySessionManager#getCurrentSession()} method.  The intent is to allow
  * listeners to provide information to this event object or to update their 
  * state before that state is interrogated by the CySessionManager. 
  */
@@ -42,6 +42,7 @@ public final class SessionAboutToBeSavedEvent extends AbstractCyEvent<CySessionM
 	 * stored in the session.
 	 * @param pluginName The name of the plugin that these files should be stored for.
 	 * @param files The list of File objects to be stored in the session file.
+	 * @throws Exception 
 	 */
 	public void addPluginFiles(final String pluginName, final List<File> files) throws Exception {
 		// Throw checked Exceptions here to force plugin authors to deal with
@@ -107,6 +108,7 @@ public final class SessionAboutToBeSavedEvent extends AbstractCyEvent<CySessionM
 	 * A method that allows plugins to add Cytopanel-related information to be
 	 * stored in the session.
 	 * @param cytopanel
+	 * @throws Exception #ASKMIKE Shouldn't this be nullptrexcept?
 	 */
 	public void addCytopanel(Cytopanel cytopanel) throws Exception {
 		if (cytopanel == null)
