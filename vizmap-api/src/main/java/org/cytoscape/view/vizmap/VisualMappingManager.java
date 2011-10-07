@@ -43,7 +43,7 @@ import org.cytoscape.view.vizmap.events.VisualStyleAboutToBeRemovedEvent;
 import org.cytoscape.view.vizmap.events.VisualStyleAddedEvent;
 
 /**
- * Manager for {@linkplain Visual Style}s. This object manages mapping from view
+ * Manager for {@linkplain VisualStyle}s. This object manages mapping from view
  * model to VisualStyle. User objects can access all VisualStyles and
  * VisualMappingFunctions through this class.
  * 
@@ -59,10 +59,8 @@ public interface VisualMappingManager {
 	/**
 	 * Set a {@linkplain VisualStyle} to the target network view model.
 	 * 
-	 * @param vs
-	 *            Visual Style to be set.
-	 * @param nv
-	 *            Target network view
+	 * @param visualStyle Visual Style to be set.
+	 * @param networkViewModel The target network view model.
 	 */
 	void setVisualStyle(final VisualStyle visualStyle,
 			final CyNetworkView networkViewModel);

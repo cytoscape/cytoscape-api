@@ -42,7 +42,7 @@ import org.cytoscape.event.CyListener;
 public interface VisualStyleAboutToBeRemovedListener extends CyListener {
 
 	/**
-	 * Update states/GUI using deleted {@linkplain VisualStyle} information.
+	 * Update states/GUI using deleted {@linkplain org.cytoscape.view.vizmap.VisualStyle} information.
 	 * 
 	 * @param e
 	 *            Event containing deleted VisualStyle.

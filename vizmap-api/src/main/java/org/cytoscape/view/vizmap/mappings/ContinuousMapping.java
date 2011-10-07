@@ -27,6 +27,7 @@ public interface ContinuousMapping<K, V> extends VisualMappingFunction<K,V>{
 
 	/**
 	 * Gets Total Point Count.
+	 * @return the total point count.
 	 */
 	public int getPointCount();
 

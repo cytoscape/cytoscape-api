@@ -14,13 +14,13 @@ import org.cytoscape.view.vizmap.VisualMappingFunction;
 public abstract class AbstractVisualMappingFunction<K, V> implements
 		VisualMappingFunction<K, V> {
 
-	// Mapping attribute name.  This is immutable.
+	/** Mapping attribute name.  This is immutable. */
 	protected final String attrName;
 	
-	// Type of attribute
+	/** Type of attribute. */
 	protected final Class<K> attrType;
 
-	// Visual Property used in this mapping.
+	/** Visual Property used in this mapping. */
 	protected final VisualProperty<V> vp;
 
 	

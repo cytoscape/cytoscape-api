@@ -42,11 +42,11 @@ import org.cytoscape.event.CyListener;
 public interface VisualStyleAddedListener extends CyListener {
 
 	/**
-	 * Do something with a new {@linkplain VisualStyle}. Usually, GUI components
+	 * Do something with a new {@linkplain org.cytoscape.view.vizmap.VisualStyle}. Usually, GUI components
 	 * and managers executes this method to update their states.
 	 * 
 	 * @param e
-	 *            event contains new {@linkplain VisualStyle} object.
+	 *            event contains new {@linkplain org.cytoscape.view.vizmap.VisualStyle} object.
 	 */
 	void handleEvent(final VisualStyleAddedEvent e);
 }

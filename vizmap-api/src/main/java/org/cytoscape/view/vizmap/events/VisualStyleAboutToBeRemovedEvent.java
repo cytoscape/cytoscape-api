@@ -50,7 +50,7 @@ public final class VisualStyleAboutToBeRemovedEvent extends AbstractCyEvent<Visu
 	 * Create an event for the removed VisualStyle.
 	 * 
 	 * @param source Source of event.  This is always a {@link VisualMappingManager}.
-	 * @param destroyed VisualStyle to be deleted.
+	 * @param style VisualStyle to be deleted.
 	 */
 	public VisualStyleAboutToBeRemovedEvent(final VisualMappingManager source, final VisualStyle style) {
 		super(source, VisualStyleAboutToBeRemovedListener.class);
