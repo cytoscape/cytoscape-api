@@ -9,6 +9,8 @@ public interface CyNetworkTableManager {
 	/**
 	 * Associates the given table to the network using the specified namespace and type.
 	 * @param network the {@link CyNetwork} to associate the given table to.
+	 * @param type Type of {@link CyTableEntry} associated with the table.
+	 * @param namespace The name of the table relative to the network.
 	 * @param table the table to associate to the network with the specified namespace and type.
 	 */
 	void setTable(CyNetwork network, Class<? extends CyTableEntry> type, String namespace, CyTable table);
@@ -17,6 +19,8 @@ public interface CyNetworkTableManager {
 	 * Returns the table with the specified namespace and type from the
 	 * network.
 	 * @param network the network to check for the table.
+	 * @param type Type of {@link CyTableEntry} associated with the table.
+	 * @param namespace The name of the table relative to the network.
 	 * @return the table with the specified namespace and type from the
 	 * network.
 	 */
@@ -26,6 +30,8 @@ public interface CyNetworkTableManager {
 	 * Removes the table with the specified namespace and type from
 	 * the network.
 	 * @param network the network to remove the table from.
+	 * @param type Type of {@link CyTableEntry} associated with the table.
+	 * @param namespace The name of the table relative to the network.
 	 */
 	void removeTable(CyNetwork network, Class<? extends CyTableEntry> type, String namespace);
 	

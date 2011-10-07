@@ -41,9 +41,22 @@ import java.util.List;
  * types.
  */
 public interface CyTable extends Identifiable {
+	/**
+	 * Mutability of the table specifies whether or not it is able to be deleted..
+	 *
+	 */
 	public static enum Mutability {
+		/**
+		 * The table can be deleted.
+		 */
 		MUTABLE("mutable"),
+		/**
+		 * The table can not be deleted.
+		 */
 		PERMANENTLY_IMMUTABLE("permanently immutable"),
+		/**
+		 * The table can not be deleted because it currently has virtual {@link CyColumn}s referencing it.
+		 */
 		IMMUTABLE_DUE_TO_VIRT_COLUMN_REFERENCES("immutable due to virtual column references");
 
 		private String humanReadableRepresentation;
@@ -56,8 +69,13 @@ public interface CyTable extends Identifiable {
 		final public String toString() { return humanReadableRepresentation; }
 	}
 	
+	/**
+	 * The SavePolicy of a table specifies whether or not it will be saved.
+	 */
 	public static enum SavePolicy {
-		DO_NOT_SAVE,  /* i.e. this table should not be serialized */
+		/** This table should not be saved i.e. this table should not be serialized. */
+		DO_NOT_SAVE,  
+		/** This table should be saved. */
 		SESSION_FILE,
 	}
 
@@ -207,7 +225,7 @@ public interface CyTable extends Identifiable {
 	/** Adds a "virtual" column to the the current table.
 	 *  @param virtualColumn  the name of the new virtual column, if this name already exists,
 	 *                        new column names with -1, -2 and so appended to this name on will
-	 *                        be tried until a nonexisting name will be found
+	 *                        be tried until a non-existing name will be found
 	 *  @param sourceColumn   the name of the column in "sourceTable" that will be mapped to
 	 *                        "virtualColumn"
 	 *  @param sourceTable    the table that really contains the column that we're adding (all
@@ -242,7 +260,7 @@ public interface CyTable extends Identifiable {
 	
 	/**
 	 * Sets how (or if) this CyTable should be saved.
-	 * @param policy the policy to follow during the lifecycle of the CyTable.
+	 * @param policy the policy to follow during the life-cycle of the CyTable.
 	 */
 	void setSavePolicy(SavePolicy policy);
 
