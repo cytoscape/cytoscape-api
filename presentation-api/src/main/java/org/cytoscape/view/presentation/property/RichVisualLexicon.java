@@ -100,7 +100,7 @@ public class RichVisualLexicon extends MinimalVisualLexicon {
 	
 
 	/**
-	 * Construct a {@linkplain VisalLexicon} for 3D rendering engine.
+	 * Construct a {@linkplain org.cytoscape.view.model.VisualLexicon} for 3D rendering engine.
 	 * 
 	 * @param root Root node in the lexicon tree.
 	 * 
