@@ -23,6 +23,7 @@ public final class BasicCyProperty implements CyProperty<Properties> {
 	 * should encapsulate.
 	 * @param properties The non-null Properties object this CyProperty object
 	 * should encapsulate.  Throws NullPointerException if Properties is null.
+	 * @param savePolicy the {@link CyProperty.SavePolicy} of this CyProperty object.
 	 */
 	public BasicCyProperty(final Properties properties, final CyProperty.SavePolicy savePolicy) {
 		if (properties == null)

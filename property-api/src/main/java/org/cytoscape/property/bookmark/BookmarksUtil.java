@@ -10,7 +10,8 @@ public interface BookmarksUtil {
 	 * Traverse bookmark tree and get a list of data sources from the specified
 	 * category.
 	 * 
-	 * @param categoryName
+	 * @param categoryName the specified category to get a list of data sources from.
+	 * @param categoryList the list of categories to traverse for the specified category.
 	 * @return a list of data sources from the specified category.
 	 */
 	List<DataSource> getDataSourceList(String categoryName, List<Category> categoryList);

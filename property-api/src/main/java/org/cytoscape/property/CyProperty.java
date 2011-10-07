@@ -8,9 +8,15 @@ package org.cytoscape.property;
  * {@link org.cytoscape.property.bookmark.Bookmarks}, or
  * {@link org.cytoscape.property.session.Cysession}, although it is possible for 
  * property objects of other types to be registered in this way as well.
+ * @param <P> The generic type for the CyProperty. Generally one  of three types: 
+ * {@link java.util.Properties}, 
+ * {@link org.cytoscape.property.bookmark.Bookmarks}, or
+ * {@link org.cytoscape.property.session.Cysession}, although it is possible for 
+ * property objects of other types to be registered in this way as well.
  */
 public interface CyProperty<P> {
 
+	/** SavePolicy specifies how the CyProperty will be saved, or if it will not be saved. */
 	enum SavePolicy {
 		/** These properties are preset by Cytoscape to some default value and
 		 *  are never written out. */
@@ -35,5 +41,9 @@ public interface CyProperty<P> {
 	 */
 	P getProperties();
 
+	/**
+	 * Returns the {@link SavePolicy} of the CyProperty.
+	 * @return the {@link SavePolicy} of the CyProperty.
+	 */
 	SavePolicy getSavePolicy();
 }
