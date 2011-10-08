@@ -34,7 +34,7 @@ public class BasicTunableHandlerFactory<T extends TunableHandler> implements Tun
 		this.allowedTypes = allowedTypes;
 	}
 	
-	/**
+	/* #ASKMIKE
 	 * Constructor.
 	 * @param tunableHandlerClass The type of the TunableHandler to be created.
 	 * @param allowedTypes The object types that the TunableHandler is associated with.
