@@ -38,9 +38,9 @@ public interface GUITunableInterceptor<TH extends TunableHandler> extends Tunabl
 	 */
 	void setTunablePanel(final JPanel parent);
 	
-	/*
+	/**
 	 * Used to set the top level parent (window) of Tunable dialog
-	 * @param topParent An UI component, usually it is the desktop window of Cytoscape
+	 * @param win An UI component, usually it is the desktop window of Cytoscape
 	 */
 	public void setParent(Window win);
 }
