@@ -64,6 +64,7 @@ public interface CytoPanel {
 
 	/**
 	 * Returns the component at index.
+	 * @param index the index of the component.
 	 *
 	 * @return component at the given index.
 	 */
@@ -108,6 +109,7 @@ public interface CytoPanel {
 	/**
 	 * Returns the Component that is this CytoPanel.  This is a hack to allow
 	 * CytoPanel to be used as a Component.
+	 * @return the Component that is this CytoPanel.
 	 */
 	public Component getThisComponent();
 }

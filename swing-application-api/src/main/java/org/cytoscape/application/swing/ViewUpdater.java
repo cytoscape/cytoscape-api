@@ -68,7 +68,7 @@ public class ViewUpdater<S> implements RowsSetListener {
 	 * visual property on the view with the new value that has been set in the
 	 * row.
 	 * 
-	 * @param RowsSetEvent The event to be processed.
+	 * @param e The {@link RowsSetEvent} to be processed.
 	 */
 	@SuppressWarnings("unchecked")
 	public void handleEvent(RowsSetEvent e) {

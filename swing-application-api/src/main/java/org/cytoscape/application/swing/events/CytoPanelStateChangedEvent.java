@@ -17,7 +17,7 @@ public final class CytoPanelStateChangedEvent extends AbstractCyEvent<Object> {
 	 * Constructor.
 	 * @param source The object firing the event.
 	 * @param cp The CytoPanel whose state has changed. 
-	 * @param index The new state of the CytoPanel. 
+	 * @param newState The new state of the CytoPanel. 
 	 */
 	public CytoPanelStateChangedEvent(final Object source, final CytoPanel cp, final CytoPanelState newState) {
 		super(source, CytoPanelStateChangedListener.class);

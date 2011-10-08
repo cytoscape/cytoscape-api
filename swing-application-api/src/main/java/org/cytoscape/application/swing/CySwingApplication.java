@@ -52,6 +52,7 @@ public interface CySwingApplication {
 	/** 
 	 * Returns the JMenu for the specified name and null if no 
 	 * menu exists for the name.
+	 * @param menuName the name of the JMenu.
 	 * @return The JMenu for the specified name and null if no 
 	 * menu exists for the name.
 	 */
