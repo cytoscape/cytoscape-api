@@ -41,7 +41,6 @@ public abstract class AbstractVisualLexicon implements VisualLexicon {
 	 * Constructor for VisualLexicon.  The parameters are required for all lexicons.
 	 * 
 	 * @param rootVisualProperty Root of the visual property tree.
-	 * @param nodeFactory factory to create tree nodes for a lexicon.
 	 */
 	public AbstractVisualLexicon(final VisualProperty<NullDataType> rootVisualProperty) {
 		
