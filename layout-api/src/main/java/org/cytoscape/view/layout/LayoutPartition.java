@@ -108,7 +108,6 @@ public final class LayoutPartition {
 	 * LayoutPartition: use this constructor to create a LayoutPartition that
 	 * includes the entire network.
 	 *
-	 * @param network the GraphPerspective to include
 	 * @param networkView the CyNetworkView to use
 	 * @param nodeSet the nodes to be considered
 	 * @param edgeWeighter the weighter to use for edge weighting
@@ -122,7 +121,6 @@ public final class LayoutPartition {
 	 * LayoutPartition: use this constructor to create a LayoutPartition that
 	 * includes the entire network.
 	 *
-	 * @param network the GraphPerspective to include
 	 * @param networkView the CyNetworkView to use
 	 * @param selectedOnly if true, only include selected nodes in the partition
 	 * @param edgeWeighter the weighter to use for edge weighting

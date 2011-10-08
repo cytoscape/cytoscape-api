@@ -88,8 +88,10 @@ abstract public class AbstractLayoutAlgorithm implements CyLayoutAlgorithm {
 
 	/**
 	 * The Constructor.
+	 * @param undo the UndoSupport object used for allowing undo of layouts.
 	 * @param computerName a computer readable name used to construct property strings.
 	 * @param humanName a user visible name of the layout.
+	 * @param supportsSelectedOnly indicates whether only selected nodes should be laid out.
 	 */
 	public AbstractLayoutAlgorithm(final UndoSupport undo, final String computerName, final String humanName, boolean supportsSelectedOnly) {
 		this.undo = undo;
@@ -186,7 +188,7 @@ abstract public class AbstractLayoutAlgorithm implements CyLayoutAlgorithm {
 	/**
 	 * This returns the list of "attributes" that are provided
 	 * by an algorithm for internal purposes.  For example,
-	 * an edge-weighted algorithmn might seed the list of
+	 * an edge-weighted algorithm might seed the list of
 	 * attributes with "unweighted".  This should be overloaded
 	 * by algorithms that intend to return custom attributes.
 	 *
