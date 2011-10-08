@@ -8,6 +8,7 @@ import java.io.File;
  */
 public interface CyApplicationConfiguration {
 	
+	/** Default configuration directory used for all Cytoscape confiuration files */
 	public static final String DEFAULT_CONFIG_DIR = ".cytoscape";
 
 	/**
