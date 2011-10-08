@@ -12,7 +12,7 @@ public interface TunableHandler {
 
 	/**
 	 * Returns an object describing a field annotated with 
-	 * @Tunable or null if no field has been associated with this handler.
+	 * {@link Tunable} or null if no field has been associated with this handler.
 	 * @return an object describing a field annotated with @Tunable 
 	 * or null if no field has been associated with this handler
 	 * @throws IllegalAccessException 
