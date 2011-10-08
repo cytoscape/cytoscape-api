@@ -79,7 +79,7 @@ public final class SessionAboutToBeSavedEvent extends AbstractCyEvent<CySessionM
 
 	/**
 	 * This method is not meant to be used by listeners for this event.
-	 * @return
+	 * @return the {@link Desktop} object associated with this event.
 	 */
 	public Desktop getDesktop() {
 		return desktop;
@@ -96,7 +96,7 @@ public final class SessionAboutToBeSavedEvent extends AbstractCyEvent<CySessionM
 
 	/**
 	 * This method is not meant to be used by listeners for this event.
-	 * @return
+	 * @return a List of {@link org.cytoscape.property.session.Cytopanel}s.
 	 */
 	public List<Cytopanel> getCytopanels() {
 		// Make the return value immutable so that listeners
