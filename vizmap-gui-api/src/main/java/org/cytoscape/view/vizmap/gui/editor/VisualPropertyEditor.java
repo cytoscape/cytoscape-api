@@ -75,7 +75,6 @@ public interface VisualPropertyEditor<T> {
 	 * type (String, Number, Color...), so we do not need to provide
 	 * VisualProperty as parameter.
 	 * 
-	 * @param parent parent component of this window
 	 * @return
 	 */
 	T showVisualPropertyValueEditor();

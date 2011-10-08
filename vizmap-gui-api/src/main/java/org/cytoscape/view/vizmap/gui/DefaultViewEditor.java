@@ -17,10 +17,10 @@ import org.cytoscape.view.vizmap.VisualStyle;
 public interface DefaultViewEditor {
 
 	/**
-	 * For a given visual style name, returns a graphics of default
+	 * For a given visual style name, returns a graphics of default.
 	 * 
-	 * @param vs 
-	 * @return
+	 * @param vs The {@link VisualStyle} to get the default view of. 
+	 * @return the default graphics Component. #ASKMIKE
 	 */
 	public Component getDefaultView(VisualStyle vs);
 	
