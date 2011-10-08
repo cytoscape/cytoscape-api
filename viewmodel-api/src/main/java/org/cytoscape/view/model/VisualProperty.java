@@ -97,7 +97,7 @@ public interface VisualProperty<T> {
 	/**
 	 * In some cases, default value from visual style is not suitable, such as x, y, z location of nodes.
 	 * If this flag is on, it will be ignored and it will be controlled by mapping only.
-	 * 
+	 * #ASKMIKE
 	 * @return
 	 */
 	boolean shouldIgnoreDefault();
