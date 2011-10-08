@@ -84,12 +84,6 @@ public interface VisualPropertyEditor<T> {
 	 * Provide Cell renderer for JTable or JList. Developers can implement
 	 * custom cell renderers by using returned component.
 	 * 
-	 * @param type
-	 * @param width
-	 *            component width
-	 * @param height
-	 *            component height
-	 * 
 	 * @return
 	 */
 	TableCellRenderer getDiscreteTableCellRenderer();

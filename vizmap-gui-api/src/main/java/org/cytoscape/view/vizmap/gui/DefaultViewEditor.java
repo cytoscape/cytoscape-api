@@ -19,7 +19,7 @@ public interface DefaultViewEditor {
 	/**
 	 * For a given visual style name, returns a graphics of default
 	 * 
-	 * @param vsName
+	 * @param vs 
 	 * @return
 	 */
 	public Component getDefaultView(VisualStyle vs);

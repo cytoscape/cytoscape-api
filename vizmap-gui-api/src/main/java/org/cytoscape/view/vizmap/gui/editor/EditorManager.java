@@ -72,9 +72,9 @@ public interface EditorManager {
 	/**
 	 * Listener for editor displayer service.
 	 *
-	 * @param ed
+	 * @param va
 	 *            DOCUMENT ME!
-	 * @param props
+	 * @param properties
 	 *            DOCUMENT ME!
 	 */
 	@SuppressWarnings("unchecked")
@@ -83,9 +83,9 @@ public interface EditorManager {
 	/**
 	 * Listener for OSGi service.
 	 *
-	 * @param ed
+	 * @param va
 	 *            DOCUMENT ME!
-	 * @param props
+	 * @param properties
 	 *            DOCUMENT ME!
 	 */
 	@SuppressWarnings("unchecked")
@@ -93,6 +93,10 @@ public interface EditorManager {
 	
 	/**
 	 * Display discrete value editor for this visual property.
+	 * @param <V> DOCUMENT ME!
+	 * @param parentComponent DOCUMENT ME!
+	 * @param type DOCUMENT ME!
+	 * @param initialVal DOCUMENT ME!
 	 *
 	 * @return DOCUMENT ME!
 	 *
@@ -109,6 +113,9 @@ public interface EditorManager {
 	 * Continuous editor always update mapping automatically, so there is no
 	 * return value.
 	 * </p>
+	 * @param <V> DOCUMENT ME!
+	 * @param parentComponent DOCUMENT ME!
+	 * @param type DOCUMENT ME!
 	 *
 	 * @throws Exception
 	 *             DOCUMENT ME!
@@ -141,8 +148,7 @@ public interface EditorManager {
 	
 	/**
 	 *  DOCUMENT ME!
-	 *
-	 * @param editorName DOCUMENT ME!
+	 * @param targetObjectType DOCUMENT ME!
 	 *
 	 * @return  DOCUMENT ME!
 	 */

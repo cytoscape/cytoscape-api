@@ -56,8 +56,9 @@ public abstract class AbstractVisualPropertyEditor<T> implements VisualPropertyE
 
 	/**
 	 * Creates a new AbstractVisualPropertyEditor object.
+	 * @param type The type of this AbstractVisualPropertyEditor object.
+	 * @param propertyEditor the {@link PropertyEditor} to construct this with.
 	 *
-	 * @param vp  DOCUMENT ME!
 	 */
 	public AbstractVisualPropertyEditor(final Class<T> type, final PropertyEditor propertyEditor) {
 		this.type = type;
