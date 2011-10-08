@@ -46,7 +46,7 @@ public interface RenderingEngineManager {
 	/**
 	 * Add new {@link RenderingEngine} to this manager.
 	 * <p>
-	 * This method fires {@link VisualStyleCreatedEvent}.
+	 * This method fires {@link org.cytoscape.view.presentation.events.RenderingEngineAddedEvent}.
 	 * 
 	 * @param engine New engine to be added.
 	 */
@@ -57,7 +57,7 @@ public interface RenderingEngineManager {
 	 * Remove a rendering engine.
 	 * 
 	 * <p>
-	 * This method fires {@link org.cytoscape.view.vizmap.events.VisualStyleAboutToBeRemovedEvent}.
+	 * This method fires {@link org.cytoscape.view.presentation.events.RenderingEngineAboutToBeRemovedEvent}.
 	 * 
 	 * @param engine engine to be removed.
 	 */
