@@ -72,6 +72,7 @@ public abstract class AbstractCyActivator implements BundleActivator {
 	/**
 	 * A method that attempts to get a service of the specified type. If an 
 	 * appropriate service is not found, an exception will be thrown.
+	 * @param <S> The generic type of the class defining the type of service desired.
 	 * @param bc The BundleContext used to find services.
 	 * @param serviceClass The class defining the type of service desired.
 	 * @return A reference to a service of type serviceClass.
@@ -94,6 +95,7 @@ public abstract class AbstractCyActivator implements BundleActivator {
 	 * A method that attempts to get a service of the specified type and that
 	 * passes the specified filter. If an appropriate service is not found, an 
 	 * exception will be thrown.
+	 * @param <S> The generic type of the class defining the type of service desired.
 	 * @param bc The BundleContext used to find services.
 	 * @param serviceClass The class defining the type of service desired.
 	 * @param filter The string defining the filter the service must pass.  See OSGi's 
