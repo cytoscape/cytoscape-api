@@ -103,6 +103,7 @@ public abstract class AbstractCyWriter<T extends CyWriterManager> extends Abstra
 	 * @param filter The specific type of file to be written.
 	 * @param out The file that will be written.
 	 * @return a {@link org.cytoscape.io.write.CyWriter} object for writing the specified file of the specified type.
+	 * @throws Exception 
 	 */
 	protected abstract CyWriter getWriter(CyFileFilter filter, File out) throws Exception;
 
