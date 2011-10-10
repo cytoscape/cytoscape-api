@@ -19,5 +19,10 @@ public abstract class AbstractVisualPropertyValue implements VisualPropertyValue
 	public String getSerializableString() {
 		return this.serializableString;
 	}
+	
+	@Override
+	public String toString() {
+		return displayName;
+	}
 
 }

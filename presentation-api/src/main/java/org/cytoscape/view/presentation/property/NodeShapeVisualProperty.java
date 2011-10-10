@@ -12,22 +12,14 @@ public final class NodeShapeVisualProperty extends
 		AbstractVisualProperty<NodeShape> {
 
 	// Presets
-	public static final NodeShape RECTANGLE = new NodeShapeImpl("Rectangle",
-			"RECTANGLE");
-	public static final NodeShape ROUND_RECTANGLE = new NodeShapeImpl(
-			"Round Rectangle", "ROUND_RECTANGLE");
-	public static final NodeShape TRIANGLE = new NodeShapeImpl("Triangle",
-			"TRIANGLE");
-	public static final NodeShape PARALLELOGRAM = new NodeShapeImpl(
-			"Parallelogram", "PARALLELOGRAM");
-	public static final NodeShape DIAMOND = new NodeShapeImpl("Diamond",
-			"DIAMOND");
-	public static final NodeShape ELLIPSE = new NodeShapeImpl("Ellipse",
-			"ELLIPSE");
-	public static final NodeShape HEXAGON = new NodeShapeImpl("Hexagon",
-			"HEXAGON");
-	public static final NodeShape OCTAGON = new NodeShapeImpl("Octagon",
-			"OCTAGON");
+	public static final NodeShape RECTANGLE = new NodeShapeImpl("Rectangle", "RECTANGLE");
+	public static final NodeShape ROUND_RECTANGLE = new NodeShapeImpl("Round Rectangle", "ROUND_RECTANGLE");
+	public static final NodeShape TRIANGLE = new NodeShapeImpl("Triangle", "TRIANGLE");
+	public static final NodeShape PARALLELOGRAM = new NodeShapeImpl("Parallelogram", "PARALLELOGRAM");
+	public static final NodeShape DIAMOND = new NodeShapeImpl("Diamond", "DIAMOND");
+	public static final NodeShape ELLIPSE = new NodeShapeImpl("Ellipse", "ELLIPSE");
+	public static final NodeShape HEXAGON = new NodeShapeImpl("Hexagon", "HEXAGON");
+	public static final NodeShape OCTAGON = new NodeShapeImpl("Octagon", "OCTAGON");
 
 	private static final DiscreteRange<NodeShape> NODE_SHAPE_RANGE;
 
@@ -96,7 +88,11 @@ public final class NodeShapeVisualProperty extends
 			// TODO Auto-generated method stub
 			return null;
 		}
-
+		
+		@Override
+		public String toString() {
+			return super.toString();
+		}
 	}
 
 }
