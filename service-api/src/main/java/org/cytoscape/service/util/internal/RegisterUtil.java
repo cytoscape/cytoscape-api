@@ -36,18 +36,10 @@
 package org.cytoscape.service.util.internal;
 
 
-import java.util.Map;
-import java.util.HashMap;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Properties;
-import org.osgi.framework.BundleContext; 
-import org.osgi.framework.BundleActivator; 
-import org.osgi.framework.ServiceRegistration; 
-import org.osgi.framework.ServiceReference; 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.cytoscape.service.util.internal.CyServiceListener;
 
 /**
  * Various utilities for registering services. 
@@ -58,14 +50,19 @@ public class RegisterUtil {
 
 	public static List<Class<?>> getAllInterfaces(Class<?> clazz) {
 		List<Class<?>> interfaces = new ArrayList<Class<?>>();
-		for ( Class<?> c : clazz.getInterfaces() )
-			interfaces.add(c);
+		addAllInterfaces(interfaces, clazz);
+		return interfaces;
+	}
+	
+	static void addAllInterfaces(List<Class<?>> list, Class<?> clazz) {
+		for ( Class<?> c : clazz.getInterfaces() ) {
+			list.add(c);
+			addAllInterfaces(list, c);
+		}
 
 		// recurse into superclass
 		Class<?> superClass = clazz.getSuperclass();
 		if ( superClass != null && superClass != Object.class )
-			interfaces.addAll( getAllInterfaces( superClass ) );
-
-		return interfaces;
+			addAllInterfaces(list, superClass);
 	}
 }
