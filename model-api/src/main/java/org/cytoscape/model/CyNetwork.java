@@ -164,7 +164,11 @@ public interface CyNetwork extends CyTableEntry {
 	boolean containsEdge(CyNode from, CyNode to);
 
 	/**
-	 * Return the CyNode that has the index.
+	 * Return the CyNode that has the index. To iterate
+	 * over all nodes, iterate over getNodeList(). We make
+	 * no guarantees on what represent valid values for the index.
+	 * The only valid indices are those accessed from existing 
+	 * nodes.
 	 *
 	 * @param index the index of the CyNode to get
 	 * @return the associated CyNode or null if there is no
@@ -173,7 +177,11 @@ public interface CyNetwork extends CyTableEntry {
 	CyNode getNode(int index);
 
 	/**
-	 * Return the CyEdge that has the index.
+	 * Return the CyEdge that has the index. To iterate
+	 * over all edges, iterate over getEdgeList(). We make
+	 * no guarantees on what represent valid values for the index.
+	 * The only valid indices are those accessed from existing 
+	 * edges.
 	 *
 	 * @param index the index of the CyEdge to get
 	 * @return the associated CyEdge or null if there is no
