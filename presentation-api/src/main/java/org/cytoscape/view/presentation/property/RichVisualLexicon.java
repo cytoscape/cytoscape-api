@@ -85,18 +85,21 @@ public class RichVisualLexicon extends MinimalVisualLexicon {
 	
 	public static final VisualProperty<Paint> EDGE_SELECTED_PAINT = new PaintVisualProperty(
 			Color.RED, MinimalVisualLexicon.PAINT_RANGE, "EDGE_SELECTED_PAINT",
-			"Edge Selected Paint", CyEdge.class);
+			"Edge Color (Selected)", CyEdge.class);
 	public static final VisualProperty<Paint> EDGE_UNSELECTED_PAINT = new PaintVisualProperty(
 			Color.DARK_GRAY, MinimalVisualLexicon.PAINT_RANGE,
-			"EDGE_UNSELECTED_PAINT", "Edge Unselected Paint", CyEdge.class);
+			"EDGE_UNSELECTED_PAINT", "Edge Color (Unselected)", CyEdge.class);
 	public static final VisualProperty<Paint> EDGE_STROKE_SELECTED_PAINT = new PaintVisualProperty(
 			Color.RED, MinimalVisualLexicon.PAINT_RANGE,
-			"EDGE_STROKE_SELECTED_PAINT", "Edge Stroke Selected Paint",
+			"EDGE_STROKE_SELECTED_PAINT", "Edge Stroke Color (Selected)",
 			CyEdge.class);
 	public static final VisualProperty<Paint> EDGE_STROKE_UNSELECTED_PAINT = new PaintVisualProperty(
 			Color.DARK_GRAY, MinimalVisualLexicon.PAINT_RANGE,
-			"EDGE_STROKE_UNSELECTED_PAINT", "Edge Stroke Unselected Paint",
+			"EDGE_STROKE_UNSELECTED_PAINT", "Edge Stroke Color (Unselected)",
 			CyEdge.class);
+	
+	public static final VisualProperty<Integer> EDGE_TRANSPARENCY = new IntegerVisualProperty(200,
+			new ContinuousRange<Integer>(Integer.class, 0, 255, true, true), "EDGE_TRANSPARENCY", "Edge Transparency", CyEdge.class);
 	
 
 	/**
@@ -139,6 +142,8 @@ public class RichVisualLexicon extends MinimalVisualLexicon {
 		addVisualProperty(EDGE_STROKE_SELECTED_PAINT, EDGE_SELECTED_PAINT);
 		addVisualProperty(EDGE_STROKE_UNSELECTED_PAINT, EDGE_UNSELECTED_PAINT);
 		
+		addVisualProperty(EDGE_TRANSPARENCY, EDGE);
+		
 		createLookupMap();
 	}
 	
@@ -175,6 +180,8 @@ public class RichVisualLexicon extends MinimalVisualLexicon {
 		addIdentifierMapping(CyEdge.class, "edgeToolTip", EDGE_TOOLTIP);
 		addIdentifierMapping(CyEdge.class, "edgeFont", EDGE_LABEL_FONT_FACE);
 		addIdentifierMapping(CyEdge.class, "edgeFontSize", EDGE_LABEL_FONT_SIZE);
+		
+		addIdentifierMapping(CyEdge.class, "edgeTransparency", EDGE_TRANSPARENCY);
 
 		// TODO add more!
 	}
