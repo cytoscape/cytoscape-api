@@ -116,6 +116,10 @@ public interface CyNetwork extends CyTableEntry {
 
 	/**
 	 * Return a list of the nodes in this network.
+	 * The list will be empty if there are no nodes in the network.
+	 * This method should never return null.
+	 * Modifying this list (if allowed by the implementation)
+	 * has no effect on the network.
 	 *
 	 * @return the node list
 	 */
@@ -123,6 +127,10 @@ public interface CyNetwork extends CyTableEntry {
 
 	/**
 	 * Return a list of the edges in this network.
+	 * The list will be empty if there are no edges in the network.
+	 * This method should never return null.
+	 * Modifying this list (if allowed by the implementation)
+	 * has no effect on the network.
 	 *
 	 * @return the edge list
 	 */
@@ -178,7 +186,11 @@ public interface CyNetwork extends CyTableEntry {
 	 * definition of "neighbor" is a node that is connected to this
 	 * node by the passed edgeType.  The {@link CyEdge.Type} enum is
 	 * used to determine whether the list includes undirected, directed,
-	 * incoming, or outgoing edges.
+	 * incoming, or outgoing edges. The list will be empty if there 
+	 * are no neighbor nodes found.
+	 * This method should never return null.
+	 * Modifying this list (if allowed by the implementation)
+	 * has no effect on the network.
 	 *
 	 * @param node the node whose neighbors we're looking for
 	 * @param edgeType the directionality of the edges we're interested in
@@ -189,7 +201,11 @@ public interface CyNetwork extends CyTableEntry {
 	/**
 	 * Get the list of edges that connect to this node. The {@link CyEdge.Type} enum is
 	 * used to determine whether the list includes undirected, directed,
-	 * incoming, or outgoing edges.
+	 * incoming, or outgoing edges. The list will be empty if there are
+	 * no adjacent edges found.
+	 * This method should never return null.
+	 * Modifying this list (if allowed by the implementation)
+	 * has no effect on the network.
 	 *
 	 * @param node the node whose edges we're looking for
 	 * @param edgeType the directionality of the edges we're interested in
@@ -200,7 +216,11 @@ public interface CyNetwork extends CyTableEntry {
 	/**
 	 * Get the list of edges that connect two nodes.  The {@link CyEdge.Type} enum is
 	 * used to determine whether the list includes undirected, directed,
-	 * incoming, or outgoing edges.
+	 * incoming, or outgoing edges. The list will be empty if no connecting
+	 * edges are found.
+	 * This method should never return null.
+	 * Modifying this list (if allowed by the implementation)
+	 * has no effect on the network.
 	 *
 	 * @param source the source node
 	 * @param target the target node
