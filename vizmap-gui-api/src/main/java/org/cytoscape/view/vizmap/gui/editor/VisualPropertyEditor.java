@@ -75,7 +75,7 @@ public interface VisualPropertyEditor<T> {
 	 * type (String, Number, Color...), so we do not need to provide
 	 * VisualProperty as parameter.
 	 * 
-	 * @return
+	 * @return the user input or null.
 	 */
 	T showVisualPropertyValueEditor();
 
@@ -83,7 +83,7 @@ public interface VisualPropertyEditor<T> {
 	 * Provide Cell renderer for JTable or JList. Developers can implement
 	 * custom cell renderers by using returned component.
 	 * 
-	 * @return
+	 * @return a TableCellRenderer for JTable or JList.
 	 */
 	TableCellRenderer getDiscreteTableCellRenderer();
 	
