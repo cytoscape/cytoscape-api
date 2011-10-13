@@ -175,6 +175,7 @@ public class BasicCyFileFilter implements CyFileFilter {
 	 * Returns a string of the characters following the last '.' in the
 	 * input string, which is to say the file extension assuming that the
 	 * input string represents a file name. Will return null if no '.' is found.
+	 * @param filename the file name as a string.
 	 * @return a string representing the file extension of the input string.
 	 */
 	protected final String getExtension(String filename) {

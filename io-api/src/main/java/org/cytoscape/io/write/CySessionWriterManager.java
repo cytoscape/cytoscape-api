@@ -50,6 +50,7 @@ public interface CySessionWriterManager extends CyWriterManager {
 	 * @param file The file to be written. 
 	 * @return The {@link CyWriter} Task that will attempt to write the specified session to the
 	 * specified file of the specified file type. 
+	 * @throws Exception 
 	 */
 	CyWriter getWriter(CySession session, CyFileFilter filter, File file) throws Exception;
 
@@ -59,6 +60,7 @@ public interface CySessionWriterManager extends CyWriterManager {
 	 * @param os The output stream to be written. 
 	 * @return The {@link CyWriter} Task that will attempt to write the specified session to the
 	 * specified output stream of the specified file type. 
+	 * @throws Exception 
 	 */
 	CyWriter getWriter(CySession session, CyFileFilter filter, OutputStream os) throws Exception;
 }

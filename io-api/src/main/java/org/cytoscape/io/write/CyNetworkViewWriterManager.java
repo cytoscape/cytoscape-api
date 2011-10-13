@@ -51,6 +51,7 @@ public interface CyNetworkViewWriterManager extends CyWriterManager {
 	 * @param file The file to be written. 
 	 * @return The {@link org.cytoscape.io.write.CyWriter} Task that will attempt to write the specified view to the
 	 * specified file of the specified file type. 
+	 * @throws Exception 
 	 */
 	CyWriter getWriter(CyNetworkView view, CyFileFilter filter, File file) throws Exception;
 
@@ -60,6 +61,7 @@ public interface CyNetworkViewWriterManager extends CyWriterManager {
 	 * @param os The output steam to be written. 
 	 * @return The {@link CyWriter} Task that will attempt to write the specified view to the
 	 * specified output steam of the specified file type. 
+	 * @throws Exception 
 	 */
 	CyWriter getWriter(CyNetworkView view, CyFileFilter filter, OutputStream os) throws Exception;
 }

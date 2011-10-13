@@ -53,6 +53,7 @@ public interface PresentationWriterManager extends CyWriterManager {
 	 * @param file The file to be written. 
 	 * @return The {@link CyWriter} Task that will attempt to write the specified view to the
 	 * specified file of the specified file type. 
+	 * @throws Exception 
 	 */
 	CyWriter getWriter(View<?> view, RenderingEngine<?> re, CyFileFilter filter, File file) throws Exception;
 
@@ -63,6 +64,7 @@ public interface PresentationWriterManager extends CyWriterManager {
 	 * @param os The output stream to be written. 
 	 * @return The {@link CyWriter} Task that will attempt to write the specified view to the
 	 * specified output stream of the specified file type. 
+	 * @throws Exception 
 	 */
 	CyWriter getWriter(View<?> view, RenderingEngine<?> re, CyFileFilter filter, OutputStream os) throws Exception;
 }

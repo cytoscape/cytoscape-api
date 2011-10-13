@@ -16,6 +16,7 @@ public interface StreamUtil {
 	 * Gets the input stream from given {@link java.net.URL}.
 	 * @param source The URL from which to generate the InputStream.
 	 * @return An input stream from the specified URL.
+	 * @throws IOException 
 	 */
 	InputStream getInputStream(URL source) throws IOException;
 
@@ -26,6 +27,7 @@ public interface StreamUtil {
 	 * be cached.
 	 * @param source The URL from which to generate the InputStream.
 	 * @return An input stream from the specified URL.
+	 * @throws IOException 
 	 */
 	InputStream getBasicInputStream(URL source) throws IOException;
 
@@ -33,6 +35,7 @@ public interface StreamUtil {
 	 * Obtain a {@link java.net.URLConnection} for a given {@link java.net.URL}.
 	 * @param source The URL from which to generate the URLConnection.
 	 * @return An URLConnection from the specified URL.
+	 * @throws IOException 
 	 */
 	URLConnection getURLConnection(URL source) throws IOException;
 
