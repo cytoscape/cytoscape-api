@@ -129,7 +129,8 @@ public abstract class AbstractFunction implements Function {
 	public abstract Class getReturnType();
 
 	/**
-	 *  @return true or false if the args passed in had the wrong arity or a type mismatch
+	 *  @param argTypes the args to check for wrong arity or a type mismatch.
+	 * @return true or false if the args passed in had the wrong arity or a type mismatch
 	 *
 	 *  Note that this is different from getReturnType() in that it will never return the wildcard Object.class.
 	 *  It is used by the parser which knows the actual type of the arguments in any given call to this function.

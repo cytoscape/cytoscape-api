@@ -37,7 +37,7 @@ import java.util.Map;
 public interface EquationCompiler {
 	/** Compiles a string to byte code plus some metadata as encapsulated by the <code>Equation</code> class
 	 *  @param equation               a textual representation of an equation
-	 *  @param variableNameToTypeMap  a mapping from variable names occuring in "equation" to their respective types
+	 *  @param variableNameToTypeMap  a mapping from variable names occurring in "equation" to their respective types
 	 */
 	boolean compile(final String equation, final Map<String, Class<?>> variableNameToTypeMap);
 
@@ -54,7 +54,7 @@ public interface EquationCompiler {
 
 	/**
 	 *  A factory method that returns an Equation that always fails at runtime.  The reason for
-	 *  why this exists is that the returned error equations can subsitute for real equations as
+	 *  why this exists is that the returned error equations can substitute for real equations as
 	 *  dummies.
 	 *
 	 *  @param equation      an arbitrary string that is usually a syntactically invalid equation
@@ -65,7 +65,7 @@ public interface EquationCompiler {
 	 */
 	public Equation getErrorEquation(final String equation, final Class<?> type, final String errorMessage);
 
-	/** Returns the parser which can be used for checking the sytax of equations.
+	/** Returns the parser which can be used for checking the syntax of equations.
 	 *  @return the parser used by the compiler
 	 */
 	public EquationParser getParser();

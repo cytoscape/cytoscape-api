@@ -66,14 +66,16 @@ public final class ArgDescriptor {
 	}
 
 	/**
-	 *  @return true if "type" is a List type that specifies the element type otherwise we return false
+	 * Returns true if "type" is a List type that specifies the element type otherwise we return false.
+	 *  @return true if "type" is a List type that specifies the element type otherwise we return false.
 	 */
 	private boolean isSpecificList(final Class type) {
 		return type == DoubleList.class || type == LongList.class || type == StringList.class || type == BooleanList.class;
 	}
 
 	/**
-	 *  @return true if "listType", which must be some type of List is a type compatible with this argument descriptor
+	 * Returns true if "listType", which must be some type of List is a type compatible with this argument descriptor.
+	 *  @return true if "listType", which must be some type of List is a type compatible with this argument descriptor.
 	 */
 	private boolean isCompatibleList(final Class listType) {
 		// First we handle the case where "listType" is highly specific...
@@ -95,12 +97,17 @@ public final class ArgDescriptor {
 	}
 
 	/**
-	 *  @return the types that are compatible with this argument
+	 * Returns the types that are compatible with this argument.
+	 *  @return the types that are compatible with this argument.
 	 */
 	public Class[] getCompatibleTypes() {
 		return argType.getCompatibleTypes();
 	}
 
+	/**
+	 * Returns true if this ArgDescriptor accepts multiple arguments, otherwise false.
+	 *  @return true if this ArgDescriptor accepts multiple arguments, otherwise false.
+	 */
 	public boolean acceptsMultipleArgs() {
 		return argType.acceptsMultipleArgs();
 	}

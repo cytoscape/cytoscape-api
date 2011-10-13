@@ -76,6 +76,8 @@ public abstract class Node {
 	 */
 	public abstract Node getRightChild();
 
-	/** Generated code for this node and pushes it onto the execution stack. */
+	/** Generated code for this node and pushes it onto the execution stack. 
+	 * @param codeStack the execution stack to push the generated code for this node.
+	 */
 	public abstract void genCode(final Stack<CodeAndSourceLocation> codeStack);
 }

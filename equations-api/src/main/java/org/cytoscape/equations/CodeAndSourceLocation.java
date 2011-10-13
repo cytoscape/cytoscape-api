@@ -31,7 +31,7 @@ package org.cytoscape.equations;
 
 
 /**
- *  Encapuslates compiled code with the location in the original source equation.
+ *  Encapsulates compiled code with the location in the original source equation.
  */
 public final class CodeAndSourceLocation {
 	private final Object code;

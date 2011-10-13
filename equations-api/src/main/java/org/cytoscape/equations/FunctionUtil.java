@@ -302,6 +302,7 @@ public final class FunctionUtil {
 	/** Attempts to convert all arguments, including Lists to a uniform array of doubles.
 	 *  @param args  the objects that will be converted to doubles, if possible
 	 *  @return the converted array
+	 *  @throws FunctionError 
 	 *  @throws IllegalArgumentException if any scalar argument cannot be converted to a double or any list
 	 *          argument contains an element that cannot be converted to a number.
 	 */
@@ -338,6 +339,7 @@ public final class FunctionUtil {
 	/** Attempts to convert all arguments, including Lists to a uniform array of longs.
 	 *  @param args  the objects that will be converted to longs, if possible
 	 *  @return the converted array
+	 *  @throws FunctionError 
 	 *  @throws IllegalArgumentException if any scalar argument cannot be converted to a long or any list
 	 *          argument contains an element that cannot be converted to a number.
 	 */
@@ -394,6 +396,7 @@ public final class FunctionUtil {
 	/** Attempts to convert all arguments, including Lists to a uniform array of booleans.
 	 *  @param args  the objects that will be converted to booleans, if possible
 	 *  @return the converted array
+	 *  @throws FunctionError 
 	 *  @throws IllegalArgumentException if any scalar argument cannot be converted to a boolean or any list
 	 *          argument contains an element that cannot be converted to a number.
 	 */

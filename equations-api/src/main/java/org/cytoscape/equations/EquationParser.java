@@ -43,16 +43,20 @@ public interface EquationParser {
 	void registerFunction(final Function func) throws IllegalArgumentException;
 
 	/**
-	 *  @return the function associated with the name "functionName" or null if no such function exists
+	 * Returns the function associated with the name "functionName" or null if no such function exists.
+	 *  @param functionName the name of the function to get.
+	 * @return the function associated with the name "functionName" or null if no such function exists.
 	 */
 	Function getFunction(final String functionName);
 
 	/**
+	 * Returns the set of currently registered functions.
 	 *  @return the set of currently registered functions
 	 */
 	Set<Function> getRegisteredFunctions();
 
 	/**
+	 * Returns true if the parse succeeded otherwise false
 	 *  @param eqn                  a valid attribute equation which must start with an equal sign
 	 *  @param attribNameToTypeMap  a list of existing attribute names and their types
 	 *  @return true if the parse succeeded otherwise false
@@ -60,7 +64,8 @@ public interface EquationParser {
 	boolean parse(final String eqn, final Map<String, Class<?>> attribNameToTypeMap);
 
 	/**
-	 *  @return the result type of the parsed equation if the parse succeeded, otherwise null
+	 * Returns the result type of the parsed equation if the parse succeeded, otherwise null.
+	 *  @return the result type of the parsed equation if the parse succeeded, otherwise null.
 	 */
 	Class<?> getType();
 
@@ -71,17 +76,20 @@ public interface EquationParser {
 	String getErrorMsg();
 
 	/**
-	 *  @return all the variable names that have been detected in the most recently parsed equation
+	 * Returns all the variable names that have been detected in the most recently parsed equation.
+	 *  @return all the variable names that have been detected in the most recently parsed equation.
 	 */
 	Set<String> getVariableReferences();
 
 	/**
-	 *  @return a map of variable names to their default values, if any
+	 *  Returns a map of variable names to their default values, if any.
+	 *  @return a map of variable names to their default values, if any.
 	 */
 	Map<String, Object> getDefaultVariableValues();
 
 	/**
-	 *  @return the parse tree.  Must only be called if parse() returns true!
+	 * Returns the parse tree. Must only be called if parse() returns true!
+	 *  @return the parse tree.
 	 */
 	Node getParseTree();
 }

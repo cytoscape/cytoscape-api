@@ -79,6 +79,7 @@ public interface Function {
 	 *  Used to invoke this function.
 	 *  @param args the function arguments which must correspond in type and number to what getParameterTypes() returns.
 	 *  @return the result of the function evaluation.  The actual type of the returned object will be what getReturnType() returns.
+	 *  @throws FunctionError 
 	 *  @throws ArithmeticException thrown if a numeric error, e.g. a division by zero occurred.
 	 *  @throws IllegalArgumentException thrown for any error that is not a numeric error, for example if a function only accepts positive numbers and a negative number was passed in.
 	 */
