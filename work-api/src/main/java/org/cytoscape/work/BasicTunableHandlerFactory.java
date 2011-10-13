@@ -34,18 +34,6 @@ public class BasicTunableHandlerFactory<T extends TunableHandler> implements Tun
 		this.allowedTypes = allowedTypes;
 	}
 	
-	/* #ASKMIKE
-	 * Constructor.
-	 * @param tunableHandlerClass The type of the TunableHandler to be created.
-	 * @param allowedTypes The object types that the TunableHandler is associated with.
-	 * For instance, an IntegerTunableHandler might allow Integer.class and int.class.
-	
-	public BasicTunableHandlerFactory(Class<T> tunableHandlerClass, Class<?>[] allowedTypes) {
-		this.tunableHandlerClass = tunableHandlerClass;
-		this.allowedTypes = allowedTypes;
-	}
-	 */
-	
 	@Override
 	public final T getHandler(final Field field, final Object instance, final Tunable tunable) {
 		if ( !properType(field.getType()) )
