@@ -63,6 +63,10 @@ public final class ValuedTaskExecutor<V> implements Task {
 	private State state = State.READY;
 	private Exception exception = null;
 
+	/**
+	 * Constructs this ValuedTaskExecutor.
+	 * @param valuedTask the {@link ValuedTask} to wrap.
+	 */
 	public ValuedTaskExecutor(ValuedTask<V> valuedTask) {
 		if ( valuedTask == null )
 			throw new NullPointerException("The task specified is null");

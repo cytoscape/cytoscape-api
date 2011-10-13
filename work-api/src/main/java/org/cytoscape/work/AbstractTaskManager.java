@@ -2,7 +2,7 @@ package org.cytoscape.work;
 
 
 /** Provides access to a TunableInterceptor to all derived classes and a utility method to determine
- *  if an object has been annotated with Tunables.
+ *  if an object has been annotated with {@link Tunable}s.
  */
 public abstract class AbstractTaskManager implements TaskManager {
 	protected final TunableInterceptor tunableInterceptor;
