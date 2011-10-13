@@ -46,12 +46,10 @@ import org.cytoscape.work.ProvidesGUI;
 /**
  * Abstract class for all web service clients.
  * All clients MUST extend this class.
-
- * @param <S>  Stub object type.  This is service dependent.
  */
 public abstract class AbstractWebServiceClient implements WebServiceClient {
 
-	// Service locaiton
+	/** Service location */
 	protected final URI serviceURI;
 	
 	// Display Name for this client.

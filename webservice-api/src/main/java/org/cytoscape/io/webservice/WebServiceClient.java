@@ -45,9 +45,6 @@ import org.cytoscape.work.TaskFactory;
  * 
  * All web service clients <strong>must</strong> implement this method.
  * 
- * @param <S>
- *            Client stub object. This is a service dependent parameter. For example, NCBI's
- *            eUtils stub has the class EUtilsServiceSoap.
  * 
  */
 public interface WebServiceClient extends TaskFactory {
