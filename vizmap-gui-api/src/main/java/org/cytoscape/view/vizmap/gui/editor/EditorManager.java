@@ -123,6 +123,12 @@ public interface EditorManager {
 	public <V> void showContinuousEditor(Component parentComponent, VisualProperty<V> type)
 	    throws Exception;
 	
+	/**
+	 * Returns the {@link VisualPropertyEditor} for the given {@link VisualProperty}.
+	 * @param <V> the generic type of the VisualProperty.
+	 * @param vp the {@link VisualProperty} to get the VisualPropertyEditor of.
+	 * @return the {@link VisualPropertyEditor} for the given {@link VisualProperty}.
+	 */
 	public <V> VisualPropertyEditor<V> getVisualPropertyEditor(VisualProperty<V> vp);
 
 	/**
