@@ -45,6 +45,10 @@ package org.cytoscape.view.model;
  */
 public interface VisualProperty<T> {
 	
+	/**
+	 * Returns the {@link Range} of this VisualProperty.
+	 * @return the {@link Range} of this VisualProperty.
+	 */
 	Range<T> getRange();
 	
 
@@ -88,6 +92,7 @@ public interface VisualProperty<T> {
 	/**
 	 * Returns an object of type T given a string serialized from the getSerializableString(T value)
 	 * method.
+	 * @param value a string serialized from the getSerializableString(T value) method.
 	 * @return an object of type T given a string serialized from the getSerializableString(T value)
 	 * method.
 	 */

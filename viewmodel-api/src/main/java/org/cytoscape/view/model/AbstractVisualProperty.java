@@ -54,7 +54,7 @@ public abstract class AbstractVisualProperty<T> implements VisualProperty<T> {
 	// Human-readable name of VP.
 	private final String name;
 
-	// If this is true, default value will be ignored by VizMapper.
+	/** If this is true, default value will be ignored by VizMapper. */
 	protected boolean shouldIgnoreDefault;
 	
 	private final Class<?> targetObjectDataType;
@@ -64,6 +64,7 @@ public abstract class AbstractVisualProperty<T> implements VisualProperty<T> {
 	 * Constructor to set all immutable fields.
 	 * 
 	 * @param defaultValue default value for this visual property.
+	 * @param range the {@link Range} for the visual property.
 	 * @param id unique string for serialization.
 	 * @param displayName human-readable name for this visual property.
 	 * 
