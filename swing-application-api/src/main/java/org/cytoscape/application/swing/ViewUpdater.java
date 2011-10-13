@@ -39,23 +39,25 @@ import org.cytoscape.model.events.RowsSetListener;
 /**
  * A utility class that provides an implementation of {@link RowsSetListener}
  * for a particular column and {@link VisualProperty}.
+ * @param <S> The generic type of this ViewUpdater.
  */
 public class ViewUpdater<S> implements RowsSetListener {
 
+	/** The {@link VisualProperty} that the {@link RowsSetListener} is provided for. */
 	protected final VisualProperty<S> vp;
+	/** The name of the column that the {@link RowsSetListener} is provided for.*/
 	protected final String columnName;
 	private final Map<CyRow, View<?>> rowViewMap;
 
 	/**
 	 * Constructor.
 	 * 
-	 * @param view The view that the visual property should be set whne the row
-	 * is changed.
 	 * @param vp The visual property that should be set on the view when the row
 	 * is changed.
-	 * @param row The row that is being listened to.
 	 * @param columnName The name of the column within the row that is being
 	 * listened to.
+	 * @param rowViewMap a map between the row that is being listened to and the
+	 * view that the visual property should be set when the row is changed.
 	 */
 	public ViewUpdater(VisualProperty<S> vp, String columnName, Map<CyRow, View<?>> rowViewMap) {
 		this.vp = vp;
