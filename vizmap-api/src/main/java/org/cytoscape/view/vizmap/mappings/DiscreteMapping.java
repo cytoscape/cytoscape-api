@@ -36,8 +36,8 @@ public interface DiscreteMapping<K, V> extends VisualMappingFunction<K,V>{
 	public <T extends V> void putAll(Map<K, T> map);
 
 	/**
-	 * gets all map values
-	 * 
+	 * Gets all map values.
+	 * @return all map values.
 	 */
 	public Map<K, V> getAll();
 

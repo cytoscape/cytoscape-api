@@ -25,5 +25,9 @@ public interface VisualMappingFunctionFactory {
 			final String attributeName, final Class<K> attrValueType,
 			final VisualProperty<V> vp);
 	
+	/**
+	 * Returns the type of this VisualMappingFunctionFactory.
+	 * @return the type of this VisualMappingFunctionFactory.
+	 */
 	Class<?> getMappingFunctionType();
 }

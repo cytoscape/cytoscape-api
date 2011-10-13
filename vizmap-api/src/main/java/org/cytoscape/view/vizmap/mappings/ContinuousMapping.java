@@ -22,6 +22,7 @@ public interface ContinuousMapping<K, V> extends VisualMappingFunction<K,V>{
 
 	/**
 	 * Removes a Point from the List.
+	 * @param index The index of the Point to remove.
 	 */
 	public void removePoint(int index);
 
