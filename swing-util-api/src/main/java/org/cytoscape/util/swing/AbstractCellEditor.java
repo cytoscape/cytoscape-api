@@ -93,7 +93,7 @@ public class AbstractCellEditor implements CellEditor {
 		listenerList.remove(CellEditorListener.class, l);
 	}
 
-	/*
+	/**
 	 * Notify all listeners that have registered interest for
 	 * notification on this event type.
 	 * @see EventListenerList
@@ -111,7 +111,7 @@ public class AbstractCellEditor implements CellEditor {
 		}
 	}
 
-	/*
+	/**
 	 * Notify all listeners that have registered interest for
 	 * notification on this event type.
 	 * @see EventListenerList
