@@ -21,6 +21,7 @@ import java.util.ArrayList;
  * file to a file type determined by a provided writer manager.  This class
  * is meant to be extended for specific file types such that the appropriate
  * {@link org.cytoscape.io.write.CyWriter} can be identified.
+ * @param <T> Generic type that extends CyWriterManager.
  */
 public abstract class AbstractCyWriter<T extends CyWriterManager> extends AbstractTask
 	implements CyWriter
@@ -51,8 +52,12 @@ public abstract class AbstractCyWriter<T extends CyWriterManager> extends Abstra
 		return outputFile;
 	}
 
+	/** An implementation of this method should return a file format description
+	 * from {@link CyFileFilter}, such that the string can be found in the descriptionFilterMap.
+	 * @return a file format description from {@link CyFileFilter}.
+	 */
 	abstract protected String getExportFileFormat();
-
+	/** A Map that maps description strings to {@link CyFileFilter}s*/
 	protected final Map<String,CyFileFilter> descriptionFilterMap;
 
 	/**

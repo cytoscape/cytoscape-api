@@ -25,7 +25,7 @@ public class BasicCyFileFilter implements CyFileFilter {
 	private final Set<String> contentTypes;
 	private final String description;
 	private final StreamUtil streamUtil;
-
+	/** Type of data that this filter applys to. */
 	protected final DataCategory category;
 	private static final Logger logger = LoggerFactory.getLogger(BasicCyFileFilter.class);
 
@@ -193,6 +193,7 @@ public class BasicCyFileFilter implements CyFileFilter {
 	/**
 	 * Returns a string containing the specified number of lines from the
 	 * beginning of the file.  This is useful for testing input streams. 
+	 * @param stream the input stream from which to read the header.
 	 * @param numLines the number of lines from the beginning of the file.
 	 * @return a string containing the specified number of lines from the
 	 * beginning of the file.
