@@ -16,7 +16,7 @@ import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskMonitor;
 import org.cytoscape.work.Tunable;
 
-
+/** #ASKMIKE */
 public final class MapNetworkAttrTask extends AbstractTask {
 	@Tunable(description="Map to current network only")
 	public boolean currentNetworkOnly = true;
