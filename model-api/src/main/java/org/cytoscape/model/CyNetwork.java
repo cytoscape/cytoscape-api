@@ -37,6 +37,7 @@ import java.util.List;
  * data structure in Cytoscape. Specifically, CyNetwork represents a
  * multi-graph as multiple edges may exist between nodes. Edges may
  * be directed, undirected, or both.
+ * @CyAPI.Api.Interface
  */
 public interface CyNetwork extends CyTableEntry {
 	/**
@@ -46,7 +47,7 @@ public interface CyNetwork extends CyTableEntry {
 	String SELECTED = "selected";
 
 	/**
-	 * The name of the defaul <b>public</b> 
+	 * The name of the default <b>public</b> 
 	 * CyTable that is created by default for CyNetworks, 
 	 * CyNodes, and CyEdges.  Other CyTables may also be associated with networks
 	 * -- see {@link CyTableManager} for more information.
