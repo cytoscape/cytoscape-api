@@ -56,4 +56,10 @@ public interface GraphicalEntity {
 	 * @return the attribute value
 	 */
 	public String getAttributeValue();
+
+	/**
+	 * Returns descriptive text for the Graphical Entity.  May be used as tool tip text.
+	 * @return descriptive text for the Graphical Entity.
+	 */
+	public String getDescription();
 }
