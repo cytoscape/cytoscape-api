@@ -100,5 +100,15 @@
       <artifactId>org.osgi.core</artifactId>
       <version>${osgi.api.version}</version>
     </dependency>
+    <dependency>
+	  <groupId>org.cytoscape</groupId>
+	  <artifactId>model-api</artifactId>
+      <version>${project.version}</version>
+	</dependency>
+	<dependency>
+	  <groupId>org.cytoscape</groupId>
+	  <artifactId>application-api</artifactId>
+	  <version>${project.version}</version>
+	</dependency>
   </dependencies>
 </project>
