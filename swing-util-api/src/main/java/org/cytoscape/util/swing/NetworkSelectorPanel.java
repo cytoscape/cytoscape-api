@@ -1,5 +1,4 @@
-package cytoscape.util.swing;
-
+package org.cytoscape.util.swing;
 
 import java.awt.BorderLayout;
 import java.awt.event.ItemListener;
@@ -12,30 +11,36 @@ import java.util.TreeSet;
 import javax.swing.JComboBox;
 import javax.swing.JPanel;
 
-import cytoscape.CyNetwork;
-import cytoscape.Cytoscape;
+import org.cytoscape.application.CyApplicationManager;
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyNetworkManager;
+import org.cytoscape.model.events.NetworkAddedEvent;
+import org.cytoscape.model.events.NetworkDestroyedEvent;
+import org.cytoscape.model.events.NetworkDestroyedListener;
+import org.cytoscape.model.events.NetworkAddedListener;
 
-
-public class NetworkSelectorPanel extends JPanel implements
-		PropertyChangeListener
+public class NetworkSelectorPanel extends JPanel implements NetworkAddedListener, NetworkDestroyedListener
 {
 	private static final long serialVersionUID = 8694272457769377810L;
 	
 	protected final JComboBox networkComboBox;
+	private CyNetworkManager cyNetworkManager;
+	private CyApplicationManager cyApplicationManager;
 
-	public NetworkSelectorPanel() {
+	public NetworkSelectorPanel(CyApplicationManager cyApplicationManager, CyNetworkManager cyNetworkManager) {
 		super();
 		this.setLayout(new BorderLayout());
 		networkComboBox = new JComboBox();
 
+		this.cyNetworkManager = cyNetworkManager;
+		this.cyApplicationManager = cyApplicationManager;
+		
 		//This should help to limit the length of combobox if the network name is too long
 		networkComboBox.setPreferredSize(new java.awt.Dimension(networkComboBox.getPreferredSize().width, 
 				networkComboBox.getPreferredSize().height));
 
 		add(networkComboBox, BorderLayout.CENTER);
 		updateNetworkList();
-		
-		Cytoscape.getPropertyChangeSupport().addPropertyChangeListener(this);
 	}
 	
 	/**
@@ -45,8 +50,9 @@ public class NetworkSelectorPanel extends JPanel implements
 	 * @return
 	 */
 	public CyNetwork getSelectedNetwork() {
-		for (CyNetwork net : Cytoscape.getNetworkSet()) {
-			if (net.getTitle().equals(networkComboBox.getSelectedItem()))
+		for (CyNetwork net : this.cyNetworkManager.getNetworkSet()) {
+			String networkTitle = net.getCyRow().get("name", String.class);
+			if (networkTitle.equals(networkComboBox.getSelectedItem()))
 				return net;
 		}
 		
@@ -54,33 +60,44 @@ public class NetworkSelectorPanel extends JPanel implements
 	}
 
 	private void updateNetworkList() {
-		final Set<CyNetwork> networks = Cytoscape.getNetworkSet();
+		final Set<CyNetwork> networks = this.cyNetworkManager.getNetworkSet();
 		final SortedSet<String> networkNames = new TreeSet<String>();
 
 		for (CyNetwork net : networks)
-			networkNames.add(net.getTitle());
+			networkNames.add(net.getCyRow().get("name", String.class));
 
 		networkComboBox.removeAllItems();
 		for (String name : networkNames)
 			networkComboBox.addItem(name);
 
-		networkComboBox.setSelectedItem(Cytoscape.getCurrentNetwork()
-				.getTitle());
-	}
-
-	public void propertyChange(PropertyChangeEvent evt) {
-
-		final String propName = evt.getPropertyName();
-		
-		if (propName.equals(Cytoscape.NETWORK_CREATED)||propName.equals(Cytoscape.NETWORK_TITLE_MODIFIED)){
-			updateNetworkList();
+		if (this.cyApplicationManager.getCurrentNetwork() != null){
+			String networkTitle = this.cyApplicationManager.getCurrentNetwork().getCyRow().get("name", String.class);
+			networkComboBox.setSelectedItem(networkTitle);			
 		}
-		else if (propName.equals(Cytoscape.NETWORK_DESTROYED))
-			networkComboBox.removeItem(Cytoscape.getNetwork(
-					(String) evt.getNewValue()).getTitle());
-
 	}
 
+//	public void propertyChange(PropertyChangeEvent evt) {
+//
+//		final String propName = evt.getPropertyName();
+//		
+//		if (propName.equals(Cytoscape.NETWORK_CREATED)||propName.equals(Cytoscape.NETWORK_TITLE_MODIFIED)){
+//			updateNetworkList();
+//		}
+//		else if (propName.equals(Cytoscape.NETWORK_DESTROYED))
+//			networkComboBox.removeItem(Cytoscape.getNetwork(
+//					(String) evt.getNewValue()).getTitle());
+//
+//	}
+	
+	public void handleEvent(NetworkAddedEvent e){
+		updateNetworkList();
+	}
+
+	public void handleEvent(NetworkDestroyedEvent e){
+		System.out.println("Entering NetworkSelectorPanel.handleEvent(NetworkDestroyedEvent)... TODO..");
+		//networkComboBox.removeItem(Cytoscape.getNetwork((String) e.getNewValue()).getTitle());
+	}
+	
 	/**
 	 *  Installs a new item listener for the embedded combo box.
 	 */
