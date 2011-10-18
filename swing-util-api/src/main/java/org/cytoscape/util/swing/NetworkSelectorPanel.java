@@ -94,8 +94,7 @@ public class NetworkSelectorPanel extends JPanel implements NetworkAddedListener
 	}
 
 	public void handleEvent(NetworkDestroyedEvent e){
-		System.out.println("Entering NetworkSelectorPanel.handleEvent(NetworkDestroyedEvent)... TODO..");
-		//networkComboBox.removeItem(Cytoscape.getNetwork((String) e.getNewValue()).getTitle());
+		updateNetworkList();
 	}
 	
 	/**
