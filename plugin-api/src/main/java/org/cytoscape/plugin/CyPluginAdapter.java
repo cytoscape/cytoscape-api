@@ -40,6 +40,7 @@ import org.cytoscape.work.undo.UndoSupport;
  * and creational facilities defined in the Cytoscape API.
  * This is a convenience interface intended make plugin development
  * as simple as possible.
+ * CyAPI.Api.Interface
  */
 public interface CyPluginAdapter {
 
