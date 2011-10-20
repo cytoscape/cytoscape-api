@@ -45,8 +45,7 @@ import javax.swing.table.TableCellRenderer;
  * If plugin developer adds a custom visual property, they should implement this
  * in the presentation layer.
  * 
- * @param <T>
- *            Type of object managed in the Visual Prop.
+ * @param <T> Type of object managed in the Visual Prop.
  * 
  */
 public interface VisualPropertyEditor<T> {
@@ -59,7 +58,7 @@ public interface VisualPropertyEditor<T> {
 
 	/**
 	 * Returns continuous mapping editor for the Visual Property. Return value
-	 * is null is Continuous Editor does not exist. #ASKMIKE
+	 * is null if Continuous Editor does not exist.
 	 * @return a continuous mapping editor for the Visual Property.
 	 */
 	PropertyEditor getContinuousMappingEditor();
@@ -80,24 +79,26 @@ public interface VisualPropertyEditor<T> {
 	T showVisualPropertyValueEditor();
 
 	/**
-	 * Provide Cell renderer for JTable or JList. Developers can implement
-	 * custom cell renderers by using returned component.
+	 * A custom cell renderer for Discrete table cells. 
 	 * 
-	 * @return a TableCellRenderer for JTable or JList.
+	 * @return a TableCellRenderer Discrete table cells. 
 	 */
 	TableCellRenderer getDiscreteTableCellRenderer();
 	
+	/**
+	 * A custom cell renderer for Continuous table cells. 
+	 * 
+	 * @return a TableCellRenderer Continuous table cells. 
+	 */
 	TableCellRenderer getContinuousTableCellRenderer();
 
 	/**
 	 * This is for default view editor.
 	 * 
-	 * @param width
-	 *            DOCUMENT ME!
-	 * @param height
-	 *            DOCUMENT ME!
+	 * @param width The width of the desired Icon.
+	 * @param height The height of the desired Icon.
 	 * 
-	 * @return DOCUMENT ME!
+	 * @return An icon of the specified width and height. 
 	 */
 	Icon getDefaultIcon(int width, int height);
 }

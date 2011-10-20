@@ -54,8 +54,7 @@ public interface VisualProperty<T> {
 
 	/**
 	 * The default value of this property.  This value is immutable.
-	 *
-	 * @return  DOCUMENT ME!
+	 * @return  The default value of this property.  
 	 */
 	T getDefault();
 
@@ -63,8 +62,7 @@ public interface VisualProperty<T> {
 	/**
 	 * A short string used to identify this visual property and suitable for
 	 * serializing to XML and other text formats.
-	 *
-	 * @return  DOCUMENT ME!
+	 * @return A short string used to identify this visual property and suitable for serialization.
 	 */
 	String getIdString();
 
@@ -72,8 +70,7 @@ public interface VisualProperty<T> {
 	/**
 	 * A short string suitable for presentation to humans.  Should not be used
 	 * for serialization.
-	 *
-	 * @return  DOCUMENT ME!
+	 * @return  A short string suitable for presentation to humans.
 	 */
 	String getDisplayName();
 
@@ -102,15 +99,14 @@ public interface VisualProperty<T> {
 	/**
 	 * In some cases, default value from visual style is not suitable, such as x, y, z location of nodes.
 	 * If this flag is on, it will be ignored and it will be controlled by mapping only.
-	 * #ASKMIKE
-	 * @return
+	 * @return true if the default value should be ignored (as with x,y,z locations) and false otherwise.
 	 */
 	boolean shouldIgnoreDefault();
 	
 	
 	/**
 	 * VisualProperty is always associated with a data type.  For example, EDGE_COLOR is associated with 
-	 * {@link org.cytoscape.model.CyEdge} data object.  In that case, this returns Class<CyEdge>.  
+	 * {@link org.cytoscape.model.CyEdge} data object.  In that case, this returns Class&lt;CyEdge&gt;.  
 	 * For now, return data types are CyNode, CyEdge, and CyNetwork.
 	 * 
 	 * @return target data type of this visual property.  CyNode, CyEdge, or CyNetwork.

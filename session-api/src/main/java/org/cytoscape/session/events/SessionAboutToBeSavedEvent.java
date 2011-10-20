@@ -88,7 +88,7 @@ public final class SessionAboutToBeSavedEvent extends AbstractCyEvent<CySessionM
 	/**
 	 * A method that allows plugins to specify desktop-related data to be
 	 * stored in the session.
-	 * @param desktop
+	 * @param desktop Setting the {@link Desktop} object associated with this event.
 	 */
 	public void setDesktop(Desktop desktop) {
 		this.desktop = desktop;
@@ -107,8 +107,8 @@ public final class SessionAboutToBeSavedEvent extends AbstractCyEvent<CySessionM
 	/**
 	 * A method that allows plugins to add Cytopanel-related information to be
 	 * stored in the session.
-	 * @param cytopanel
-	 * @throws Exception #ASKMIKE Shouldn't this be nullptrexcept?
+	 * @param cytopanel The CytoPanel to be added.
+	 * @throws NullPointerException If the cytopanel to be added is null.
 	 */
 	public void addCytopanel(Cytopanel cytopanel) throws Exception {
 		if (cytopanel == null)
@@ -116,5 +116,4 @@ public final class SessionAboutToBeSavedEvent extends AbstractCyEvent<CySessionM
 		
 		cytopanels.add(cytopanel);
 	}
-	
 }
