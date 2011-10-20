@@ -103,4 +103,8 @@ public class NetworkSelectorPanel extends JPanel implements NetworkAddedListener
 	public void addItemListener(final ItemListener newListener) {
 		networkComboBox.addItemListener(newListener);
 	}
+	
+	public JComboBox getJCombobox(){
+		return this.networkComboBox;
+	}
 }
