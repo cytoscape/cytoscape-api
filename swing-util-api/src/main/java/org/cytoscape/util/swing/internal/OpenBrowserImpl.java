@@ -49,7 +49,12 @@ import java.util.Properties;
 import org.cytoscape.property.CyProperty;
 import org.cytoscape.util.swing.OpenBrowser;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 public class OpenBrowserImpl implements OpenBrowser {
+
+	private final Logger logger = LoggerFactory.getLogger(OpenBrowserImpl.class);
 
 	private final Properties props;
 
@@ -68,7 +73,7 @@ public class OpenBrowserImpl implements OpenBrowser {
 	 *
 	 * @param url DOCUMENT ME!
 	 */
-	public void openURL(String url) {
+	public boolean openURL(String url) {
 		String defBrowser = props.getProperty(OpenBrowser.DEF_WEB_BROWSER_PROP_NAME);
 		String osName = System.getProperty("os.name");
 
@@ -87,21 +92,27 @@ public class OpenBrowserImpl implements OpenBrowser {
 				}
 			}
 
-			System.out.println("Opening URL by command \"" + cmd + "\"");
+			logger.debug("Opening URL by command \"" + cmd + "\"");
 
 			Process p = Runtime.getRuntime().exec(cmd);
 
 			try {
 				int exitCode = p.waitFor();
 
-				if (exitCode != 0)
-					System.err.println("Open browser command (" + cmd + ") failed!");
+				if (exitCode != 0) {
+					logger.warn("Open browser command (" + cmd + ") failed!");
+					return false;
+				}
 
 			} catch (InterruptedException ex) {
-				ex.printStackTrace();
+				logger.warn("Open browser exception",ex);	
+				return false;
 			}
 		} catch (IOException ioe) {
-			ioe.printStackTrace();
+			logger.warn("Open browser IOException",ioe);	
+			return false;
 		}
+
+		return true;
 	}
 }

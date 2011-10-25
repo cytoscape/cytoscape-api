@@ -56,6 +56,7 @@ public interface OpenBrowser {
 	/**
 	 * Opens a web browser pointing to the specified URL.  
 	 * @param url A string URL that should be opened in the web browser. 
+	 * @return Whether the browser opened successfully or not.
 	 */
-	void openURL(String url);
+	boolean openURL(String url);
 }
