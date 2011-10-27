@@ -2,8 +2,6 @@ package org.cytoscape.util.swing;
 
 import java.awt.BorderLayout;
 import java.awt.event.ItemListener;
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
 import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
@@ -18,6 +16,7 @@ import org.cytoscape.model.events.NetworkAddedEvent;
 import org.cytoscape.model.events.NetworkDestroyedEvent;
 import org.cytoscape.model.events.NetworkDestroyedListener;
 import org.cytoscape.model.events.NetworkAddedListener;
+import javax.swing.DefaultComboBoxModel;
 
 public class NetworkSelectorPanel extends JPanel implements NetworkAddedListener, NetworkDestroyedListener
 {
@@ -66,7 +65,9 @@ public class NetworkSelectorPanel extends JPanel implements NetworkAddedListener
 		for (CyNetwork net : networks)
 			networkNames.add(net.getCyRow().get("name", String.class));
 
-		networkComboBox.removeAllItems();
+		// Clear the comboBox
+		networkComboBox.setModel(new DefaultComboBoxModel());
+
 		for (String name : networkNames)
 			networkComboBox.addItem(name);
 
