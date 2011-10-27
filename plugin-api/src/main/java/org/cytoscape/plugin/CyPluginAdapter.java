@@ -25,6 +25,8 @@ import org.cytoscape.view.layout.CyLayoutAlgorithmManager;
 import org.cytoscape.view.model.CyNetworkViewFactory;
 import org.cytoscape.view.model.CyNetworkViewManager;
 import org.cytoscape.view.presentation.RenderingEngineManager;
+import org.cytoscape.view.vizmap.VisualMappingFunction;
+import org.cytoscape.view.vizmap.VisualMappingFunctionFactory;
 import org.cytoscape.view.vizmap.VisualMappingManager;
 import org.cytoscape.view.vizmap.VisualStyleFactory;
 import org.cytoscape.work.TaskManager;
@@ -182,6 +184,14 @@ public interface CyPluginAdapter {
 	 * @return an instance of {@link VisualStyleFactory}.
 	 */
 	VisualStyleFactory getVisualStyleFactory();
+	
+	/**
+	 * Returns an instance of {@link VisualMappingFunctionFactory}.
+	 * @return an instance of {@link VisualMappingFunctionFactory}.
+	 */
+	VisualMappingFunctionFactory getVisualMappingFunctionContinuousFactory();
+	VisualMappingFunctionFactory getVisualMappingFunctionDiscreteFactory();
+	VisualMappingFunctionFactory getVisualMappingFunctionPassthroughFactory();
 
 	//
 	// layout api
