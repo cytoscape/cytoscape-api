@@ -1,24 +1,43 @@
 package org.cytoscape.work;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.Map;
 
-/** Provides access to a TunableInterceptor to all derived classes and a utility method to determine
- *  if an object has been annotated with {@link Tunable}s.
+
+/** 
+ * Provides access to a TunableInterceptor to all derived classes and a 
+ * utility method to determine if an object has been annotated with Tunables.
  */
-public abstract class AbstractTaskManager implements TaskManager {
-	protected final TunableInterceptor tunableInterceptor;
+public abstract class AbstractTaskManager<T,C> implements TaskManager<T,C> {
+
+	protected final TunableMutator tunableMutator;
+	protected final List<TunableRecorder> tunableRecorders;
+	protected C executionContext;
 
 	/**
-	 *  Initializes an <code>AbstractTaskManager</code> object by setting its <code>TunableInterceptor</code>.
+	 * Initialises an <code>AbstractTaskManager</code> object by setting 
+	 * its <code>TunableInterceptor</code>.
 	 *
-	 *  @param tunableInterceptor The <code>TunableInterceptor</code> to be used by this <code>TaskManager</code>.
+	 * @param tunableMutator The <code>TunableMutator</code> to be 
+	 * used by this <code>TaskManager</code>.
 	 */
-	public AbstractTaskManager(final TunableInterceptor tunableInterceptor) {
-		this.tunableInterceptor = tunableInterceptor;
+	public AbstractTaskManager(final TunableMutator tunableMutator) {
+		this.tunableMutator = tunableMutator;
+		tunableRecorders = new ArrayList<TunableRecorder>();
 	}
 
-	final public boolean hasTunables(final Object o) {
-		return tunableInterceptor.hasTunables(o);
+	final public void addTunableRecorder(TunableRecorder roti, Map props) {
+		if ( roti != null )
+			tunableRecorders.add(roti);			
 	}
 
-	abstract public void execute(TaskFactory factory);
+	final public void removeTunableRecorder(TunableRecorder roti, Map props) {
+		if ( roti != null )
+			tunableRecorders.remove(roti);			
+	}
+
+	public void setExecutionContext(C context) {
+		executionContext = context;
+	}
 }

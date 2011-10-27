@@ -28,7 +28,9 @@ import org.cytoscape.view.presentation.RenderingEngineManager;
 import org.cytoscape.view.vizmap.VisualMappingManager;
 import org.cytoscape.view.vizmap.VisualStyleFactory;
 import org.cytoscape.work.TaskManager;
-import org.cytoscape.work.swing.GUITaskManager;
+import org.cytoscape.work.swing.DialogTaskManager;
+import org.cytoscape.work.swing.PanelTaskManager;
+import org.cytoscape.work.swing.SubmenuTaskManager;
 import org.cytoscape.work.undo.UndoSupport;
 
 /**
@@ -124,6 +126,7 @@ public interface CyPluginAdapter {
 	 * Returns an instance of {@link TaskManager}.
 	 * @return an instance of {@link TaskManager}.
 	 */
+	//TODO should this be here?  Do we want to allow an unalloyed TaskManager?
 	TaskManager getTaskManager();
 
 	/**
@@ -137,10 +140,22 @@ public interface CyPluginAdapter {
 	//
 
 	/**
-	 * Returns an instance of {@link GUITaskManager}.
-	 * @return an instance of {@link GUITaskManager}.
+	 * Returns an instance of {@link DialogTaskManager}.
+	 * @return an instance of {@link DialogTaskManager}.
 	 */
-	GUITaskManager getGUITaskManager();
+	DialogTaskManager getDialogTaskManager();
+
+	/**
+	 * Returns an instance of {@link SubmenuTaskManager}.
+	 * @return an instance of {@link SubmenuTaskManager}.
+	 */
+	SubmenuTaskManager getSubmenuTaskManager();
+
+	/**
+	 * Returns an instance of {@link PanelTaskManager}.
+	 * @return an instance of {@link PanelTaskManager}.
+	 */
+	PanelTaskManager getPanelTaskManager();
 
 	//
 	// presentation api

@@ -8,7 +8,10 @@ import org.cytoscape.work.TunableHandler;
 
 /**
  * An extension of <code>TunableHandler</code> with added functionality to support 
- * the construction of a Swing-based UI.
+ * the construction of a Swing-based UI. 
+ * <br>
+ * Any implementation of this interface should extend {@link AbstractGUITunableHandler}
+ * to avoid the difficult handling of dependencies!
  */
 public interface GUITunableHandler extends TunableHandler {
 

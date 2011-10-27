@@ -92,14 +92,15 @@ public interface CyLayoutAlgorithm extends NetworkViewTaskFactory {
 	 * will be set using setLayoutAttribute() just like other attributes, so the
 	 * layout algorithm will need to check for it.
 	 *
-	 * @return List of Strings
+	 * @return List of column names (i.e. attributes) used for attribute-based layouts.
 	 */
 	public List<String> getInitialAttributeList();
 
 	/**
-	 * Get the name of this layout.
+	 * Returns the computer-readable name of the layout.  To get
+	 * a human readable name, use toString().
 	 *
-	 * @return String representing the name of the layout.
+	 * @return The computer-readable name of the layout.
 	 */
 	public String getName();
 }

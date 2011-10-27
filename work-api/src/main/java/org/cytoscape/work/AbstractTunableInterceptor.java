@@ -45,48 +45,15 @@ import org.slf4j.Logger;
 
 
 /**
- * Interceptor for Tunables : detect them, create an appropriate <code>Handler</code> from the <code>HandlerFactory</code> for each of them, and store them in a HashMap for further use.
- *
- * <p><pre>
- * <b>example :</b>
- * <code>
- * public class Test{
- * 	<code>@Tunable(description="Number of Modules", group={"General Parameters"})</code>
- * 	public BoundedInteger numMod = new BoundedInteger(0,5,1000,false,false);
- * 	<code>@Tunable(description="Overlap Threshold", group={"General Parameters"})</code>
- * 	public BoundedDouble overlap = new BoundedDouble(0.0,0.8,1.0,false,false);
- * 	<code>@Tunable(description="Adjust for size?", group={"General Parameters"})</code>
- * 	public boolean adjustForSize = true;
- * }
- * </code></pre></p>
- *
- * <p><pre>
- * Here are the steps to get a list of handlers for each object annotated as a<code> @Tunable </code>, in order to provide :
- * <ul>
- * 	<li>a Graphic User Interface for <code>Tunables</code> in the Cytoscape Desktop(use of a <code>GuiTunableInterceptor</code>)</li>
- * 	<li>a Command-line interface to execute the Tasks by just typing the name of the class implementing the <code>TaskFactory</code> interface (use of <code>CLTunableInterceptor</code>)</li>
- * 	<li>access to the properties of the <code>Tunables</code>(use of <code>LoadPropsInterceptor</code> or <code>StorePropsInterceptor</code></li>
- * </ul>
- *
- * <ol>
- * 	<li>Detection of a field or getter method annonated with <code>@Tunable </code> in the class the <code>TunableInterceptor</code> is applied to</li>
- * 	<li>The <code>Handlers</code> are created for each kind of <code>Tunable</code> Object (In
- *          this example : creation of a <code>AbstractBounded<Integer></code>, <code>AbstractBounded&lt;Double&gt;</code> and <code>Boolean</code>  <code>Handlers<code>)</li>
- * 	<li>The <code>Handlers</code> are stored in a <i>handlerList</i>, and are used by different <code>TunableInterceptor</code> types</li>
- * 	<li>Create a GUI, provide command-line options, store or load properties for those <code>Tunables</code> by using those <code>TunableHandler</code>s</li>
- * </ol>
- * </pre></p>
- *
- * @param <TH>  <code>TunableHandler</code>s created in the factory
+ * An abstract base class for TunableRecorder and TunableMutator implementations.  
  */
-public abstract class AbstractTunableInterceptor<TH extends TunableHandler> implements TunableInterceptor<TH> {
+public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 	private boolean throwException;
-
 
 	/**
 	 *  Store the Handlers
 	 */
-	protected final Map<Object, LinkedHashMap<String, TH>> handlerMap;
+	protected final Map<Object, LinkedHashMap<String, T>> handlerMap;
 
 	/**
 	 *  Store the JPanel-returning methods
@@ -96,7 +63,7 @@ public abstract class AbstractTunableInterceptor<TH extends TunableHandler> impl
 	/**
 	 * A list of TunableHandlerFactory services that have been registered.
 	 */
-	protected final List<TunableHandlerFactory<TH>> tunableHandlerFactories;
+	protected final List<TunableHandlerFactory<T>> tunableHandlerFactories;
 
 	private final static Logger logger = LoggerFactory.getLogger(AbstractTunableInterceptor.class);
 
@@ -105,9 +72,9 @@ public abstract class AbstractTunableInterceptor<TH extends TunableHandler> impl
 	 */
 	public AbstractTunableInterceptor() {
 		throwException = false;
-		handlerMap = new HashMap<Object, LinkedHashMap<String, TH>>();
+		handlerMap = new HashMap<Object, LinkedHashMap<String, T>>();
 		guiProviderMap = new HashMap<Object, Method>();
-		tunableHandlerFactories = new ArrayList<TunableHandlerFactory<TH>>();
+		tunableHandlerFactories = new ArrayList<TunableHandlerFactory<T>>();
 	}
 
 	/** Used for testing only! */
@@ -115,17 +82,17 @@ public abstract class AbstractTunableInterceptor<TH extends TunableHandler> impl
 		this.throwException = throwException;
 	}
 
+	// TODO make this private!!!
 	/**
-	 *  To detect fields and methods annotated with <code>Tunable</code>, create a <code>Handler</code> for
-	 *  each from the factory, and store it in <code>handlerMap</code>.
-	 *  In addition we also detect methods annotated with <code>ProvidesGUI</code> and store those in
-	 *  <code>guiProviderMap</code>.
+	 * To detect fields and methods annotated with {@link Tunable}, create 
+	 * a {@link TunableHandler} for each from the factory, and store it in handlerMap.
 	 *
-	 *  @param obj A class that contains <code>Tunable</code> that need to be caught to interact with the users
+	 * @param obj A class that contains fields or methods annotated with {@link Tunable} 
+	 * whose value needs to be set or recorded. 
 	 */
-	public void loadTunables(final Object obj) {
+	protected void loadTunables(final Object obj) {
 		if (!handlerMap.containsKey(obj)) {
-			LinkedHashMap<String, TH> handlerList = new LinkedHashMap<String, TH>();
+			LinkedHashMap<String, T> handlerList = new LinkedHashMap<String, T>();
 
 			// Find each public field in the class.
 			for (final Field field : obj.getClass().getFields()) {
@@ -136,7 +103,7 @@ public abstract class AbstractTunableInterceptor<TH extends TunableHandler> impl
 						final Tunable tunable = field.getAnnotation(Tunable.class);
 
 						// Get a Handler for this type of Tunable and...
-						TH handler = getHandler(field, obj, tunable);
+						T handler = getHandler(field, obj, tunable);
 
 						// ...add it to the list of Handlers
 						if (handler != null)
@@ -179,7 +146,7 @@ public abstract class AbstractTunableInterceptor<TH extends TunableHandler> impl
    						}
 
    						// Get a handler with for get and set methods:
-   						final TH handler = getHandler(method, setter, obj, tunableMap.get(rootName));
+   						final T handler = getHandler(method, setter, obj, tunableMap.get(rootName));
    						if (handler == null) {
    							logOrThrowException("Failed to create a handler for " + setter.getName() + "()!",null);
    						} else {
@@ -243,22 +210,29 @@ public abstract class AbstractTunableInterceptor<TH extends TunableHandler> impl
 	}
 
 	/**
-	 *  To get the Map of the <code>Handlers</code> that are contained in this <code>TunableInterceptor</code> Object applied to an external Object(class).
-	 *
-	 * @param o The Object the TunableInterceptor has been applied to.
-	 *
-	 * @return  The map that contains all the <code>Handlers</code> that have been created for the Object o
+	 * Returns a map of {@link TunableHandler} objects that have been found to process
+	 * the fields and methods annotated with {@link Tunable}. The keys in the map are
+	 * the names of the fields and methods that were annotated.
+	 * @param o The object whose fields and methods will be searched for {@link Tunable} 
+	 * annotations. 
+	 * @return The map that contains all the {@link TunableHandler} objects that have been 
+	 * found to process the fields and methods annotated with {@link Tunable}.
 	 */
-	public final Map<String, TH> getHandlers(final Object o) {
+	public final Map<String, T> getHandlers(final Object o) {
 		if (o == null)
 			return null;
+
+		// this is a no-op if tunables have already been loaded
+		loadTunables(o);
 
 		return handlerMap.get(o);
 	}
 
-	/** Tests an object for having tunable annotations.
-	 *
-	 *  @return true if "o" has tunable annotations and else false.
+	/** 
+	 * Tests an object to see if any of its fields or method have {@link Tunable} annotations.
+	 * @param o The object whose fields and methods should be evaluated for {@link Tunable} 
+	 * annotations.
+	 * @return true if "o" has fields or methods annotated with {@link Tunable} otherwise false.
 	 */
 	public boolean hasTunables(final Object o) {
 		for (final Field field : o.getClass().getFields()) {
@@ -273,40 +247,43 @@ public abstract class AbstractTunableInterceptor<TH extends TunableHandler> impl
 		return false;
 	}
 	
-	private TH getHandler(Field field, Object instance, Tunable tunable) {
-		for ( TunableHandlerFactory<TH> thf : tunableHandlerFactories ) {
-			TH th = thf.getHandler(field, instance, tunable);
+	private T getHandler(Field field, Object instance, Tunable tunable) {
+		for ( TunableHandlerFactory<T> thf : tunableHandlerFactories ) {
+			T th = thf.getHandler(field, instance, tunable);
 			if ( th != null )
 				return th;
 		}
 		return null;
 	}
 	
-	private TH getHandler(final Method getter, final Method setter, final Object instance, final Tunable tunable) {
-		for ( TunableHandlerFactory<TH> thf : tunableHandlerFactories ) {
-			TH th = thf.getHandler(getter, setter, instance, tunable);
-			if ( th != null )
+	private T getHandler(final Method getter, final Method setter, final Object instance, final Tunable tunable) {
+		for ( TunableHandlerFactory<T> thf : tunableHandlerFactories ) {
+			T th = thf.getHandler(getter, setter, instance, tunable);
+			if ( th != null ) {
 				return th;
+			}
 		}
 		return null;
 	}
 	
 	/**
-	 * Allows TunableHandlerFactory services to be added to the list of factories used to process Tunables.
+	 * Allows TunableHandlerFactory services to be added to the list of factories used 
+	 * to process Tunables.
 	 * @param thf The factory to be added.
 	 * @param properties OSGi service metadata.  May be null.
 	 */
-	public void addTunableHandlerFactory(TunableHandlerFactory<TH> thf, Map properties) {
+	public void addTunableHandlerFactory(TunableHandlerFactory<T> thf, Map properties) {
 		if ( thf != null )
 			tunableHandlerFactories.add(thf);
 	}
 
 	/**
-	 * Allows TunableHandlerFactory services to be removed from the list of factories used to process Tunables.
+	 * Allows TunableHandlerFactory services to be removed from the list of factories used 
+	 * to process Tunables.
 	 * @param thf The factory to be removed.
 	 * @param properties OSGi service metadata.  May be null.
 	 */
-	public void removeTunableHandlerFactory(TunableHandlerFactory<TH> thf, Map properties) {
+	public void removeTunableHandlerFactory(TunableHandlerFactory<T> thf, Map properties) {
 		tunableHandlerFactories.remove(thf);
 	}
 

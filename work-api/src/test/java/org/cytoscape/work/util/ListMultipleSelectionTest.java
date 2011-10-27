@@ -71,7 +71,7 @@ public class ListMultipleSelectionTest {
 		new ListMultipleSelection<String>(nullList);
 	}
 
-	@Test(expected=IllegalArgumentException.class)
+	@Test
 	public final void testConstructionWithEmptyList() throws Exception {
 		new ListMultipleSelection<String>(new ArrayList<String>());
 	}

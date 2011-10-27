@@ -55,15 +55,15 @@ public class ListMultipleSelection<T> extends ListSelection<T> {
 	private List<T> selected;
 
 	/**
-	 * Creates a new ListMultipleSelection object
+	 * Creates a new ListMultipleSelection object.
 	 *
 	 *<p><pre>
 	 * <b>example</b> :
 	 * 
-	 * <code>ListMultipleSelection<String> lms = new ListMultipleSelection<String>("1","2","3","4")</code>
+	 * <code>ListMultipleSelection<String> lms = new ListMultipleSelection<String>("1","2","3","4");</code>
 	 * </pre></p>
 	 * 
-	 * @param values array of <code>T</code> items that can be selected
+	 * @param values An arbitrary number of values of type T items that can be selected.
 	 */
 	public ListMultipleSelection(final T ... values) {
 		super(Arrays.asList(values));
@@ -87,7 +87,8 @@ public class ListMultipleSelection<T> extends ListSelection<T> {
 	 *</code>
 	 *</pre></p>
 	 *
-	 * @param values  list of <code>values</code> of type<code>T</code> that can be selected
+	 * @param values The list of values of type T that can be selected.  The list
+	 * may be empty.
 	 */
 	public ListMultipleSelection(final List<T> values) {
 		super(values);

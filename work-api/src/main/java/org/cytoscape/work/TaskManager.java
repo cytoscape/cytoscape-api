@@ -4,14 +4,24 @@ package org.cytoscape.work;
 /**
  * Executes the Tasks found in the TaskIterator provided by a TaskFactory. 
  */
-public interface TaskManager {
+public interface TaskManager<T,C> {
 
-	/** 
-	 * Tests an object for having tunable annotations.
-	 * @param o object to test for having tunable annotations.
-	 * @return true if "o" has tunable annotations and else false.
+	/**
+	 * Returns a configuration object generated from the Tunables
+	 * read from the TaskFactory.
+	 * @param factory The TaskFactory that will be scanned for Tunables.
+	 * @return a configuration object generated from the Tunables
+	 * read from the TaskFactory.
 	 */
-	boolean hasTunables(final Object o);
+	 T getConfiguration(TaskFactory factory);
+
+	/**
+	 * Allows a user of a TaskManager to set the execution context for
+	 * the tast, for example the parent Window of a dialog or the top-level
+	 * menu for menu generation.
+	 * @param context The object to serve as the execution context for the TaskManager.
+	 */
+	void setExecutionContext(C context);
 
 	/**
 	 * This method is called to execute the Tasks in a TaskIterator provided

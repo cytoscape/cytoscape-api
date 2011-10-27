@@ -31,6 +31,8 @@ package org.cytoscape.work.util;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+import java.util.Collections; 
+import java.util.List; 
 
 
 public class ListSingleSelectionTest {
@@ -50,5 +52,16 @@ public class ListSingleSelectionTest {
 	@Test(expected=IllegalArgumentException.class)
 	public final void testSetSelectedValueWithInvalidSelection() throws Exception {
 		lss.setSelectedValue("oranges");
+	}
+
+	@Test(expected=NullPointerException.class)
+	public final void testNullListInConstructor() throws Exception {
+		List<String> l = null;
+		lss = new ListSingleSelection<String>(l);
+	}
+
+	@Test
+	public final void testEmptyListInConstructor() throws Exception {
+		lss = new ListSingleSelection<String>(Collections.EMPTY_LIST);
 	}
 }

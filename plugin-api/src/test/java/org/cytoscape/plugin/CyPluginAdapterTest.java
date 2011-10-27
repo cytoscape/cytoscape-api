@@ -84,8 +84,18 @@ public abstract class CyPluginAdapterTest {
 	} 
 
 	@Test
-	public void testGUITaskManager() { 
-		assertNotNull("GUITaskManager exists", adapter.getGUITaskManager());
+	public void testDialogTaskManager() { 
+		assertNotNull("DialogTaskManager exists", adapter.getDialogTaskManager());
+	} 
+
+	@Test
+	public void testPanelTaskManager() { 
+		assertNotNull("PanelTaskManager exists", adapter.getPanelTaskManager());
+	} 
+
+	@Test
+	public void testSubmenuTaskManager() { 
+		assertNotNull("SubmenuTaskManager exists", adapter.getSubmenuTaskManager());
 	} 
 
 	@Test

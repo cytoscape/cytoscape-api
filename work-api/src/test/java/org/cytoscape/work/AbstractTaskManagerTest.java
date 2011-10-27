@@ -31,56 +31,60 @@ package org.cytoscape.work;
 import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
+import java.util.Properties;
 
 import static org.mockito.Mockito.*;
 
 
 public class AbstractTaskManagerTest {
-	static private class SimpleTaskMananger extends AbstractTaskManager {
-		SimpleTaskMananger(final TunableInterceptor tunableInterceptor) {
-			super(tunableInterceptor);
-		}
 
-		TunableInterceptor getTunableInterceptor() {
-			return this.tunableInterceptor;
-		}
+	final TunableMutator interceptor = mock(TunableMutator.class);
+	SimpleTaskMananger taskManager; 
 
-		public void execute(TaskFactory factory) {
-		}
+	@Before 
+	public void setup() {
+		taskManager = new SimpleTaskMananger(interceptor);
 	}
 
-	static private class SimpleTunableInterceptor<TH extends TunableHandler> extends AbstractTunableInterceptor {
-		SimpleTunableInterceptor() {
-			super();
+	static private class SimpleTaskMananger<T,C> extends AbstractTaskManager<T,C> {
+		SimpleTaskMananger(final TunableMutator tunableMutator) {
+			super(tunableMutator);
 		}
 
-		public boolean execUI(Object... obs) {
-			return false;
+		TunableMutator getTunableMutator() {
+			return this.tunableMutator;
 		}
 
-		public boolean validateAndWriteBackTunables(Object... objs) {
-			return false;
+		int getNumTunableRecorders() {
+			return tunableRecorders.size();
 		}
+
+		@Override
+		public void execute(TaskFactory factory) { }
+
+		@Override
+		public T getConfiguration(TaskFactory tf) { return null; }
 	}
 
 	@Test
 	public void testConstructor() {
-		final TunableInterceptor interceptor = mock(TunableInterceptor.class);
-		final SimpleTaskMananger taskManager = new SimpleTaskMananger(interceptor);
-		assertEquals("The TunableInterceptor passed into the TaskMananger's constructor is not that same as that of the protected data members!",
-			     interceptor, taskManager.getTunableInterceptor());
+		assertEquals("The TunableMutator passed into the TaskMananger's constructor is not that same as that of the protected data members!", interceptor, taskManager.getTunableMutator());
 	}
 
 	@Test
-	public void testHasTunables() {
-		final TunableHandlerFactory<SimpleTunableHandler> handlerFactory= mock(TunableHandlerFactory.class);
-		final SimpleTunableInterceptor interceptor = new SimpleTunableInterceptor<SimpleTunableHandler>();
-		interceptor.addTunableHandlerFactory(handlerFactory, null);
-		final SimpleTaskMananger taskManager = new SimpleTaskMananger(interceptor);
-		assertFalse("This object has *no* Tunable annotation!", taskManager.hasTunables(new Object()));
-		assertTrue("This object has an annotated field!",
-			   taskManager.hasTunables(new HasAnnotatedField()));
-		assertTrue("This object has annotated getter/setter methods!",
-			   taskManager.hasTunables(new HasAnnotatedSetterAndGetterMethods()));
+	public void testAddTunableRecorders() {
+		taskManager.addTunableRecorder( mock(TunableRecorder.class), new Properties());
+		assertEquals( 1, taskManager.getNumTunableRecorders());
 	}
+
+	@Test
+	public void testRemoveTunableRecorders() {
+		TunableRecorder rec = mock(TunableRecorder.class);
+		taskManager.addTunableRecorder( rec, new Properties());
+		assertEquals( 1, taskManager.getNumTunableRecorders());
+		taskManager.removeTunableRecorder( rec, new Properties());
+		assertEquals( 0, taskManager.getNumTunableRecorders());
+	}
+
+
 }

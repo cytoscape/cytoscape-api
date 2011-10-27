@@ -57,14 +57,12 @@ class ListSelection<T> {
 	/**
 	 * Creates a new ListSelection object.
 	 *
-	 * @param values list of items of type <code>T</code> that contains the one(s) that is(are) going to be selected
+	 * @param values List of items of type <code>T</code> that contains the one(s) that is(are) going to be selected.
+	 * The list of values my be empty.
 	 */
 	public ListSelection(final List<T> values) {
 		if (values == null)
 			throw new NullPointerException("values is null!");
-
-		if (values.size() == 0)
-			throw new IllegalArgumentException("list has size 0");
 
 		this.values = values;
 	}

@@ -61,7 +61,7 @@ public class ListSingleSelection<T> extends ListSelection<T> {
 	 * <code>ListSingleSelection<String> lss = new ListSingleSelection<String>("1","2","3","4")</code>
 	 * </pre></p>
 	 *
-	 * @param values array of <code>T</code> items that can be selected
+	 * @param values An arbitrary number of values of type T that can be selected.
 	 */
 	public ListSingleSelection(final T ... values) {
 		super(Arrays.asList(values));
@@ -74,7 +74,7 @@ public class ListSingleSelection<T> extends ListSelection<T> {
 	 *<b>example</b> :
 	 *
 	 *<code>
-	 *	java.util.List<String> list = new jave.util.ArrayList<String>();
+	 *	List<String> list = ArrayList<String>();
 	 *	list.add("1");
 	 *	list.add("2");
 	 *	list.add("3");
@@ -83,7 +83,8 @@ public class ListSingleSelection<T> extends ListSelection<T> {
 	 *	ListSingleSelection<String> lss = new ListSingleSelection<String>(list);
 	 *</code>
 	 *</pre></p>
-	 * @param values  a list of <code>values</code> of type<code>T</code> that can be selected
+	 * @param values The list of values of type T that can be selected.  This list
+	 * may be empty, but not null.
 	 */
 	public ListSingleSelection(final List<T> values) {
 		super(values);

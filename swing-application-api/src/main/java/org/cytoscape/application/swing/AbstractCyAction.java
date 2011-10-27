@@ -29,6 +29,16 @@
 */
 package org.cytoscape.application.swing;
 
+import org.cytoscape.application.CyApplicationManager;
+
+import org.cytoscape.model.CyEdge;
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyNode;
+
+import org.cytoscape.view.model.CyNetworkView;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Map;
 
@@ -38,13 +48,6 @@ import javax.swing.KeyStroke;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.PopupMenuEvent;
 
-import org.cytoscape.application.CyApplicationManager;
-import org.cytoscape.model.CyEdge;
-import org.cytoscape.model.CyNetwork;
-import org.cytoscape.model.CyNode;
-import org.cytoscape.view.model.CyNetworkView;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * An abstract implementation of the CyAction interface. Instead of using this
@@ -56,41 +59,50 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractCyAction extends AbstractAction implements CyAction {
 	private static final long serialVersionUID = -2245672104075936952L;
 	private static final Logger logger = LoggerFactory.getLogger(AbstractCyAction.class);
-
 	protected String preferredMenu = null;
 
 	// Value 100.0 means end of menu/tool bar
 	protected float menuGravity = 100.0f;
 	protected float toolbarGravity = 100.0f;
-
 	protected boolean acceleratorSet = false;
 	protected KeyStroke acceleratorKeyStroke = null;
-
 	protected boolean useCheckBoxMenuItem = false;
 	protected boolean inToolBar = false;
 	protected boolean inMenuBar = true;
 	protected String enableFor = null;
-
 	protected String name;
 	protected final CyApplicationManager applicationManager;
+	protected MenuEnableSupport enabler; 
 
 	/**
 	 * Creates a new AbstractCyAction object.
-	 * 
+	 *
 	 * @param name
 	 *            The name of the action.
 	 * @param applicationManager
 	 *            The application manager providing context for this action.
 	 */
 	public AbstractCyAction(final String name, final CyApplicationManager applicationManager) {
-		super(name);
-		this.name = name;
-		this.applicationManager = applicationManager;
+		this(name,applicationManager,null);
 	}
 
 	/**
 	 * Creates a new AbstractCyAction object.
-	 * 
+	 *
+	 * @param name The name of the action.
+	 * @param applicationManager The application manager providing context for this action.
+	 * @param enableFor A string declaring which states this action should be enabled for. 
+	 */
+	public AbstractCyAction(final String name, final CyApplicationManager applicationManager, String enableFor) {
+		super(name);
+		this.name = name;
+		this.applicationManager = applicationManager;
+		this.enabler = new MenuEnableSupport(this,enableFor,applicationManager);
+	}
+
+	/**
+	 * Creates a new AbstractCyAction object.
+	 *
 	 * @param configProps
 	 *            A String-String Map of configuration metadata. This will
 	 *            usually be the Map provided by the Spring service
@@ -110,41 +122,48 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * @param applicationManager
 	 *            The application manager providing context for this action.
 	 */
-	public AbstractCyAction(final Map<String, String> configProps, final CyApplicationManager applicationManager) {
-		this(configProps.get("title"), applicationManager);
+	public AbstractCyAction(final Map<String, String> configProps,
+	                        final CyApplicationManager applicationManager) {
+		this(configProps.get("title"), applicationManager, configProps.get("enableFor"));
 
 		logger.debug("New CyAction with title: " + configProps.get("title"));
 
 		final String prefMenu = configProps.get("preferredMenu");
+
 		if (prefMenu != null)
 			setPreferredMenu(prefMenu);
 
 		final String iconName = configProps.get("iconName");
+
 		if (iconName != null)
 			putValue(SMALL_ICON, new ImageIcon(getClass().getResource(iconName)));
 
 		final String tooltip = configProps.get("tooltip");
+
 		if (tooltip != null)
 			putValue(SHORT_DESCRIPTION, tooltip);
 
 		final String foundInToolBar = configProps.get("inToolBar");
+
 		if (foundInToolBar != null)
 			inToolBar = true;
 
 		final String foundInMenuBar = configProps.get("inMenuBar");
+
 		if (foundInMenuBar != null)
 			inMenuBar = true;
 
-		this.enableFor = configProps.get("enableFor");
-
 		final String keyComboString = configProps.get("accelerator");
+
 		if (keyComboString != null) {
 			final KeyStroke command = AcceleratorParser.parse(keyComboString);
+
 			if (command != null)
 				setAcceleratorKeyStroke(command);
 		}
 
 		final String menuGravityString = configProps.get("menuGravity");
+
 		if (menuGravityString != null) {
 			try {
 				menuGravity = Float.valueOf(menuGravityString);
@@ -154,6 +173,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		}
 
 		final String toolbarGravityString = configProps.get("toolBarGravity");
+
 		if (toolbarGravityString != null) {
 			try {
 				toolbarGravity = Float.valueOf(toolbarGravityString);
@@ -162,13 +182,12 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 			}
 		}
 
-		logger.debug("New Action: enable for = " + this.enableFor);
-		this.setEnabled(true);
+		setEnabled(true);
 	}
 
 	/**
 	 * Sets the name of the action.
-	 * 
+	 *
 	 * @param name
 	 *            The name of the action.
 	 */
@@ -186,7 +205,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	/**
 	 * By default all CytoscapeActions wish to be included in the menu bar at
 	 * the 'preferredMenuName' location is specified and the 'Tools' menu not.
-	 * 
+	 *
 	 * @return true if this CyAction should be included in menu bar.
 	 */
 	public boolean isInMenuBar() {
@@ -195,7 +214,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 
 	/**
 	 * By default no CytoscapeActions will be included in the toolbar.
-	 * 
+	 *
 	 * @return true if this Action should be included in the toolbar.
 	 */
 	public boolean isInToolBar() {
@@ -204,7 +223,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 
 	/**
 	 * Sets the gravity used to order this action in the menu bar.
-	 * 
+	 *
 	 * @param gravity
 	 *            The gravity for ordering menu bar actions.
 	 */
@@ -221,7 +240,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 
 	/**
 	 * Sets the gravity used to order this action in the toolbar.
-	 * 
+	 *
 	 * @param gravity
 	 *            The gravity for ordering toolbar actions.
 	 */
@@ -238,7 +257,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 
 	/**
 	 * Sets the accelerator KeyStroke for this action.
-	 * 
+	 *
 	 * @param ks
 	 *            The KeyStroke to be used as an accelerator for this action.
 	 *            This parameter may be null, in which case no accelerator is
@@ -265,7 +284,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	/**
 	 * Sets the preferredMenuString. See the {@link #getPreferredMenu}
 	 * description for formatting description.
-	 * 
+	 *
 	 * @param new_preferred
 	 *            The string describing the preferred menu name.
 	 */
@@ -282,22 +301,22 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 
 	/**
 	 * This method can be used at your discretion, but otherwise does nothing.
-	 * 
+	 *
 	 * @param e
 	 *            The triggering event.
 	 */
 	public void menuCanceled(MenuEvent e) {
-		updateEnableState();
+		enabler.updateEnableState();
 	}
 
 	/**
 	 * This method can be used at your discretion, but otherwise does nothing.
-	 * 
+	 *
 	 * @param e
 	 *            The triggering event.
 	 */
 	public void menuDeselected(MenuEvent e) {
-		updateEnableState();
+		enabler.updateEnableState();
 	}
 
 	/**
@@ -307,12 +326,12 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * property found in the properties used to construct the action. The valid
 	 * options for "enableFor" are "network", "networkAndView", and
 	 * "selectedNetworkObjs".
-	 * 
+	 *
 	 * @param e
 	 *            The triggering event.
 	 */
 	public void menuSelected(MenuEvent e) {
-		updateEnableState();
+		enabler.updateEnableState();
 	}
 
 	/**
@@ -322,17 +341,17 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * property found in the properties used to construct the action. The valid
 	 * options for "enableFor" are "network", "networkAndView", and
 	 * "selectedNetworkObjs".
-	 * 
+	 *
 	 * @param e
 	 *            The triggering event.
 	 */
 	public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
-		updateEnableState();
+		enabler.updateEnableState();
 	}
 
 	/**
 	 * This method can be used at your discretion, but otherwise does nothing.
-	 * 
+	 *
 	 * @param e
 	 *            The triggering event.
 	 */
@@ -341,141 +360,46 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 
 	/**
 	 * This method can be used at your discretion, but otherwise does nothing.
-	 * 
+	 *
 	 * @param e
 	 *            The triggering event.
 	 */
 	public void popupMenuCanceled(PopupMenuEvent e) {
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	public void updateEnableState() {
-		if (enableFor == null)
-			setEnabled(true);
-		else if (enableFor.equals("network"))
-			enableForNetwork();
-		else if (enableFor.equals("networkWithoutView"))
-			enableForNetworkWithoutView();
-		else if (enableFor.equals("networkAndView"))
-			enableForNetworkAndView();
-		else if (enableFor.equals("selectedNodesOrEdges"))
-			enableForSelectedNodesOrEdges();
-		else if (enableFor.equals("selectedNodes"))
-			enableForSelectedNodes();
-		else if (enableFor.equals("selectedEdges"))
-			enableForSelectedEdges();
-		else if (enableFor.equals("table"))
-			enableForTable();
-		else
-			setEnabled(true);
+		enabler.updateEnableState();
 	}
 
-	//
-	// The following methods are utility methods that that enable or disable
-	// the action based on the state of Cytoscape. These methods are meant to
-	// reduce duplicate code since many actions demand the same state to be
-	// functional (e.g. a network and network view must exist). These methods
-	// are generally called from within implementations of {@link
-	// #menuSelected},
-	// but can be called from anywhere.
-	//
 
-	/**
-	 * Enable the action if the current network exists and is not null.
-	 */
-	protected void enableForNetwork() {
-		CyNetwork n = applicationManager.getCurrentNetwork();
-		if (n == null)
-			setEnabled(false);
-		else
-			setEnabled(true);
-	}
+    /**
+     * Enable the action if the current network exists and is not null.
+     */
+    protected void enableForNetwork() {
+		enabler.enableForNetwork();
+    }
     
 	protected void enableForNetworkWithoutView() {
-		final CyNetwork n = applicationManager.getCurrentNetwork();
-		final CyNetworkView v = applicationManager.getCurrentNetworkView();
-		if (n == null)
-			setEnabled(false);
-		else if(n != null && v == null)
-			setEnabled(true);
-		else
-			setEnabled(false);
+		enabler.enableForNetworkWithoutView() ;
 	}
 
-	/**
-	 * Enable the action if the current network and view exist and are not null.
-	 */
-	protected void enableForNetworkAndView() {
-		CyNetworkView v = applicationManager.getCurrentNetworkView();
-		if (v == null)
-			setEnabled(false);
-		else
-			setEnabled(true);
-	}
+    protected void enableForNetworkAndView() {
+    	enabler.enableForNetworkAndView() ;
+    }
 
-	/**
-	 * Enable the action if at least one selected node or edge is required to
-	 * perform the action.
-	 */
-	protected void enableForSelectedNodesOrEdges() {
-		if (applicationManager.getCurrentNetworkView() == null)
-			return;
-		
-		final CyNetwork network = applicationManager.getCurrentNetwork();
+    protected void enableForSelectedNodesOrEdges() {
+    	enabler.enableForSelectedNodesOrEdges() ;
+    }
 
-		// Disable if there is no current network.
-		if (network == null) {
-			setEnabled(false);
-			return;
-		}
+    protected void enableForSelectedNodes() {
+    	enabler.enableForSelectedNodes() ;
+    }
 
-		// If any of nodes are selected, enable this.
-		if (network.getDefaultNodeTable().getMatchingRows(CyNetwork.SELECTED, Boolean.TRUE).isEmpty() &&
-		    network.getDefaultEdgeTable().getMatchingRows(CyNetwork.SELECTED, Boolean.TRUE).isEmpty()) 
-			setEnabled(false);
-		else 
-			setEnabled(true);
-		
-	}
+    protected void enableForSelectedEdges() {
+    	enabler.enableForSelectedNodes() ;
+    }
 
-	/**
-	 * Enable the action if at least one selected node is required to perform
-	 * the action.
-	 */
-	protected void enableForSelectedNodes() {
-		if (applicationManager.getCurrentNetworkView() == null)
-			return;
-		
-		final CyNetwork network = applicationManager.getCurrentNetwork();
-		if (network == null) {
-			setEnabled(false);
-			return;
-		}
-
-		setEnabled(!network.getDefaultNodeTable().getMatchingRows(CyNetwork.SELECTED, Boolean.TRUE).isEmpty());
-	}
-
-	/**
-	 * Enable the action if at least one selected edge is required to perform
-	 * the action.
-	 */
-	protected void enableForSelectedEdges() {
-		if (applicationManager.getCurrentNetworkView() == null)
-			return;
-		
-		final CyNetwork network = applicationManager.getCurrentNetwork();
-
-		if (network == null) {
-			setEnabled(false);
-			return;
-		}
-
-		setEnabled(!network.getDefaultEdgeTable().getMatchingRows(CyNetwork.SELECTED, Boolean.TRUE).isEmpty());
-	}
-
-	private void enableForTable() {
-		setEnabled(applicationManager.getCurrentTable() != null);
+    private void enableForTable() {
+    	enabler.enableForTable() ;
 	}
 }
