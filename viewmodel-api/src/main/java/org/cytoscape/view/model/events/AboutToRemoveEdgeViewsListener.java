@@ -4,7 +4,7 @@ import org.cytoscape.event.CyListener;
 
 /**
  * Listener for {@linkplain AboutToRemoveEdgeViewsEvent}.
- *
+ * @CyAPI.Spi.Interface
  */
 public interface AboutToRemoveEdgeViewsListener extends CyListener {
 

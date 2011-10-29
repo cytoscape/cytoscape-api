@@ -6,7 +6,7 @@ import org.cytoscape.event.CyListener;
  * Listener for {@linkplain FitContentEvent}.
  * 
  * @author kono
- *
+ * @CyAPI.Spi.Interface
  */
 public interface FitContentEventListener extends CyListener {
 	

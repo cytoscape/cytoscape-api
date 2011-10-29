@@ -9,6 +9,7 @@ import org.cytoscape.model.CyNode;
 
 /**
  * When node {@link View}s are about to be removed from a {@linkplain CyNetworkView}, this event will be fired.
+ * @CyAPI.Final.Class   #ASKMIKE : This class isn't declared as final.
  */
 public class AboutToRemoveNodeViewsEvent extends AbstractCyEvent<CyNetworkView> {
 

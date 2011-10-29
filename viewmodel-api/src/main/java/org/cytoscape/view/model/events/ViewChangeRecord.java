@@ -3,6 +3,9 @@ package org.cytoscape.view.model.events;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
 
+/**
+ * @CyAPI.Final.Class
+ */
 public final class ViewChangeRecord<T> {
 	private final View<T> view;
 	private final VisualProperty<?> vp;

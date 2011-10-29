@@ -6,12 +6,12 @@ import org.cytoscape.event.CyListener;
 
 /**
  * Listener for {@linkplain NetworkViewAddedEvent}.
- *
+ * @CyAPI.Spi.Interface
  */
 public interface NetworkViewAddedListener extends CyListener {
 	
 	/**
-	 * Process event
+	 * Process event.
 	 * 
 	 * @param e the {@link NetworkViewAddedEvent} to be handled.
 	 */

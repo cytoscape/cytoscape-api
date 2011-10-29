@@ -4,12 +4,12 @@ import org.cytoscape.event.CyListener;
 
 /**
  * Listener for {@linkplain EdgeViewsChangedEvent}.
- *
+ * @CyAPI.Spi.Interface
  */
 public interface EdgeViewsChangedListener extends CyListener {
 	
 	/**
-	 * Process event
+	 * Process event.
 	 * 
 	 * @param e the {@link EdgeViewsChangedEvent} to be handled.
 	 */

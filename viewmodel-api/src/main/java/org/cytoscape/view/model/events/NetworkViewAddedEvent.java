@@ -8,6 +8,7 @@ import org.cytoscape.view.model.View;
 
 /**
  * When a {@link CyNetworkView} is added to a {@linkplain CyNetworkViewManager}, this event will be fired.
+ * @CyAPI.Final.Class
  */
 public final class NetworkViewAddedEvent extends AbstractNetworkViewEvent {
 	/**

@@ -7,7 +7,8 @@ import org.cytoscape.view.model.CyNetworkView;
 
 
 /**
- *  Base class for all derived concrete event classes classes in this package that require a CyNetworkView.
+ *  Base class for all derived concrete event classes classes in this package that require a {@link CyNetworkView}.
+ * #ASKMIKE
  */
 class AbstractNetworkViewEvent extends AbstractCyEvent<CyNetworkViewManager> {
 	private final CyNetworkView view;
