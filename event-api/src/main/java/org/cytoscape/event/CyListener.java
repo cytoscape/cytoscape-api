@@ -31,7 +31,7 @@ package org.cytoscape.event;
 /**
  * The basic interface that any class interested in a particular
  * type of event should implement.
- * <p> <b> Any class implementing this inteface must implement the
+ * <p> <b> Any class implementing this interface must implement the
  * method:
  * <p> <code>public void handleEvent(ZZZ e);</code>
  * <p>where ZZZ extends CyEvent! </b> 
@@ -53,6 +53,7 @@ package org.cytoscape.event;
  * type, but that doesn't appear possible with Java. That
  * means users are either must register as different listeners
  * or handle different event types in the handleEvent method. 
+ * @CyAPI.Spi.Interface   #ASKMIKE
  */
 public interface CyListener {
 	// implement 

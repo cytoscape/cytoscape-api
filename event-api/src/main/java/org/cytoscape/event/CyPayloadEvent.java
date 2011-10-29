@@ -41,6 +41,7 @@ import java.util.Collection;
  * An extension of CyEvent specifically for payload events.
  * @param <S> The event source type.
  * @param <P> The payload type.
+ * @CyAPI.Spi.Interface
  */
 public interface CyPayloadEvent<S,P> extends CyEvent<S> {
 	

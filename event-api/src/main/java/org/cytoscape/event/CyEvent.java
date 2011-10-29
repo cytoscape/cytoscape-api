@@ -40,6 +40,7 @@ package org.cytoscape.event;
  * event can add additional methods to provide access to information
  * relevant to that specific event.
  * @param <T> the generic type of the CyEvent.
+ * @CyAPI.Spi.Interface
  */
 public interface CyEvent<T> {
 	
