@@ -4,7 +4,8 @@ package org.cytoscape.application.events;
 import org.cytoscape.event.CyListener;
 
 /**
- * The listener for the CytoscapeShutdownEvent.
+ * The listener for the {@link CytoscapeShutdownEvent}.
+ * @CyAPI.Spi.Interface
  */
 public interface CytoscapeShutdownListener extends CyListener {
 

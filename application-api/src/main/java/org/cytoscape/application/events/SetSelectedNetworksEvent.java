@@ -9,6 +9,7 @@ import org.cytoscape.model.CyNetwork;
 
 /**
  * An event indicating the a collection of networks has been selected.
+ * @CyAPI.Final.Class
  */
 public final class SetSelectedNetworksEvent extends AbstractCyEvent<CyApplicationManager> {
 	private final List<CyNetwork> networks;

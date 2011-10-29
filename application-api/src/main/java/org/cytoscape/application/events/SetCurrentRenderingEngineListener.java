@@ -4,7 +4,7 @@ import org.cytoscape.event.CyListener;
 
 /**
  * Listener for {@link SetCurrentRenderingEngineEvent}.
- *
+ * @CyAPI.Spi.Interface
  */
 public interface SetCurrentRenderingEngineListener extends CyListener {
 	/**

@@ -5,6 +5,7 @@ import org.cytoscape.event.CyListener;
 
 /**
  * A listener for {@link SetSelectedNetworkViewsEvent}s. 
+ * @CyAPI.Spi.Interface
  */
 public interface SetSelectedNetworkViewsListener extends CyListener {
 	/**

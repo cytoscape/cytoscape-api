@@ -8,6 +8,7 @@ import org.cytoscape.event.AbstractCyEvent;
  * event provides methods for listeners processing this event to
  * abort the shutdown. This event should only be fired synchronously
  * to allow all listeners time to clean up.
+ * @CyAPI.Final.Class
  */
 public final class CytoscapeShutdownEvent extends AbstractCyEvent<Object> {
 

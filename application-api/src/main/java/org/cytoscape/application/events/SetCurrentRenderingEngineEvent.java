@@ -7,7 +7,7 @@ import org.cytoscape.view.presentation.RenderingEngine;
 
 /**
  * This event signals that a {@link RenderingEngine} has been set as current.
- *
+ * @CyAPI.Final.Class
  */
 public final class SetCurrentRenderingEngineEvent extends
 		AbstractCyEvent<CyApplicationManager>{
