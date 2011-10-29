@@ -40,6 +40,7 @@ package org.cytoscape.model;
  * Any object that implements this interface shall return a session unique
  * identifier that shall be unique among all instances of objects that 
  * implement this interface.  The identifier shall be greater than 0.
+ * @CyAPI.Api.Interface
  */
 public interface Identifiable {
 	

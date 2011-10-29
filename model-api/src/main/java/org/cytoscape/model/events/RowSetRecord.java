@@ -4,7 +4,7 @@ import org.cytoscape.model.CyRow;
 
 /**
  * Holds a record of a {@link CyRow} that was set and what it was set to.
- *
+ * @CyAPI.Final.Class
  */
 public final class RowSetRecord {
 	private final CyRow row;

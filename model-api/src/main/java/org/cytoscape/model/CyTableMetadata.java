@@ -3,6 +3,7 @@ package org.cytoscape.model;
 /**
  * A snapshot of information about a relationship shared between a CyTable
  * instance and an associated CyNetworks.
+ * @CyAPI.Api.Interface
  */
 public interface CyTableMetadata {
 	/**

@@ -43,6 +43,7 @@ import org.cytoscape.model.CyTable;
  * This event signals that a column has been created.
  *<p>
  * This should probably return the type parameter as well. 
+ * @CyAPI.Final.Class
  */
 public final class ColumnCreatedEvent extends AbstractColumnEvent {
 	/**

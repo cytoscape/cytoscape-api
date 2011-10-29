@@ -32,7 +32,9 @@ import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 
 
-/** Used to track setting of nested networks on nodes. */
+/** Used to track setting of nested networks on nodes. 
+ * @CyAPI.Final.Class
+ */
 public final class SetNestedNetworkEvent extends AbstractNestedNetworkEvent {
 	/**
 	 * Constructs event.

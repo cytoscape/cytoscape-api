@@ -46,6 +46,7 @@ import org.cytoscape.model.CyNetwork;
 /**
  * Fired before an edge is actually removed so that listeners
  * have a chance to clean up before the edge object disappears.
+ * @CyAPI.Final.Class
  */
 public final class AboutToRemoveEdgesEvent extends AbstractCyEvent<CyNetwork> {
 	

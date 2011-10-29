@@ -5,7 +5,7 @@ import org.cytoscape.event.CyListener;
 
 /**
  * Listener for {@link NetworkAboutToBeDestroyedEvent}
- *
+ * @CyAPI.Spi.Interface
  */
 public interface NetworkAboutToBeDestroyedListener extends CyListener {
 	/**

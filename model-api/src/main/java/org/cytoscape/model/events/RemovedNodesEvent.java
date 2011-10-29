@@ -44,12 +44,13 @@ import org.cytoscape.model.CyNetwork;
 /**
  * Just a signal in case anyone wants to 
  * resync after a node has been removed.
- * Note that this event also <i>implies</i> a RemovedEdgesEvent
+ * Note that this event also <i>implies</i> a {@link RemovedEdgesEvent}
  * for every edge adjacent to the node in question (because all
  * adjacent edges are removed as a consequence of removing
  * a node) even though the 
  * RemovedEdgesEvent is not actually fired.  If you only care
  * about removing edges, be sure to listen for this event as well!
+ * @CyAPI.Final.Class
  */
 public final class RemovedNodesEvent extends AbstractCyEvent<CyNetwork> {
 	/**

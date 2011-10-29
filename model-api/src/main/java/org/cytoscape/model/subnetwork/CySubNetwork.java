@@ -46,6 +46,7 @@ import org.cytoscape.model.CyEdge;
  * A CySubNetwork is a {@link CyNetwork} that is contained within a parent
  * {@link CyNetwork}.  See the description in {@link CyRootNetwork} for
  * a more complete description of Cytoscape's meta-network model.
+ * @CyAPI.Api.Interface
  */
 public interface CySubNetwork extends CyNetwork {
 	/**

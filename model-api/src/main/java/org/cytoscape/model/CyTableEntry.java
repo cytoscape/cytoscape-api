@@ -32,6 +32,7 @@ package org.cytoscape.model;
  * CyTableEntry is an interface that indicates that the implementing
  * object can be considered a key into a table. In general, table
  * entries will be things like nodes, edges, and networks..
+ * @CyAPI.Api.Interface
  */
 public interface CyTableEntry extends Identifiable {
 	/**

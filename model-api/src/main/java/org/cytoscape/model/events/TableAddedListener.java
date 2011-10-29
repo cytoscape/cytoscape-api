@@ -4,7 +4,7 @@ import org.cytoscape.event.CyListener;
 
 /**
  * Listener for {@link TableAddedEvent}.
- * 
+ * @CyAPI.Spi.Interface
  */
 public interface TableAddedListener extends CyListener {
 	/**

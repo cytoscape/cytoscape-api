@@ -41,6 +41,7 @@ import org.cytoscape.event.CyListener;
 
 /**
  * Listener for ColumnCreatedEvents.
+ * @CyAPI.Spi.Interface
  */
 public interface ColumnCreatedListener extends CyListener {
 	/**

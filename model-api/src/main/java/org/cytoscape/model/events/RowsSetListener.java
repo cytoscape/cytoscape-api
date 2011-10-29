@@ -4,7 +4,7 @@ import org.cytoscape.event.CyListener;
 
 /**
  * Listener for {@link RowsSetEvent}
- *
+ * @CyAPI.Spi.Interface
  */
 public interface RowsSetListener extends CyListener {
 	/**

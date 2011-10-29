@@ -35,6 +35,7 @@ import org.cytoscape.model.events.UnsetNestedNetworkEvent;
 /**
  * An object that represents a node (vertex) within a network 
  * of nodes and edges.
+ * @CyAPI.Api.Interface
  */
 public interface CyNode extends CyTableEntry {
 	

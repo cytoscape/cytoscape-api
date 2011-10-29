@@ -32,7 +32,8 @@ import org.cytoscape.event.CyListener;
 
 
 /**
- * Listener for ColumnNameChangedEvents.
+ * Listener for {@link ColumnNameChangedEvent}s.
+ * @CyAPI.Spi.Interface
  */
 public interface ColumnNameChangedListener extends CyListener {
 	/**

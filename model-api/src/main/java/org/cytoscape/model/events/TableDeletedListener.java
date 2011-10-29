@@ -6,7 +6,7 @@ import org.cytoscape.event.CyListener;
 
 /**
  * Listener for {@link TableDeletedEvent}
- *
+ * @CyAPI.Spi.Interface
  */
 public interface TableDeletedListener extends CyListener {
 	/**

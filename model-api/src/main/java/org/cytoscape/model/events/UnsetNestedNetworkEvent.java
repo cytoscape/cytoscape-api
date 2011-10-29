@@ -32,7 +32,9 @@ import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 
 
-/** Used to track removing of nested networks from nodes. */
+/** Used to track removing of nested networks from nodes. 
+ * @CyAPI.Final.Class
+ */
 public final class UnsetNestedNetworkEvent extends AbstractNestedNetworkEvent {
 	/**
 	 * Constructs event.

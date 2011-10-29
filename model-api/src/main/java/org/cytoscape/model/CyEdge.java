@@ -39,6 +39,7 @@ package org.cytoscape.model;
 /**
  * An object that represents an edge within a network of nodes (vertices)
  * and edges.
+ * @CyAPI.Api.Interface
  */
 public interface CyEdge extends CyTableEntry {
 

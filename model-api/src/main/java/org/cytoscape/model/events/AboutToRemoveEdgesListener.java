@@ -41,6 +41,7 @@ import org.cytoscape.event.CyListener;
 
 /**
  * Listener for AboutToRemoveEdgeEvents.
+ * @CyAPI.Spi.Interface
  */
 public interface AboutToRemoveEdgesListener extends CyListener {
 	/**

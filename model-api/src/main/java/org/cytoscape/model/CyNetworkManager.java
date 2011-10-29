@@ -37,6 +37,7 @@ import org.cytoscape.model.CyNetwork;
 
 /**
  * Basic access to networks and view in an instance of Cytoscape.
+ * @CyAPI.Api.Interface
  */
 public interface CyNetworkManager {
 	/**
@@ -61,7 +62,7 @@ public interface CyNetworkManager {
 	 * 
 	 * @param network_id  possibly the ID of a network
 	 * 
-	 * @return true if "network_id" does correspond to a network knwon to the network manager, else false
+	 * @return true if "network_id" does correspond to a network known to the network manager, else false
 	 */
 	public boolean networkExists(long network_id);
 

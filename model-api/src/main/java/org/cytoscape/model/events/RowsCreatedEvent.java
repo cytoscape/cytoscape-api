@@ -7,7 +7,7 @@ import org.cytoscape.model.CyTable;
 
 /**
  * This event signals that rows have been created.
- *
+ * @CyAPI.Final.Class   #ASKMIKE : This class isn't declared as final.
  */
 public class RowsCreatedEvent extends AbstractCyPayloadEvent<CyTable, Object> {
 

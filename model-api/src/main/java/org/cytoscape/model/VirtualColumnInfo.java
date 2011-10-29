@@ -3,7 +3,7 @@ package org.cytoscape.model;
 /**
  * Information object for columns that stores extra Virtual Column information
  * if applicable.
- *
+ * @CyAPI.Api.Interface
  */
 public interface VirtualColumnInfo {
 	/**

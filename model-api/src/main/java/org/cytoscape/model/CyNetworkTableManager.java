@@ -4,6 +4,7 @@ import java.util.Map;
 
 /**
  * Provides access to all network-table relationships.
+ * @CyAPI.Api.Interface
  */
 public interface CyNetworkTableManager {
 	/**

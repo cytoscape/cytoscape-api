@@ -32,6 +32,7 @@ package org.cytoscape.model;
  * An interface describing a factory used for creating 
  * {@link CyTable} objects.  This factory will be
  * provided as a service through Spring/OSGi.
+ * @CyAPI.Api.Interface
  */
 public interface CyTableFactory {
 	/**

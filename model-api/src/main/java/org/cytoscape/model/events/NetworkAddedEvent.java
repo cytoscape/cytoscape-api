@@ -7,6 +7,7 @@ import org.cytoscape.model.CyNetwork;
 
 /**
  * This event signals that a network has been added.
+ * @CyAPI.Final.Class
  */
 public final class NetworkAddedEvent extends AbstractNetworkEvent {
 	/**

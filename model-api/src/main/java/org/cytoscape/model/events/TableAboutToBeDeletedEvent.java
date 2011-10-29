@@ -33,11 +33,14 @@ import org.cytoscape.model.CyTable;
 import org.cytoscape.model.CyTableManager;
 
 
-/** This event signals that a table is about to be deleted. */
+/** This event signals that a table is about to be deleted. 
+ * @CyAPI.Final.Class
+ */
 public final class TableAboutToBeDeletedEvent extends AbstractCyEvent<CyTableManager> {
 	private final CyTable table;
 	
 	/**
+	 * Constructs the event.
 	 * @param source  the table manager
 	 * @param table   the table in which is about to be deleted from the table manager
 	 */
@@ -48,7 +51,7 @@ public final class TableAboutToBeDeletedEvent extends AbstractCyEvent<CyTableMan
 
 
 	/**
-	 * Retursn the table that is about to be delegted from the table manager.
+	 * Returns the table that is about to be deleted from the table manager.
 	 * @return the table that is about to be deleted from the table manager.
 	 */
 	public final CyTable getTable() {

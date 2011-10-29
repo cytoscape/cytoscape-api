@@ -44,6 +44,7 @@ import org.cytoscape.model.CyTable;
 // that it is clear when it should be fired.
 /**
  * This event signals that a column has been deleted.
+ * @CyAPI.Final.Class
  */
 public final class ColumnDeletedEvent extends AbstractColumnEvent {
 	/**

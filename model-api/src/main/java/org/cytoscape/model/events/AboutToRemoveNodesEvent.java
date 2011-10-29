@@ -52,6 +52,7 @@ import org.cytoscape.model.CyNode;
  * a node), even though the
  * AboutToRemoveEdgesEvent is not actually fired.  If you only care
  * about removing edges, be sure to listen for this event as well!
+ * @CyAPI.Final.Class
  */
 public final class AboutToRemoveNodesEvent extends AbstractCyEvent<CyNetwork> {
 	

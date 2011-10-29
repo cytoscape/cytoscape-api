@@ -31,7 +31,9 @@ package org.cytoscape.model;
 import java.util.List;
 
 
-/** This class describes a column in a CyTable. */
+/** This class describes a column in a CyTable. 
+ * @CyAPI.Api.Interface
+ */
 public interface CyColumn {
 	/** 
 	 * Returns the name of the column.

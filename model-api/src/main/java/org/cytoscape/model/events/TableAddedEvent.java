@@ -6,7 +6,7 @@ import org.cytoscape.model.CyTableManager;
 
 /**
  * This event will be fired when new table is added to {@link CyTableManager}.
- *
+ * @CyAPI.Final.Class
  */
 public final class TableAddedEvent extends AbstractCyEvent<CyTableManager> {
 	

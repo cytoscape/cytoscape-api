@@ -34,6 +34,7 @@ import java.util.Set;
 /** 
  * A singleton object that provides access to the available
  * tables in the system. Should be provided as an OSGi service.
+ * @CyAPI.Api.Interface
  */
 public interface CyTableManager {
 	/**

@@ -38,6 +38,7 @@ package org.cytoscape.model;
 
 /**
  * This singleton class returns unique, positive SUID (session unique ID) values. 
+ * @CyAPI.Static.Class
  */
 public abstract class SUIDFactory {
 

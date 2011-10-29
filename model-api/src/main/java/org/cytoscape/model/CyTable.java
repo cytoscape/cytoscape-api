@@ -39,6 +39,7 @@ import java.util.List;
  * types of data that may be stored.  The allowable types are:
  * String, Integer, Long, Double, Boolean, and Lists of those five
  * types.
+ * @CyAPI.Api.Interface
  */
 public interface CyTable extends Identifiable {
 	/**

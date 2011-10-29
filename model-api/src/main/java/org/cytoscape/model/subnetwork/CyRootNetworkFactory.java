@@ -41,6 +41,7 @@ import org.cytoscape.model.CyNetwork;
 /**
  * A singleton object that provides access to the CyRootNetwork
  * objects associated with CyNetwork objects.
+ * @CyAPI.Api.Interface
  */
 public interface CyRootNetworkFactory {
 

@@ -41,6 +41,7 @@ import org.cytoscape.event.CyListener;
 
 /**
  * Listener for ColumnDeletedEvents.
+ * @CyAPI.Spi.Interface
  */
 public interface ColumnDeletedListener extends CyListener {
 	/**
