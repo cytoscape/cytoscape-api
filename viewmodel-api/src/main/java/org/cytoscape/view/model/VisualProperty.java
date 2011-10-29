@@ -41,7 +41,8 @@ package org.cytoscape.view.model;
  * 
  * Visual Property itself does NOT have any hierarchy/dependency.  It will be implemented in VisualLexicon.
  * 
- * @param <T> the dataType of the VisualProperty, ie. what kind of objects are the values
+ * @param <T> the dataType of the VisualProperty, i.e. what kind of objects are the values
+ * @CyAPI.Api.Interface
  */
 public interface VisualProperty<T> {
 	
@@ -60,7 +61,7 @@ public interface VisualProperty<T> {
 
 	
 	/**
-	 * A short string used to identify this visual property and suitable for
+	 * Returns a short string used to identify this visual property and suitable for
 	 * serializing to XML and other text formats.
 	 * @return A short string used to identify this visual property and suitable for serialization.
 	 */
@@ -68,7 +69,7 @@ public interface VisualProperty<T> {
 
 	
 	/**
-	 * A short string suitable for presentation to humans.  Should not be used
+	 * Returns a short string suitable for presentation to humans.  Should not be used
 	 * for serialization.
 	 * @return  A short string suitable for presentation to humans.
 	 */

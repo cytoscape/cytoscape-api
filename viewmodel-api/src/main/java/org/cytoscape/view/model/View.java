@@ -66,7 +66,7 @@ public interface View<S> extends Identifiable {
 	 * 
 	 * @param <T> Object type of the Visual Property (Color, Double, ...)
 	 * 
-	 * @param vp the VisualProperty
+	 * @param vp the VisualProperty.
 	 * @return Value associated with this View and Visual Property pair.
 	 */
 	<T> T getVisualProperty(VisualProperty<T> vp);
@@ -83,8 +83,9 @@ public interface View<S> extends Identifiable {
 
 	
 	/**
+	 * Returns true if current VisualProperty value is locked.
 	 * @param vp the VisualProperty
-	 * @return true if current VisualProperty value is locked
+	 * @return true if current VisualProperty value is locked.
 	 */
 	boolean isValueLocked(VisualProperty<?> vp);
 
@@ -92,7 +93,7 @@ public interface View<S> extends Identifiable {
 	/**
 	 * Clear value lock for given VisualProperty.
 	 *
-	 * @param vp the VisualProperty
+	 * @param vp the VisualProperty.
 	 */
 	void clearValueLock(VisualProperty<?> vp);
 

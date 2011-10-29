@@ -1,5 +1,10 @@
 package org.cytoscape.view.model;
 
+/**
+ * Defines a continuous range of values for {@link VisualProperty}s.
+ *
+ * @param <T> The generic type of this ContinuousRange.
+ */
 public class ContinuousRange<T> implements Range<T> {
 
 	private final Class<T> type;
@@ -11,6 +16,14 @@ public class ContinuousRange<T> implements Range<T> {
 	private final Boolean includeMax;
 	
 
+	/**
+	 * Constructs this ContinuousRange.
+	 * @param type the type of this ContinuousRange.
+	 * @param min the minimum value of this range.
+	 * @param max the maximum value of this range.
+	 * @param includeMin Whether or not to include the minimum in the range.
+	 * @param includeMax Whether or not to include the maximum in the range.
+	 */
 	public ContinuousRange(final Class<T> type, final T min, final T max, final Boolean includeMin, final Boolean includeMax) {
 		this.type = type;
 		this.min = min;
@@ -29,21 +42,34 @@ public class ContinuousRange<T> implements Range<T> {
 		return false;
 	}
 
+	/**
+	 * Returns the minimum value of this range.
+	 * @return the minimum value of this range.
+	 */
 	public T getMin() {
 		return min;
 	}
 
-	
+	/**
+	 * Returns the maximum value of this range.
+	 * @return the maximum value of this range.
+	 */
 	public T getMax() {
 		return max;
 	}
 
-	
+	/**
+	 * Returns true if the minimum value is included in this range.
+	 * @return true if the minimum value is included in this range.
+	 */
 	public boolean includeMin() {
 		return includeMin;
 	}
 
-	
+	/**
+	 * Returns true if the maximum value is included in this range.
+	 * @return true if the maximum value is included in this range.
+	 */
 	public boolean includeMax() {
 		return includeMax;
 	}

@@ -44,18 +44,17 @@ import org.cytoscape.model.CyTableEntry;
 /**
  * 
  * Additional methods for CyNetworkView. Network view should implement BOTH View
- * and CyNetworkView.
+ * and CyNetworkView. #ASKMIKE
  * 
  * Consolidated data structure for graph object views.
- * 
+ * @CyAPI.Api.Interface
  */
 public interface CyNetworkView extends View<CyNetwork> {
 
 	/**
 	 * Returns a View for a specified Node.
 	 * 
-	 * @param node
-	 *            Node object
+	 * @param node Node object
 	 * 
 	 * @return View for the given node object.
 	 */

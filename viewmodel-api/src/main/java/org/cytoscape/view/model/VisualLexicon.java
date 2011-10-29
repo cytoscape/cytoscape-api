@@ -93,8 +93,7 @@ public interface VisualLexicon {
 	/**
 	 * Get collection of visual properties for a given object type (node/edge/network).
 	 * 
-	 * @param prop
-	 *            any visual property
+	 * @param prop any visual property
 	 * 
 	 * @return Collection of visual properties for the type.
 	 */

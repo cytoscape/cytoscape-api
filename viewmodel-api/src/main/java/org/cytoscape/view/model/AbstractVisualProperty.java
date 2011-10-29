@@ -39,7 +39,7 @@ package org.cytoscape.view.model;
  * An abstract implementation of VisualProperty that omits the methods dealing
  * with serializing data.
  * @param <T> the generic type for this AbstractVisualProperty.
- * 
+ * @CyAPI.Abstract.Class
  */
 public abstract class AbstractVisualProperty<T> implements VisualProperty<T> {
 

@@ -40,7 +40,7 @@ import org.cytoscape.view.model.CyNetworkView;
  */
 public interface CyNetworkViewManager {
 	/**
-	 * Provides the set of network views that are currently known to the network mananger.
+	 * Provides the set of network views that are currently known to the network manager.
 	 * 
 	 * @return the set of all network views maintained by the network view manager
 	 */
@@ -49,7 +49,7 @@ public interface CyNetworkViewManager {
 	/**
 	 * Returns the network view corresponding to an ID, if found.
 	 * 
-	 * @param network_id  a unquite ID that hopefully corresponds to a network view
+	 * @param network_id  a unique ID that hopefully corresponds to a network view.
 	 * 
 	 * @return null if no network view was found corresponding to "network_id", else the network view
 	 */
@@ -72,7 +72,7 @@ public interface CyNetworkViewManager {
 	public void destroyNetworkView(CyNetworkView view);
 
 	/**
-	 * Registers a network view with the network view mananger.
+	 * Registers a network view with the network view manager.
 	 * 
 	 * @param view  a non-null network view
 	 */

@@ -10,7 +10,7 @@ import java.util.HashSet;
  * <p>
  * All data fields are immutable. 
  * 
- *
+ * @CyAPI.Final.Class
  */
 public final class VisualLexiconNode {
 	
@@ -21,6 +21,11 @@ public final class VisualLexiconNode {
 	
 	private boolean isDepend;
 	
+	/**
+	 * Constructs this VisualLexiconNode.
+	 * @param vp the {@link VisualProperty} to wrap.
+	 * @param parent this VisualLexiconNodes parent VisualLexiconNode.
+	 */
 	public VisualLexiconNode(final VisualProperty<?> vp, final VisualLexiconNode parent) {
 		if(vp == null)
 			throw new NullPointerException("Visual Property cannot be null.");
@@ -36,10 +41,18 @@ public final class VisualLexiconNode {
 	}
 	
 	
+	/**
+	 * Sets the dependency of this VisualLexiconNode.
+	 * @param depend True to make this VisualLexiconNode dependent on its parent, false otherwise.
+	 */
 	public void setDependency(boolean depend) {
 		this.isDepend = depend;
 	}
 	
+	/**
+	 * Returns true if this VisualLexiconNode is dependent on its parent.
+	 * @return true if this VisualLexiconNode is dependent on its parent.
+	 */
 	public boolean isDepend() {
 		return isDepend;
 	}
@@ -70,7 +83,7 @@ public final class VisualLexiconNode {
 	/**
 	 * Returns collection of all children of this node.
 	 * 
-	 * @return collection of all children
+	 * @return collection of all children of this node.
 	 */
 	public Collection<VisualLexiconNode> getChildren() {
 		return children;
