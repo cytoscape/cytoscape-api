@@ -22,7 +22,7 @@ import org.cytoscape.service.util.internal.RegisterUtil;
  *
  * Users should extend this class and at implement the start(BundleContext bc)
  * method.  
- * 
+ * @CyAPI.Abstract.Class
  */
 public abstract class AbstractCyActivator implements BundleActivator {
 

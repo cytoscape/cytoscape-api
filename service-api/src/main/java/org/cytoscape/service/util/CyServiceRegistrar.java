@@ -8,6 +8,7 @@ import java.util.Dictionary;
  * services dynamically at runtime.  You should only use this interface
  * if you need to register services while running based on data not 
  * available at startup. 
+ * @CyAPI.Api.Interface #ASKMIKE
  */
 public interface CyServiceRegistrar {
 
@@ -41,7 +42,7 @@ public interface CyServiceRegistrar {
 	/**
 	 * This method unregisters an object as all OSGi service
 	 * interfaces that the object implements.
-	 * @param o The object to be unregistered for services it provids.
+	 * @param o The object to be unregistered for services it provides.
 	 */
 	void unregisterAllServices(Object o);
 }
