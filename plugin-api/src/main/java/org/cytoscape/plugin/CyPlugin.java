@@ -11,7 +11,7 @@ package org.cytoscape.plugin;
  * To load alternative versions of the same library used by other plugins or 
  * Cytoscape itself, it will be necessary to write your plugin using OSGi
  * and Spring.
- * CyAPI.Abstract.Class
+ * @CyAPI.Abstract.Class
  */
 public abstract class CyPlugin {
 
