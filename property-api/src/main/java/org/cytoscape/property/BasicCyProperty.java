@@ -7,6 +7,7 @@ import java.util.Properties;
 /**
  * A simple implementation of CyProperty&lt;Properties&gt; suitable for 
  * general purpose use. 
+ * @CyAPI.Final.Class
  */
 public final class BasicCyProperty implements CyProperty<Properties> {
 	

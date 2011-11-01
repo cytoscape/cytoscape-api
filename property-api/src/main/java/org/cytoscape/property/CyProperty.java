@@ -13,10 +13,13 @@ package org.cytoscape.property;
  * {@link org.cytoscape.property.bookmark.Bookmarks}, or
  * {@link org.cytoscape.property.session.Cysession}, although it is possible for 
  * property objects of other types to be registered in this way as well.
+ * @CyAPI.Api.Interface #ASKMIKE
  */
 public interface CyProperty<P> {
 
-	/** SavePolicy specifies how the CyProperty will be saved, or if it will not be saved. */
+	/** SavePolicy specifies how the CyProperty will be saved, or if it will not be saved. 
+	 * @CyAPI.Enum.Class
+	 */
 	enum SavePolicy {
 		/** These properties are preset by Cytoscape to some default value and
 		 *  are never written out. */

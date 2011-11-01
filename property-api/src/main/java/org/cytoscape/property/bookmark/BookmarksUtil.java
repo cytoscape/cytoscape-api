@@ -2,7 +2,8 @@ package org.cytoscape.property.bookmark;
 
 import java.util.List;
 /**
- * A set of utility methods to manipulate the bookmarks
+ * A set of utility methods to manipulate the bookmarks.
+ * @CyAPI.Api.Interface #ASKMIKE
  */
 public interface BookmarksUtil {
 
@@ -46,7 +47,7 @@ public interface BookmarksUtil {
 			DataSource pDataSource);
 
 	/**
-	 * Delete a bookmark (pDataSource) from the categoty (pCategoryName) in the bookmarks object (pBookmarks)
+	 * Delete a bookmark (pDataSource) from the category (pCategoryName) in the bookmarks object (pBookmarks)
 	 * 
 	 * @param pBookmarks Bookmark object, which hold a set of bookmark
 	 *  
