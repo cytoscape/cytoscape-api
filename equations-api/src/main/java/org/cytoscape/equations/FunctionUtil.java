@@ -45,6 +45,7 @@ import javax.management.relation.RoleUnresolvedList;
 
 /**
  *  A collection of static methods that may be useful for the implementation of built-in functions.
+ *  @CyAPI.Static.Class
  */
 public final class FunctionUtil {
 	private FunctionUtil() { } // Exists to prevent creating instances of this class!
@@ -431,6 +432,7 @@ public final class FunctionUtil {
 	}
 
 	/**
+	 *  Returns "arg" converted to a Double, if possible, else null
 	 *  @return "arg" converted to a Double, if possible, else null
 	 */
 	static private Double convertToDouble(final Object arg) {
@@ -454,7 +456,8 @@ public final class FunctionUtil {
 	}
 
 	/**
-	 *  @return "arg" converted to a Long, if possible, else null
+	 * Returns "arg" converted to a Long, if possible, else null.
+	 *  @return "arg" converted to a Long, if possible, else null.
 	 */
 	static private Long convertToLong(final Object arg) {
 		if (arg.getClass() == Double.class)

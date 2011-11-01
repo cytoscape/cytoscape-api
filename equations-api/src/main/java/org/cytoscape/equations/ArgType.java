@@ -36,6 +36,7 @@ import java.util.ArrayList;
 
 /**
  *  An enum specifying a function argument type.
+ *  @CyAPI.Enum.Class
  */
 public enum ArgType {
 	//                 opt.  mult.args.                          compatible arg. types
@@ -135,8 +136,10 @@ public enum ArgType {
 		this.acceptsMultipleArgs = acceptsMultipleArgs;
 		this.compatibleTypes = compatibleTypes;
 	}
-
+	/** #ASKMIKE */
 	public boolean isOptional() { return isOptional; }
+	/** #ASKMIKE */
 	public boolean acceptsMultipleArgs() { return acceptsMultipleArgs; }
+	/** #ASKMIKE */
 	public Class[] getCompatibleTypes() { return compatibleTypes; }
 }

@@ -29,7 +29,10 @@
 */
 package org.cytoscape.equations;
 
-
+/**
+ * #ASKMIKE Needs method comments and class description.
+ * @CyAPI.Final.class
+ */
 public final class FunctionError extends Exception {
 	private static final long serialVersionUID = 0xDAEDEBECFAEF2134L;
 	private final int argNumber; // Which argument this error is associated with.

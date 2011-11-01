@@ -34,7 +34,9 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-
+/** #ASKMIKE 
+ * @CyAPI.Final.Class
+ */
 public final class Equation {
 	private final String equation;
 	private final Set<String> variableReferences;

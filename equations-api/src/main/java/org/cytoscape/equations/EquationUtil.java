@@ -30,7 +30,9 @@
 package org.cytoscape.equations;
 
 
-/** Various static utility methods relating to equations. **/
+/** Various static utility methods relating to equations. 
+ * @CyAPI.Static.Class
+ */
 public final class EquationUtil {
 	private EquationUtil() { } // Exists to prevent creating instances of this class!
 
@@ -82,9 +84,10 @@ public final class EquationUtil {
 		return true;
 	}
 
-	/**
+	/** Returns "attribName" with characters that need to be backslash-escaped when written as
+	 *           part of an attribute reference, escaped.
 	 *  @return "attribName" with characters that need to be backslash-escaped when written as
-	 *           part of an attribute refernce, escaped
+	 *           part of an attribute reference, escaped.
 	 */
 	private static String escapeAttribName(final String attribName) {
 		final int length = attribName.length();

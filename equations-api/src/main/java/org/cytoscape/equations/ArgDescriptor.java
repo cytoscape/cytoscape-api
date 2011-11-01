@@ -34,8 +34,9 @@ import java.util.List;
 import java.util.ArrayList;
 
 
-/**
+/** #ASKMIKE Needs method comments.
  *  A class describing a function argument.
+ *  @CyAPI.Final.Class
  */
 public final class ArgDescriptor {
 	private ArgType argType;

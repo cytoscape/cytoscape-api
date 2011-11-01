@@ -33,11 +33,14 @@ package org.cytoscape.equations;
 import java.util.Map;
 
 
-/** Compiler that compiles equations to byte (non-Java) code. */
+/** Compiler that compiles equations to byte (non-Java) code. 
+ * @CyAPI.Api.Interface #ASKMIKE
+ */
 public interface EquationCompiler {
 	/** Compiles a string to byte code plus some metadata as encapsulated by the <code>Equation</code> class
 	 *  @param equation               a textual representation of an equation
 	 *  @param variableNameToTypeMap  a mapping from variable names occurring in "equation" to their respective types
+	 * @return #ASKMIKE
 	 */
 	boolean compile(final String equation, final Map<String, Class<?>> variableNameToTypeMap);
 

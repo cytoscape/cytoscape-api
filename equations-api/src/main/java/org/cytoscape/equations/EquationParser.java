@@ -33,7 +33,9 @@ package org.cytoscape.equations;
 import java.util.Map;
 import java.util.Set;
 
-
+/** #ASKMIKE 
+ * @CyAPI.Api.Interface #ASKMIKE
+ */
 public interface EquationParser {
 	/**
 	 *  After registering an attribute function "func" it can be used in attribute equations.

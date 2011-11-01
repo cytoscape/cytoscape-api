@@ -37,7 +37,9 @@ import java.util.Set;
 import java.util.TreeSet;
 
 
-/** Base class for all {@link Function} implementations. */
+/** Base class for all {@link Function} implementations. 
+ * @CyAPI.Abstract.Class
+ */
 public abstract class AbstractFunction implements Function {
 	final private ArgDescriptor[] argDescriptors;
 
@@ -119,6 +121,7 @@ public abstract class AbstractFunction implements Function {
 	}
 
 	/**
+	 * Returns the static return type of this function.
 	 *  @return the static return type of this function, Object.class, Double.cLass, String.class, or Boolean.class.
 	 *           If the static return type is Object.class, the dynamic return type will be one of Double.cLass, String.class, or Boolean.class
 	 *           and will depend on the arguments passed to the function!
@@ -129,6 +132,7 @@ public abstract class AbstractFunction implements Function {
 	public abstract Class getReturnType();
 
 	/**
+	 * Returns true of false if the args passed in had arity of a type mismatch.
 	 *  @param argTypes the args to check for wrong arity or a type mismatch.
 	 * @return true or false if the args passed in had the wrong arity or a type mismatch
 	 *
@@ -164,6 +168,7 @@ public abstract class AbstractFunction implements Function {
 	}
 
 	/**
+	 * Returns the return type of this function.
 	 *  @return the return type for this function (Double.class, String.class, or Boolean.class)
 	 *           or null if the args passed in had the wrong arity or a type mismatch
 	 *

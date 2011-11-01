@@ -35,6 +35,7 @@ import java.util.Stack;
 
 /**
  *  A node in the parse tree.
+ *  @CyAPI.Abstract.Class
  */
 public abstract class Node {
 	private final int sourceLocation; // What location the "source code" is this associated with.

@@ -34,12 +34,13 @@ import java.util.List;
 
 
 /** Used to hold a current value for an equation's variable reference.
+ * @CyAPI.Api.Interface #ASKMIKE
  */
 public class IdentDescriptor {
 	private final Class type;
 	private final Object value;
 
-	/** Initialises a new <code>IdentDescriptor</code> and provides minimal type translation
+	/** Initializes a new <code>IdentDescriptor</code> and provides minimal type translation
 	 *  (from <code>Integer</code> to <code>Long</code>).
 	 *  @param o  an object that represents a value for a variable reference
 	 *  @throws NullPointerException  if "o" is null

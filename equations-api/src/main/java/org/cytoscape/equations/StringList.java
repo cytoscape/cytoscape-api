@@ -32,7 +32,10 @@ package org.cytoscape.equations;
 
 import java.util.ArrayList;
 
-
+/**
+ * #ASKMIKE
+ * @CyAPI.Final.Class
+ */
 public final class StringList extends ArrayList<String> {
 	public static final long serialVersionUID = -4245160342069182L;
 

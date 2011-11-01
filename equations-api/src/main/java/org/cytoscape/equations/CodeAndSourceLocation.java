@@ -32,6 +32,7 @@ package org.cytoscape.equations;
 
 /**
  *  Encapsulates compiled code with the location in the original source equation.
+ *  @CyAPI.Final.Class
  */
 public final class CodeAndSourceLocation {
 	private final Object code;
