@@ -41,6 +41,7 @@ package org.cytoscape.application;
  * A service that will shutdown Cytoscape cleanly. Will fire a 
  * CytoscapeShutdownEvent such that all CytoscapeShutdownListener will be
  * notified before actually shutting down.
+ * @CyAPI.Api.Interface
  */
 public interface CytoscapeShutdown {
 	/**

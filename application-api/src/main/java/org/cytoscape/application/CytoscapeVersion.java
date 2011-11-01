@@ -41,6 +41,7 @@ package org.cytoscape.application;
  * version of the Cytoscape application. Cytoscape strives to follow
  * the <a href="http://semver.org">Semantic Versioning</a> standard
  * to ensure comprehensible backwards compatibility versioning. 
+ * @CyAPI.Api.Interface
  */
 public interface CytoscapeVersion {
 

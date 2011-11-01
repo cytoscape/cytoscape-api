@@ -4,11 +4,11 @@ import java.io.File;
 
 /**
  * Application-wide setting will be accessible through this interface.
- *
+ * @CyAPI.Api.Interface
  */
 public interface CyApplicationConfiguration {
 	
-	/** Default configuration directory used for all Cytoscape confiuration files */
+	/** Default configuration directory used for all Cytoscape configuration files */
 	public static final String DEFAULT_CONFIG_DIR = ".cytoscape";
 
 	/**
