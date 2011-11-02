@@ -80,6 +80,14 @@ public class TaskIteratorTest {
 		// This should blow up!
 		iter.next();
 	}
+
+	@Test
+	public final void testNumTasks() throws Exception {
+		final Task initialTask = new SimpleTask(1);
+		final Task initialTask2 = new SimpleTask(2);
+		final TaskIterator iter = new TaskIterator(initialTask, initialTask2);
+		assertEquals(2,iter.getNumTasks());
+	}
 }
 
 

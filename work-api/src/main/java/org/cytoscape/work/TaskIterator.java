@@ -14,19 +14,32 @@ import java.util.NoSuchElementException;
 public final class TaskIterator implements Iterator<Task> {
 	private final List<Task> tasks;
 	private int currentIndex;
+	private int numTasks;
 
-	/** Constructs an iterator that will yield Tasks in the order that they were passed into
-	 *  this constructor.
+	/** 
+	 * Constructs an iterator that will yield Tasks in the order that they were passed into
+	 * this constructor. 
+	 * @param expectedNumTasks The total number of tasks that the initialTasks are likely to spawn. 
 	 * @param initialTasks the Tasks to place into the iterator.
 	 */
-	public TaskIterator(final Task... initialTasks) {
+	public TaskIterator(int expectedNumTasks, final Task... initialTasks) {
 		this.tasks = new ArrayList<Task>(initialTasks.length);
 		this.currentIndex = 0;
+		this.numTasks = expectedNumTasks;
 
 		for (final Task initialTask : initialTasks) {
 			tryToAddSelfReferenceToTask(initialTask);
 			tasks.add(initialTask);
 		}
+	}
+
+	/** 
+	 * Constructs an iterator that will yield Tasks in the order that they were passed into
+	 * this constructor.
+	 * @param initialTasks the Tasks to place into the iterator.
+	 */
+	public TaskIterator(final Task... initialTasks) {
+		this(initialTasks.length,initialTasks);
 	}
 
 	/** Inserts "newTasks" immediately after "referenceTask".
@@ -38,6 +51,9 @@ public final class TaskIterator implements Iterator<Task> {
 		final int referenceIndex = tasks.indexOf(referenceTask);
 		if (referenceIndex == -1)
 			throw new IllegalStateException("invalid reference task in call to insertTaskAfter()!");
+
+		numTasks += newTasks.length;
+
 		int offset = 0;
 		for (final Task newTask : newTasks) {
 			tryToAddSelfReferenceToTask(newTask);
@@ -55,6 +71,9 @@ public final class TaskIterator implements Iterator<Task> {
 		final int referenceIndex = tasks.indexOf(referenceTask);
 		if (referenceIndex == -1)
 			throw new IllegalStateException("invalid reference task in call to insertTaskAfter()!");
+
+		numTasks += newTasks.getNumTasks();
+
 		int offset = 0;
 		while (newTasks.hasNext()) {
 			final Task newTask = newTasks.next();
@@ -100,6 +119,17 @@ public final class TaskIterator implements Iterator<Task> {
 				// The above cast must always succeed and therefore we should never get here!
 			}
 		}
+	}
+
+	/**
+	 * Returns the current total number of tasks in the iterator. As tasks
+	 * get added to the iterator, this number will change, so this should
+	 * not be viewed as a fixed or final value!
+	 * 
+	 * @return the current total number of tasks in the iterator. 
+	 */
+	public int getNumTasks() {
+		return numTasks;
 	}
 }
 
