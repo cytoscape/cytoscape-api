@@ -2,9 +2,9 @@ package org.cytoscape.view.presentation.property.values;
 
 import org.cytoscape.view.presentation.property.VisualPropertyValue;
 
-/** 
- * Marker interface representing line type of edge/node border.
+
+/**
+ * Marker interface representing edge end shape (arrow).
  *
  */
-public interface LineType extends VisualPropertyValue {
-}
+public interface ArrowShape extends VisualPropertyValue {}

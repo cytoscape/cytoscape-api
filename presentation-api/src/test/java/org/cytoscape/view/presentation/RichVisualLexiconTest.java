@@ -31,7 +31,7 @@ public class RichVisualLexiconTest extends AbstractVisualLexiconTest {
 
 	@Test
 	public void test2DLexicon() throws Exception {
-		assertEquals(51, richLex.getAllVisualProperties().size());
+		assertEquals(53, richLex.getAllVisualProperties().size());
 	}
 
 	@Test

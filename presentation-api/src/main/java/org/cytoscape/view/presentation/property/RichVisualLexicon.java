@@ -10,6 +10,7 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.ContinuousRange;
 import org.cytoscape.view.model.NullDataType;
 import org.cytoscape.view.model.VisualProperty;
+import org.cytoscape.view.presentation.property.values.ArrowShape;
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 
@@ -101,6 +102,10 @@ public class RichVisualLexicon extends MinimalVisualLexicon {
 	public static final VisualProperty<Integer> EDGE_TRANSPARENCY = new IntegerVisualProperty(200,
 			new ContinuousRange<Integer>(Integer.class, 0, 255, true, true), "EDGE_TRANSPARENCY", "Edge Transparency", CyEdge.class);
 	
+	public static final VisualProperty<ArrowShape> EDGE_SOURCE_ARROW_SHAPE = new ArrowShapeVisualProperty(
+			ArrowShapeVisualProperty.NONE, "EDGE_SOURCE_ARROW_SHAPE", "Edge Source Arrow Shape", CyEdge.class);
+	public static final VisualProperty<ArrowShape> EDGE_TARGET_ARROW_SHAPE = new ArrowShapeVisualProperty(
+			ArrowShapeVisualProperty.NONE, "EDGE_TARGET_ARROW_SHAPE", "Edge Target Arrow Shape", CyEdge.class);
 
 	/**
 	 * Construct a {@linkplain org.cytoscape.view.model.VisualLexicon} for 3D rendering engine.
@@ -144,6 +149,10 @@ public class RichVisualLexicon extends MinimalVisualLexicon {
 		
 		addVisualProperty(EDGE_TRANSPARENCY, EDGE);
 		
+		addVisualProperty(EDGE_SOURCE_ARROW_SHAPE, EDGE);
+		addVisualProperty(EDGE_TARGET_ARROW_SHAPE, EDGE);
+		
+		
 		createLookupMap();
 	}
 	
@@ -182,6 +191,11 @@ public class RichVisualLexicon extends MinimalVisualLexicon {
 		addIdentifierMapping(CyEdge.class, "edgeFontSize", EDGE_LABEL_FONT_SIZE);
 		
 		addIdentifierMapping(CyEdge.class, "edgeTransparency", EDGE_TRANSPARENCY);
+		
+		addIdentifierMapping(CyEdge.class, "sourceArrow", EDGE_SOURCE_ARROW_SHAPE);
+		addIdentifierMapping(CyEdge.class, "targetArrow", EDGE_TARGET_ARROW_SHAPE);
+		addIdentifierMapping(CyEdge.class, "edgeSourceArrowShape", EDGE_SOURCE_ARROW_SHAPE);
+		addIdentifierMapping(CyEdge.class, "edgeTargetArrowShape", EDGE_TARGET_ARROW_SHAPE);
 
 		// TODO add more!
 	}
