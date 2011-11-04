@@ -46,6 +46,7 @@ import org.cytoscape.work.ProvidesGUI;
 /**
  * Abstract class for all web service clients.
  * All clients MUST extend this class.
+ * @CyAPI.Abstract.Class
  */
 public abstract class AbstractWebServiceClient implements WebServiceClient {
 
@@ -62,6 +63,10 @@ public abstract class AbstractWebServiceClient implements WebServiceClient {
 	protected Object currentQuery = null;
 
 
+	/**
+	 * Constructs this AbstractWebServiceClient.
+	 * @param uri Service Location.
+	 */
 	public AbstractWebServiceClient(final String uri, final String displayName, final String description) {
 		
 		// Create URI

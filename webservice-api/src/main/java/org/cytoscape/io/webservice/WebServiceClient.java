@@ -45,7 +45,7 @@ import org.cytoscape.work.TaskFactory;
  * 
  * All web service clients <strong>must</strong> implement this method.
  * 
- * 
+ * @CyAPI.Spi.Interface
  */
 public interface WebServiceClient extends TaskFactory {
 	
