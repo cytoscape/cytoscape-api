@@ -3,7 +3,7 @@ package org.cytoscape.property.bookmark;
 import java.util.List;
 /**
  * A set of utility methods to manipulate the bookmarks.
- * @CyAPI.Api.Interface #ASKMIKE
+ * @CyAPI.Api.Interface
  */
 public interface BookmarksUtil {
 

@@ -13,7 +13,7 @@ package org.cytoscape.property;
  * {@link org.cytoscape.property.bookmark.Bookmarks}, or
  * {@link org.cytoscape.property.session.Cysession}, although it is possible for 
  * property objects of other types to be registered in this way as well.
- * @CyAPI.Api.Interface #ASKMIKE
+ * @CyAPI.Spi.Interface
  */
 public interface CyProperty<P> {
 
