@@ -8,7 +8,7 @@ import java.util.Dictionary;
  * services dynamically at runtime.  You should only use this interface
  * if you need to register services while running based on data not 
  * available at startup. 
- * @CyAPI.Api.Interface #ASKMIKE
+ * @CyAPI.Api.Interface
  */
 public interface CyServiceRegistrar {
 
