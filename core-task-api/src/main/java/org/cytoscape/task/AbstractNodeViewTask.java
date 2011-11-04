@@ -35,16 +35,17 @@ import org.cytoscape.work.AbstractTask;
 
 
 /** The base class for all tasks that need to operate on a node view and possibly its associated network view.
+ * @CyAPI.Abstract.Class
  */
 public abstract class AbstractNodeViewTask extends AbstractTask {
-	/** The node view that descendents of this class will operate on. */
+	/** The node view that descendants of this class will operate on. */
 	final protected View<CyNode> nodeView;
 
-	/** The network view that descendents of this class will operate on. */
+	/** The network view that descendants of this class will operate on. */
 	final protected CyNetworkView netView;
 
 	/** Base class constructor for all tasks that need to operate on a node view and possibly its associated network view.
-	 *  @param nodeView  a non-null node view that descendents of this class will operate on
+	 *  @param nodeView  a non-null node view that descendants of this class will operate on
 	 *  @param netView   the non-null network that is associated with {@link #nodeView}
 	 */
 	public AbstractNodeViewTask(final View<CyNode> nodeView, final CyNetworkView netView) {

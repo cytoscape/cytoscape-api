@@ -37,6 +37,7 @@ import java.util.Collection;
  * The assumption is that setNetworkCollection() will be called before
  * getTask() and that the Task in question operates on the 
  * specified CyNetworks. 
+ * @CyAPI.Spi.Interface
  */
 public interface NetworkCollectionTaskFactory extends TaskFactory {
 	/** Provisions this factory with the collection of networks that will be passed into any task

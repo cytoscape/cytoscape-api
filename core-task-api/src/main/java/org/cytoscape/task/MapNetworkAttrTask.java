@@ -17,11 +17,15 @@ import org.cytoscape.work.TaskMonitor;
 import org.cytoscape.work.Tunable;
 
 /** 
- * This is a simple {@link Task} that will take a loaded table and ask whether
+ * This is a simple {@link org.cytoscape.work.Task} that will take a loaded table and ask whether
  * the columns in the new table should become virtual columns in the node or
  * edge table of the current network, all networks, or no networks.
+ * @CyAPI.Final.Class
  */
 public final class MapNetworkAttrTask extends AbstractTask {
+	/**
+	 * If true map to current network only.
+	 */
 	@Tunable(description="Map to current network only")
 	public boolean currentNetworkOnly = true;
 
@@ -57,7 +61,7 @@ public final class MapNetworkAttrTask extends AbstractTask {
 
 	
 	/**
-	 * Constructor. Will attempt to map existing tables based on the {@link CyTableEntry.NAME}
+	 * Constructor. Will attempt to map existing tables based on the {@link CyTableEntry#NAME}
 	 * column.
 	 * @param type The type of table to map to, either CyNode.class or CyEdge.class.
 	 * @param newGlobalTable The table to be mapped. 

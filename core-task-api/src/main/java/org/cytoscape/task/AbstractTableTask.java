@@ -32,13 +32,15 @@ import org.cytoscape.model.CyTable;
 import org.cytoscape.work.AbstractTask;
 
 
-/** A base class for Tasks that need to operate on an entire CyTable. */
+/** A base class for Tasks that need to operate on an entire {@link CyTable}. 
+ * @CyAPI.Abstract.Class
+ */
 public abstract class AbstractTableTask extends AbstractTask {
 	
 	/** The table that descendants of this class will operate on. */
 	protected final CyTable table;
 	
-	/** Initializes a Task that needs to operate on a CyTable.
+	/** Initializes a Task that needs to operate on a {@link CyTable}.
 	 *  @param table  a non-null CyTable
 	 */
 	public AbstractTableTask(CyTable table) {

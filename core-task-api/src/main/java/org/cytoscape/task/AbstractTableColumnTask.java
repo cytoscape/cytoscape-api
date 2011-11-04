@@ -32,7 +32,9 @@ import org.cytoscape.model.CyColumn;
 import org.cytoscape.work.AbstractTask;
 
 
-/** A base class for Tasks that need to operate on an entire CyTable column. */
+/** A base class for Tasks that need to operate on an entire CyTable column. 
+ * @CyAPI.Abstract.Class
+ */
 public abstract class AbstractTableColumnTask extends AbstractTask {
 	
 	/** The {@link CyColumn} that descendants will operate on. */

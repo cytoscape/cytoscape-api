@@ -34,7 +34,8 @@ import org.cytoscape.model.CyColumn;
 
 /**
  * The assumption is that setColumnAndPrimaryKey() will be called before getTask() and that the Task
- * in question operates on the specified table entry identified by the column and primary key value.'
+ * in question operates on the specified table entry identified by the column and primary key value.
+ * @CyAPI.Spi.Interface
  */
 public interface TableCellTaskFactory extends TaskFactory {
 	/** Used to provision this factory with a {@link CyColumn} and a primary key that will be

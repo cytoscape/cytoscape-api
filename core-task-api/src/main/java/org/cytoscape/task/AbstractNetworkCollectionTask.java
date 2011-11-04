@@ -37,6 +37,7 @@ import java.util.Collection;
 
 /** 
  * The base class for all tasks that need to operate on a Collection of {@link CyNetwork}s.
+ * @CyAPI.Abstract.Class
  */
 public abstract class AbstractNetworkCollectionTask extends AbstractTask {
 	/** The collection of networks that descendants will operate on. */

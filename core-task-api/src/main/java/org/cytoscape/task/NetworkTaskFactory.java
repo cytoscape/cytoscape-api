@@ -33,6 +33,7 @@ import org.cytoscape.model.CyNetwork;
 /**
  * The assumption is that setNetwork() will be called before getTask() and that
  * the Task in question operates on the specified CyNetwork.
+ * @CyAPI.Spi.Interface
  */
 public interface NetworkTaskFactory extends TaskFactory {
 

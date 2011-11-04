@@ -38,6 +38,7 @@ import org.cytoscape.view.model.View;
  * The assumption is that setNodeView() will be called before
  * getTask() and that the Task in question operates on the 
  * specified View&lt;CyNode&gt;.
+ * @CyAPI.Spi.Interface
  */
 public interface NodeViewTaskFactory extends TaskFactory {
 	/** Provisions this factory with the node view and its associated network view, both of

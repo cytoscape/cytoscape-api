@@ -33,6 +33,7 @@ import org.cytoscape.model.CyNetwork;
 
 /** 
  * Base class for all task factories that create tasks that need to be provisioned with a network view.
+ * @CyAPI.Abstract.Class
  */
 public abstract class AbstractNetworkTaskFactory implements NetworkTaskFactory {
 

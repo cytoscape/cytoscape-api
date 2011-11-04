@@ -36,6 +36,7 @@ import org.cytoscape.model.CyRow;
  * The assumption is that setRow() will be called before
  * getTask() and that the Task in question operates on the 
  * specified CyNetwork. 
+ * @CyAPI.Spi.Interface
  */
 public interface RowTaskFactory extends TaskFactory {
 	/** Provisions this factory with the {@link CyRow} that will be passed into any task created

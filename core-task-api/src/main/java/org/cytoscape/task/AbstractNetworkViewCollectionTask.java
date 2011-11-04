@@ -35,6 +35,7 @@ import java.util.Collection;
 
 /** 
  * The base class for all tasks that need to operate on a Collection of {@link CyNetworkView}s.
+ * @CyAPI.Abstract.Class
  */
 public abstract class AbstractNetworkViewCollectionTask extends AbstractTask {
 	/** A collection of network views to operate on for any descendants of this class. */

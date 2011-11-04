@@ -38,6 +38,7 @@ import org.cytoscape.view.model.View;
  * The assumption is that setEdgeView() will be called before
  * getTask() and that the Task in question operates on the 
  * specified View&lt;CyEdge&gt;.
+ * @CyAPI.Spi.Interface
  */
 public interface EdgeViewTaskFactory extends TaskFactory {
 	/** Used to provision this factory with the edge view and associated network view that will

@@ -36,6 +36,7 @@ import org.cytoscape.view.model.CyNetworkView;
  * The assumption is that setNetworkView() will be called before
  * getTask() and that the Task in question operates on the 
  * specified CyNetworkView. 
+ * @CyAPI.Spi.Interface
  */
 public interface NetworkViewTaskFactory extends TaskFactory {
 	/** Provisions this factory with a {@link CyNetworkView} that will be passed into any tasks

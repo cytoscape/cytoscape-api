@@ -34,6 +34,7 @@ import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.work.AbstractTask;
 
 /** The base class for all tasks that need to operate on a network view.
+ * @CyAPI.Abstract.Class
  */
 public abstract class AbstractNetworkViewTask extends AbstractTask {
 	/** The network view that descendants of this class will operate on. */

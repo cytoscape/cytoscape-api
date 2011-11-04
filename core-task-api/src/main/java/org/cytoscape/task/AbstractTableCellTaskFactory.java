@@ -35,6 +35,7 @@ import org.cytoscape.model.CyColumn;
 /**
  * The assumption is that setColumnAndPrimaryKey() will be called before getTask() and that the Task
  * in question operates on the specified table entry identified by the column and primary key value.'
+ * @CyAPI.Abstract.Class
  */
 abstract public class AbstractTableCellTaskFactory implements TableCellTaskFactory {
 	/** The {@link CyColumn} of the cell that will be used to provision tasks that are being created by descendants 

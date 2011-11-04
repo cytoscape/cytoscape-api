@@ -35,6 +35,7 @@ import org.cytoscape.model.CyColumn;
 /**
  * The assumption is that setColumn() will be called before getTask() and that the Task in question
  * operates on the specified CyColumn. 
+ * @CyAPI.Spi.Interface
  */
 public interface TableColumnTaskFactory extends TaskFactory {
 	/** Used to provision this factory with a {@link CyColumn} that will be used to create tasks.

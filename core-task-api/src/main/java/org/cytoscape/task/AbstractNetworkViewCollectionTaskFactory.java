@@ -34,6 +34,7 @@ import java.util.Collection;
 /** 
  * Base class for all task factories that create tasks that need to be provisioned with a Collection
  * of {@link CyNetworkView}s.
+ * @CyAPI.Abstract.Class
  */
 public abstract class AbstractNetworkViewCollectionTaskFactory implements NetworkViewCollectionTaskFactory {
 	/** The collection of network views to be passed into any tasks constructed by descendants of this class. */

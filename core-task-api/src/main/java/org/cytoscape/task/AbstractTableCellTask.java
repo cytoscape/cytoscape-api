@@ -32,7 +32,9 @@ import org.cytoscape.model.CyColumn;
 import org.cytoscape.work.AbstractTask;
 
 
-/** A base class for Tasks that need to operate on a single CyTable cell. */
+/** A base class for Tasks that need to operate on a single CyTable cell. 
+ * @CyAPI.Abstract.Class
+ */
 public abstract class AbstractTableCellTask extends AbstractTask {
 	/** The {@link CyColumn} of the {@link org.cytoscape.model.CyTable} cell */
 	protected final CyColumn column;

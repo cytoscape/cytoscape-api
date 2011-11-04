@@ -4,6 +4,7 @@ import org.cytoscape.view.model.CyNetworkView;
 
 /**
  * An interface for creating new, empty network views.
+ * @CyAPI.Spi.Interface
  */
 public interface NewEmptyNetworkViewFactory {
 

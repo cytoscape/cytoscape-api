@@ -38,6 +38,7 @@ import java.util.Collection;
 /** 
  * Base class for all task factories that create tasks that need to be provisioned with a Collection
  * of {@link CyNetwork}s.
+ * @CyAPI.Abstract.Class
  */
 public abstract class AbstractNetworkCollectionTaskFactory implements NetworkCollectionTaskFactory {
 	/** The collection of networks that will be passed to any task constructed by descendants of this factory. */

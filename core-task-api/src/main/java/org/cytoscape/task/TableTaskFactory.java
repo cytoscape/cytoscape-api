@@ -35,6 +35,7 @@ import org.cytoscape.model.CyTable;
 /**
  * The assumption is that setTable() will be called before getTask() and that the Task in question
  * operates on the specified CyTable. 
+ * @CyAPI.Spi.Interface
  */
 public interface TableTaskFactory extends TaskFactory {
 	/** Used to provision this factory with a {@link CyTable} that will be used to create tasks.

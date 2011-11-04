@@ -31,9 +31,11 @@ package org.cytoscape.task;
 import org.cytoscape.model.CyRow;
 
 
-/** Base class for all task factories that need to create tasks that have been provisioned with a {@link CyRow}. */
+/** Base class for all task factories that need to create tasks that have been provisioned with a {@link CyRow}. 
+ * @CyAPI.Abstract.Class
+ */
 public abstract class AbstractRowTaskFactory implements RowTaskFactory {
-	/** The CyRow that will be passed into any task that will be created by descendents of this class. */
+	/** The CyRow that will be passed into any task that will be created by descendants of this class. */
 	protected CyRow row;
 
 	/** Used to provision this class with a {@link CyRow} that will be passed into any task
