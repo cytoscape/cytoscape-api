@@ -4,6 +4,12 @@ import java.util.List;
 
 import org.cytoscape.view.vizmap.VisualMappingFunction;
 
+/**
+ *
+ * @param <K>
+ * @param <V>
+ * @CyAPI.Api.Interface
+ */
 public interface ContinuousMapping<K, V> extends VisualMappingFunction<K,V>{
 
 	public static final String CONTINUOUS = "Continuous Mapping";

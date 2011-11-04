@@ -41,7 +41,7 @@ import org.cytoscape.view.vizmap.VisualStyle;
 /**
  * When new {@linkplain VisualStyle} is added to the {@link VisualMappingManager},
  * it fires this event.
- * 
+ * @CyAPI.Final.Class
  */
 public final class VisualStyleAddedEvent extends AbstractCyEvent<VisualMappingManager> {
 

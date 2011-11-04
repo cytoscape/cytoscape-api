@@ -38,6 +38,7 @@ import org.cytoscape.event.CyListener;
 
 /**
  * Listener for {@linkplain VisualStyleAddedEvent}.
+ * @CyAPI.Spi.Interface
  */
 public interface VisualStyleAddedListener extends CyListener {
 

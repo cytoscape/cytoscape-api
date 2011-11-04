@@ -8,8 +8,9 @@ import org.cytoscape.view.vizmap.VisualMappingFunction;
  * 
  * @author kono
  *
- * @param <K>
- * @param <V>
+ * @param <K> Generic type of the attribute mapped.
+ * @param <V> Generic type of the {@link VisualProperty} used in this mapping.
+ * @CyAPI.Abstract.Class
  */
 public abstract class AbstractVisualMappingFunction<K, V> implements
 		VisualMappingFunction<K, V> {
@@ -24,6 +25,12 @@ public abstract class AbstractVisualMappingFunction<K, V> implements
 	protected final VisualProperty<V> vp;
 
 	
+	/**
+	 * Constructs this AbstractVisualMappingFunction.
+	 * @param attrName Mapping attribute name.
+	 * @param attrType Type of attribute.
+	 * @param vp Visual Property used in this mapping.
+	 */
 	public AbstractVisualMappingFunction(final String attrName, final Class<K> attrType,
 			final VisualProperty<V> vp) {
 		this.attrType = attrType;

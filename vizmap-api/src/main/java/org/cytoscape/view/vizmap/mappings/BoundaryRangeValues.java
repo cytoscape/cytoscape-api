@@ -59,6 +59,7 @@ package org.cytoscape.view.vizmap.mappings;
  * interpolation above and below the same domain value, plus allow a distinctly
  * different value for exact matches.
  * @param <T> the generic type for this BoundaryRangeValues.
+ * @CyAPI.Final.Class
  */
 public final class BoundaryRangeValues<T> {
 	/**

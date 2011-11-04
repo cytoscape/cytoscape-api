@@ -65,7 +65,7 @@ import org.cytoscape.view.model.VisualProperty;
  *            be any objects)
  * @param <V>
  *            Visual property value type. (can be any type)
- * 
+ * @CyAPI.Api.Interface
  */
 public interface VisualMappingFunction<K, V> {
 

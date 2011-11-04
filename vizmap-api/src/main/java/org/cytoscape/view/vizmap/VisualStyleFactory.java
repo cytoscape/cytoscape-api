@@ -3,7 +3,7 @@ package org.cytoscape.view.vizmap;
 
 /**
  * Factory for {@linkplain VisualStyle}s.  This object will be provided as an OSGi service.
- *
+ * @CyAPI.Api.Interface
  */
 public interface VisualStyleFactory {
 	

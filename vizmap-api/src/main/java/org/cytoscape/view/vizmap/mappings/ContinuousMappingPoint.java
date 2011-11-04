@@ -47,8 +47,9 @@ import org.cytoscape.view.vizmap.mappings.BoundaryRangeValues;
 
 /**
  * Encapsulates a ContinuousMapping Point with a single point value
- * and associated BoundaryRangeValues.
- *
+ * and associated {@link BoundaryRangeValues}.
+ * @param <V> The generic type of associated {@link BoundaryRangeValues}.
+ * @CyAPI.Final.Class
  */
 public final class ContinuousMappingPoint<K, V> {
 	private K value;

@@ -4,6 +4,12 @@ import java.util.Map;
 
 import org.cytoscape.view.vizmap.VisualMappingFunction;
 
+/**
+ * 
+ * @param <K>
+ * @param <V>
+ * @CyAPI.Api.Interface
+ */
 public interface DiscreteMapping<K, V> extends VisualMappingFunction<K,V>{
 
 	public static final String DISCRETE = "Discrete Mapping";

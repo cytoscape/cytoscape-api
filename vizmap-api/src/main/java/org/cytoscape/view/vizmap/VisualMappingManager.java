@@ -52,7 +52,7 @@ import org.cytoscape.view.vizmap.events.VisualStyleAddedEvent;
  * JavaDoc for {@linkplain VisualStyleAddedEvent} and
  * {@linkplain VisualStyleAboutToBeRemovedEvent}.
  * </p>
- * 
+ * @CyAPI.Api.Interface
  */
 public interface VisualMappingManager {
 
@@ -109,6 +109,9 @@ public interface VisualMappingManager {
 	 */
 	VisualStyle getDefaultVisualStyle();
 	
+	/** Returns a Set of all {@link VisualLexicon}s.
+	 * @return a Set of all {@link VisualLexicon}s.
+	 */
 	Set<VisualLexicon> getAllVisualLexicon();
 
 }

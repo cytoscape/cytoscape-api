@@ -5,7 +5,7 @@ import org.cytoscape.view.model.VisualProperty;
 /**
  * Factory for {@linkplain VisualMappingFunction}s. Implementation of this will
  * be provided as an service.  One mapping type should have one factory.
- * 
+ * @CyAPI.Api.Interface
  */
 public interface VisualMappingFunctionFactory {
 
