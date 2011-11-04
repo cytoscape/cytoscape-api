@@ -36,6 +36,10 @@ import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyRow;
 import org.cytoscape.work.Tunable;
 
+/**
+ * #ASKMIKE
+ * @CyAPI.Enum.Class
+ */
 enum WeightTypes {
 	GUESS("Heuristic"),
 	LOG("-Log(value)"),
@@ -50,6 +54,7 @@ enum WeightTypes {
 /**
  * The EdgeWeighter class.  This class is used as a container for information
  * about how to interpret weights in an weighted layout.
+ * @CyAPI.Final.Class
  */
 public final class EdgeWeighter {
 

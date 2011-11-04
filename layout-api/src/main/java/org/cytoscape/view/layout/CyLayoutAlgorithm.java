@@ -42,6 +42,7 @@ import java.util.Set;
 
 /**
  * An extension of NetworkViewTaskFactory specific to layout algorithms.
+ * @CyAPI.Spi.Interface
  */
 public interface CyLayoutAlgorithm extends NetworkViewTaskFactory {
 	/**

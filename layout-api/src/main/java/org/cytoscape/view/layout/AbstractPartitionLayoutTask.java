@@ -20,6 +20,7 @@ import org.slf4j.LoggerFactory;
  *  Extensions of this class are meant to implement the layoutPartition()
  *  method and operate on the LayoutParition object that is passed to that
  *  method as an argument.
+ *  @CyAPI.Abstract.Class
  */
 public abstract class AbstractPartitionLayoutTask extends AbstractBasicLayoutTask {
 	

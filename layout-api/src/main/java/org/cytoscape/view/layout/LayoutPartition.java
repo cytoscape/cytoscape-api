@@ -59,6 +59,7 @@ import org.cytoscape.work.TaskMonitor;
  *
  * @author <a href="mailto:scooter@cgl.ucsf.edu">Scooter Morris</a>
  * @version 0.9
+ * @CyAPI.Final.Class
  */
 public final class LayoutPartition {
 	
@@ -321,7 +322,7 @@ public final class LayoutPartition {
 	}
 
 	/**
-	 * Return an iterator over all of the LayoutNodes in this parition
+	 * Return an iterator over all of the LayoutNodes in this partition
 	 *
 	 * @return Iterator over the list of LayoutNodes
 	 * @see LayoutNode
@@ -331,7 +332,7 @@ public final class LayoutPartition {
 	}
 
 	/**
-	 * Return an iterator over all of the LayoutEdges in this parition
+	 * Return an iterator over all of the LayoutEdges in this partition
 	 *
 	 * @return Iterator over the list of LayoutEdges
 	 * @see LayoutEdge
@@ -431,7 +432,7 @@ public final class LayoutPartition {
 	}
 
 	/**
-	 * Return the number of locked nodes within this parititon
+	 * Return the number of locked nodes within this partition
 	 *
 	 * @return number of locked nodes in partition
 	 */

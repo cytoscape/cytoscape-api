@@ -39,6 +39,7 @@ import org.cytoscape.model.CyEdge;
  * about the edges in a layout.  In particular, it provides a convenient handle
  * to information about the weights associated with edges, and pointers to the
  * LayoutNodes that are joined by this edge.
+ * @CyAPI.Final.Class
  */
 public final class LayoutEdge {
 	// instance variables
@@ -164,7 +165,7 @@ public final class LayoutEdge {
 	/**
 	 * Return a string representation for this LayoutEdge.
 	 *
-	 * @return    A String containting the name of the Edge, the connecting LayoutNodes
+	 * @return    A String containing the name of the Edge, the connecting LayoutNodes
 	 *          and the current weight.
 	 */
 	public String toString() {

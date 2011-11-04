@@ -34,6 +34,7 @@ import java.util.Collection;
 
 /**
  *  This class provides access to the available layout algorithms.
+ *  @CyAPI.Api.Interface
  */
 public interface CyLayoutAlgorithmManager {
 

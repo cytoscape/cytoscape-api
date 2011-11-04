@@ -23,6 +23,7 @@ import org.slf4j.LoggerFactory;
  *  Extensions of this class are meant to operate on the CyNetworkView 
  *  provided to the constructor (and is available as a protected member 
  *  variable).
+ *  @CyAPI.Abstract.Class
  */
 public abstract class AbstractBasicLayoutTask extends AbstractTask {
 	

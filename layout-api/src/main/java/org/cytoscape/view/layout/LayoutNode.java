@@ -46,6 +46,7 @@ import java.util.List;
  * to information about position, the node itself, the node view.  Many of
  * the methods of this class are wrappers for Node or View<CyNode> methods, and
  * these are often wrapped by LayoutPartition methods.
+ * @CyAPI.Final.Class
  */
 public final class LayoutNode {
 	// static (class) variables
@@ -105,8 +106,8 @@ public final class LayoutNode {
 	 * that location.  Users should call moveToLocation to actually
 	 * accomplish the move.
 	 *
-	 * @param    x    Double representing the new X corrdinate of this node
-	 * @param    y    Double representing the new Y corrdinate of this node
+	 * @param    x    Double representing the new X coordinate of this node
+	 * @param    y    Double representing the new Y coordinate of this node
 	 */
 	public void setLocation(double x, double y) {
 		this.x = x;
@@ -119,7 +120,7 @@ public final class LayoutNode {
 	 * that location.  Users should call moveToLocation to actually
 	 * accomplish the move.
 	 *
-	 * @param    x    Double representing the new X corrdinate of this node
+	 * @param    x    Double representing the new X coordinate of this node
 	 */
 	public void setX(double x) {
 		this.x = x;
@@ -131,7 +132,7 @@ public final class LayoutNode {
 	 * that location.  Users should call moveToLocation to actually
 	 * accomplish the move.
 	 *
-	 * @param    y    Double representing the new Y corrdinate of this node
+	 * @param    y    Double representing the new Y coordinate of this node
 	 */
 	public void setY(double y) {
 		this.y = y;
@@ -311,10 +312,10 @@ public final class LayoutNode {
 	}
 
 	/**
-	 * Return the euclidean distance between this node and another node
+	 * Return the Euclidean distance between this node and another node
 	 *
 	 * @param    otherNode    the node to measure the distance to
-	 * @return        the euclidean distance from this node to otherNode
+	 * @return        the Euclidean distance from this node to otherNode
 	 */
 	public double distance(LayoutNode otherNode) {
 		double deltaX = this.x - otherNode.getX();
@@ -324,11 +325,11 @@ public final class LayoutNode {
 	}
 
 	/**
-	 * Return the euclidean distance between this node and a location
+	 * Return the Euclidean distance between this node and a location
 	 *
 	 * @param    uX    the X location to measure the distance to
 	 * @param    uY    the Y location to measure the distance to
-	 * @return        the euclidean distance from this node to (uX,uY)
+	 * @return        the Euclidean distance from this node to (uX,uY)
 	 */
 	public double distance(double uX, double uY) {
 		double deltaX = this.x - uX;

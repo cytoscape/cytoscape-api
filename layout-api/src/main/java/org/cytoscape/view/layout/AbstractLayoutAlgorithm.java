@@ -52,6 +52,7 @@ import org.cytoscape.work.util.ListSingleSelection;
 
 /**
  * The AbstractLayoutAlgorithm provides a basic implementation of a layout TaskFactory.
+ * @CyAPI.Abstract.Class
  */
 abstract public class AbstractLayoutAlgorithm implements CyLayoutAlgorithm {
 
@@ -67,6 +68,7 @@ abstract public class AbstractLayoutAlgorithm implements CyLayoutAlgorithm {
 	 * Never use this method from within a layout to access the submenu options,
      * instead call the configureLayoutFromSubmenuSelection() method to configure
 	 * the layout based on menu selection. 
+	 * @return #ASKMIKE
 	 */
 	@Tunable(description="Submenu definition")
 	public ListSingleSelection<String> getSubmenuOptions() {
@@ -232,6 +234,7 @@ abstract public class AbstractLayoutAlgorithm implements CyLayoutAlgorithm {
 
 	/**
 	 * A computer readable name used to construct property strings.
+	 * @return a computer readable name used to construct property strings.
 	 */
 	public String getName() {
 		return computerName;
@@ -239,6 +242,7 @@ abstract public class AbstractLayoutAlgorithm implements CyLayoutAlgorithm {
 
 	/**
 	 * Used to get the user-visible name of the layout.
+	 * @return the user-visible name of the layout.
 	 */
 	public String toString() {
 		return humanName;
