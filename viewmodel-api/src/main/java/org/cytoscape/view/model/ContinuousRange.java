@@ -4,6 +4,7 @@ package org.cytoscape.view.model;
  * Defines a continuous range of values for {@link VisualProperty}s.
  *
  * @param <T> The generic type of this ContinuousRange.
+ * @CyAPI.Api.Interface
  */
 public class ContinuousRange<T> implements Range<T> {
 

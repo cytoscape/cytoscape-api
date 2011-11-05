@@ -44,7 +44,7 @@ import org.cytoscape.model.CyTableEntry;
 /**
  * 
  * Additional methods for CyNetworkView. Network view should implement BOTH View
- * and CyNetworkView. #ASKMIKE
+ * and CyNetworkView.
  * 
  * Consolidated data structure for graph object views.
  * @CyAPI.Api.Interface
@@ -112,6 +112,8 @@ public interface CyNetworkView extends View<CyNetwork> {
 	 
 	/**
 	 * Sets the default value to be used for the specified visual property.
+	 * @param <T> #ASKMIKE
+	 * @param <V> #ASKMIKE
 	 * @param vp The visual property whose default value we're specifying.
 	 * @param defaultValue The default value to be used for this visual property for this view. 
 	 */

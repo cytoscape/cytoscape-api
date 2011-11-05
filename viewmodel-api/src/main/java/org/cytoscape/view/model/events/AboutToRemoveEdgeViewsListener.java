@@ -9,7 +9,7 @@ import org.cytoscape.event.CyListener;
 public interface AboutToRemoveEdgeViewsListener extends CyListener {
 
 	/**
-	 * Process event
+	 * Process event.
 	 * 
 	 * @param e the {@link AboutToRemoveEdgeViewsEvent} to be handled.
 	 */

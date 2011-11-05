@@ -4,6 +4,7 @@ package org.cytoscape.view.model;
  * Defines a range of values for {@link VisualProperty}s.
  *
  * @param <T> The generic type of this Range.
+ * @CyAPI.Api.Interface
  */
 public interface Range<T> {
 	

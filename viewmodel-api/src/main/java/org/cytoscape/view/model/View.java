@@ -45,7 +45,7 @@ import org.cytoscape.model.Identifiable;
  *
  * @param <S> the base (model-level) object for which this is a View. For example, CyNode or CyEdge.
  * In the future versions, Attributes can be this parameter.
- * 
+ * @CyAPI.Api.Interface #ASKMIKE
  */
 public interface View<S> extends Identifiable {
 	
@@ -75,7 +75,8 @@ public interface View<S> extends Identifiable {
 	/**
 	 * Set locked value.  This value will be used to bypass the style.
 	 * 
-	 * @param <T> 
+	 * @param <T> Data type of the visual property.  This can be subclasses of type T.
+	 * @param <V> Value of the visual property.  This can be subclasses of T. 
 	 * @param vp the VisualProperty
 	 * @param value DOCUMENT ME!
 	 */

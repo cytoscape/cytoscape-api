@@ -44,7 +44,7 @@ import java.util.Set;
  * This is a pre-defined tree of VisualProperties designed by the {@linkplain org.cytoscape.view.presentation.RenderingEngine} developer.
  * 
  * @since Cytoscape 3.0
- * 
+ * @CyAPI.Api.Interface
  */
 public interface VisualLexicon {
 	

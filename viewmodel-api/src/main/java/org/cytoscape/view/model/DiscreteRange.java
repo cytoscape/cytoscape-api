@@ -7,6 +7,7 @@ import java.util.Set;
  * Defines a discrete range of values for {@link VisualProperty}s.
  *
  * @param <T> The generic type of this DiscreteRange.
+ * @CyAPI.Api.Interface
  */
 public class DiscreteRange<T> implements Range<T> {
 

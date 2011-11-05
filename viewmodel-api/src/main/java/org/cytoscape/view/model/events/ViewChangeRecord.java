@@ -4,6 +4,7 @@ import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
 
 /**
+ * #ASKMIKE Needs class description and method descriptions.
  * @CyAPI.Final.Class
  */
 public final class ViewChangeRecord<T> {
