@@ -8,6 +8,7 @@ import java.util.Set;
  * An interface that captures the metadata description of a file type
  * so that files of the specified type can be handled correctly by the
  * application and the user interface.
+ * @CyAPI.Spi.Interface
  */
 public interface CyFileFilter {
 
@@ -38,7 +39,7 @@ public interface CyFileFilter {
 	Set<String> getExtensions();
 
 	/**
-	 * The MIME content types suppored by this filter.
+	 * The MIME content types supported by this filter.
 	 * @return A set of strings the describe the different MIME types supported by this filter.
 	 */
 	Set<String> getContentTypes();

@@ -9,6 +9,7 @@ import org.cytoscape.io.CyFileFilterProvider;
  * for generating a Task to write the actual output.  Instantiations
  * of CyWriterFactories are meant to be singleton objects registered
  * as OSGi services.
+ * @CyAPI.Spi.Interface
  */
 public interface CyWriterFactory extends CyFileFilterProvider {
 
@@ -21,6 +22,8 @@ public interface CyWriterFactory extends CyFileFilterProvider {
 	void setOutputStream(OutputStream os);
 
 	/**
+	 * Returns a {@link CyWriter} Task suitable for writing to the specified
+	 * output stream.
 	 * @return A {@link CyWriter} Task suitable for writing to the specified
 	 * output stream.
 	 */

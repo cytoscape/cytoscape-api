@@ -15,9 +15,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This is meant to be an basic implementation of CyFileFilter that can either be
+ * This is meant to be an basic implementation of {@link CyFileFilter} that can either be
  * used directly or extended to provide different acceptance criteria. Only the 
- * accepts() methods may be overridden.  
+ * accepts() methods may be overridden.
+ * @CyAPI.Final.Class #ASKMIKE Should be final or static?
  */
 public class BasicCyFileFilter implements CyFileFilter {
 
@@ -25,7 +26,7 @@ public class BasicCyFileFilter implements CyFileFilter {
 	private final Set<String> contentTypes;
 	private final String description;
 	private final StreamUtil streamUtil;
-	/** Type of data that this filter applys to. */
+	/** Type of data that this filter applies to. */
 	protected final DataCategory category;
 	private static final Logger logger = LoggerFactory.getLogger(BasicCyFileFilter.class);
 

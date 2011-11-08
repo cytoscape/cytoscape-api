@@ -5,6 +5,7 @@ import org.cytoscape.model.CyTable;
 /**
  * A specialization of {@link CyWriterFactory} that allows a {@link org.cytoscape.model.CyTable} to
  * be specified and written.
+ * @CyAPI.Spi.Interface
  */
 public interface CyTableWriterFactory extends CyWriterFactory {
 

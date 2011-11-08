@@ -41,10 +41,13 @@ import java.io.OutputStream;
 
 /**
  * A {@link CyWriterManager} specific to writing {@link org.cytoscape.model.CyTable} objects. 
+ * @CyAPI.Api.Interface
  */
 public interface CyTableWriterManager extends CyWriterManager {
 
 	/**
+	 * Returns the {@link CyWriter} Task that will attempt to write the specified table to the
+	 * specified file of the specified file type.
 	 * @param table The {@link org.cytoscape.model.CyTable} to be written.
 	 * @param filter The {@link org.cytoscape.io.CyFileFilter} that defines the type of file to be written.
 	 * @param file The file to be written. 
@@ -55,6 +58,8 @@ public interface CyTableWriterManager extends CyWriterManager {
 	CyWriter getWriter(CyTable table, CyFileFilter filter, File file) throws Exception;
 
 	/**
+	 * Returns the {@link CyWriter} Task that will attempt to write the specified table to the
+	 * specified output stream of the specified file type.
 	 * @param table The {@link org.cytoscape.model.CyTable} to be written.
 	 * @param filter The {@link org.cytoscape.io.CyFileFilter} that defines the type of file to be written.
 	 * @param os The output stream to be written. 

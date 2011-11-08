@@ -5,8 +5,9 @@ import org.cytoscape.view.presentation.RenderingEngine;
 
 /**
  * A specialization of {@link CyWriterFactory} that allows a View 
- * rendererd by the specified {@link RenderingEngine} to
+ * rendered by the specified {@link RenderingEngine} to
  * be specified and written.
+ * @CyAPI.Spi.Interface
  */
 public interface PresentationWriterFactory extends CyWriterFactory {
 

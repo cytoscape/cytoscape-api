@@ -11,6 +11,7 @@ import java.util.List;
 
 /**
  * A utility Task implementation that writes a {@link org.cytoscape.session.CySession} to a file.
+ * @CyAPI.Final.Class
  */
 public final class CySessionWriter extends AbstractTask implements CyWriter {
 	private final CySession session; 
@@ -18,6 +19,7 @@ public final class CySessionWriter extends AbstractTask implements CyWriter {
 	private File outputFile; 
 
 	/**
+	 * Constructs this CySessionWriter.
 	 * @param writerMgr The {@link org.cytoscape.io.write.CySessionWriterManager} contains single expected
 	 * {@link org.cytoscape.io.write.CySessionWriterFactory} to use to write the file.
 	 * @param session The {@link org.cytoscape.session.CySession} to be written out. 

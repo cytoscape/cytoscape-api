@@ -42,10 +42,13 @@ import java.io.OutputStream;
 /**
  * A {@link org.cytoscape.io.write.CyWriterManager} specific to writing 
  * {@link org.cytoscape.view.model.CyNetworkView} objects. 
+ * @CyAPI.Api.Interface
  */
 public interface CyNetworkViewWriterManager extends CyWriterManager {
 
 	/**
+	 * Returns the {@link org.cytoscape.io.write.CyWriter} Task that will attempt to write the specified view to the
+	 * specified file of the specified file type. 
 	 * @param view The {@link org.cytoscape.view.model.CyNetworkView} to be written.
 	 * @param filter The {@link org.cytoscape.io.CyFileFilter} that defines the type of file to be written.
 	 * @param file The file to be written. 
@@ -56,6 +59,8 @@ public interface CyNetworkViewWriterManager extends CyWriterManager {
 	CyWriter getWriter(CyNetworkView view, CyFileFilter filter, File file) throws Exception;
 
 	/**
+	 * Returns the {@link CyWriter} Task that will attempt to write the specified view to the
+	 * specified output steam of the specified file type. 
 	 * @param view The {@link org.cytoscape.view.model.CyNetworkView} to be written.
 	 * @param filter The {@link org.cytoscape.io.CyFileFilter} that defines the type of file to be written.
 	 * @param os The output steam to be written. 

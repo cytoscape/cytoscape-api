@@ -43,10 +43,13 @@ import java.io.OutputStream;
 
 /**
  * A {@link CyWriterManager} specific to writing View objects. 
+ * @CyAPI.Api.Interface
  */
 public interface PresentationWriterManager extends CyWriterManager {
 
 	/**
+	 * Returns the {@link CyWriter} Task that will attempt to write the specified view to the
+	 * specified file of the specified file type. 
 	 * @param view The {@link View} to be written.
 	 * @param re The {@link RenderingEngine} used to generate the image to be written.
 	 * @param filter The {@link CyFileFilter} that defines the type of file to be written.
@@ -58,6 +61,8 @@ public interface PresentationWriterManager extends CyWriterManager {
 	CyWriter getWriter(View<?> view, RenderingEngine<?> re, CyFileFilter filter, File file) throws Exception;
 
 	/**
+	 * Returns the {@link CyWriter} Task that will attempt to write the specified view to the
+	 * specified output stream of the specified file type. 
 	 * @param view The View to be written.
 	 * @param re The {@link RenderingEngine} used to generate the image to be written.
 	 * @param filter The {@link CyFileFilter} that defines the type of file to be written.

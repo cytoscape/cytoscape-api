@@ -11,6 +11,7 @@ import org.cytoscape.work.Task;
  * by associated reader manager objects that distinguish 
  * InputStreamTaskFactories based on the {@link org.cytoscape.io.DataCategory} associated with
  * the {@link org.cytoscape.io.CyFileFilter}.
+ * @CyAPI.Spi.Interface
  */
 public interface CyTableReader extends Task{
 

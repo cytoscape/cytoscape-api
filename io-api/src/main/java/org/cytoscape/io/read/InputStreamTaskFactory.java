@@ -8,6 +8,7 @@ import org.cytoscape.work.TaskFactory;
 /**
  * A super interface that allows the input stream to be set for reader
  * task factories.
+ * @CyAPI.Spi.Interface
  */
 public interface InputStreamTaskFactory extends TaskFactory, CyFileFilterProvider {
 

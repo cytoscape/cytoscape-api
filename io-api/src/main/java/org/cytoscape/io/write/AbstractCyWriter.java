@@ -22,6 +22,7 @@ import java.util.ArrayList;
  * is meant to be extended for specific file types such that the appropriate
  * {@link org.cytoscape.io.write.CyWriter} can be identified.
  * @param <T> Generic type that extends CyWriterManager.
+ * @CyAPI.Abstract.Class
  */
 public abstract class AbstractCyWriter<T extends CyWriterManager> extends AbstractTask
 	implements CyWriter
@@ -66,6 +67,7 @@ public abstract class AbstractCyWriter<T extends CyWriterManager> extends Abstra
 	protected final T writerManager;
 
 	/**
+	 * Constructor.
 	 * @param writerManager The CyWriterManager to be used to determine which
 	 * {@link org.cytoscape.io.write.CyWriter} to be used to write the file chosen by the user. 
 	 */

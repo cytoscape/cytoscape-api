@@ -8,6 +8,7 @@ import java.net.URI;
  * processes specified input to determine the appropriate factory to
  * use and then returns an instance of the correct {@link org.cytoscape.io.read.CySessionReader} 
  * for the input.
+ * @CyAPI.Api.Interface
  */
 public interface CySessionReaderManager {
     /**

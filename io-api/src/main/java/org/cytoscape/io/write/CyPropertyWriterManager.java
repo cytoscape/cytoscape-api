@@ -37,15 +37,18 @@ import java.util.List;
 
 /**
  * A {@link CyWriterManager} specific to writing property objects. See 
- * CyProperty for information on types of object expected.
+ * {@link org.cytoscape.property.CyProperty} for information on types of object expected.
+ * @CyAPI.Api.Interface
  */
 public interface CyPropertyWriterManager extends CyWriterManager {
 	/** Returns the <code>CyFileFilter</code>s known to this <code>CyWriter</code> manager.
-	 *  @return the set of known file filters
+	 *  @return the set of known file filters.
 	 */
 	List<CyFileFilter> getAvailableWriterFilters();
 
 	/**
+	 * Returns the {@link CyWriter} Task that will attempt to write the specified property
+	 * object to the specified file of the specified file type. 
 	 * @param property The property object to be written.
 	 * @param filter The {@link CyFileFilter} that defines the type of file to be written.
 	 * @param file The file to be written. 
@@ -56,6 +59,8 @@ public interface CyPropertyWriterManager extends CyWriterManager {
 	CyWriter getWriter(Object property, CyFileFilter filter, File file) throws Exception;
 
 	/**
+	 * Returns the {@link CyWriter} Task that will attempt to write the specified property
+	 * object to the specified output stream of the specified file type. 
 	 * @param property The property object to be written.
 	 * @param filter The {@link CyFileFilter} that defines the type of file to be written.
 	 * @param os The output stream to be written. 

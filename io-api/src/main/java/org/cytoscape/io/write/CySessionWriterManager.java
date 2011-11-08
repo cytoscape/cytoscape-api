@@ -41,10 +41,13 @@ import java.io.OutputStream;
 
 /**
  * A {@link CyWriterManager} specific to writing {@link org.cytoscape.session.CySession} objects. 
+ * @CyAPI.Api.Interface
  */
 public interface CySessionWriterManager extends CyWriterManager {
 
 	/**
+	 * Returns the {@link CyWriter} Task that will attempt to write the specified session to the
+	 * specified file of the specified file type. 
 	 * @param session The {@link org.cytoscape.session.CySession} to be written.
 	 * @param filter The {@link org.cytoscape.io.CyFileFilter} that defines the type of file to be written.
 	 * @param file The file to be written. 
@@ -55,6 +58,8 @@ public interface CySessionWriterManager extends CyWriterManager {
 	CyWriter getWriter(CySession session, CyFileFilter filter, File file) throws Exception;
 
 	/**
+	 * Returns the {@link CyWriter} Task that will attempt to write the specified session to the
+	 * specified output stream of the specified file type. 
 	 * @param session The {@link org.cytoscape.session.CySession} to be written.
 	 * @param filter The {@link org.cytoscape.io.CyFileFilter} that defines the type of file to be written.
 	 * @param os The output stream to be written. 

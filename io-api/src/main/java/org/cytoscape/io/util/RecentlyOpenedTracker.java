@@ -7,13 +7,14 @@ import java.util.List;
 /**
  * Manages list of recently opened files.
  * Currently, this is used for tracking recent sessions.
- *
+ * @CyAPI.Api.Interface
  */
 public interface RecentlyOpenedTracker {
 
 
 	/**
-	 * @return the last addition or null if there are no URLs
+	 * Returns the last addition or null if there are no URLs.
+	 * @return the last addition or null if there are no URLs.
 	 */
 	URL getMostRecentlyOpenedURL();
 	

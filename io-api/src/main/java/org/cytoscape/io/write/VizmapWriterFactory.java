@@ -42,6 +42,7 @@ import org.cytoscape.view.vizmap.VisualStyle;
 /**
  * A specialization of {@link CyWriterFactory} that allows a {@link org.cytoscape.view.vizmap.VisualStyle} to
  * be specified and written.
+ * @CyAPI.Spi.Interface
  */
 public interface VizmapWriterFactory extends CyWriterFactory {
 

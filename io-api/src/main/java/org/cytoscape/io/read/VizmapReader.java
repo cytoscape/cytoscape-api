@@ -13,11 +13,13 @@ import org.cytoscape.work.Task;
  * by associated reader manager objects that distinguish 
  * InputStreamTaskFactories based on the {@link org.cytoscape.io.DataCategory} associated with
  * the {@link org.cytoscape.io.CyFileFilter}.
+ * @CyAPI.Spi.Interface
  */
 public interface VizmapReader extends Task {
 
 	/**
-	 * @return A list of {@link org.cytoscape.view.vizmap.VisualStyle} objects
+	 * Returns a list of {@link org.cytoscape.view.vizmap.VisualStyle} objects.
+	 * @return A list of {@link org.cytoscape.view.vizmap.VisualStyle} objects.
 	 */
 	Set<VisualStyle> getVisualStyles();
 }

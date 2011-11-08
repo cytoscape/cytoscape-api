@@ -8,6 +8,7 @@ import java.net.URLConnection;
 /**
  * A stateless utility class that provides special handling to support
  * InputStreams and URLConnections over the network. 
+ * @CyAPI.Api.Interface
  */
 public interface StreamUtil {
 
