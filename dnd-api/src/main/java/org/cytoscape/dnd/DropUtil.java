@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 /**
  * A stateless, static utility class that provides a few methods useful for
  * interacting with Drag-n-Drop related objects.
+ * @CyAPI.Static.Class
  */
 public final class DropUtil {
 

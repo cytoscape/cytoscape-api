@@ -18,48 +18,49 @@ import javax.swing.Icon;
 public interface GraphicalEntity {
 
 	/**
-	 * get the Title of the graphical entity
-	 * @return the Title
+	 * Get the Title of this GraphicalEntity.
+	 * @return the Title of this GraphicalEntity.
 	 */
 	public String getTitle();
 
 	/**
-	 * retrieves the source of the drag operation, used when dragging a graphical entity from the palette onto
-	 * the canvas
-	 * @return the drag source
+	 * Retrieves the source of the drag operation, used when dragging a GraphicalEntity from the palette onto
+	 * the canvas.
+	 * @return the the source of the drag operation, used when dragging a GraphicalEntity from the palette onto
+	 * the canvas.
 	 */
 	public DragSource getMyDragSource();
 
 	/**
-	 * get the image for the icon used on the palette to represent the graphical entity
-	 * @return the image
+	 * Get the image for the icon used on the palette to represent the GraphicalEntity.
+	 * @return the image for the icon used on the palette to represent the GraphicalEntity.
 	 */
 	public Image getImage();
 
 	/**
-	 * get the icon used on the palette to represent the graphical entity
-	 * @return the icon used on the palette to represent the graphical entity
+	 * Get the icon used on the palette to represent this GraphicalEntity.
+	 * @return the icon used on the palette to represent this GraphicalEntity.
 	 */
 	public Icon getIcon();
 
 	/**
-	 * returns the name of the attribute associated with the Graphical Entity.
+	 * Returns the name of the attribute associated with this GraphicalEntity.
 	 * This is used to determine whether a Node or an Edge has been dropped on the canvas.
 	 * This attribute will also be set for the CyNode or CyEdge created as a result of the drop operation.
-	 * @return the attribute name
+	 * @return the name of the attribute associated with this GraphicalEntity.
 	 */
 	public String getAttributeName();
 
 	/**
-	 * returns the value of the attribute associated with the Graphical Entity.
+	 * Returns the value of the attribute associated with this GraphicalEntity.
 	 * This attribute will be set for the CyNode or CyEdge created as a result of the drop operation.
-	 * @return the attribute value
+	 * @return the value of the attribute associated with this GraphicalEntity.
 	 */
 	public String getAttributeValue();
 
 	/**
-	 * Returns descriptive text for the Graphical Entity.  May be used as tool tip text.
-	 * @return descriptive text for the Graphical Entity.
+	 * Returns descriptive text for this GraphicalEntity.  May be used as tool tip text.
+	 * @return descriptive text for this GraphicalEntity.
 	 */
 	public String getDescription();
 }

@@ -10,6 +10,7 @@ import org.cytoscape.task.NodeViewTaskFactory;
 /**
  * An extension of TaskFactory that provides support for
  * tasks to deal with drag and drop.
+ * @CyAPI.Spi.Interface
  */
 public interface DropNodeViewTaskFactory extends NodeViewTaskFactory {
 
