@@ -43,6 +43,7 @@ import javax.help.HelpSet;
 /**
  * This interface provides access to the Cytoscape Help Broker and 
  * Help Set for managing the JavaHelp system. 
+ * @CyAPI.Api.Interface
  */
 public interface CyHelpBroker {
 

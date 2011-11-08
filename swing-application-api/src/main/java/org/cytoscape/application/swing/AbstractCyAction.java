@@ -52,13 +52,17 @@ import javax.swing.event.PopupMenuEvent;
 /**
  * An abstract implementation of the CyAction interface. Instead of using this
  * class directly you should (strongly) consider implementing a
- * org.cytoscape.work.TaskFactory/org.cytoscape.work.Task pair. Doing so will
+ * {@link org.cytoscape.work.TaskFactory}/{@link org.cytoscape.work.Task} pair. Doing so will
  * allow your action to be used outside of a Swing specific application (which
  * the CyAction interface binds you to)!
+ * @CyAPI.Abstract.Class
  */
 public abstract class AbstractCyAction extends AbstractAction implements CyAction {
 	private static final long serialVersionUID = -2245672104075936952L;
 	private static final Logger logger = LoggerFactory.getLogger(AbstractCyAction.class);
+	/**
+	 * #ASKMIKE and other protected attributes right below
+	 */
 	protected String preferredMenu = null;
 
 	// Value 100.0 means end of menu/tool bar
@@ -379,6 +383,9 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		enabler.enableForNetwork();
     }
     
+	/**
+	 * #ASKMIKE and all methods below this
+	 */
 	protected void enableForNetworkWithoutView() {
 		enabler.enableForNetworkWithoutView() ;
 	}

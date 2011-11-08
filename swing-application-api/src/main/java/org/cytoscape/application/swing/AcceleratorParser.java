@@ -36,6 +36,7 @@ import org.slf4j.LoggerFactory;
  * <code>AcceleratorParser</code> will convert the Control key modifier to an
  * Apple key modifier if one is running on a Mac and vice-versa.</li>
  * </ol>
+ * @CyAPI.Static.Class
  */
 final class AcceleratorParser {
 

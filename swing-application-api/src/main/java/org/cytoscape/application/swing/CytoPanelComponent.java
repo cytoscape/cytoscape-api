@@ -37,7 +37,8 @@ import javax.swing.Icon;
 
 /**
  * An interface that allows a component to be registered as a service
- * that will then be added to the appropriate CytoPanel.
+ * that will then be added to the appropriate {@link CytoPanel}.
+ * @CyAPI.Spi.Interface
  */
 public interface CytoPanelComponent {
 

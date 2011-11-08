@@ -39,22 +39,23 @@ package org.cytoscape.application.swing;
 
 
 /**
- *  The different display states available for a CytoPanel.
+ *  The different display states available for a {@link CytoPanel}.
+ *  @CyAPI.Enum.Class
  */
 public enum CytoPanelState {
 	/**
-	 * The CytoPanel will be hidden and only appear as a menu item.
+	 * The {@link CytoPanel} will be hidden and only appear as a menu item.
 	 */
 	HIDE,
 
 	/**
-	 * The CytoPanel will be open and appear as a separate frame 
+	 * The {@link CytoPanel} will be open and appear as a separate frame 
 	 * independent of the application.
 	 */
 	FLOAT,
 
 	/**
-	 * The CytoPanel will be open and appear as a nested frame 
+	 * The {@link CytoPanel} will be open and appear as a nested frame 
 	 * within the application.
 	 */
 	DOCK,

@@ -48,6 +48,7 @@ import java.util.List;
 /**
  * An interface that describes how an action should be placed within 
  * the menus and/or toolbars of the Swing application.
+ * @CyAPI.Spi.Interface
  */
 public interface CyAction extends Action, MenuListener, PopupMenuListener {
 
@@ -90,7 +91,7 @@ public interface CyAction extends Action, MenuListener, PopupMenuListener {
 	KeyStroke getAcceleratorKeyStroke();
 
 	/** 
-	 * This method returns a Menu specification string. Submenus are preceeded
+	 * This method returns a Menu specification string. Submenus are preceded
 	 * by dots in this string, so the result "File.Import" specifies the submenu
 	 * "Import" of the menu "File". If the result is null, the menu will be
 	 * placed in a default location.

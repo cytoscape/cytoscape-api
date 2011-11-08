@@ -40,6 +40,7 @@ import org.cytoscape.model.events.RowsSetListener;
  * A utility class that provides an implementation of {@link RowsSetListener}
  * for a particular column and {@link VisualProperty}.
  * @param <S> The generic type of this ViewUpdater.
+ * #ASKMIKE taglet?
  */
 public class ViewUpdater<S> implements RowsSetListener {
 

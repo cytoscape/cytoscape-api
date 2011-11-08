@@ -38,6 +38,7 @@ import java.awt.*;
  * Interface to a CytoPanel.
  *
  * @author Ben Gross.
+ * @CyAPI.Api.Interface
  */
 public interface CytoPanel {
 

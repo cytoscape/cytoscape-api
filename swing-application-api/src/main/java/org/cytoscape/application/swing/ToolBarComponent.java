@@ -7,6 +7,7 @@ import javax.swing.Icon;
 /**
  * An interface that allows a component to be registered as a service
  * that will then be added to the ToolBar.
+ * @CyAPI.Spi.Interface
  */
 public interface ToolBarComponent {
 

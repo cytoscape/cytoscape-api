@@ -42,7 +42,8 @@ import javax.swing.JMenuItem;
 
 /**
  * A class that allows the enabled state of an Action of JMenuItem to managed in 
- * a consistent way.
+ * a consistent way. #ASKMIKE needs comments on several methods
+ * @CyAPI.Final.Class
  */
 public final class MenuEnableSupport {
 

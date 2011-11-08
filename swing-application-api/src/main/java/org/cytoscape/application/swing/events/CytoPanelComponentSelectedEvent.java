@@ -6,7 +6,8 @@ import org.cytoscape.application.swing.CytoPanelState;
 import org.cytoscape.event.AbstractCyEvent;
 
 /**
- *  The event fired to indicate that a CytoPanelComponent has been selected.
+ *  The event fired to indicate that a {@link org.cytoscape.application.swing.CytoPanelComponent} has been selected.
+ *  @CyAPI.Final.Class
  */
 public final class CytoPanelComponentSelectedEvent extends AbstractCyEvent<Object> {
 

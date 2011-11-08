@@ -31,8 +31,9 @@ package org.cytoscape.application.swing;
 
 
 /** 
- * An enum that describes CytoPanels uses compass directions
+ * An enum that describes {@link CytoPanel}s uses compass directions
  * to describe their location within the application.
+ * @CyAPI.Enum.Class
  */
 public enum CytoPanelName {
 	/**
@@ -41,17 +42,17 @@ public enum CytoPanelName {
 	SOUTH("Data Panel"),
 
 	/**
-	 * The east or righthand panel.
+	 * The east or right-hand panel.
 	 */
 	EAST("Results Panel"),
 
 	/**
-	 * The west or lefthand panel.
+	 * The west or left-hand panel.
 	 */
 	WEST("Control Panel"),
 
 	/**
-	 * The southwest or bottom left panel.
+	 * The south-west or bottom left panel.
 	 */
 	SOUTH_WEST("Tool Panel"),
 	;

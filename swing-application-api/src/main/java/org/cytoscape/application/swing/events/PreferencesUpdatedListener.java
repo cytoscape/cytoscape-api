@@ -4,12 +4,13 @@ package org.cytoscape.application.swing.events;
 import org.cytoscape.event.CyListener;
 
 /**
- * A listener for the PreferencesUpdatedEvent.
+ * A listener for the {@link PreferencesUpdatedEvent}.
+ * @CyAPI.Spi.Interface
  */
 public interface PreferencesUpdatedListener extends CyListener {
 
 	/**
-	 * Proces the specified event.
+	 * Process the specified event.
 	 * @param e The even to be processed.
 	 */
 	public void handleEvent(PreferencesUpdatedEvent e);
