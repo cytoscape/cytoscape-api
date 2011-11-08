@@ -37,7 +37,7 @@ package org.cytoscape.event;
  * <p>where ZZZ extends CyEvent! </b> 
  * <p>
  * Unfortunately, we can't parameterize this
- * because Java doesn't reify generic types, meaning a class 
+ * because Java doesn't verify generic types, meaning a class 
  * could only implement ONE instance of this interface, 
  * something that doesn't work for us.  And so we leave it
  * to convention.
