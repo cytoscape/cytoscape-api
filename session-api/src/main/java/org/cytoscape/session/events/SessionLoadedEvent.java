@@ -10,6 +10,7 @@ import org.cytoscape.session.CySessionManager;
  * {@link CySessionManager#setCurrentSession(CySession, String)} 
  * method and is used to notify interested parties in the change 
  * of state. 
+ * @CyAPI.Final.Class
  */
 public final class SessionLoadedEvent extends AbstractCyEvent<CySessionManager> {
 
@@ -18,8 +19,8 @@ public final class SessionLoadedEvent extends AbstractCyEvent<CySessionManager> 
 
 	/**
 	 * Constructor.
-	 * @param source The CySessionManager that is the source of this event.
-	 * @param session The CySession object that was just loaded.
+	 * @param source The {@link CySessionManager} that is the source of this event.
+	 * @param session The {@link CySession} object that was just loaded.
 	 * @param fileName the name of the file representing the session.
 	 */
 	public SessionLoadedEvent(final CySessionManager source, final CySession session, final String fileName) {

@@ -4,14 +4,15 @@ package org.cytoscape.session;
 /**
  * This class primarily acts as a listener and tracks the state of 
  * the Cytoscape application. This state can be interrogated at any
- * time and the result is an immutable CySession object suitable
+ * time and the result is an immutable {@link CySession} object suitable
  * for serialization. Likewise, setting a new session will replace
  * the current session with a new one.
+ * @CyAPI.Api.Interface
  */
 public interface CySessionManager {
 
 	/**
-	 * This method returns a CySession object describing the current
+	 * This method returns a {@link CySession} object describing the current
 	 * state of Cytoscape. The object returned is meant to
 	 * be used for serialization and is not meant to be used interactively
 	 * to track the state of Cytsocape.

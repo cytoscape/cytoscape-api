@@ -14,10 +14,11 @@ import org.cytoscape.property.session.Desktop;
 import org.cytoscape.session.CySessionManager;
 
 /**
- * This event is fired synchronously by the CySessionManager at beginning of the
+ * This event is fired synchronously by the {@link CySessionManager} at beginning of the
  * {@link CySessionManager#getCurrentSession()} method.  The intent is to allow
  * listeners to provide information to this event object or to update their 
  * state before that state is interrogated by the CySessionManager. 
+ * @CyAPI.Final.Class
  */
 public final class SessionAboutToBeSavedEvent extends AbstractCyEvent<CySessionManager> {
 	
@@ -28,7 +29,7 @@ public final class SessionAboutToBeSavedEvent extends AbstractCyEvent<CySessionM
 	// TODO should the source be the session manager??
 	/**
 	 * Constructor.
-	 * @param source The CySessionManager that will be saving the session.
+	 * @param source The {@link CySessionManager} that will be saving the session.
 	 */
 	public SessionAboutToBeSavedEvent(final CySessionManager source) {
 		super(source, SessionAboutToBeSavedListener.class);
@@ -66,7 +67,7 @@ public final class SessionAboutToBeSavedEvent extends AbstractCyEvent<CySessionM
 	/**
 	 * This method is not meant to be used by listeners for this event, 
 	 * although you can and no harm should come to you.  This method is
-	 * used by the CySessionManager to retrieve the list of files from
+	 * used by the {@link CySessionManager} to retrieve the list of files from
 	 * plugins.
 	 * @return A map of plugin names to lists of files to be stored in the
 	 * session for that plugin.
@@ -108,7 +109,8 @@ public final class SessionAboutToBeSavedEvent extends AbstractCyEvent<CySessionM
 	 * A method that allows plugins to add Cytopanel-related information to be
 	 * stored in the session.
 	 * @param cytopanel The CytoPanel to be added.
-	 * @throws NullPointerException If the cytopanel to be added is null.
+	 * @throws Exception 
+	 * @throws NullPointerException If the Cytopanel to be added is null.
 	 */
 	public void addCytopanel(Cytopanel cytopanel) throws Exception {
 		if (cytopanel == null)

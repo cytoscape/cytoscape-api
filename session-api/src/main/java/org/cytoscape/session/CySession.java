@@ -56,12 +56,13 @@ import org.slf4j.LoggerFactory;
  * <br/>
  * Creating an instance of CySession is done following the builder pattern.
  * For example, the following code creates a session that only includes
- * a list of networkViews and cytoscape properties, but nothing else.  
+ * a list of networkViews and Cytoscape properties, but nothing else.  
  * <br/>
  * <pre>
  * CySession session = new CySession.Builder().networkViews(viewList).cytoscapeProperties(cyProps).build();
  * </pre>
  * <br/>
+ * @CyAPI.Final.Class
  */
 public final class CySession {
 
@@ -123,6 +124,7 @@ public final class CySession {
 	/**
 	 * A implementation of the builder pattern used to construct immutable
 	 * instances of CySession objects.
+	 * @CyAPI.Static.Class
 	 */
 	public static class Builder {
 
