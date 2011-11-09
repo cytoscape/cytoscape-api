@@ -38,8 +38,9 @@ import java.awt.Container;
 import java.net.URI;
 import java.net.URISyntaxException;
 
+import javax.swing.JPanel;
+
 import org.cytoscape.io.webservice.WebServiceClient;
-import org.cytoscape.work.ProvidesGUI;
 
 
 
@@ -58,7 +59,7 @@ public abstract class AbstractWebServiceClient implements WebServiceClient {
 	private final String description;
 	
 	// By default, this is null.
-	protected final Container panel = null;
+	protected final JPanel panel = null;
 	
 	protected Object currentQuery = null;
 
@@ -102,7 +103,7 @@ public abstract class AbstractWebServiceClient implements WebServiceClient {
 	}
 
 
-	@Override @ProvidesGUI
+	@Override
 	public Container getQueryBuilderGUI() {
 		return panel;
 	}
