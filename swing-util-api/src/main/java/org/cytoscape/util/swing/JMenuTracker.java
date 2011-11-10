@@ -43,6 +43,7 @@ import java.util.StringTokenizer;
 
 /**
  * A class that creates and manages hierarchies of JMenu objects.
+ * @CyAPI.Final.Class
  */
 public final class JMenuTracker {
 	final private Map<String, MenuGravityTracker> menuMap;
@@ -87,7 +88,7 @@ public final class JMenuTracker {
 	}
 
 	/**
-	 * This method will fetch an exising menu or create a new one if a menu
+	 * This method will fetch an existing menu or create a new one if a menu
 	 * with the specified name does not exist. The menu name is specified
 	 * with a '.' delimited string, such that each token creates a new child
 	 * menu.  Insertion locations are determined in two possible ways: 1) a "gravity" or "weight"

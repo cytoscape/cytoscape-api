@@ -45,6 +45,7 @@ import java.awt.event.ActionListener;
 /**
  * This is an annoying re-implementation of JColorChooser.showDialog() that remembers
  * recently used colors between invocations of the chooser dialog.
+ * @CyAPI.Static.Class #ASKMIKE needs to be final and have private constructor
  */
 public class CyColorChooser {
 	protected static JColorChooser chooser = new JColorChooser();

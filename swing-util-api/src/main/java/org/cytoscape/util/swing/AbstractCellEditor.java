@@ -24,7 +24,8 @@ import java.util.EventObject;
 
 
 /**
- *
+ * #ASKMIKE Document me's
+ * @CyAPI.Abstract.Class
  */
 public class AbstractCellEditor implements CellEditor {
 	protected EventListenerList listenerList = new EventListenerList();
@@ -78,7 +79,7 @@ public class AbstractCellEditor implements CellEditor {
 	/**
 	 *  DOCUMENT ME!
 	 *
-	 * @param l DOCUMENT ME!
+	 * @param l The CellEditorListener to add.
 	 */
 	public void addCellEditorListener(CellEditorListener l) {
 		listenerList.add(CellEditorListener.class, l);
@@ -87,7 +88,7 @@ public class AbstractCellEditor implements CellEditor {
 	/**
 	 *  DOCUMENT ME!
 	 *
-	 * @param l DOCUMENT ME!
+	 * @param l The CellEditorListener to remove.
 	 */
 	public void removeCellEditorListener(CellEditorListener l) {
 		listenerList.remove(CellEditorListener.class, l);

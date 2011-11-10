@@ -45,7 +45,7 @@ import javax.swing.LayoutStyle;
  * Simple status bar with 3 fields.<br>
  * 
  * @author kono
- * 
+ * @CyAPI.Final.Class #ASKMIKE declare final
  */
 public class JStatusBar extends JPanel {
 	private final static long serialVersionUID = 1202339875133611L;
@@ -58,30 +58,27 @@ public class JStatusBar extends JPanel {
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Set the left label of this JStatusBar.
 	 * 
-	 * @param text
-	 *            DOCUMENT ME!
+	 * @param text The String to set the left label to.
 	 */
 	public void setLeftLabel(String text) {
 		leftLabel.setText(text);
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Set the center label of this JStatusBar.
 	 * 
-	 * @param text
-	 *            DOCUMENT ME!
+	 * @param text The String to set the center label to.
 	 */
 	public void setCenterLabel(String text) {
 		centerLabel.setText(text);
 	}
 
 	/**
-	 * DOCUMENT ME!
+	 * Set the right label of this JStatusBar.
 	 * 
-	 * @param text
-	 *            DOCUMENT ME!
+	 * @param text The String to set the right label to.
 	 */
 	public void setRightLabel(String text) {
 		rightLabel.setText(text);

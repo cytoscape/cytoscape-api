@@ -18,6 +18,9 @@ import org.cytoscape.model.events.NetworkDestroyedListener;
 import org.cytoscape.model.events.NetworkAddedListener;
 import javax.swing.DefaultComboBoxModel;
 
+/**
+ * @CyAPI.Final.Class   #ASKMIKE final? needs comments
+ */
 public class NetworkSelectorPanel extends JPanel implements NetworkAddedListener, NetworkDestroyedListener
 {
 	private static final long serialVersionUID = 8694272457769377810L;

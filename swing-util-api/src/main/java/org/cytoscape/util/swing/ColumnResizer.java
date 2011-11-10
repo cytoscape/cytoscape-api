@@ -54,7 +54,7 @@ import java.awt.*;
  * @since Cytoscape 2.4
  * @version 1.0
  * @author Joshua Marinacci, Chris Adamson, Keiichiro Ono
- *
+ * @CyAPI.Static.Class #ASKMIKE should be final and have private construct
  */
 public class ColumnResizer {
 	private static final int DEFLMAX_WIDTH = 280;

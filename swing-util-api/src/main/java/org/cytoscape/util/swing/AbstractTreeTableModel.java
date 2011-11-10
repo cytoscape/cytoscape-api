@@ -41,36 +41,42 @@ import javax.swing.tree.TreePath;
  * An abstract implementation of the TreeTableModel interface, handling the list
  * of listeners.
  * @author Philip Milne
+ * @CyAPI.Abstract.Class #ASKMIKE document me's
  */
 public abstract class AbstractTreeTableModel implements TreeTableModel {
+	/**
+	 * The root of this AbstractTreeTableModel.
+	 */
 	protected Object root;
+	/**
+	 * The {@link EventListenerList} associated with this AbstractTreeTableModel.
+	 */
 	protected EventListenerList listenerList = new EventListenerList();
 
 	/**
 	 * Creates a new AbstractTreeTableModel object.
 	 *
-	 * @param root  DOCUMENT ME!
+	 * @param root  The root of this AbstractTreeTableModel.
 	 */
 	public AbstractTreeTableModel(Object root) {
 		this.root = root;
 	}
 
-	//
 	/**
-	 *  DOCUMENT ME!
+	 *  Returns the root of this AbstractTreeTableModel.
 	 *
-	 * @return  DOCUMENT ME!
+	 * @return the root of this AbstractTreeTableModel.
 	 */
 	public Object getRoot() {
 		return root;
 	}
 
 	/**
-	 *  DOCUMENT ME!
+	 *  Returns true if the specified node is a leaf, false otherwise.
 	 *
-	 * @param node DOCUMENT ME!
+	 * @param node The node to check.
 	 *
-	 * @return  DOCUMENT ME!
+	 * @return  True if the specified node is a leaf, false otherwise.
 	 */
 	public boolean isLeaf(Object node) {
 		return getChildCount(node) == 0;
@@ -107,7 +113,7 @@ public abstract class AbstractTreeTableModel implements TreeTableModel {
 	/**
 	 *  DOCUMENT ME!
 	 *
-	 * @param l DOCUMENT ME!
+	 * @param l The TreeModelListener to add.
 	 */
 	public void addTreeModelListener(TreeModelListener l) {
 		listenerList.add(TreeModelListener.class, l);
@@ -116,13 +122,13 @@ public abstract class AbstractTreeTableModel implements TreeTableModel {
 	/**
 	 *  DOCUMENT ME!
 	 *
-	 * @param l DOCUMENT ME!
+	 * @param l The TreeModelListener to remove.
 	 */
 	public void removeTreeModelListener(TreeModelListener l) {
 		listenerList.remove(TreeModelListener.class, l);
 	}
 
-	/*
+	/**
 	 * Notify all listeners that have registered interest for
 	 * notification on this event type.  The event instance
 	 * is lazily created using the parameters passed into
@@ -148,7 +154,7 @@ public abstract class AbstractTreeTableModel implements TreeTableModel {
 		}
 	}
 
-	/*
+	/**
 	 * Notify all listeners that have registered interest for
 	 * notification on this event type.  The event instance
 	 * is lazily created using the parameters passed into
@@ -174,7 +180,7 @@ public abstract class AbstractTreeTableModel implements TreeTableModel {
 		}
 	}
 
-	/*
+	/**
 	 * Notify all listeners that have registered interest for
 	 * notification on this event type.  The event instance
 	 * is lazily created using the parameters passed into
@@ -200,7 +206,7 @@ public abstract class AbstractTreeTableModel implements TreeTableModel {
 		}
 	}
 
-	/*
+	/**
 	 * Notify all listeners that have registered interest for
 	 * notification on this event type.  The event instance
 	 * is lazily created using the parameters passed into

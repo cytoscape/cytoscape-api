@@ -10,6 +10,7 @@ import java.awt.*;
  * @version 0.7
  * @since Cytoscape 2.5
  * @author kono
+ * @CyAPI.Final.Class #ASKMIKE declare final, doc me's
   */
 public class DropDownMenuButton extends JButton {
 	private final static long serialVersionUID = 1202339868695691L;

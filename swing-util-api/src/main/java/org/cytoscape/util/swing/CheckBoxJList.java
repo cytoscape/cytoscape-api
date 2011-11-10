@@ -52,6 +52,7 @@ import java.util.List;
  * <p>
  *     Customized by Keiichiro Ono
  * </p>
+ * @CyAPI.Final.Class #ASKMIKE declare final
  */
 public class CheckBoxJList extends JList implements ListSelectionListener {
 	private final static long serialVersionUID = 120233987581935L;

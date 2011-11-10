@@ -49,6 +49,7 @@ import java.util.EventObject;
  *
  * @author Philip Milne
  * @author Scott Violet
+ * @CyAPI.Final.Class #ASKMIKE declare final, doc me's
  */
 public class JTreeTable extends JTable {
 	private final static long serialVersionUID = 1202339868625600L;
@@ -136,7 +137,7 @@ public class JTreeTable extends JTable {
 
 	/**
 	 * Overridden to message super and forward the method to the tree. Since the
-	 * tree is not actually in the component hieachy it will never receive this
+	 * tree is not actually in the component hierarchy it will never receive this
 	 * unless we forward it in this manner.
 	 */
 	public void updateUI() {
@@ -181,6 +182,7 @@ public class JTreeTable extends JTable {
 
 	/**
 	 * Returns the tree that is being shared between the model.
+	 * @return the {@link JTree} that is being shared between the model.
 	 */
 	public JTree getTree() {
 		return tree;
@@ -188,12 +190,17 @@ public class JTreeTable extends JTable {
 
 	/**
 	 * A TreeCellRenderer that displays a JTree.
+	 * @CyAPI.Final.Class #ASKMIKE declare final?
 	 */
 	public class TreeTableCellRenderer extends JTree implements TableCellRenderer {
 	private final static long serialVersionUID = 1202339868600141L;
 		/** Last table/tree row asked to renderer. */
 		protected int visibleRow;
 
+		/**
+		 * Constructs this TreeTabelCellRenderer.
+		 * @param model DOCUMENT ME!
+		 */
 		public TreeTableCellRenderer(TreeModel model) {
 			super(model);
 		}
@@ -242,7 +249,7 @@ public class JTreeTable extends JTable {
 		}
 
 		/**
-		 * Sublcassed to translate the graphics such that the last visible row
+		 * Subclassed to translate the graphics such that the last visible row
 		 * will be drawn at 0,0.
 		 */
 		public void paint(Graphics g) {
@@ -373,8 +380,9 @@ public class JTreeTable extends JTable {
 			// paths are the only thing that needs to be updated.
 		}
 
-		/**
-		 * Creates and returns an instance of ListSelectionHandler.
+		/** 
+		 * Creates and returns an instance of {@link ListSelectionHandler}.
+		 * @return the newly created instance of ListSelectionHandler.
 		 */
 		protected ListSelectionListener createListSelectionListener() {
 			return new ListSelectionHandler();
@@ -416,7 +424,7 @@ public class JTreeTable extends JTable {
 
 		/**
 		 * Class responsible for calling updateSelectedPathsFromSelectedRows
-		 * when the selection of the list changse.
+		 * when the selection of the list changes.
 		 */
 		class ListSelectionHandler implements ListSelectionListener {
 			public void valueChanged(ListSelectionEvent e) {

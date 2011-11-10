@@ -55,7 +55,7 @@ import java.util.List;
  * From <i>Swing Hacks</i> by Joshua Marinacci and Chris Adamson.
  * </p>
  * Customized by Keiichiro Ono
- *
+ * @CyAPI.Final.Class #ASKMIKE declare final, doc me's
  */
 public class FilterHistoryJList extends JList {
 	private final static long serialVersionUID = 1202339875121578L;

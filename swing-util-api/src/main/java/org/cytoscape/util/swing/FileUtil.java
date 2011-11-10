@@ -40,6 +40,7 @@ import java.util.Collection;
  * Provides a platform-dependent way to open files. Mainly
  * because Mac would prefer that you use java.awt.FileDialog
  * instead of the Swing FileChooser.
+ * @CyAPI.Api.Interface #ASKMIKE
  */
 public interface FileUtil {
 	/** The Cytoscape property that stores the last save/load directory. */
@@ -70,7 +71,7 @@ public interface FileUtil {
 	 * Returns a File object, this method should be used instead
 	 * of rolling your own JFileChooser.
 	 *
-	 * @return the location of the selcted file
+	 * @return the location of the selected file
 	 * @param parent the parent of the JFileChooser or FileDialog
 	 * @param title the title of the dialog box
 	 * @param load_save_custom a flag for the type of file dialog
@@ -83,14 +84,12 @@ public interface FileUtil {
 	 * Returns a File object, this method should be used instead
 	 * of rolling your own JFileChooser.
 	 *
-	 * @return the location of the selcted file
+	 * @return the location of the selected file
 	 * @param parent the parent of the JFileChooser or FileDialog
 	 * @param title the title of the dialog box
 	 * @param load_save_custom a flag for the type of file dialog
-	 * @param filters an array of FileChooserFilters that let you filter
-	 *                based on extension
 	 * @param start_dir an alternate start dir, if null the default
-	 *                  cytoscape MUD will be used
+	 *                  Cytoscape MUD will be used
 	 * @param custom_approve_text if this is a custom dialog, then
 	 *                            custom text should be on the approve
 	 *                            button.
@@ -102,7 +101,7 @@ public interface FileUtil {
 	/**
 	 * Returns an array of File objects, this method should be used instead
 	 * of rolling your own JFileChooser.
-	 * @return the location of the selcted file
+	 * @return the location of the selected file
 	 * @param parent the parent of the JFileChooser or FileDialog
 	 * @param title the title of the dialog box
 	 * @param load_save_custom a flag for the type of file dialog
@@ -119,10 +118,8 @@ public interface FileUtil {
 	 * @param parent the parent of the JFileChooser or FileDialog
 	 * @param title the title of the dialog box
 	 * @param load_save_custom a flag for the type of file dialog
-	 * @param filters an array of FileChooserFilters that let you filter
-	 *                based on extension
 	 * @param start_dir an alternate start dir, if null the default
-	 *                  cytoscape MUD will be used
+	 *                  Cytoscape MUD will be used
 	 * @param custom_approve_text if this is a custom dialog, then
 	 *                            custom text should be on the approve
 	 *                            button.
@@ -140,8 +137,6 @@ public interface FileUtil {
 	 * @param parent the parent of the JFileChooser or FileDialog
 	 * @param title the title of the dialog box
 	 * @param load_save_custom a flag for the type of file dialog
-	 * @param filters an array of FileChooserFilters that let you filter
-	 *                based on extension
 	 * @param start_dir an alternate start dir, if null the default
 	 *                  cytoscape MUD will be used
 	 * @param custom_approve_text if this is a custom dialog, then

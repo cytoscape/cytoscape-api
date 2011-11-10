@@ -43,12 +43,17 @@ import org.slf4j.LoggerFactory;
 
 /** This class inserts menu items and separators in a menu based on their "gravity".
  *  Items with higher gravity appear further down the menu.
+ *  @CyAPI.Final.Class
  */
 public final class MenuGravityTracker implements GravityTracker {
 	private final static Logger logger = LoggerFactory.getLogger(MenuGravityTracker.class);
 	private final JMenu menu;
 	private final Map<Component, Double> componentGravity;
 
+	/**
+	 * Constructor.
+	 * @param menu The JMenu associated with this MenuGravityTracker.
+	 */
 	public MenuGravityTracker(final JMenu menu) {
 		this.menu = menu;
 		this.componentGravity = new HashMap<Component, Double>();

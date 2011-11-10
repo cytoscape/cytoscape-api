@@ -41,7 +41,7 @@ import javax.swing.tree.TreeModel;
 
 /**
  * TreeTableModel is the model used by a JTreeTable. It extends TreeModel
- * to add methods for getting inforamtion about the set of columns each
+ * to add methods for getting information about the set of columns each
  * node in the TreeTableModel may have. Each column, like a column in
  * a TableModel, has a name and a type associated with it. Each node in
  * the TreeTableModel can return a value for each of the columns and
@@ -49,25 +49,35 @@ import javax.swing.tree.TreeModel;
  *
  * @author Philip Milne
  * @author Scott Violet
+ * @CyAPI.Api.Interface #ASKMIKE
  */
 public interface TreeTableModel extends TreeModel {
 	/**
-	 * Returns the number of availible columns.
+	 * Returns the number of available columns.
+	 * @return the number of available columns.
 	 */
 	public int getColumnCount();
 
 	/**
 	 * Returns the name for column number <code>column</code>.
+	 * @param column the column number.
+	 * @return the name for the column number.
 	 */
 	public String getColumnName(int column);
 
 	/**
 	 * Returns the type for column number <code>column</code>.
+	 * @param column the column number.
+	 * @return the type for the column.
 	 */
 	public Class getColumnClass(int column);
 
 	/**
 	 * Returns the value to be displayed for node <code>node</code>,
+	 * at column number <code>column</code>.
+	 * @param node The node to check.
+	 * @param column the column number.
+	 * @return the value to be displayed for node <code>node</code>,
 	 * at column number <code>column</code>.
 	 */
 	public Object getValueAt(Object node, int column);
@@ -75,12 +85,18 @@ public interface TreeTableModel extends TreeModel {
 	/**
 	 * Indicates whether the the value for node <code>node</code>,
 	 * at column number <code>column</code> is editable.
+	 * @param node The node to check.
+	 * @param column The column number.
+	 * @return True if editable, false otherwise.
 	 */
 	public boolean isCellEditable(Object node, int column);
 
 	/**
 	 * Sets the value for node <code>node</code>,
 	 * at column number <code>column</code>.
+	 * @param aValue The value to set to.
+	 * @param node The node to modify.
+	 * @param column The column number to modify.
 	 */
 	public void setValueAt(Object aValue, Object node, int column);
 }

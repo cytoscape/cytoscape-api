@@ -50,6 +50,7 @@ import javax.swing.tree.TreePath;
  *
  * @author Philip Milne
  * @author Scott Violet
+ * @CyAPI.Final.Class   #ASKMIKE final?
  */
 public class TreeTableModelAdapter extends AbstractTableModel {
 	private final static long serialVersionUID = 1202339875193043L;
@@ -103,40 +104,40 @@ public class TreeTableModelAdapter extends AbstractTableModel {
 
 	// Wrappers, implementing TableModel interface.
 	/**
-	 *  DOCUMENT ME!
+	 *  Returns the number of columns in the TreeTabelModel.
 	 *
-	 * @return  DOCUMENT ME!
+	 * @return  the int number of columns in the TreeTabelModel.
 	 */
 	public int getColumnCount() {
 		return treeTableModel.getColumnCount();
 	}
 
 	/**
-	 *  DOCUMENT ME!
+	 *  Returns the column name at the given column number.
 	 *
-	 * @param column DOCUMENT ME!
+	 * @param column The column number.
 	 *
-	 * @return  DOCUMENT ME!
+	 * @return  The name of the column,.
 	 */
 	public String getColumnName(int column) {
 		return treeTableModel.getColumnName(column);
 	}
 
 	/**
-	 *  DOCUMENT ME!
+	 *  Returns the class of the column at the given column number.
 	 *
-	 * @param column DOCUMENT ME!
+	 * @param column The column number.
 	 *
-	 * @return  DOCUMENT ME!
+	 * @return  The class of the column.
 	 */
 	public Class getColumnClass(int column) {
 		return treeTableModel.getColumnClass(column);
 	}
 
 	/**
-	 *  DOCUMENT ME!
+	 *  Returns the number of rows in the {@link JTree}.
 	 *
-	 * @return  DOCUMENT ME!
+	 * @return  The int number of rows in the JTree.
 	 */
 	public int getRowCount() {
 		return tree.getRowCount();
@@ -153,12 +154,12 @@ public class TreeTableModelAdapter extends AbstractTableModel {
 	}
 
 	/**
-	 *  DOCUMENT ME!
+	 *  Returns the value at the given row and column.
 	 *
-	 * @param row DOCUMENT ME!
-	 * @param column DOCUMENT ME!
+	 * @param row The row number.
+	 * @param column The column number.
 	 *
-	 * @return  DOCUMENT ME!
+	 * @return  The value at the given location.
 	 */
 	public Object getValueAt(int row, int column) {
 		Object tempObj = nodeForRow(row);
@@ -171,23 +172,23 @@ public class TreeTableModelAdapter extends AbstractTableModel {
 	}
 
 	/**
-	 *  DOCUMENT ME!
+	 *  Returns whether the cell at the given location is editable.
 	 *
-	 * @param row DOCUMENT ME!
-	 * @param column DOCUMENT ME!
+	 * @param row The row number.
+	 * @param column The column number.
 	 *
-	 * @return  DOCUMENT ME!
+	 * @return  True if the cell is editable, false otherwise.
 	 */
 	public boolean isCellEditable(int row, int column) {
 		return treeTableModel.isCellEditable(nodeForRow(row), column);
 	}
 
 	/**
-	 *  DOCUMENT ME!
+	 *  Sets the value at the given row and column..
 	 *
-	 * @param value DOCUMENT ME!
-	 * @param row DOCUMENT ME!
-	 * @param column DOCUMENT ME!
+	 * @param value The value to set to.
+	 * @param row The row number.
+	 * @param column The column number.
 	 */
 	public void setValueAt(Object value, int row, int column) {
 		treeTableModel.setValueAt(value, nodeForRow(row), column);

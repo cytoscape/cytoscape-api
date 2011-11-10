@@ -37,10 +37,16 @@ import javax.swing.undo.AbstractUndoableEdit;
  * A small convenience class that can be used to create new edits.  All
  * you should have to do is implement the undo() and redo() methods. The
  * benefit is that you don't need to worry about setting up names.
+ * @CyAPI.Abstract.Class
  */
 public abstract class CyAbstractEdit extends AbstractUndoableEdit {
+	/** The presentation name of this CyAbstractEdit. */
 	protected String desc;
 
+	/**
+	 * Constructor.
+	 * @param desc The presentation name of this CyAbstractEdit.
+	 */
 	public CyAbstractEdit(String desc) {
 		super();
 		this.desc = desc;
