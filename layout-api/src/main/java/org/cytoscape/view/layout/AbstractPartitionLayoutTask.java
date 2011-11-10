@@ -66,6 +66,11 @@ public abstract class AbstractPartitionLayoutTask extends AbstractBasicLayoutTas
 
 	/**
 	 * Creates a new AbstractPartitionLayoutTask object.
+	 * @param networkView the CyNetworkView being partitioned.
+	 * @param name #ASKMIKE
+	 * @param singlePartition 
+	 * @param selectedOnly 
+	 * @param staticNodes 
 	 */
 	public AbstractPartitionLayoutTask(final CyNetworkView networkView, final String name,
 				      final boolean singlePartition, final boolean selectedOnly, final Set<View<CyNode>> staticNodes) {

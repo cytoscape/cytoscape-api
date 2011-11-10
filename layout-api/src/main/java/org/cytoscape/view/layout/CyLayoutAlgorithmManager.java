@@ -38,7 +38,10 @@ import java.util.Collection;
  */
 public interface CyLayoutAlgorithmManager {
 
+	/** The name of the default layout. */
 	String DEFAULT_LAYOUT_NAME = "grid";
+	
+	/** The name of the default layout property. */
 	String DEFAULT_LAYOUT_PROPERTY_NAME = "layout.default";
 
 	/**

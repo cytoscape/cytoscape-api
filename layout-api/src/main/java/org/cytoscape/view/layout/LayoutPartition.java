@@ -86,8 +86,13 @@ public final class LayoutPartition {
 	// this partition
 	private int lockedNodes = 0;
 
+	/** The {@link TaskMonitor} associated with this LayoutPartition. */
 	protected TaskMonitor taskMonitor = null;
 	
+	/**
+	 * Sets the {@link TaskMonitor} for this LayoutPartition.
+	 * @param taskMonitor the TaskMonitor to use.
+	 */
 	public void setTaskMonitor(final TaskMonitor taskMonitor) {
 		this.taskMonitor = taskMonitor;
 	}
