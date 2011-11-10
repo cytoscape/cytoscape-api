@@ -30,27 +30,28 @@ package org.cytoscape.work.util;
 
 /**
  * A bounded number object whose bounds values cannot be modified
- * @param <N>  Any type of Number
+ * @param <N>  Any type of Number.
  * @author Pasteur
+ * @CyAPI.Abstract.Class
  */
 abstract public class AbstractBounded<N extends Comparable<N>> {
 	/**
-	 *  Initial value of the Bounded Object that will be modified
+	 *  Initial value of the Bounded Object that will be modified.
 	 */
 	private N value;
 
 	/**
-	 *  Value of the lower bound of the Bounded Object
+	 *  Value of the lower bound of the Bounded Object.
 	 */
 	private final N lower;
 
 	/**
-	 *  Value of the upper bound of the Bounded Object
+	 *  Value of the upper bound of the Bounded Object.
 	 */
 	private final N upper;
 
 	/**
-	 *  Whether or not the <code>value</code> could be set to the <code>upper</code> value
+	 *  Whether or not the <code>value</code> could be set to the <code>upper</code> value.
 	 *
 	 *  <p><pre>
 	 *    <code> if (upperStrict)</code> , then the <code>value</code> cannot be set to <code>upper</code>
@@ -59,7 +60,7 @@ abstract public class AbstractBounded<N extends Comparable<N>> {
 	private final boolean upperStrict;
 
 	/**
-	 *  Whether or not the <code>value</code> could be set to the <code>lower</code> value
+	 *  Whether or not the <code>value</code> could be set to the <code>lower</code> value.
 	 *
 	 *  <p><pre>
 	 *    <code> if (lowerStrict)</code> , then the <code>value</code> cannot be set to <code>lower</code>
@@ -70,11 +71,11 @@ abstract public class AbstractBounded<N extends Comparable<N>> {
 	/**
 	 *  Creates a new Bounded object.
 	 *
-	 *  @param lower        The lower bound value
-	 *  @param initValue    The initial value
-	 *  @param upper        The upper bound value
-	 *  @param lowerStrict	True means that the value cannot be equal to the lower bound
-	 *  @param upperStrict	True means that the value cannot be equal to the upper bound
+	 *  @param lower        The lower bound value.
+	 *  @param initValue    The initial value.
+	 *  @param upper        The upper bound value.
+	 *  @param lowerStrict	True means that the value cannot be equal to the lower bound.
+	 *  @param upperStrict	True means that the value cannot be equal to the upper bound.
 	 */
 	 public AbstractBounded(final N lower, final N initValue, final N upper, boolean lowerStrict, boolean upperStrict) {
 		if (lower == null)
@@ -94,18 +95,18 @@ abstract public class AbstractBounded<N extends Comparable<N>> {
 	}
 
 	/**
-	 *  Returns the upper limit of the object
+	 *  Returns the upper limit of the object.
 	 *
-	 * @return the upper bound
+	 * @return the upper bound.
 	 */
 	public N getUpperBound() {
 		return upper;
 	}
 
 	/**
-	 *  Returns the lower limit of the object
+	 *  Returns the lower limit of the object.
 	 *
-	 * @return the lower bound
+	 * @return the lower bound.
 	 */
 	public N getLowerBound() {
 		return lower;
@@ -114,7 +115,7 @@ abstract public class AbstractBounded<N extends Comparable<N>> {
 	/**
 	 *  Does the value have to be strictly lower than the upper bound?
 	 *
-	 *  @return true if the upper bound is strict, otherwise false
+	 *  @return true if the upper bound is strict, otherwise false.
 	 */
 	public boolean isUpperBoundStrict() {
 		return upperStrict;
@@ -123,16 +124,16 @@ abstract public class AbstractBounded<N extends Comparable<N>> {
 	/**
 	 * Does the value have to be strictly greater than the lower bound?
 	 *
-	 * @return true if the lower bound is strict, otherwise false
+	 * @return true if the lower bound is strict, otherwise false.
 	 */
 	public boolean isLowerBoundStrict() {
 		return lowerStrict;
 	}
 
 	/**
-	 *  Returns the value
+	 *  Returns the value.
 	 *
-	 * @return the current value of the <code>Bounded</code> object
+	 * @return the current value of the <code>Bounded</code> object.
 	 */
 	public synchronized N getValue() {
 		return value;
@@ -141,7 +142,7 @@ abstract public class AbstractBounded<N extends Comparable<N>> {
 	/**
 	 *  Set the value <code>v</code> as the value of the Bounded Object.
 	 *
-	 *  @param v the value to be set
+	 *  @param v the value to be set.
 	 */
 	public void setValue(final N v) {
 		if (v == null)

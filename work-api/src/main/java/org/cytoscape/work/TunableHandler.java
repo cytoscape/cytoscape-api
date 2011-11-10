@@ -7,6 +7,7 @@ import java.util.Properties;
 /** 
  * Interface for classes that deal with reading out and writing back 
  * <code>Tunable</code>s and their properties.
+ * @CyAPI.Spi.Interface
  */
 public interface TunableHandler {
 

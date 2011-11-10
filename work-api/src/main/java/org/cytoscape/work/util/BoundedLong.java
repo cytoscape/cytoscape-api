@@ -37,26 +37,27 @@
 package org.cytoscape.work.util;
 
 /**
- * A Long object which has <i>low</i> and <i>up</i> bounds
+ * A Long object which has <i>low</i> and <i>up</i> bounds.
+ * @CyAPI.Final.Class #ASKMIKE declare final
  */
 public class BoundedLong extends AbstractBounded<Long> {
 
 	/**
 	 * Creates a new Bounded Long object.
 	 *
-	 * @param lower  The lower bound value
-	 * @param initValue  Initial of default value for the Long
-	 * @param upper  The upper bound value
-	 * @param lowerStrict	True means that the value cannot be equal to the lower bound
-	 * @param upperStrict	True means that the value cannot be equal to the upper bound
+	 * @param lower  The lower bound value.
+	 * @param initValue  Initial of default value for the Long.
+	 * @param upper  The upper bound value.
+	 * @param lowerStrict	True means that the value cannot be equal to the lower bound.
+	 * @param upperStrict	True means that the value cannot be equal to the upper bound.
 	 */
 	public BoundedLong(final Long lower, final Long initValue, final Long upper, boolean lowerStrict, boolean upperStrict) {
 		super(lower,initValue,upper,lowerStrict,upperStrict);
 	}
 	
 	/**
-	 * Set a new value to the BoundedLong object
-	 * @param s String converted into Long
+	 * Set a new value to the BoundedLong object.
+	 * @param s String converted into Long.
 	 */
 	public void setValue(String s) {
 		setValue( Long.valueOf(s) );

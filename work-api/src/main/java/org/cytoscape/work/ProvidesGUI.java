@@ -21,6 +21,7 @@ import java.lang.annotation.Target;
  * </pre>
  * 
  * Please note that the method annotated with this needs to return a JPanel and take no arguments.
+ * @CyAPI.Api.Interface
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})

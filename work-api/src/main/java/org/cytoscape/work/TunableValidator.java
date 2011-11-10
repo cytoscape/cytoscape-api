@@ -30,11 +30,19 @@ package org.cytoscape.work;
  * The String message returned by <code>validate()</code> method is displayed to the user. 
  * 
  * @author Pasteur
- *
+ * @CyAPI.Spi.Interface
  */
 public interface TunableValidator {
+	/** This is what the TunableValidator can return. 
+	 * @CyAPI.Enum.Class
+	 */
 	public enum ValidationState {
-		INVALID, OK, REQUEST_CONFIRMATION
+		/** The input is invalid. */
+		INVALID, 
+		/** The input is valid. */
+		OK, 
+		/** Request confirmation from the user. */
+		REQUEST_CONFIRMATION
 	}
 
 	/**

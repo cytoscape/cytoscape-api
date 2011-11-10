@@ -147,6 +147,7 @@ package org.cytoscape.work;
  * </ul></ul></p>
  *
  * @author Pasteur
+ * @CyAPI.Spi.Interface
  */
 public interface Task {
 	/**
@@ -165,7 +166,7 @@ public interface Task {
 	 * need to specify the <code>throws Exception</code> clause 
 	 * for the <code>run</code> method. Moreover, exceptions
 	 * should be <i>the</i> way the <code>Task</code> communicates
-	 * the occurance of a fatal error, like a low-level exception or an invalid parameter,
+	 * the occurrence of a fatal error, like a low-level exception or an invalid parameter,
 	 * to the <code>TaskManager</code>.
 	 */
 	void run(TaskMonitor taskMonitor) throws Exception;

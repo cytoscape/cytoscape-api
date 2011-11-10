@@ -36,11 +36,13 @@ import javax.swing.undo.UndoableEditSupport;
  * A simple interface that provides access to a Swing Undo Service. 
  */
 public interface UndoSupport {
-	/** @return the <code>UndoManager</code> associated with this <code>UndoSupport</code> instance
+	/** Returns the <code>UndoManager</code> associated with this <code>UndoSupport</code> instance.
+	 * @return the <code>UndoManager</code> associated with this <code>UndoSupport</code> instance.
 	 */
 	UndoManager getUndoManager(); 
 
-	/** @return the <code>UndoableEditSupport</code> associated with this <code>UndoSupport</code> instance
+	/** Returns the <code>UndoableEditSupport</code> associated with this <code>UndoSupport</code> instance.
+	 * @return the <code>UndoableEditSupport</code> associated with this <code>UndoSupport</code> instance.
 	 */
 	UndoableEditSupport getUndoableEditSupport();
 }

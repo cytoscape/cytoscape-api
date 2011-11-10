@@ -41,15 +41,15 @@ import java.util.List;
 
 
 /**
- * A ListSelection object
+ * A ListSelection object.
  * 
- * @param <T>  type of item that will be listed
+ * @param <T>  type of item that will be listed.
  */
 class ListSelection<T> {
 
 	
 	/**
-	 * declares a List of items of type <code>T</code>
+	 * Declares a List of items of type <code>T</code>.
 	 */
 	protected final List<T> values;
 
@@ -69,9 +69,9 @@ class ListSelection<T> {
 
 	
 	/**
-	 * To get all the items of the <code>List<T> values</code>
+	 * To get all the items of the <code>List<T> values</code>.
 	 *
-	 * @return  an enumeration of all the items
+	 * @return  an enumeration of all the items.
 	 */
 	public List<T> getPossibleValues() {
 		return new ArrayList<T>(values);

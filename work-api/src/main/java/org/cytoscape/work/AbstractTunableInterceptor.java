@@ -46,17 +46,19 @@ import org.slf4j.Logger;
 
 /**
  * An abstract base class for TunableRecorder and TunableMutator implementations.  
+ * @param <T> The generic type of this AbstractTunableInterceptor.
+ * @CyAPI.Abstract.Class
  */
 public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 	private boolean throwException;
 
 	/**
-	 *  Store the Handlers
+	 *  Store the Handlers.
 	 */
 	protected final Map<Object, LinkedHashMap<String, T>> handlerMap;
 
 	/**
-	 *  Store the JPanel-returning methods
+	 *  Store the JPanel-returning methods.
 	 */
 	protected final Map<Object, Method> guiProviderMap;
 

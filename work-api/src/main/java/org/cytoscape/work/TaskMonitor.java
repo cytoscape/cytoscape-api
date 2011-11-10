@@ -5,6 +5,7 @@ package org.cytoscape.work;
  * Used by <code>Task</code>s to modify its user interface.
  *
  * @author Pasteur
+ * @CyAPI.Api.Interface
  */
 public interface TaskMonitor {
 	/**

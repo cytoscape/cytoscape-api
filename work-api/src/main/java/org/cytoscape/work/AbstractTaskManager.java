@@ -8,6 +8,7 @@ import java.util.Map;
 /** 
  * Provides access to a TunableInterceptor to all derived classes and a 
  * utility method to determine if an object has been annotated with Tunables.
+ *  @CyAPI.Abstract.Class #ASKMIKE need method/attribute comments
  */
 public abstract class AbstractTaskManager<T,C> implements TaskManager<T,C> {
 
@@ -16,7 +17,7 @@ public abstract class AbstractTaskManager<T,C> implements TaskManager<T,C> {
 	protected C executionContext;
 
 	/**
-	 * Initialises an <code>AbstractTaskManager</code> object by setting 
+	 * Initializes an <code>AbstractTaskManager</code> object by setting 
 	 * its <code>TunableInterceptor</code>.
 	 *
 	 * @param tunableMutator The <code>TunableMutator</code> to be 

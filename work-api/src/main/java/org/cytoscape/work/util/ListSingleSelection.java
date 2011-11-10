@@ -41,19 +41,20 @@ import java.util.List;
 
 
 /**
- * List with items of type <code>T</code> : only 1 item can be selected
+ * List with items of type <code>T</code> : only 1 item can be selected.
  *
- * @param <T>  type of items that will be listed
+ * @param <T>  type of items that will be listed.
+ * @CyAPI.Final.Class #ASKMIKE declare final
  */
 public class ListSingleSelection<T> extends ListSelection<T> {
 	
 	/**
-	 * The item that will be selected
+	 * The item that will be selected.
 	 */
 	private T selected;
 
 	/**
-	 * Creates a new ListSingleSelection object
+	 * Creates a new ListSingleSelection object.
 	 * 
 	 * <p><pre>
 	 * <b>example</b> :
@@ -68,7 +69,7 @@ public class ListSingleSelection<T> extends ListSelection<T> {
 	}
 
 	/**
-	 * Creates a new ListSingleSelection object
+	 * Creates a new ListSingleSelection object.
 	 *
 	 *<p><pre>
 	 *<b>example</b> :
@@ -91,18 +92,18 @@ public class ListSingleSelection<T> extends ListSelection<T> {
 	}
 
 	/**
-	 * Get the item that is currently selected
+	 * Get the item that is currently selected.
 	 *
-	 * @return  the selected item
+	 * @return  the selected item.
 	 */
 	public T getSelectedValue() {
 		return selected;
 	}
 
 	/**
-	 *  Set the <code>val</code> item of type <code>T</code> as selected in the ListSingleSelection
+	 *  Set the <code>val</code> item of type <code>T</code> as selected in the ListSingleSelection.
 	 *
-	 * @param val the selected item
+	 * @param val the selected item.
 	 */
 	public void setSelectedValue(T val) {
 		if (!values.contains(val))

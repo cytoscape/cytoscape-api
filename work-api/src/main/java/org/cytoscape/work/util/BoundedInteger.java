@@ -37,14 +37,15 @@
 package org.cytoscape.work.util;
 
 /**
- * An Integer object which has <i>low</i> and <i>up</i> bounds
+ * An Integer object which has <i>low</i> and <i>up</i> bounds.
+ * @CyAPI.Final.Class #ASKMIKE declare final
  */
 public class BoundedInteger extends AbstractBounded<Integer> {
 
 	/**
 	 * Creates a new Bounded Integer object.
 	 *
-	 * @param lower  The lower bound value
+	 * @param lower  The lower bound value.
 	 * @param initValue  Initial of default value for the Integer
 	 * @param upper  The upper bound value
 	 * @param lowerStrict	True means that the value cannot be equal to the lower bound

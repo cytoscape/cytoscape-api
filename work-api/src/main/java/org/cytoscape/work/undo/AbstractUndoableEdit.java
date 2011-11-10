@@ -34,6 +34,7 @@ package org.cytoscape.work.undo;
  * A small convenience class that can be used to create new undo/redo edits.  All
  * you should have to do is implement the undo() and redo() methods. The
  * benefit is that you don't need to worry about setting up names.
+ * @CyAPI.Abstract.Class
  */
 public abstract class AbstractUndoableEdit extends javax.swing.undo.AbstractUndoableEdit {
 	
@@ -52,7 +53,8 @@ public abstract class AbstractUndoableEdit extends javax.swing.undo.AbstractUndo
 		this.presentationName = presentationName;
 	}
 
-	/** @return a string representing the action that can be undone
+	/** Returns a string representing the action that can be undone.
+	 * @return a string representing the action that can be undone.
 	 */
 	@Override
 	public final String getPresentationName() {

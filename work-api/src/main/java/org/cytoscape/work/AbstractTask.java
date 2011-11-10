@@ -3,6 +3,7 @@ package org.cytoscape.work;
 
 /**
  *  A base class for tasks that need to be able to access the TaskIterator that contains them.
+ *  @CyAPI.Abstract.Class
  */
 public abstract class AbstractTask implements Task {
 	/**

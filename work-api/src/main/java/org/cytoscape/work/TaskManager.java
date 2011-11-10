@@ -3,6 +3,7 @@ package org.cytoscape.work;
 
 /**
  * Executes the Tasks found in the TaskIterator provided by a TaskFactory. 
+ * @CyAPI.Api.Interface
  */
 public interface TaskManager<T,C> {
 
@@ -17,7 +18,7 @@ public interface TaskManager<T,C> {
 
 	/**
 	 * Allows a user of a TaskManager to set the execution context for
-	 * the tast, for example the parent Window of a dialog or the top-level
+	 * the task, for example the parent Window of a dialog or the top-level
 	 * menu for menu generation.
 	 * @param context The object to serve as the execution context for the TaskManager.
 	 */

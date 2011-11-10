@@ -43,14 +43,15 @@ import java.util.Arrays;
 
 
 /**
- * List with items of type <code>T</code> : one or more items can be selected
+ * List with items of type <code>T</code> : one or more items can be selected.
  *
- * @param <T>  type of items that will be listed
+ * @param <T>  type of items that will be listed.
+ * @CyAPI.Final.Class #ASKMIKE declare final
  */
 public class ListMultipleSelection<T> extends ListSelection<T> {
 	
 	/**
-	 * The list of items that have been selected
+	 * The list of items that have been selected.
 	 */
 	private List<T> selected;
 
@@ -71,7 +72,7 @@ public class ListMultipleSelection<T> extends ListSelection<T> {
 	}
 
 	/**
-	 * Creates a new ListMultipleSelection object
+	 * Creates a new ListMultipleSelection object.
 	 * 
 	 * <p><pre>
 	 *<b>example</b> :
@@ -96,18 +97,18 @@ public class ListMultipleSelection<T> extends ListSelection<T> {
 	}
 
 	/**
-	 * Get the items that are currently selected
+	 * Get the items that are currently selected.
 	 *
-	 * @return a list of selected items
+	 * @return a list of selected items.
 	 */
 	public List<T> getSelectedValues() {
 		return new ArrayList<T>(selected);
 	}
 
 	/**
-	 *  Set the <code>T</code> items as selected in the ListMultipleSelection object
+	 *  Set the <code>T</code> items as selected in the ListMultipleSelection object.
 	 *
-	 * @param vals the selected items
+	 * @param vals the selected items.
 	 */
 	public void setSelectedValues(final List<T> vals) {
 		if (vals == null)

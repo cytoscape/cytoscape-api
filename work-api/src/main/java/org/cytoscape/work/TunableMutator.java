@@ -7,16 +7,17 @@ package org.cytoscape.work;
  * modifies</b> the values annotated with the {@link Tunable}
  * annotation.  Only one TunableMutator will be used by a given
  * {@link TaskManager}, and that is defined by the TaskManager
- * itself. You control which TunableMutator gets used by chosing
+ * itself. You control which TunableMutator gets used by choosing
  * the appropriate TaskManager.
  * </br>
  * When implementing this interface, it is recommended that you
  * use the {@link AbstractTunableInterceptor} class to do so.
  *
- * @param T The specific type of {@link TunableHandler} used to 
+ * @param <T> The specific type of {@link TunableHandler} used to 
  * process the tunables.
- * @param S The type of configuration object returned by this
+ * @param <S> The type of configuration object returned by this
  * TunableMutator.  
+ * @CyAPI.Api.Interface
  */
 public interface TunableMutator<T extends TunableHandler, S> {
 
@@ -27,7 +28,7 @@ public interface TunableMutator<T extends TunableHandler, S> {
 	 * JPanel, indicating that the TunableMutator should build its
 	 * configuration within that JPanel.  This method may be a 
 	 * no-op depending on the type of configuration.
-	 * @param o The context object in which the configuraiton will be built.
+	 * @param o The context object in which the configuration will be built.
 	 */
 	void setConfigurationContext(Object o);
 

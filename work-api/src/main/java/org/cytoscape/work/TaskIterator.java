@@ -9,7 +9,7 @@ import java.util.NoSuchElementException;
 
 /** A TaskIterator provides the functionality of sequencing tasks.  Tasks provided by TaskIterator
  *  can be executed by calling a TaskManager's execute() method.
- *
+ *  @CyAPI.Final.Class
  */
 public final class TaskIterator implements Iterator<Task> {
 	private final List<Task> tasks;
@@ -83,14 +83,17 @@ public final class TaskIterator implements Iterator<Task> {
 		}
 	}
 
-	/** @return true if a call to next() would return another Task, otherwise false
+	/** Returns true if a call to next() would return another Task, otherwise false.
+	 * @return true if a call to next() would return another Task, otherwise false.
 	 */
 	public boolean hasNext() {
 		return currentIndex < tasks.size();
 	}
 
-	/** @return the next Task in order if the TaskIterator can still yield more Tasks, otherwise throws
-	 *          an exception
+	/** Returns the next Task in order if the TaskIterator can still yield more Tasks, otherwise throws
+	 *          an exception.
+	 * @return the next Task in order if the TaskIterator can still yield more Tasks, otherwise throws
+	 *          an exception.
 	 */
 	public Task next() {
 		if (currentIndex < tasks.size()) {
