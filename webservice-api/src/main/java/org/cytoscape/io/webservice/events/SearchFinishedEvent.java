@@ -3,6 +3,7 @@ package org.cytoscape.io.webservice.events;
 import org.cytoscape.event.AbstractCyEvent;
 
 /**
+ * #ASKMIKE
  * @CyAPI.Final.Class
  */
 public final class SearchFinishedEvent<T> extends AbstractCyEvent<Object> {
