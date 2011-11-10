@@ -8,6 +8,10 @@ import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.DiscreteRange;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
 
+/**
+ * #ASKMIKE needs class comment, public method/attribute comments
+ * @CyAPI.Final.Class
+ */
 public final class ArrowShapeVisualProperty extends AbstractVisualProperty<ArrowShape> {
 	
 	// Presets

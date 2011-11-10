@@ -37,6 +37,10 @@ package org.cytoscape.view.presentation.property;
 import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.Range;
 
+/**
+ * #ASKMIKE needs class comment, public method comments, declare as final
+ * @CyAPI.Final.Class
+ */
 public class IntegerVisualProperty extends AbstractVisualProperty<Integer> {
 
 	/**
@@ -45,7 +49,7 @@ public class IntegerVisualProperty extends AbstractVisualProperty<Integer> {
 	 * @param id
 	 * @param name
 	 * @param targetDataType
-	 * @param range
+	 * @param range the {@link Range} for this IntegerVisualProperty.
 	 */
 	public IntegerVisualProperty(final Integer def, final Range<Integer> range, final String id, final String name,
 			final Class<?> targetDataType) {

@@ -42,6 +42,10 @@ import java.util.StringTokenizer;
 import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.Range;
 
+/**
+ * #ASKMIKE needs class comment, construct comment, declare as final
+ * @CyAPI.Final.Class
+ */
 public class PaintVisualProperty extends AbstractVisualProperty<Paint> { 
 
 	public PaintVisualProperty(final Paint def, final Range<Paint> range, final String id, final String name, final Class<?> targetDataType) {

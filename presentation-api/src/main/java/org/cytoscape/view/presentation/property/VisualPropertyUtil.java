@@ -7,7 +7,7 @@ import org.cytoscape.view.model.VisualProperty;
 
 /**
  * Utility functions for traversing visual lexicon tree.
- *
+ * @CyAPI.Static.Class #ASKMIKE declare final, private construct?
  */
 public class VisualPropertyUtil {
 

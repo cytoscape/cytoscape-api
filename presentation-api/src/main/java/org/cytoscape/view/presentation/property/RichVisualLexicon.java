@@ -17,6 +17,7 @@ import org.cytoscape.view.presentation.property.values.NodeShape;
 /**
  * Minimal set of Visual Properties for 3D rendering engines.
  *
+ * @CyAPI.Final.Class #ASKMIKE needs public attribute comments, declare as final
  */
 public class RichVisualLexicon extends MinimalVisualLexicon {
 	

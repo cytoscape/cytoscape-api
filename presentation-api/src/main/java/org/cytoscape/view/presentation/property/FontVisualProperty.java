@@ -45,6 +45,10 @@ import org.cytoscape.view.model.Range;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * #ASKMIKE needs class comment, construct comment
+ * @CyAPI.Final.Class
+ */
 public class FontVisualProperty extends AbstractVisualProperty<Font> {
 
 	private static final Range<Font> FONT_RANGE;

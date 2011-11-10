@@ -2,7 +2,7 @@ package org.cytoscape.view.presentation.events;
 
 /**
  * Listener for {@link RenderingEngineAboutToBeRemovedEvent}.
- *
+ * @CyAPI.Spi.Interface
  */
 public interface RenderingEngineAboutToBeRemovedListener {
 	

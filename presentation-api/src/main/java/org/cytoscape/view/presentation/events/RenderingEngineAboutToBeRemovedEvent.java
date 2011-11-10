@@ -7,7 +7,7 @@ import org.cytoscape.view.presentation.RenderingEngineManager;
 /**
  * When presentation (rendered graphics) is destroyed, this event should be
  * fired.
- * 
+ * @CyAPI.Final.Class
  */
 public final class RenderingEngineAboutToBeRemovedEvent extends AbstractCyEvent<RenderingEngineManager> {
 

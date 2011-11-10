@@ -17,8 +17,8 @@ import org.cytoscape.view.model.VisualProperty;
  * 
  * @param <T>
  *            source data object to be visualized. For now we have only one
- *            implementation for CyNetwork, but it can be anything, including
- *            CyTable.
+ *            implementation for {@link org.cytoscape.model.CyNetwork}, but it can be anything, including
+ *            {@link org.cytoscape.model.CyTable}.
  */
 public interface RenderingEngine<T> {
 
@@ -74,7 +74,7 @@ public interface RenderingEngine<T> {
 	 * @param <V> Data type, such as Color, String, Double, etc.
 	 * 
 	 * @param vp VisualProperty to be rendered as Icon.
-	 * @param value Value for the Icon.  For example, if V is shape, this can be redtangle, triangle, and so on.
+	 * @param value Value for the Icon.  For example, if V is shape, this can be rectangle, triangle, and so on.
 	 * @param width width of the icon
 	 * @param height height of the icon
 	 * 

@@ -20,7 +20,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * Implementations for common features for all VisualLexicons.
- *
+ * @CyAPI.Abstract.Class
  */
 public abstract class AbstractVisualLexicon implements VisualLexicon {
 
@@ -97,10 +97,10 @@ public abstract class AbstractVisualLexicon implements VisualLexicon {
 	}
 	
 	/**
-	 * Insert a Visual Property to the tree.
+	 * Insert a {@link VisualProperty} to the tree.
 	 * 
-	 * @param vp
-	 * @param parent
+	 * @param vp the VisualProperty to insert in the tree.
+	 * @param parent the parent of the VisualProperty to insert.
 	 */
 	protected void addVisualProperty(final VisualProperty<?> vp, final VisualProperty<?> parent) {
 		if(this.visualPropertyMap.containsKey(vp))
@@ -141,6 +141,11 @@ public abstract class AbstractVisualLexicon implements VisualLexicon {
 		return visualPropertyMap.containsKey(vp);
 	}
 
+	/** #ASKMIKE
+	 * @param type
+	 * @param id
+	 * @param vp
+	 */
 	protected final void addIdentifierMapping(final Class<?> type, final String id, final VisualProperty<?> vp) {
 		if ( type == null ) {
 			logger.warn("attempting to add VisualLexicon identifier lookup mapping with null type");

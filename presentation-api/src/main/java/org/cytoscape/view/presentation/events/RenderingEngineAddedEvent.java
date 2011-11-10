@@ -7,7 +7,7 @@ import org.cytoscape.view.presentation.RenderingEngineManager;
 /**
  * When new presentation is created, its factory always creates a {@linkplain RenderingEngine}).
  * The engine should be added to {@link RenderingEngineManager} and it fires this event.
- * 
+ * @CyAPI.Final.Class
  */
 public final class RenderingEngineAddedEvent extends
 		AbstractCyEvent<RenderingEngineManager> {

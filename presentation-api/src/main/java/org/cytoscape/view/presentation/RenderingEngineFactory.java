@@ -10,7 +10,8 @@ import org.cytoscape.view.model.VisualLexicon;
  * @param <T>
  *            Compatible data model for this factory. For example, if this
  *            parameter is set to {@linkplain org.cytoscape.model.CyNetwork}, the factory creates rendering
- *            engine for CyNetwork objects.
+ *            engine for {@link org.cytoscape.model.CyNetwork} objects.
+ * @CyAPI.Api.Interface
  */
 public interface RenderingEngineFactory<T> {
 

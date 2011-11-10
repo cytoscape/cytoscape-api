@@ -8,6 +8,10 @@ import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.DiscreteRange;
 import org.cytoscape.view.presentation.property.values.LineType;
 
+/**
+ * #ASKMIKE needs class comment, public method//attribute comments, declare as final
+ * @CyAPI.Final.Class
+ */
 public class LineTypeVisualProperty extends AbstractVisualProperty<LineType> {
 	
 	// Default basic line types.  Others will be provided from rendering engines.

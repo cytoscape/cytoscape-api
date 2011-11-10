@@ -12,15 +12,15 @@ import org.cytoscape.view.model.VisualLexicon;
  * <P>
  * Register/unregister engines are handled through
  * {@linkplain org.cytoscape.view.presentation.events.RenderingEngineAddedEvent}s.
- * 
+ * @CyAPI.Api.Interface
  */
 public interface RenderingEngineManager {
 	
 	/**
-	 * Provide default Visual Lexicon from a default engine factory.
+	 * Provide default {@link VisualLexicon} from a default engine factory.
 	 * In current implementation, this is always DING's lexicon.
 	 * 
-	 * @return default visual lexicon.
+	 * @return default VisualLexicon.
 	 */
 	VisualLexicon getDefaultVisualLexicon();
 

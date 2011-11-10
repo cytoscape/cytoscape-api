@@ -42,6 +42,10 @@ import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.DiscreteRange;
 import org.cytoscape.view.model.Range;
 
+/**
+ * #ASKMIKE needs class comment, public method comments, declare as final
+ * @CyAPI.Final.Class
+ */
 public class BooleanVisualProperty extends AbstractVisualProperty<Boolean> { 
 	
 	private static final Range<Boolean> BOOLEAN_RANGE;

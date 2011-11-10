@@ -37,6 +37,10 @@ package org.cytoscape.view.presentation.property;
 import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.Range;
 
+/**
+ * #ASKMIKE needs class comment, public method comments, declare final
+ * @CyAPI.Final.Class
+ */
 public class StringVisualProperty extends AbstractVisualProperty<String> {
 
 	public StringVisualProperty(final String def, final Range<String> range, final String id, final String name, final Class<?> targetDataType) {

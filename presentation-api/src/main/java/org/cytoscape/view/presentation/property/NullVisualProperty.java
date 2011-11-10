@@ -11,7 +11,8 @@ import org.cytoscape.view.model.Range;
 /**
  * Visual Property for root. This will not be used in actual visualization. Just
  * a marker node in the tree.
- * 
+ *
+ * @CyAPI.Final.Class #ASKMIKE  public method comments, declare as final
  */
 public class NullVisualProperty extends AbstractVisualProperty<NullDataType> {
 
