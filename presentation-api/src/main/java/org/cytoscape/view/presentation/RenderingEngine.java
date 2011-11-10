@@ -19,6 +19,7 @@ import org.cytoscape.view.model.VisualProperty;
  *            source data object to be visualized. For now we have only one
  *            implementation for {@link org.cytoscape.model.CyNetwork}, but it can be anything, including
  *            {@link org.cytoscape.model.CyTable}.
+ * @CyAPI.Api.Interface
  */
 public interface RenderingEngine<T> {
 
