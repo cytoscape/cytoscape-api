@@ -6,6 +6,9 @@ import java.awt.Component;
 import java.awt.Dialog;
 import java.awt.Window;
 
+/**
+ * @CyAPI.Final.Class   #ASKMIKE final?, method/class comment
+ */
 public class TunableDialog extends JDialog {
 
 	private static final long serialVersionUID = 7438623438647443009L;
@@ -13,6 +16,10 @@ public class TunableDialog extends JDialog {
 	protected JPanel parentPanel = null;
 	private String userInput = "";
 
+	/**
+	 * Construct this TunableDialog.
+	 * @param parent The parent Window of this TunableDialog.
+	 */
 	public TunableDialog(final Window parent) {
 		super(parent);
 		this.setModalityType(Dialog.ModalityType.APPLICATION_MODAL);
@@ -26,7 +33,9 @@ public class TunableDialog extends JDialog {
 		this.setSize(this.getSize().width + 30, this.getSize().height + 30);
 	}
 
-	// Set the text to replace the "OK" string on OK button
+	/** Set the text to replace the "OK" string on OK button. 
+	 * @param okText the text to replace "OK" on the OK button.
+	 * */
 	public void setOKtext(String okText) {
 		this.btnOK.setText(okText);
 	}

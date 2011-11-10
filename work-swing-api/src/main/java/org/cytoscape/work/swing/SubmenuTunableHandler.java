@@ -9,6 +9,7 @@ import org.cytoscape.work.TaskFactory;
 
 /**
  * A TunableHandler specifically for generating dynamic submenus.
+ * @CyAPI.Spi.Interface
  */
 public interface SubmenuTunableHandler extends TunableHandler {
 

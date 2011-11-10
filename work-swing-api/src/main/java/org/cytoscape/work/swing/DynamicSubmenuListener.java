@@ -10,6 +10,7 @@ import javax.swing.event.PopupMenuListener;
  * dynamic submenus. This interface allows the top name of the
  * dynamic menu to be set and allows the menu to be enabled or
  * disabled based on the state of the system.
+ * @CyAPI.Api.Interface
  */
 public interface DynamicSubmenuListener extends MenuListener, PopupMenuListener {
 

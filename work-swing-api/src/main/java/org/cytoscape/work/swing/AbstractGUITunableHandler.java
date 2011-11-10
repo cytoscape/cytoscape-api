@@ -20,12 +20,14 @@ import org.cytoscape.work.AbstractTunableHandler;
 import org.cytoscape.work.Tunable;
 
 
-/** Base class for the various Swing implementations of <code>TunableHandler</code>. */
+/** Base class for the various Swing implementations of <code>TunableHandler</code>. 
+ * @CyAPI.Abstract.Class
+ */
 public abstract class AbstractGUITunableHandler
 	extends AbstractTunableHandler implements GUITunableHandler, ActionListener, ChangeListener, ListSelectionListener
 {
 	/**
-	 *  If true, the associated GUI element should be layed out next to others in the same group,
+	 *  If true, the associated GUI element should be laid out next to others in the same group,
 	 *  if false, it should be vertically stacked relative to the others.
 	 */
 	protected boolean horizontal;

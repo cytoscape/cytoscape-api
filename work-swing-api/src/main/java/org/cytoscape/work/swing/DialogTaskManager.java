@@ -17,7 +17,7 @@ import org.cytoscape.work.TaskManager;
 public interface DialogTaskManager extends TaskManager<JDialog,Window> {
 
 	/**
-	 * An additional execute method that allows {@link Tunable} annotated
+	 * An additional execute method that allows {@link org.cytoscape.work.Tunable} annotated
 	 * fields and methods to be ignored in the TaskFactory object.
 	 * @param tf The TaskFactory to be executed.
 	 * @param ignoreTaskFactoryTunables If true any tunables found in the

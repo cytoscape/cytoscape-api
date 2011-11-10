@@ -12,11 +12,12 @@ import org.cytoscape.work.TunableHandler;
  * <br>
  * Any implementation of this interface should extend {@link AbstractGUITunableHandler}
  * to avoid the difficult handling of dependencies!
+ * @CyAPI.Spi.Interface
  */
 public interface GUITunableHandler extends TunableHandler {
 
 	/**
-	 * to get the panel that contains the GUI representation
+	 * To get the panel that contains the GUI representation
 	 * (<code>JTextField, JFileChooser, JLabel, JList ...</code>)
 	 *
 	 * @return the panel containing GUI

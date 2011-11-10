@@ -14,6 +14,7 @@ import org.cytoscape.work.TaskManager;
  * {@link org.cytoscape.work.util.ListSingleSelection}&lt;String&gt; field
  * or method annotated with {@link org.cytoscape.work.Tunable}.  The strings
  * found in the ListSingleSelection object will define the submenus.
+ * @CyAPI.Api.Interface
  */
 public interface SubmenuTaskManager extends TaskManager<DynamicSubmenuListener,Object> {
 	
