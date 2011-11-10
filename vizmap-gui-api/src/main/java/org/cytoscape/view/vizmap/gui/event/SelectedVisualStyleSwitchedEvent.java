@@ -3,6 +3,10 @@ package org.cytoscape.view.vizmap.gui.event;
 import org.cytoscape.event.AbstractCyEvent;
 import org.cytoscape.view.vizmap.VisualStyle;
 
+/**
+ * #ASKMIKE constructor/method comments
+ * @CyAPI.Final.Class
+ */
 public final class SelectedVisualStyleSwitchedEvent extends AbstractCyEvent<Object> {
 	
 	private final VisualStyle lastVS;

@@ -54,7 +54,7 @@ import org.cytoscape.view.vizmap.VisualStyle;
  *  <li>Property Sheet
  * </ul>
  * <p>
- * Since there is no "current Visual Style" in the viamap api, the replacement for 
+ * Since there is no "current Visual Style" in the vizmap api, the replacement for 
  * "current VS" is "selected visual style" managed here.
  * <p>
  * This component tracks the selected Visual Style.

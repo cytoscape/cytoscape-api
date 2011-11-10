@@ -5,6 +5,9 @@ import java.util.Set;
 
 import org.cytoscape.view.model.VisualProperty;
 
+/**
+ * @CyAPI.Abstract.Class
+ */
 public abstract class AbstractVisualPropertyDependency implements
 		VisualPropertyDependency {
 	

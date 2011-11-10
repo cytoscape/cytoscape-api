@@ -4,6 +4,9 @@ import java.util.Collection;
 
 import org.cytoscape.view.vizmap.VisualMappingFunctionFactory;
 
+/**
+ * @CyAPI.Api.Interface
+ */
 public interface MappingFunctionFactoryManager {
 	
 	Collection<VisualMappingFunctionFactory> getFactories();

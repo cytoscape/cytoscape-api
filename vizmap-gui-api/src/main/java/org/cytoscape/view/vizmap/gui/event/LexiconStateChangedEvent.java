@@ -5,6 +5,10 @@ import java.util.Set;
 import org.cytoscape.event.AbstractCyEvent;
 import org.cytoscape.view.model.VisualProperty;
 
+/**
+ * #ASKMIKE constructor/method comments
+ * @CyAPI.Final.Class
+ */
 public final class LexiconStateChangedEvent extends AbstractCyEvent<Object> {
 
 	private final Set<VisualProperty<?>> enabled;
