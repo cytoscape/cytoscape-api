@@ -39,6 +39,7 @@ package org.cytoscape.model.subnetwork;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
+import org.cytoscape.model.CyTable;
 
 import java.util.List;
 
@@ -65,6 +66,11 @@ import java.util.List;
  * @CyAPI.Api.Interface
  */
 public interface CyRootNetwork extends CyNetwork {
+
+	/**
+	 * The name of the table shared by all subnetworks. 
+	 */
+	String SHARED_ATTRS = "SHARED_ATTRS";
 
 	/**
 	 * Create an empty {@link CySubNetwork}. 
@@ -111,4 +117,28 @@ public interface CyRootNetwork extends CyNetwork {
 	 * returns false otherwise or if the network is null.
 	 */
 	boolean containsNetwork(CyNetwork n);
+
+	/**
+	 * Returns the network table shared by all subnetworks. The columns of this table 
+	 * are automatically made into virtual columns of the DEFAULT network table of 
+	 * each subnetwork of this root network.
+	 * @return the network table shared by all subnetworks.
+	 */
+	CyTable getSharedNetworkTable();
+
+	/**
+	 * Returns the node table shared by all subnetworks. The columns of this table 
+	 * are automatically made into virtual columns of the DEFAULT node table of 
+	 * each subnetwork of this root network.
+	 * @return the network table shared by all subnetworks.
+	 */
+	CyTable getSharedNodeTable();
+
+	/**
+	 * Returns the edge table shared by all subnetworks. The columns of this table 
+	 * are automatically made into virtual columns of the DEFAULT edge table of 
+	 * each subnetwork of this root network.
+	 * @return the network table shared by all subnetworks.
+	 */
+	CyTable getSharedEdgeTable();
 }

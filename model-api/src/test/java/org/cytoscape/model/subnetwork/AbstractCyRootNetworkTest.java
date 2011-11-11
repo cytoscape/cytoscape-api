@@ -42,6 +42,7 @@ import org.cytoscape.event.CyListener;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
+import org.cytoscape.model.CyTable;
 import org.cytoscape.model.DummyCyNode;
 import org.cytoscape.model.DummyCyEdge;
 
@@ -631,7 +632,7 @@ public abstract class AbstractCyRootNetworkTest {
 		assertTrue( n.containsNode(n3) );
 	}
 
-	@Test
+	@Test(expected=IllegalArgumentException.class)
 	public void testAddSubNetworkWithInvalidNodesAndGoodEdges() {
 		CyNode n1 = root.addNode();
 		CyNode n2 = root.addNode();
@@ -642,16 +643,10 @@ public abstract class AbstractCyRootNetworkTest {
 		List<CyNode> nodes = Arrays.asList( b1, b2 );
 		List<CyEdge> edges = Arrays.asList( e1 );
 
-		try {
-			CySubNetwork n = root.addSubNetwork(nodes, edges);
-		} catch (IllegalArgumentException iae) {
-			return;
-		}
-
-		fail("shouldn't allow nodes not in root network to be used");
+		CySubNetwork n = root.addSubNetwork(nodes, edges);
 	}
 
-	@Test
+	@Test(expected=IllegalArgumentException.class)
 	public void testAddSubNetworkWithGoodNodesAndInvalidEdges() {
 		CyNode n1 = root.addNode();
 		CyNode n2 = root.addNode();
@@ -661,12 +656,33 @@ public abstract class AbstractCyRootNetworkTest {
 		List<CyNode> nodes = Arrays.asList( n1, n2, n3 );
 		List<CyEdge> edges = Arrays.asList( ex );
 
-		try {
-			CySubNetwork n = root.addSubNetwork(nodes, edges);
-		} catch (IllegalArgumentException iae) {
-			return;
-		}
-
-		fail("shouldn't allow edges not in root network to be used");
+		CySubNetwork n = root.addSubNetwork(nodes, edges);
 	}
+
+    @Test
+    public void testGetSharedNetworkTable() {
+		CyTable shared = root.getSharedNetworkTable();
+        assertNotNull(shared);
+		shared.createColumn("homer",String.class,false);
+		CySubNetwork sub = root.addSubNetwork();
+		assertNotNull( sub.getDefaultNetworkTable().getColumn("homer") );	
+    }
+
+    @Test
+    public void testGetSharedNodeTable() {
+		CyTable shared = root.getSharedNodeTable();
+        assertNotNull(shared);
+		shared.createColumn("homer",String.class,false);
+		CySubNetwork sub = root.addSubNetwork();
+		assertNotNull( sub.getDefaultNodeTable().getColumn("homer") );	
+    }
+
+    @Test
+    public void testGetSharedEdgeTable() {
+		CyTable shared = root.getSharedEdgeTable();
+        assertNotNull(shared);
+		shared.createColumn("homer",String.class,false);
+		CySubNetwork sub = root.addSubNetwork();
+		assertNotNull( sub.getDefaultEdgeTable().getColumn("homer") );	
+    }
 }
