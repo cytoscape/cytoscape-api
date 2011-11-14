@@ -42,18 +42,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.table.TableCellRenderer;
-
-import org.cytoscape.model.CyTable;
 import org.cytoscape.model.CyTableEntry;
-import org.cytoscape.view.model.VisualLexicon;
 import org.cytoscape.view.model.VisualProperty;
 
 
 /**
  * Manages currently available editors
- *
- * @author kono
  *
  */
 public interface EditorManager {

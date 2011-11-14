@@ -47,6 +47,7 @@ import javax.swing.table.TableCellRenderer;
 /**
  * #ASKMIKE class/attribute comments, entire vizmap-gui-api needs looking over
  * @param <T> The generic type of this AbstractVisualPropertyEditor.
+ * 
  * @CyAPI.Abstract.Class
  */
 public abstract class AbstractVisualPropertyEditor<T> implements VisualPropertyEditor<T> {

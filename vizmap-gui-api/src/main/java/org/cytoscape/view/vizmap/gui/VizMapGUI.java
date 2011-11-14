@@ -40,12 +40,10 @@ import java.awt.Component;
 
 import javax.swing.JPanel;
 
-import org.cytoscape.view.vizmap.VisualStyle;
-
 
 /**
  * <p>
- * The top-level component of Viz Map GUI.
+ * The top-level GUI component of VizMap GUI.
  * <p>
  * VizMapGUI consists of three parts:
  * <ul>
@@ -63,13 +61,20 @@ import org.cytoscape.view.vizmap.VisualStyle;
   */
 public interface VizMapGUI {
 	
-	public DefaultViewEditor getDefaultViewEditor();
-	public void setDefaultViewEditor(final DefaultViewEditor defViewEditor);
-
-	public JPanel getDefaultViewPanel();
-	public void setDefaultViewPanel(JPanel defViewPanel);
+	/**
+	 * Returns Default View Editor.
+	 * Default View Editor is immutable.
+	 * 
+	 * @return default view editor
+	 */
+	DefaultViewEditor getDefaultViewEditor();
 	
-	public Component getVisualMappingBrowser();
-	public void setVisualMappingBrowser(Component visualMappingBrowser);
 	
+	/**
+	 * Returns Default View Panel.
+	 * This panel is immutable.
+	 * 
+	 * @return Default view on {@link JPanel}.
+	 */
+	JPanel getDefaultViewPanel();
 }

@@ -5,7 +5,7 @@ import java.util.Set;
 import org.cytoscape.view.model.VisualProperty;
 
 /**
- * Defines the dependency
+ * Defines the dependency of Visual Properties.
  * 
  */
 public interface VisualPropertyDependency {

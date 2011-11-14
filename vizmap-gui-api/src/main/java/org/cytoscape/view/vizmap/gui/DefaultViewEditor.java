@@ -22,6 +22,7 @@ public interface DefaultViewEditor {
 
 	/**
 	 * Show the default view editor in the specified parent component.
+	 * 
 	 * @param parent The component in which the default view should be shown.
 	 */
 	void showEditor(Component parent);
