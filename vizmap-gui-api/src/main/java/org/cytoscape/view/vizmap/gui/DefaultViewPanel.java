@@ -6,6 +6,7 @@ import org.cytoscape.view.presentation.RenderingEngine;
 /**
  * GUI component to display default appearance of current Visual Style.
  *
+ * @CyAPI.Api.Interface
  */
 public interface DefaultViewPanel {
 

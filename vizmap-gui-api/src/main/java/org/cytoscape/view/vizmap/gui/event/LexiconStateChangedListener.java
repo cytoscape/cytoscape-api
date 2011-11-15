@@ -2,6 +2,7 @@ package org.cytoscape.view.vizmap.gui.event;
 
 /**
  * Listener for {@link LexiconStateChangedEvent}.
+ * 
  * @CyAPI.Spi.Interface
  */
 public interface LexiconStateChangedListener {

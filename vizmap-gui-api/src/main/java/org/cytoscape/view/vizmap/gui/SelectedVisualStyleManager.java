@@ -5,6 +5,7 @@ import org.cytoscape.view.vizmap.VisualStyle;
 /**
  * Manages current (selected) Visual Style. Selected style will be set by
  * {@link org.cytoscape.view.vizmap.gui.event.SelectedVisualStyleSwitchedListener}.
+ * 
  * @CyAPI.Api.Interface
  */
 public interface SelectedVisualStyleManager {

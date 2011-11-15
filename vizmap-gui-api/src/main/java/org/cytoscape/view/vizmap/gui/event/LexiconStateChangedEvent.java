@@ -6,7 +6,10 @@ import org.cytoscape.event.AbstractCyEvent;
 import org.cytoscape.view.model.VisualProperty;
 
 /**
- * #ASKMIKE constructor/method comments
+ * Tell listeners a enabled/disabled visual properties.
+ * 
+ * TODO: Refactor dependency mechanism.
+ * 
  * @CyAPI.Final.Class
  */
 public final class LexiconStateChangedEvent extends AbstractCyEvent<Object> {
@@ -14,6 +17,13 @@ public final class LexiconStateChangedEvent extends AbstractCyEvent<Object> {
 	private final Set<VisualProperty<?>> enabled;
 	private final Set<VisualProperty<?>> disabled;
 
+	/**
+	 * Constructor of the event.
+	 * 
+	 * @param source Source of this event.
+	 * @param enabled set of Visual Properties to be enabled in the lexicon.
+	 * @param disabled set of Visual Properties to be disabled in the lexicon.
+	 */
 	public LexiconStateChangedEvent(final Object source,
 			final Set<VisualProperty<?>> enabled,
 			final Set<VisualProperty<?>> disabled) {
@@ -22,10 +32,20 @@ public final class LexiconStateChangedEvent extends AbstractCyEvent<Object> {
 		this.disabled = disabled;
 	}
 
+	/**
+	 * Get set of Visual Properties to be disabled in the lexicon.
+	 * 
+	 * @return set of lexicon to be disabled
+	 */
 	public Set<VisualProperty<?>> getDisabled() {
 		return this.disabled;
 	}
 
+	/**
+	 * Get set of Visual Properties to be enabled in the lexicon.
+	 * 
+	 * @return set of VP to be enabled.
+	 */
 	public Set<VisualProperty<?>> getEnabled() {
 		return this.enabled;
 	}

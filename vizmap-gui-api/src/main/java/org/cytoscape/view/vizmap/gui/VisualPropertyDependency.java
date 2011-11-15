@@ -7,6 +7,7 @@ import org.cytoscape.view.model.VisualProperty;
 /**
  * Defines the dependency of Visual Properties.
  * 
+ * @CyAPI.Api.Interface
  */
 public interface VisualPropertyDependency {
 	

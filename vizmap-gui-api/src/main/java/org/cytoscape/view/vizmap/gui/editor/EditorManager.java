@@ -47,11 +47,12 @@ import org.cytoscape.view.model.VisualProperty;
 
 
 /**
- * Manages currently available editors
+ * Manages all editor objects for ViaMap GUI.
+ * 
  *
+ * @CyAPI.Api.Interface
  */
 public interface EditorManager {
-	
 	
 	/**
 	 * Editor window state
@@ -64,95 +65,112 @@ public interface EditorManager {
 	public static final String EDITOR_WINDOW_CLOSED = "EDITOR_WINDOW_CLOSED";
 
 	/**
-	 * Listener for editor displayer service.
-	 *
-	 * @param va
-	 *            DOCUMENT ME!
-	 * @param properties
-	 *            DOCUMENT ME!
+	 * Add value editor OSGi services.
+	 * 
+	 * @param va New value editor to be added.
+	 * @param properties OSGi service metadata.
 	 */
 	@SuppressWarnings("unchecked")
 	public void addValueEditor(ValueEditor<?> va, Map properties);
 
+
 	/**
-	 * Listener for OSGi service.
-	 *
-	 * @param va
-	 *            DOCUMENT ME!
-	 * @param properties
-	 *            DOCUMENT ME!
+	 * Remove an editor from manager (through OSGi).
+	 * 
+	 * @param va editor to be removed.
+	 * @param properties OSGi metadata
 	 */
 	@SuppressWarnings("unchecked")
 	public void removeValueEditor(ValueEditor<?> va, Map properties);
-	
+
+
 	/**
-	 * Display discrete value editor for this visual property.
-	 * @param <V> DOCUMENT ME!
-	 * @param parentComponent DOCUMENT ME!
-	 * @param type DOCUMENT ME!
-	 * @param initialVal DOCUMENT ME!
-	 *
-	 * @return DOCUMENT ME!
-	 *
+	 * Display value editor to get a new value.
+	 * 
+	 * @param parentComponent parent GUI component
+	 * @param type Visual Property type to be edited
+	 * @param initialVal default value for the editor.
+	 * 
+	 * @return New value fot the given Visual Property.
+	 * 
 	 * @throws Exception
-	 *             DOCUMENT ME!
 	 */
 	public <V> V showVisualPropertyValueEditor(Component parentComponent, VisualProperty<V> type, V initialVal)
-	    throws Exception;
+			throws Exception;
 
+	
 	/**
 	 * Display continuous value editor.
 	 *
 	 * <p>
-	 * Continuous editor always update mapping automatically, so there is no
+	 * Continuous editor always update mapping in real-time, so there is no
 	 * return value.
 	 * </p>
-	 * @param <V> DOCUMENT ME!
-	 * @param parentComponent DOCUMENT ME!
-	 * @param type DOCUMENT ME!
-	 *
-	 * @throws Exception
-	 *             DOCUMENT ME!
+	 * 
+	 * @param parentComponent parent GUI component
+	 * @param type Visual Property to be edited
+	 * @throws Exception 
 	 */
-	public <V> void showContinuousEditor(Component parentComponent, VisualProperty<V> type)
-	    throws Exception;
+	public <V> void showContinuousEditor(Component parentComponent, VisualProperty<V> type) throws Exception;
+	
 	
 	/**
 	 * Returns the {@link VisualPropertyEditor} for the given {@link VisualProperty}.
+	 * 
 	 * @param <V> the generic type of the VisualProperty.
 	 * @param vp the {@link VisualProperty} to get the VisualPropertyEditor of.
 	 * @return the {@link VisualPropertyEditor} for the given {@link VisualProperty}.
 	 */
-	public <V> VisualPropertyEditor<V> getVisualPropertyEditor(VisualProperty<V> vp);
+	<V> VisualPropertyEditor<V> getVisualPropertyEditor(VisualProperty<V> vp);
 
 	/**
-	 * DOCUMENT ME!
+	 * Returns editors for individual cells in discrete mapping editor.
 	 * 
-	 * @return DOCUMENT ME!
+	 * @return all available cell editors.
 	 */
-	public List<PropertyEditor> getCellEditors();
+	List<PropertyEditor> getCellEditors();
 	
+	/**
+	 * Returns set of selector for available attributes (table columns).
+	 * 
+	 * @return all attribute selectors.
+ 	 */
 	Collection<PropertyEditor> getAttributeSelectors();
 	
+	/**
+	 * Returns selector for Mapping Type.  For now, users can select Discrete, Continuous, 
+	 * and Passthrough from this object.
+	 * 
+	 * @return mapping type selector.
+	 */
 	PropertyEditor getMappingFunctionSelector();
 
 
 	/**
-	 *  DOCUMENT ME!
-	 *
-	 * @param editorName DOCUMENT ME!
-	 *
-	 * @return  DOCUMENT ME!
+	 * Get {@link JComboBox} type editor 
+	 * 
+	 * @param editorName name (ID) of editor
+	 * 
+	 * @return combobox editor associated with the name.
 	 */
-	public PropertyEditor getDefaultComboBoxEditor(String editorName);
+	PropertyEditor getDefaultComboBoxEditor(String editorName);
 	
 	/**
-	 *  DOCUMENT ME!
-	 * @param targetObjectType DOCUMENT ME!
-	 *
-	 * @return  DOCUMENT ME!
+	 * Attribute selector for the given table entry type.
+	 * 
+	 * @param targetObjectType node, edge, or network.
+	 * 
+	 * @return selector
 	 */
 	public PropertyEditor getDataTableComboBoxEditor(final Class<? extends CyTableEntry> targetObjectType);
 	
+	
+	/**
+	 * Returns value editor for the given data type.
+	 * 
+	 * @param dataType type of data.  They are Color, number, Shape, etc.
+	 * 
+	 * @return Value editor
+	 */
 	public <V> ValueEditor<V> getValueEditor(Class<V> dataType);
 }

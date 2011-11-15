@@ -8,6 +8,9 @@ import org.cytoscape.view.vizmap.VisualStyle;
  * Default View Editor is the component to display available visual properties
  * and its default view for given Visual Style.
  * This component will be provided as a service.
+ * 
+ * @CyAPI.Api.Interface
+ * 
  */
 public interface DefaultViewEditor {
 

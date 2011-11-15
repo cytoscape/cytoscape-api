@@ -45,7 +45,9 @@ import javax.swing.table.TableCellRenderer;
 
 
 /**
- * #ASKMIKE class/attribute comments, entire vizmap-gui-api needs looking over
+ * Abstract implementation of Visual Property Editor.
+ * All editors should extend this class.
+ * 
  * @param <T> The generic type of this AbstractVisualPropertyEditor.
  * 
  * @CyAPI.Abstract.Class
@@ -71,16 +73,24 @@ public abstract class AbstractVisualPropertyEditor<T> implements VisualPropertyE
 		this.propertyEditor = propertyEditor;
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override public Class<T> getType() {
 		return this.type;
 	}
 
-	
+
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override public PropertyEditor getPropertyEditor() {
 		return propertyEditor;
 	}
 
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override public T showVisualPropertyValueEditor() {
 		if(vpValueEditor == null) {
 			// Search value editor repository 
@@ -91,21 +101,33 @@ public abstract class AbstractVisualPropertyEditor<T> implements VisualPropertyE
 		return null;
 	}
 
-	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override public TableCellRenderer getDiscreteTableCellRenderer() {
 		return discreteTableCellRenderer;
 	}
 	
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override public TableCellRenderer getContinuousTableCellRenderer() {
 		return continuousTableCellRenderer;
 	}
 
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override public PropertyEditor getContinuousMappingEditor() throws IllegalArgumentException {
 		return continuousEditor;
 	}
 
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override public Icon getDefaultIcon(int width, int height) {
 		// By default, it does not return actual icon.  This should be implemented child classes.
 		return null;

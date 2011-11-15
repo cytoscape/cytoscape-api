@@ -36,8 +36,6 @@
 
 package org.cytoscape.view.vizmap.gui;
 
-import java.awt.Component;
-
 import javax.swing.JPanel;
 
 
@@ -57,6 +55,8 @@ import javax.swing.JPanel;
  * <p>
  * This component tracks the selected Visual Style.
  * Because of this, Visual Style is editable even if current Network View does not exist.
+ * 
+ * @CyAPI.Api.Interface
  * 
   */
 public interface VizMapGUI {

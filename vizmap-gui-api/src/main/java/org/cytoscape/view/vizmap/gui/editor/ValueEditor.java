@@ -4,9 +4,12 @@ import java.awt.Component;
 
 /**
  * Provides a GUI Editor for a data type.
+ * 
+ * To support new data type, this should be implemented.
  *
  * @param <V> target data type for this editor.
  * 
+ * @CyAPI.Spi.Interface
  */
 public interface ValueEditor<V> {
 	
