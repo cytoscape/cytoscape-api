@@ -114,7 +114,7 @@ public final class MapNetworkAttrTask extends AbstractTask {
 		for (final CyTable targetTable : targetTables) {
 			if (cancelled)
 				return;
-			targetTable.addVirtualColumns(newGlobalTable, sourceTableJoinColumn, mappingKey, false);			
+			targetTable.addVirtualColumns(newGlobalTable, mappingKey, false);			
 		}
 	}
 }

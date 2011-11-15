@@ -223,35 +223,36 @@ public interface CyTable extends Identifiable {
 	 */
 	int getRowCount();
 
-	/** Adds a "virtual" column to the the current table.
-	 *  @param virtualColumn  the name of the new virtual column, if this name already exists,
-	 *                        new column names with -1, -2 and so appended to this name on will
-	 *                        be tried until a non-existing name will be found
-	 *  @param sourceColumn   the name of the column in "sourceTable" that will be mapped to
-	 *                        "virtualColumn"
-	 *  @param sourceTable    the table that really contains the column that we're adding (all
-	 *                        updates and lookups of this new column will be redirected to here)
-	 *  @param sourceJoinKey  the column in "sourceTable" that will be used for the join
-	 *  @param targetJoinKey  the column in current table that will be used for the join
-	 *  @param isImmutable    if true, this column cannot be deleted
-	 *  @return the actual name of the new virtual column
-	 *  Note: The types of "sourceJoinKey" and "targetJoinKey" have to be identical.
+	/** 
+	 * Adds a "virtual" column to the the current table.
+	 * @param virtualColumn  The name of the new virtual column, if this name already exists,
+	 *                       new column names with -1, -2 and so appended to this name on will
+	 *                       be tried until a non-existing name will be found.
+	 * @param sourceColumn   The name of the column in "sourceTable" that will be mapped to
+	 *                       "virtualColumn".
+	 * @param sourceTable    The table that really contains the column that we're adding (all
+	 *                       updates and lookups of this new column will be redirected to here).
+	 *                       The table will be joined on the primary key column of this table.
+	 * @param targetJoinKey  The column in current table that will be used for the join. This
+	 *                       column will be joined with the primary key column of the source
+	 *                       table. These columns must be of the same type!
+	 * @param isImmutable    If true, this column cannot be deleted.
+	 * @return The actual name of the new virtual column.
 	 */
 	String addVirtualColumn(String virtualColumn, String sourceColumn, CyTable sourceTable,
-				String sourceJoinKey, String targetJoinKey,
-				boolean isImmutable);
+	                        String targetJoinKey, boolean isImmutable);
 
 	/** Adds all columns in another table as "virtual" columns to the the current table.
-	 *  @param sourceTable    the table that really contains the column that we're adding (all
-	 *                        updates and lookups of this new column will be redirected to here)
-	 *  @param sourceJoinKey  the column in "sourceTable" that will be used for the join
-	 *  @param targetJoinKey  the column in current table that will be used for the join
-	 *  @param isImmutable    if true, these columns cannot be deleted
-	 *  Note: The types of "sourceJoinKey" and "targetJoinKey" have to be identical.  Also none
-	 *        of the column names in "sourceTable" must exist in the current table!
+	 *  @param sourceTable    The table that really contains the column that we're adding (all
+	 *                        updates and lookups of this new column will be redirected to here).
+	 *                        The table will be joined on the primary key column of this table.
+	 *                        None of the column names in "sourceTable" must exist in the current table!
+	 *  @param targetJoinKey  The column in current table that will be used for the join. This
+	 *                        column will be joined with the primary key column of the source
+	 *                        table. These columns must be of the same type!
+	 *  @param isImmutable    If true, these columns cannot be deleted.
 	 */
-	void addVirtualColumns(CyTable sourceTable, String sourceJoinKey, String targetJoinKey,
-			       boolean isImmutable);
+	void addVirtualColumns(CyTable sourceTable, String targetJoinKey, boolean isImmutable);
 	
 	/**
 	 * Returns how (or if) this CyTable should be saved.

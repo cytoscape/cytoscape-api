@@ -541,26 +541,21 @@ public abstract class AbstractCyTableTest {
 	@Test
 	public void testVirtualColumn() {
 		table.createColumn("x", Long.class, false);
-		table2.createColumn("x2", Long.class, false);
 		table2.createColumn("s", String.class, false);
-		assertEquals(table.addVirtualColumn("s1", "s", table2, "x2", "x", false), "s1");
+		assertEquals(table.addVirtualColumn("s1", "s", table2, "x", false), "s1");
 		assertEquals("Virtual column type should have been String!",
 			     String.class, table.getColumn("s1").getType());
-		assertEquals(table.addVirtualColumn("s1", "s", table2, "x2", "x", false), "s1-1");
+		assertEquals(table.addVirtualColumn("s1", "s", table2, "x", false), "s1-1");
 		assertEquals("Virtual column type should have been String!",
 			     String.class, table.getColumn("s1-1").getType());
 	}
 
 	@Test
 	public void testVirtualColumnIsSet() {
-		table.createColumn("x", Integer.class, false);
 		CyRow row1 = table.getRow(1L);
-		row1.set("x", 33);
-		table2.createColumn("x2", Integer.class, false);
 		CyRow row2 =  table2.getRow(1L);
-		row2.set("x2", 33);
 		table2.createColumn("s", String.class, false);
-		table.addVirtualColumn("s1", "s", table2, "x2", "x", true);
+		table.addVirtualColumn("s1", "s", table2, table.getPrimaryKey().getName(), true);
 		assertFalse(row1.isSet("s1"));
 		row2.set("s", "abc");
 		assertTrue(row1.isSet("s1"));
@@ -568,14 +563,10 @@ public abstract class AbstractCyTableTest {
 
 	@Test
 	public void testVirtualColumnGet() {
-		table.createColumn("x", Integer.class, false);
 		CyRow row1 = table.getRow(1L);
-		row1.set("x", 33);
-		table2.createColumn("x2", Integer.class, false);
 		CyRow row2 =  table2.getRow(1L);
-		row2.set("x2", 33);
 		table2.createColumn("s", String.class, false);
-		table.addVirtualColumn("s1", "s", table2, "x2", "x", false);
+		table.addVirtualColumn("s1", "s", table2, table.getPrimaryKey().getName(), false);
 		assertFalse(row1.isSet("s1"));
 		row2.set("s", "abc");
 		assertEquals(row1.get("s1", String.class), "abc");
@@ -583,14 +574,10 @@ public abstract class AbstractCyTableTest {
 
 	@Test
 	public void testVirtualColumnSetWithAReplacementValue() {
-		table.createColumn("x", Integer.class, false);
 		CyRow row1 = table.getRow(1L);
-		row1.set("x", 33);
-		table2.createColumn("x2", Integer.class, false);
 		CyRow row2 =  table2.getRow(1L);
-		row2.set("x2", 33);
 		table2.createColumn("s", String.class, false);
-		table.addVirtualColumn("s1", "s", table2, "x2", "x", true);
+		table.addVirtualColumn("s1", "s", table2, table.getPrimaryKey().getName(), true);
 		assertFalse(row1.isSet("s1"));
 		row2.set("s", "abc");
 		assertEquals(row1.get("s1", String.class), "abc");
@@ -600,14 +587,10 @@ public abstract class AbstractCyTableTest {
 
 	@Test
 	public void testVirtualColumnUnset() {
-		table.createColumn("x", Integer.class, false);
 		CyRow row1 = table.getRow(1L);
-		row1.set("x", 33);
-		table2.createColumn("x2", Integer.class, false);
 		CyRow row2 =  table2.getRow(1L);
-		row2.set("x2", 33);
 		table2.createColumn("s", String.class, false);
-		table.addVirtualColumn("s1", "s", table2, "x2", "x", false);
+		table.addVirtualColumn("s1", "s", table2, table.getPrimaryKey().getName(), false);
 		row2.set("s", "abc");
 		assertTrue(row1.isSet("s1"));
 		row1.set("s1", null);
@@ -619,11 +602,9 @@ public abstract class AbstractCyTableTest {
 		table.createColumn("x", Integer.class, false);
 		CyRow row1 = table.getRow(1L);
 		row1.set("x", 33);
-		table2.createColumn("x2", Integer.class, false);
 		CyRow row2 =  table2.getRow(1L);
-		row2.set("x2", 33);
 		table2.createColumn("s", String.class, false);
-		table.addVirtualColumn("s1", "s", table2, "x2", "x", true);
+		table.addVirtualColumn("s1", "s", table2, table.getPrimaryKey().getName(), true);
 		assertFalse(row1.isSet("s1"));
 		row2.set("s", "abc");
 		Collection<CyRow> matchingRows = table.getMatchingRows("s1", "abc");
@@ -636,9 +617,8 @@ public abstract class AbstractCyTableTest {
 	@Test
 	public void testVirtualColumnDelete() {
 		table.createColumn("x", Long.class, false);
-		table2.createColumn("x2", Long.class, false);
 		table2.createColumn("s", String.class, false);
-		table.addVirtualColumn("s1", "s", table2, "x2", "x", false);
+		table.addVirtualColumn("s1", "s", table2, "x", false);
 		assertNotNull(table.getColumn("s1"));
 		table.deleteColumn("s1");
 		assertNull(table.getColumn("s1"));
@@ -646,14 +626,10 @@ public abstract class AbstractCyTableTest {
 
 	@Test
 	public void testVirtualColumnColumnSize() {
-		table.createColumn("x", Integer.class, false);
 		CyRow row1 = table.getRow(1L);
-		row1.set("x", 33);
-		table2.createColumn("x2", Integer.class, false);
 		CyRow row2 =  table2.getRow(1L);
-		row2.set("x2", 33);
 		table2.createColumn("s", String.class, false);
-		table.addVirtualColumn("s1", "s", table2, "x2", "x", true);
+		table.addVirtualColumn("s1", "s", table2, table.getPrimaryKey().getName(), true);
 		assertFalse(row1.isSet("s1"));
 		row2.set("s", "abc");
 		List<String> columnValues = table.getColumn("s1").getValues(String.class);
@@ -664,9 +640,8 @@ public abstract class AbstractCyTableTest {
 	@Test
 	public void testVirtualColumnGetColumnValues() {
 		table.createColumn("x", Long.class, false);
-		table2.createColumn("x2", Long.class, false);
 		table2.createListColumn("b", Boolean.class, false);
-		table.addVirtualColumn("b1", "b", table2, "x2", "x", false);
+		table.addVirtualColumn("b1", "b", table2, "x", false);
 		assertEquals("Virtual column list element type should have been Boolean!",
 			     Boolean.class, table.getColumn("b1").getListElementType());
 	}
@@ -674,9 +649,8 @@ public abstract class AbstractCyTableTest {
 	@Test
 	public void testIsVirtual() {
 		table.createColumn("x", Long.class, false);
-		table2.createColumn("x2", Long.class, false);
 		table2.createListColumn("b", Boolean.class, false);
-		table.addVirtualColumn("b1", "b", table2, "x2", "x", true);
+		table.addVirtualColumn("b1", "b", table2, "x", true);
 		assertTrue(table.getColumn("b1").getVirtualColumnInfo().isVirtual());
 		assertFalse(table.getColumn("x").getVirtualColumnInfo().isVirtual());
 		assertFalse(table2.getColumn("b").getVirtualColumnInfo().isVirtual());
@@ -709,9 +683,8 @@ public abstract class AbstractCyTableTest {
 		table.createColumn("x", Long.class, false);
 		CyColumn column = table.getColumn("x");
 		assertNull(column.getVirtualColumnInfo().getSourceTable());
-		table2.createColumn("x2", Long.class, false);
 		table2.createListColumn("b", Boolean.class, false);
-		table.addVirtualColumn("b1", "b", table2, "x2", "x", true);
+		table.addVirtualColumn("b1", "b", table2, "x", true);
 		CyColumn column2 = table.getColumn("b1");
 		assertEquals(table2, column2.getVirtualColumnInfo().getSourceTable());
 	}
@@ -719,10 +692,9 @@ public abstract class AbstractCyTableTest {
 	@Test
 	public void testTableMutability() {
 		table.createColumn("x", Long.class, false);
-		table2.createColumn("x2", Long.class, false);
 		table2.createListColumn("b", Boolean.class, false);
 		assertEquals(Mutability.MUTABLE, table2.getMutability());
-		table.addVirtualColumn("b1", "b", table2, "x2", "x", true);
+		table.addVirtualColumn("b1", "b", table2, "x", true);
 		assertEquals(Mutability.IMMUTABLE_DUE_TO_VIRT_COLUMN_REFERENCES, table2.getMutability());
 	}
 
@@ -926,5 +898,81 @@ public abstract class AbstractCyTableTest {
 	@Test
 	public void testGetAttrBeforeColumnExists() {
 		assertNull(attrs.get("nonexistentColumnX",Integer.class));
+	}
+
+	@Test
+	public void testVirtualColumns() {
+		table2.createColumn("s", String.class, false);
+		table2.createColumn("t", Integer.class, false);
+		table2.createColumn("u", Long.class, false);
+		table2.createColumn("v", Boolean.class, false);
+		table2.createColumn("w", Double.class, false);
+		table2.createListColumn("x", String.class, false);
+		table.addVirtualColumns( table2, table.getPrimaryKey().getName(), false);
+
+		CyColumn scol = table.getColumn("s");
+		assertNotNull(scol);
+		assertEquals(String.class,scol.getType());
+
+		CyColumn tcol = table.getColumn("t");
+		assertNotNull(tcol);
+		assertEquals(Integer.class,tcol.getType());
+
+		CyColumn ucol = table.getColumn("u");
+		assertNotNull(ucol);
+		assertEquals(Long.class,ucol.getType());
+
+		CyColumn vcol = table.getColumn("v");
+		assertNotNull(vcol);
+		assertEquals(Boolean.class,vcol.getType());
+
+		CyColumn wcol = table.getColumn("w");
+		assertNotNull(wcol);
+		assertEquals(Double.class,wcol.getType());
+
+		CyColumn xcol = table.getColumn("x");
+		assertNotNull(xcol);
+		assertEquals(List.class,xcol.getType());
+		assertEquals(String.class,xcol.getListElementType());
+	}
+
+	@Test
+	public void testVirtualColumnWithDupe() {
+		table2.createColumn("s", String.class, false);
+		table.createColumn("s", String.class, false);
+		table.addVirtualColumns( table2, table.getPrimaryKey().getName(), false);
+
+		CyColumn scol = table.getColumn("s");
+		assertFalse( scol.getVirtualColumnInfo().isVirtual() );
+
+		CyColumn s1col = table.getColumn("s-1");
+		assertTrue( s1col.getVirtualColumnInfo().isVirtual() );
+	}
+
+	@Test
+	public void testVirtualColumnsNoPrimaryKey() {
+		table2.createColumn("s", String.class, false);
+		table.addVirtualColumns( table2, table.getPrimaryKey().getName(), false);
+
+		CyColumn scol = table.getColumn("s");
+		assertNotNull(scol);
+
+		// If the tables have the same name for the primary key column, then verify that
+		// we don't get new column with the expected new column name for source table
+		// primary key.  Also make sure that the existing column for the primary key
+		// is not virtual.
+		if ( table.getPrimaryKey().getName().equals( table2.getPrimaryKey().getName() ) ) {
+			String expectedNewName = table2.getPrimaryKey().getName() + "-1";
+			CyColumn npkcol = table.getColumn( expectedNewName );
+			assertNull(npkcol);
+			CyColumn pkcol = table.getColumn( table.getPrimaryKey().getName() );
+			assertFalse( pkcol.getVirtualColumnInfo().isVirtual() );
+		
+		// Otherwise, just make sure that the primary key column of the source table
+		// isn't added.
+		} else {
+			CyColumn npkcol = table.getColumn( table2.getPrimaryKey().getName() );
+			assertNull(npkcol);
+		}
 	}
 }
