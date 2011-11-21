@@ -1,5 +1,6 @@
 package org.cytoscape.view.vizmap;
 
+import org.cytoscape.model.CyTable;
 import org.cytoscape.view.model.VisualProperty;
 
 /**
@@ -22,7 +23,7 @@ public interface VisualMappingFunctionFactory {
 	 * @return new VisualMappingFunction.
 	 */
 	<K, V> VisualMappingFunction<K, V> createVisualMappingFunction(
-			final String attributeName, final Class<K> attrValueType,
+			final String attributeName, final Class<K> attrValueType, final CyTable table,
 			final VisualProperty<V> vp);
 	
 	/**

@@ -34,6 +34,7 @@
  */
 package org.cytoscape.view.vizmap;
 
+import org.cytoscape.model.CyTable;
 import org.cytoscape.model.CyTableEntry;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
@@ -83,6 +84,14 @@ public interface VisualMappingFunction<K, V> {
 	 * @return data type of controlling attribute.
 	 */
 	Class<K> getMappingAttributeType();
+	
+	
+	/**
+	 * Returns table used for this mapping.
+	 * 
+	 * @return CyTable associated with this mapping.
+	 */
+	CyTable getMappingTable();
 
 	/**
 	 * Visual Property associated with this function. This field is immutable.
@@ -90,6 +99,7 @@ public interface VisualMappingFunction<K, V> {
 	 * @return {@linkplain VisualProperty} used in this mapping.
 	 */
 	VisualProperty<V> getVisualProperty();
+	
 
 	/**
 	 * Apply mapping to the view model. Once this method is called, Cytoscape
