@@ -42,12 +42,12 @@ public abstract class AbstractVisualMappingFunction<K, V> implements
 		this.table = table;
 	}
 
-	@Override public String getMappingAttributeName() {
+	@Override public String getMappingColumnName() {
 		return attrName;
 	}
 
 	
-	@Override public Class<K> getMappingAttributeType() {
+	@Override public Class<K> getMappingColumnType() {
 		return attrType;
 	}
 

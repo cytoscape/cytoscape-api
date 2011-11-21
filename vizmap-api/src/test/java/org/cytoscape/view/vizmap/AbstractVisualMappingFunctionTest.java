@@ -34,8 +34,8 @@ public abstract class AbstractVisualMappingFunctionTest {
 		
 		assertNotNull(mapping);
 		
-		assertEquals(attrName, mapping.getMappingAttributeName());
-		assertEquals(attrType, mapping.getMappingAttributeType());
+		assertEquals(attrName, mapping.getMappingColumnName());
+		assertEquals(attrType, mapping.getMappingColumnType());
 		assertEquals(vp, mapping.getVisualProperty());
 	}
 

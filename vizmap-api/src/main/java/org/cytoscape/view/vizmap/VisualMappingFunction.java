@@ -76,14 +76,14 @@ public interface VisualMappingFunction<K, V> {
 	 * @return name of attribute (a column name in data table) associated with
 	 *         this mapping.
 	 */
-	String getMappingAttributeName();
+	String getMappingColumnName();
 
 	/**
 	 * Returns data type of mapping attribute.
 	 * 
 	 * @return data type of controlling attribute.
 	 */
-	Class<K> getMappingAttributeType();
+	Class<K> getMappingColumnType();
 	
 	
 	/**
