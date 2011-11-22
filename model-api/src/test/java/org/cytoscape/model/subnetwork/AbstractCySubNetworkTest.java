@@ -37,6 +37,7 @@ import org.cytoscape.event.CyEventHelper;
 import org.cytoscape.event.CyListener;
 
 import org.cytoscape.model.CyTable;
+import org.cytoscape.model.CyTableEntry;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
@@ -360,6 +361,78 @@ public abstract class AbstractCySubNetworkTest {
 
 		List<CyNode> nl = sub2.getNeighborList(n1, CyEdge.Type.ANY);
 		assertEquals(0,nl.size());
+	}
+
+	@Test
+	public void testNodeAddedInSubnetworkHasNameAttr() {
+		n1 = root.addNode();
+		n1.getCyRow().set(CyTableEntry.NAME,"homer");
+
+		sub = root.addSubNetwork();
+		sub.addNode(n1);
+	
+		List<CyNode> subNodes = sub.getNodeList();
+		assertEquals( "homer", subNodes.get(0).getCyRow().get(CyTableEntry.NAME,String.class) ); 
+	}
+
+	@Test
+	public void testNodeAddedInSubnetworkHasSelectedAttr() {
+		n1 = root.addNode();
+		n1.getCyRow().set(CyNetwork.SELECTED,true);
+
+		sub = root.addSubNetwork();
+		sub.addNode(n1);
+	
+		List<CyNode> subNodes = sub.getNodeList();
+		assertTrue( subNodes.get(0).getCyRow().get(CyNetwork.SELECTED,Boolean.class) ); 
+	}
+
+	@Test
+	public void testEdgeAddedInSubnetworkHasNameAttr() {
+		n1 = root.addNode();
+		n2 = root.addNode();
+		e1 = root.addEdge(n1,n2,true);
+		e1.getCyRow().set(CyTableEntry.NAME,"homer");
+
+		sub = root.addSubNetwork();
+		sub.addNode(n1);
+		sub.addNode(n2);
+		sub.addEdge(e1);
+	
+		List<CyEdge> subEdges = sub.getEdgeList();
+		assertEquals( "homer", subEdges.get(0).getCyRow().get(CyTableEntry.NAME,String.class) ); 
+	}
+
+	@Test
+	public void testEdgeAddedInSubnetworkHasInteractionAttr() {
+		n1 = root.addNode();
+		n2 = root.addNode();
+		e1 = root.addEdge(n1,n2,true);
+		e1.getCyRow().set(CyEdge.INTERACTION,"marge");
+
+		sub = root.addSubNetwork();
+		sub.addNode(n1);
+		sub.addNode(n2);
+		sub.addEdge(e1);
+	
+		List<CyEdge> subEdges = sub.getEdgeList();
+		assertEquals( "marge", subEdges.get(0).getCyRow().get(CyEdge.INTERACTION,String.class) ); 
+	}
+
+	@Test
+	public void testEdgeAddedInSubnetworkHasSelectedAttr() {
+		n1 = root.addNode();
+		n2 = root.addNode();
+		e1 = root.addEdge(n1,n2,true);
+		e1.getCyRow().set(CyNetwork.SELECTED,true);
+
+		sub = root.addSubNetwork();
+		sub.addNode(n1);
+		sub.addNode(n2);
+		sub.addEdge(e1);
+	
+		List<CyEdge> subEdges = sub.getEdgeList();
+		assertTrue(subEdges.get(0).getCyRow().get(CyNetwork.SELECTED,Boolean.class) ); 
 	}
 
 	// TODO
