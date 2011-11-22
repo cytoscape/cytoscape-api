@@ -224,8 +224,9 @@ class FileUtilImpl implements FileUtil {
 									"File exists",
 									JOptionPane.YES_NO_OPTION,
 									JOptionPane.WARNING_MESSAGE);
-							if (answer == JOptionPane.YES_OPTION)
+							if (answer == JOptionPane.NO_OPTION){
 								return null;
+							}
 						}
 					}
 				}
