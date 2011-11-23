@@ -67,7 +67,7 @@ public abstract class AbstractVisualProperty<T> implements VisualProperty<T> {
 	 * @param range the {@link Range} for the visual property.
 	 * @param id unique string for serialization.
 	 * @param displayName human-readable name for this visual property.
-	 * @param targetObjectDataType #ASKMIKE
+	 * @param targetObjectDataType the type of the target object for this visual property. 
 	 * 
 	 */
 	@SuppressWarnings("unchecked")

@@ -40,24 +40,24 @@ import java.util.Collection;
  * Provides a platform-dependent way to open files. Mainly
  * because Mac would prefer that you use java.awt.FileDialog
  * instead of the Swing FileChooser.
- * @CyAPI.Api.Interface #ASKMIKE
+ * @CyAPI.Api.Interface 
  */
 public interface FileUtil {
 	/** The Cytoscape property that stores the last save/load directory. */
 	final String LAST_DIRECTORY = "directory.last";
 
 	/**
-	 *
+	 * Equal to FileDialog.LOAD.
 	 */
 	int LOAD = FileDialog.LOAD;
 
 	/**
-	 *
+	 * Equal to FileDialog.SAVE.
 	 */
 	int SAVE = FileDialog.SAVE;
 
 	/**
-	 *
+	 * Equal to FileDialog.LOAD + FileDialog.SAVE.
 	 */
 	int CUSTOM = LOAD + SAVE;
 

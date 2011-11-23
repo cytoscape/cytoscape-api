@@ -24,71 +24,57 @@ import java.util.EventObject;
 
 
 /**
- * #ASKMIKE Document me's
+ * An abstract, convenience implementation of a Cell Editor that
+ * really only adds event listener support.  All other methods
+ * should be probably be overridden.
  * @CyAPI.Abstract.Class
  */
 public class AbstractCellEditor implements CellEditor {
 	protected EventListenerList listenerList = new EventListenerList();
 
 	/**
-	 *  DOCUMENT ME!
-	 *
-	 * @return  DOCUMENT ME!
+	 * {@inheritDoc}
 	 */
 	public Object getCellEditorValue() {
 		return null;
 	}
 
 	/**
-	 *  DOCUMENT ME!
-	 *
-	 * @param e DOCUMENT ME!
-	 *
-	 * @return  DOCUMENT ME!
+	 * {@inheritDoc}
 	 */
 	public boolean isCellEditable(EventObject e) {
 		return true;
 	}
 
 	/**
-	 *  DOCUMENT ME!
-	 *
-	 * @param anEvent DOCUMENT ME!
-	 *
-	 * @return  DOCUMENT ME!
+	 * {@inheritDoc}
 	 */
 	public boolean shouldSelectCell(EventObject anEvent) {
 		return false;
 	}
 
 	/**
-	 *  DOCUMENT ME!
-	 *
-	 * @return  DOCUMENT ME!
+	 * {@inheritDoc}
 	 */
 	public boolean stopCellEditing() {
 		return true;
 	}
 
 	/**
-	 *  DOCUMENT ME!
+	 * {@inheritDoc}
 	 */
 	public void cancelCellEditing() {
 	}
 
 	/**
-	 *  DOCUMENT ME!
-	 *
-	 * @param l The CellEditorListener to add.
+	 * {@inheritDoc}
 	 */
 	public void addCellEditorListener(CellEditorListener l) {
 		listenerList.add(CellEditorListener.class, l);
 	}
 
 	/**
-	 *  DOCUMENT ME!
-	 *
-	 * @param l The CellEditorListener to remove.
+	 * {@inheritDoc}
 	 */
 	public void removeCellEditorListener(CellEditorListener l) {
 		listenerList.remove(CellEditorListener.class, l);

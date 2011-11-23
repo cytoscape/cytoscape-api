@@ -6,10 +6,8 @@ import java.awt.Component;
 import java.awt.Dialog;
 import java.awt.Window;
 
-/**
- * @CyAPI.Final.Class   #ASKMIKE final?, method/class comment
- */
-public class TunableDialog extends JDialog {
+// TODO move to work-swing-impl
+public final class TunableDialog extends JDialog {
 
 	private static final long serialVersionUID = 7438623438647443009L;
 

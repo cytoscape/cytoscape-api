@@ -50,9 +50,9 @@ import javax.swing.tree.TreePath;
  *
  * @author Philip Milne
  * @author Scott Violet
- * @CyAPI.Final.Class   #ASKMIKE final?
+ * @CyAPI.Final.Class   
  */
-public class TreeTableModelAdapter extends AbstractTableModel {
+public final class TreeTableModelAdapter extends AbstractTableModel {
 	private final static long serialVersionUID = 1202339875193043L;
 	JTree tree;
 	TreeTableModel treeTableModel;
@@ -60,8 +60,8 @@ public class TreeTableModelAdapter extends AbstractTableModel {
 	/**
 	 * Creates a new TreeTableModelAdapter object.
 	 *
-	 * @param treeTableModel  DOCUMENT ME!
-	 * @param tree  DOCUMENT ME!
+	 * @param treeTableModel The tree table model. 
+	 * @param tree The tree itself. 
 	 */
 	public TreeTableModelAdapter(TreeTableModel treeTableModel, JTree tree) {
 		this.tree = tree;
@@ -143,7 +143,7 @@ public class TreeTableModelAdapter extends AbstractTableModel {
 		return tree.getRowCount();
 	}
 
-	protected Object nodeForRow(int row) {
+	private Object nodeForRow(int row) {
 		TreePath treePath = tree.getPathForRow(row);
 
 		if (treePath != null) {

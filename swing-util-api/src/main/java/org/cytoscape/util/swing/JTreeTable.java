@@ -52,9 +52,9 @@ import org.slf4j.LoggerFactory;
  *
  * @author Philip Milne
  * @author Scott Violet
- * @CyAPI.Final.Class #ASKMIKE declare final, doc me's
+ * @CyAPI.Final.Class 
  */
-public class JTreeTable extends JTable {
+public final class JTreeTable extends JTable {
 	private final static long serialVersionUID = 1202339868625600L;
 	private final static Logger logger = LoggerFactory.getLogger( JTreeTable.class );
 
@@ -64,7 +64,7 @@ public class JTreeTable extends JTable {
 	/**
 	 * Creates a new JTreeTable object.
 	 *
-	 * @param treeTableModel  DOCUMENT ME!
+	 * @param treeTableModel The tree table model. 
 	 */
 	public JTreeTable(TreeTableModel treeTableModel) {
 		super();
@@ -102,6 +102,7 @@ public class JTreeTable extends JTable {
 	 * The code in this method is copy and pasted from source code to the same
 	 * method in javax.swing.JTable, except for one value change on one line. If
 	 * you'd like to see the change, please read the source code below.
+	 * @param event the mouse event we're reacting to
 	 */
 	public String getToolTipText(MouseEvent event) {
 		String tip = null;
@@ -166,9 +167,8 @@ public class JTreeTable extends JTable {
 	 */
 
 	/**
-	 *  DOCUMENT ME!
-	 *
-	 * @return  DOCUMENT ME!
+	 * Returns the row being edited. 
+	 * @return the row being edited. 
 	 */
 	public int getEditingRow() {
 		return (getColumnClass(editingColumn) == TreeTableModel.class) ? (-1) : editingRow;
@@ -176,6 +176,7 @@ public class JTreeTable extends JTable {
 
 	/**
 	 * Overridden to pass the new rowHeight to the tree.
+	 * @param rowHeight the new height of the row
 	 */
 	public void setRowHeight(int rowHeight) {
 		super.setRowHeight(rowHeight);
@@ -195,9 +196,9 @@ public class JTreeTable extends JTable {
 
 	/**
 	 * A TreeCellRenderer that displays a JTree.
-	 * @CyAPI.Final.Class #ASKMIKE declare final?
+	 * @CyAPI.Final.Class 
 	 */
-	public class TreeTableCellRenderer extends JTree implements TableCellRenderer {
+	private class TreeTableCellRenderer extends JTree implements TableCellRenderer {
 	private final static long serialVersionUID = 1202339868600141L;
 		/** Last table/tree row asked to renderer. */
 		protected int visibleRow;

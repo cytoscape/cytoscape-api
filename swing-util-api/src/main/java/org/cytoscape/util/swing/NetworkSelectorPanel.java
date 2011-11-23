@@ -19,9 +19,10 @@ import org.cytoscape.model.events.NetworkAddedListener;
 import javax.swing.DefaultComboBoxModel;
 
 /**
- * @CyAPI.Final.Class   #ASKMIKE final? needs comments
+ * A convenience JPanel for selecting networks.
+ * @CyAPI.Final.Class 
  */
-public class NetworkSelectorPanel extends JPanel implements NetworkAddedListener, NetworkDestroyedListener
+public final class NetworkSelectorPanel extends JPanel implements NetworkAddedListener, NetworkDestroyedListener
 {
 	private static final long serialVersionUID = 8694272457769377810L;
 	
@@ -29,6 +30,11 @@ public class NetworkSelectorPanel extends JPanel implements NetworkAddedListener
 	private CyNetworkManager cyNetworkManager;
 	private CyApplicationManager cyApplicationManager;
 
+	/**
+	 * Constructor.
+	 * @param cyApplicationManager The application manager used for tracking the current network.
+	 * @param cyNetworkManager The network manager used for accessing all available networks.
+	 */
 	public NetworkSelectorPanel(CyApplicationManager cyApplicationManager, CyNetworkManager cyNetworkManager) {
 		super();
 		this.setLayout(new BorderLayout());
@@ -49,7 +55,7 @@ public class NetworkSelectorPanel extends JPanel implements NetworkAddedListener
 	 * If selected, return selected network.
 	 * Otherwise, return null.
 	 * 
-	 * @return
+	 * @return The network that was selected.
 	 */
 	public CyNetwork getSelectedNetwork() {
 		for (CyNetwork net : this.cyNetworkManager.getNetworkSet()) {
@@ -80,34 +86,34 @@ public class NetworkSelectorPanel extends JPanel implements NetworkAddedListener
 		}
 	}
 
-//	public void propertyChange(PropertyChangeEvent evt) {
-//
-//		final String propName = evt.getPropertyName();
-//		
-//		if (propName.equals(Cytoscape.NETWORK_CREATED)||propName.equals(Cytoscape.NETWORK_TITLE_MODIFIED)){
-//			updateNetworkList();
-//		}
-//		else if (propName.equals(Cytoscape.NETWORK_DESTROYED))
-//			networkComboBox.removeItem(Cytoscape.getNetwork(
-//					(String) evt.getNewValue()).getTitle());
-//
-//	}
-	
+	/**
+	 * Updates the list based on network added events.
+	 * @param e The network added event.
+	 */
 	public void handleEvent(NetworkAddedEvent e){
 		updateNetworkList();
 	}
 
+	/**
+	 * Updates the list based on network destroyed events.
+	 * @param e The network destroyed event.
+	 */
 	public void handleEvent(NetworkDestroyedEvent e){
 		updateNetworkList();
 	}
 	
 	/**
-	 *  Installs a new item listener for the embedded combo box.
+	 * Installs a new item listener for the embedded combo box.
+	 * @param newListener The new item listener to be added.
 	 */
 	public void addItemListener(final ItemListener newListener) {
 		networkComboBox.addItemListener(newListener);
 	}
-	
+
+	/**
+	 * Returns the network combobox.
+	 * @return The network combobox.
+	 */
 	public JComboBox getJCombobox(){
 		return this.networkComboBox;
 	}

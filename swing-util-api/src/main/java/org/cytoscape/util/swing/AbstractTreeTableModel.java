@@ -37,11 +37,10 @@ import javax.swing.tree.TreePath;
 
 
 /**
- * @version 1.2 10/27/98
  * An abstract implementation of the TreeTableModel interface, handling the list
  * of listeners.
  * @author Philip Milne
- * @CyAPI.Abstract.Class #ASKMIKE document me's
+ * @CyAPI.Abstract.Class 
  */
 public abstract class AbstractTreeTableModel implements TreeTableModel {
 	/**
@@ -83,22 +82,22 @@ public abstract class AbstractTreeTableModel implements TreeTableModel {
 	}
 
 	/**
-	 *  DOCUMENT ME!
+	 * Should be overridden. 
 	 *
-	 * @param path DOCUMENT ME!
-	 * @param newValue DOCUMENT ME!
+	 * @param path the TreePath. 
+	 * @param newValue the new value. 
 	 */
 	public void valueForPathChanged(TreePath path, Object newValue) {
 	}
 
 	// This is not called in the JTree's default mode: use a naive implementation.
 	/**
-	 *  DOCUMENT ME!
+	 * Returns the index of a child given a parent. 
 	 *
-	 * @param parent DOCUMENT ME!
-	 * @param child DOCUMENT ME!
+	 * @param parent The parent object. 
+	 * @param child The child whose index we want. 
 	 *
-	 * @return  DOCUMENT ME!
+	 * @return The index of the child. -1 if the child isn't found.
 	 */
 	public int getIndexOfChild(Object parent, Object child) {
 		for (int i = 0; i < getChildCount(parent); i++) {
@@ -111,8 +110,6 @@ public abstract class AbstractTreeTableModel implements TreeTableModel {
 	}
 
 	/**
-	 *  DOCUMENT ME!
-	 *
 	 * @param l The TreeModelListener to add.
 	 */
 	public void addTreeModelListener(TreeModelListener l) {
@@ -120,8 +117,6 @@ public abstract class AbstractTreeTableModel implements TreeTableModel {
 	}
 
 	/**
-	 *  DOCUMENT ME!
-	 *
 	 * @param l The TreeModelListener to remove.
 	 */
 	public void removeTreeModelListener(TreeModelListener l) {
@@ -234,11 +229,12 @@ public abstract class AbstractTreeTableModel implements TreeTableModel {
 
 	//
 	/**
-	 *  DOCUMENT ME!
+	 * Returns the class of the column specified in the argument. 
+	 * Should probably be overridden since this implementation always returns Object.
 	 *
-	 * @param column DOCUMENT ME!
+	 * @param column The index of the column.
 	 *
-	 * @return  DOCUMENT ME!
+	 * @return the class of the column specified in the argument. 
 	 */
 	public Class getColumnClass(int column) {
 		return Object.class;
@@ -253,11 +249,11 @@ public abstract class AbstractTreeTableModel implements TreeTableModel {
 	}
 
 	/**
-	 *  DOCUMENT ME!
+	 * Should be overridden - this is a no-op. 
 	 *
-	 * @param aValue DOCUMENT ME!
-	 * @param node DOCUMENT ME!
-	 * @param column DOCUMENT ME!
+	 * @param aValue The value. 
+	 * @param node The node. 
+	 * @param column The column. 
 	 */
 	public void setValueAt(Object aValue, Object node, int column) {
 	}

@@ -38,9 +38,9 @@ package org.cytoscape.work.util;
 
 /**
  * A Float object which has <i>low</i> and <i>up</i> bounds.
- * @CyAPI.Final.Class #ASKMIKE declare final
+ * @CyAPI.Final.Class 
  */
-public class BoundedFloat extends AbstractBounded<Float> {
+public final class BoundedFloat extends AbstractBounded<Float> {
 
 	/**
 	 * Creates a new Bounded Float object.

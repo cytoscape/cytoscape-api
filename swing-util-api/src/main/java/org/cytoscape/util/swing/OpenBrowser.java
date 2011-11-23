@@ -44,7 +44,7 @@ package org.cytoscape.util.swing;
  * a web browser. The Cytoscape property "defaultWebBrowser"
  * may be set with an alternative command for opening
  * a different web browser than default.
- * @CyAPI.Api.Interface #ASKMIKE
+ * @CyAPI.Api.Interface 
  */
 public interface OpenBrowser {
 

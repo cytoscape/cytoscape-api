@@ -38,9 +38,9 @@ package org.cytoscape.work.util;
 
 /**
  * An Integer object which has <i>low</i> and <i>up</i> bounds.
- * @CyAPI.Final.Class #ASKMIKE declare final
+ * @CyAPI.Final.Class 
  */
-public class BoundedInteger extends AbstractBounded<Integer> {
+public final class BoundedInteger extends AbstractBounded<Integer> {
 
 	/**
 	 * Creates a new Bounded Integer object.

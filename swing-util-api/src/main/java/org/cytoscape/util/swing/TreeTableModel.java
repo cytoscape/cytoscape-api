@@ -49,7 +49,7 @@ import javax.swing.tree.TreeModel;
  *
  * @author Philip Milne
  * @author Scott Violet
- * @CyAPI.Api.Interface #ASKMIKE
+ * @CyAPI.Spi.Interface 
  */
 public interface TreeTableModel extends TreeModel {
 	/**

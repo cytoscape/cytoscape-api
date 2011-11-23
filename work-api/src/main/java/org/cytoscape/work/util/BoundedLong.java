@@ -38,9 +38,9 @@ package org.cytoscape.work.util;
 
 /**
  * A Long object which has <i>low</i> and <i>up</i> bounds.
- * @CyAPI.Final.Class #ASKMIKE declare final
+ * @CyAPI.Final.Class 
  */
-public class BoundedLong extends AbstractBounded<Long> {
+public final class BoundedLong extends AbstractBounded<Long> {
 
 	/**
 	 * Creates a new Bounded Long object.

@@ -42,12 +42,11 @@ import javax.swing.JPanel;
 import javax.swing.LayoutStyle;
 
 /**
- * Simple status bar with 3 fields.<br>
+ * Simple status bar with 3 fields.
  * 
- * @author kono
- * @CyAPI.Final.Class #ASKMIKE declare final
+ * @CyAPI.Final.Class 
  */
-public class JStatusBar extends JPanel {
+public final class JStatusBar extends JPanel {
 	private final static long serialVersionUID = 1202339875133611L;
 
 	/**

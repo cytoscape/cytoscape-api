@@ -7,7 +7,7 @@ package org.cytoscape.io.webservice.events;
 public interface SearchFinishedListener {
 	/**
 	 * The method that should handle the specified event.
-	 * @param evt The event to be handled. #ASKMIKE shouldn't it have <?>
+	 * @param evt The event to be handled. 
 	 */
 	void handleEvent(final SearchFinishedEvent evt);
 }

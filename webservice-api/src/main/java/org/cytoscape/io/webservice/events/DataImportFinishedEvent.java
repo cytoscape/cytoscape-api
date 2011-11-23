@@ -3,11 +3,11 @@ package org.cytoscape.io.webservice.events;
 import org.cytoscape.event.AbstractCyEvent;
 
 /**
- * #ASKMIKE needs class comment and should be declared as final
+ * An event indicating that data has been successfully imported.
  * @param <T> the generic type of the object associated with this DataImportFinishedEvent.
  * @CyAPI.Final.Class
  */
-public class DataImportFinishedEvent<T> extends AbstractCyEvent<Object> {
+public final class DataImportFinishedEvent<T> extends AbstractCyEvent<Object> {
 
 	private final T imported;
 	

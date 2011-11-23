@@ -12,7 +12,7 @@ package org.cytoscape.work;
  *  should have setY() and setZ() methods.  XTaskFactory's getTaskIterator() method would then construct
  *  an XTask with the Y and Z that it has available and create a {@link TaskIterator} with this single Task to
  *  iterate over.
- *  @CyAPI.Spi.Interface #ASKMIKE
+ *  @CyAPI.Spi.Interface 
  */
 public interface TaskFactory {
 	/** 

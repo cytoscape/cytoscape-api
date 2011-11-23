@@ -45,7 +45,7 @@ import org.cytoscape.model.Identifiable;
  *
  * @param <S> the base (model-level) object for which this is a View. For example, CyNode or CyEdge.
  * In the future versions, Attributes can be this parameter.
- * @CyAPI.Api.Interface #ASKMIKE
+ * @CyAPI.Api.Interface 
  */
 public interface View<S> extends Identifiable {
 	

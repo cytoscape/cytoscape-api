@@ -3,7 +3,7 @@ package org.cytoscape.work.swing;
 import org.cytoscape.work.TunableHandlerFactory;
 
 /**
- * #ASKMIKE
+ * A specialization fo TunableHandlerFactory for GUITunableHandler. 
  * @param <T>
  * @CyAPI.Spi.Interface
  */

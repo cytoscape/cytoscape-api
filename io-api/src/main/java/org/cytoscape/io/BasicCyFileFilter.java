@@ -18,7 +18,7 @@ import org.slf4j.LoggerFactory;
  * This is meant to be an basic implementation of {@link CyFileFilter} that can either be
  * used directly or extended to provide different acceptance criteria. Only the 
  * accepts() methods may be overridden.
- * @CyAPI.Abstract.Class #ASKMIKE Should we have another option? 
+ * @CyAPI.Abstract.Class 
  */
 public class BasicCyFileFilter implements CyFileFilter {
 

@@ -42,7 +42,19 @@ import javax.swing.JMenuItem;
 
 /**
  * A class that allows the enabled state of an Action of JMenuItem to managed in 
- * a consistent way. #ASKMIKE needs comments on several methods
+ * a consistent way. 
+ * <br/>
+ * Recognized values for the "enableFor" description string are:
+ * <ul>
+ * <li>network</li>
+ * <li>networkWithoutView</li>
+ * <li>networkAndView</li>
+ * <li>selectedNodesOrEdges</li>
+ * <li>selectedNodes</li>
+ * <li>selectedEdges</li>
+ * <li>table</li>
+ * </ul>
+ * 
  * @CyAPI.Final.Class
  */
 public final class MenuEnableSupport {
@@ -54,6 +66,13 @@ public final class MenuEnableSupport {
 	private final String enableFor;
 	private boolean enableState;
 
+	/**
+	 * Constructor.
+	 * @param submenuListener The submenu listener whose enabled state will be updated.
+	 * @param enableFor The description of how the submenu should be enabled.
+	 * See class documentation above for allowable values for this string.
+	 * @param applicationManager The application manager.
+	 */
 	public MenuEnableSupport(DynamicSubmenuListener submenuListener, String enableFor, CyApplicationManager applicationManager) {
 		this.submenuListener = submenuListener;
 		this.action = null;
@@ -63,6 +82,13 @@ public final class MenuEnableSupport {
 		this.enableState = true;
 	}
 
+	/**
+	 * Constructor.
+	 * @param action The action whose enabled state will be updated.
+	 * @param enableFor The description of how the action should be enabled.
+	 * See class documentation above for allowable values for this string.
+	 * @param applicationManager The application manager.
+	 */
 	public MenuEnableSupport(Action action, String enableFor, CyApplicationManager applicationManager) {
 		this.submenuListener = null;
 		this.action = action;
@@ -71,6 +97,13 @@ public final class MenuEnableSupport {
 		this.applicationManager = applicationManager;
 	}
 
+	/**
+	 * Constructor.
+	 * @param menuItem The menuItem whose enabled state will be updated.
+	 * @param enableFor The description of how the menuItem should be enabled.
+	 * See class documentation above for allowable values for this string.
+	 * @param applicationManager The application manager.
+	 */
 	public MenuEnableSupport(JMenuItem menuItem, String enableFor, CyApplicationManager applicationManager) {
 		this.submenuListener = null;
 		this.action = null;
@@ -79,6 +112,10 @@ public final class MenuEnableSupport {
 		this.applicationManager = applicationManager;
 	}
 
+	/**
+	 * Updates the enable state for the specified action/menuListener/menuItem
+	 * for the specified enableFor description and the state of the system.
+	 */
 	public void updateEnableState() {
 		if (enableFor == null)
 			setEnabled(true);
@@ -122,6 +159,10 @@ public final class MenuEnableSupport {
 			setEnabled(true);
 	}
 
+	/**
+	 * Enable the action if the current network exists, is not null,
+	 * and no view is available for the network.
+	 */
 	public void enableForNetworkWithoutView() {
 		final CyNetwork n = applicationManager.getCurrentNetwork();
 		final CyNetworkView v = applicationManager.getCurrentNetworkView();
@@ -228,6 +269,9 @@ public final class MenuEnableSupport {
 		setEnabled(false);
 	}
 
+	/**
+	 * Enables the action/menuListener/menuItem if a table is available and not null.
+	 */
 	public void enableForTable() {
 		setEnabled(applicationManager.getCurrentTable() != null);
 	}
@@ -242,6 +286,10 @@ public final class MenuEnableSupport {
 			menuItem.setEnabled(enableState);
 	}
 
+	/**
+	 * Returns true if the action/menuListener/menuItem is enabled, false otherwise.
+	 * @return true if the action/menuListener/menuItem is enabled, false otherwise.
+	 */
 	public synchronized boolean isCurrentlyEnabled() {
 		return enableState;
 	}

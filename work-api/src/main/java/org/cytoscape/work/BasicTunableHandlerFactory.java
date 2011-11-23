@@ -15,8 +15,8 @@ import org.slf4j.LoggerFactory;
  * If you need additional parameters to construct your TunableHandler, then
  * it is probably best to implement the TunableHandlerFactory interface directly!
  *
- * @param <T> The type of the TunableHandler.
- * #ASKMIKE
+ * @param <T> The specific type of the TunableHandler.
+ * @CyAPI.Abstract.Class 
  */
 public class BasicTunableHandlerFactory<T extends TunableHandler> implements TunableHandlerFactory<T> {
 	

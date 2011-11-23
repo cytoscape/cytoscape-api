@@ -46,9 +46,9 @@ import java.util.Arrays;
  * List with items of type <code>T</code> : one or more items can be selected.
  *
  * @param <T>  type of items that will be listed.
- * @CyAPI.Final.Class #ASKMIKE declare final
+ * @CyAPI.Final.Class
  */
-public class ListMultipleSelection<T> extends ListSelection<T> {
+public final class ListMultipleSelection<T> extends ListSelection<T> {
 	
 	/**
 	 * The list of items that have been selected.

@@ -60,31 +60,74 @@ import javax.swing.event.PopupMenuEvent;
 public abstract class AbstractCyAction extends AbstractAction implements CyAction {
 	private static final long serialVersionUID = -2245672104075936952L;
 	private static final Logger logger = LoggerFactory.getLogger(AbstractCyAction.class);
+
 	/**
-	 * #ASKMIKE and other protected attributes right below
+	 * The name describing the preferred menu for the action. 
 	 */
 	protected String preferredMenu = null;
 
-	// Value 100.0 means end of menu/tool bar
+	/**
+	 * The float value placing the action within the menu.
+	 * Value of 0.0 is the beginning and 100.0 means end of menu.
+	 */
 	protected float menuGravity = 100.0f;
+
+	/**
+	 * The float value placing the action within the toolbar.
+	 * Value of 0.0 is the beginning and 100.0 means end of menu.
+	 */
 	protected float toolbarGravity = 100.0f;
+
+	/**
+	 * Indicates whether accelerator keys have been set for the action.
+	 */
 	protected boolean acceleratorSet = false;
+
+	/**
+	 * The accelerator keystroke, if set.
+	 */
 	protected KeyStroke acceleratorKeyStroke = null;
+
+	/**
+	 * Indicates whether to use a checkbox menu item.
+	 */
 	protected boolean useCheckBoxMenuItem = false;
+
+	/**
+	 * Indicates whether the action is in the toolbar.
+	 */
 	protected boolean inToolBar = false;
+
+	/**
+	 * Indicates whether the action is in a menu.
+	 */
 	protected boolean inMenuBar = true;
+
+	/**
+	 * The string defining the possible system states that the
+	 * action is enabled for.
+	 */
 	protected String enableFor = null;
+
+	/**
+	 * The name of the action.
+	 */
 	protected String name;
+
+	/**
+	 * The application manager.
+	 */
 	protected final CyApplicationManager applicationManager;
+
+	/**
+	 * A support class for deciding whether the action should be enabled.
+	 */
 	protected MenuEnableSupport enabler; 
 
 	/**
 	 * Creates a new AbstractCyAction object.
-	 *
-	 * @param name
-	 *            The name of the action.
-	 * @param applicationManager
-	 *            The application manager providing context for this action.
+	 * @param name The name of the action.
+	 * @param applicationManager The application manager providing context for this action.
 	 */
 	public AbstractCyAction(final String name, final CyApplicationManager applicationManager) {
 		this(name,applicationManager,null);
@@ -192,8 +235,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	/**
 	 * Sets the name of the action.
 	 *
-	 * @param name
-	 *            The name of the action.
+	 * @param name The name of the action.
 	 */
 	public void setName(String name) {
 		this.name = name;
@@ -228,8 +270,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	/**
 	 * Sets the gravity used to order this action in the menu bar.
 	 *
-	 * @param gravity
-	 *            The gravity for ordering menu bar actions.
+	 * @param gravity The gravity for ordering menu bar actions.
 	 */
 	public void setMenuGravity(float gravity) {
 		menuGravity = gravity;
@@ -245,8 +286,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	/**
 	 * Sets the gravity used to order this action in the toolbar.
 	 *
-	 * @param gravity
-	 *            The gravity for ordering toolbar actions.
+	 * @param gravity The gravity for ordering toolbar actions.
 	 */
 	public void setToolbarGravity(float gravity) {
 		toolbarGravity = gravity;
@@ -262,8 +302,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	/**
 	 * Sets the accelerator KeyStroke for this action.
 	 *
-	 * @param ks
-	 *            The KeyStroke to be used as an accelerator for this action.
+	 * @param ks The KeyStroke to be used as an accelerator for this action.
 	 *            This parameter may be null, in which case no accelerator is
 	 *            defined.
 	 */
@@ -289,8 +328,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * Sets the preferredMenuString. See the {@link #getPreferredMenu}
 	 * description for formatting description.
 	 *
-	 * @param new_preferred
-	 *            The string describing the preferred menu name.
+	 * @param new_preferred The string describing the preferred menu name.
 	 */
 	public void setPreferredMenu(String new_preferred) {
 		preferredMenu = new_preferred;
@@ -306,8 +344,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	/**
 	 * This method can be used at your discretion, but otherwise does nothing.
 	 *
-	 * @param e
-	 *            The triggering event.
+	 * @param e The triggering event.
 	 */
 	public void menuCanceled(MenuEvent e) {
 		enabler.updateEnableState();
@@ -316,8 +353,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	/**
 	 * This method can be used at your discretion, but otherwise does nothing.
 	 *
-	 * @param e
-	 *            The triggering event.
+	 * @param e The triggering event.
 	 */
 	public void menuDeselected(MenuEvent e) {
 		enabler.updateEnableState();
@@ -331,8 +367,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * options for "enableFor" are "network", "networkAndView", and
 	 * "selectedNetworkObjs".
 	 *
-	 * @param e
-	 *            The triggering event.
+	 * @param e The triggering event.
 	 */
 	public void menuSelected(MenuEvent e) {
 		enabler.updateEnableState();
@@ -346,8 +381,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * options for "enableFor" are "network", "networkAndView", and
 	 * "selectedNetworkObjs".
 	 *
-	 * @param e
-	 *            The triggering event.
+	 * @param e The triggering event.
 	 */
 	public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
 		enabler.updateEnableState();
@@ -356,8 +390,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	/**
 	 * This method can be used at your discretion, but otherwise does nothing.
 	 *
-	 * @param e
-	 *            The triggering event.
+	 * @param e The triggering event.
 	 */
 	public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
 	}
@@ -365,16 +398,19 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	/**
 	 * This method can be used at your discretion, but otherwise does nothing.
 	 *
-	 * @param e
-	 *            The triggering event.
+	 * @param e The triggering event.
 	 */
 	public void popupMenuCanceled(PopupMenuEvent e) {
 	}
 
+	/**
+	 * Triggers the enable state of the action to be updated based
+	 * on the enableFor state of the action and the state of the
+	 * system.
+	 */
 	public void updateEnableState() {
 		enabler.updateEnableState();
 	}
-
 
     /**
      * Enable the action if the current network exists and is not null.
@@ -384,26 +420,38 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
     }
     
 	/**
-	 * #ASKMIKE and all methods below this
+	 *  Enables the action when a network without view is present. 
 	 */
 	protected void enableForNetworkWithoutView() {
 		enabler.enableForNetworkWithoutView() ;
 	}
 
+	/**
+	 *  Enables the action when a network view is present. 
+	 */
     protected void enableForNetworkAndView() {
     	enabler.enableForNetworkAndView() ;
     }
 
+	/**
+	 *  Enables the action when selected nodes or edges are present. 
+	 */
     protected void enableForSelectedNodesOrEdges() {
     	enabler.enableForSelectedNodesOrEdges() ;
     }
 
+	/**
+	 *  Enables the action when selected nodes are present. 
+	 */
     protected void enableForSelectedNodes() {
     	enabler.enableForSelectedNodes() ;
     }
 
+	/**
+	 *  Enables the action when selected edges are present. 
+	 */
     protected void enableForSelectedEdges() {
-    	enabler.enableForSelectedNodes() ;
+    	enabler.enableForSelectedEdges() ;
     }
 
     private void enableForTable() {

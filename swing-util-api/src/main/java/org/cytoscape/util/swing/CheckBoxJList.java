@@ -52,9 +52,9 @@ import java.util.List;
  * <p>
  *     Customized by Keiichiro Ono
  * </p>
- * @CyAPI.Final.Class #ASKMIKE declare final
+ * @CyAPI.Final.Class 
  */
-public class CheckBoxJList extends JList implements ListSelectionListener {
+public final class CheckBoxJList extends JList implements ListSelectionListener {
 	private final static long serialVersionUID = 120233987581935L;
 	private static final Color SELECTED_COLOR = new Color(0, 100, 250, 250);
 	private static final Color NORMAL_COLOR = new Color(100, 100, 100, 170);
@@ -62,7 +62,11 @@ public class CheckBoxJList extends JList implements ListSelectionListener {
 	private static Color listBackground;
 	private static final Font NORMAL_FONT = new Font("SansSerif", Font.PLAIN, 12);
 	private static final Font SELECTED_FONT = new Font("SansSerif", Font.BOLD, 12);
-	
+
+	/**
+	 * The name of the property change that indicates that the list 
+	 * has been updated.
+	 */
 	public static final String LIST_UPDATED = "LIST_UPDATED";
 
 	static {
@@ -80,7 +84,11 @@ public class CheckBoxJList extends JList implements ListSelectionListener {
 		setCellRenderer(new CheckBoxListCellRenderer());
 		addListSelectionListener(this);
 	}
-	
+
+	/**
+	 * Sets the specified items as selected.
+	 * @param selected the items to be selected.
+	 */
 	public void setSelectedItems(List<String> selected) {
 		ListSelectionListener[] listeners = this.getListSelectionListeners();
 		for(ListSelectionListener l :listeners) {
@@ -103,9 +111,7 @@ public class CheckBoxJList extends JList implements ListSelectionListener {
 
 	// ListSelectionListener implementation
 	/**
-	 *  Update the list items.
-	 *
-	 * @param lse DOCUMENT ME!
+	 * {@inheritDoc} 
 	 */
 	public void valueChanged(ListSelectionEvent lse) {
 		
@@ -149,7 +155,7 @@ public class CheckBoxJList extends JList implements ListSelectionListener {
 		}
 	}
 
-	class CheckBoxListCellRenderer extends JComponent implements ListCellRenderer {
+	private class CheckBoxListCellRenderer extends JComponent implements ListCellRenderer {
 	private final static long serialVersionUID = 120233987573888L;
 		private final DefaultListCellRenderer defaultComp;
 		private final JCheckBox checkbox;

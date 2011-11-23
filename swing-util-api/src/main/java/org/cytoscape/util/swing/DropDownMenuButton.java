@@ -7,19 +7,16 @@ import java.awt.*;
 /**
  * Button with drop down menu.
  *
- * @version 0.7
- * @since Cytoscape 2.5
- * @author kono
- * @CyAPI.Final.Class #ASKMIKE declare final, doc me's
+ * @CyAPI.Final.Class 
   */
-public class DropDownMenuButton extends JButton {
+public final class DropDownMenuButton extends JButton {
 	private final static long serialVersionUID = 1202339868695691L;
     private final Icon buttonIcon = new MenuArrowIcon();
 
     /**
      * Creates a new DropDownMenuButton object.
      *
-     * @param action DOCUMENT ME!
+     * @param action The action that this button represents. 
      */
     public DropDownMenuButton(final AbstractAction action) {
         super(action);
@@ -31,9 +28,7 @@ public class DropDownMenuButton extends JButton {
     }
 
     /**
-     * DOCUMENT ME!
-     *
-     * @param g DOCUMENT ME!
+     * {@inheritDoc} 
      */
     public void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -46,7 +41,7 @@ public class DropDownMenuButton extends JButton {
         buttonIcon.paintIcon(this, g, x, y);
     }
 
-    class MenuArrowIcon
+    private class MenuArrowIcon
         implements Icon {
         public void paintIcon(Component c, Graphics g, int x, int y) {
             Graphics2D g2 = (Graphics2D) g;
