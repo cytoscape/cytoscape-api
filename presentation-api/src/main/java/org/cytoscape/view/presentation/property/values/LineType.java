@@ -3,7 +3,8 @@ package org.cytoscape.view.presentation.property.values;
 import org.cytoscape.view.presentation.property.VisualPropertyValue;
 
 /**
- * #ASKMIKE
+ * Marker interface for line types.
+ * 
+ * @CyAPI.Api.Interface
  */
-public interface LineType extends VisualPropertyValue {
-}
+public interface LineType extends VisualPropertyValue {}

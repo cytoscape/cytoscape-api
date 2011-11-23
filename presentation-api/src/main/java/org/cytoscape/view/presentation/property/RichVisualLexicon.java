@@ -15,9 +15,10 @@ import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 
 /**
- * Minimal set of Visual Properties for 3D rendering engines.
+ * Set of Visual Properties for more advanced rendering engines.
+ * Rendering engine developers should extend this class to add their own set of Visual Properties.
  * 
- * @CyAPI.Final.Class #ASKMIKE needs public attribute comments, declare as final
+ * @CyAPI.Final.Class
  */
 public class RichVisualLexicon extends MinimalVisualLexicon {
 

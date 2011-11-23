@@ -43,10 +43,12 @@ import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.Range;
 
 /**
- * #ASKMIKE needs class comment, construct comment, declare as final
+ *  Visual Property for {@link Paint} values.
+ *  Usually, this will be used for {@link Color}.
+ *  
  * @CyAPI.Final.Class
  */
-public class PaintVisualProperty extends AbstractVisualProperty<Paint> { 
+public final class PaintVisualProperty extends AbstractVisualProperty<Paint> { 
 
 	public PaintVisualProperty(final Paint def, final Range<Paint> range, final String id, final String name, final Class<?> targetDataType) {
 		super(def, range, id, name, targetDataType);

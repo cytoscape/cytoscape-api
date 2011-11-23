@@ -55,7 +55,7 @@ import org.cytoscape.view.presentation.RenderingEngine;
  * all {@linkplain RenderingEngine}s. All of Visual Properties are singletons
  * and accessible as static object.
  * 
- * @CyAPI.Static.Class #ASKMIKE public method/attribute comments, declare as final
+ * @CyAPI.Static.Class
  */
 public class MinimalVisualLexicon extends AbstractVisualLexicon {
 

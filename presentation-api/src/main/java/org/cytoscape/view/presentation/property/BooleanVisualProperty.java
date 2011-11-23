@@ -43,10 +43,11 @@ import org.cytoscape.view.model.DiscreteRange;
 import org.cytoscape.view.model.Range;
 
 /**
- * #ASKMIKE needs class comment, public method comments, declare as final
+ * Visual Property for {@link Boolean} values.
+ * 
  * @CyAPI.Final.Class
  */
-public class BooleanVisualProperty extends AbstractVisualProperty<Boolean> { 
+public final class BooleanVisualProperty extends AbstractVisualProperty<Boolean> { 
 	
 	private static final Range<Boolean> BOOLEAN_RANGE;
 	
@@ -66,10 +67,13 @@ public class BooleanVisualProperty extends AbstractVisualProperty<Boolean> {
 		this.shouldIgnoreDefault = ignoreDefault;
 	}
 	
+	
+	@Override
 	public String toSerializableString(final Boolean value) {
 		return value.toString();
 	}
 
+	@Override
 	public Boolean parseSerializableString(final String text) {
 		return Boolean.valueOf(text);
 	}

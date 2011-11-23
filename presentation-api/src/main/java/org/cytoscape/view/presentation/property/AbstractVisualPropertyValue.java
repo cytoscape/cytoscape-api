@@ -1,7 +1,7 @@
 package org.cytoscape.view.presentation.property;
 
 /**
- * #ASKMIKE class comment
+ * Base class for all {@link VisualPropertyValue}.
  * @CyAPI.Abstract.Class
  */
 public abstract class AbstractVisualPropertyValue implements VisualPropertyValue {

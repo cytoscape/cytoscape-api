@@ -12,9 +12,9 @@ import org.cytoscape.view.model.Range;
  * Visual Property for root. This will not be used in actual visualization. Just
  * a marker node in the tree.
  *
- * @CyAPI.Final.Class #ASKMIKE  public method comments, declare as final
+ * @CyAPI.Final.Class
  */
-public class NullVisualProperty extends AbstractVisualProperty<NullDataType> {
+public final class NullVisualProperty extends AbstractVisualProperty<NullDataType> {
 
 	private static final NullDataType dummyObject = new NullDataTypeImpl();
 	private static final Range<NullDataType> NULL_RANGE;
@@ -29,10 +29,14 @@ public class NullVisualProperty extends AbstractVisualProperty<NullDataType> {
 		super(dummyObject, NULL_RANGE, id, name, Object.class);
 	}
 
+	
+	@Override
 	public String toSerializableString(final NullDataType value) {
 		return value.toString();
 	}
 
+	
+	@Override
 	public NullDataType parseSerializableString(final String text) {
 		return dummyObject;
 	}

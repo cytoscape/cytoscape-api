@@ -9,7 +9,8 @@ import org.cytoscape.view.model.DiscreteRange;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 
 /**
- * #ASKMIKE needs class comment, public method/attribute comments
+ * Visual Property for {@link NodeShape} values.
+ * 
  * @CyAPI.Final.Class
  */
 public final class NodeShapeVisualProperty extends

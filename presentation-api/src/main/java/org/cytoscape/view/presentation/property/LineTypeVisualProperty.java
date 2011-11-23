@@ -9,10 +9,11 @@ import org.cytoscape.view.model.DiscreteRange;
 import org.cytoscape.view.presentation.property.values.LineType;
 
 /**
- * #ASKMIKE needs class comment, public method//attribute comments, declare as final
+ * Visual Property for {@link LineType} values.
+ * 
  * @CyAPI.Final.Class
  */
-public class LineTypeVisualProperty extends AbstractVisualProperty<LineType> {
+public final class LineTypeVisualProperty extends AbstractVisualProperty<LineType> {
 	
 	// Default basic line types.  Others will be provided from rendering engines.
 	public static final LineType SOLID = new LineTypeImpl("Solid", "SOLID");

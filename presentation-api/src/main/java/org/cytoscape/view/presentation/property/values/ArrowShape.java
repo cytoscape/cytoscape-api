@@ -5,6 +5,7 @@ import org.cytoscape.view.presentation.property.VisualPropertyValue;
 
 /**
  * Marker interface representing edge end shape (arrow).
- * #ASKMIKE which taglet
+ * 
+ * @CyAPI.Api.Interface
  */
 public interface ArrowShape extends VisualPropertyValue {}

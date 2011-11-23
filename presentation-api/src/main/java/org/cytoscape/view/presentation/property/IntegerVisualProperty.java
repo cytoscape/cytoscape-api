@@ -38,10 +38,11 @@ import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.Range;
 
 /**
- * #ASKMIKE needs class comment, public method comments, declare as final
+ * Visual Property for {@link Integer} values.
+ * 
  * @CyAPI.Final.Class
  */
-public class IntegerVisualProperty extends AbstractVisualProperty<Integer> {
+public final class IntegerVisualProperty extends AbstractVisualProperty<Integer> {
 
 	/**
 	 * Use specific range
@@ -56,10 +57,20 @@ public class IntegerVisualProperty extends AbstractVisualProperty<Integer> {
 		super(def, range, id, name, targetDataType);
 	}
 
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public String toSerializableString(final Integer value) {
 		return value.toString();
 	}
 
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	@Override
 	public Integer parseSerializableString(final String text) {
 		// Cytoscape 2.x serializes integer attributes as decimals (e.g."1.0")!
 		return Double.valueOf(text).intValue();

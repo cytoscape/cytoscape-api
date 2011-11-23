@@ -38,10 +38,11 @@ import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.Range;
 
 /**
- * #ASKMIKE needs class comment, public method comments, declare as final
+ * Visual Property for {@link Double} values. 
+ * 
  * @CyAPI.Final.Class
  */
-public class DoubleVisualProperty extends AbstractVisualProperty<Double> {
+public final class DoubleVisualProperty extends AbstractVisualProperty<Double> {
 
 	public DoubleVisualProperty(final Double def, final Range<Double> range, final String id, final String name, final Class<?> targetDataType) {
 		this(def, range, id, name, false, targetDataType);

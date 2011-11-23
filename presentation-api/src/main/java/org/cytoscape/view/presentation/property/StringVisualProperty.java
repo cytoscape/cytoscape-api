@@ -38,19 +38,22 @@ import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.Range;
 
 /**
- * #ASKMIKE needs class comment, public method comments, declare final
+ * Visual Property for {@link String} values.
+ * 
  * @CyAPI.Final.Class
  */
-public class StringVisualProperty extends AbstractVisualProperty<String> {
+public final class StringVisualProperty extends AbstractVisualProperty<String> {
 
 	public StringVisualProperty(final String def, final Range<String> range, final String id, final String name, final Class<?> targetDataType) {
 		super(def, range, id, name, targetDataType);
 	}
 
+	@Override
 	public String toSerializableString(final String value) {
 		return value;
 	}
 
+	@Override
 	public String parseSerializableString(final String text) {
 		return text;
 	}

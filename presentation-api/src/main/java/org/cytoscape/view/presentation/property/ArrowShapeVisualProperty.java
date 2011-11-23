@@ -9,12 +9,13 @@ import org.cytoscape.view.model.DiscreteRange;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
 
 /**
- * #ASKMIKE needs class comment, public method/attribute comments
+ * Visual Property for {@link ArrowShape} values.
+ * 
  * @CyAPI.Final.Class
  */
 public final class ArrowShapeVisualProperty extends AbstractVisualProperty<ArrowShape> {
 	
-	// Presets
+	// Preset arrow shapes
 	public static final ArrowShape NONE = new ArrowShapeImpl("No Arrow", "NONE");
 	public static final ArrowShape DIAMOND = new ArrowShapeImpl("Diamond", "DIAMOND");
 	public static final ArrowShape DELTA = new ArrowShapeImpl("Delta", "DELTA");
@@ -45,7 +46,6 @@ public final class ArrowShapeVisualProperty extends AbstractVisualProperty<Arrow
 	public ArrowShapeVisualProperty(ArrowShape defaultValue, String id, String displayName,
 			Class<?> targetObjectDataType) {
 		super(defaultValue, ARROW_SHAPE_RANGE, id, displayName, targetObjectDataType);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
@@ -75,6 +75,7 @@ public final class ArrowShapeVisualProperty extends AbstractVisualProperty<Arrow
 
 		@Override
 		public VisualPropertyValue parseSerializableString(String serializableString) {
+			// TODO: FIXME
 			// Should be overridden by child class.
 			return null;
 		}

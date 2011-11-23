@@ -12,9 +12,10 @@ import org.cytoscape.view.model.Visualizable;
  * Visual Property to represent abstract concept such as Node or Edge. If
  * rendering engine have this visual property in the lexicon tree and if it's a
  * leaf, it should render it with default settings.
- * @CyAPI.Final.Class #ASKMIKE needs final declare
+ * 
+ * @CyAPI.Final.Class
  */
-public class DefaultVisualizableVisualProperty extends
+public final class DefaultVisualizableVisualProperty extends
 		AbstractVisualProperty<Visualizable> {
 
 	private static final Visualizable visualizable = new VisualizableImpl();

@@ -1,15 +1,15 @@
 package org.cytoscape.view.presentation.property;
 
-import org.cytoscape.model.CyTableEntry;
 import org.cytoscape.view.model.VisualLexicon;
 import org.cytoscape.view.model.VisualLexiconNode;
 import org.cytoscape.view.model.VisualProperty;
 
 /**
  * Utility functions for traversing visual lexicon tree.
- * @CyAPI.Static.Class #ASKMIKE declare final, private construct?
+ * 
+ * @CyAPI.Static.Class
  */
-public class VisualPropertyUtil {
+public final class VisualPropertyUtil {
 
 	/**
 	 * Check whether the given {@linkplain VisualProperty} is a child of parent vp or not.
