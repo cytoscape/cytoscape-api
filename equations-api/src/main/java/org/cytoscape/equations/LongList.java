@@ -33,12 +33,17 @@ package org.cytoscape.equations;
 import java.util.ArrayList;
 
 /**
- * #ASKMIKE
+ * An convenience implementation of ArrayList&lt;Long&gt; that
+ * allows for strong type checking.
  * @CyAPI.Final.Class
  */
 public final class LongList extends ArrayList<Long> {
 	public static final long serialVersionUID = -245160324069812L;
 
+    /**
+     * Constructor.
+     * @param longs The values that will initially comprise this list.
+     */
 	public LongList(final long... longs) {
 		ensureCapacity(longs.length);
 		for (final long l : longs)

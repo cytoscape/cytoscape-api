@@ -33,12 +33,17 @@ package org.cytoscape.equations;
 import java.util.ArrayList;
 
 /**
- * #ASKMIKE
+ * An convenience implementation of ArrayList&lt;Boolean&gt; that
+ * allows for strong type checking.
  * @CyAPI.Final.Class
  */
 public final class BooleanList extends ArrayList<Boolean> {
 	public static final long serialVersionUID = -39245160342061982L;
 
+	/**
+	 * Constructor.
+	 * @param booleans The values that will initially comprise this list.
+	 */
 	public BooleanList(final boolean... booleans) {
 		ensureCapacity(booleans.length);
 		for (final boolean b : booleans)

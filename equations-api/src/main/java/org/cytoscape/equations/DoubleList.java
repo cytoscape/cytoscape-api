@@ -33,12 +33,17 @@ package org.cytoscape.equations;
 import java.util.ArrayList;
 
 /**
- * #ASKMIKE
+ * An convenience implementation of ArrayList&lt;Double&gt; that
+ * allows for strong type checking.
  * @CyAPI.Final.Class
  */
 public final class DoubleList extends ArrayList<Double> {
 	public static final long serialVersionUID = 9241560324069182L;
 
+	/**
+	 * Constructor.
+	 * @param doubles The values that will initially comprise this list.
+	 */
 	public DoubleList(final double... doubles) {
 		ensureCapacity(doubles.length);
 		for (final double d : doubles)

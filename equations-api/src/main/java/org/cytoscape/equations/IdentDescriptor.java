@@ -34,9 +34,9 @@ import java.util.List;
 
 
 /** Used to hold a current value for an equation's variable reference.
- * @CyAPI.Api.Interface #ASKMIKE
+ * @CyAPI.Final.Class
  */
-public class IdentDescriptor {
+public final class IdentDescriptor {
 	private final Class type;
 	private final Object value;
 

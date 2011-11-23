@@ -32,7 +32,7 @@ package org.cytoscape.event;
  * The basic event handling interface for Cytoscape.  All Cytoscape events
  * should be fired using these methods.  All listeners should be registered
  * as CyListener services.
- * @CyAPI.Api.Interface   #ASKMIKE
+ * @CyAPI.Api.Interface 
  */
 public interface CyEventHelper {
 	/**

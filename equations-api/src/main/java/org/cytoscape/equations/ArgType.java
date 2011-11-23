@@ -136,10 +136,22 @@ public enum ArgType {
 		this.acceptsMultipleArgs = acceptsMultipleArgs;
 		this.compatibleTypes = compatibleTypes;
 	}
-	/** #ASKMIKE */
+
+	/** 
+	 * Returns true if this type is optional. 
+	 * @return true if this type is optional. 
+	 */
+
 	public boolean isOptional() { return isOptional; }
-	/** #ASKMIKE */
+	/** 
+	 * Returns true if this type accepts multiple args.
+	 * @return true if this type accepts multiple args.
+	 */
 	public boolean acceptsMultipleArgs() { return acceptsMultipleArgs; }
-	/** #ASKMIKE */
+
+	/** 
+	 * Returns an array of compatible Class types.
+	 * @return an array of compatible Class types.
+	 */
 	public Class[] getCompatibleTypes() { return compatibleTypes; }
 }

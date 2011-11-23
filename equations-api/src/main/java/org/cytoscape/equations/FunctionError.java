@@ -30,18 +30,27 @@
 package org.cytoscape.equations;
 
 /**
- * #ASKMIKE Needs method comments and class description.
+ * A class describing an error in a function. 
  * @CyAPI.Final.class
  */
 public final class FunctionError extends Exception {
 	private static final long serialVersionUID = 0xDAEDEBECFAEF2134L;
 	private final int argNumber; // Which argument this error is associated with.
 
+	/**
+	 * Constructor.
+	 * @param message The error message.
+	 * @param argNumber The argument number associated with the error. 
+	 */
 	public FunctionError(final String message, final int argNumber) {
 		super(message);
 
 		this.argNumber = argNumber;
 	}
 
+	/**
+	 * Returns the argument number the error is associated with.
+	 * @return the argument number the error is associated with.
+	 */
 	public int getArgNumber() { return argNumber; }
 }

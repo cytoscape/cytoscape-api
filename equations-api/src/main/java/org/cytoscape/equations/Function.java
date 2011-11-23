@@ -32,7 +32,8 @@ package org.cytoscape.equations;
 
 import java.util.List;
 
-/** #ASKMIKE 
+/** 
+ * The basic description of a Function.
  * @CyAPI.Spi.Interface
  */
 public interface Function {

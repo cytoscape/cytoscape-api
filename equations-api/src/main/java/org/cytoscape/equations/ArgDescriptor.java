@@ -34,7 +34,7 @@ import java.util.List;
 import java.util.ArrayList;
 
 
-/** #ASKMIKE Needs method comments.
+/** 
  *  A class describing a function argument.
  *  @CyAPI.Final.Class
  */
@@ -43,17 +43,45 @@ public final class ArgDescriptor {
 	private String argName;
 	private String description;
 
+	/**
+	 * @param argType The type of the argument.
+	 * @param argName The name of the argument.
+	 * @param description The description of the argument.
+	 */
 	public ArgDescriptor(final ArgType argType, final String argName, final String description) {
 		this.argType = argType;
 		this.argName = argName;
 		this.description = description;
 	}
 
+	/**
+	 * @return The type of the argument.
+	 */
 	public ArgType getArgType() { return argType; }
+
+	/**
+	 * Returns the name of the argument.
+	 * @return The name of the argument.
+	 */
 	public String getArgName() { return argName; }
+
+	/**
+	 * Returns the description of the argument.
+	 * @return The description of the argument.
+	 */
 	public String getDescription() { return description; }
+
+	/**
+	 * Returns whether the ArgType is optional. 
+	 * @return whether the ArgType is optional. 
+	 */
 	public boolean isOptional() { return argType.isOptional(); }
 
+	/**
+	 * Tests to see if the specified class is compatible with this ArgType.
+	 * @param type the Class to test against this ArgType.
+	 * @return true if the specified class is compatible with this ArgType.
+	 */
 	public boolean isCompatibleWith(final Class type) {
 		if (FunctionUtil.isSomeKindOfList(type))
 			return isCompatibleList(type);
@@ -68,7 +96,8 @@ public final class ArgDescriptor {
 
 	/**
 	 * Returns true if "type" is a List type that specifies the element type otherwise we return false.
-	 *  @return true if "type" is a List type that specifies the element type otherwise we return false.
+	 * @param type The type to be tested.
+	 * @return true if "type" is a List type that specifies the element type otherwise we return false.
 	 */
 	private boolean isSpecificList(final Class type) {
 		return type == DoubleList.class || type == LongList.class || type == StringList.class || type == BooleanList.class;
@@ -76,7 +105,8 @@ public final class ArgDescriptor {
 
 	/**
 	 * Returns true if "listType", which must be some type of List is a type compatible with this argument descriptor.
-	 *  @return true if "listType", which must be some type of List is a type compatible with this argument descriptor.
+	 * @param listType A type that is a subclass of List.
+	 * @return true if "listType", which must be some type of List is a type compatible with this argument descriptor.
 	 */
 	private boolean isCompatibleList(final Class listType) {
 		// First we handle the case where "listType" is highly specific...
@@ -90,16 +120,16 @@ public final class ArgDescriptor {
 
 		// ...and here we handle the case where we don't have any information about the argument types of "listType":
 		for (final Class compatibleType : argType.getCompatibleTypes()) {
-                        if (FunctionUtil.isSomeKindOfList(compatibleType))
-                                return true;
+			if (FunctionUtil.isSomeKindOfList(compatibleType))
+				return true;
 		}
 
-                return false;
+		return false;
 	}
 
 	/**
 	 * Returns the types that are compatible with this argument.
-	 *  @return the types that are compatible with this argument.
+	 * @return the types that are compatible with this argument.
 	 */
 	public Class[] getCompatibleTypes() {
 		return argType.getCompatibleTypes();
@@ -107,7 +137,7 @@ public final class ArgDescriptor {
 
 	/**
 	 * Returns true if this ArgDescriptor accepts multiple arguments, otherwise false.
-	 *  @return true if this ArgDescriptor accepts multiple arguments, otherwise false.
+	 * @return true if this ArgDescriptor accepts multiple arguments, otherwise false.
 	 */
 	public boolean acceptsMultipleArgs() {
 		return argType.acceptsMultipleArgs();

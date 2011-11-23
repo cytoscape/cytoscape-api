@@ -34,9 +34,9 @@ import org.cytoscape.model.CyTable;
 
 /**
  * This event signals that a columns name has been changed.
- * @CyAPI.Final.Class   #ASKMIKE : This class isn't declared as final.
+ * @CyAPI.Final.Class 
  */
-public class ColumnNameChangedEvent extends AbstractCyEvent<CyTable> {
+public final class ColumnNameChangedEvent extends AbstractCyEvent<CyTable> {
 	private final String oldColumnName;
 	private final String newColumnName;
 

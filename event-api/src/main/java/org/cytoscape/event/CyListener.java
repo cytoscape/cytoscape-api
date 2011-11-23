@@ -53,7 +53,7 @@ package org.cytoscape.event;
  * type, but that doesn't appear possible with Java. That
  * means users are either must register as different listeners
  * or handle different event types in the handleEvent method. 
- * @CyAPI.Spi.Interface   #ASKMIKE
+ * @CyAPI.Spi.Interface 
  */
 public interface CyListener {
 	// implement 

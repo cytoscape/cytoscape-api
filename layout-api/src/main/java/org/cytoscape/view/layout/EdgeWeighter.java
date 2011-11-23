@@ -37,7 +37,7 @@ import org.cytoscape.model.CyRow;
 import org.cytoscape.work.Tunable;
 
 /**
- * #ASKMIKE
+ * An enum describing different weighting strategies. 
  * @CyAPI.Enum.Class
  */
 enum WeightTypes {
@@ -48,6 +48,11 @@ enum WeightTypes {
 
 	private String name;
 	private WeightTypes(String str) { name=str; }
+
+	/**
+	 * Returns the name of the weighting type.
+	 * @return the name of the weighting type.
+	 */	
 	public String toString() { return name; }
 }
 

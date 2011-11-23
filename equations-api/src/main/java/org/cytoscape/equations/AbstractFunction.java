@@ -43,8 +43,9 @@ import java.util.TreeSet;
 public abstract class AbstractFunction implements Function {
 	final private ArgDescriptor[] argDescriptors;
 
-	/** Base class constructor for easy creation of <code>Function</code>s from function argument descriptors.
-	 *  @param argDescriptors  an array describing the <code>Function</code> argument list
+	/** 
+	 * Base class constructor for easy creation of <code>Function</code>s from function argument descriptors.
+	 * @param argDescriptors  an array describing the <code>Function</code> argument list
 	 */
 	protected AbstractFunction(final ArgDescriptor[] argDescriptors) {
 		this.argDescriptors = argDescriptors;
@@ -122,22 +123,23 @@ public abstract class AbstractFunction implements Function {
 
 	/**
 	 * Returns the static return type of this function.
-	 *  @return the static return type of this function, Object.class, Double.cLass, String.class, or Boolean.class.
-	 *           If the static return type is Object.class, the dynamic return type will be one of Double.cLass, String.class, or Boolean.class
-	 *           and will depend on the arguments passed to the function!
+	 * If the static return type is Object.class, the dynamic return type will be one of Double.cLass, 
+	 * String.class, or Boolean.class and will depend on the arguments passed to the function!
+	 * <br/>
+	 * Note, this is used by external tools used to filter a list of functions based on what a valid 
+	 * return type might be. In Cytoscape it is used in the attribute browser's formula builder.
 	 *
-	 *  Note, this is used by external tools used to filter a list of functions based on what a valid return type might be.
-	 *  In Cytoscape it is used in the attribute browser's formula builder.
+	 * @return the static return type of this function, Object.class, Double.cLass, String.class, or Boolean.class.
 	 */
 	public abstract Class getReturnType();
 
 	/**
 	 * Returns true of false if the args passed in had arity of a type mismatch.
-	 *  @param argTypes the args to check for wrong arity or a type mismatch.
-	 * @return true or false if the args passed in had the wrong arity or a type mismatch
+	 * Note that this is different from getReturnType() in that it will never return the wildcard Object.class.
+	 * It is used by the parser which knows the actual type of the arguments in any given call to this function.
 	 *
-	 *  Note that this is different from getReturnType() in that it will never return the wildcard Object.class.
-	 *  It is used by the parser which knows the actual type of the arguments in any given call to this function.
+	 * @param argTypes the args to check for wrong arity or a type mismatch.
+	 * @return true or false if the args passed in had the wrong arity or a type mismatch
 	 */
 	protected final boolean argTypesAreValid(final Class[] argTypes) {
 		int i = 0;
@@ -169,22 +171,25 @@ public abstract class AbstractFunction implements Function {
 
 	/**
 	 * Returns the return type of this function.
-	 *  @return the return type for this function (Double.class, String.class, or Boolean.class)
-	 *           or null if the args passed in had the wrong arity or a type mismatch
+	 * Note that this is different from getReturnType() in that it will never return the wildcard Object.class.
+	 * It is used by the parser which knows the actual type of the arguments in any given call to this function.
 	 *
-	 *  Note that this is different from getReturnType() in that it will never return the wildcard Object.class.
-	 *  It is used by the parser which knows the actual type of the arguments in any given call to this function.
+	 * @param argTypes the args to check for wrong arity or a type mismatch.
+	 * @return the return type for this function (Double.class, String.class, or Boolean.class)
+	 *          or null if the args passed in had the wrong arity or a type mismatch
 	 */
 	public final Class validateArgTypes(final Class[] argTypes) {
 		return argTypesAreValid(argTypes) ? getReturnType() : null;
 	}
 
 	/**
-	 *  Used to invoke this function.
-	 *  @param args the function arguments which must correspond in type and number to what getParameterTypes() returns.
-	 *  @return the result of the function evaluation.  The actual type of the returned object will be what getReturnType() returns.
-	 *  @throws ArithmeticException thrown if a numeric error, e.g. a division by zero occurred.
-	 *  @throws IllegalArgumentException thrown for any error that is not a numeric error, for example if a function only accepts positive numbers and a negative number was passed in.
+	 * Used to invoke this function.
+	 * @param args the function arguments which must correspond in type and number to what getParameterTypes() returns.
+	 * @return the result of the function evaluation.  The actual type of the returned object will be what 
+	 * getReturnType() returns.
+	 * @throws ArithmeticException thrown if a numeric error, e.g. a division by zero occurred.
+	 * @throws IllegalArgumentException thrown for any error that is not a numeric error, 
+	 * for example if a function only accepts positive numbers and a negative number was passed in.
 	 */
 	public abstract Object evaluateFunction(final Object[] args) throws FunctionError;
 

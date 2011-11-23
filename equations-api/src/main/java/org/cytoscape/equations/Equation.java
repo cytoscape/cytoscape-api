@@ -34,7 +34,8 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-/** #ASKMIKE 
+/** 
+ * The class representing an equation.
  * @CyAPI.Final.Class
  */
 public final class Equation {

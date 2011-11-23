@@ -33,8 +33,9 @@ package org.cytoscape.equations;
 import java.util.Map;
 import java.util.Set;
 
-/** #ASKMIKE 
- * @CyAPI.Api.Interface #ASKMIKE
+/** 
+ * Parser for a string representing an equation. 
+ * @CyAPI.Api.Interface 
  */
 public interface EquationParser {
 	/**

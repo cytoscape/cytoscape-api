@@ -32,7 +32,7 @@ package org.cytoscape.equations;
 
 import java.util.Map;
 
-/** #ASKMIKE 
+/** Executes the code represented by an equation.
  * @CyAPI.Api.Interface
  */
 public interface Interpreter {

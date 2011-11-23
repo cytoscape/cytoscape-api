@@ -68,7 +68,8 @@ abstract public class AbstractLayoutAlgorithm implements CyLayoutAlgorithm {
 	 * Never use this method from within a layout to access the submenu options,
      * instead call the configureLayoutFromSubmenuSelection() method to configure
 	 * the layout based on menu selection. 
-	 * @return #ASKMIKE
+	 * @return The list single selection object that specifies the submenu
+	 * names to be used for generating selection submenus. 
 	 */
 	@Tunable(description="Submenu definition")
 	public ListSingleSelection<String> getSubmenuOptions() {
