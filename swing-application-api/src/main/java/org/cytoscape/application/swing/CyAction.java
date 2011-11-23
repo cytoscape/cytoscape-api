@@ -72,12 +72,16 @@ public interface CyAction extends Action, MenuListener, PopupMenuListener {
 
 	/**
 	 * Returns the gravity used to place the menu item for this action.
+	 * Gravity is a numeric value associated with each menu item. MenuItems in the same menu pull-down
+	 * are sorted in ascending order based on their gravity values.
 	 * @return The gravity used to place the menu item for this action.
 	 */
 	float getMenuGravity();
 
 	/**
 	 * Returns the gravity used to place this action in the toolbar.
+	 * Gravity is a numeric value associated with each menu item. MenuItems in the same menu pull-down
+	 * are sorted in ascending order based on their gravity values.
 	 * @return The gravity used to place this action in the toolbar.
 	 */
 	float getToolbarGravity();
