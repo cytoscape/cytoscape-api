@@ -92,7 +92,7 @@ public interface CyEdge extends CyTableEntry {
 	int getIndex();
 
 	/**
-	 * Returns the source node determining this edge. 
+	 * Returns the source node determining this edge. It will never be null.
 	 * For undirected networks this method will consistently 
 	 * return the same node.
 	 * @return The source node of this edge.
@@ -100,7 +100,7 @@ public interface CyEdge extends CyTableEntry {
 	CyNode getSource();
 
 	/**
-	 * Returns the target node determining this edge.
+	 * Returns the target node determining this edge. It will never be null.
 	 * For undirected networks this method will consistently 
 	 * return the same node.
 	 * @return The target node of this edge.
