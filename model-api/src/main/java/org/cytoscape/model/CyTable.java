@@ -130,7 +130,9 @@ public interface CyTable extends Identifiable {
 	Collection<CyColumn> getColumns();
 
 	/**
-	 * Will delete the column of the specified name.
+	 * Will delete the column of the specified name. columnName must be not null. If the column does not exist,
+	 * there is no effect. If the column is immutable, IllegalArgumentException will be thrown. If the deletion is 
+	 * successful, {@link ColumnDeletedEvent} will be fired.  
 	 * @param columnName The name identifying the attribute.
 	 */
 	void deleteColumn(String columnName);
