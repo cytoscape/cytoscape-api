@@ -39,6 +39,9 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.EventObject;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /**
  * This example shows how to create a simple JTreeTable component, by using a
@@ -53,6 +56,8 @@ import java.util.EventObject;
  */
 public class JTreeTable extends JTable {
 	private final static long serialVersionUID = 1202339868625600L;
+	private final static Logger logger = LoggerFactory.getLogger( JTreeTable.class );
+
 	/** A subclass of JTree. */
 	protected TreeTableCellRenderer tree;
 
@@ -260,8 +265,8 @@ public class JTreeTable extends JTable {
 
 			try {
 				super.paint(g);
-			} catch (Exception e) {
-				//System.err.println("********************");
+			} catch (Throwable e) {
+				logger.debug("random swing exception/error: ",e);
 			}
 		}
 
