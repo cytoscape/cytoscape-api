@@ -43,6 +43,7 @@ import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyTable;
+import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.DummyCyNode;
 import org.cytoscape.model.DummyCyEdge;
 
@@ -685,4 +686,29 @@ public abstract class AbstractCyRootNetworkTest {
 		CySubNetwork sub = root.addSubNetwork();
 		assertNotNull( sub.getDefaultEdgeTable().getColumn("homer") );	
     }
+
+    @Test
+    public void testGetNodeSharedNameColumn() {
+		CyTable shared = root.getSharedNodeTable();
+		CyColumn col = shared.getColumn(CyRootNetwork.SHARED_NAME);	
+		assertNotNull( col );
+		assertEquals( String.class, col.getType() );
+    }
+
+    @Test
+    public void testGetEdgeSharedNameColumn() {
+		CyTable shared = root.getSharedEdgeTable();
+		CyColumn col = shared.getColumn(CyRootNetwork.SHARED_NAME);	
+		assertNotNull( col );
+		assertEquals( String.class, col.getType() );
+    }
+
+    @Test
+    public void testGetNetworkSharedNameColumn() {
+		CyTable shared = root.getSharedNetworkTable();
+		CyColumn col = shared.getColumn(CyRootNetwork.SHARED_NAME);	
+		assertNotNull( col );
+		assertEquals( String.class, col.getType() );
+    }
+
 }
