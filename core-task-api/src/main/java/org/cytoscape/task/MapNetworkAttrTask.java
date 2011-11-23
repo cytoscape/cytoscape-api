@@ -4,6 +4,7 @@ package org.cytoscape.task;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.HashSet;
 
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.model.CyEdge;
@@ -11,10 +12,17 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.model.CyTable;
+import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyTableEntry;
+import org.cytoscape.model.subnetwork.CyRootNetworkFactory;
+import org.cytoscape.model.subnetwork.CyRootNetwork;
 import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskMonitor;
 import org.cytoscape.work.Tunable;
+import org.cytoscape.work.util.ListSingleSelection;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /** 
  * This is a simple {@link org.cytoscape.work.Task} that will take a loaded table and ask whether
@@ -23,16 +31,22 @@ import org.cytoscape.work.Tunable;
  * @CyAPI.Final.Class
  */
 public final class MapNetworkAttrTask extends AbstractTask {
-	/**
-	 * If true map to current network only.
-	 */
-	@Tunable(description="Map to current network only")
-	public boolean currentNetworkOnly = true;
+
+	private static final Logger logger = LoggerFactory.getLogger(MapNetworkAttrTask.class);
+
+	private static final String CURRENT_LOCAL = "Just the current network";
+	private static final String CURRENT_SHARED = "All networks related to current network";
+	private static final String ALL_SHARED = "All networks";
+	private static final String INDEPENDENT = "None (make table independent)";
+
+	@Tunable(description="Would you like to map this table to:")
+	public ListSingleSelection<String> whichTable;
 
 	private final Class<? extends CyTableEntry> type; // Must be node or edge!
 	private final CyTable newGlobalTable;
 	private final CyNetworkManager networkManager;
 	private final CyApplicationManager applicationManager;
+	private final CyRootNetworkFactory rootNetworkFactory;
 	private String mappingKey; 
 
 	/**
@@ -47,13 +61,17 @@ public final class MapNetworkAttrTask extends AbstractTask {
 	                          final CyTable newGlobalTable,
 	                          String mappingKey,
 	                          final CyNetworkManager networkManager,
-	                          final CyApplicationManager applicationManager)
+	                          final CyApplicationManager applicationManager,
+							  final CyRootNetworkFactory rootNetworkFactory)
 	{
 		this.type               = type;
 		this.newGlobalTable     = newGlobalTable;
 		this.mappingKey         = mappingKey;		
 		this.networkManager     = networkManager;
 		this.applicationManager = applicationManager;
+		this.rootNetworkFactory = rootNetworkFactory;
+
+		this.whichTable = new ListSingleSelection<String>(CURRENT_SHARED, CURRENT_LOCAL, ALL_SHARED, INDEPENDENT);
 
 		if (type != CyNode.class && type != CyEdge.class)
 			throw new IllegalArgumentException("\"type\" must be CyNode.class or CyEdge.class!");
@@ -71,9 +89,10 @@ public final class MapNetworkAttrTask extends AbstractTask {
 	public MapNetworkAttrTask(final Class<? extends CyTableEntry> type, 
 	                          final CyTable newGlobalTable,
 	                          final CyNetworkManager networkManager,
-	                          final CyApplicationManager applicationManager)
+	                          final CyApplicationManager applicationManager,
+							  final CyRootNetworkFactory rootNetworkFactory)
 	{
-		this(type,newGlobalTable,CyTableEntry.NAME,networkManager, applicationManager);
+		this(type,newGlobalTable,CyTableEntry.NAME,networkManager,applicationManager,rootNetworkFactory);
 	}
 
 
@@ -87,16 +106,33 @@ public final class MapNetworkAttrTask extends AbstractTask {
 		taskMonitor.setTitle("Mapping virtual columns");
 
 		final List<CyTable> targetTables = new ArrayList<CyTable>();
+		
+		final String selection = whichTable.getSelectedValue();
 
-		if (currentNetworkOnly) {
+		if (selection.equals(CURRENT_LOCAL)) {
 			final CyNetwork currentNetwork = applicationManager.getCurrentNetwork();
 			targetTables.add(type == CyNode.class ? currentNetwork.getDefaultNodeTable()
 					                      : currentNetwork.getDefaultEdgeTable());
-		} else {
+		} else if (selection.equals(CURRENT_SHARED)) {
+			final CyNetwork currentNetwork = applicationManager.getCurrentNetwork();
+			final CyRootNetwork rootNetwork = rootNetworkFactory.convert(currentNetwork);
+			targetTables.add(type == CyNode.class ? rootNetwork.getSharedNodeTable()
+					                      : rootNetwork.getSharedEdgeTable());
+			if ( mappingKey.equals(CyTableEntry.NAME) )
+				mappingKey = CyRootNetwork.SHARED_NAME;
+		} else if (selection.equals(ALL_SHARED)) {
 			final Set<CyNetwork> networks = networkManager.getNetworkSet();
-			for (final CyNetwork network : networks)
-				targetTables.add(type == CyNode.class ? network.getDefaultNodeTable()
-						                      : network.getDefaultEdgeTable());
+			final Set<CyRootNetwork> rootNetworks = new HashSet<CyRootNetwork>(); 
+			for (final CyNetwork network : networks) 
+				rootNetworks.add( rootNetworkFactory.convert(network) );
+			for (final CyRootNetwork rootNetwork : rootNetworks) 
+				targetTables.add(type == CyNode.class ? rootNetwork.getSharedNodeTable()
+						                      : rootNetwork.getSharedEdgeTable());
+			if ( mappingKey.equals(CyTableEntry.NAME) )
+				mappingKey = CyRootNetwork.SHARED_NAME;
+		} else {
+			// don't map it to anything!
+			return;
 		}
 		
 		mapAll(targetTables);
@@ -114,7 +150,12 @@ public final class MapNetworkAttrTask extends AbstractTask {
 		for (final CyTable targetTable : targetTables) {
 			if (cancelled)
 				return;
-			targetTable.addVirtualColumns(newGlobalTable, mappingKey, false);			
+			CyColumn trgCol = targetTable.getColumn(mappingKey);
+			if ( trgCol != null )
+				targetTable.addVirtualColumns(newGlobalTable, mappingKey, false);			
+			else
+				logger.warn("Table: '" + targetTable.getTitle() + "' does not contain a column named: '" + 
+				            mappingKey + "' so no mapping is possible!");
 		}
 	}
 }
