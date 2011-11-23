@@ -38,5 +38,10 @@ public abstract class AbstractVisualPropertyDependency implements VisualProperty
 	public Set<VisualProperty<?>> getVisualProperties() {
 		return group;
 	}
+	
+	@Override
+	public String toString() {
+		return displayName;
+	}
 
 }

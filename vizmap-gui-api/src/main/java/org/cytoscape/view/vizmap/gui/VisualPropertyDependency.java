@@ -18,6 +18,11 @@ public interface VisualPropertyDependency {
 	 */
 	String getDisplayName();
 	
+	/**
+	 * Returns set of Visual Properties to be modified by the state change.
+	 * 
+	 * @return set of visual properties to be modified.
+	 */
 	Set<VisualProperty<?>> getVisualProperties();
 
 }
