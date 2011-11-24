@@ -9,7 +9,7 @@ import java.util.Properties;
  * general purpose use. 
  * @CyAPI.Final.Class
  */
-public final class BasicCyProperty implements CyProperty<Properties> {
+public final class SimpleCyProperty implements CyProperty<Properties> {
 	
 	/**
 	 * Core Cytoscape Property (Cytoscape System Property)
@@ -26,7 +26,7 @@ public final class BasicCyProperty implements CyProperty<Properties> {
 	 * should encapsulate.  Throws NullPointerException if Properties is null.
 	 * @param savePolicy the {@link CyProperty.SavePolicy} of this CyProperty object.
 	 */
-	public BasicCyProperty(final Properties properties, final CyProperty.SavePolicy savePolicy) {
+	public SimpleCyProperty(final Properties properties, final CyProperty.SavePolicy savePolicy) {
 		if (properties == null)
 			throw new NullPointerException("\"properties\" parameter is null!");
 		if (savePolicy == null)
