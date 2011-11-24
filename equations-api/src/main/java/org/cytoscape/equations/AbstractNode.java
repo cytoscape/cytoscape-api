@@ -37,21 +37,21 @@ import java.util.Stack;
  *  A node in the parse tree.
  *  @CyAPI.Abstract.Class
  */
-public abstract class Node {
+public abstract class AbstractNode implements TreeNode {
 	private final int sourceLocation; // What location the "source code" is this associated with.
 
 	/** Base class constructor for any <code>Node</code> type.
 	 *  @param sourceLocation  start of the location in the equation where the code was found
 	 *                         that was turned into a node in the parse tree
 	 */
-	public Node(final int sourceLocation) {
+	public AbstractNode(final int sourceLocation) {
 		this.sourceLocation = sourceLocation;
 	}
 
-	/** Returns the start of the location in the equation where the code was found that was
-	 *  turned into a node in the parse tree.
-	 *  @return the location in the source code that resulted in this node
+	/* (non-Javadoc)
+	 * @see org.cytoscape.equations.TreeNode#getSourceLocation()
 	 */
+	@Override
 	public final int getSourceLocation() {
 		return sourceLocation;
 	}
@@ -62,23 +62,27 @@ public abstract class Node {
 	 */
 	public abstract String toString();
 
-	/** Returns the type of this node.
-	 *  @return the type of the result of the code generated from this node will result in 
+	/* (non-Javadoc)
+	 * @see org.cytoscape.equations.TreeNode#getType()
 	 */
+	@Override
 	public abstract Class getType(); // The type of this node.
 
-	/** Returns the left child if it exists or null if it doesn't.
-	 *  @return the left child, if any, of this node in the parse tree
+	/* (non-Javadoc)
+	 * @see org.cytoscape.equations.TreeNode#getLeftChild()
 	 */
-	public abstract Node getLeftChild();
+	@Override
+	public abstract TreeNode getLeftChild();
 
-	/** Returns the right child if it exists or null if it doesn't.
-	 *  @return the right child, if any, of this node in the parse tree
+	/* (non-Javadoc)
+	 * @see org.cytoscape.equations.TreeNode#getRightChild()
 	 */
-	public abstract Node getRightChild();
+	@Override
+	public abstract TreeNode getRightChild();
 
-	/** Generated code for this node and pushes it onto the execution stack. 
-	 * @param codeStack the execution stack to push the generated code for this node.
+	/* (non-Javadoc)
+	 * @see org.cytoscape.equations.TreeNode#genCode(java.util.Stack)
 	 */
+	@Override
 	public abstract void genCode(final Stack<CodeAndSourceLocation> codeStack);
 }

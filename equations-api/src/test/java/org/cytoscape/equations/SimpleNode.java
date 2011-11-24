@@ -4,7 +4,7 @@ package org.cytoscape.equations;
 import java.util.Stack;
 
 
-class SimpleNode extends Node {
+class SimpleNode extends AbstractNode {
 	SimpleNode(final int sourceLocation) {
 		super(sourceLocation);
 	}
@@ -16,10 +16,10 @@ class SimpleNode extends Node {
 	public Class getType() { return null; }
 
 	@Override
-	public Node getLeftChild() { return null; }
+	public TreeNode getLeftChild() { return null; }
 
 	@Override
-	public Node getRightChild() { return null; }
+	public TreeNode getRightChild() { return null; }
 
 	@Override
 	public void genCode(final Stack<CodeAndSourceLocation> codeStack) { }

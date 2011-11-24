@@ -94,5 +94,5 @@ public interface EquationParser {
 	 * Returns the parse tree. Must only be called if parse() returns true!
 	 *  @return the parse tree.
 	 */
-	Node getParseTree();
+	TreeNode getParseTree();
 }
