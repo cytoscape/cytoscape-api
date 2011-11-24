@@ -7,7 +7,7 @@ import org.cytoscape.work.BasicTunableHandlerFactory;
  * @param <T> 
  * @CyAPI.Final.Class
  */
-public final class BasicSubmenuTunableHandlerFactory<T extends SubmenuTunableHandler> extends BasicTunableHandlerFactory<T> implements SubmenuTunableHandlerFactory<T> {
+public final class SimpleSubmenuTunableHandlerFactory<T extends SubmenuTunableHandler> extends BasicTunableHandlerFactory<T> implements SubmenuTunableHandlerFactory<T> {
 
 	/**
 	 * Constructs this BasicSubmenuTunableHandlerFactory.
@@ -17,7 +17,7 @@ public final class BasicSubmenuTunableHandlerFactory<T extends SubmenuTunableHan
 	 * @param classesToMatch One or more class types that will be handled by this handler.
 	 * For example the FloatHandler might handle both Float.class and float.class.
 	 */
-	public BasicSubmenuTunableHandlerFactory(Class<T> specificHandlerType, Class<?>... classesToMatch ) {
+	public SimpleSubmenuTunableHandlerFactory(Class<T> specificHandlerType, Class<?>... classesToMatch ) {
 		super(specificHandlerType, classesToMatch);
 	}
 

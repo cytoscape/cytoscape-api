@@ -8,7 +8,7 @@ import org.cytoscape.work.BasicTunableHandlerFactory;
  * @param <T> 
  * @CyAPI.Final.Class
  */
-public final class BasicGUITunableHandlerFactory<T extends GUITunableHandler> extends BasicTunableHandlerFactory<T> implements GUITunableHandlerFactory<T> {
+public final class SimpleGUITunableHandlerFactory<T extends GUITunableHandler> extends BasicTunableHandlerFactory<T> implements GUITunableHandlerFactory<T> {
 
 	/**
 	 * Constructs this BasicGUITunableHandlerFactory.
@@ -18,7 +18,7 @@ public final class BasicGUITunableHandlerFactory<T extends GUITunableHandler> ex
 	 * @param classesToMatch One or more class types that will be handled by this handler.
 	 * For example the FloatHandler might handle both Float.class and float.class.
 	 */
-	public BasicGUITunableHandlerFactory(Class<T> specificHandlerType, Class<?>... classesToMatch ) {
+	public SimpleGUITunableHandlerFactory(Class<T> specificHandlerType, Class<?>... classesToMatch ) {
 		super(specificHandlerType, classesToMatch);
 	}
 
