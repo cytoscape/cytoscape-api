@@ -55,7 +55,7 @@ public interface CyNode extends CyTableEntry {
 	 * @return A reference to a CyNetwork if one exists, 
 	 * returns null otherwise.
 	 */
-	CyNetwork getNetwork();
+	CyNetwork getNetworkPointer();
 
 	/**
 	 * Allows a network reference for this node to be set. Only one
@@ -71,5 +71,5 @@ public interface CyNode extends CyTableEntry {
 	 * {@link UnsetNestedNetworkEvent} will be fired and if a new network will be set a
 	 * {@link SetNestedNetworkEvent} will be fired.  
 	 */
-	void setNetwork(CyNetwork network);
+	void setNetworkPointer(CyNetwork network);
 }

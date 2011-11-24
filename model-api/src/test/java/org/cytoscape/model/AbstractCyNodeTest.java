@@ -72,25 +72,25 @@ public abstract class AbstractCyNodeTest {
 	@Test
 	public void testInitGetNestedNetwork() {
 		CyNode n1 = net.addNode();
-		assertNull(n1.getNetwork());
+		assertNull(n1.getNetworkPointer());
 	}
 
 	@Test
 	public void testSetNestedNetwork() {
 		CyNode n1 = net.addNode();
 		CyNetwork net2 = mock(CyNetwork.class);
-		n1.setNetwork( net2 );
-		assertNotNull(n1.getNetwork());
-		assertEquals(net2, n1.getNetwork());
+		n1.setNetworkPointer( net2 );
+		assertNotNull(n1.getNetworkPointer());
+		assertEquals(net2, n1.getNetworkPointer());
 	}
 
 	// self nested networks are allowed
 	@Test
 	public void testSetSelfNestedNetwork() {
 		CyNode n1 = net.addNode();
-		n1.setNetwork( net );
-		assertNotNull(n1.getNetwork());
-		assertEquals(net, n1.getNetwork());
+		n1.setNetworkPointer( net );
+		assertNotNull(n1.getNetworkPointer());
+		assertEquals(net, n1.getNetworkPointer());
 	}
 
 	// null nested networks are allowed
@@ -100,13 +100,13 @@ public abstract class AbstractCyNodeTest {
 
 		// put a real network here first
 		CyNetwork net2 = mock(CyNetwork.class);
-		n1.setNetwork( net2 );
-		assertNotNull(n1.getNetwork());
-		assertEquals(net2, n1.getNetwork());
+		n1.setNetworkPointer( net2 );
+		assertNotNull(n1.getNetworkPointer());
+		assertEquals(net2, n1.getNetworkPointer());
 
 		// now put a null network to verify that we've "unset" things
-		n1.setNetwork( null );
-		assertNull(n1.getNetwork());
+		n1.setNetworkPointer( null );
+		assertNull(n1.getNetworkPointer());
 	}
 
 	@Test

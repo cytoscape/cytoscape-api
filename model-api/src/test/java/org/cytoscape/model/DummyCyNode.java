@@ -65,11 +65,11 @@ public class DummyCyNode extends DummyGraphObject implements CyNode {
 		return new ArrayList<CyEdge>();
 	}
 
-	public CyNetwork getNetwork() {
+	public CyNetwork getNetworkPointer() {
 		return nested;
 	}
 
-	public void setNetwork(CyNetwork n) {
+	public void setNetworkPointer(CyNetwork n) {
 		nested = n;
 	}
 }
