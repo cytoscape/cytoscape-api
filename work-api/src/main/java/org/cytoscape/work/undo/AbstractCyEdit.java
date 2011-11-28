@@ -40,7 +40,7 @@ import javax.swing.undo.AbstractUndoableEdit;
  * @CyAPI.Abstract.Class
  */
 public abstract class AbstractCyEdit extends AbstractUndoableEdit {
-	/** The presentation name of this CyAbstractEdit. */
+	/** The presentation name of this AbstractCyEdit. */
 	protected String desc;
 
 	/**
@@ -49,6 +49,10 @@ public abstract class AbstractCyEdit extends AbstractUndoableEdit {
 	 */
 	public AbstractCyEdit(String desc) {
 		super();
+
+        if (desc == null)
+			throw new NullPointerException("Presentation name must not be null!");
+
 		this.desc = desc;
 	}
 

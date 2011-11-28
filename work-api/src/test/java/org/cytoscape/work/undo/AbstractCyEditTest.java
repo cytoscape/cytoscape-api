@@ -28,16 +28,14 @@
 package org.cytoscape.work.undo;
 
 
-import javax.swing.undo.UndoableEdit;
-
 import static org.junit.Assert.*;
 import org.junit.Test;
 
-import org.cytoscape.work.undo.AbstractUndoableEdit;
+import org.cytoscape.work.undo.AbstractCyEdit;
 
 
-public abstract class AbstractUndoableEditTest {
-	protected UndoableEdit undoableEdit;
+public abstract class AbstractCyEditTest {
+	protected AbstractCyEdit undoableEdit;
 
 	public abstract void saveState();
 	public abstract void changeState();

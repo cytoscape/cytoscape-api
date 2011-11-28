@@ -33,14 +33,14 @@ import javax.swing.undo.UndoableEdit;
 import org.junit.Before;
 import org.junit.Test;
 
-import org.cytoscape.work.undo.AbstractUndoableEdit;
+import org.cytoscape.work.undo.AbstractCyEdit;
 
 
-public class SimpleUndoableEditTest extends AbstractUndoableEditTest {
+public class SimpleUndoableEditTest extends AbstractCyEditTest {
 	private int state = 0;
 	private int savedState;
 
-	class SimpleUndoableEdit extends AbstractUndoableEdit {
+	class SimpleUndoableEdit extends AbstractCyEdit {
 		SimpleUndoableEdit(final String presentationName) {
 			super(presentationName);
 		}
@@ -69,7 +69,7 @@ public class SimpleUndoableEditTest extends AbstractUndoableEditTest {
 		return state == savedState;
 	}
 
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected=NullPointerException.class)
 	public final void testNullConstructorArgument() {
 		new SimpleUndoableEdit(null);
 	}
