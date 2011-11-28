@@ -8,7 +8,7 @@ import static org.mockito.Mockito.*;
 
 
 public class CyPluginTest {
-	private static class MyPlugin extends CyPlugin {
+	private static class MyPlugin extends AbstractCyPlugin {
 		MyPlugin(CyPluginAdapter a) {
 			super(a);
 		}

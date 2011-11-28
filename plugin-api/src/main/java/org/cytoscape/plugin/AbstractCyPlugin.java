@@ -13,7 +13,7 @@ package org.cytoscape.plugin;
  * and Spring.
  * @CyAPI.Abstract.Class
  */
-public abstract class CyPlugin {
+public abstract class AbstractCyPlugin {
 
 	/**
 	 * Reference to access Cytoscape functionality -- various managers and 
@@ -22,7 +22,7 @@ public abstract class CyPlugin {
 	protected CyPluginAdapter adapter;
 
 	// so no one calls this constructor
-	private CyPlugin() {
+	private AbstractCyPlugin() {
 		throw new NullPointerException("no adapter provided!");
 	}
 
@@ -44,7 +44,7 @@ public abstract class CyPlugin {
 	 * @param adapter a {@link CyPluginAdapter} reference provided as an
 	 * argument to the constructor.
 	 */
-	public CyPlugin(final CyPluginAdapter adapter) {
+	public AbstractCyPlugin(final CyPluginAdapter adapter) {
 		if ( adapter == null )
 			throw new NullPointerException("null adapter");
 		this.adapter = adapter;
