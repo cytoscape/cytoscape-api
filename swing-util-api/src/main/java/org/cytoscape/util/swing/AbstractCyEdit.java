@@ -39,7 +39,7 @@ import javax.swing.undo.AbstractUndoableEdit;
  * benefit is that you don't need to worry about setting up names.
  * @CyAPI.Abstract.Class
  */
-public abstract class CyAbstractEdit extends AbstractUndoableEdit {
+public abstract class AbstractCyEdit extends AbstractUndoableEdit {
 	/** The presentation name of this CyAbstractEdit. */
 	protected String desc;
 
@@ -47,7 +47,7 @@ public abstract class CyAbstractEdit extends AbstractUndoableEdit {
 	 * Constructor.
 	 * @param desc The presentation name of this CyAbstractEdit.
 	 */
-	public CyAbstractEdit(String desc) {
+	public AbstractCyEdit(String desc) {
 		super();
 		this.desc = desc;
 	}
