@@ -1,4 +1,4 @@
 /**
- *  Various supporting classes for Cytoscape the work (a.k.a. Task) framework.
+ *  Various supporting classes for Cytoscape the work (Task) framework.
  */
 package org.cytoscape.work.util;
