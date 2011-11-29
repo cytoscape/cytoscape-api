@@ -30,49 +30,69 @@
 package org.cytoscape.work.undo;
 
 
-import javax.swing.undo.AbstractUndoableEdit;
-
-
 /**
- * A small convenience class that can be used to create new edits.  All
- * you should have to do is implement the undo() and redo() methods. The
- * benefit is that you don't need to worry about setting up names.
+ * A small class used to create new undoable edits.  All
+ * you have to do is implement the undo() and redo() methods.
+ * <br/>
+ * Cytoscape's undo scheme is much simpler than Swing's and 
+ * we may in the future add additional functionality to this
+ * class to support more advanced features.  If we do, we 
+ * will make sure that the features are fully backwards compatible.
  * @CyAPI.Abstract.Class
  */
-public abstract class AbstractCyEdit extends AbstractUndoableEdit {
-	/** The presentation name of this AbstractCyEdit. */
-	protected String desc;
+public abstract class AbstractCyEdit {
 
+	private final String presentationName;
+		
 	/**
 	 * Constructor.
-	 * @param desc The presentation name of this CyAbstractEdit.
+	 * @param presentationName A short, human-readable description of this edit that will be used
+	 * in logs and in menu item titles.
 	 */
-	public AbstractCyEdit(String desc) {
-		super();
-
-        if (desc == null)
+	public AbstractCyEdit(String presentationName) {
+        if (presentationName == null)
 			throw new NullPointerException("Presentation name must not be null!");
 
-		this.desc = desc;
+		this.presentationName = presentationName;
 	}
 
-	public String getPresentationName() {
-		return desc;
+	/**
+	 * Returns a human-readable description of this edit that will be used in
+	 * logs and other descriptions of the edit. 
+	 * @return a human-readable description of this edit that will be used in
+	 * logs and other descriptions of the edit. 
+	 */
+	public final String getPresentationName() {
+		return presentationName;
 	}
 
-	public String getRedoPresentationName() {
-		return "Redo: " + desc;
+	/**
+	 * Returns a human-readable description of this edit that will be used in
+	 * redo menu items. 
+	 * @return a human-readable description of this edit that will be used in
+	 * redo menu items. 
+	 */
+	public final String getRedoPresentationName() {
+		return "Redo: " + presentationName;
 	}
 
-	public String getUndoPresentationName() {
-		return "Undo: " + desc;
+	/**
+	 * Returns a human-readable description of this edit that will be used in
+	 * undo menu items. 
+	 * @return a human-readable description of this edit that will be used in
+	 * undo menu items. 
+	 */
+	public final String getUndoPresentationName() {
+		return "Undo: " + presentationName;
 	}
 
-	public void undo() {
-		super.undo();
-	}
+	/**
+	 * The method that performs the undo.
+	 */
+	public abstract void undo();
 
-	public void redo() {
-		super.redo();
-	}
+	/**
+	 * The method that performs the redo.
+	 */
+	public abstract void redo();
 }

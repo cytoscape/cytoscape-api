@@ -3,4 +3,4 @@
 #-----------------------------------------------------------------
 
 
-Export-Package: org.cytoscape.work.swing
+Export-Package: org.cytoscape.work.swing, org.cytoscape.work.swing.undo
