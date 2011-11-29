@@ -17,7 +17,7 @@ import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.model.CyTableFactory;
 import org.cytoscape.model.CyTableManager;
-import org.cytoscape.model.subnetwork.CyRootNetworkFactory;
+import org.cytoscape.model.subnetwork.CyRootNetworkManager;
 import org.cytoscape.property.CyProperty;
 import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.session.CySessionManager;
@@ -71,10 +71,10 @@ public interface CyPluginAdapter {
 	CyTableManager getCyTableManager();
 
 	/**
-	 * Returns an instance of {@link CyRootNetworkFactory}.
-	 * @return an instance of {@link CyRootNetworkFactory}.
+	 * Returns an instance of {@link CyRootNetworkManager}.
+	 * @return an instance of {@link CyRootNetworkManager}.
 	 */
-	CyRootNetworkFactory getCyRootNetworkFactory(); 
+	CyRootNetworkManager getCyRootNetworkFactory(); 
 
 	/**
 	 * Returns an instance of {@link CyEventHelper}.

@@ -14,7 +14,7 @@ import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyTableEntry;
-import org.cytoscape.model.subnetwork.CyRootNetworkFactory;
+import org.cytoscape.model.subnetwork.CyRootNetworkManager;
 import org.cytoscape.model.subnetwork.CyRootNetwork;
 import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskMonitor;
@@ -46,7 +46,7 @@ public final class MapNetworkAttrTask extends AbstractTask {
 	private final CyTable newGlobalTable;
 	private final CyNetworkManager networkManager;
 	private final CyApplicationManager applicationManager;
-	private final CyRootNetworkFactory rootNetworkFactory;
+	private final CyRootNetworkManager rootNetworkFactory;
 	private String mappingKey; 
 
 	/**
@@ -62,7 +62,7 @@ public final class MapNetworkAttrTask extends AbstractTask {
 	                          String mappingKey,
 	                          final CyNetworkManager networkManager,
 	                          final CyApplicationManager applicationManager,
-							  final CyRootNetworkFactory rootNetworkFactory)
+							  final CyRootNetworkManager rootNetworkFactory)
 	{
 		this.type               = type;
 		this.newGlobalTable     = newGlobalTable;
@@ -90,7 +90,7 @@ public final class MapNetworkAttrTask extends AbstractTask {
 	                          final CyTable newGlobalTable,
 	                          final CyNetworkManager networkManager,
 	                          final CyApplicationManager applicationManager,
-							  final CyRootNetworkFactory rootNetworkFactory)
+							  final CyRootNetworkManager rootNetworkFactory)
 	{
 		this(type,newGlobalTable,CyTableEntry.NAME,networkManager,applicationManager,rootNetworkFactory);
 	}
@@ -115,7 +115,7 @@ public final class MapNetworkAttrTask extends AbstractTask {
 					                      : currentNetwork.getDefaultEdgeTable());
 		} else if (selection.equals(CURRENT_SHARED)) {
 			final CyNetwork currentNetwork = applicationManager.getCurrentNetwork();
-			final CyRootNetwork rootNetwork = rootNetworkFactory.convert(currentNetwork);
+			final CyRootNetwork rootNetwork = rootNetworkFactory.getRootNetwork(currentNetwork);
 			targetTables.add(type == CyNode.class ? rootNetwork.getSharedNodeTable()
 					                      : rootNetwork.getSharedEdgeTable());
 			if ( mappingKey.equals(CyTableEntry.NAME) )
@@ -124,7 +124,7 @@ public final class MapNetworkAttrTask extends AbstractTask {
 			final Set<CyNetwork> networks = networkManager.getNetworkSet();
 			final Set<CyRootNetwork> rootNetworks = new HashSet<CyRootNetwork>(); 
 			for (final CyNetwork network : networks) 
-				rootNetworks.add( rootNetworkFactory.convert(network) );
+				rootNetworks.add( rootNetworkFactory.getRootNetwork(network) );
 			for (final CyRootNetwork rootNetwork : rootNetworks) 
 				targetTables.add(type == CyNode.class ? rootNetwork.getSharedNodeTable()
 						                      : rootNetwork.getSharedEdgeTable());
