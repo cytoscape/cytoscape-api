@@ -1,6 +1,0 @@
-#-----------------------------------------------------------------
-# Use this file to add customized Bnd instructions for the bundle
-#-----------------------------------------------------------------
-
-Import-Package: *
-Export-Package: org.cytoscape.io.webservice, org.cytoscape.io.webservice.*
