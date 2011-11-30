@@ -26,11 +26,11 @@ public abstract class AbstractVisualStyleFactoryTest {
 		assertNotNull(factory);
 		
 		final String title = "original style";
-		final VisualStyle style = factory.getInstance(title);
+		final VisualStyle style = factory.createVisualStyle(title);
 		
 		assertNotNull(style);
 		
-		final VisualStyle copyStyle = factory.getInstance(style);
+		final VisualStyle copyStyle = factory.createVisualStyle(style);
 		assertNotNull(copyStyle);
 
 		assertEquals(title, copyStyle.getTitle());

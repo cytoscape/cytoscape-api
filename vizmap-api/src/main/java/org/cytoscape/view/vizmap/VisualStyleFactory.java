@@ -16,7 +16,7 @@ public interface VisualStyleFactory {
 	 *
 	 * @return New VisualStyle object.
 	 */
-	VisualStyle getInstance(final String title);
+	VisualStyle createVisualStyle(final String title);
 	
 	
 	/**
@@ -28,6 +28,6 @@ public interface VisualStyleFactory {
 	 * @return New VisualStyle copied from the original.
 	 * 
 	 */
-	VisualStyle getInstance(final VisualStyle original);
+	VisualStyle createVisualStyle(final VisualStyle original);
 
 }
