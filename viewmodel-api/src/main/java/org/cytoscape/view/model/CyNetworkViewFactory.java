@@ -53,7 +53,7 @@ public interface CyNetworkViewFactory {
 	 * @param network for which the CyNetworkView is to be created
 	 * @return the view model for the network data model
 	 */
-	public CyNetworkView getNetworkView(final CyNetwork network);
+	public CyNetworkView createNetworkView(final CyNetwork network);
 	
 	/**
 	 * Creates view with or without using viewThreshold property.
@@ -63,5 +63,5 @@ public interface CyNetworkViewFactory {
 	 * 
 	 * @return View model for the given data model.
 	 */
-	public CyNetworkView getNetworkView(final CyNetwork network, final Boolean useThreshold);
+	public CyNetworkView createNetworkView(final CyNetwork network, final Boolean useThreshold);
 }
