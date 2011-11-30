@@ -9,7 +9,7 @@
 
 	<properties>
 		<bundle.symbolicName>org.cytoscape.work-swing-api</bundle.symbolicName>
-		<bundle.namespace>org.cytoscape.work</bundle.namespace>
+		<bundle.namespace>org.cytoscape.work.swing</bundle.namespace>
 	</properties>
 
 	<modelVersion>4.0.0</modelVersion>
