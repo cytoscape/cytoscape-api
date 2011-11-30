@@ -39,11 +39,11 @@ public interface CyNetworkFactory {
 	 * Returns a new, empty {@link CyNetwork} object. 
 	 * @return A new, empty {@link CyNetwork} object. 
 	 */
-	CyNetwork getInstance();
+	CyNetwork createNetwork();
 
 	/**
 	 * Returns a new, empty {@link CyNetwork} object where the associated default tables are private. 
 	 * @return A new, empty {@link CyNetwork} object. 
 	 */
-	CyNetwork getInstanceWithPrivateTables();
+	CyNetwork createNetworkWithPrivateTables();
 }
