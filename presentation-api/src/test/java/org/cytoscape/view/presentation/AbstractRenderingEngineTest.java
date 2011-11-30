@@ -29,7 +29,7 @@ public abstract class AbstractRenderingEngineTest {
 	public void testFactory() {
 
 		final JPanel panel = new JPanel();
-		RenderingEngine<CyNetwork> engine = factory.getInstance(panel, networkView);
+		RenderingEngine<CyNetwork> engine = factory.createRenderingEngine(panel, networkView);
 
 		assertNotNull(engine);
 
