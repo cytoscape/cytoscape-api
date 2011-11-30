@@ -46,7 +46,7 @@ public final class MapNetworkAttrTask extends AbstractTask {
 	private final CyTable newGlobalTable;
 	private final CyNetworkManager networkManager;
 	private final CyApplicationManager applicationManager;
-	private final CyRootNetworkManager rootNetworkFactory;
+	private final CyRootNetworkManager rootNetworkManager;
 	private String mappingKey; 
 
 	/**
@@ -62,14 +62,14 @@ public final class MapNetworkAttrTask extends AbstractTask {
 	                          String mappingKey,
 	                          final CyNetworkManager networkManager,
 	                          final CyApplicationManager applicationManager,
-							  final CyRootNetworkManager rootNetworkFactory)
+							  final CyRootNetworkManager rootNetworkManager)
 	{
 		this.type               = type;
 		this.newGlobalTable     = newGlobalTable;
 		this.mappingKey         = mappingKey;		
 		this.networkManager     = networkManager;
 		this.applicationManager = applicationManager;
-		this.rootNetworkFactory = rootNetworkFactory;
+		this.rootNetworkManager = rootNetworkManager;
 
 		this.whichTable = new ListSingleSelection<String>(CURRENT_SHARED, CURRENT_LOCAL, ALL_SHARED, INDEPENDENT);
 
@@ -90,9 +90,9 @@ public final class MapNetworkAttrTask extends AbstractTask {
 	                          final CyTable newGlobalTable,
 	                          final CyNetworkManager networkManager,
 	                          final CyApplicationManager applicationManager,
-							  final CyRootNetworkManager rootNetworkFactory)
+							  final CyRootNetworkManager rootNetworkManager)
 	{
-		this(type,newGlobalTable,CyTableEntry.NAME,networkManager,applicationManager,rootNetworkFactory);
+		this(type,newGlobalTable,CyTableEntry.NAME,networkManager,applicationManager,rootNetworkManager);
 	}
 
 
@@ -115,7 +115,7 @@ public final class MapNetworkAttrTask extends AbstractTask {
 					                      : currentNetwork.getDefaultEdgeTable());
 		} else if (selection.equals(CURRENT_SHARED)) {
 			final CyNetwork currentNetwork = applicationManager.getCurrentNetwork();
-			final CyRootNetwork rootNetwork = rootNetworkFactory.getRootNetwork(currentNetwork);
+			final CyRootNetwork rootNetwork = rootNetworkManager.getRootNetwork(currentNetwork);
 			targetTables.add(type == CyNode.class ? rootNetwork.getSharedNodeTable()
 					                      : rootNetwork.getSharedEdgeTable());
 			if ( mappingKey.equals(CyTableEntry.NAME) )
@@ -124,7 +124,7 @@ public final class MapNetworkAttrTask extends AbstractTask {
 			final Set<CyNetwork> networks = networkManager.getNetworkSet();
 			final Set<CyRootNetwork> rootNetworks = new HashSet<CyRootNetwork>(); 
 			for (final CyNetwork network : networks) 
-				rootNetworks.add( rootNetworkFactory.getRootNetwork(network) );
+				rootNetworks.add( rootNetworkManager.getRootNetwork(network) );
 			for (final CyRootNetwork rootNetwork : rootNetworks) 
 				targetTables.add(type == CyNode.class ? rootNetwork.getSharedNodeTable()
 						                      : rootNetwork.getSharedEdgeTable());
