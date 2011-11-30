@@ -29,7 +29,7 @@ public interface TunableHandlerFactory<T extends TunableHandler> {
 	 * @return T       the newly constructed <code>TunableHandler</code> or null if this factory
 	 * can't handle a field of the specified type.
 	 */
-	 T getHandler(final Field field, final Object instance, final Tunable tunable);
+	 T createTunableHandler(final Field field, final Object instance, final Tunable tunable);
 
 	/**
 	 * This method returns a <code>TunableHandler</code> for a Method annotated as a <code>Tunable</code>
@@ -43,6 +43,6 @@ public interface TunableHandlerFactory<T extends TunableHandler> {
 	 * @return T       the newly constructed <code>TunableHandler</code> or null if this factory
 	 * can't handle a field of the specified type.
 	 */
-	 T getHandler(final Method getter, final Method setter, final Object instance, final Tunable tunable);
+	 T createTunableHandler(final Method getter, final Method setter, final Object instance, final Tunable tunable);
 	 
 }

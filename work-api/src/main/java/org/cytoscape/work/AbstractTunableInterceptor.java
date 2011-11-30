@@ -251,7 +251,7 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 	
 	private T getHandler(Field field, Object instance, Tunable tunable) {
 		for ( TunableHandlerFactory<T> thf : tunableHandlerFactories ) {
-			T th = thf.getHandler(field, instance, tunable);
+			T th = thf.createTunableHandler(field, instance, tunable);
 			if ( th != null )
 				return th;
 		}
@@ -260,7 +260,7 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 	
 	private T getHandler(final Method getter, final Method setter, final Object instance, final Tunable tunable) {
 		for ( TunableHandlerFactory<T> thf : tunableHandlerFactories ) {
-			T th = thf.getHandler(getter, setter, instance, tunable);
+			T th = thf.createTunableHandler(getter, setter, instance, tunable);
 			if ( th != null ) {
 				return th;
 			}

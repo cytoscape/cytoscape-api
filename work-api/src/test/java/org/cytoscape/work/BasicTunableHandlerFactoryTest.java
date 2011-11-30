@@ -55,42 +55,42 @@ public class BasicTunableHandlerFactoryTest {
 	@Test
 	public void testGetHandlerField() {
 		BasicTunableHandlerFactory<TunableHandler> thf = new BasicTunableHandlerFactory(GoodTunableHandler.class, int.class);
-		TunableHandler th = thf.getHandler(getField(), source, getFieldTunable() );
+		TunableHandler th = thf.createTunableHandler(getField(), source, getFieldTunable() );
 		assertNotNull(th);
 	}
 	
 	@Test
 	public void testGetHandlerMethod() {
 		BasicTunableHandlerFactory<TunableHandler> thf = new BasicTunableHandlerFactory(GoodTunableHandler.class, int.class);
-		TunableHandler th = thf.getHandler(getGetter(), getSetter(), source, getMethodTunable() );
+		TunableHandler th = thf.createTunableHandler(getGetter(), getSetter(), source, getMethodTunable() );
 		assertNotNull(th);
 	}
 	
 	@Test
 	public void testInvalidTypesField() {
 		BasicTunableHandlerFactory<TunableHandler> thf = new BasicTunableHandlerFactory(GoodTunableHandler.class, String.class);
-		TunableHandler th = thf.getHandler(getField(), source, getFieldTunable() );
+		TunableHandler th = thf.createTunableHandler(getField(), source, getFieldTunable() );
 		assertNull(th);
 	}
 	
 	@Test
 	public void testInvalidTypesMethod() {
 		BasicTunableHandlerFactory<TunableHandler> thf = new BasicTunableHandlerFactory(GoodTunableHandler.class, String.class);
-		TunableHandler th = thf.getHandler(getGetter(), getSetter(), source, getMethodTunable() );
+		TunableHandler th = thf.createTunableHandler(getGetter(), getSetter(), source, getMethodTunable() );
 		assertNull(th);
 	}
 	
 	@Test
 	public void testNoFieldConstructor() {
 		BasicTunableHandlerFactory<TunableHandler> thf = new BasicTunableHandlerFactory(NoFieldTunableHandler.class, int.class);
-		TunableHandler th = thf.getHandler(getField(), source, getFieldTunable() );
+		TunableHandler th = thf.createTunableHandler(getField(), source, getFieldTunable() );
 		assertNull(th);
 	}
 	
 	@Test
 	public void testNoMethodConstructor() {
 		BasicTunableHandlerFactory<TunableHandler> thf = new BasicTunableHandlerFactory(NoMethodTunableHandler.class, int.class);
-		TunableHandler th = thf.getHandler(getGetter(), getSetter(), source, getMethodTunable() );
+		TunableHandler th = thf.createTunableHandler(getGetter(), getSetter(), source, getMethodTunable() );
 		assertNull(th);
 	}
 }

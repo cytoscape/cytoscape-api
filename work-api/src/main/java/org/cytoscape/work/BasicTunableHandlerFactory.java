@@ -36,7 +36,7 @@ public class BasicTunableHandlerFactory<T extends TunableHandler> implements Tun
 	}
 	
 	@Override
-	public final T getHandler(final Field field, final Object instance, final Tunable tunable) {
+	public final T createTunableHandler(final Field field, final Object instance, final Tunable tunable) {
 		if ( !properType(field.getType()) )
 			return null;
 	
@@ -51,7 +51,7 @@ public class BasicTunableHandlerFactory<T extends TunableHandler> implements Tun
 	}
 
 	@Override
-	public final T getHandler(final Method getter, final Method setter, final Object instance, final Tunable tunable) {
+	public final T createTunableHandler(final Method getter, final Method setter, final Object instance, final Tunable tunable) {
 		if ( !properType(getter.getReturnType()) )
 			return null;
 	
