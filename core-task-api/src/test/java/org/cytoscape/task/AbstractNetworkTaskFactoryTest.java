@@ -48,7 +48,7 @@ import org.cytoscape.work.TaskIterator;
 public class AbstractNetworkTaskFactoryTest {
 	
 	private class NetworkTaskFactory extends AbstractNetworkTaskFactory {
-		public TaskIterator getTaskIterator() {
+		public TaskIterator createTaskIterator() {
 			return null;
 		}
 	}

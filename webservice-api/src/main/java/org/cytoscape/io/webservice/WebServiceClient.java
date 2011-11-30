@@ -80,7 +80,7 @@ public interface WebServiceClient extends TaskFactory {
 	
 	/**
 	 * Returns query builder UI.  Since this is a TaskFactory, 
-	 * getTaskIterator() method should use parameters from this GUI.
+	 * createTaskIterator() method should use parameters from this GUI.
 	 * 
 	 * @return query builder UI.
 	 */

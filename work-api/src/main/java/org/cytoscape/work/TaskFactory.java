@@ -9,7 +9,7 @@ package org.cytoscape.work;
  *  class called XTask, where the processing would be taking place in XTask's run() method.  Assuming
  *  X needs to have two types of data, let's call them Y and Z, in order to control its behavior.
  *  This would imply that XTask's constructor should take an X and a Y as parameters.  And XTaskFactory
- *  should have setY() and setZ() methods.  XTaskFactory's getTaskIterator() method would then construct
+ *  should have setY() and setZ() methods.  XTaskFactory's createTaskIterator() method would then construct
  *  an XTask with the Y and Z that it has available and create a {@link TaskIterator} with this single Task to
  *  iterate over.
  *  @CyAPI.Spi.Interface 
@@ -21,5 +21,5 @@ public interface TaskFactory {
 	 *
 	 *  Note: Most factory's returned iterator only yields a single <code>Task</code>.
 	 */
-	TaskIterator getTaskIterator();
+	TaskIterator createTaskIterator();
 }

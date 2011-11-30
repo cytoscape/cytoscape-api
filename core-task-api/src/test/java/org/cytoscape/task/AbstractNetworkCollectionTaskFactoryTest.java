@@ -50,7 +50,7 @@ import java.util.Collection;
 public class AbstractNetworkCollectionTaskFactoryTest {
 	
 	private class NetworkCollectionTaskFactory extends AbstractNetworkCollectionTaskFactory {
-		public TaskIterator getTaskIterator() {
+		public TaskIterator createTaskIterator() {
 			return null;
 		}
 	}

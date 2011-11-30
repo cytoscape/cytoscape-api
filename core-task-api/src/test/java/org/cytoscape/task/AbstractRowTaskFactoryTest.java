@@ -48,7 +48,7 @@ import org.cytoscape.work.TaskIterator;
 public class AbstractRowTaskFactoryTest {
 	
 	private class RowTaskFactory extends AbstractRowTaskFactory {
-		public TaskIterator getTaskIterator() {
+		public TaskIterator createTaskIterator() {
 			return null;
 		}
 	}

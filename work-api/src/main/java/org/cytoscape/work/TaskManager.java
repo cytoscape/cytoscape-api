@@ -28,10 +28,10 @@ public interface TaskManager<T,C> {
 	 * This method is called to execute the Tasks in a TaskIterator provided
 	 * by a <code>TaskFactory</code>.  
 	 * This method returns once the <code>Task</code>s derived from the <code>TaskIterator</code>
-	 * returned by the <code>TaskFactory</code>'s <code>getTaskIterator()</code> method have
+	 * returned by the <code>TaskFactory</code>'s <code>createTaskIterator()</code> method have
 	 * started (but not necessarily completed) execution. 
 	 * It <i>does not wait</i> for the <code>Task</code>s to finish. 
-	 * @param factory The <code>TaskFactory</code> whose tasks returned by its getTaskIterator()
+	 * @param factory The <code>TaskFactory</code> whose tasks returned by its createTaskIterator()
 	 * method's iterator will be executed
 	 */
 	void execute(TaskFactory factory);

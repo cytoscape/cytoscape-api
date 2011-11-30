@@ -48,7 +48,7 @@ import org.junit.Test;
 public class AbstractTableTaskFactoryTest {
 	
 	private class TableTaskFactory extends AbstractTableTaskFactory {
-		public TaskIterator getTaskIterator() {
+		public TaskIterator createTaskIterator() {
 			return null;
 		}
 	}

@@ -50,7 +50,7 @@ import org.cytoscape.work.TaskIterator;
 public class AbstractNodeViewTaskFactoryTest {
 	
 	private class NodeViewTaskFactory extends AbstractNodeViewTaskFactory {
-		public TaskIterator getTaskIterator() {
+		public TaskIterator createTaskIterator() {
 			return null;
 		}
 	}
