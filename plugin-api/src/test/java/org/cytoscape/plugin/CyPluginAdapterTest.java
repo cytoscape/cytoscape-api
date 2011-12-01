@@ -19,8 +19,8 @@ public abstract class CyPluginAdapterTest {
 	} 
 
 	@Test
-	public void testGetCyLayouts() { 
-		assertNotNull("CyLayouts exists", adapter.getCyLayouts());
+	public void testGetCyLayoutAlgorithmManager() { 
+		assertNotNull("CyLayouts exists", adapter.getCyLayoutAlgorithmManager());
 	} 
 
 	@Test

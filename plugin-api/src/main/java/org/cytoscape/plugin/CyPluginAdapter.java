@@ -211,7 +211,7 @@ public interface CyPluginAdapter {
 	 * Returns an instance of {@link CyLayoutAlgorithmManager}.
 	 * @return an instance of {@link CyLayoutAlgorithmManager}.
 	 */
-	CyLayoutAlgorithmManager getCyLayouts();
+	CyLayoutAlgorithmManager getCyLayoutAlgorithmManager();
 
 	//
 	// swing application api
