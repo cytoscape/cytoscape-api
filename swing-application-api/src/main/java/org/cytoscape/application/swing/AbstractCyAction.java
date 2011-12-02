@@ -48,6 +48,9 @@ import javax.swing.KeyStroke;
 import javax.swing.event.MenuEvent;
 import javax.swing.event.PopupMenuEvent;
 
+import java.net.URL;
+import java.net.MalformedURLException; 
+
 
 /**
  * An abstract implementation of the CyAction interface. Instead of using this
@@ -152,19 +155,20 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *
 	 * @param configProps
 	 *            A String-String Map of configuration metadata. This will
-	 *            usually be the Map provided by the Spring service
+	 *            usually be the Map provided by the OSGi service
 	 *            configuration. Available configuration keys include:
 	 *            <ul>
-	 *            <li>title</li>
-	 *            <li>preferredMenu</li>
-	 *            <li>iconName</li>
-	 *            <li>tooltip</li>
-	 *            <li>inToolBar</li>
-	 *            <li>inMenuBar</li>
-	 *            <li>enableFor</li>
-	 *            <li>accelerator</li>
-	 *            <li>menuGravity</li>
-	 *            <li>toolBarGravity</li>
+	 *            <li>title - (The title of the menu.)</li>
+	 *            <li>preferredMenu - (The preferred menu for the action.)</li>
+	 *            <li>largeIconURL - (The icon to be used for the toolbar.)</li>
+	 *            <li>smallIconURL - (The icon to be used for the menu.)</li>
+	 *            <li>tooltip - (The toolbar or menu tooltip.)</li>
+	 *            <li>inToolBar - (Whether the action should be in the toolbar.)</li>
+	 *            <li>inMenuBar - (Whether the action should be in a menu.)</li>
+	 *            <li>enableFor - (System state that the action should be enabled for. See {@link MenuEnableSupport} for more detail.)</li>
+	 *            <li>accelerator - (Accelerator key bindings.)</li>
+	 *            <li>menuGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the menu.)</li>
+	 *            <li>toolBarGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the toolbar.)</li>
 	 *            </ul>
 	 * @param applicationManager
 	 *            The application manager providing context for this action.
@@ -180,10 +184,13 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		if (prefMenu != null)
 			setPreferredMenu(prefMenu);
 
-		final String iconName = configProps.get("iconName");
+		final URL largeIconURL = getURL( configProps.get("largeIconURL") );
+		if ( largeIconURL != null ) 
+			putValue(LARGE_ICON_KEY, new ImageIcon(largeIconURL));
 
-		if (iconName != null)
-			putValue(SMALL_ICON, new ImageIcon(getClass().getResource(iconName)));
+		final URL smallIconURL = getURL( configProps.get("smallIconURL") );
+		if ( smallIconURL != null ) 
+			putValue(SMALL_ICON, new ImageIcon(smallIconURL));
 
 		final String tooltip = configProps.get("tooltip");
 
@@ -456,5 +463,17 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 
     private void enableForTable() {
     	enabler.enableForTable() ;
+	}
+
+	private URL getURL(String s) {
+		if ( s == null )
+			return null;
+		try {
+			URL u = new URL(s);
+			return u;
+		} catch (MalformedURLException e) {
+			logger.warn("Incorrectly formatted URL string: '" + s +"'",e);
+		}
+		return null;
 	}
 }
