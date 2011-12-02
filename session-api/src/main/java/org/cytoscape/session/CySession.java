@@ -36,6 +36,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyTableMetadata;
 import org.cytoscape.property.bookmark.Bookmarks;
 import org.cytoscape.property.session.Cysession;
@@ -66,6 +67,7 @@ import org.slf4j.LoggerFactory;
  */
 public final class CySession {
 
+	private final Set<CyNetwork> networks;
 	private final Set<CyNetworkView> netViews;
 	private final Set<CyTableMetadata> tables;
 	private final Map<CyNetworkView,String> vsMap;
@@ -80,6 +82,11 @@ public final class CySession {
 	private CySession(Builder b) {
 		// TODO consider making defensive copies of objects...
 
+		if ( b.networks == null )
+			networks = new HashSet<CyNetwork>();
+		else
+			networks = b.networks;
+		
 		if ( b.netViews == null )
 			netViews = new HashSet<CyNetworkView>();
 		else
@@ -128,6 +135,7 @@ public final class CySession {
 	 */
 	public static class Builder {
 
+		private Set<CyNetwork> networks; 
 		private Set<CyNetworkView> netViews; 
 		private Set<CyTableMetadata> tables;
 		private Map<CyNetworkView,String> vsMap; 
@@ -146,8 +154,21 @@ public final class CySession {
 
 		/**
 		 * Returns an instance of Builder that has at least been configured
+		 * with the specified networks.
+		 * @param views A Set of CyNetwork objects, presumably all networks
+		 * that exist in this instance of Cytoscape.
+		 * @return An instance of Builder that has at least been configured
+		 * with the specified networks.
+		 */
+		public Builder networks(final Set<CyNetwork> networks) { 
+			this.networks = networks; 
+			return this;
+		}
+		
+		/**
+		 * Returns an instance of Builder that has at least been configured
 		 * with the specified network views.
-		 * @param views A Set of CyNetworkView objects, presumably all networks
+		 * @param views A Set of CyNetworkView objects, presumably all network views
 		 * that exist in this instance of Cytoscape.
 		 * @return An instance of Builder that has at least been configured
 		 * with the specified network views.
@@ -249,6 +270,12 @@ public final class CySession {
 		}
 	}
 
+	/**
+	 * Returns a set of all CyNetwork objects contained in this Session. 
+	 * @return A set of all CyNetwork objects contained in this Session. 
+	 */
+    public Set<CyNetwork> getNetworks() { return networks; }
+	
 	/**
 	 * Returns a set of all CyNetworkView objects contained in this Session. 
 	 * @return A set of all CyNetworkView objects contained in this Session. 
