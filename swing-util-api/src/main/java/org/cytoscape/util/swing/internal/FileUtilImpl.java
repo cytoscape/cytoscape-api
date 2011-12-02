@@ -264,8 +264,17 @@ class FileUtilImpl implements FileUtil {
 				return fileName;
 		}
 		
+		
 		// Need to add ext
-		return fileName + "." + extSet.iterator().next();
+		String fullFileName = fileName;
+		try {
+			fullFileName = fileName + "." + extSet.iterator().next();
+		}
+		catch(Exception e){
+			//If the category is "UNSPECIFIED", we may get null-pointer exception here
+		}
+		
+		return fullFileName;
 	}
 
 	private static final class CombinedFilenameFilter implements FilenameFilter {
