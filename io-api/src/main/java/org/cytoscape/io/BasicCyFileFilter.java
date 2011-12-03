@@ -22,10 +22,10 @@ import org.slf4j.LoggerFactory;
  */
 public class BasicCyFileFilter implements CyFileFilter {
 
-	private final Set<String> extensions;
-	private final Set<String> contentTypes;
-	private final String description;
-	private final StreamUtil streamUtil;
+	protected final Set<String> extensions;
+	protected final Set<String> contentTypes;
+	protected final String description;
+	protected final StreamUtil streamUtil;
 	/** Type of data that this filter applies to. */
 	protected final DataCategory category;
 	private static final Logger logger = LoggerFactory.getLogger(BasicCyFileFilter.class);

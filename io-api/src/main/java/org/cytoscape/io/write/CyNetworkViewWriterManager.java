@@ -34,10 +34,12 @@
  */
 package org.cytoscape.io.write;
 
-import org.cytoscape.view.model.CyNetworkView;
-import org.cytoscape.io.CyFileFilter;
 import java.io.File;
 import java.io.OutputStream;
+
+import org.cytoscape.io.CyFileFilter;
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.view.model.CyNetworkView;
 
 /**
  * A {@link org.cytoscape.io.write.CyWriterManager} specific to writing 
@@ -47,12 +49,36 @@ import java.io.OutputStream;
 public interface CyNetworkViewWriterManager extends CyWriterManager {
 
 	/**
-	 * Returns the {@link org.cytoscape.io.write.CyWriter} Task that will attempt to write the specified view to the
+	 * Returns the {@link CyWriter} Task that will attempt to write the specified network to the
+	 * specified file of the specified file type.
+	 * @param network The {@link org.cytoscape.model.CyNetwork} to be written.
+	 * @param filter The {@link org.cytoscape.io.CyFileFilter} that defines the type of file to be written.
+	 * @param file The file to be written. 
+	 * @return The {@link CyWriter} Task that will attempt to write the specified network to the
+	 * specified file of the specified file type. 
+	 * @throws Exception 
+	 */
+	CyWriter getWriter(CyNetwork network, CyFileFilter filter, File file) throws Exception;
+
+	/**
+	 * Returns the {@link CyWriter} Task that will attempt to write the specified network to the
+	 * specified output steam of the specified file type.
+	 * @param network The {@link org.cytoscape.model.CyNetwork} to be written.
+	 * @param filter The {@link org.cytoscape.io.CyFileFilter} that defines the type of file to be written.
+	 * @param os The output steam to be written. 
+	 * @return The {@link CyWriter} Task that will attempt to write the specified network to the
+	 * specified output steam of the specified file type. 
+	 * @throws Exception 
+	 */
+	CyWriter getWriter(CyNetwork network, CyFileFilter filter, OutputStream os) throws Exception;
+	
+	/**
+	 * Returns the {@link CyWriter} Task that will attempt to write the specified view to the
 	 * specified file of the specified file type. 
 	 * @param view The {@link org.cytoscape.view.model.CyNetworkView} to be written.
 	 * @param filter The {@link org.cytoscape.io.CyFileFilter} that defines the type of file to be written.
 	 * @param file The file to be written. 
-	 * @return The {@link org.cytoscape.io.write.CyWriter} Task that will attempt to write the specified view to the
+	 * @return The {@link CyWriter} Task that will attempt to write the specified view to the
 	 * specified file of the specified file type. 
 	 * @throws Exception 
 	 */
