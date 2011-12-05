@@ -39,7 +39,7 @@ public enum CytoPanelName {
 	/**
 	 * The south or bottom panel.
 	 */
-	SOUTH("Data Panel"),
+	SOUTH("Table Panel"),
 
 	/**
 	 * The east or right-hand panel.
