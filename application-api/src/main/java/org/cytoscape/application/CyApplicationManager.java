@@ -52,10 +52,10 @@ public interface CyApplicationManager {
 	public CyNetwork getCurrentNetwork();
 
 	/**
-	 * Sets the current network to the one with the provided network SUID.
-	 * @param network_id  must be the SUID of a network
+	 * Sets the current network to the specified network. 
+	 * @param net The network that will become the current network. 
 	 */
-	public void setCurrentNetwork(final long network_id);
+	public void setCurrentNetwork(final CyNetwork net);
 
 	/**
 	 * Returns the current network view.
@@ -65,11 +65,10 @@ public interface CyApplicationManager {
 	public CyNetworkView getCurrentNetworkView();
 
 	/**
-	 * Sets the current network view based on the specified ID.
-	 * @param view_id The <i>network</i> SUID of the network view to
-	 * be made current.
+	 * Sets the current network view to the specified network view.
+	 * @param netView The network view to become the current network view. 
 	 */
-	public void setCurrentNetworkView(final long view_id);
+	public void setCurrentNetworkView(final CyNetworkView netView);
 
 	/**
 	 * Returns the list of selected networks.  
@@ -84,18 +83,16 @@ public interface CyApplicationManager {
 	public List<CyNetworkView> getSelectedNetworkViews();
 
 	/**
-	 * Sets the network views associated with the specified network 
-	 * IDs as selected.
-	 * @param modelIDs The <i>model</i> SUIDs of the networks that have 
-	 * been selected.
+	 * Sets the specified network views as selected. 
+	 * @param views The list of network views to be selected.
 	 */
-	public void setSelectedNetworkViews(final List<Long> modelIDs);
+	public void setSelectedNetworkViews(final List<CyNetworkView> views);
 
 	/**
-	 * Sets the networks associated with the specified IDs as selected.
-	 * @param ids The SUIDs of the networks that have been selected.
+	 * Sets the networks specified as selected.
+	 * @param nets The networks to be selected.
 	 */
-	public void setSelectedNetworks(final List<Long> ids);
+	public void setSelectedNetworks(final List<CyNetwork> nets);
 
 	/**
 	 * Returns the rendering engine associated with the current network view.
