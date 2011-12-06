@@ -44,8 +44,22 @@ import org.cytoscape.view.model.Range;
  */
 public final class StringVisualProperty extends AbstractVisualProperty<String> {
 
-	public StringVisualProperty(final String def, final Range<String> range, final String id, final String name, final Class<?> targetDataType) {
+	public StringVisualProperty(final String def,
+								final Range<String> range,
+								final String id,
+								final String name,
+								final Class<?> targetDataType) {
 		super(def, range, id, name, targetDataType);
+	}
+	
+	public StringVisualProperty(final String def,
+								final Range<String> range,
+								final String id,
+								final String name,
+								final boolean ignoreDefault,
+								final Class<?> targetDataType) {
+		super(def, range, id, name, targetDataType);
+		this.shouldIgnoreDefault = ignoreDefault;
 	}
 
 	@Override

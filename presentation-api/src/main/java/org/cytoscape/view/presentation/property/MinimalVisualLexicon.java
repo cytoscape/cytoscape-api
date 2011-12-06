@@ -173,7 +173,7 @@ public class MinimalVisualLexicon extends AbstractVisualLexicon {
 			"Network Height", true, CyNetwork.class);
 
 	public static final VisualProperty<String> NETWORK_TITLE = new StringVisualProperty(
-			"", ARBITRARY_STRING_RANGE, "NETWORK_TITLE", "Network Title",
+			"", ARBITRARY_STRING_RANGE, "NETWORK_TITLE", "Network Title", true,
 			CyNetwork.class);
 
 	public static final VisualProperty<Paint> NETWORK_BACKGROUND_PAINT = new PaintVisualProperty(
