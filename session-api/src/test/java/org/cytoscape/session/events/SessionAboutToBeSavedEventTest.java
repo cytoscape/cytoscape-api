@@ -39,36 +39,36 @@ public class SessionAboutToBeSavedEventTest {
 	}
 
 	@Test
-	public void testAddPluginFiles1() throws Exception {
+	public void testAddAppFiles1() throws Exception {
 		
-		final String pluginName = "sample plugin";
+		final String appName = "sample app";
 		final List<File> files = new ArrayList<File>();
-		e.addPluginFiles(pluginName, files);
+		e.addAppFiles(appName, files);
 		
-		assertNotNull(e.getPluginFileListMap());
-		assertEquals(files, e.getPluginFileListMap().get(pluginName));		
+		assertNotNull(e.getAppFileListMap());
+		assertEquals(files, e.getAppFileListMap().get(appName));		
 	}
 	
 	@Test(expected=NullPointerException.class)
-	public void testAddPluginFiles2() throws Exception {
-		final String pluginName = "sample plugin2";
-		e.addPluginFiles(pluginName, null);
+	public void testAddAppFiles2() throws Exception {
+		final String appName = "sample app2";
+		e.addAppFiles(appName, null);
 	}
 	
 	@Test(expected=NullPointerException.class)
-	public void testAddPluginFiles3() throws Exception {
+	public void testAddAppFiles3() throws Exception {
 		final List<File> files = new ArrayList<File>();
-		e.addPluginFiles(null, files);
+		e.addAppFiles(null, files);
 	}
 	
 
 	@Test(expected=IllegalArgumentException.class)
-	public void testAddPluginFiles4() throws Exception {
-		final String pluginName = "sample plugin4";
+	public void testAddAppFiles4() throws Exception {
+		final String appName = "sample app4";
 		final List<File> files1 = new ArrayList<File>();
 		final List<File> files2 = new ArrayList<File>();
-		e.addPluginFiles(pluginName, files1);
-		e.addPluginFiles(pluginName, files2);
+		e.addAppFiles(appName, files1);
+		e.addAppFiles(appName, files2);
 	}
 	
 	

@@ -8,13 +8,13 @@
   </parent>
 
   <properties>
-    <bundle.symbolicName>org.cytoscape.plugin-api</bundle.symbolicName>
-    <bundle.namespace>org.cytoscape.plugin</bundle.namespace>
+    <bundle.symbolicName>org.cytoscape.app-api</bundle.symbolicName>
+    <bundle.namespace>org.cytoscape.app</bundle.namespace>
   </properties>
 
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.cytoscape</groupId>
-  <artifactId>plugin-api</artifactId>
+  <artifactId>app-api</artifactId>
 
   <name>${bundle.symbolicName}</name>
 

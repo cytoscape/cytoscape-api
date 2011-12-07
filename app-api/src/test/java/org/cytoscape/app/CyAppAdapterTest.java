@@ -1,12 +1,12 @@
-package org.cytoscape.plugin;
+package org.cytoscape.app;
 
 
 import org.junit.Test;
 import static org.junit.Assert.*;
 
 
-public abstract class CyPluginAdapterTest {
-	protected CyPluginAdapter adapter;
+public abstract class CyAppAdapterTest {
+	protected CyAppAdapter adapter;
 	
 	@Test
 	public void testGetCyTableFactory() { 

@@ -38,7 +38,7 @@ public class SessionLoadedEventTest {
 	private Cysession cysess;
 
 	@Mock
-	private Map<String, List<File>> pluginMap;
+	private Map<String, List<File>> appMap;
 
 	@Mock
 	private Set<CyTableMetadata> tables;
@@ -57,7 +57,7 @@ public class SessionLoadedEventTest {
 		MockitoAnnotations.initMocks(this);
 		
 		session = new CySession.Builder().cytoscapeProperties(props).bookmarks(bkmarks).cysession(cysess)
-				.pluginFileListMap(pluginMap).tables(tables).networkViews(netViews).visualStyles(styles)
+				.appFileListMap(appMap).tables(tables).networkViews(netViews).visualStyles(styles)
 				.viewVisualStyleMap(stylesMap).build();
 	}
 	

@@ -22,7 +22,7 @@ import org.cytoscape.session.CySessionManager;
  */
 public final class SessionAboutToBeSavedEvent extends AbstractCyEvent<CySessionManager> {
 	
-	private final Map<String,List<File>> pluginFileListMap;
+	private final Map<String,List<File>> appFileListMap;
 	private final List<Cytopanel> cytopanels;
 	private Desktop desktop;
 	
@@ -34,48 +34,48 @@ public final class SessionAboutToBeSavedEvent extends AbstractCyEvent<CySessionM
 	public SessionAboutToBeSavedEvent(final CySessionManager source) {
 		super(source, SessionAboutToBeSavedListener.class);
 
-		pluginFileListMap = new HashMap<String,List<File>>();
+		appFileListMap = new HashMap<String,List<File>>();
 		cytopanels = new ArrayList<Cytopanel>();
 	}
 
 	/**
-	 * A method that allows plugins to specify a list of files that should be
+	 * A method that allows apps to specify a list of files that should be
 	 * stored in the session.
-	 * @param pluginName The name of the plugin that these files should be stored for.
+	 * @param appName The name of the app that these files should be stored for.
 	 * @param files The list of File objects to be stored in the session file.
 	 * @throws Exception 
 	 */
-	public void addPluginFiles(final String pluginName, final List<File> files) throws Exception {
-		// Throw checked Exceptions here to force plugin authors to deal with
+	public void addAppFiles(final String appName, final List<File> files) throws Exception {
+		// Throw checked Exceptions here to force app authors to deal with
 		// problems they might create.
-		if ( pluginName == null )
-			throw new NullPointerException("plugin name is null");
+		if ( appName == null )
+			throw new NullPointerException("app name is null");
 			
-		if ( pluginName == "" )
-			throw new IllegalArgumentException("plugin name is empty");
+		if ( appName == "" )
+			throw new IllegalArgumentException("app name is empty");
 
-		if ( pluginFileListMap.containsKey( pluginName ) )
-			throw new IllegalArgumentException("The plugin file list already contains a list of files identified by the name: " + pluginName);
+		if ( appFileListMap.containsKey( appName ) )
+			throw new IllegalArgumentException("The app file list already contains a list of files identified by the name: " + appName);
 
 		if ( files == null )
 			throw new NullPointerException("file list is null");
 
 		// allow empty lists
-		pluginFileListMap.put(pluginName, new ArrayList<File>(files));
+		appFileListMap.put(appName, new ArrayList<File>(files));
 	}
 
 	/**
 	 * This method is not meant to be used by listeners for this event, 
 	 * although you can and no harm should come to you.  This method is
 	 * used by the {@link CySessionManager} to retrieve the list of files from
-	 * plugins.
-	 * @return A map of plugin names to lists of files to be stored in the
-	 * session for that plugin.
+	 * apps.
+	 * @return A map of app names to lists of files to be stored in the
+	 * session for that app.
 	 */
-	public Map<String,List<File>> getPluginFileListMap() {
+	public Map<String,List<File>> getAppFileListMap() {
 		// Make the return value immutable so that listeners
 		// can't mess with us.
-		return Collections.unmodifiableMap( pluginFileListMap );
+		return Collections.unmodifiableMap( appFileListMap );
 	}
 
 	/**
@@ -87,7 +87,7 @@ public final class SessionAboutToBeSavedEvent extends AbstractCyEvent<CySessionM
 	}
 
 	/**
-	 * A method that allows plugins to specify desktop-related data to be
+	 * A method that allows apps to specify desktop-related data to be
 	 * stored in the session.
 	 * @param desktop Setting the {@link Desktop} object associated with this event.
 	 */
@@ -106,7 +106,7 @@ public final class SessionAboutToBeSavedEvent extends AbstractCyEvent<CySessionM
 	}
 
 	/**
-	 * A method that allows plugins to add Cytopanel-related information to be
+	 * A method that allows apps to add Cytopanel-related information to be
 	 * stored in the session.
 	 * @param cytopanel The CytoPanel to be added.
 	 * @throws Exception 

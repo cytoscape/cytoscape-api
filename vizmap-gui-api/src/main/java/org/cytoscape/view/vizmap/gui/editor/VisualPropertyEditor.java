@@ -42,7 +42,7 @@ import javax.swing.table.TableCellRenderer;
 /**
  * Facade of all editor-related objects for a Visual Property.
  * 
- * If plugin developer adds a custom visual property, they should implement this
+ * If an app developer adds a custom visual property, they should implement this
  * in the presentation layer.
  * 
  * @param <T> Type of object managed in the Visual Prop.

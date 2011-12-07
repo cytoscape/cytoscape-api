@@ -73,7 +73,7 @@ public final class CySession {
 	private final Map<CyNetworkView,String> vsMap;
 	private final Properties cyProps;
 	private final Set<VisualStyle> visualStyles;
-	private final Map<String, List<File>> pluginFiles;
+	private final Map<String, List<File>> appFiles;
 	private final Bookmarks bookmarks; 
 	private final Cysession cysession; 
 
@@ -112,10 +112,10 @@ public final class CySession {
 		else
 			visualStyles = b.visualStyles;
 
-		if ( b.pluginFiles == null )
-			pluginFiles = new HashMap<String, List<File>>(); 
+		if ( b.appFiles == null )
+			appFiles = new HashMap<String, List<File>>(); 
 		else
-			pluginFiles = b.pluginFiles;
+			appFiles = b.appFiles;
 
 		if ( b.bookmarks == null )
 			bookmarks = new Bookmarks(); 
@@ -141,7 +141,7 @@ public final class CySession {
 		private Map<CyNetworkView,String> vsMap; 
 		private Properties cyProps;
 		private Set<VisualStyle> visualStyles; 
-		private Map<String, List<File>> pluginFiles; 
+		private Map<String, List<File>> appFiles; 
 		private Bookmarks bookmarks; 
 		private Cysession cysession; 
 
@@ -232,14 +232,14 @@ public final class CySession {
 
 		/**
 		 * Returns an instance of Builder that has at least been configured
-		 * with the specified plugin file list map.
-		 * @param p A map of plugin names to a list of File objects that the
-		 * given plugin wants stored in the session file.
+		 * with the specified app file list map.
+		 * @param p A map of app names to a list of File objects that the
+		 * given app wants stored in the session file.
 		 * @return An instance of Builder that has at least been configured
-		 * with the specified plugin file list map.
+		 * with the specified app file list map.
 		 */
-		public Builder pluginFileListMap(final Map<String, List<File>> p) { 
-			this.pluginFiles = p; 
+		public Builder appFileListMap(final Map<String, List<File>> p) { 
+			this.appFiles = p; 
 			return this;
 		}
 
@@ -323,12 +323,12 @@ public final class CySession {
     public Cysession getCysession() { return cysession; }
 
 	/**
-	 * Returns a map of plugin names to lists of File objects that are stored
-	 * as part of the session for the specified plugin.
-	 * @return A map of plugin names to lists of File objects that are stored
-	 * as part of the session for the specified plugin.
+	 * Returns a map of app names to lists of File objects that are stored
+	 * as part of the session for the specified app.
+	 * @return A map of app names to lists of File objects that are stored
+	 * as part of the session for the specified app.
 	 */
-	public Map<String, List<File>> getPluginFileListMap() { return pluginFiles; }
+	public Map<String, List<File>> getAppFileListMap() { return appFiles; }
 }
 
 

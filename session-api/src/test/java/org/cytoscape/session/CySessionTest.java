@@ -82,8 +82,8 @@ public class CySessionTest {
 		CyTable t2 = mock(CyTable.class); 
 
 		Set<CyTableMetadata> ts = new HashSet<CyTableMetadata>();
-		CyTableMetadataImpl m1 = new CyTableMetadataImpl(t1);
-		CyTableMetadataImpl m2 = new CyTableMetadataImpl(t2);
+		CyTableMetadata m1 = new CyTableMetadataImpl(t1);
+		CyTableMetadata m2 = new CyTableMetadataImpl(t2);
 		ts.add( m1 );
 		ts.add( m2 );
 
@@ -224,22 +224,22 @@ public class CySessionTest {
 	}
 
 	@Test
-	public void testDefaultGetPluginFileListMap() {
+	public void testDefaultGetAppFileListMap() {
 		session = new CySession.Builder().build();
 		assertNotNull(session);
-		assertNotNull(session.getPluginFileListMap());
+		assertNotNull(session.getAppFileListMap());
 	}
 
 	@Test
-	public void testSetNullPluginFileListMap() {
-		session = new CySession.Builder().pluginFileListMap(null).build();
+	public void testSetNullAppFileListMap() {
+		session = new CySession.Builder().appFileListMap(null).build();
 		assertNotNull(session);
-		assertNotNull(session.getPluginFileListMap());
-		assertEquals(0,session.getPluginFileListMap().size());
+		assertNotNull(session.getAppFileListMap());
+		assertEquals(0,session.getAppFileListMap().size());
 	}
 
 	@Test
-	public void testSetPluginFileListMap() {
+	public void testSetAppFileListMap() {
 		File f1 = new File("f1");
 		File f2 = new File("f2");
 
@@ -255,15 +255,15 @@ public class CySessionTest {
 		l1.add(f4);
 
 		Map<String,List<File>> pflm = new HashMap<String,List<File>>();
-		pflm.put("plugin1",l1);
-		pflm.put("plugin2",l2);
+		pflm.put("app1",l1);
+		pflm.put("app2",l2);
 
-		session = new CySession.Builder().pluginFileListMap(pflm).build();
+		session = new CySession.Builder().appFileListMap(pflm).build();
 		assertNotNull(session);
-		assertNotNull(session.getPluginFileListMap());
-		assertEquals(2,session.getPluginFileListMap().size());
-		assertEquals(l1,session.getPluginFileListMap().get("plugin1"));
-		assertEquals(l2,session.getPluginFileListMap().get("plugin2"));
+		assertNotNull(session.getAppFileListMap());
+		assertEquals(2,session.getAppFileListMap().size());
+		assertEquals(l1,session.getAppFileListMap().get("app1"));
+		assertEquals(l2,session.getAppFileListMap().get("app2"));
 	}
 
 
