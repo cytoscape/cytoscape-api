@@ -38,6 +38,7 @@
 		<module>swing-util-api</module>
 		<module>application-api</module>
 		<module>biopax-api</module>
+		<module>datasource-api</module>
 	</modules>
 
 	<dependencyManagement>
