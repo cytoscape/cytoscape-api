@@ -31,6 +31,7 @@ import java.io.StringWriter;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -67,7 +68,7 @@ import org.slf4j.LoggerFactory;
  *
  * @author Ethan Cerami, Rex, Arman and Igor Rodchenkov
  */
-public class BioPaxUtil {
+public final class BioPaxUtil {
 	private static final Map<String,String> cellLocationMap;
 	private static final Map<String,String> chemModificationsMap;
 	
@@ -87,8 +88,8 @@ public class BioPaxUtil {
 	 */
 	public static final String PROTEIN_PHOSPHORYLATED = "Protein-phosphorylated";
 	
-	// protected Constructor
-	protected BioPaxUtil() {}
+	// private Constructor
+	private BioPaxUtil() {}
 	
 	static  {
 		// the following is for node labels
@@ -527,11 +528,11 @@ public class BioPaxUtil {
 	
 	
 	public static Map<String, String> getChemModificationsMap() {
-		return chemModificationsMap;
+		return Collections.unmodifiableMap(chemModificationsMap);
 	}
 	
 	public static Map<String, String> getCellLocationMap() {
-		return cellLocationMap;
+		return Collections.unmodifiableMap(cellLocationMap);
 	}
 	
 	
@@ -547,13 +548,13 @@ public class BioPaxUtil {
 
 	
 	public static boolean isBioPAXNetwork(CyNetwork cyNetwork) {
-		return Boolean.TRUE == cyNetwork.getCyRow()
+		return Boolean.TRUE == cyNetwork.getCyRow(cyNetwork)
 			.get(MapBioPaxToCytoscape.BIOPAX_NETWORK, Boolean.class);
 	}
 	
 	
 	public static boolean isBiopaxSifNetwork(CyNetwork cyNetwork) {
-		return Boolean.TRUE == cyNetwork.getCyRow()
+		return Boolean.TRUE == cyNetwork.getCyRow(cyNetwork)
 			.get(MapBioPaxToCytoscape.BINARY_NETWORK, Boolean.class);
 	}
 	

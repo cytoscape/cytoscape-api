@@ -38,24 +38,7 @@ public interface CyTableEntry extends Identifiable {
 	/**
 	 * A String column created by default for every CyTableEntry that
 	 * holds the name of the entry.
-	 * 
-	 *  FIXME: create new enum for default attribute names?
 	 */
 	String NAME = "name";
 	
-	
-	/**
-	 * Returns the row for the specified table name for this object.
-	 * @param tableName the name of the table from which to extract the row..
-	 * @return the row in the table of the specified name for this object. 
-	 */
-	CyRow getCyRow(String tableName);
-
-	/**
-	 * A convenience method that returns the row in the default table 
-	 * for this object. This method is equivalent to calling 
-	 * getCyRow({@link CyNetwork#DEFAULT_ATTRS}).
-	 * @return the row in the default table for this object. 
-	 */
-	CyRow getCyRow();
 }

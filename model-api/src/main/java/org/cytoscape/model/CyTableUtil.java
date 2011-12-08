@@ -59,7 +59,7 @@ public class CyTableUtil {
 			throw new NullPointerException("network is null");
 		List<CyNode> ret = new ArrayList<CyNode>();
 		for ( CyNode node : net.getNodeList() )
-			if ( node.getCyRow().get(columnName,Boolean.class) == state )
+			if ( net.getCyRow(node).get(columnName,Boolean.class) == state )
 				ret.add( node );
 		return ret;
 	}
@@ -81,7 +81,7 @@ public class CyTableUtil {
 			throw new NullPointerException("network is null");
 		List<CyEdge> ret = new ArrayList<CyEdge>();
 		for ( CyEdge edge : net.getEdgeList() )
-			if ( edge.getCyRow().get(columnName,Boolean.class) == state )
+			if ( net.getCyRow(edge).get(columnName,Boolean.class) == state )
 				ret.add( edge );
 		return ret;
 	}

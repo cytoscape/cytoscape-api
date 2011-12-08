@@ -53,23 +53,25 @@ public class CyTableUtilTest {
 
 	@Before
 	public void setUp() {
+		net = mock(CyNetwork.class);
+
 		row1 = mock(CyRow.class);
 		when(row1.get(columnName,Boolean.class)).thenReturn(true);
 
 		node1 = mock(CyNode.class);
-		when(node1.getCyRow()).thenReturn(row1);
+		when(net.getCyRow(node1)).thenReturn(row1);
 
 		edge1 = mock(CyEdge.class);
-		when(edge1.getCyRow()).thenReturn(row1);
+		when(net.getCyRow(edge1)).thenReturn(row1);
 
 		row2 = mock(CyRow.class);
 		when(row2.get(columnName,Boolean.class)).thenReturn(false);
 
 		node2 = mock(CyNode.class);
-		when(node2.getCyRow()).thenReturn(row2);
+		when(net.getCyRow(node2)).thenReturn(row2);
 
 		edge2 = mock(CyEdge.class);
-		when(edge2.getCyRow()).thenReturn(row2);
+		when(net.getCyRow(edge2)).thenReturn(row2);
 
 		List<CyNode> nlist = new ArrayList<CyNode>();
 		nlist.add(node1);
@@ -79,7 +81,6 @@ public class CyTableUtilTest {
 		elist.add(edge1);
 		elist.add(edge2);
 
-		net = mock(CyNetwork.class);
 		when(net.getNodeList()).thenReturn(nlist);
 		when(net.getEdgeList()).thenReturn(elist);
 	}

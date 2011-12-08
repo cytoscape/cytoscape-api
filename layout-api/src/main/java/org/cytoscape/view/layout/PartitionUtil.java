@@ -184,7 +184,7 @@ public final class PartitionUtil {
 		View<CyNode> nv = nodesToViews.get(nodeIndex);
 
 		// Add this node to the partition
-		partition.addNode(nv, false);
+		partition.addNode(network, nv, false);
 
 		// Iterate through each connected edge
 		for (CyEdge incidentEdge: network.getAdjacentEdgeList(node, CyEdge.Type.ANY)){
@@ -200,7 +200,7 @@ public final class PartitionUtil {
 			edgesSeenMap.put(edgeIndex, m_NODE_HAS_BEEN_SEEN);
 
 			// Add the edge to the partition
-			partition.addEdge(incidentEdge);
+			partition.addEdge(incidentEdge,network.getCyRow(incidentEdge));
 
 			// Determine the node's index that is on the other side of the edge
 			CyNode otherNode;

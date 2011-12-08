@@ -33,6 +33,7 @@
 package org.cytoscape.view.layout;
 
 import org.cytoscape.model.CyEdge;
+import org.cytoscape.model.CyRow;
 
 /**
  * The LayoutEdge class.  This class is used as a container for information
@@ -48,6 +49,7 @@ public final class LayoutEdge {
 	private double weight = 0.5;
 	private double logWeight;
 	private CyEdge edge;
+	private CyRow row;
 
 	/**
 	 * Create a LayoutEdge that will contain information about this edge.
@@ -55,8 +57,9 @@ public final class LayoutEdge {
 	 *
 	 * @param    edge    Edge that this LayoutEdge represents
 	 */
-	public LayoutEdge(CyEdge edge) {
+	public LayoutEdge(CyEdge edge, CyRow row) {
 		this.edge = edge;
+		this.row = row;
 	}
 
 	/**
@@ -67,10 +70,11 @@ public final class LayoutEdge {
 	 * @param    v1    The LayoutNode that represents the source of the edge
 	 * @param    v2    The LayoutNode that represents the target of the edge
 	 */
-	public LayoutEdge(CyEdge edge, LayoutNode v1, LayoutNode v2) {
+	public LayoutEdge(CyEdge edge, LayoutNode v1, LayoutNode v2, CyRow row) {
 		this.edge = edge;
 		this.v1 = v1;
 		this.v2 = v2;
+		this.row = row;
 
 		if (v1 != v2) {
 			v1.addNeighbor(v2);
@@ -160,6 +164,15 @@ public final class LayoutEdge {
 	 */
 	public CyEdge getEdge() {
 		return this.edge;
+	}
+
+	/**
+	 * Return the CyRow for this LayoutEdge 
+	 *
+	 * @return     The CyRow for this LayoutEdge
+	 */
+	public CyRow getRow() {
+		return this.row;
 	}
 
 	/**

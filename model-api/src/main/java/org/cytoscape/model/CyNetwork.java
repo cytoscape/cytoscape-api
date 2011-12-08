@@ -223,6 +223,24 @@ public interface CyNetwork extends CyTableEntry {
 	List<CyEdge> getAdjacentEdgeList(CyNode node, CyEdge.Type edgeType);
 
 	/**
+	 * Gets an Iteable of edges that connect to this node. The {@link CyEdge.Type} enum is
+	 * used to determine whether the list includes undirected, directed,
+	 * incoming, or outgoing edges. The iterable will be empty if there are
+	 * no adjacent edges found.
+	 * This method should never return null.
+	 * Modifying this list (if allowed by the implementation)
+	 * has no effect on the network.
+	 * The Iterable implementation <i>may</i> be more efficient because it doesn't
+	 * necessarily need to create a list first. However, that depends on implementation
+	 * details, so you should evaluate the method performance yourself.
+	 *
+	 * @param node the node whose edges we're looking for
+	 * @param edgeType the directionality of the edges we're interested in
+	 * @return the Iterable of edges that are adjacent to this one
+	 */
+	Iterable<CyEdge> getAdjacentEdgeIterable(CyNode node, CyEdge.Type edgeType);
+
+	/**
 	 * Get the list of edges that connect two nodes.  The {@link CyEdge.Type} enum is
 	 * used to determine whether the list includes undirected, directed,
 	 * incoming, or outgoing edges. The list will be empty if no connecting
@@ -261,4 +279,27 @@ public interface CyNetwork extends CyTableEntry {
 	 * @return The default attribute table for the edges of this network.
 	 */
 	CyTable getDefaultEdgeTable();
+
+	
+	/**
+	 * Returns the row for the specified table name for this object.
+	 * A null entry or a
+	 * an entry not found in this network will return null.
+	 * @param entry The entry (node, edge, network) whose row we're looking for. 
+	 * @param tableName the name of the table from which to extract the row..
+	 * @return the row in the table of the specified name for this object. 
+	 */
+	CyRow getCyRow(CyTableEntry entry, String tableName);
+ 
+	/**
+	 * A convenience method that returns the row in the default table 
+	 * for this object. This method is equivalent to calling 
+	 * getCyRow(entry,{@link CyNetwork#DEFAULT_ATTRS}). 
+	 * A null entry or a
+	 * an entry not found in this network will return null.
+	 * @param entry The entry (node, edge, network) whose row we're looking for. 
+	 * @return the row in the default table for this object. 
+	 */
+	CyRow getCyRow(CyTableEntry entry);
+
 }

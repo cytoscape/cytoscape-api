@@ -33,6 +33,7 @@
 package org.cytoscape.view.layout;
 
 import org.cytoscape.model.CyNode;
+import org.cytoscape.model.CyRow;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.presentation.property.MinimalVisualLexicon;
 
@@ -60,6 +61,7 @@ public final class LayoutNode {
 	private double dispX;
 	private double dispY;
 	private CyNode node;
+	private CyRow row;
 	private View<CyNode> nodeView;
 	private int index;
 	private boolean isLocked = false;
@@ -71,9 +73,10 @@ public final class LayoutNode {
 	 * @param nodeView The View<CyNode> of this node
 	 * @param index The index (usually in a node array) of this node
 	 */
-	public LayoutNode(View<CyNode> nodeView, int index) {
+	public LayoutNode(View<CyNode> nodeView, int index, CyRow row) {
 		this.nodeView = nodeView;
 		this.node = nodeView.getModel();
+		this.row = row;
 		this.index = index;
 		this.x = nodeView.getVisualProperty(MinimalVisualLexicon.NODE_X_LOCATION);
 		this.y = nodeView.getVisualProperty(MinimalVisualLexicon.NODE_Y_LOCATION);
@@ -88,6 +91,16 @@ public final class LayoutNode {
 	 */
 	public CyNode getNode() {
 		return this.node;
+	}
+
+	/**
+	 * Accessor function to return the CyRow associated with
+	 * this LayoutNode.
+	 *
+	 * @return    CyRow that is associated with this LayoutNode
+	 */
+	public CyRow getRow() {
+		return this.row;
 	}
 
 	/**

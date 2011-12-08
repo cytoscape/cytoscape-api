@@ -44,7 +44,9 @@ import java.util.Random;
 
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNode;
+import org.cytoscape.model.CyRow;
 import org.cytoscape.model.CyTableUtil;
+import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.presentation.property.MinimalVisualLexicon;
@@ -171,9 +173,9 @@ public final class LayoutPartition {
 	 * @param nv the View<CyNode> of the node to add
 	 * @param locked a boolean value to determine if this node is locked or not
 	 */
-	protected void addNode(View<CyNode> nv, boolean locked) {
+	protected void addNode(CyNetwork network, View<CyNode> nv, boolean locked) {
 		CyNode node = nv.getModel();
-		LayoutNode v = new LayoutNode(nv, nodeIndex++);
+		LayoutNode v = new LayoutNode(nv, nodeIndex++, network.getCyRow(node));
 		nodeList.add(v);
 		nodeToLayoutNode.put(node, v);
 
@@ -194,8 +196,8 @@ public final class LayoutPartition {
 	 *
 	 * @param edge    the Edge to add to the partition
 	 */
-	protected void addEdge(CyEdge edge) {
-		LayoutEdge newEdge = new LayoutEdge(edge);
+	protected void addEdge(CyEdge edge, CyRow row) {
+		LayoutEdge newEdge = new LayoutEdge(edge, row);
 		updateWeights(newEdge);
 		edgeList.add(newEdge);
 	}
@@ -208,8 +210,8 @@ public final class LayoutPartition {
 	 * @param v1    the LayoutNode of the edge source
 	 * @param v2    the LayoutNode of the edge target
 	 */
-	protected void addEdge(CyEdge edge, LayoutNode v1, LayoutNode v2) {
-		LayoutEdge newEdge = new LayoutEdge(edge, v1, v2);
+	protected void addEdge(CyEdge edge, LayoutNode v1, LayoutNode v2, CyRow row) {
+		LayoutEdge newEdge = new LayoutEdge(edge, v1, v2, row);
 		updateWeights(newEdge);
 		edgeList.add(newEdge);
 	}
@@ -504,9 +506,9 @@ public final class LayoutPartition {
 			final CyNode node = nv.getModel();
 
 			if (!nodeSet.contains(node))
-				addNode(nv, true);
+				addNode(networkView.getModel(),nv, true);
 			else
-				addNode(nv, false);
+				addNode(networkView.getModel(),nv, false);
 		}
 	}
 
@@ -530,7 +532,7 @@ public final class LayoutPartition {
 			if (v1.isLocked() && v2.isLocked())
 				continue; // no, ignore it
 
-			addEdge(edge, v1, v2);
+			addEdge(edge, v1, v2, networkView.getModel().getCyRow(edge));
 		}
 	}
 
