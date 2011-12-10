@@ -83,7 +83,7 @@ public interface CyTable extends Identifiable {
 	/**
 	 * A public CyTable is a table that is accessible to the user through the user
 	 * interface.  Private or non-public CyTables will not be visible to the user from the
-	 * normal user interface, although they will be accessible to plugin writers through the API.
+	 * normal user interface, although they will be accessible to app writers through the API.
 	 *
 	 * @return Whether or not this CyTable should be publicly accessible.
 	 */
