@@ -8,7 +8,8 @@ import org.cytoscape.work.BasicTunableHandlerFactory;
  * @param <T> 
  * @CyAPI.Final.Class
  */
-public final class SimpleGUITunableHandlerFactory<T extends GUITunableHandler> extends BasicTunableHandlerFactory<T> implements GUITunableHandlerFactory<T> {
+public final class SimpleGUITunableHandlerFactory<T extends GUITunableHandler> extends BasicTunableHandlerFactory<T>
+		implements GUITunableHandlerFactory<T> {
 
 	/**
 	 * Constructs this BasicGUITunableHandlerFactory.

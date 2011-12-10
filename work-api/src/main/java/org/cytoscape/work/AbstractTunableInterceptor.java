@@ -94,10 +94,10 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 	 */
 	protected void loadTunables(final Object obj) {
 		if (!handlerMap.containsKey(obj)) {
-			LinkedHashMap<String, T> handlerList = new LinkedHashMap<String, T>();
+			final LinkedHashMap<String, T> handlerList = new LinkedHashMap<String, T>();
 
 			// Find each public field in the class.
-			for (final Field field : obj.getClass().getFields()) {
+			for (final Field field : obj.getClass().getFields()) {				
 				// See if the field is annotated as a Tunable.
 				if (field.isAnnotationPresent(Tunable.class)) {
 					try {
@@ -249,7 +249,7 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 		return false;
 	}
 	
-	private T getHandler(Field field, Object instance, Tunable tunable) {
+	private T getHandler(final Field field, Object instance, Tunable tunable) {		
 		for ( TunableHandlerFactory<T> thf : tunableHandlerFactories ) {
 			T th = thf.createTunableHandler(field, instance, tunable);
 			if ( th != null )
@@ -274,7 +274,7 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 	 * @param thf The factory to be added.
 	 * @param properties OSGi service metadata.  May be null.
 	 */
-	public void addTunableHandlerFactory(TunableHandlerFactory<T> thf, Map properties) {
+	public void addTunableHandlerFactory(TunableHandlerFactory<T> thf, Map properties) {		
 		if ( thf != null )
 			tunableHandlerFactories.add(thf);
 	}
