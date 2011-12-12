@@ -50,20 +50,20 @@ public interface CyNetworkViewManager {
 	/**
 	 * Returns the network view corresponding to an ID, if found.
 	 * 
-	 * @param network_id  a unique ID that hopefully corresponds to a network view.
+	 * @param networkId  a unique ID that hopefully corresponds to a network view.
 	 * 
-	 * @return null if no network view was found corresponding to "network_id", else the network view
+	 * @return null if no network view was found corresponding to "networkId", else the network view
 	 */
-	public CyNetworkView getNetworkView(long network_id);
+	public CyNetworkView getNetworkView(long networkId);
 
 	/**
 	 * Determines whether a network view corresponding to a certain ID is known to the network view manager.
 	 * 
-	 * @param network_id  a unique ID that may correspond to a network view
+	 * @param networkId  a unique ID that may correspond to a network view
 	 * 
-	 * @return true if a view was found that corresponds to "network_id", else false
+	 * @return true if a view was found that corresponds to "networkId", else false
 	 */
-	public boolean viewExists(long network_id);
+	public boolean viewExists(long networkId);
 
 	/**
 	 * Destroys a network view.

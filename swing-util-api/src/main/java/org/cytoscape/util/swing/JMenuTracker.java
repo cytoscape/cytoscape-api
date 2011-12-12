@@ -96,17 +96,17 @@ public final class JMenuTracker {
 	 * omitted, the insertion location will be based on a case-insensitive alphanumeric
 	 * ordering.   An example of a string using weights is "File[10].New[40]".
 	 *
-	 * @param menu_string A '.' delimited string identifying menu names.
+	 * @param menuString A '.' delimited string identifying menu names.
 	 * @return The last child JMenu object specified by the menu_string parameter.
 	 */
-	public GravityTracker getGravityTracker(final String menu_string) {
-		if (menu_string == null)
+	public GravityTracker getGravityTracker(final String menuString) {
+		if (menuString == null)
 			throw new NullPointerException("menu string is null");
 
-		if (menu_string.isEmpty())
+		if (menuString.isEmpty())
 			throw new IllegalArgumentException("menu string has zero length");
 
-		final List<MenuNameAndGravity> namesAndGravities = parseMenuString(menu_string);
+		final List<MenuNameAndGravity> namesAndGravities = parseMenuString(menuString);
 		MenuGravityTracker parentGravityTracker = null;
 		MenuGravityTracker gravityTracker = null;
 		String menu_key = null;

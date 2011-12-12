@@ -60,11 +60,11 @@ public interface CyNetworkManager {
 	/**
 	 *  Tests whether a network has been registered with the network manager or not.
 	 * 
-	 * @param network_id  possibly the ID of a network
+	 * @param networkId  possibly the ID of a network
 	 * 
-	 * @return true if "network_id" does correspond to a network known to the network manager, else false
+	 * @return true if "networkId" does correspond to a network known to the network manager, else false
 	 */
-	public boolean networkExists(long network_id);
+	public boolean networkExists(long networkId);
 
 	/**
 	 *  Destroys a network.

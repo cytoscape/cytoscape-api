@@ -335,10 +335,10 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * Sets the preferredMenuString. See the {@link #getPreferredMenu}
 	 * description for formatting description.
 	 *
-	 * @param new_preferred The string describing the preferred menu name.
+	 * @param newPreferredMenu The string describing the preferred menu name.
 	 */
-	public void setPreferredMenu(String new_preferred) {
-		preferredMenu = new_preferred;
+	public void setPreferredMenu(String newPreferredMenu) {
+		preferredMenu = newPreferredMenu;
 	}
 
 	/**
