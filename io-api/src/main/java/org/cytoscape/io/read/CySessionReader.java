@@ -22,6 +22,6 @@ public interface CySessionReader extends Task {
 	 * Returns a {@link org.cytoscape.session.CySession} object
 	 * @return A {@link org.cytoscape.session.CySession} object. 
 	 */
-    CySession getCySession();
+    CySession getSession();
 }
 

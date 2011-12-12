@@ -844,28 +844,28 @@ public abstract class AbstractCyNetworkTest {
 		// As long as the object is not null and is an instance of CyRow, we
 		// should be satisfied.  Don't test any other properties of CyRow.
 		// Leave that to the CyRow unit tests.
-		assertNotNull("cyattrs exists", net.getCyRow(net,"USER"));
-		assertTrue("cyattrs is CyRow", net.getCyRow(net,"USER") instanceof CyRow);
+		assertNotNull("cyattrs exists", net.getRow(net,"USER"));
+		assertTrue("cyattrs is CyRow", net.getRow(net,"USER") instanceof CyRow);
 	}
 
 	@Test(expected=NullPointerException.class)
 	public void testGetCyRowNullNamespace() {
-		net.getCyRow(net,null);
+		net.getRow(net,null);
 	}
 
 	@Test(expected=NullPointerException.class)
 	public void testGetCyRowNullEntry() {
-		net.getCyRow(null,CyNetwork.DEFAULT_ATTRS);
+		net.getRow(null,CyNetwork.DEFAULT_ATTRS);
 	}
 
 	@Test(expected=NullPointerException.class)
 	public void testCyRowBadNamespace() {
-		net.getCyRow(net,"homeradfasdf");
+		net.getRow(net,"homeradfasdf");
 	}
 
 	@Test
 	public void testDefaultAttributes() {
-		assertEquals(String.class, net.getCyRow(net).getTable().getColumn("name").getType());
+		assertEquals(String.class, net.getRow(net).getTable().getColumn("name").getType());
 	}
 
 	@Test

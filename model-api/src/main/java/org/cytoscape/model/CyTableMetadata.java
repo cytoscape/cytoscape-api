@@ -18,13 +18,13 @@ public interface CyTableMetadata {
 	 * Returns the table whose metadata is described by this instance.
 	 * @return the table whose metadata is described by this instance.
 	 */
-	CyTable getCyTable();
+	CyTable getTable();
 	
 	/**
 	 * Returns all the networks associated with this object's table.
 	 * @return all the networks associated with this object's table.
 	 */
-	CyNetwork getCyNetwork();
+	CyNetwork getNetwork();
 	
 	/**
 	 * Returns the namespace used as the key to this object's table in

@@ -22,7 +22,7 @@ public interface CyNetworkReader extends Task {
 	 * Returns an array of networks read after executing the run() method of {@link Task}.
 	 * @return an array of networks read after executing the run() method of {@link Task}.
 	 */
-	CyNetwork[] getCyNetworks();
+	CyNetwork[] getNetworks();
 
 	/**
 	 * A method to build a {@link CyNetworkView} from one of the networks just read.

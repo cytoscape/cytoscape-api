@@ -63,9 +63,9 @@ public abstract class AbstractCyNodeTest {
 	public void testDefaultAttributes() {
 		CyNode n1 = net.addNode();
 		assertEquals(String.class,
-			     net.getCyRow(n1).getTable().getColumn("name").getType());
+			     net.getRow(n1).getTable().getColumn("name").getType());
 		assertEquals(Boolean.class,
-			     net.getCyRow(n1).getTable().getColumn("selected").getType());
+			     net.getRow(n1).getTable().getColumn("selected").getType());
 	}
 
 	// by default a node should have a null nested network

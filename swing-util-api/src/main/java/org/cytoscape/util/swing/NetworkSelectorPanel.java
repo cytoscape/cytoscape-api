@@ -59,7 +59,7 @@ public final class NetworkSelectorPanel extends JPanel implements NetworkAddedLi
 	 */
 	public CyNetwork getSelectedNetwork() {
 		for (CyNetwork net : this.cyNetworkManager.getNetworkSet()) {
-			String networkTitle = net.getCyRow(net).get("name", String.class);
+			String networkTitle = net.getRow(net).get("name", String.class);
 			if (networkTitle.equals(networkComboBox.getSelectedItem()))
 				return net;
 		}
@@ -72,7 +72,7 @@ public final class NetworkSelectorPanel extends JPanel implements NetworkAddedLi
 		final SortedSet<String> networkNames = new TreeSet<String>();
 
 		for (CyNetwork net : networks)
-			networkNames.add(net.getCyRow(net).get("name", String.class));
+			networkNames.add(net.getRow(net).get("name", String.class));
 
 		// Clear the comboBox
 		networkComboBox.setModel(new DefaultComboBoxModel());
@@ -82,7 +82,7 @@ public final class NetworkSelectorPanel extends JPanel implements NetworkAddedLi
 
 		CyNetwork currNetwork = this.cyApplicationManager.getCurrentNetwork();
 		if (currNetwork != null) {
-			String networkTitle = currNetwork.getCyRow(currNetwork).get("name", String.class);
+			String networkTitle = currNetwork.getRow(currNetwork).get("name", String.class);
 			networkComboBox.setSelectedItem(networkTitle);			
 		}
 	}

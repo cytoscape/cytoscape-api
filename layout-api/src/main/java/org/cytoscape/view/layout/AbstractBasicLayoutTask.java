@@ -90,7 +90,7 @@ public abstract class AbstractBasicLayoutTask extends AbstractTask {
 		networkView.fitContent();
 
 		// update the __layoutAlgorithm attribute
-		final CyRow networkAttributes = network.getCyRow(network,CyNetwork.HIDDEN_ATTRS);
+		final CyRow networkAttributes = network.getRow(network,CyNetwork.HIDDEN_ATTRS);
 		final CyTable netAttrsTable = networkAttributes.getTable();
 		if (netAttrsTable.getColumn(LAYOUT_ALGORITHM) == null)
 			netAttrsTable.createColumn(LAYOUT_ALGORITHM, String.class, true);

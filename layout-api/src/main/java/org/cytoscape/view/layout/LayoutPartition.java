@@ -175,7 +175,7 @@ public final class LayoutPartition {
 	 */
 	protected void addNode(CyNetwork network, View<CyNode> nv, boolean locked) {
 		CyNode node = nv.getModel();
-		LayoutNode v = new LayoutNode(nv, nodeIndex++, network.getCyRow(node));
+		LayoutNode v = new LayoutNode(nv, nodeIndex++, network.getRow(node));
 		nodeList.add(v);
 		nodeToLayoutNode.put(node, v);
 
@@ -532,7 +532,7 @@ public final class LayoutPartition {
 			if (v1.isLocked() && v2.isLocked())
 				continue; // no, ignore it
 
-			addEdge(edge, v1, v2, networkView.getModel().getCyRow(edge));
+			addEdge(edge, v1, v2, networkView.getModel().getRow(edge));
 		}
 	}
 

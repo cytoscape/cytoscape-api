@@ -11,6 +11,6 @@ public interface CyFileFilterProvider {
 	 * Return the file filter associated with the IOFactory.
 	 * @return the {@link CyFileFilter} associated with the IOFactory.
 	 */
-	CyFileFilter getCyFileFilter();
+	CyFileFilter getFileFilter();
 
 }

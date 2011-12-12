@@ -289,7 +289,7 @@ public interface CyNetwork extends CyTableEntry {
 	 * @param tableName the name of the table from which to extract the row..
 	 * @return the row in the table of the specified name for this object. 
 	 */
-	CyRow getCyRow(CyTableEntry entry, String tableName);
+	CyRow getRow(CyTableEntry entry, String tableName);
  
 	/**
 	 * A convenience method that returns the row in the default table 
@@ -300,6 +300,6 @@ public interface CyNetwork extends CyTableEntry {
 	 * @param entry The entry (node, edge, network) whose row we're looking for. 
 	 * @return the row in the default table for this object. 
 	 */
-	CyRow getCyRow(CyTableEntry entry);
+	CyRow getRow(CyTableEntry entry);
 
 }

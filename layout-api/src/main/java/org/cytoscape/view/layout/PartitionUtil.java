@@ -200,7 +200,7 @@ public final class PartitionUtil {
 			edgesSeenMap.put(edgeIndex, m_NODE_HAS_BEEN_SEEN);
 
 			// Add the edge to the partition
-			partition.addEdge(incidentEdge,network.getCyRow(incidentEdge));
+			partition.addEdge(incidentEdge,network.getRow(incidentEdge));
 
 			// Determine the node's index that is on the other side of the edge
 			CyNode otherNode;

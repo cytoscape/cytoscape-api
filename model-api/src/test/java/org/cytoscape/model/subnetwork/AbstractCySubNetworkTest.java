@@ -366,25 +366,25 @@ public abstract class AbstractCySubNetworkTest {
 	@Test
 	public void testNodeAddedInSubnetworkHasNameAttr() {
 		n1 = root.addNode();
-		root.getCyRow(n1).set(CyTableEntry.NAME,"homer");
+		root.getRow(n1).set(CyTableEntry.NAME,"homer");
 
 		sub = root.addSubNetwork();
 		sub.addNode(n1);
 	
 		List<CyNode> subNodes = sub.getNodeList();
-		assertEquals( "homer", sub.getCyRow(subNodes.get(0)).get(CyTableEntry.NAME,String.class) ); 
+		assertEquals( "homer", sub.getRow(subNodes.get(0)).get(CyTableEntry.NAME,String.class) ); 
 	}
 
 	@Test
 	public void testNodeAddedInSubnetworkHasSelectedAttr() {
 		n1 = root.addNode();
-		root.getCyRow(n1).set(CyNetwork.SELECTED,true);
+		root.getRow(n1).set(CyNetwork.SELECTED,true);
 
 		sub = root.addSubNetwork();
 		sub.addNode(n1);
 	
 		List<CyNode> subNodes = sub.getNodeList();
-		assertTrue( sub.getCyRow(subNodes.get(0)).get(CyNetwork.SELECTED,Boolean.class) ); 
+		assertTrue( sub.getRow(subNodes.get(0)).get(CyNetwork.SELECTED,Boolean.class) ); 
 	}
 
 	@Test
@@ -392,7 +392,7 @@ public abstract class AbstractCySubNetworkTest {
 		n1 = root.addNode();
 		n2 = root.addNode();
 		e1 = root.addEdge(n1,n2,true);
-		root.getCyRow(e1).set(CyTableEntry.NAME,"homer");
+		root.getRow(e1).set(CyTableEntry.NAME,"homer");
 
 		sub = root.addSubNetwork();
 		sub.addNode(n1);
@@ -400,7 +400,7 @@ public abstract class AbstractCySubNetworkTest {
 		sub.addEdge(e1);
 	
 		List<CyEdge> subEdges = sub.getEdgeList();
-		assertEquals( "homer", sub.getCyRow(subEdges.get(0)).get(CyTableEntry.NAME,String.class) ); 
+		assertEquals( "homer", sub.getRow(subEdges.get(0)).get(CyTableEntry.NAME,String.class) ); 
 	}
 
 	@Test
@@ -408,7 +408,7 @@ public abstract class AbstractCySubNetworkTest {
 		n1 = root.addNode();
 		n2 = root.addNode();
 		e1 = root.addEdge(n1,n2,true);
-		root.getCyRow(e1).set(CyEdge.INTERACTION,"marge");
+		root.getRow(e1).set(CyEdge.INTERACTION,"marge");
 
 		sub = root.addSubNetwork();
 		sub.addNode(n1);
@@ -416,7 +416,7 @@ public abstract class AbstractCySubNetworkTest {
 		sub.addEdge(e1);
 	
 		List<CyEdge> subEdges = sub.getEdgeList();
-		assertEquals( "marge", sub.getCyRow(subEdges.get(0)).get(CyEdge.INTERACTION,String.class) ); 
+		assertEquals( "marge", sub.getRow(subEdges.get(0)).get(CyEdge.INTERACTION,String.class) ); 
 	}
 
 	@Test
@@ -424,7 +424,7 @@ public abstract class AbstractCySubNetworkTest {
 		n1 = root.addNode();
 		n2 = root.addNode();
 		e1 = root.addEdge(n1,n2,true);
-		root.getCyRow(e1).set(CyNetwork.SELECTED,true);
+		root.getRow(e1).set(CyNetwork.SELECTED,true);
 
 		sub = root.addSubNetwork();
 		sub.addNode(n1);
@@ -432,7 +432,7 @@ public abstract class AbstractCySubNetworkTest {
 		sub.addEdge(e1);
 	
 		List<CyEdge> subEdges = sub.getEdgeList();
-		assertTrue(sub.getCyRow(subEdges.get(0)).get(CyNetwork.SELECTED,Boolean.class) ); 
+		assertTrue(sub.getRow(subEdges.get(0)).get(CyNetwork.SELECTED,Boolean.class) ); 
 	}
 
 	// TODO

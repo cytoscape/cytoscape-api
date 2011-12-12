@@ -548,13 +548,13 @@ public final class BioPaxUtil {
 
 	
 	public static boolean isBioPAXNetwork(CyNetwork cyNetwork) {
-		return Boolean.TRUE == cyNetwork.getCyRow(cyNetwork)
+		return Boolean.TRUE == cyNetwork.getRow(cyNetwork)
 			.get(MapBioPaxToCytoscape.BIOPAX_NETWORK, Boolean.class);
 	}
 	
 	
 	public static boolean isBiopaxSifNetwork(CyNetwork cyNetwork) {
-		return Boolean.TRUE == cyNetwork.getCyRow(cyNetwork)
+		return Boolean.TRUE == cyNetwork.getRow(cyNetwork)
 			.get(MapBioPaxToCytoscape.BINARY_NETWORK, Boolean.class);
 	}
 	

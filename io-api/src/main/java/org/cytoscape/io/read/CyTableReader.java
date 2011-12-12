@@ -19,5 +19,5 @@ public interface CyTableReader extends Task{
 	 * Return an array of {@link org.cytoscape.model.CyTable} objects.
 	 * @return An array of {@link org.cytoscape.model.CyTable} objects.
 	 */
-	CyTable[] getCyTables();
+	CyTable[] getTables();
 }

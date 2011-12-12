@@ -14,12 +14,12 @@ public class CyTableMetadataImpl implements CyTableMetadata {
 
 	@Override
 	public boolean equals(Object obj) {
-		return getCyTable().equals(((CyTableMetadata) obj).getCyTable());
+		return getTable().equals(((CyTableMetadata) obj).getTable());
 	}
 	
 	@Override
 	public int hashCode() {
-		return getCyTable().hashCode();
+		return getTable().hashCode();
 	}
 
 	@Override
@@ -28,12 +28,12 @@ public class CyTableMetadataImpl implements CyTableMetadata {
 	}
 
 	@Override
-	public CyTable getCyTable() {
+	public CyTable getTable() {
 		return table;
 	}
 
 	@Override
-	public CyNetwork getCyNetwork() {
+	public CyNetwork getNetwork() {
 		return null;
 	}
 

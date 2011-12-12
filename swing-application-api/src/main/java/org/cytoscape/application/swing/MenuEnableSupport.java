@@ -203,7 +203,7 @@ public final class MenuEnableSupport {
 
 		// If any of nodes are selected, enable this.
 		for (CyNode node : curNetwork.getNodeList()) {
-			if (curNetwork.getCyRow(node).get(CyNetwork.SELECTED, Boolean.class)) {
+			if (curNetwork.getRow(node).get(CyNetwork.SELECTED, Boolean.class)) {
 				setEnabled(true);
 
 				return;
@@ -211,7 +211,7 @@ public final class MenuEnableSupport {
 		}
 
 		for (CyEdge edge : curNetwork.getEdgeList()) {
-			if (curNetwork.getCyRow(edge).get(CyNetwork.SELECTED, Boolean.class)) {
+			if (curNetwork.getRow(edge).get(CyNetwork.SELECTED, Boolean.class)) {
 				setEnabled(true);
 
 				return;
@@ -235,7 +235,7 @@ public final class MenuEnableSupport {
 		}
 
 		for (CyNode node : n.getNodeList()) {
-			if (n.getCyRow(node).get(CyNetwork.SELECTED, Boolean.class)) {
+			if (n.getRow(node).get(CyNetwork.SELECTED, Boolean.class)) {
 				setEnabled(true);
 
 				return;
@@ -259,7 +259,7 @@ public final class MenuEnableSupport {
 		}
 
 		for (CyEdge edge : n.getEdgeList()) {
-			if (n.getCyRow(edge).get(CyNetwork.SELECTED, Boolean.class)) {
+			if (n.getRow(edge).get(CyNetwork.SELECTED, Boolean.class)) {
 				setEnabled(true);
 
 				return;
