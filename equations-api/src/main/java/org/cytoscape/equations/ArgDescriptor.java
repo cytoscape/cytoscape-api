@@ -83,7 +83,7 @@ public final class ArgDescriptor {
 	 * @return true if the specified class is compatible with this ArgType.
 	 */
 	public boolean isCompatibleWith(final Class type) {
-		if (FunctionUtil.isSomeKindOfList(type))
+		if (FunctionUtil.isTypeOfList(type))
 			return isCompatibleList(type);
 
 		for (final Class compatibleType : argType.getCompatibleTypes()) {
@@ -120,7 +120,7 @@ public final class ArgDescriptor {
 
 		// ...and here we handle the case where we don't have any information about the argument types of "listType":
 		for (final Class compatibleType : argType.getCompatibleTypes()) {
-			if (FunctionUtil.isSomeKindOfList(compatibleType))
+			if (FunctionUtil.isTypeOfList(compatibleType))
 				return true;
 		}
 

@@ -34,7 +34,7 @@ import org.cytoscape.work.swing.DialogTaskManager;
 import org.cytoscape.work.swing.PanelTaskManager;
 import org.cytoscape.work.swing.SubmenuTaskManager;
 import org.cytoscape.work.undo.UndoSupport;
-import org.cytoscape.application.CytoscapeVersion;
+import org.cytoscape.application.CyVersion;
 
 /**
  * A Java-only api providing access to Cytoscape functionality.
@@ -300,9 +300,9 @@ public interface CyAppAdapter {
 	
 	
 	/**
-	 * Returns an instance of {@link CytoscapeVersion}.
-	 * @return an instance of {@link CytoscapeVersion}.
+	 * Returns an instance of {@link CyVersion}.
+	 * @return an instance of {@link CyVersion}.
 	 */
-	CytoscapeVersion getCytoscapeVersion();
+	CyVersion getCyVersion();
 	
 }

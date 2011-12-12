@@ -4,14 +4,14 @@ package org.cytoscape.application.events;
 import org.cytoscape.event.CyListener;
 
 /**
- * The listener for the {@link CytoscapeStartEvent}.
+ * The listener for the {@link CyStartEvent}.
  * @CyAPI.Spi.Interface
  */
-public interface CytoscapeStartListener extends CyListener {
+public interface CyStartListener extends CyListener {
 
 	/**
 	 * Process the specified event.
 	 * @param e The event being processed.
 	 */
-	public void handleEvent(CytoscapeStartEvent e);
+	public void handleEvent(CyStartEvent e);
 }

@@ -43,7 +43,7 @@ package org.cytoscape.application;
  * to ensure comprehensible backwards compatibility versioning. 
  * @CyAPI.Api.Interface
  */
-public interface CytoscapeVersion {
+public interface CyVersion {
 
 	/**
 	 * The string used to identify the Property containing the version number.

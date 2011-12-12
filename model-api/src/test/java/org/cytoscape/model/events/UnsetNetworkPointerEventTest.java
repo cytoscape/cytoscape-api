@@ -38,8 +38,8 @@ import org.junit.Test;
 import static org.mockito.Mockito.*;
 
 
-public class SetNestedNetworkEventTest {
-	private SetNestedNetworkEvent event;
+public class UnsetNetworkPointerEventTest {
+	private UnsetNetworkPointerEvent event;
 	private CyNode node;
 	private CyNetwork net;
 
@@ -47,7 +47,7 @@ public class SetNestedNetworkEventTest {
 	public void init() {
 		node = mock(CyNode.class); 
 		net = mock(CyNetwork.class); 
-		event = new SetNestedNetworkEvent(node, net);
+		event = new UnsetNetworkPointerEvent(node, net);
 	}
 
 	@Test
@@ -67,13 +67,13 @@ public class SetNestedNetworkEventTest {
 
 	@Test
 	public void testGetListenerClass() {
-		assertEquals("Invalid listener class!", event.getListenerClass(), SetNestedNetworkListener.class);
+		assertEquals("Invalid listener class!", event.getListenerClass(), UnsetNetworkPointerListener.class);
 	}
 
 	@Test
 	public void testNullNode() {
 		try {
-			SetNestedNetworkEvent ev = new SetNestedNetworkEvent(null, net);
+			UnsetNetworkPointerEvent ev = new UnsetNetworkPointerEvent(null, net);
 		} catch (NullPointerException npe) {
 			return;
 		}
@@ -83,7 +83,7 @@ public class SetNestedNetworkEventTest {
 	@Test
 	public void testNullNetwork() {
 		try {
-			SetNestedNetworkEvent ev = new SetNestedNetworkEvent(node, null);
+			UnsetNetworkPointerEvent ev = new UnsetNetworkPointerEvent(node, null);
 		} catch (NullPointerException npe) {
 			return;
 		}

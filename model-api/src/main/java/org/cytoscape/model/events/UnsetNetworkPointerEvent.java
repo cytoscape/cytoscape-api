@@ -35,13 +35,13 @@ import org.cytoscape.model.CyNode;
 /** Used to track removing of nested networks from nodes. 
  * @CyAPI.Final.Class
  */
-public final class UnsetNestedNetworkEvent extends AbstractNestedNetworkEvent {
+public final class UnsetNetworkPointerEvent extends AbstractNestedNetworkEvent {
 	/**
 	 * Constructs event.
 	 * @param node     the node that the nested network was removed from
 	 * @param network  the network that was removed as the nested network on "node"
 	 */
-	public UnsetNestedNetworkEvent(final CyNode node, final CyNetwork network) {
-		super(UnsetNestedNetworkListener.class, node, network);
+	public UnsetNetworkPointerEvent(final CyNode node, final CyNetwork network) {
+		super(UnsetNetworkPointerListener.class, node, network);
 	}
 }

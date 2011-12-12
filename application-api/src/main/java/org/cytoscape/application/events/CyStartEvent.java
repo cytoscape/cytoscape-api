@@ -9,13 +9,13 @@ import org.cytoscape.event.AbstractCyEvent;
  * Warning: There is no guarantee that this event is fired after all bundles are start-up.  
  * @CyAPI.Final.Class
  */
-public final class CytoscapeStartEvent extends AbstractCyEvent<Object> {
+public final class CyStartEvent extends AbstractCyEvent<Object> {
 
 	/**
 	 * Constructor.
 	 * @param source The object firing this event.
 	 */
-	public CytoscapeStartEvent(final Object source) {
-		super(source, CytoscapeStartListener.class);
+	public CyStartEvent(final Object source) {
+		super(source, CyStartListener.class);
 	}
 }

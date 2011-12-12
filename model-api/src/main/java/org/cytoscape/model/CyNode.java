@@ -28,8 +28,8 @@
 package org.cytoscape.model;
 
 
-import org.cytoscape.model.events.SetNestedNetworkEvent;
-import org.cytoscape.model.events.UnsetNestedNetworkEvent;
+import org.cytoscape.model.events.SetNetworkPointerEvent;
+import org.cytoscape.model.events.UnsetNetworkPointerEvent;
 
 
 /**
@@ -68,8 +68,8 @@ public interface CyNode extends CyTableEntry {
 	 * this value is null, any existing reference will be removed.
 	 *
 	 * Note that this if a previous referenced network is being replaced or nulled out, an
-	 * {@link UnsetNestedNetworkEvent} will be fired and if a new network will be set a
-	 * {@link SetNestedNetworkEvent} will be fired.  
+	 * {@link UnsetNetworkPointerEvent} will be fired and if a new network will be set a
+	 * {@link SetNetworkPointerEvent} will be fired.  
 	 */
 	void setNetworkPointer(CyNetwork network);
 }

@@ -10,7 +10,7 @@ import org.cytoscape.event.AbstractCyEvent;
  * to allow all listeners time to clean up.
  * @CyAPI.Final.Class
  */
-public final class CytoscapeShutdownEvent extends AbstractCyEvent<Object> {
+public final class CyShutdownEvent extends AbstractCyEvent<Object> {
 
 	private String reason;
 
@@ -18,8 +18,8 @@ public final class CytoscapeShutdownEvent extends AbstractCyEvent<Object> {
 	 * Constructor.
 	 * @param source The object firing this event.
 	 */
-	public CytoscapeShutdownEvent(final Object source) {
-		super(source, CytoscapeShutdownListener.class);
+	public CyShutdownEvent(final Object source) {
+		super(source, CyShutdownListener.class);
 		reason = null;
 	}
 
@@ -40,7 +40,7 @@ public final class CytoscapeShutdownEvent extends AbstractCyEvent<Object> {
 	 * Returns the reason that the application should not be shut down.
 	 * @return The reason that the application should not be shut down.
 	 */
-	public String whyNot() {
+	public String abortShutdownReason() {
 		return reason;
 	}
 

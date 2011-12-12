@@ -31,17 +31,62 @@ package org.cytoscape.model.events;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
 
-/** Used to track setting of nested networks on nodes. 
- * @CyAPI.Final.Class
- */
-public final class SetNestedNetworkEvent extends AbstractNestedNetworkEvent {
-	/**
-	 * Constructs event.
-	 * @param node     the node that the nested network was set on
-	 * @param network  the network that was set as the nested network on "node"
-	 */
-	public SetNestedNetworkEvent(final CyNode node, final CyNetwork network) {
-		super(SetNestedNetworkListener.class, node, network);
+import static org.mockito.Mockito.*;
+
+
+public class SetNetworkPointerEventTest {
+	private SetNetworkPointerEvent event;
+	private CyNode node;
+	private CyNetwork net;
+
+	@Before
+	public void init() {
+		node = mock(CyNode.class); 
+		net = mock(CyNetwork.class); 
+		event = new SetNetworkPointerEvent(node, net);
+	}
+
+	@Test
+	public void testGetNode() {
+		assertEquals("getNode() failed!", event.getNode(), node);
+	}
+
+	@Test
+	public void testGetNetwork() {
+		assertEquals("getNode() failed!", event.getNetwork(), net);
+	}
+
+	@Test
+	public void testGetSource() {
+		assertEquals("getSource() failed!", event.getSource(), node);
+	}
+
+	@Test
+	public void testGetListenerClass() {
+		assertEquals("Invalid listener class!", event.getListenerClass(), SetNetworkPointerListener.class);
+	}
+
+	@Test
+	public void testNullNode() {
+		try {
+			SetNetworkPointerEvent ev = new SetNetworkPointerEvent(null, net);
+		} catch (NullPointerException npe) {
+			return;
+		}
+		fail("didn't catch expected npe for node");
+	}
+
+	@Test
+	public void testNullNetwork() {
+		try {
+			SetNetworkPointerEvent ev = new SetNetworkPointerEvent(node, null);
+		} catch (NullPointerException npe) {
+			return;
+		}
+		fail("didn't catch expected npe for network");
 	}
 }

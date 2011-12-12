@@ -19,6 +19,6 @@ public interface CyApplicationConfiguration {
 	 * 
 	 * TODO: How can we set this location?
 	 */
-	File getSettingLocation();
+	File getConfigurationDirectoryLocation();
 
 }

@@ -236,77 +236,77 @@ public class FunctionUtilTest {
 
 	@Test
 	public void testIsSomeKindOfListWithAListArg() {
-		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isSomeKindOfList(List.class));
+		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isTypeOfList(List.class));
 	}
 
 	@Test
 	public void testIsSomeKindOfListWithAnArrayListArg() {
-		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isSomeKindOfList(ArrayList.class));
+		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isTypeOfList(ArrayList.class));
 	}
 
 	@Test
 	public void testIsSomeKindOfListWithADoubleListArg() {
-		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isSomeKindOfList(DoubleList.class));
+		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isTypeOfList(DoubleList.class));
 	}
 
 	@Test
 	public void testIsSomeKindOfListWithAStringListArg() {
-		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isSomeKindOfList(StringList.class));
+		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isTypeOfList(StringList.class));
 	}
 
 	@Test
 	public void testIsSomeKindOfListWithALongListArg() {
-		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isSomeKindOfList(LongList.class));
+		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isTypeOfList(LongList.class));
 	}
 
 	@Test
 	public void testIsSomeKindOfListWithABooleanListArg() {
-		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isSomeKindOfList(BooleanList.class));
+		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isTypeOfList(BooleanList.class));
 	}
 
 	@Test
 	public void testIsSomeKindOfListWithAVectorArg() {
-		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isSomeKindOfList(Vector.class));
+		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isTypeOfList(Vector.class));
 	}
 
 	@Test
 	public void testIsSomeKindOfListWithAStackArg() {
-		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isSomeKindOfList(Stack.class));
+		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isTypeOfList(Stack.class));
 	}
 
 	@Test
 	public void testIsSomeKindOfListWithAnAttributeListArg() {
-		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isSomeKindOfList(AttributeList.class));
+		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isTypeOfList(AttributeList.class));
 	}
 
 	@Test
 	public void testIsSomeKindOfListWithACopyOnWriteArrayListArg() {
-		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isSomeKindOfList(CopyOnWriteArrayList.class));
+		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isTypeOfList(CopyOnWriteArrayList.class));
 	}
 
 	@Test
 	public void testIsSomeKindOfListWithALinkedListArg() {
-		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isSomeKindOfList(LinkedList.class));
+		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isTypeOfList(LinkedList.class));
 	}
 
 	@Test
 	public void testIsSomeKindOfListWithARoleListArg() {
-		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isSomeKindOfList(RoleList.class));
+		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isTypeOfList(RoleList.class));
 	}
 
 	@Test
 	public void testIsSomeKindOfListWithARoleUnresolvedListArg() {
-		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isSomeKindOfList(RoleUnresolvedList.class));
+		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isTypeOfList(RoleUnresolvedList.class));
 	}
 
 	@Test
 	public void testIsSomeKindOfListWithAScalarArg() {
-		assertFalse("isSomeKindOfList() failed!", FunctionUtil.isSomeKindOfList(Long.class));
+		assertFalse("isSomeKindOfList() failed!", FunctionUtil.isTypeOfList(Long.class));
 	}
 
 	@Test
 	public void testIsSomeKindOfListWithAnArrayArg() {
-		assertFalse("isSomeKindOfList() failed!", FunctionUtil.isSomeKindOfList(Long[].class));
+		assertFalse("isSomeKindOfList() failed!", FunctionUtil.isTypeOfList(Long[].class));
 	}
 
 	@Test

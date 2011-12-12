@@ -257,7 +257,7 @@ public final class FunctionUtil {
 	 *  @param listClassCandidate  the type that will be tested
 	 *  @return true if "listClassCandidate" is an implementer of interface List, else false
 	 */
-	static public boolean isSomeKindOfList(final Class listClassCandidate) {
+	static public boolean isTypeOfList(final Class listClassCandidate) {
 		if (listClassCandidate == List.class)
 			return true;
 		if (listClassCandidate == ArrayList.class)

@@ -31,13 +31,13 @@ package org.cytoscape.model.events;
 import org.cytoscape.event.CyListener;
 
 
-/** Listener for {@link UnsetNestedNetworkEvent}s. 
+/** Listener for {@link SetNetworkPointerEvent}s. 
  * @CyAPI.Spi.Interface
  */
-public interface UnsetNestedNetworkListener extends CyListener {
+public interface SetNetworkPointerListener extends CyListener {
 	/**
 	 * The method that should handle the specified event.
 	 * @param e The event to be handled.
 	 */
-	void handleEvent(UnsetNestedNetworkEvent e);
+	void handleEvent(SetNetworkPointerEvent e);
 }

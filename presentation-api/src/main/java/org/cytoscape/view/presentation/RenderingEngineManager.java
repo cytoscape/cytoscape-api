@@ -33,7 +33,7 @@ public interface RenderingEngineManager {
 	 * @return Rendering engine (presentation) for the given
 	 *         view model.
 	 */
-	RenderingEngine<?> getRendringEngine(final View<?> viewModel);
+	RenderingEngine<?> getRenderingEngine(final View<?> viewModel);
 	
 	/**
 	 * Get all {@link RenderingEngine}s registered in this manager.

@@ -68,6 +68,6 @@ public interface BookmarksUtil {
 	 * 
 	 * @return True if the bookmark is in bookmarks, False otherwise
 	 */
-	boolean isInBookmarks(Bookmarks pBookmarks, String pCategoryName, DataSource pDataSource);
+	boolean containsBookmarks(Bookmarks pBookmarks, String pCategoryName, DataSource pDataSource);
 
 }

@@ -43,7 +43,7 @@ package org.cytoscape.application;
  * notified before actually shutting down.
  * @CyAPI.Api.Interface
  */
-public interface CytoscapeShutdown {
+public interface CyShutdown {
 	/**
 	 * Calling this method indicates that the application should shutdown.
 	 * @param retVal The return value with which to (eventually)
