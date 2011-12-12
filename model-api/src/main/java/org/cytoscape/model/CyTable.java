@@ -41,7 +41,7 @@ import java.util.List;
  * types.
  * @CyAPI.Api.Interface
  */
-public interface CyTable extends Identifiable {
+public interface CyTable extends CyTableEntry {
 	/**
 	 * Mutability of the table specifies whether or not it is able to be deleted..
 	 *

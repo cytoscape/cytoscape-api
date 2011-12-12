@@ -34,11 +34,21 @@ package org.cytoscape.model;
  * entries will be things like nodes, edges, and networks..
  * @CyAPI.Api.Interface
  */
-public interface CyTableEntry extends Identifiable {
+public interface CyTableEntry {
 	/**
 	 * A String column created by default for every CyTableEntry that
 	 * holds the name of the entry.
 	 */
 	String NAME = "name";
+
+	/**
+	 * This will be used as column name of SUID.
+	 */
+	String SUID = "SUID";
 	
+	/**
+	 * Returns the SUID of the implementing object.
+	 * @return the SUID of the implementing object.
+	 */
+	long getSUID();
 }

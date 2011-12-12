@@ -42,7 +42,7 @@ import java.util.List;
 import java.util.Map;
 
 
-public abstract class AbstractIdentifiableTest {
+public abstract class AbstractCyTableEntryTest {
 	protected CyNetwork net;
 
 	@Test
