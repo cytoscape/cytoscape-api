@@ -7,75 +7,84 @@ import org.cytoscape.view.model.CyNetworkView;
 
 /**
  * This API is provisional and is subject to change at any time.
+ * 
+ * @CyAPI.Api.Interface
  */
-public interface MapBioPaxToCytoscape {
+public interface BioPaxMapper {
+	
 	/**
 	 * Cytoscape Attribute:  BioPAX Network.
 	 * Stores boolean indicating this CyNetwork
 	 * is a BioPAX network.
 	 */
-	public static final String BIOPAX_NETWORK = "BIOPAX_NETWORK";
-    public final static String BINARY_NETWORK = "BINARY_NETWORK";
+	static final String BIOPAX_NETWORK = "BIOPAX_NETWORK";
+	
+	/**
+	 * Cytoscape Attribute:  BioPAX Network.
+	 * Stores boolean indicating this CyNetwork
+	 * is a converted to SIF format BioPAX network.
+	 */
+    static final String BINARY_NETWORK = "BINARY_NETWORK";
 	
 	/**
 	 * Cytoscape Attribute:  BioPAX Edge Type.
 	 */
-	public static final String BIOPAX_EDGE_TYPE = "BIOPAX_EDGE_TYPE";
+	static final String BIOPAX_EDGE_TYPE = "BIOPAX_EDGE_TYPE";
 
 	/**
 	 * Cytoscape Attribute:  BioPAX RDF ID.
 	 */
-	public static final String BIOPAX_RDF_ID = "URI";
+	static final String BIOPAX_RDF_ID = "URI";
 
 	/**
 	 * BioPax Node Attribute: Entity TYPE
 	 */
-	public static final String BIOPAX_ENTITY_TYPE = "biopax_type";
+	static final String BIOPAX_ENTITY_TYPE = "biopax_type";
 
 	/**
 	 * BioPax Node Attribute: CHEMICAL_MODIFICATIONS_MAP
 	 */
-	public static final String BIOPAX_CHEMICAL_MODIFICATIONS_MAP = "chemical_modifications_map";
+	static final String BIOPAX_CHEMICAL_MODIFICATIONS_MAP = "chemical_modifications_map";
 
 	/**
 	 * BioPax Node Attribute: CHEMICAL_MODIFICATIONS_LIST
 	 */
-	public static final String BIOPAX_CHEMICAL_MODIFICATIONS_LIST = "chemical_modifications";
+	static final String BIOPAX_CHEMICAL_MODIFICATIONS_LIST = "chemical_modifications";
 
 	/**
 	 * Node Attribute: UNIFICATION_REFERENCES
 	 */
-	public static final String BIOPAX_UNIFICATION_REFERENCES = "unification_references";
+	static final String BIOPAX_UNIFICATION_REFERENCES = "unification_references";
 
 	/**
 	 * Node Attribute: RELATIONSHIP_REFERENCES
 	 */
-	public static final String BIOPAX_RELATIONSHIP_REFERENCES = "relationship_references";
+	static final String BIOPAX_RELATIONSHIP_REFERENCES = "relationship_references";
 
 	/**
 	 * Node Attribute: PUBLICATION_REFERENCES
 	 */
-	public static final String BIOPAX_PUBLICATION_REFERENCES = "publication_references";
+	static final String BIOPAX_PUBLICATION_REFERENCES = "publication_references";
 
 	/**
 	 * Node Attribute:  XREF_IDs.
 	 */
-	public static final String BIOPAX_XREF_IDS = "identifiers";
+	static final String BIOPAX_XREF_IDS = "identifiers";
 
 	/**
 	 * Node Attribute:  BIOPAX_XREF_PREFIX.
 	 */
-	public static final String BIOPAX_XREF_PREFIX = "xref.";
+	static final String BIOPAX_XREF_PREFIX = "xref.";
 
 	/**
 	 * Node Attribute: IHOP_LINKS
 	 */
-	public static final String BIOPAX_IHOP_LINKS = "ihop_links";
+	static final String BIOPAX_IHOP_LINKS = "ihop_links";
 
 	/**
 	 * Node Attribute: AFFYMETRIX_REFERENCES
 	 */
-	public static final String BIOPAX_AFFYMETRIX_REFERENCES_LIST = "affymetrix_references";
+	static final String BIOPAX_AFFYMETRIX_REFERENCES_LIST = "affymetrix_references";
 
 	
 	/**
@@ -88,12 +97,16 @@ public interface MapBioPaxToCytoscape {
 	
 	/**
      * Maps BioPAX element properties to CyNode attributes.
-     * @param element          BioPAX Object.
+     * @param element a BioPAX Object.
 	 * @param node
 	 * @param network
      */
 	void createAttributesFromProperties(BioPAXElement element, CyNode node, CyNetwork network);
 	
-	
+	/**
+	 * Adds custom node shapes to BioPAX nodes.
+	 * 
+	 * @param networkView
+	 */
 	void customNodes(CyNetworkView networkView);
 }
