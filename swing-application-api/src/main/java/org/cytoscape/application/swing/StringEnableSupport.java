@@ -1,5 +1,5 @@
 /*
- File: MenuEnableSupport.java
+ File: StringEnableSupport.java
 
  Copyright (c) 2006, 2010, The Cytoscape Consortium (www.cytoscape.org)
 
@@ -57,14 +57,45 @@ import javax.swing.JMenuItem;
  * 
  * @CyAPI.Final.Class
  */
-public final class MenuEnableSupport {
+public final class StringEnableSupport extends AbstractEnableSupport {
 
-	private final Action action;
-	private final JMenuItem menuItem;
-	private final DynamicSubmenuListener submenuListener; 
 	private final CyApplicationManager applicationManager;
 	private final String enableFor;
-	private boolean enableState;
+
+	/**
+	 * Enable when at least one network exists.
+	 */
+	public static final String ENABLE_FOR_NETWORK = "network";
+
+	/**
+	 * Enable when at least one network with NO view exists.
+	 */
+	public static final String ENABLE_FOR_NETWORK_WITHOUT_VIEW = "networkWithoutView";
+
+	/**
+	 * Enable when at least one network WITH view exists.
+	 */
+	public static final String ENABLE_FOR_NETWORK_AND_VIEW = "networkAndView";
+
+	/**
+	 * Enable when either nodes or edges have been selected in a network. 
+	 */
+	public static final String ENABLE_FOR_SELECTED_NODES_OR_EDGES = "selectedNodesOrEdges";
+
+	/**
+	 * Enable when nodes have been selected in a network. 
+	 */
+	public static final String ENABLE_FOR_SELECTED_NODES = "selectedNodes";
+
+	/**
+	 * Enable when edges have been selected in a network. 
+	 */
+	public static final String ENABLE_FOR_SELECTED_EDGES = "selectedEdges";
+
+	/**
+	 * Enable when at least one network exists.
+	 */
+	public static final String ENABLE_FOR_TABLE = "table";
 
 	/**
 	 * Constructor.
@@ -73,13 +104,10 @@ public final class MenuEnableSupport {
 	 * See class documentation above for allowable values for this string.
 	 * @param applicationManager The application manager.
 	 */
-	public MenuEnableSupport(DynamicSubmenuListener submenuListener, String enableFor, CyApplicationManager applicationManager) {
-		this.submenuListener = submenuListener;
-		this.action = null;
-		this.menuItem = null;
+	public StringEnableSupport(DynamicSubmenuListener submenuListener, String enableFor, CyApplicationManager applicationManager) {
+		super(submenuListener);
 		this.enableFor = enableFor;
 		this.applicationManager = applicationManager;
-		this.enableState = true;
 	}
 
 	/**
@@ -89,10 +117,8 @@ public final class MenuEnableSupport {
 	 * See class documentation above for allowable values for this string.
 	 * @param applicationManager The application manager.
 	 */
-	public MenuEnableSupport(Action action, String enableFor, CyApplicationManager applicationManager) {
-		this.submenuListener = null;
-		this.action = action;
-		this.menuItem = null;
+	public StringEnableSupport(Action action, String enableFor, CyApplicationManager applicationManager) {
+		super(action);
 		this.enableFor = enableFor;
 		this.applicationManager = applicationManager;
 	}
@@ -104,10 +130,8 @@ public final class MenuEnableSupport {
 	 * See class documentation above for allowable values for this string.
 	 * @param applicationManager The application manager.
 	 */
-	public MenuEnableSupport(JMenuItem menuItem, String enableFor, CyApplicationManager applicationManager) {
-		this.submenuListener = null;
-		this.action = null;
-		this.menuItem = menuItem;
+	public StringEnableSupport(JMenuItem menuItem, String enableFor, CyApplicationManager applicationManager) {
+		super(menuItem);
 		this.enableFor = enableFor;
 		this.applicationManager = applicationManager;
 	}
@@ -119,19 +143,19 @@ public final class MenuEnableSupport {
 	public void updateEnableState() {
 		if (enableFor == null)
 			setEnabled(true);
-		else if (enableFor.equals("network"))
+		else if (enableFor.equals(ENABLE_FOR_NETWORK))
 			enableForNetwork();
-		else if (enableFor.equals("networkWithoutView"))
+		else if (enableFor.equals(ENABLE_FOR_NETWORK_WITHOUT_VIEW))
 			enableForNetworkWithoutView();
-		else if (enableFor.equals("networkAndView"))
+		else if (enableFor.equals(ENABLE_FOR_NETWORK_AND_VIEW))
 			enableForNetworkAndView();
-		else if (enableFor.equals("selectedNodesOrEdges"))
+		else if (enableFor.equals(ENABLE_FOR_SELECTED_NODES_OR_EDGES))
 			enableForSelectedNodesOrEdges();
-		else if (enableFor.equals("selectedNodes"))
+		else if (enableFor.equals(ENABLE_FOR_SELECTED_NODES))
 			enableForSelectedNodes();
-		else if (enableFor.equals("selectedEdges"))
+		else if (enableFor.equals(ENABLE_FOR_SELECTED_EDGES))
 			enableForSelectedEdges();
-		else if (enableFor.equals("table"))
+		else if (enableFor.equals(ENABLE_FOR_TABLE))
 			enableForTable();
 		else
 			setEnabled(true);
@@ -150,7 +174,7 @@ public final class MenuEnableSupport {
 	/**
 	 * Enable the action if the current network exists and is not null.
 	 */
-	public void enableForNetwork() {
+	private void enableForNetwork() {
 		CyNetwork n = applicationManager.getCurrentNetwork();
 
 		if (n == null)
@@ -163,7 +187,7 @@ public final class MenuEnableSupport {
 	 * Enable the action if the current network exists, is not null,
 	 * and no view is available for the network.
 	 */
-	public void enableForNetworkWithoutView() {
+	private void enableForNetworkWithoutView() {
 		final CyNetwork n = applicationManager.getCurrentNetwork();
 		final CyNetworkView v = applicationManager.getCurrentNetworkView();
 
@@ -178,7 +202,7 @@ public final class MenuEnableSupport {
 	/**
 	 * Enable the action if the current network and view exist and are not null.
 	 */
-	public void enableForNetworkAndView() {
+	private void enableForNetworkAndView() {
 		CyNetworkView v = applicationManager.getCurrentNetworkView();
 
 		if (v == null)
@@ -191,7 +215,7 @@ public final class MenuEnableSupport {
 	 * Enable the action if at least one selected node or edge is required to
 	 * perform the action.
 	 */
-	public void enableForSelectedNodesOrEdges() {
+	private void enableForSelectedNodesOrEdges() {
 		final CyNetwork curNetwork = applicationManager.getCurrentNetwork();
 
 		// Disable if there is no current network.
@@ -225,7 +249,7 @@ public final class MenuEnableSupport {
 	 * Enable the action if at least one selected node is required to perform
 	 * the action.
 	 */
-	public void enableForSelectedNodes() {
+	private void enableForSelectedNodes() {
 		CyNetwork n = applicationManager.getCurrentNetwork();
 
 		if (n == null) {
@@ -249,7 +273,7 @@ public final class MenuEnableSupport {
 	 * Enable the action if at least one selected edge is required to perform
 	 * the action.
 	 */
-	public void enableForSelectedEdges() {
+	private void enableForSelectedEdges() {
 		CyNetwork n = applicationManager.getCurrentNetwork();
 
 		if (n == null) {
@@ -272,25 +296,8 @@ public final class MenuEnableSupport {
 	/**
 	 * Enables the action/menuListener/menuItem if a table is available and not null.
 	 */
-	public void enableForTable() {
+	private void enableForTable() {
 		setEnabled(applicationManager.getCurrentTable() != null);
 	}
 
-	private synchronized void setEnabled(boolean b) {
-		enableState = b;
-		if ( submenuListener != null )
-			submenuListener.setEnabled(enableState);
-		if ( action != null )
-			action.setEnabled(enableState);
-		if ( menuItem != null )
-			menuItem.setEnabled(enableState);
-	}
-
-	/**
-	 * Returns true if the action/menuListener/menuItem is enabled, false otherwise.
-	 * @return true if the action/menuListener/menuItem is enabled, false otherwise.
-	 */
-	public synchronized boolean isCurrentlyEnabled() {
-		return enableState;
-	}
 }

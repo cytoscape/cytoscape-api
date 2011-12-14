@@ -37,6 +37,9 @@ import org.cytoscape.model.CyNode;
 
 import org.cytoscape.view.model.CyNetworkView;
 
+import org.cytoscape.work.TaskFactoryPredicate;
+import org.cytoscape.work.TaskFactory;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -118,22 +121,17 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	protected String name;
 
 	/**
-	 * The application manager.
-	 */
-	protected final CyApplicationManager applicationManager;
-
-	/**
 	 * A support class for deciding whether the action should be enabled.
 	 */
-	protected MenuEnableSupport enabler; 
+	private final AbstractEnableSupport enabler; 
 
 	/**
 	 * Creates a new AbstractCyAction object.
 	 * @param name The name of the action.
-	 * @param applicationManager The application manager providing context for this action.
 	 */
-	public AbstractCyAction(final String name, final CyApplicationManager applicationManager) {
-		this(name,applicationManager,null);
+	public AbstractCyAction(final String name) {
+		super(name);
+		this.enabler = new AlwaysEnabledEnableSupport(this);
 	}
 
 	/**
@@ -145,9 +143,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 */
 	public AbstractCyAction(final String name, final CyApplicationManager applicationManager, String enableFor) {
 		super(name);
-		this.name = name;
-		this.applicationManager = applicationManager;
-		this.enabler = new MenuEnableSupport(this,enableFor,applicationManager);
+		this.enabler = new StringEnableSupport(this,enableFor,applicationManager);
 	}
 
 	/**
@@ -165,7 +161,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *            <li>tooltip - (The toolbar or menu tooltip.)</li>
 	 *            <li>inToolBar - (Whether the action should be in the toolbar.)</li>
 	 *            <li>inMenuBar - (Whether the action should be in a menu.)</li>
-	 *            <li>enableFor - (System state that the action should be enabled for. See {@link MenuEnableSupport} for more detail.)</li>
+	 *            <li>enableFor - (System state that the action should be enabled for. See {@link StringEnableSupport} for more detail.)</li>
 	 *            <li>accelerator - (Accelerator key bindings.)</li>
 	 *            <li>menuGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the menu.)</li>
 	 *            <li>toolBarGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the toolbar.)</li>
@@ -176,6 +172,84 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	public AbstractCyAction(final Map<String, String> configProps,
 	                        final CyApplicationManager applicationManager) {
 		this(configProps.get("title"), applicationManager, configProps.get("enableFor"));
+		
+		configFromProps( configProps );
+	}
+
+	/**
+	 * Creates a new AbstractCyAction object.
+	 *
+	 * @param configProps
+	 *            A String-String Map of configuration metadata. This will
+	 *            usually be the Map provided by the OSGi service
+	 *            configuration. Available configuration keys include:
+	 *            <ul>
+	 *            <li>title - (The title of the menu.)</li>
+	 *            <li>preferredMenu - (The preferred menu for the action.)</li>
+	 *            <li>largeIconURL - (The icon to be used for the toolbar.)</li>
+	 *            <li>smallIconURL - (The icon to be used for the menu.)</li>
+	 *            <li>tooltip - (The toolbar or menu tooltip.)</li>
+	 *            <li>inToolBar - (Whether the action should be in the toolbar.)</li>
+	 *            <li>inMenuBar - (Whether the action should be in a menu.)</li>
+	 *            <li>enableFor - (<i>Ingored in this constructor and TaskFactoryPredicate is used instead!</i>)</li>
+	 *            <li>accelerator - (Accelerator key bindings.)</li>
+	 *            <li>menuGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the menu.)</li>
+	 *            <li>toolBarGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the toolbar.)</li>
+	 *            </ul>
+	 * @param predicate
+	 *            The task factory predicate that indicates whether or not this 
+	 *            action should be enabled.
+	 */
+	public AbstractCyAction(final Map<String, String> configProps,
+	                        final TaskFactoryPredicate predicate) {
+		super(configProps.get("title"));
+		this.enabler = new TaskFactoryEnableSupport(this,predicate);
+		
+		configFromProps( configProps );
+	}
+
+	/**
+	 * Creates a new AbstractCyAction object.
+	 *
+	 * @param configProps
+	 *            A String-String Map of configuration metadata. This will
+	 *            usually be the Map provided by the OSGi service
+	 *            configuration. Available configuration keys include:
+	 *            <ul>
+	 *            <li>title - (The title of the menu.)</li>
+	 *            <li>preferredMenu - (The preferred menu for the action.)</li>
+	 *            <li>largeIconURL - (The icon to be used for the toolbar.)</li>
+	 *            <li>smallIconURL - (The icon to be used for the menu.)</li>
+	 *            <li>tooltip - (The toolbar or menu tooltip.)</li>
+	 *            <li>inToolBar - (Whether the action should be in the toolbar.)</li>
+	 *            <li>inMenuBar - (Whether the action should be in a menu.)</li>
+	 *            <li>enableFor - (<i>Will only use this value if the TaskFactory is not a TaskFactoryPredicate!</i> 
+	 *                             See {@link StringEnableSupport} for more detail.)</li>
+	 *            <li>accelerator - (Accelerator key bindings.)</li>
+	 *            <li>menuGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the menu.)</li>
+	 *            <li>toolBarGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the toolbar.)</li>
+	 *            </ul>
+	 * @param applicationManager
+	 *            The application manager providing context for this action.
+	 * @param factory
+	 *            The task factory that may or may not be a TaskFactoryPredicate. If it is a predicate,
+	 *            it will be used to indicate whether or not this action should be enabled.  This
+	 *            TaskFactory is not used by the AbstractCyAction in any other way.  Any execution of tasks
+	 *            from this TaskFactory must be handled by a subclass.
+	 */
+	public AbstractCyAction(final Map<String, String> configProps,
+	                        final CyApplicationManager applicationManager,
+	                        final TaskFactory factory) {
+		super(configProps.get("title"));
+		if ( factory instanceof TaskFactoryPredicate )
+			this.enabler = new TaskFactoryEnableSupport(this,(TaskFactoryPredicate)factory);
+		else
+			this.enabler = new StringEnableSupport(this,configProps.get("enableFor"),applicationManager);
+		
+		configFromProps( configProps );
+	}
+
+	private void configFromProps(final Map<String, String> configProps) {
 
 		logger.debug("New CyAction with title: " + configProps.get("title"));
 
@@ -417,52 +491,6 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 */
 	public void updateEnableState() {
 		enabler.updateEnableState();
-	}
-
-    /**
-     * Enable the action if the current network exists and is not null.
-     */
-    protected void enableForNetwork() {
-		enabler.enableForNetwork();
-    }
-    
-	/**
-	 *  Enables the action when a network without view is present. 
-	 */
-	protected void enableForNetworkWithoutView() {
-		enabler.enableForNetworkWithoutView() ;
-	}
-
-	/**
-	 *  Enables the action when a network view is present. 
-	 */
-    protected void enableForNetworkAndView() {
-    	enabler.enableForNetworkAndView() ;
-    }
-
-	/**
-	 *  Enables the action when selected nodes or edges are present. 
-	 */
-    protected void enableForSelectedNodesOrEdges() {
-    	enabler.enableForSelectedNodesOrEdges() ;
-    }
-
-	/**
-	 *  Enables the action when selected nodes are present. 
-	 */
-    protected void enableForSelectedNodes() {
-    	enabler.enableForSelectedNodes() ;
-    }
-
-	/**
-	 *  Enables the action when selected edges are present. 
-	 */
-    protected void enableForSelectedEdges() {
-    	enabler.enableForSelectedEdges() ;
-    }
-
-    private void enableForTable() {
-    	enabler.enableForTable() ;
 	}
 
 	private URL getURL(String s) {
