@@ -91,7 +91,6 @@ public class BasicCyFileFilter implements CyFileFilter {
 			return false;
 
 		try {
-
 			final URLConnection connection = streamUtil.getURLConnection(uri.toURL());
 			final String contentType = connection.getContentType();
 
