@@ -1,6 +1,7 @@
 package org.cytoscape.model;
 
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Provides access to all network-table relationships.
@@ -50,4 +51,10 @@ public interface CyNetworkTableManager {
 	 * Clears all the network-table relationships.
 	 */
 	void reset();
+
+	/**
+	 * Returns a read-only set of all networks managed by this instance.
+	 * @return a read-only set of all networks managed by this instance. 
+	 */
+	Set<CyNetwork> getNetworkSet();
 }
