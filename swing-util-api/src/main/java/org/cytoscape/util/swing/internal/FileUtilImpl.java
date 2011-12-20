@@ -41,8 +41,11 @@ import java.util.HashSet;
 import java.util.Properties;
 import java.util.Set;
 
+import javax.swing.JComponent;
 import javax.swing.JFileChooser;
+import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import javax.swing.JPopupMenu;
 
 import org.cytoscape.property.CyProperty;
 import org.cytoscape.util.swing.FileChooserFilter;
@@ -130,8 +133,15 @@ class FileUtilImpl implements FileUtil {
 				final FileDialog chooser;
 				if (parent instanceof Frame)
 					chooser = new FileDialog((Frame) parent, title, load_save_custom);
-				else
+				else if (parent instanceof Dialog)
 					chooser = new FileDialog((Dialog) parent, title, load_save_custom);
+				else if (parent instanceof JMenuItem) {
+					JComponent jcomponent = (JComponent) ((JPopupMenu)parent.getParent()).getInvoker();
+					chooser = new FileDialog((Frame) jcomponent.getTopLevelAncestor(), title, load_save_custom);
+				} else {
+					throw new IllegalArgumentException("Cannot (not implemented yet) create a dialog " +
+							"own by a parent component of type: " + parent.getClass().getCanonicalName());
+				}
 
 				if (start_dir != null)
 					chooser.setDirectory(start_dir);
