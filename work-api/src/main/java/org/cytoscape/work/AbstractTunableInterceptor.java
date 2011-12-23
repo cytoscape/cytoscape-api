@@ -293,6 +293,6 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 		if (throwException)
 			throw new IllegalArgumentException(msg, ex);
 		else
-			logger.warn(msg, ex);
+			logger.debug(msg, ex);
 	}
 }
