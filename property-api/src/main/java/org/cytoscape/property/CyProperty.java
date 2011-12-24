@@ -17,26 +17,42 @@ package org.cytoscape.property;
  */
 public interface CyProperty<P> {
 
-	/** SavePolicy specifies how the CyProperty will be saved, or if it will not be saved. 
+	/** 
+	 * SavePolicy specifies how the CyProperty will be saved, or if it will not be saved. 
 	 * @CyAPI.Enum.Class
 	 */
 	enum SavePolicy {
-		/** These properties are preset by Cytoscape to some default value and
-		 *  are never written out. */
+		/** 
+		 * These properties are preset by Cytoscape to some default value and
+		 * are never written out. 
+		 */
 		DO_NOT_SAVE,
 
-		/** These properties are loaded from and written to the default config
-		 *  directory and are user defaults. */
+		/** 
+		 * These properties are loaded from and written to the default config
+		 * directory and are user defaults. 
+		 */
 		CONFIG_DIR,
 
-		/** This properties will be loaded from and saved to session files. */
+		/** 
+		 * This properties will be loaded from and saved to session files. 
+		 */
 		SESSION_FILE,
 
-		/** This properties will be loaded from and saved to session files and the default
-		 *  config directory.  (Settings in a session file will overwrite those from the
-		 *  default config directory.) */
-                SESSION_FILE_AND_CONFIG_DIR
+		/** 
+		 * These properties will be loaded from and saved to session files and the default
+		 * config directory.  (Settings in a session file will overwrite those from the
+		 * default config directory.) 
+		 */
+		SESSION_FILE_AND_CONFIG_DIR
 	}
+
+	/**
+	 * The name of the default directory where we will look for properties files.  This
+	 * will be a subdirectory of the "user.home" directory defined in the default Java
+	 * system properties ({@link System#getProperties()}).
+	 */
+	String DEFAULT_PROPS_CONFIG_DIR = ".cytoscape";
 
 	/**
 	 * Return a property object
