@@ -63,6 +63,11 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 	protected final Map<Object, Method> guiProviderMap;
 
 	/**
+	 *  Store the title-returning methods.
+	 */
+	protected final Map<Object, Method> titleProviderMap;
+
+	/**
 	 * A list of TunableHandlerFactory services that have been registered.
 	 */
 	protected final List<TunableHandlerFactory<T>> tunableHandlerFactories;
@@ -76,6 +81,7 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 		throwException = false;
 		handlerMap = new HashMap<Object, LinkedHashMap<String, T>>();
 		guiProviderMap = new HashMap<Object, Method>();
+		titleProviderMap = new HashMap<Object, Method>();
 		tunableHandlerFactories = new ArrayList<TunableHandlerFactory<T>>();
 	}
 
@@ -170,6 +176,18 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 							throw new IllegalArgumentException("Classes must have at most a single @ProvidesGUI annotated method but + "
 							        + method.getDeclaringClass().getName() + " has more than one!");
 						guiProviderMap.put(obj, method);
+					}
+				} else if (method.isAnnotationPresent(ProvidesTitle.class)) {
+					if (!String.class.isAssignableFrom(method.getReturnType())) {
+						throw new IllegalArgumentException(method.getName() + " annotated with @ProvidesTitle must return String!");
+					} else if (method.getParameterTypes().length != 0) {
+						throw new IllegalArgumentException(method.getName() + " annotated with @ProvidesTitle must take 0 arguments!");
+					} else {
+						if (titleProviderMap.containsKey(obj)) {
+							throw new IllegalArgumentException("Classes must have at most a single @ProvidesTitle annotated method but + "
+							        + method.getDeclaringClass().getName() + " has more than one!");
+						}
+						titleProviderMap.put(obj, method);
 					}
 				}
 			}
