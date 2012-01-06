@@ -29,7 +29,7 @@ public class SessionLoadedEventTest {
 	private CySession session;
 
 	@Mock
-	private Properties props;
+	private Map<String, Properties> props;
 
 	@Mock
 	private Bookmarks bkmarks;
@@ -56,7 +56,7 @@ public class SessionLoadedEventTest {
 	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 		
-		session = new CySession.Builder().cytoscapeProperties(props).bookmarks(bkmarks).cysession(cysess)
+		session = new CySession.Builder().properties(props).bookmarks(bkmarks).cysession(cysess)
 				.appFileListMap(appMap).tables(tables).networkViews(netViews).visualStyles(styles)
 				.viewVisualStyleMap(stylesMap).build();
 	}
