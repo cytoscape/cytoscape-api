@@ -134,22 +134,22 @@ public class CySessionTest {
 	public void testDefaultGetCytoscapeProperties() {
 		session = new CySession.Builder().build();
 		assertNotNull(session);
-		assertNotNull(session.getCytoscapeProperties());
+		assertNotNull(session.getProperties());
 	}
 
 	@Test
 	public void testSetNullCytoscapeProperties() {
-		session = new CySession.Builder().cytoscapeProperties(null).build();
+		session = new CySession.Builder().properties(null).build();
 		assertNotNull(session);
-		assertNotNull(session.getCytoscapeProperties());
-		assertEquals(0,session.getCytoscapeProperties().size());
+		assertNotNull(session.getProperties());
+		assertEquals(0,session.getProperties().size());
 	}
 
 	@Test
 	public void testSetCytoscapeProperties() {
-		session = new CySession.Builder().cytoscapeProperties(getFakeProps()).build();
+		session = new CySession.Builder().properties(getFakeProps()).build();
 		assertNotNull(session);
-		checkProps(session.getCytoscapeProperties());
+		checkProps(session.getProperties());
 	}
 
 	@Test
@@ -267,17 +267,23 @@ public class CySessionTest {
 	}
 
 
-	private void checkProps(Properties p) {
+	private void checkProps(Map<String, Properties> map) {
+		assertNotNull(map);
+		Properties p = map.get("Session");
 		assertNotNull(p);
 		assertEquals(2,p.size());
 		assertEquals("value1",p.getProperty("key1"));
 		assertEquals("value2",p.getProperty("key2"));
 	}
 
-	private Properties getFakeProps() {
+	private Map<String, Properties> getFakeProps() {
+		Map<String, Properties> map = new HashMap<String, Properties>();
+		
 		Properties p = new Properties();
 		p.setProperty("key1","value1");
 		p.setProperty("key2","value2");
-		return p;
+		map.put("Session", p);
+		
+		return map;
 	}
 }

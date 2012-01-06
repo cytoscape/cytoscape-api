@@ -1,4 +1,3 @@
-
 /*
  Copyright (c) 2006, 2010, The Cytoscape Consortium (www.cytoscape.org)
 
@@ -42,8 +41,6 @@ import org.cytoscape.property.bookmark.Bookmarks;
 import org.cytoscape.property.session.Cysession;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.vizmap.VisualStyle;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * A session is an immutable snapshot of the data contents of Cytoscape.
@@ -71,13 +68,11 @@ public final class CySession {
 	private final Set<CyNetworkView> netViews;
 	private final Set<CyTableMetadata> tables;
 	private final Map<CyNetworkView,String> vsMap;
-	private final Properties cyProps;
+	private final Map<String, Properties> properties;
 	private final Set<VisualStyle> visualStyles;
 	private final Map<String, List<File>> appFiles;
 	private final Bookmarks bookmarks; 
 	private final Cysession cysession; 
-
-	private static final Logger logger = LoggerFactory.getLogger(CySession.class);
 
 	private CySession(Builder b) {
 		// TODO consider making defensive copies of objects...
@@ -102,10 +97,10 @@ public final class CySession {
 		else
 			vsMap = b.vsMap;
 
-		if ( b.cyProps == null )
-			cyProps = new Properties();
+		if ( b.properties == null )
+			properties = new HashMap<String, Properties>();
 		else
-			cyProps = b.cyProps;
+			properties = b.properties;
 
 		if ( b.visualStyles == null )
 			visualStyles = new HashSet<VisualStyle>();
@@ -139,7 +134,7 @@ public final class CySession {
 		private Set<CyNetworkView> netViews; 
 		private Set<CyTableMetadata> tables;
 		private Map<CyNetworkView,String> vsMap; 
-		private Properties cyProps;
+		private Map<String, Properties> properties;
 		private Set<VisualStyle> visualStyles; 
 		private Map<String, List<File>> appFiles; 
 		private Bookmarks bookmarks; 
@@ -208,13 +203,12 @@ public final class CySession {
 		/**
 		 * Returns an instance of Builder that has at least been configured
 		 * with the specified properties.
-		 * @param p A Properties object that contains the current Cytoscape 
-		 * properties.
+		 * @param p A map of session related Property objects by property name.
 		 * @return An instance of Builder that has at least been configured
 		 * with the specified properties.
 		 */
-    	public Builder cytoscapeProperties(final Properties p) { 
-			cyProps = p; 
+    	public Builder properties(final Map<String, Properties> p) { 
+    		properties = p; 
 			return this;
 		}
 
@@ -299,10 +293,10 @@ public final class CySession {
 	/**
 	 * Returns a Propeties object containing all Cytoscape properties 
 	 * defined for this session. 
-	 * @return A Propeties object containing all Cytoscape properties 
+	 * @return A map of session related Property objects by property name.
 	 * defined for this session. 
 	 */
-    public Properties getCytoscapeProperties() { return cyProps; }
+    public Map<String, Properties> getProperties() { return properties; }
 
 	/**
 	 * Returns a set containing all VisualStyles defined for this session.
