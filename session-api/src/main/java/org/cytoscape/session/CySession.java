@@ -291,8 +291,7 @@ public final class CySession {
     public Map<CyNetworkView,String> getViewVisualStyleMap() { return vsMap; }
 
 	/**
-	 * Returns a Propeties object containing all Cytoscape properties 
-	 * defined for this session. 
+	 * Returns a map of session related properties defined for this session.
 	 * @return A map of session related Property objects by property name.
 	 * defined for this session. 
 	 */
