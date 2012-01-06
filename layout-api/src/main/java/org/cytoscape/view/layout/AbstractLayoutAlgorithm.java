@@ -71,7 +71,7 @@ abstract public class AbstractLayoutAlgorithm implements CyLayoutAlgorithm {
 	 * @return The list single selection object that specifies the submenu
 	 * names to be used for generating selection submenus. 
 	 */
-	@Tunable(description="Submenu definition")
+	@Tunable(description="Apply to")
 	public ListSingleSelection<String> getSubmenuOptions() {
 
 		List<String> possibleValues = new ArrayList<String>();
@@ -105,11 +105,13 @@ abstract public class AbstractLayoutAlgorithm implements CyLayoutAlgorithm {
 			}
 		} 
 
-		if ( possibleValues.isEmpty() )
-			possibleValues.add( humanName );
+//		if ( possibleValues.isEmpty() )
+//			possibleValues.add( humanName );
 		
 		submenuDef = new ListSingleSelection<String>( possibleValues );
-
+		if (possibleValues.size() > 0) {
+			submenuDef.setSelectedValue(possibleValues.get(0));
+		}
 		return submenuDef;
 	}
 
