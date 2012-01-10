@@ -9,7 +9,7 @@ public abstract class AbstractTask implements Task {
 	/**
 	 *  If this is true, we should abort whatever the <code>Task</code> is currently doing in the run() method.
 	 */
-	protected boolean cancelled = false;
+	protected volatile boolean cancelled = false;
 
 	private TaskIterator taskIterator;
 
