@@ -1,6 +1,5 @@
 package org.cytoscape.property;
 
-
 import java.util.Properties;
 
 
@@ -11,11 +10,10 @@ import java.util.Properties;
  */
 public final class SimpleCyProperty implements CyProperty<Properties> {
 	
-	/**
-	 * Core Cytoscape Property (Cytoscape System Property)
-	 */
-	public static final String CORE_PROPRERTY_NAME = "cytoscape3.props";
+	/** Core Cytoscape Property (Cytoscape System Property) */
+	public static final String CORE_PROPRERTY_NAME = "cytoscape 3";
 	
+	private final String name;
 	private final Properties properties;
 	private final CyProperty.SavePolicy savePolicy;
 
@@ -26,26 +24,33 @@ public final class SimpleCyProperty implements CyProperty<Properties> {
 	 * should encapsulate.  Throws NullPointerException if Properties is null.
 	 * @param savePolicy the {@link CyProperty.SavePolicy} of this CyProperty object.
 	 */
-	public SimpleCyProperty(final Properties properties, final CyProperty.SavePolicy savePolicy) {
+	public SimpleCyProperty(final String name, final Properties properties, final CyProperty.SavePolicy savePolicy) {
+		if (name == null)
+			throw new NullPointerException("\"name\" parameter is null!");
 		if (properties == null)
 			throw new NullPointerException("\"properties\" parameter is null!");
 		if (savePolicy == null)
 			throw new NullPointerException("\"savePolicy\" parameter is null!");
 
+		this.name = name;
 		this.properties = properties;
 		this.savePolicy = savePolicy;
 	}
 
-	/**
-	 * {@inheritDoc} 
-	 */
+	/** {@inheritDoc} */
+	@Override
+	public String getName() {
+		return name;
+	}
+	
+	/** {@inheritDoc} */
+	@Override
 	public Properties getProperties() {
 		return properties;
 	}
 
-	/**
-	 * {@inheritDoc} 
-	 */
+	/** {@inheritDoc} */
+	@Override
 	public CyProperty.SavePolicy getSavePolicy() {
 		return savePolicy;
 	}

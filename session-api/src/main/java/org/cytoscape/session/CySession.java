@@ -37,6 +37,7 @@ import java.util.Set;
 
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyTableMetadata;
+import org.cytoscape.property.CyProperty;
 import org.cytoscape.property.bookmark.Bookmarks;
 import org.cytoscape.property.session.Cysession;
 import org.cytoscape.view.model.CyNetworkView;
@@ -68,7 +69,7 @@ public final class CySession {
 	private final Set<CyNetworkView> netViews;
 	private final Set<CyTableMetadata> tables;
 	private final Map<CyNetworkView,String> vsMap;
-	private final Map<String, Properties> properties;
+	private final Set<CyProperty<Properties>> properties;
 	private final Set<VisualStyle> visualStyles;
 	private final Map<String, List<File>> appFiles;
 	private final Bookmarks bookmarks; 
@@ -98,7 +99,7 @@ public final class CySession {
 			vsMap = b.vsMap;
 
 		if ( b.properties == null )
-			properties = new HashMap<String, Properties>();
+			properties = new HashSet<CyProperty<Properties>>();
 		else
 			properties = b.properties;
 
@@ -134,7 +135,7 @@ public final class CySession {
 		private Set<CyNetworkView> netViews; 
 		private Set<CyTableMetadata> tables;
 		private Map<CyNetworkView,String> vsMap; 
-		private Map<String, Properties> properties;
+		private Set<CyProperty<Properties>> properties;
 		private Set<VisualStyle> visualStyles; 
 		private Map<String, List<File>> appFiles; 
 		private Bookmarks bookmarks; 
@@ -203,11 +204,11 @@ public final class CySession {
 		/**
 		 * Returns an instance of Builder that has at least been configured
 		 * with the specified properties.
-		 * @param p A map of session related Property objects by property name.
+		 * @param p A set of session related {@link CyProperty} objects.
 		 * @return An instance of Builder that has at least been configured
 		 * with the specified properties.
 		 */
-    	public Builder properties(final Map<String, Properties> p) { 
+    	public Builder properties(final Set<CyProperty<Properties>> p) { 
     		properties = p; 
 			return this;
 		}
@@ -291,11 +292,11 @@ public final class CySession {
     public Map<CyNetworkView,String> getViewVisualStyleMap() { return vsMap; }
 
 	/**
-	 * Returns a map of session related properties defined for this session.
-	 * @return A map of session related Property objects by property name.
+	 * Returns a set of {@link CyProperty} objects defined for this session.
+	 * @return A set of session related {@link CyProperty} objects.
 	 * defined for this session. 
 	 */
-    public Map<String, Properties> getProperties() { return properties; }
+    public Set<CyProperty<Properties>> getProperties() { return properties; }
 
 	/**
 	 * Returns a set containing all VisualStyles defined for this session.

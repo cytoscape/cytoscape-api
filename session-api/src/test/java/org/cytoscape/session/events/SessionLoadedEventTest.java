@@ -10,6 +10,7 @@ import java.util.Properties;
 import java.util.Set;
 
 import org.cytoscape.model.CyTableMetadata;
+import org.cytoscape.property.CyProperty;
 import org.cytoscape.property.bookmark.Bookmarks;
 import org.cytoscape.property.session.Cysession;
 import org.cytoscape.session.CySession;
@@ -29,7 +30,7 @@ public class SessionLoadedEventTest {
 	private CySession session;
 
 	@Mock
-	private Map<String, Properties> props;
+	private Set<CyProperty<Properties>> props;
 
 	@Mock
 	private Bookmarks bkmarks;

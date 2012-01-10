@@ -16,6 +16,8 @@ import java.util.Set;
 
 import org.cytoscape.model.CyTable;
 import org.cytoscape.model.CyTableMetadata;
+import org.cytoscape.property.CyProperty;
+import org.cytoscape.property.SimpleCyProperty;
 import org.cytoscape.property.bookmark.Bookmarks;
 import org.cytoscape.property.session.Cysession;
 import org.cytoscape.view.model.CyNetworkView;
@@ -267,23 +269,31 @@ public class CySessionTest {
 	}
 
 
-	private void checkProps(Map<String, Properties> map) {
-		assertNotNull(map);
-		Properties p = map.get("Session");
-		assertNotNull(p);
+	private void checkProps(Set<CyProperty<Properties>> set) {
+		assertNotNull(set);
+		assertEquals(1,set.size());
+		
+		CyProperty<Properties> cyProps = set.toArray(new CyProperty[set.size()])[0];
+		assertNotNull(cyProps);
+		assertEquals("test",cyProps.getName());
+		assertEquals(CyProperty.SavePolicy.SESSION_FILE,cyProps.getSavePolicy());
+		
+		Properties p = cyProps.getProperties();
 		assertEquals(2,p.size());
 		assertEquals("value1",p.getProperty("key1"));
 		assertEquals("value2",p.getProperty("key2"));
 	}
 
-	private Map<String, Properties> getFakeProps() {
-		Map<String, Properties> map = new HashMap<String, Properties>();
+	private Set<CyProperty<Properties>> getFakeProps() {
+		Set<CyProperty<Properties>> set = new HashSet<CyProperty<Properties>>();
 		
 		Properties p = new Properties();
 		p.setProperty("key1","value1");
 		p.setProperty("key2","value2");
-		map.put("Session", p);
 		
-		return map;
+		CyProperty<Properties> cyProps = new SimpleCyProperty("test", p, CyProperty.SavePolicy.SESSION_FILE);
+		set.add(cyProps);
+		
+		return set;
 	}
 }

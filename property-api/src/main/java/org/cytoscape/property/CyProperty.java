@@ -53,9 +53,15 @@ public interface CyProperty<P> {
 	 * system properties ({@link System#getProperties()}).
 	 */
 	String DEFAULT_PROPS_CONFIG_DIR = ".cytoscape";
-
+	
 	/**
-	 * Return a property object
+	 * Returns the name of the CyProperty.
+	 * @return The name of the CyProperty.
+	 */
+	String getName();
+	
+	/**
+	 * Return a property object.
 	 * @return A property object of type P.
 	 */
 	P getProperties();

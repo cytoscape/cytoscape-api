@@ -30,18 +30,16 @@ import org.slf4j.LoggerFactory;
 public abstract class AbstractConfigDirPropsReader implements CyProperty<Properties> {
 	private static final Logger logger = LoggerFactory.getLogger(AbstractConfigDirPropsReader.class);
 
-	/**
-	 * The Properties object created for this class. 
-	 */
+	/** The name of this CyProperty. */
+	protected final String name;
+	/** The Properties object created for this class.  */
 	protected final Properties props;
-
-	/**
-	 * The SavePolicy of this CyProperty.
-	 */
+	/** The SavePolicy of this CyProperty. */
 	protected final SavePolicy savePolicy;
 
 	/**
 	 * Creates a new AbstractConfigDirPropsReader object.
+	 * @param name The name of this CyProperty. 
 	 * @param propFileName The name of the java.util.Properties file to read. 
 	 * @param savePolicy The save policy for this CyProperty.  This value MUST be
 	 * either {@link CyProperty.SavePolicy.CONFIG_DIR} or 
@@ -50,7 +48,10 @@ public abstract class AbstractConfigDirPropsReader implements CyProperty<Propert
 	 * If you'd like to use a different SavePolicy, then consider using
 	 * {@link SimpleCyProperty} instead.
 	 */
-	public AbstractConfigDirPropsReader(String propFileName, SavePolicy savePolicy) {
+	public AbstractConfigDirPropsReader(final String name, final String propFileName, final SavePolicy savePolicy) {
+		if ( name == null )
+			throw new NullPointerException("name cannot be null");
+		
 		if ( propFileName == null )
 			throw new NullPointerException("propFileName cannot be null");
 
@@ -61,6 +62,7 @@ public abstract class AbstractConfigDirPropsReader implements CyProperty<Propert
 		     savePolicy != CyProperty.SavePolicy.SESSION_FILE_AND_CONFIG_DIR )
 			 throw new IllegalArgumentException("Save policy must be either CONFIG_DIR or SESSION_FILE_AND_CONFIG_DIR");
 		
+		this.name = name;
 		this.savePolicy = savePolicy;
 		this.props = new Properties();
 
@@ -114,6 +116,12 @@ public abstract class AbstractConfigDirPropsReader implements CyProperty<Propert
 		}
 	}
 
+	/** {@inheritDoc} */
+	@Override
+	public String getName() {
+		return name;
+	}
+	
 	/** {@inheritDoc} */
 	@Override
 	public CyProperty.SavePolicy getSavePolicy() {
