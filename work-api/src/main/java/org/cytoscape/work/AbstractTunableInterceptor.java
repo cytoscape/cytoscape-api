@@ -38,8 +38,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.swing.JPanel;
-
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 
@@ -199,7 +197,8 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 	private boolean isJPanelOrJPanelDescendent(final Class c) {
 		Class c0 = c;
 		while (c0 != null && c0 != Object.class) {
-			if (c0 == JPanel.class)
+			// hack so that we don't need to import swing
+			if (c0.getName().equals( "javax.swing.JPanel" ))
 				return true;
 			c0 = c0.getSuperclass();
 		}

@@ -103,6 +103,11 @@ public class AbstractTunableInterceptorTest {
 	}
 
 	@Test(expected=IllegalArgumentException.class)
+	public final void testInvalidProvidesGUIReturnType2() {
+		interceptor.loadTunables(new HasInvalidProvidesGUIMethod2());
+	}
+
+	@Test(expected=IllegalArgumentException.class)
 	public final void testInvalidProvidesGUIMethodWithArg() {
 		interceptor.loadTunables(new HasInvalidProvidesGUIMethodWithArg());
 	}
@@ -205,6 +210,11 @@ class SetterAnnotatedInsteadOfGetter {
 class HasInvalidProvidesGUIMethod {
 	@ProvidesGUI
 	public void badReturnType() { }
+}
+
+class HasInvalidProvidesGUIMethod2 {
+	@ProvidesGUI
+	public Double badReturnType() { return null; }
 }
 
 
