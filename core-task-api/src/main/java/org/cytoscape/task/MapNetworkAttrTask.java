@@ -17,6 +17,7 @@ import org.cytoscape.model.CyTableEntry;
 import org.cytoscape.model.subnetwork.CyRootNetworkManager;
 import org.cytoscape.model.subnetwork.CyRootNetwork;
 import org.cytoscape.work.AbstractTask;
+import org.cytoscape.work.ProvidesTitle;
 import org.cytoscape.work.TaskMonitor;
 import org.cytoscape.work.Tunable;
 import org.cytoscape.work.util.ListSingleSelection;
@@ -42,6 +43,11 @@ public final class MapNetworkAttrTask extends AbstractTask {
 	@Tunable(description="Would you like to map this table to:")
 	public ListSingleSelection<String> whichTable;
 
+	@ProvidesTitle
+	public String getTitle() {
+		return "Map Table";
+	}
+	
 	private final Class<? extends CyTableEntry> type; // Must be node or edge!
 	private final CyTable newGlobalTable;
 	private final CyNetworkManager networkManager;
