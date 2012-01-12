@@ -188,7 +188,9 @@ public abstract class AbstractCyActivator implements BundleActivator {
 
 	/**
 	 * A utility method that registers the specified service object as an OSGi service for
-	 * all interfaces that the object implements.
+	 * all interfaces that the object implements. Note that this method will NOT register 
+	 * services for any packages with names that begin with "java", which is an effort to 
+	 * avoid registering meaningless services for core Java APIs.
 	 * @param bc The BundleContext used to find services.
 	 * @param service The object to be registered as one or more services.
 	 * @param props The service properties to be registered with each service. 
@@ -196,8 +198,12 @@ public abstract class AbstractCyActivator implements BundleActivator {
 	protected final void registerAllServices(final BundleContext bc, final Object service, final Properties props) {
 		List<Class<?>> interfaces = RegisterUtil.getAllInterfaces(service.getClass());
 		logger.debug("attempting to register " + interfaces.size() + " services for: " + service.toString());
-		for ( Class<?> c : interfaces ) 
-			registerService(bc, service, c, props);
+		for ( Class<?> c : interfaces )  {
+			if ( c.getName().startsWith("java") ) 
+				logger.debug("NOT registering service: " + service.toString() + " as type " + c.getName() + " because it is a core java interface.");
+			else 
+				registerService(bc, service, c, props);
+		}
 	}
 
 	/**

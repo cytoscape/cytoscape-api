@@ -32,7 +32,10 @@ public interface CyServiceRegistrar {
 	/**
 	 * This method registers an object as an OSGi service
 	 * for all interfaces that the object implements
-	 * and with the specified properties.
+	 * and with the specified properties. Note that this method
+	 * will NOT register services for any packages with names that
+	 * begin with "java", which is an effort to avoid registering
+	 * meaningless services for core Java APIs.
 	 * @param o The object to be registered as a service for all
 	 * interfaces that the object implements.
 	 * @param props The service properties. 

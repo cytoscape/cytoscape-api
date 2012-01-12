@@ -23,8 +23,12 @@ public class CyServiceRegistrarImpl implements CyServiceRegistrar {
 	}
 
 	public void registerAllServices(Object o, Dictionary props) {
-		for ( Class c : RegisterUtil.getAllInterfaces(o.getClass()) ) 
-			registerService(o,c,props);
+		for ( Class c : RegisterUtil.getAllInterfaces(o.getClass()) ) {
+			if ( c.getName().startsWith("java") ) 
+				logger.debug("NOT registering service: " + o.toString() + " as type " + c.getName() + " because it is a core java interface.");
+			else   
+				registerService(o,c,props);
+		}
 	}
 
 	public void registerService(Object o, Class c, Dictionary props) {
