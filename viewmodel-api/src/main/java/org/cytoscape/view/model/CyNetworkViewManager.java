@@ -33,6 +33,7 @@ package org.cytoscape.view.model;
 import java.util.Set;
 
 import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.model.CyNetwork;
 
 
 /**
@@ -48,22 +49,22 @@ public interface CyNetworkViewManager {
 	public Set<CyNetworkView> getNetworkViewSet();
 
 	/**
-	 * Returns the network view corresponding to an ID, if found.
+	 * Returns the network view corresponding to the specified network, if found.
 	 * 
-	 * @param networkId  a unique ID that hopefully corresponds to a network view.
+	 * @param network  The network we're requesting a view of.
 	 * 
 	 * @return null if no network view was found corresponding to "networkId", else the network view
 	 */
-	public CyNetworkView getNetworkView(long networkId);
+	public CyNetworkView getNetworkView(CyNetwork network);
 
 	/**
-	 * Determines whether a network view corresponding to a certain ID is known to the network view manager.
+	 * Determines whether a network view for the specified network is known to the network view manager.
 	 * 
-	 * @param networkId  a unique ID that may correspond to a network view
+	 * @param network  The network for which we want to know whether a view exists.
 	 * 
 	 * @return true if a view was found that corresponds to "networkId", else false
 	 */
-	public boolean viewExists(long networkId);
+	public boolean viewExists(CyNetwork network);
 
 	/**
 	 * Destroys a network view.
