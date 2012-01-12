@@ -16,7 +16,7 @@ import org.cytoscape.view.presentation.property.values.ArrowShape;
 public final class ArrowShapeVisualProperty extends AbstractVisualProperty<ArrowShape> {
 	
 	// Preset arrow shapes
-	public static final ArrowShape NONE = new ArrowShapeImpl("No Arrow", "NONE");
+	public static final ArrowShape NONE = new ArrowShapeImpl("None", "NONE");
 	public static final ArrowShape DIAMOND = new ArrowShapeImpl("Diamond", "DIAMOND");
 	public static final ArrowShape DELTA = new ArrowShapeImpl("Delta", "DELTA");
 	public static final ArrowShape ARROW = new ArrowShapeImpl("Arrow", "ARROW");
