@@ -44,10 +44,12 @@ public class CyServiceRegistrarImpl implements CyServiceRegistrar {
 		logger.debug("attempting to register service: " + o.toString() + " of type " + c.getName());
 		ServiceRegistration s = bc.registerService( c.getName(), o, props );
 
-		if ( !refs.containsKey(c) )
-			refs.put(c, new HashMap<Object,ServiceRegistration>() );
-
-		refs.get(c).put(o,s);
+		Map<Object, ServiceRegistration> registrations = refs.get(c);
+		if ( registrations == null ) {
+			registrations = new HashMap<Object,ServiceRegistration>();
+			refs.put(c, registrations );
+		}
+		registrations.put(o,s);
 	}
 
 
@@ -65,10 +67,11 @@ public class CyServiceRegistrarImpl implements CyServiceRegistrar {
 
 		logger.debug("attempting to UNregister service: " + o.toString() + " of type " + c.getName());
 
-		if ( !refs.containsKey(c) )
+		Map<Object, ServiceRegistration> registrations = refs.get(c);
+		if ( registrations == null )
 			return;
 		
-		ServiceRegistration s = refs.get(c).get(o);
+		ServiceRegistration s = registrations.get(o);
 
 		if ( s == null )
 			return;

@@ -227,9 +227,12 @@ public abstract class AbstractCyActivator implements BundleActivator {
 		logger.debug("attempting to register service: " + service.toString() + " of type " + serviceClass.getName());
 		ServiceRegistration s = bc.registerService( serviceClass.getName(), service, props );
 
-		if ( !serviceRegistrations.containsKey(serviceClass) )
-			serviceRegistrations.put(serviceClass, new HashMap<Object,ServiceRegistration>() );
+		Map<Object, ServiceRegistration> registrations = serviceRegistrations.get(serviceClass);
+		if ( registrations == null ) {
+			registrations = new HashMap<Object,ServiceRegistration>();
+			serviceRegistrations.put(serviceClass, registrations );
+		}
 
-		serviceRegistrations.get(serviceClass).put(service,s);
+		registrations.put(service,s);
 	}
 }

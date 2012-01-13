@@ -115,9 +115,8 @@ public final class JMenuTracker {
 			final String menu_token = nameAndGravity.getMenuName();
 			menu_key = menu_key == null ? menu_token : menu_key + "." + menu_token;
 
-			if (menuMap.containsKey(menu_key))
-				gravityTracker = menuMap.get(menu_key);
-			else {
+			gravityTracker = menuMap.get(menu_key);
+			if (gravityTracker == null) {
 				final JMenu menu = new JMenu(menu_token);
 
 				// if there is a JMenu parent, use that

@@ -110,9 +110,9 @@ public final class MenuGravityTracker implements GravityTracker {
 		} else {
 			for (int i = 0; i < menu.getMenuComponentCount(); ++i) {
 				final Component item = menu.getMenuComponent(i);
-				if (componentGravity.containsKey(item)) {
-					if (newGravity < componentGravity.get(item))
-						return i;
+				Double gravity = componentGravity.get(item);
+				if (gravity != null && newGravity < gravity) {
+					return i;
 				}
 			}
 		}

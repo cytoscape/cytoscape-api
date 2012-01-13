@@ -268,10 +268,11 @@ public final class LayoutPartition {
 			CyNode target = (CyNode) edge.getTarget();
 			CyNode source = (CyNode) edge.getSource();
 
-			if (nodeToLayoutNode.containsKey(source) && nodeToLayoutNode.containsKey(target)) {
+			LayoutNode sourceLayoutNode = nodeToLayoutNode.get(source);
+			LayoutNode targetLayoutNode = nodeToLayoutNode.get(target);
+			if (sourceLayoutNode != null && targetLayoutNode != null) {
 				// Add the connecting nodes
-				lEdge.addNodes(nodeToLayoutNode.get(source),
-				               nodeToLayoutNode.get(target));
+				lEdge.addNodes(sourceLayoutNode, targetLayoutNode);
 			}
 		}
 	}
