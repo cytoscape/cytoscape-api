@@ -54,8 +54,11 @@ public class CyServiceRegistrarImpl implements CyServiceRegistrar {
 
 
 	public void unregisterAllServices(Object o) {
-		for ( Class<?> c : o.getClass().getInterfaces() ) 
-			unregisterService(o,c);
+		for ( Class c : RegisterUtil.getAllInterfaces(o.getClass()) ) {
+			if ( !c.getName().startsWith("java") ) { 
+				unregisterService(o,c);
+			}
+		}
 	}
 
 
