@@ -434,15 +434,15 @@ public abstract class AbstractCyTableTest {
 		assertTrue(table.getAllRows().size() == 3);
 	}
 
-	@Test(expected=IllegalArgumentException.class)
+	@Test
 	public void testGetListWithANonExistantColumn() {
-		attrs.getList("x", String.class);
+		assertNull(attrs.getList("x", String.class));
 	}
 
-	@Test(expected=IllegalArgumentException.class)
+	@Test
 	public void testGetListWithAnInvalidListElementType() {
 		table.createListColumn("x", Long.class, false);
-		attrs.getList("x", String.class);
+		assertNull(attrs.getList("x", String.class));
 	}
 
 	@Test
@@ -898,6 +898,11 @@ public abstract class AbstractCyTableTest {
 	@Test
 	public void testGetAttrBeforeColumnExists() {
 		assertNull(attrs.get("nonexistentColumnX",Integer.class));
+	}
+
+	@Test
+	public void testGetAttrBeforeListColumnExists() {
+		assertNull(attrs.getList("nonexistentListColumnX",Integer.class));
 	}
 
 	@Test
