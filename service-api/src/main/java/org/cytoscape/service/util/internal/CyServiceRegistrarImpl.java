@@ -24,9 +24,7 @@ public class CyServiceRegistrarImpl implements CyServiceRegistrar {
 
 	public void registerAllServices(Object o, Dictionary props) {
 		for ( Class c : RegisterUtil.getAllInterfaces(o.getClass()) ) {
-			if ( c.getName().startsWith("java") ) 
-				logger.debug("NOT registering service: " + o.toString() + " as type " + c.getName() + " because it is a core java interface.");
-			else   
+			if ( !c.getName().startsWith("java") ) 
 				registerService(o,c,props);
 		}
 	}
@@ -41,7 +39,7 @@ public class CyServiceRegistrarImpl implements CyServiceRegistrar {
 		if ( bc == null )
 			throw new IllegalStateException( "BundleContext is null" );
 
-		logger.debug("attempting to register service: " + o.toString() + " of type " + c.getName());
+		//logger.debug("attempting to register service: " + o.toString() + " of type " + c.getName());
 		ServiceRegistration s = bc.registerService( c.getName(), o, props );
 
 		Map<Object, ServiceRegistration> registrations = refs.get(c);
@@ -68,7 +66,7 @@ public class CyServiceRegistrarImpl implements CyServiceRegistrar {
 		if ( c == null )
 			throw new NullPointerException( "class is null" );
 
-		logger.debug("attempting to UNregister service: " + o.toString() + " of type " + c.getName());
+		//logger.debug("attempting to UNregister service: " + o.toString() + " of type " + c.getName());
 
 		Map<Object, ServiceRegistration> registrations = refs.get(c);
 		if ( registrations == null )
