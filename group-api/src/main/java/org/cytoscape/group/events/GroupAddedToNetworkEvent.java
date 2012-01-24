@@ -7,7 +7,10 @@ import org.cytoscape.model.CyNetwork;
 
 
 /**
- * This event signals that a network has been added.
+ * This event signals that an existing group has been added to a new network.
+ * This is meant to be used primarily by the view and presentation layers to
+ * allow them to appropriately visualize the group.
+ *
  * @CyAPI.Final.Class
  */
 public final class GroupAddedToNetworkEvent extends AbstractGroupEvent {

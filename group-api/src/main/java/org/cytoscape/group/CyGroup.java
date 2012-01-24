@@ -120,11 +120,31 @@ public interface CyGroup {
 	void addNodes(List<CyNode> nodes);
 
 	/**
-	 * Remove a set of nodes from a group
+	 * Add a list of edges to a group.  The edges
+	 * will be added either to the internal edges
+	 * or external edges lists.  Note that unlike
+	 * {@link CyGroup#addNodes} either the source
+	 * node or target node for the edge must be
+	 * in the group.
+	 *
+	 * @param edges the list of edges to add
+	 */
+	void addEdges(List<CyEdge> edges);
+
+	/**
+	 * Remove a set of nodes and their edges from a group
 	 *
 	 * @param nodes the nodes to remove
 	 */
-	void removeNodes(Collection<CyNode> nodes);
+	void removeNodes(List<CyNode> nodes);
+
+	/**
+	 * Remove a set of edges from a group.  Edges can be either
+	 * internal edges or external edges.
+	 *
+	 * @param edges the edges to remove
+	 */
+	void removeEdges(List<CyEdge> edges);
 
 	/**
 	 * Return the root network for this group.  A group can only

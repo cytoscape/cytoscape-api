@@ -6,7 +6,9 @@ import org.cytoscape.group.CyGroup;
 
 
 /**
- * This event signals that a group is about to be destroyed.
+ * This event signals that a group is about to be destroyed -- i.e. completely removed
+ * from all networks.  The group's subnetwork and group node will also be destroyed.
+ *
  * @CyAPI.Final.Class
  */
 public final class  GroupAboutToBeDestroyedEvent extends AbstractGroupManagerEvent {

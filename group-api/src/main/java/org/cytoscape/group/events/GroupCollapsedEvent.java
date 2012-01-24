@@ -8,7 +8,9 @@ import org.cytoscape.model.CyNetwork;
 
 
 /**
- * This event signals that a network has been added.
+ * This event signals that a group has either been expanded or collapsed in
+ * a particular network.
+ *
  * @CyAPI.Final.Class
  */
 public final class GroupCollapsedEvent extends AbstractGroupEvent {

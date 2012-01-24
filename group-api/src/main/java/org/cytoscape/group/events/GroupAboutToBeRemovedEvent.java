@@ -7,7 +7,11 @@ import org.cytoscape.model.CyNetwork;
 
 
 /**
- * This event signals that a network has been added.
+ * This event signals that a group is about to be removed from a network, but
+ * not completely deleted.  This event is meant to be used primarily by the
+ * the view and presentation layers for managing the visualization of the
+ * network.
+ *
  * @CyAPI.Final.Class
  */
 public final class GroupAboutToBeRemovedEvent extends AbstractGroupEvent {

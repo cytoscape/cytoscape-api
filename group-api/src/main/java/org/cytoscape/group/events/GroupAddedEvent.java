@@ -6,7 +6,7 @@ import org.cytoscape.group.CyGroup;
 
 
 /**
- * This event signals that a network has been added.
+ * This event signals that a new group has been added.
  * @CyAPI.Final.Class
  */
 public final class GroupAddedEvent extends AbstractGroupManagerEvent {
