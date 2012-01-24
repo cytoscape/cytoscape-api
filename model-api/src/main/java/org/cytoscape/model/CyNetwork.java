@@ -74,7 +74,12 @@ public interface CyNetwork extends CyTableEntry {
 	/**
 	 * Remove a node from the network and delete the node (if it only exists in 
 	 * this network).  See {@link org.cytoscape.model.subnetwork.CyRootNetwork} 
-	 * for information about having the same node in two networks.
+	 * for information about having the same node in two networks. 
+	 * <br/>
+	 * To delete a single node it is convenient to do it this way:
+	 * <code>
+	 * network.removeNodes(Collections.singletonList(node));
+	 * </code>
 	 *
 	 * @param node the node to be deleted
 	 * @return true if the node was successfully deleted
@@ -95,6 +100,11 @@ public interface CyNetwork extends CyTableEntry {
 	 * Remove an edge from the network and delete the edge (if it only exists in
 	 * this network).  See {@link org.cytoscape.model.subnetwork.CyRootNetwork} 
 	 * for information about having the same edge in two networks.
+	 * <br/>
+	 * To delete a single edge it is convenient to do it this way:
+	 * <code>
+	 * network.removeEdges(Collections.singletonList(edge));
+	 * </code>
 	 *
 	 * @param edges the edges to be deleted
 	 * @return true if the edge was successfully deleted

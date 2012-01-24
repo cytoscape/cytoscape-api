@@ -132,7 +132,7 @@ public interface CyTable extends CyTableEntry {
 	/**
 	 * Will delete the column of the specified name. columnName must be not null. If the column does not exist,
 	 * there is no effect. If the column is immutable, IllegalArgumentException will be thrown. If the deletion is 
-	 * successful, {@link ColumnDeletedEvent} will be fired.  
+	 * successful, {@link org.cytoscape.model.events.ColumnDeletedEvent} will be fired.  
 	 * @param columnName The name identifying the attribute.
 	 */
 	void deleteColumn(String columnName);
