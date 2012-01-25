@@ -40,4 +40,9 @@ public interface UndoSupport {
 	 * @param edit The edit to be added to the Cytoscape undo stack.
 	 */
 	void postEdit(AbstractCyEdit edit);
+	
+	/**
+	 * Clears the undo stack.
+	 */
+	void reset();
 }
