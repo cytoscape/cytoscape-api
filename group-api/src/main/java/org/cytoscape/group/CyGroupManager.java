@@ -73,6 +73,18 @@ public interface CyGroupManager {
 	public boolean isGroup(CyNode node, CyNetwork network);
 
 	/**
+	 * Return the group the corresponds to a particular
+	 * node in a {@link CyNetwork}.
+	 *
+	 * @param node the {@link CyNode} to test
+	 * @param network the {@link CyNetwork} to test
+	 * @return the {@link CyGroup} that corresponds to
+	 * the node, or null if this group doesn't exist in
+	 * the network
+	 */
+	public CyGroup getGroup(CyNode node, CyNetwork network);
+
+	/**
 	 * Destroy a group.
 	 *
 	 * @param group the {@link CyGroup} to remove.
