@@ -68,7 +68,7 @@ public interface CyGroup {
 	 * 
 	 * @return A list of CyEdges
 	 */
-	List<CyEdge> getInteriorEdgeList();
+	List<CyEdge> getInternalEdgeList();
 
 	/**
 	 * Returns the list of exterior edges connected to the
@@ -76,7 +76,7 @@ public interface CyGroup {
 	 * 
 	 * @return A list of CyEdges
 	 */
-	Set<CyEdge> getExteriorEdgeList();
+	Set<CyEdge> getExternalEdgeList();
 
 	/**
 	 * Returns the network referenced by this group.  All

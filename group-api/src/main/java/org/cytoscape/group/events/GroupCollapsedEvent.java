@@ -20,6 +20,7 @@ public final class GroupCollapsedEvent extends AbstractGroupEvent {
 	 * Constructs event.
 	 * @param source the {@link CyGroup} that has been changed.
 	 * @param network the {@link CyNetwork} the group has been changed in.
+	 * @param collapsed true if the group has collapsed
 	 */
 	public GroupCollapsedEvent(final CyGroup source, final CyNetwork network, boolean collapsed) {
 		super(source, GroupCollapsedListener.class, network);

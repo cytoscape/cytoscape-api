@@ -89,14 +89,14 @@ public abstract class AbstractCyGroupTest {
 	@Test
 	public void testGroupCreated() {
     assertTrue("group node count = 3", group.getNodeList().size() == 3);
-    assertTrue("group internal edge count = 2", group.getInteriorEdgeList().size() == 2);
-    assertTrue("group external edge count = 2", group.getExteriorEdgeList().size() == 2);
+    assertTrue("group internal edge count = 2", group.getInternalEdgeList().size() == 2);
+    assertTrue("group external edge count = 2", group.getExternalEdgeList().size() == 2);
 	}
 
 	@Test
 	public void testAddExternalEdge() {
 		group.addExternalEdge(edge5);
-    assertTrue("group external edge count = 3", group.getExteriorEdgeList().size() == 3);
+    assertTrue("group external edge count = 3", group.getExternalEdgeList().size() == 3);
 	}
 
 	@Test
