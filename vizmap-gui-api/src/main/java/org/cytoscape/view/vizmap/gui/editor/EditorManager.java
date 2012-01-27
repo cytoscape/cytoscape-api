@@ -42,8 +42,11 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
+import org.cytoscape.model.CyTable;
 import org.cytoscape.model.CyTableEntry;
 import org.cytoscape.view.model.VisualProperty;
+import org.cytoscape.view.vizmap.VisualStyle;
+import org.cytoscape.view.vizmap.mappings.ContinuousMapping;
 
 
 /**
@@ -100,18 +103,8 @@ public interface EditorManager {
 
 	
 	/**
-	 * Display continuous value editor.
-	 *
-	 * <p>
-	 * Continuous editor always update mapping in real-time, so there is no
-	 * return value.
-	 * </p>
-	 * 
-	 * @param parentComponent parent GUI component
-	 * @param type Visual Property to be edited
-	 * @throws Exception 
 	 */
-	public <V> void showContinuousEditor(Component parentComponent, VisualProperty<V> type) throws Exception;
+	PropertyEditor getContinuousEditor(final VisualProperty<?> vp);
 	
 	
 	/**

@@ -36,11 +36,20 @@
 
 package org.cytoscape.view.vizmap.gui.editor;
 
+import java.awt.Component;
 import java.awt.Window;
 import java.beans.PropertyEditor;
 
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
+import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
+
+import org.cytoscape.view.vizmap.mappings.ContinuousMapping;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.l2fprod.common.swing.renderer.DefaultCellRenderer;
 
 
 
@@ -56,9 +65,9 @@ public abstract class AbstractVisualPropertyEditor<T> implements VisualPropertyE
 	
 	protected final Class<T> type;
 	protected final PropertyEditor propertyEditor;
-	protected PropertyEditor continuousEditor;
+	private final ContinuousEditorType continuousEditorType;
 	protected Window vpValueEditor;
-	
+		
 	protected TableCellRenderer discreteTableCellRenderer;
 	protected TableCellRenderer continuousTableCellRenderer;
 
@@ -68,9 +77,10 @@ public abstract class AbstractVisualPropertyEditor<T> implements VisualPropertyE
 	 * @param propertyEditor the {@link PropertyEditor} to construct this with.
 	 *
 	 */
-	public AbstractVisualPropertyEditor(final Class<T> type, final PropertyEditor propertyEditor) {
+	public AbstractVisualPropertyEditor(final Class<T> type, final PropertyEditor propertyEditor, ContinuousEditorType continuousEditorType) {
 		this.type = type;
 		this.propertyEditor = propertyEditor;
+		this.continuousEditorType = continuousEditorType;
 	}
 
 	/**
@@ -88,18 +98,18 @@ public abstract class AbstractVisualPropertyEditor<T> implements VisualPropertyE
 		return propertyEditor;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override public T showVisualPropertyValueEditor() {
-		if(vpValueEditor == null) {
-			// Search value editor repository 
-		}
-		vpValueEditor.setVisible(true);
-		
-		//TODO: need new interface for value editor
-		return null;
-	}
+//	/**
+//	 * {@inheritDoc}
+//	 */
+//	@Override public T showVisualPropertyValueEditor() {
+//		if(vpValueEditor == null) {
+//			// Search value editor repository 
+//		}
+//		vpValueEditor.setVisible(true);
+//		
+//		//TODO: need new interface for value editor
+//		return null;
+//	}
 
 	/**
 	 * {@inheritDoc}
@@ -108,22 +118,17 @@ public abstract class AbstractVisualPropertyEditor<T> implements VisualPropertyE
 		return discreteTableCellRenderer;
 	}
 	
-	
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override public TableCellRenderer getContinuousTableCellRenderer() {
-		return continuousTableCellRenderer;
+	@Override
+	public TableCellRenderer getContinuousTableCellRenderer(PropertyEditor continuousMappingEditor) {
+		// Return default cell renderer for 
+		return new ContinuousMappingCellRenderer((ContinuousMappingEditor<?, ?>) continuousMappingEditor);
 	}
 
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override public PropertyEditor getContinuousMappingEditor() throws IllegalArgumentException {
-		return continuousEditor;
+	@Override
+	public ContinuousEditorType getContinuousEditorType() {
+		return this.continuousEditorType;
 	}
-
 
 	/**
 	 * {@inheritDoc}
@@ -131,5 +136,44 @@ public abstract class AbstractVisualPropertyEditor<T> implements VisualPropertyE
 	@Override public Icon getDefaultIcon(int width, int height) {
 		// By default, it does not return actual icon.  This should be implemented child classes.
 		return null;
+	}
+	
+	private final class ContinuousMappingCellRenderer extends DefaultCellRenderer {
+
+		private static final long serialVersionUID = -6734053848878359286L;
+
+		private final ContinuousMappingEditor<?, ?> editor;
+
+		public ContinuousMappingCellRenderer(final ContinuousMappingEditor<?, ?> editor) {
+			if (editor == null)
+				throw new NullPointerException("Editor object is null.");
+
+			this.editor = editor;
+		}
+
+		@Override
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
+
+			if (value == null || value instanceof ContinuousMapping == false) {
+				this.setText("Unkonown Mapping");
+				return this;
+			}
+
+			if (isSelected) {
+				setBackground(table.getSelectionBackground());
+				setForeground(table.getSelectionForeground());
+			} else {
+				setBackground(table.getBackground());
+				setForeground(table.getForeground());
+			}
+
+			final int height = table.getRowHeight(row);
+			final int width = table.getColumnModel().getColumn(column).getWidth();
+			final ImageIcon icon = editor.drawIcon(width, height - 2, false);
+			this.setIcon(icon);
+
+			return this;
+		}
 	}
 }
