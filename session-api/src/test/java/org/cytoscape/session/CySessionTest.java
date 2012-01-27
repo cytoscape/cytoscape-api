@@ -18,7 +18,6 @@ import org.cytoscape.model.CyTable;
 import org.cytoscape.model.CyTableMetadata;
 import org.cytoscape.property.CyProperty;
 import org.cytoscape.property.SimpleCyProperty;
-import org.cytoscape.property.bookmark.Bookmarks;
 import org.cytoscape.property.session.Cysession;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.vizmap.VisualStyle;
@@ -180,29 +179,6 @@ public class CySessionTest {
 	}
 
 	@Test
-	public void testDefaultGetBookmarks() {
-		session = new CySession.Builder().build();
-		assertNotNull(session);
-		assertNotNull(session.getBookmarks());
-	}
-
-	@Test
-	public void testSetNullBookmarks() {
-		session = new CySession.Builder().bookmarks(null).build();
-		assertNotNull(session);
-		assertNotNull(session.getBookmarks());
-	}
-
-	@Test
-	public void testSetBookmarks() {
-		Bookmarks b = mock(Bookmarks.class);
-		session = new CySession.Builder().bookmarks(b).build();
-		assertNotNull(session);
-		assertNotNull(session.getBookmarks());
-		assertEquals(b, session.getBookmarks());
-	}
-
-	@Test
 	public void testDefaultGetSession() {
 		session = new CySession.Builder().build();
 		assertNotNull(session);
@@ -269,29 +245,31 @@ public class CySessionTest {
 	}
 
 
-	private void checkProps(Set<CyProperty<Properties>> set) {
+	private void checkProps(Set<CyProperty<?>> set) {
 		assertNotNull(set);
 		assertEquals(1,set.size());
 		
-		CyProperty<Properties> cyProps = set.toArray(new CyProperty[set.size()])[0];
+		CyProperty<?> cyProps = set.toArray(new CyProperty[set.size()])[0];
 		assertNotNull(cyProps);
 		assertEquals("test",cyProps.getName());
 		assertEquals(CyProperty.SavePolicy.SESSION_FILE,cyProps.getSavePolicy());
+		assertTrue(Properties.class.isAssignableFrom(cyProps.getPropertyType()));
 		
-		Properties p = cyProps.getProperties();
+		Properties p = (Properties) cyProps.getProperties();
 		assertEquals(2,p.size());
 		assertEquals("value1",p.getProperty("key1"));
 		assertEquals("value2",p.getProperty("key2"));
 	}
 
-	private Set<CyProperty<Properties>> getFakeProps() {
-		Set<CyProperty<Properties>> set = new HashSet<CyProperty<Properties>>();
+	private Set<CyProperty<?>> getFakeProps() {
+		Set<CyProperty<?>> set = new HashSet<CyProperty<?>>();
 		
 		Properties p = new Properties();
 		p.setProperty("key1","value1");
 		p.setProperty("key2","value2");
 		
-		CyProperty<Properties> cyProps = new SimpleCyProperty("test", p, CyProperty.SavePolicy.SESSION_FILE);
+		CyProperty<Properties> cyProps = new SimpleCyProperty<Properties>("test", p, Properties.class,
+				CyProperty.SavePolicy.SESSION_FILE);
 		set.add(cyProps);
 		
 		return set;

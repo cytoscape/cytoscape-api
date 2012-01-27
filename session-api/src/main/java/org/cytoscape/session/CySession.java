@@ -32,13 +32,11 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyTableMetadata;
 import org.cytoscape.property.CyProperty;
-import org.cytoscape.property.bookmark.Bookmarks;
 import org.cytoscape.property.session.Cysession;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.vizmap.VisualStyle;
@@ -69,10 +67,9 @@ public final class CySession {
 	private final Set<CyNetworkView> netViews;
 	private final Set<CyTableMetadata> tables;
 	private final Map<CyNetworkView,String> vsMap;
-	private final Set<CyProperty<Properties>> properties;
+	private final Set<CyProperty<?>> properties;
 	private final Set<VisualStyle> visualStyles;
 	private final Map<String, List<File>> appFiles;
-	private final Bookmarks bookmarks; 
 	private final Cysession cysession; 
 
 	private CySession(Builder b) {
@@ -99,7 +96,7 @@ public final class CySession {
 			vsMap = b.vsMap;
 
 		if ( b.properties == null )
-			properties = new HashSet<CyProperty<Properties>>();
+			properties = new HashSet<CyProperty<?>>();
 		else
 			properties = b.properties;
 
@@ -112,11 +109,6 @@ public final class CySession {
 			appFiles = new HashMap<String, List<File>>(); 
 		else
 			appFiles = b.appFiles;
-
-		if ( b.bookmarks == null )
-			bookmarks = new Bookmarks(); 
-		else
-			bookmarks = b.bookmarks;
 
 		if ( b.cysession == null )
 			cysession = new Cysession(); 
@@ -135,10 +127,9 @@ public final class CySession {
 		private Set<CyNetworkView> netViews; 
 		private Set<CyTableMetadata> tables;
 		private Map<CyNetworkView,String> vsMap; 
-		private Set<CyProperty<Properties>> properties;
+		private Set<CyProperty<?>> properties;
 		private Set<VisualStyle> visualStyles; 
 		private Map<String, List<File>> appFiles; 
-		private Bookmarks bookmarks; 
 		private Cysession cysession; 
 
 		/**
@@ -208,7 +199,7 @@ public final class CySession {
 		 * @return An instance of Builder that has at least been configured
 		 * with the specified properties.
 		 */
-    	public Builder properties(final Set<CyProperty<Properties>> p) { 
+    	public Builder properties(final Set<CyProperty<?>> p) { 
     		properties = p; 
 			return this;
 		}
@@ -235,19 +226,6 @@ public final class CySession {
 		 */
 		public Builder appFileListMap(final Map<String, List<File>> p) { 
 			this.appFiles = p; 
-			return this;
-		}
-
-		/**
-		 * Returns an instance of Builder that has at least been configured
-		 * with the specified bookmarks. 
-		 * @param b A Bookmarks object containing all bookmarks defined
-		 * for this session.
-		 * @return An instance of Builder that has at least been configured
-		 * with the specified bookmarks. 
-		 */
-		public Builder bookmarks(final Bookmarks b) { 
-			this.bookmarks = b; 
 			return this;
 		}
 
@@ -296,19 +274,13 @@ public final class CySession {
 	 * @return A set of session related {@link CyProperty} objects.
 	 * defined for this session. 
 	 */
-    public Set<CyProperty<Properties>> getProperties() { return properties; }
+    public Set<CyProperty<?>> getProperties() { return properties; }
 
 	/**
 	 * Returns a set containing all VisualStyles defined for this session.
 	 * @return A Set of {@link org.cytoscape.view.vizmap.VisualStyle} objects
 	 */
     public Set<VisualStyle> getVisualStyles() { return visualStyles; }
-
-	/**
-	 * Returns a {@link Bookmarks} object containing all bookmarks for this session.
-	 * @return A {@link Bookmarks} object containing all bookmarks for this session.
-	 */
-    public Bookmarks getBookmarks() { return bookmarks; }
 
 	/**
 	 * Returns a {@link Cysession} object containing a description of this session. 
@@ -324,5 +296,3 @@ public final class CySession {
 	 */
 	public Map<String, List<File>> getAppFileListMap() { return appFiles; }
 }
-
-

@@ -3,15 +3,13 @@ package org.cytoscape.property;
 
 /**
  * A general property service interface for providing access to different types
- * of property objects as OSGi services. The type P is generally one  of three types: 
- * {@link java.util.Properties}, 
- * {@link org.cytoscape.property.bookmark.Bookmarks}, or
- * {@link org.cytoscape.property.session.Cysession}, although it is possible for 
+ * of property objects as OSGi services. The type P is generally one of two types: 
+ * {@link java.util.Properties} or 
+ * {@link org.cytoscape.property.bookmark.Bookmarks}, although it is possible for 
  * property objects of other types to be registered in this way as well.
- * @param <P> The generic type for the CyProperty. Generally one  of three types: 
- * {@link java.util.Properties}, 
- * {@link org.cytoscape.property.bookmark.Bookmarks}, or
- * {@link org.cytoscape.property.session.Cysession}, although it is possible for 
+ * @param <P> The generic type for the CyProperty. Generally one of two types: 
+ * {@link java.util.Properties} or 
+ * {@link org.cytoscape.property.bookmark.Bookmarks}, although it is possible for 
  * property objects of other types to be registered in this way as well.
  * @CyAPI.Spi.Interface
  */
@@ -35,7 +33,7 @@ public interface CyProperty<P> {
 		CONFIG_DIR,
 
 		/** 
-		 * This properties will be loaded from and saved to session files. 
+		 * These properties will be loaded from and saved to session files. 
 		 */
 		SESSION_FILE,
 
@@ -71,4 +69,10 @@ public interface CyProperty<P> {
 	 * @return the {@link SavePolicy} of the CyProperty.
 	 */
 	SavePolicy getSavePolicy();
+	
+	/**
+	 * Returns the type of the property object.
+	 * @return the type of the property object.
+	 */
+	Class<? extends P> getPropertyType();
 }

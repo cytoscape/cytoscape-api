@@ -133,4 +133,10 @@ public abstract class AbstractConfigDirPropsReader implements CyProperty<Propert
 	public Properties getProperties() {
 		return props;
 	}
+	
+	/** {@inheritDoc} */
+	@Override
+	public Class<? extends Properties> getPropertyType() {
+		return Properties.class;
+	}
 }

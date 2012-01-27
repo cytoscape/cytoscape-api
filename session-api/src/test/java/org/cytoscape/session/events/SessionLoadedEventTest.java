@@ -6,12 +6,10 @@ import static org.junit.Assert.assertNotNull;
 import java.io.File;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 
 import org.cytoscape.model.CyTableMetadata;
 import org.cytoscape.property.CyProperty;
-import org.cytoscape.property.bookmark.Bookmarks;
 import org.cytoscape.property.session.Cysession;
 import org.cytoscape.session.CySession;
 import org.cytoscape.session.CySessionManager;
@@ -30,10 +28,7 @@ public class SessionLoadedEventTest {
 	private CySession session;
 
 	@Mock
-	private Set<CyProperty<Properties>> props;
-
-	@Mock
-	private Bookmarks bkmarks;
+	private Set<CyProperty<?>> props;
 
 	@Mock
 	private Cysession cysess;
@@ -57,9 +52,9 @@ public class SessionLoadedEventTest {
 	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 		
-		session = new CySession.Builder().properties(props).bookmarks(bkmarks).cysession(cysess)
-				.appFileListMap(appMap).tables(tables).networkViews(netViews).visualStyles(styles)
-				.viewVisualStyleMap(stylesMap).build();
+		session = new CySession.Builder().properties(props).cysession(cysess).appFileListMap(appMap).tables(tables)
+				.networkViews(netViews).visualStyles(styles).viewVisualStyleMap(stylesMap)
+				.build();
 	}
 	
 	@Test
@@ -73,6 +68,4 @@ public class SessionLoadedEventTest {
 		assertNotNull(e.getLoadedFileName());
 		assertEquals(sessionFileName, e.getLoadedFileName());
 	}
-
-
 }
