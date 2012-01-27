@@ -38,15 +38,15 @@ package org.cytoscape.model;
 
 public class DummyGraphObject implements CyTableEntry {
 	
-	private static int suidBase = 0;
+	private static long suidBase = 0;
 
-	private final long suid;
+	private final Long suid;
 
 	public DummyGraphObject() {
 		suid = suidBase++;
 	}
 
-	public long getSUID() {
+	public Long getSUID() {
 		return suid;
 	}
 

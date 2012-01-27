@@ -50,5 +50,5 @@ public interface CyTableEntry {
 	 * Returns the SUID of the implementing object.
 	 * @return the SUID of the implementing object.
 	 */
-	long getSUID();
+	Long getSUID();
 }
