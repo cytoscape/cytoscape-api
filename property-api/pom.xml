@@ -43,22 +43,6 @@
 				<version>0.7.4</version>
 				<executions>
 					<execution>
-						<id>session</id>
-						<goals>
-							<goal>generate</goal>
-						</goals>
-						<configuration>
-							<schemaDirectory>src/main/resources/xsd</schemaDirectory>
-							<schemaIncludes>
-								<include>cysession.xsd</include>
-							</schemaIncludes>
-							<generatePackage>org.cytoscape.property.session</generatePackage>
-							<verbose>true</verbose>
-							<removeOldOutput>false</removeOldOutput>
-							<forceRegenerate>true</forceRegenerate>
-						</configuration>
-					</execution>
-					<execution>
 						<id>bookmarks</id>
 						<goals>
 							<goal>generate</goal>

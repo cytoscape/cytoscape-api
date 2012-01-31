@@ -10,7 +10,6 @@ import java.util.Set;
 
 import org.cytoscape.model.CyTableMetadata;
 import org.cytoscape.property.CyProperty;
-import org.cytoscape.property.session.Cysession;
 import org.cytoscape.session.CySession;
 import org.cytoscape.session.CySessionManager;
 import org.cytoscape.view.model.CyNetworkView;
@@ -31,9 +30,6 @@ public class SessionLoadedEventTest {
 	private Set<CyProperty<?>> props;
 
 	@Mock
-	private Cysession cysess;
-
-	@Mock
 	private Map<String, List<File>> appMap;
 
 	@Mock
@@ -52,7 +48,7 @@ public class SessionLoadedEventTest {
 	public void initMocks() {
 		MockitoAnnotations.initMocks(this);
 		
-		session = new CySession.Builder().properties(props).cysession(cysess).appFileListMap(appMap).tables(tables)
+		session = new CySession.Builder().properties(props).appFileListMap(appMap).tables(tables)
 				.networkViews(netViews).visualStyles(styles).viewVisualStyleMap(stylesMap)
 				.build();
 	}

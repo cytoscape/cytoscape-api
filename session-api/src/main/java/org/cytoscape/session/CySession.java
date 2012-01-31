@@ -37,7 +37,6 @@ import java.util.Set;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyTableMetadata;
 import org.cytoscape.property.CyProperty;
-import org.cytoscape.property.session.Cysession;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.vizmap.VisualStyle;
 
@@ -70,7 +69,6 @@ public final class CySession {
 	private final Set<CyProperty<?>> properties;
 	private final Set<VisualStyle> visualStyles;
 	private final Map<String, List<File>> appFiles;
-	private final Cysession cysession; 
 
 	private CySession(Builder b) {
 		// TODO consider making defensive copies of objects...
@@ -109,11 +107,6 @@ public final class CySession {
 			appFiles = new HashMap<String, List<File>>(); 
 		else
 			appFiles = b.appFiles;
-
-		if ( b.cysession == null )
-			cysession = new Cysession(); 
-		else
-			cysession = b.cysession;
 	}
 
 	/**
@@ -130,7 +123,6 @@ public final class CySession {
 		private Set<CyProperty<?>> properties;
 		private Set<VisualStyle> visualStyles; 
 		private Map<String, List<File>> appFiles; 
-		private Cysession cysession; 
 
 		/**
 		 * Returns a complete instance of CySession based upon the methods
@@ -228,19 +220,6 @@ public final class CySession {
 			this.appFiles = p; 
 			return this;
 		}
-
-		/**
-		 * Returns an instance of Builder that has at least been configured
-		 * with the specified session descriptor. 
-		 * @param s A {@link Cysession} object containing the session descriptor
-		 * for this session.
-		 * @return An instance of Builder that has at least been configured
-		 * with the specified session descriptor. 
-		 */
-		public Builder cysession(final Cysession s) { 
-			this.cysession = s; 
-			return this;
-		}
 	}
 
 	/**
@@ -281,12 +260,6 @@ public final class CySession {
 	 * @return A Set of {@link org.cytoscape.view.vizmap.VisualStyle} objects
 	 */
     public Set<VisualStyle> getVisualStyles() { return visualStyles; }
-
-	/**
-	 * Returns a {@link Cysession} object containing a description of this session. 
-	 * @return A {@link Cysession} object containing a description of this session. 
-	 */
-    public Cysession getCysession() { return cysession; }
 
 	/**
 	 * Returns a map of app names to lists of File objects that are stored

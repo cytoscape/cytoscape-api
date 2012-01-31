@@ -9,8 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.cytoscape.event.AbstractCyEvent;
-import org.cytoscape.property.session.Cytopanel;
-import org.cytoscape.property.session.Desktop;
 import org.cytoscape.session.CySessionManager;
 
 /**
@@ -23,8 +21,6 @@ import org.cytoscape.session.CySessionManager;
 public final class SessionAboutToBeSavedEvent extends AbstractCyEvent<CySessionManager> {
 	
 	private final Map<String,List<File>> appFileListMap;
-	private final List<Cytopanel> cytopanels;
-	private Desktop desktop;
 	
 	// TODO should the source be the session manager??
 	/**
@@ -35,7 +31,6 @@ public final class SessionAboutToBeSavedEvent extends AbstractCyEvent<CySessionM
 		super(source, SessionAboutToBeSavedListener.class);
 
 		appFileListMap = new HashMap<String,List<File>>();
-		cytopanels = new ArrayList<Cytopanel>();
 	}
 
 	/**
@@ -76,46 +71,5 @@ public final class SessionAboutToBeSavedEvent extends AbstractCyEvent<CySessionM
 		// Make the return value immutable so that listeners
 		// can't mess with us.
 		return Collections.unmodifiableMap( appFileListMap );
-	}
-
-	/**
-	 * This method is not meant to be used by listeners for this event.
-	 * @return the {@link Desktop} object associated with this event.
-	 */
-	public Desktop getDesktop() {
-		return desktop;
-	}
-
-	/**
-	 * A method that allows apps to specify desktop-related data to be
-	 * stored in the session.
-	 * @param desktop Setting the {@link Desktop} object associated with this event.
-	 */
-	public void setDesktop(Desktop desktop) {
-		this.desktop = desktop;
-	}
-
-	/**
-	 * This method is not meant to be used by listeners for this event.
-	 * @return a List of {@link org.cytoscape.property.session.Cytopanel}s.
-	 */
-	public List<Cytopanel> getCytopanels() {
-		// Make the return value immutable so that listeners
-		// can't mess with us.
-		return Collections.unmodifiableList( cytopanels );
-	}
-
-	/**
-	 * A method that allows apps to add Cytopanel-related information to be
-	 * stored in the session.
-	 * @param cytopanel The CytoPanel to be added.
-	 * @throws Exception 
-	 * @throws NullPointerException If the Cytopanel to be added is null.
-	 */
-	public void addCytopanel(Cytopanel cytopanel) throws Exception {
-		if (cytopanel == null)
-			throw new NullPointerException("cytopanel is null");
-		
-		cytopanels.add(cytopanel);
 	}
 }

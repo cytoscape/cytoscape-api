@@ -18,7 +18,6 @@ import org.cytoscape.model.CyTable;
 import org.cytoscape.model.CyTableMetadata;
 import org.cytoscape.property.CyProperty;
 import org.cytoscape.property.SimpleCyProperty;
-import org.cytoscape.property.session.Cysession;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.vizmap.VisualStyle;
 import org.junit.Test;
@@ -176,29 +175,6 @@ public class CySessionTest {
 		assertNotNull(session);
 		assertNotNull(session.getVisualStyles());
 		assertEquals(set, session.getVisualStyles());
-	}
-
-	@Test
-	public void testDefaultGetSession() {
-		session = new CySession.Builder().build();
-		assertNotNull(session);
-		assertNotNull(session.getCysession());
-	}
-
-	@Test
-	public void testSetNullSession() {
-		session = new CySession.Builder().cysession(null).build();
-		assertNotNull(session);
-		assertNotNull(session.getCysession());
-	}
-
-	@Test
-	public void testSetSession() {
-		Cysession b = mock(Cysession.class);
-		session = new CySession.Builder().cysession(b).build();
-		assertNotNull(session);
-		assertNotNull(session.getCysession());
-		assertEquals(b, session.getCysession());
 	}
 
 	@Test
