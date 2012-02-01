@@ -68,16 +68,8 @@ public final class ArrowShapeVisualProperty extends AbstractVisualProperty<Arrow
 	}
 
 	private static final class ArrowShapeImpl extends AbstractVisualPropertyValue implements ArrowShape {
-
-		public ArrowShapeImpl(String displayName, String serializableString) {
+		public ArrowShapeImpl(final String displayName, final String serializableString) {
 			super(displayName, serializableString);
-		}
-
-		@Override
-		public VisualPropertyValue parseSerializableString(String serializableString) {
-			// TODO: FIXME
-			// Should be overridden by child class.
-			return null;
 		}
 	}
 }

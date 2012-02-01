@@ -13,8 +13,7 @@ import org.cytoscape.view.presentation.property.values.NodeShape;
  * 
  * @CyAPI.Final.Class
  */
-public final class NodeShapeVisualProperty extends
-		AbstractVisualProperty<NodeShape> {
+public final class NodeShapeVisualProperty extends AbstractVisualProperty<NodeShape> {
 
 	// Presets
 	public static final NodeShape RECTANGLE = new NodeShapeImpl("Rectangle", "RECTANGLE");
@@ -64,7 +63,7 @@ public final class NodeShapeVisualProperty extends
 	}
 
 	@Override
-	public NodeShape parseSerializableString(String value) {
+	public NodeShape parseSerializableString(final String value) {
 		NodeShape shape = null;
 		
 		if (value != null)
@@ -77,24 +76,9 @@ public final class NodeShapeVisualProperty extends
 		return DEFAULT_SHAPES.containsValue(shape);
 	}
 
-	private static final class NodeShapeImpl extends
-			AbstractVisualPropertyValue implements NodeShape {
-
-		public NodeShapeImpl(final String displayName,
-				final String serializableString) {
+	private static final class NodeShapeImpl extends AbstractVisualPropertyValue implements NodeShape {
+		public NodeShapeImpl(final String displayName, final String serializableString) {
 			super(displayName, serializableString);
 		}
-
-		@Override
-		public VisualPropertyValue parseSerializableString(final String serializableString) {
-			// TODO Auto-generated method stub
-			return null;
-		}
-		
-		@Override
-		public String toString() {
-			return super.toString();
-		}
 	}
-
 }

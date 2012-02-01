@@ -63,15 +63,8 @@ public final class LineTypeVisualProperty extends AbstractVisualProperty<LineTyp
 	}
 	
 	private static final class LineTypeImpl extends AbstractVisualPropertyValue implements LineType {
-
 		public LineTypeImpl(String displayName, String serializableString) {
 			super(displayName, serializableString);
-		}
-
-		@Override
-		public VisualPropertyValue parseSerializableString(String serializableString) {
-			// TODO Auto-generated method stub
-			return null;
 		}
 	}
 }

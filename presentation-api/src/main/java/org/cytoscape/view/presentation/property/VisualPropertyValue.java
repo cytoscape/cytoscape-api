@@ -25,11 +25,4 @@ public interface VisualPropertyValue {
 	 */
 	String getSerializableString();
 	
-	/**
-	 * Create actual value from serializable String.
-	 * 
-	 * @param serializableString serialized form of this value
-	 * @return Value created from given text representation.
-	 */
-	VisualPropertyValue parseSerializableString(final String serializableString);
 }
