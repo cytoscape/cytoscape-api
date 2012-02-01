@@ -39,7 +39,7 @@ public class RichVisualLexicon extends MinimalVisualLexicon {
 			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NETWORK_DEPTH", "Network Depth", CyNetwork.class);
 
 	public static final VisualProperty<NodeShape> NODE_SHAPE = new NodeShapeVisualProperty(
-			NodeShapeVisualProperty.RECTANGLE, "NODE_SHAPE", "Node Shape", CyNode.class);
+			NodeShapeVisualProperty.ELLIPSE, "NODE_SHAPE", "Node Shape", CyNode.class);
 
 	// Line Types
 	public static final VisualProperty<LineType> NODE_BORDER_LINE_TYPE = new LineTypeVisualProperty(

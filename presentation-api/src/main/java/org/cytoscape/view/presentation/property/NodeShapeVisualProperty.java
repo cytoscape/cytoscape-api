@@ -54,10 +54,8 @@ public final class NodeShapeVisualProperty extends
 		NODE_SHAPE_RANGE = new DiscreteRange<NodeShape>(NodeShape.class, new HashSet<NodeShape>(DEFAULT_SHAPES.values()));
 	}
 
-	public NodeShapeVisualProperty(NodeShape defaultValue, String id,
-			String displayName, Class<?> targetObjectDataType) {
-		super(defaultValue, NODE_SHAPE_RANGE, id, displayName,
-				targetObjectDataType);
+	public NodeShapeVisualProperty(NodeShape defaultValue, String id, String displayName, Class<?> targetObjectDataType) {
+		super(defaultValue, NODE_SHAPE_RANGE, id, displayName, targetObjectDataType);
 	}
 
 	@Override
@@ -88,8 +86,7 @@ public final class NodeShapeVisualProperty extends
 		}
 
 		@Override
-		public VisualPropertyValue parseSerializableString(
-				String serializableString) {
+		public VisualPropertyValue parseSerializableString(final String serializableString) {
 			// TODO Auto-generated method stub
 			return null;
 		}
