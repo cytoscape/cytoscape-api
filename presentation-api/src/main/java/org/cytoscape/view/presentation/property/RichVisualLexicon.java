@@ -66,14 +66,14 @@ public class RichVisualLexicon extends MinimalVisualLexicon {
 			new ContinuousRange<Integer>(Integer.class, 1, Integer.MAX_VALUE, true, true), "NODE_LABEL_FONT_SIZE",
 			"Node Label Font Size", CyNode.class);
 
-	public static final VisualProperty<Integer> NODE_TRANSPARENCY = new IntegerVisualProperty(200,
+	public static final VisualProperty<Integer> NODE_TRANSPARENCY = new IntegerVisualProperty(255,
 			new ContinuousRange<Integer>(Integer.class, 0, 255, true, true), "NODE_TRANSPARENCY", "Node Transparency",
 			CyNode.class);
-	public static final VisualProperty<Integer> NODE_BORDER_TRANSPARENCY = new IntegerVisualProperty(200,
+	public static final VisualProperty<Integer> NODE_BORDER_TRANSPARENCY = new IntegerVisualProperty(255,
 			new ContinuousRange<Integer>(Integer.class, 0, 255, true, true), "NODE_BORDER_TRANSPARENCY", "Node Border Transparency",
 			CyNode.class);
 
-	public static final VisualProperty<Integer> NODE_LABEL_TRANSPARENCY = new IntegerVisualProperty(200,
+	public static final VisualProperty<Integer> NODE_LABEL_TRANSPARENCY = new IntegerVisualProperty(255,
 			new ContinuousRange<Integer>(Integer.class, 0, 255, true, true), "NODE_LABEL_TRANSPARENCY",
 			"Node Label Transparency", CyNode.class);
 
@@ -97,11 +97,11 @@ public class RichVisualLexicon extends MinimalVisualLexicon {
 			MinimalVisualLexicon.PAINT_RANGE, "EDGE_STROKE_UNSELECTED_PAINT", "Edge Stroke Color (Unselected)",
 			CyEdge.class);
 
-	public static final VisualProperty<Integer> EDGE_TRANSPARENCY = new IntegerVisualProperty(200,
+	public static final VisualProperty<Integer> EDGE_TRANSPARENCY = new IntegerVisualProperty(255,
 			new ContinuousRange<Integer>(Integer.class, 0, 255, true, true), "EDGE_TRANSPARENCY", "Edge Transparency",
 			CyEdge.class);
 
-	public static final VisualProperty<Integer> EDGE_LABEL_TRANSPARENCY = new IntegerVisualProperty(200,
+	public static final VisualProperty<Integer> EDGE_LABEL_TRANSPARENCY = new IntegerVisualProperty(255,
 			new ContinuousRange<Integer>(Integer.class, 0, 255, true, true), "EDGE_LABEL_TRANSPARENCY",
 			"Edge Label Transparency", CyEdge.class);
 
