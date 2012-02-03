@@ -28,6 +28,7 @@
 package org.cytoscape.session;
 
 import java.io.File;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -71,47 +72,18 @@ public final class CySession {
 	private final Map<String, List<File>> appFiles;
 
 	private CySession(Builder b) {
-		// TODO consider making defensive copies of objects...
-
-		if ( b.networks == null )
-			networks = new HashSet<CyNetwork>();
-		else
-			networks = b.networks;
-		
-		if ( b.netViews == null )
-			netViews = new HashSet<CyNetworkView>();
-		else
-			netViews = b.netViews;
-
-		if ( b.tables == null )
-			tables = new HashSet<CyTableMetadata>();
-		else 
-			tables = b.tables;
-
-		if ( b.vsMap == null )
-			vsMap = new HashMap<CyNetworkView,String>();
-		else
-			vsMap = b.vsMap;
-
-		if ( b.properties == null )
-			properties = new HashSet<CyProperty<?>>();
-		else
-			properties = b.properties;
-
-		if ( b.visualStyles == null )
-			visualStyles = new HashSet<VisualStyle>();
-		else
-			visualStyles = b.visualStyles;
-
-		if ( b.appFiles == null )
-			appFiles = new HashMap<String, List<File>>(); 
-		else
-			appFiles = b.appFiles;
+		// Make defensive copies of objects
+		networks = Collections.unmodifiableSet( b.networks == null ? new HashSet<CyNetwork>() : b.networks );
+		netViews = Collections.unmodifiableSet( b.netViews == null ? new HashSet<CyNetworkView>() : b.netViews );
+		tables = Collections.unmodifiableSet( b.tables == null ? new HashSet<CyTableMetadata>() : b.tables );
+		vsMap = Collections.unmodifiableMap( b.vsMap == null ? new HashMap<CyNetworkView,String>() : b.vsMap );
+		properties = Collections.unmodifiableSet( b.properties == null ? new HashSet<CyProperty<?>>() : b.properties );
+		visualStyles = Collections.unmodifiableSet( b.visualStyles == null ? new HashSet<VisualStyle>() : b.visualStyles );
+		appFiles = Collections.unmodifiableMap( b.appFiles == null ? new HashMap<String, List<File>>() : b.appFiles );
 	}
 
 	/**
-	 * A implementation of the builder pattern used to construct immutable
-	 * instances of CySession objects.
+	 * A implementation of the builder pattern used to construct immutable instances of CySession objects.
 	 * @CyAPI.Static.Class
 	 */
 	public static class Builder {
@@ -125,19 +97,15 @@ public final class CySession {
 		private Map<String, List<File>> appFiles; 
 
 		/**
-		 * Returns a complete instance of CySession based upon the methods
-		 * called on this instance of Builder.
-		 * @return A fully configured instanced of CySession. 
+		 * Returns a complete instance of CySession based upon the methods called on this instance of Builder.
+		 * @return A fully configured instanced of CySession.
 		 */
 		public CySession build() { return new CySession(this); }
 
 		/**
-		 * Returns an instance of Builder that has at least been configured
-		 * with the specified networks.
-		 * @param views A Set of CyNetwork objects, presumably all networks
-		 * that exist in this instance of Cytoscape.
-		 * @return An instance of Builder that has at least been configured
-		 * with the specified networks.
+		 * Returns an instance of Builder that has at least been configured with the specified networks.
+		 * @param views A Set of CyNetwork objects, presumably all networks that exist in this instance of Cytoscape.
+		 * @return An instance of Builder that has at least been configured with the specified networks.
 		 */
 		public Builder networks(final Set<CyNetwork> networks) { 
 			this.networks = networks; 
@@ -145,12 +113,10 @@ public final class CySession {
 		}
 		
 		/**
-		 * Returns an instance of Builder that has at least been configured
-		 * with the specified network views.
-		 * @param views A Set of CyNetworkView objects, presumably all network views
-		 * that exist in this instance of Cytoscape.
-		 * @return An instance of Builder that has at least been configured
-		 * with the specified network views.
+		 * Returns an instance of Builder that has at least been configured with the specified network views.
+		 * @param views A Set of CyNetworkView objects, presumably all network views that exist in this instance of
+		 *            Cytoscape.
+		 * @return An instance of Builder that has at least been configured with the specified network views.
 		 */
 		public Builder networkViews(final Set<CyNetworkView> views) { 
 			netViews = views; 
@@ -158,12 +124,9 @@ public final class CySession {
 		}
 
 		/**
-		 * Returns an instance of Builder that has at least been configured
-		 * with the specified tables.
-		 * @param tables2 A Set of CyTable objects, presumably all tables
-		 * that exist in this instance of Cytoscape.
-		 * @return An instance of Builder that has at least been configured
-		 * with the specified tables.
+		 * Returns an instance of Builder that has at least been configured with the specified tables.
+		 * @param tables2 A Set of CyTable objects, presumably all tables that exist in this instance of Cytoscape.
+		 * @return An instance of Builder that has at least been configured with the specified tables.
 		 */
     	public Builder tables(final Set<CyTableMetadata> tables2) { 
 			tables = tables2; 
@@ -171,13 +134,12 @@ public final class CySession {
 		}
 
 		/**
-		 * Returns an instance of Builder that has at least been configured
-		 * with the specified network view visual style name map.
-		 * @param vs A map of CyNetworkViews to the names of the VisualStyle
-		 * currently applied to that network view, for presumably all network views
-		 * that exist in this instance of Cytoscape.
-		 * @return An instance of Builder that has at least been configured
-		 * with the specified network view visual style name map.
+		 * Returns an instance of Builder that has at least been configured with the specified network view visual style
+		 * name map.
+		 * @param vs A map of CyNetworkViews to the names of the VisualStyle currently applied to that network view, for
+		 *            presumably all network views that exist in this instance of Cytoscape.
+		 * @return An instance of Builder that has at least been configured with the specified network view visual style
+		 *         name map.
 		 */
     	public Builder viewVisualStyleMap(final  Map<CyNetworkView,String> vs) { 
 			vsMap = vs; 
@@ -185,23 +147,19 @@ public final class CySession {
 		}
 
 		/**
-		 * Returns an instance of Builder that has at least been configured
-		 * with the specified properties.
+		 * Returns an instance of Builder that has at least been configured with the specified properties.
 		 * @param p A set of session related {@link CyProperty} objects.
-		 * @return An instance of Builder that has at least been configured
-		 * with the specified properties.
+		 * @return An instance of Builder that has at least been configured with the specified properties.
 		 */
-    	public Builder properties(final Set<CyProperty<?>> p) { 
-    		properties = p; 
+		public Builder properties(final Set<CyProperty<?>> p) {
+			properties = p;
 			return this;
 		}
 
 		/**
-		 * Returns an instance of Builder that has at least been configured
-		 * with the specified properties.
+		 * Returns an instance of Builder that has at least been configured with the specified properties.
 		 * @param styles All VisualStyles in this instance of Cytoscape.
-		 * @return An instance of Builder that has at least been configured
-		 * with the specified properties.
+		 * @return An instance of Builder that has at least been configured with the specified properties.
 		 */
     	public Builder visualStyles(final Set<VisualStyle> styles) { 
 			visualStyles = styles; 
@@ -209,12 +167,12 @@ public final class CySession {
 		}
 
 		/**
-		 * Returns an instance of Builder that has at least been configured
-		 * with the specified app file list map.
-		 * @param p A map of app names to a list of File objects that the
-		 * given app wants stored in the session file.
-		 * @return An instance of Builder that has at least been configured
-		 * with the specified app file list map.
+		 * Returns an instance of Builder that has at least been configured with the specified app file list map.<br/>
+		 * The app name should follow the java class namespace convention (e.g. org.orgname.appname) in order to prevent
+		 * name collisions. The "org.cytoscape" domain is reserved for core Cytoscape apps (e.g. org.cytoscape.filter).
+		 * @param p A map of app names to a list of File objects that the given app wants stored in the session file.
+		 *            The app name should follow the java class namespace convention.
+		 * @return An instance of Builder that has at least been configured with the specified app file list map.
 		 */
 		public Builder appFileListMap(final Map<String, List<File>> p) { 
 			this.appFiles = p; 
@@ -241,17 +199,14 @@ public final class CySession {
     public Set<CyTableMetadata> getTables() { return tables; }
 
 	/**
-	 * Returns a map of CyNetworkViews to the names of the VisualStyle
-	 * applied to that network view in this session.
-	 * @return A map of CyNetworkViews to the names of the VisualStyle
-	 * applied to that network view in this session.
+	 * Returns a map of CyNetworkViews to the names of the VisualStyle applied to that network view in this session.
+	 * @return A map of CyNetworkViews to the names of the VisualStyle applied to that network view in this session.
 	 */
     public Map<CyNetworkView,String> getViewVisualStyleMap() { return vsMap; }
 
 	/**
 	 * Returns a set of {@link CyProperty} objects defined for this session.
-	 * @return A set of session related {@link CyProperty} objects.
-	 * defined for this session. 
+	 * @return A set of session related {@link CyProperty} objects. defined for this session.
 	 */
     public Set<CyProperty<?>> getProperties() { return properties; }
 
@@ -262,10 +217,8 @@ public final class CySession {
     public Set<VisualStyle> getVisualStyles() { return visualStyles; }
 
 	/**
-	 * Returns a map of app names to lists of File objects that are stored
-	 * as part of the session for the specified app.
-	 * @return A map of app names to lists of File objects that are stored
-	 * as part of the session for the specified app.
+	 * Returns a map of app names to lists of File objects that are stored as part of the session for the specified app.
+	 * @return A map of app names to lists of File objects that are stored as part of the session for the specified app.
 	 */
 	public Map<String, List<File>> getAppFileListMap() { return appFiles; }
 }
