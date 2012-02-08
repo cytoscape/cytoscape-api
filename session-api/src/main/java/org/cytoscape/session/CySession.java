@@ -36,10 +36,14 @@ import java.util.Map;
 import java.util.Set;
 
 import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyNode;
+import org.cytoscape.model.CyTableEntry;
 import org.cytoscape.model.CyTableMetadata;
 import org.cytoscape.property.CyProperty;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.vizmap.VisualStyle;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A session is an immutable snapshot of the data contents of Cytoscape.
@@ -66,20 +70,28 @@ public final class CySession {
 	private final Set<CyNetwork> networks;
 	private final Set<CyNetworkView> netViews;
 	private final Set<CyTableMetadata> tables;
-	private final Map<CyNetworkView,String> vsMap;
+	private final Map<CyNetworkView, String> vsMap;
 	private final Set<CyProperty<?>> properties;
 	private final Set<VisualStyle> visualStyles;
 	private final Map<String, List<File>> appFiles;
+	private final Map<Class<? extends CyTableEntry>, Map<Object, ? extends CyTableEntry>> objectMap;
+
+	private static final Logger logger = LoggerFactory.getLogger(CySession.class);
 
 	private CySession(Builder b) {
 		// Make defensive copies of objects
 		networks = Collections.unmodifiableSet( b.networks == null ? new HashSet<CyNetwork>() : b.networks );
 		netViews = Collections.unmodifiableSet( b.netViews == null ? new HashSet<CyNetworkView>() : b.netViews );
 		tables = Collections.unmodifiableSet( b.tables == null ? new HashSet<CyTableMetadata>() : b.tables );
-		vsMap = Collections.unmodifiableMap( b.vsMap == null ? new HashMap<CyNetworkView,String>() : b.vsMap );
+		vsMap = Collections.unmodifiableMap( b.vsMap == null ? new HashMap<CyNetworkView, String>() : b.vsMap );
 		properties = Collections.unmodifiableSet( b.properties == null ? new HashSet<CyProperty<?>>() : b.properties );
 		visualStyles = Collections.unmodifiableSet( b.visualStyles == null ? new HashSet<VisualStyle>() : b.visualStyles );
 		appFiles = Collections.unmodifiableMap( b.appFiles == null ? new HashMap<String, List<File>>() : b.appFiles );
+		
+		if (b.objectMap == null)
+			objectMap = Collections.unmodifiableMap(new HashMap<Class<? extends CyTableEntry>, Map<Object, ? extends CyTableEntry>>());
+		else
+			objectMap = Collections.unmodifiableMap(b.objectMap);
 	}
 
 	/**
@@ -91,10 +103,11 @@ public final class CySession {
 		private Set<CyNetwork> networks; 
 		private Set<CyNetworkView> netViews; 
 		private Set<CyTableMetadata> tables;
-		private Map<CyNetworkView,String> vsMap; 
+		private Map<CyNetworkView, String> vsMap; 
 		private Set<CyProperty<?>> properties;
 		private Set<VisualStyle> visualStyles; 
-		private Map<String, List<File>> appFiles; 
+		private Map<String, List<File>> appFiles;
+		private Map<Class<? extends CyTableEntry>, Map<Object, ? extends CyTableEntry>> objectMap;
 
 		/**
 		 * Returns a complete instance of CySession based upon the methods called on this instance of Builder.
@@ -141,7 +154,7 @@ public final class CySession {
 		 * @return An instance of Builder that has at least been configured with the specified network view visual style
 		 *         name map.
 		 */
-    	public Builder viewVisualStyleMap(final  Map<CyNetworkView,String> vs) { 
+    	public Builder viewVisualStyleMap(final  Map<CyNetworkView, String> vs) { 
 			vsMap = vs; 
 			return this;
 		}
@@ -178,6 +191,17 @@ public final class CySession {
 			this.appFiles = p; 
 			return this;
 		}
+		
+		/**
+		 * Returns an instance of Builder that has at least been configured with the specified old ID maps.
+		 * @param map A map of {@link CyTableEntry} types to maps that have former identifiers as keys and {@link CyNode}s,
+		 *            {@link CyEdge}s, {@link CyNetwork}s or {@link CyNetworkView}s as values.
+		 * @return An instance of Builder that has at least been configured with the specified map.
+		 */
+		public Builder objectMap(final Map<Class<? extends CyTableEntry>, Map<Object, ? extends CyTableEntry>> map) { 
+			this.objectMap = map; 
+			return this;
+		}
 	}
 
 	/**
@@ -202,7 +226,7 @@ public final class CySession {
 	 * Returns a map of CyNetworkViews to the names of the VisualStyle applied to that network view in this session.
 	 * @return A map of CyNetworkViews to the names of the VisualStyle applied to that network view in this session.
 	 */
-    public Map<CyNetworkView,String> getViewVisualStyleMap() { return vsMap; }
+    public Map<CyNetworkView, String> getViewVisualStyleMap() { return vsMap; }
 
 	/**
 	 * Returns a set of {@link CyProperty} objects defined for this session.
@@ -221,4 +245,35 @@ public final class CySession {
 	 * @return A map of app names to lists of File objects that are stored as part of the session for the specified app.
 	 */
 	public Map<String, List<File>> getAppFileListMap() { return appFiles; }
+	
+	/**
+	 * When a session is restored, Cytoscape automatically generates new SUIDs. This method returns an object 
+	 * ({@link CyNode}, {@link CyEdge}, {@link CyNetwork} or {@link CyNetworkView}) given its former identifier.<br/>
+	 * If the original version of the restored session is 3.0 or higher, the former ID is an SUID, which is a
+	 * {@link java.lang.Long}. However, if the session was recreated from a 2.x format, the former identifier is a
+	 * {@link java.lang.String} (e.g. the network's name).<br/>
+	 * @param oldId The former ID.
+	 * @param type The Class of the object to be returned ({@link CyNode}, {@link CyEdge}, {@link CyNetwork} or
+	 *            {@link CyNetworkView}).
+	 * @return An object ({@link CyNode}, {@link CyEdge}, {@link CyNetwork} or {@link CyNetworkView}) given its former
+	 *         identifier.
+	 */
+	@SuppressWarnings("unchecked")
+	public <T extends CyTableEntry> T getObject(Object oldId, Class<T> type) {
+		T tableEntry = null;
+		Map<Object, ? extends CyTableEntry> objByIdMap = objectMap.get(type);
+		
+		if (objByIdMap != null) {
+			Object obj = objByIdMap.get(oldId);
+			
+			try {
+				tableEntry = (T) obj;
+			} catch (ClassCastException cce) { // TODO: should it just throw the Exception?
+				logger.error("ClassCastException: Tried to cast object " + obj + " to " + type + " (old id = " + oldId
+						+ ")");
+			}
+		}
+		
+		return tableEntry;
+	}
 }

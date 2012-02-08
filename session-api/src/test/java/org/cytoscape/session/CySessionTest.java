@@ -2,6 +2,8 @@ package org.cytoscape.session;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 
@@ -14,11 +16,16 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
 
+import org.cytoscape.model.CyEdge;
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyTable;
+import org.cytoscape.model.CyTableEntry;
 import org.cytoscape.model.CyTableMetadata;
 import org.cytoscape.property.CyProperty;
 import org.cytoscape.property.SimpleCyProperty;
 import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.View;
 import org.cytoscape.view.vizmap.VisualStyle;
 import org.junit.Test;
 
@@ -220,6 +227,56 @@ public class CySessionTest {
 		assertEquals(l2,session.getAppFileListMap().get("app2"));
 	}
 
+	@Test
+	public void testSetNullObjectMap() {
+		session = new CySession.Builder().objectMap(null).build();
+		assertNotNull(session);
+		assertNull(session.getObject(1, CyNode.class));
+		assertNull(session.getObject(1, CyEdge.class));
+		assertNull(session.getObject(1, CyNetwork.class));
+		assertNull(session.getObject(1, CyNetworkView.class));
+		assertNull(session.getObject(1, View.class));
+	}
+	
+	@Test
+	public void testSetObjectMap() {
+		Map<Object, CyNetwork> netMap = new HashMap<Object, CyNetwork>();
+		CyNetwork net1 = mock(CyNetwork.class);
+		netMap.put("A", net1);
+		CyNetwork net2 = mock(CyNetwork.class);
+		netMap.put("B", net2);
+		
+		Map<Object, CyNetworkView> viewMap = new HashMap<Object, CyNetworkView>();
+		CyNetworkView view1 = mock(CyNetworkView.class);
+		viewMap.put("A", view1);
+		
+		Map<Object, CyNode> nodeMap = new HashMap<Object, CyNode>();
+		CyNode n1 = mock(CyNode.class);
+		nodeMap.put(new Long(1), n1);
+		CyNode n2 = mock(CyNode.class);
+		nodeMap.put(new Long(2), n2);
+		
+		Map<Object, CyEdge> edgeMap = new HashMap<Object, CyEdge>();
+		CyEdge e1 = mock(CyEdge.class);
+		edgeMap.put(new Long(3), e1);
+				
+		Map<Class<? extends CyTableEntry>, Map<Object, ? extends CyTableEntry>> objMap = new HashMap<Class<? extends CyTableEntry>, Map<Object, ? extends CyTableEntry>>();
+		objMap.put(CyNetwork.class, netMap);
+		objMap.put(CyNetworkView.class, viewMap);
+		objMap.put(CyNode.class, nodeMap);
+		objMap.put(CyEdge.class, edgeMap);
+		
+		session = new CySession.Builder().objectMap(objMap).build();
+		assertNotNull(session);
+		assertSame(net1, session.getObject("A", CyNetwork.class));
+		assertSame(net2, session.getObject("B", CyNetwork.class));
+		assertSame(view1, session.getObject("A", CyNetworkView.class));
+		assertSame(n1, session.getObject(new Long(1), CyNode.class));
+		assertSame(n2, session.getObject(new Long(2), CyNode.class));
+		assertSame(e1, session.getObject(new Long(3), CyEdge.class));
+		assertNull(session.getObject("A", View.class));
+		assertNull(session.getObject("B", CyNetworkView.class));
+	}
 
 	private void checkProps(Set<CyProperty<?>> set) {
 		assertNotNull(set);
