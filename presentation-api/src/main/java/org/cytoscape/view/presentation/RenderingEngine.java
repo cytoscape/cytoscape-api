@@ -41,15 +41,21 @@ public interface RenderingEngine<T> {
 
 	/**
 	 * Get property values for the rendering engine, like LOD.
-	 * Users can set each property value by getting this {@linkplain Properties} object.
-	 * <p>
-	 * {@linkplain Properties} object itself is immutable.
+	 * Users can set each property using the {@linkplain setProperty} method.
 	 * 
 	 * @return property values.
 	 */
 	public Properties getProperties();
 	
 
+	/**
+	 * Set property value for the rendering engine, like LOD.
+	 * @param key the property attribute that need to be set.
+	 * @param value the value for the property attribute.
+	 */
+	public void setProperties( String key, String value);
+	
+	
 	/**
 	 * For export image function.
 	 * 
