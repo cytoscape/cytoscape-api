@@ -231,11 +231,16 @@ public class CySessionTest {
 	public void testSetNullObjectMap() {
 		session = new CySession.Builder().objectMap(null).build();
 		assertNotNull(session);
-		assertNull(session.getObject(1, CyNode.class));
-		assertNull(session.getObject(1, CyEdge.class));
-		assertNull(session.getObject(1, CyNetwork.class));
-		assertNull(session.getObject(1, CyNetworkView.class));
-		assertNull(session.getObject(1, View.class));
+		assertNull(session.getObject(1L, CyNode.class));
+		assertNull(session.getObject(1L, CyEdge.class));
+		assertNull(session.getObject(1L, CyNetwork.class));
+		assertNull(session.getObject(1L, CyNetworkView.class));
+		assertNull(session.getObject(1L, View.class));
+		assertNull(session.getObject("a", CyNode.class));
+		assertNull(session.getObject("a", CyEdge.class));
+		assertNull(session.getObject("a", CyNetwork.class));
+		assertNull(session.getObject("a", CyNetworkView.class));
+		assertNull(session.getObject("a", View.class));
 	}
 	
 	@Test

@@ -248,18 +248,35 @@ public final class CySession {
 	
 	/**
 	 * When a session is restored, Cytoscape automatically generates new SUIDs. This method returns an object 
+	 * ({@link CyNode}, {@link CyEdge}, {@link CyNetwork} or {@link CyNetworkView}) given its former SUID.<br/>
+	 * Use this method if the version of the loaded session is 3.0 or higher.
+	 * @param oldSUID The former SUID.
+	 * @param type The Class of the object to be returned ({@link CyNode}, {@link CyEdge}, {@link CyNetwork} or
+	 *            {@link CyNetworkView}).
+	 * @return An object ({@link CyNode}, {@link CyEdge}, {@link CyNetwork} or {@link CyNetworkView}) given its former
+	 *         SUID.
+	 */
+	public <T extends CyTableEntry> T getObject(Long oldSUID, Class<T> type) {
+		return getObjectInternal(oldSUID, type);
+	}
+	
+	/**
+	 * When a session is restored, Cytoscape automatically generates new SUIDs. This method returns an object 
 	 * ({@link CyNode}, {@link CyEdge}, {@link CyNetwork} or {@link CyNetworkView}) given its former identifier.<br/>
-	 * If the original version of the restored session is 3.0 or higher, the former ID is an SUID, which is a
-	 * {@link java.lang.Long}. However, if the session was recreated from a 2.x format, the former identifier is a
-	 * {@link java.lang.String} (e.g. the network's name).<br/>
-	 * @param oldId The former ID.
+	 * Use this method if the version of the loaded session is 2.x, because older versions of Cytoscape save 
+	 * String IDs, such as node names and the network titles.
+	 * @param oldId The former ID, from Cytocape versions prior than 3.0.
 	 * @param type The Class of the object to be returned ({@link CyNode}, {@link CyEdge}, {@link CyNetwork} or
 	 *            {@link CyNetworkView}).
 	 * @return An object ({@link CyNode}, {@link CyEdge}, {@link CyNetwork} or {@link CyNetworkView}) given its former
 	 *         identifier.
 	 */
+	public <T extends CyTableEntry> T getObject(String oldId, Class<T> type) {
+		return getObjectInternal(oldId, type);
+	}
+	
 	@SuppressWarnings("unchecked")
-	public <T extends CyTableEntry> T getObject(Object oldId, Class<T> type) {
+	private <T extends CyTableEntry> T getObjectInternal(Object oldId, Class<T> type) {
 		T tableEntry = null;
 		Map<Object, ? extends CyTableEntry> objByIdMap = objectMap.get(type);
 		
@@ -268,7 +285,7 @@ public final class CySession {
 			
 			try {
 				tableEntry = (T) obj;
-			} catch (ClassCastException cce) { // TODO: should it just throw the Exception?
+			} catch (ClassCastException cce) {
 				logger.error("ClassCastException: Tried to cast object " + obj + " to " + type + " (old id = " + oldId
 						+ ")");
 			}
