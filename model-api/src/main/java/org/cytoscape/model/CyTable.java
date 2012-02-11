@@ -140,7 +140,7 @@ public interface CyTable extends CyTableEntry {
 	/**
 	 * Create a column of the specified name and the specified type. The column
 	 * type is limited to Integer, Long, Double, String, and Boolean. The
-	 * default value for the column will be null. If the column already existed, IllegalArgumentException will be thrown.
+	 * default value for the column will be null. If the column already exists, IllegalArgumentException will be thrown.
 	 * @param <T> The generic type of the column.
 	 * @param columnName The name identifying the attribute.
 	 * @param type The type of the column.
@@ -150,7 +150,8 @@ public interface CyTable extends CyTableEntry {
 
 	/**
 	 * Create a column of the specified name and the specified type. The column
-	 * type is limited to Integer, Long, Double, String, and Boolean. If the column already existed, IllegalArgumentException will be thrown.
+	 * type is limited to Integer, Long, Double, String, and Boolean. If the column already exists, IllegalArgumentException will be thrown.
+	 * The check for matching column names is case insensitive. 
 	 * @param <T> The generic type of the column.
 	 * @param columnName The name identifying the attribute.
 	 * @param type The type of the column.
@@ -163,7 +164,8 @@ public interface CyTable extends CyTableEntry {
 	/**
 	 * Create a column of Lists with the specified name and the specified element type.
 	 * The column type is limited to Integer, Long, Double, String, and Boolean. The
-	 * default value for the column will be null. If the column already existed, IllegalArgumentException will be thrown.
+	 * default value for the column will be null. If the column already exists, IllegalArgumentException will be thrown.
+	 * The check for matching column names is case insensitive. 
 	 * @param <T> The generic type of the elements of the list.
 	 * @param columnName The name identifying the attribute.
 	 * @param listElementType The type of the elements of the list.
@@ -173,7 +175,8 @@ public interface CyTable extends CyTableEntry {
 
 	/**
 	 * Create a column of Lists with the specified name and the specified element type.
-	 * The column type is limited to Integer, Long, Double, String, and Boolean. If the column already existed, IllegalArgumentException will be thrown.
+	 * The column type is limited to Integer, Long, Double, String, and Boolean. If the column already exists, IllegalArgumentException will be thrown.
+	 * The check for matching column names is case insensitive. 
 	 * @param <T> The generic type of the elements of the list.
 	 * @param columnName The name identifying the attribute.
 	 * @param listElementType The type of the elements of the list.
@@ -187,6 +190,7 @@ public interface CyTable extends CyTableEntry {
 	 * Returns the row specified by the primary key object and if a row
 	 * for the specified key does not yet exist in the table, a new row
 	 * will be created and the new row will be returned.
+	 * The check for matching column names is case insensitive. 
 	 * @param primaryKey The primary key index of the row to return.
 	 * @return The {@link CyRow} identified by the specified key or a new
 	 * row identified by the key if one did not already exist.

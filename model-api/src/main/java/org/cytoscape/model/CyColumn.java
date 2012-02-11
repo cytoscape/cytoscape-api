@@ -41,7 +41,8 @@ public interface CyColumn {
 	 */
 	String getName();
 
-	/** Change the name of this column.
+	/** Change the name of this column. If another column with a matching name already exists, IllegalArgumentException will be thrown.
+	 * The check for matching column names is case insensitive. 
 	 *  @param newName  the new column name
 	 *  @throws IllegalArgumentException if the column is immutable
 	 */

@@ -980,4 +980,78 @@ public abstract class AbstractCyTableTest {
 			assertNull(npkcol);
 		}
 	}
+	
+	@Test (expected=IllegalArgumentException.class)
+	public void testColumnNameMatchFirst(){
+		
+		table.createColumn("test", String.class, false);
+		table.createColumn("Test", Integer.class, false);
+		
+	}
+	
+	@Test (expected=IllegalArgumentException.class)
+	public void testColumnNameMatchFirst2(){
+		
+		table.createColumn("Test", String.class, false);
+		table.createColumn("test", Integer.class, false);
+		
+	}
+	
+	@Test (expected=IllegalArgumentException.class)
+	public void testColumnNameMatchMiddle(){
+		
+		table.createColumn("test", String.class, false);
+		table.createColumn("teSt", Integer.class, false);
+		
+	}
+	
+	@Test (expected=IllegalArgumentException.class)
+	public void testColumnNameMatchEnd(){
+		
+		table.createColumn("test", String.class, false);
+		table.createColumn("tesT", Integer.class, false);
+		
+	}
+	
+	@Test (expected=IllegalArgumentException.class)
+	public void testColumnNameMatchAllCases(){
+		
+		table.createColumn("test", String.class, false);
+		table.createColumn("TEST", Integer.class, false);
+		
+	}
+	
+	@Test (expected=IllegalArgumentException.class)
+	public void testColumnNameMatchSomeCases(){
+		
+		table.createColumn("test", String.class, false);
+		table.createColumn("tESt", Integer.class, false);
+		
+	}
+	
+	@Test (expected=IllegalArgumentException.class)
+	public void testCreatColumnDefaultCaseMatch(){
+		
+		table.createColumn("test", String.class, false);
+		table.createColumn("Test", String.class, false, "");
+	}
+	
+	
+	@Test (expected=IllegalArgumentException.class)
+	public void testCreatListColumnsCaseMatch(){
+		
+		table.createColumn("test", String.class, false);
+		table.createListColumn("Test", String.class, false);
+	}
+	
+	@Test (expected=IllegalArgumentException.class)
+	public void testCreatListColumnsCaseMatch2(){
+		
+		table.createColumn("test", String.class, false);
+		table.createListColumn("Test", String.class, false, null );
+	}
+	
+	
+	
 }
+
