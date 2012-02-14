@@ -269,7 +269,7 @@ public interface CyNetwork extends CyTableEntry {
 	/**
 	 * A convenience method returns the default attribute table for this network.
 	 * This is equivalent to 
-	 * <code>cyTableManager.getTableMap(CyNetwork.class,this).get(CyNetwork.DEFAULT_ATTRS);</code>
+	 * <code>CyNetworkTableManager.getTableMap(this,CyNetwork.class,CyNetwork.DEFAULT_ATTRS);</code>
 	 * @return The default attribute table for this network.
 	 */
 	CyTable getDefaultNetworkTable();
@@ -277,7 +277,7 @@ public interface CyNetwork extends CyTableEntry {
 	/**
 	 * A convenience method returns the default attribute table for the nodes of this network.
 	 * This is equivalent to 
-	 * <code>cyTableManager.getTableMap(CyNode.class,this).get(CyNetwork.DEFAULT_ATTRS);</code>
+	 * <code>CyNetworkTableManager.getTable(this,CyNode.class,CyNetwork.DEFAULT_ATTRS);</code>
 	 * @return The default attribute table for the nodes of this network.
 	 */
 	CyTable getDefaultNodeTable();
@@ -285,7 +285,7 @@ public interface CyNetwork extends CyTableEntry {
 	/**
 	 * A convenience method returns the default attribute table for the edges of this network.
 	 * This is equivalent to 
-	 * <code>cyTableManager.getTableMap(CyEdge.class,this).get(CyNetwork.DEFAULT_ATTRS);</code>
+	 * <code>CyNetworkTableManager.getTableMap(this,CyEdge.class,CyNetwork.DEFAULT_ATTRS);</code>
 	 * @return The default attribute table for the edges of this network.
 	 */
 	CyTable getDefaultEdgeTable();
@@ -293,8 +293,8 @@ public interface CyNetwork extends CyTableEntry {
 	
 	/**
 	 * Returns the row for the specified table name for this object.
-	 * A null entry or a
-	 * an entry not found in this network will return null.
+	 * A null entry or a an entry not found in this network will return null,
+	 * but otherwise every node or edge in the network is guaranteed to have a row.
 	 * @param entry The entry (node, edge, network) whose row we're looking for. 
 	 * @param tableName the name of the table from which to extract the row..
 	 * @return the row in the table of the specified name for this object. 
