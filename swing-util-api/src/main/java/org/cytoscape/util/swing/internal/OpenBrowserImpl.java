@@ -43,7 +43,10 @@
 package org.cytoscape.util.swing.internal;
 
 
+import java.awt.Desktop;
 import java.io.IOException;
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.Properties;
 
 import org.cytoscape.property.CyProperty;
@@ -74,45 +77,25 @@ public class OpenBrowserImpl implements OpenBrowser {
 	 * @param url DOCUMENT ME!
 	 */
 	public boolean openURL(String url) {
-		String defBrowser = props.getProperty(OpenBrowser.DEF_WEB_BROWSER_PROP_NAME);
-		String osName = System.getProperty("os.name");
-
-		try {
-			String cmd;
-
-			if (osName.startsWith("Windows")) {
-				cmd = WIN_PATH + " " + url;
-			} else if (osName.startsWith("Mac")) {
-				cmd = MAC_PATH + " " + url;
-			} else {
-				if (defBrowser != null && !defBrowser.equals("")) {
-					cmd = defBrowser + " " + url;
-				} else {
-					cmd = UNIX_PATH + " " + url;
-				}
-			}
-
-			logger.debug("Opening URL by command \"" + cmd + "\"");
-
-			Process p = Runtime.getRuntime().exec(cmd);
-
-			try {
-				int exitCode = p.waitFor();
-
-				if (exitCode != 0) {
-					logger.warn("Open browser command (" + cmd + ") failed!");
-					return false;
-				}
-
-			} catch (InterruptedException ex) {
-				logger.warn("Open browser exception",ex);	
-				return false;
-			}
-		} catch (IOException ioe) {
+		
+		Desktop desktop  = Desktop.getDesktop();
+		
+		try{
+			URI uri = new URI(url);
+			desktop.browse(uri);
+		}catch (IOException ioe) {
+			
 			logger.warn("Open browser IOException",ioe);	
 			return false;
+			
+		} catch (URISyntaxException e) {
+			
+			logger.warn("Url conversion to URI exception", e);
+			return false;
+			
 		}
-
+		
 		return true;
 	}
+
 }
