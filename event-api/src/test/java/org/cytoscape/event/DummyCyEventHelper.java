@@ -27,16 +27,29 @@
 */
 package org.cytoscape.event;
 
+import java.util.List;
+import java.util.ArrayList;
+
 
 public class DummyCyEventHelper implements CyEventHelper {
-	private Object lastEvent;
+	private List<Object> lastEvents; 
 	private Object payload;
+	private final boolean keepAllEvents;
+
+	public DummyCyEventHelper(boolean keepAllEvents) {
+		this.keepAllEvents = keepAllEvents;
+		lastEvents = new ArrayList<Object>();
+	}
 
 	public DummyCyEventHelper() {
+		this(false);
 	}
 	
 	public synchronized <E extends CyEvent<?>> void fireEvent(final E event) {
-		lastEvent = event;
+		if ( keepAllEvents || lastEvents.size() == 0 )
+			lastEvents.add(event);
+		else 
+			lastEvents.set(0,event);
 	}
 
 	public <S,P,E extends CyPayloadEvent<S,P>> void addEventPayload(S source, P p, Class<E> e) {
@@ -44,7 +57,11 @@ public class DummyCyEventHelper implements CyEventHelper {
 	}
 
 	public Object getLastEvent() {
-		return lastEvent;
+		return lastEvents.get(lastEvents.size()-1);
+	}
+
+	public List<Object> getAllLastEvents() {
+		return lastEvents;
 	}
 	
 	public Object getLastPayload() {
