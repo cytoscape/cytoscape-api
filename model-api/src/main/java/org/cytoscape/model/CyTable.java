@@ -217,12 +217,21 @@ public interface CyTable extends CyTableEntry {
 	 */
 	String getLastInternalError();
 
-	/** Returns all the rows of a specified column that contain a certain value for that column.
-	 *  @param columnName  the column for which we want the rows
-	 *  @param value       the value for which we want the rows that contain it
-	 *  @return the rows, if any that contain the value "value" for the column "columnName"
+	/**
+	 * Returns all the rows of a specified column that contain a certain value for that column.
+	 * @param columnName  the column for which we want the rows
+	 * @param value       the value for which we want the rows that contain it
+	 * @return the rows, if any that contain the value "value" for the column "columnName"
 	 */
 	Collection<CyRow> getMatchingRows(String columnName, Object value);
+
+	/** 
+	 * Returns the number of rows with the in the specified column with the specified value. 
+	 * @param columnName  the column to check 
+	 * @param value       the value we want to check for 
+	 * @return the number of rows with the in the specified column with the specified value. 
+	 */
+	int countMatchingRows(String columnName, Object value);
 
 	/** Returns the number of rows in this table.
 	 *  @return The number if rows in the table.

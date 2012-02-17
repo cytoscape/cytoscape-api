@@ -1051,7 +1051,49 @@ public abstract class AbstractCyTableTest {
 		table.createListColumn("Test", String.class, false, null );
 	}
 	
-	
+	@Test
+	public void testCountMatchingRows() {
+		table.createColumn("x", Integer.class, false);
+		CyRow row1 = table.getRow(1L);
+		row1.set("x", 44);
+		CyRow row2 =  table.getRow(2L);
+		row2.set("x", 44);
+		assertEquals(2, table.countMatchingRows("x", 44) );
+		assertEquals(0, table.countMatchingRows("x", 55) );
+	}
+
+	@Test
+	public void testCountMatchingRowsBooleanFalse() {
+		table.createColumn("selection", Boolean.class, false);
+		CyRow row1 = table.getRow(1L);
+		row1.set("selection", true);
+		CyRow row2 =  table.getRow(2L);
+		row2.set("selection", false);
+		assertEquals(1, table.countMatchingRows("selection", true) );
+	}
+
+	@Test
+	public void testCountMatchingRowsBooleanTrue() {
+		table.createColumn("selection", Boolean.class, false);
+		CyRow row1 = table.getRow(1L);
+		row1.set("selection", false);
+		CyRow row2 =  table.getRow(2L);
+		row2.set("selection", false);
+		assertEquals(0, table.countMatchingRows("selection", true) );
+	}
+
+	@Test
+	public void testVirtualColumnHasMatchingRow() {
+		table.createColumn("x", Integer.class, false);
+		CyRow row1 = table.getRow(1L);
+		row1.set("x", 33);
+		CyRow row2 =  table2.getRow(1L);
+		table2.createColumn("s", String.class, false);
+		table.addVirtualColumn("s1", "s", table2, table.getPrimaryKey().getName(), true);
+		assertFalse(row1.isSet("s1"));
+		row2.set("s", "abc");
+		assertEquals(1, table.countMatchingRows("s1", "abc") );
+	}
 	
 }
 

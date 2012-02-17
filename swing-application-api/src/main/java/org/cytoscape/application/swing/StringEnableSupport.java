@@ -225,24 +225,8 @@ public final class StringEnableSupport extends AbstractEnableSupport {
 			return;
 		}
 
-		// If any of nodes are selected, enable this.
-		for (CyNode node : curNetwork.getNodeList()) {
-			if (curNetwork.getRow(node).get(CyNetwork.SELECTED, Boolean.class)) {
-				setEnabled(true);
-
-				return;
-			}
-		}
-
-		for (CyEdge edge : curNetwork.getEdgeList()) {
-			if (curNetwork.getRow(edge).get(CyNetwork.SELECTED, Boolean.class)) {
-				setEnabled(true);
-
-				return;
-			}
-		}
-
-		setEnabled(false);
+		setEnabled( ((curNetwork.getDefaultNodeTable().countMatchingRows(CyNetwork.SELECTED, true) > 0) ||
+		             (curNetwork.getDefaultEdgeTable().countMatchingRows(CyNetwork.SELECTED, true) > 0)) ); 
 	}
 
 	/**
@@ -258,15 +242,7 @@ public final class StringEnableSupport extends AbstractEnableSupport {
 			return;
 		}
 
-		for (CyNode node : n.getNodeList()) {
-			if (n.getRow(node).get(CyNetwork.SELECTED, Boolean.class)) {
-				setEnabled(true);
-
-				return;
-			}
-		}
-
-		setEnabled(false);
+		setEnabled( (n.getDefaultNodeTable().countMatchingRows(CyNetwork.SELECTED, true) > 0) );
 	}
 
 	/**
@@ -282,15 +258,7 @@ public final class StringEnableSupport extends AbstractEnableSupport {
 			return;
 		}
 
-		for (CyEdge edge : n.getEdgeList()) {
-			if (n.getRow(edge).get(CyNetwork.SELECTED, Boolean.class)) {
-				setEnabled(true);
-
-				return;
-			}
-		}
-
-		setEnabled(false);
+		setEnabled( (n.getDefaultEdgeTable().countMatchingRows(CyNetwork.SELECTED, true) > 0) );
 	}
 
 	/**
