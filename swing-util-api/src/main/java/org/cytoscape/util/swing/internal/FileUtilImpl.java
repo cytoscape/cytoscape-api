@@ -176,7 +176,7 @@ class FileUtilImpl implements FileUtil {
 			// this is not a Mac, use the Swing based file dialog
 			final File start = new File(start_dir);
 			final JFileChooser chooser = new JFileChooser(start);
-
+			
 			// set multiple selection, if applicable
 			chooser.setMultiSelectionEnabled(multiselect);
 
@@ -251,7 +251,7 @@ class FileUtilImpl implements FileUtil {
 				}
 			}
 
-			if (results != null && start_dir == null)
+			if (results != null && chooser.getCurrentDirectory().getPath() != null)
 				coreProperties.setProperty(FileUtil.LAST_DIRECTORY,
 				                           chooser.getCurrentDirectory().getPath());
 
