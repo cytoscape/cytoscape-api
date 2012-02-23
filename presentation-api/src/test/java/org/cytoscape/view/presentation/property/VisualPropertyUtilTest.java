@@ -19,18 +19,18 @@ public class VisualPropertyUtilTest {
 
 	@Before
 	public void setUp() throws Exception {
-		dummy = new DoubleVisualProperty(new Double(10), MinimalVisualLexicon.ARBITRARY_DOUBLE_RANGE, "DUMMY", "Dummy Prop", CyNode.class);
+		dummy = new DoubleVisualProperty(new Double(10), BasicVisualLexicon.ARBITRARY_DOUBLE_RANGE, "DUMMY", "Dummy Prop", CyNode.class);
 		
 		// Create root node.
 		twoDRoot = new NullVisualProperty("TWO_D_ROOT",
 				"2D Root Visual Property");
 
-		lexicon = new MinimalVisualLexicon(twoDRoot);
+		lexicon = new BasicVisualLexicon(twoDRoot);
 	}
 
 	@Test
 	public void testIsChildOf1() {
-		assertTrue(VisualPropertyUtil.isChildOf(twoDRoot, MinimalVisualLexicon.EDGE, lexicon));
+		assertTrue(VisualPropertyUtil.isChildOf(twoDRoot, BasicVisualLexicon.EDGE, lexicon));
 		
 		try {
 			VisualPropertyUtil.isChildOf(twoDRoot, dummy, lexicon);
@@ -38,7 +38,7 @@ public class VisualPropertyUtilTest {
 			assertTrue(e instanceof IllegalArgumentException);
 		}
 		
-		assertFalse(VisualPropertyUtil.isChildOf(MinimalVisualLexicon.NODE, MinimalVisualLexicon.EDGE, lexicon));
+		assertFalse(VisualPropertyUtil.isChildOf(BasicVisualLexicon.NODE, BasicVisualLexicon.EDGE, lexicon));
 	}
 	
 	@Test
@@ -48,12 +48,13 @@ public class VisualPropertyUtilTest {
 	
 	@Test
 	public void testIsChildOf3() {
-		assertEquals(true, VisualPropertyUtil.isChildOf(MinimalVisualLexicon.NODE_PAINT, MinimalVisualLexicon.NODE_FILL_COLOR, lexicon));
+		assertEquals(true, VisualPropertyUtil.isChildOf(BasicVisualLexicon.NODE_PAINT, BasicVisualLexicon.NODE_FILL_COLOR, lexicon));
 	}
 	
 	@Test
 	public void testIsChildOf4() {
-		assertEquals(true, VisualPropertyUtil.isChildOf(MinimalVisualLexicon.NODE_PAINT, MinimalVisualLexicon.NODE_LABEL_COLOR, lexicon));
+		assertEquals(true, VisualPropertyUtil.isChildOf(BasicVisualLexicon.NODE_PAINT,
+				BasicVisualLexicon.NODE_LABEL_COLOR, lexicon));
 	}
 	
 	@Test(expected=NullPointerException.class)

@@ -17,7 +17,7 @@ import org.cytoscape.property.CyProperty;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualLexicon;
-import org.cytoscape.view.presentation.property.MinimalVisualLexicon;
+import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -71,22 +71,22 @@ public abstract class AbstractVisualStyleTest {
 		
 //		style.addVisualMappingFunction(colorMapping1);
 //		style.addVisualMappingFunction(colorMapping2);
-		style.setDefaultValue(MinimalVisualLexicon.NODE_PAINT, Color.BLACK);
-		style.setDefaultValue(MinimalVisualLexicon.NODE_FILL_COLOR, Color.PINK);
+		style.setDefaultValue(BasicVisualLexicon.NODE_PAINT, Color.BLACK);
+		style.setDefaultValue(BasicVisualLexicon.NODE_FILL_COLOR, Color.PINK);
 		
-		final Paint defaultNodeColor = MinimalVisualLexicon.NODE_FILL_COLOR.getDefault();
-		final Paint defaultNodePaint = MinimalVisualLexicon.NODE_PAINT.getDefault();
+		final Paint defaultNodeColor = BasicVisualLexicon.NODE_FILL_COLOR.getDefault();
+		final Paint defaultNodePaint = BasicVisualLexicon.NODE_PAINT.getDefault();
 		final View<CyNode> nodeView1 = networkView.getNodeView(node1);
 		final View<CyNode> nodeView2 = networkView.getNodeView(node2);
 		final View<CyNode> nodeView3 = networkView.getNodeView(node3);
 		
 		// Before apply call, all node views should have same color (property default).
-		assertEquals(defaultNodeColor, nodeView1.getVisualProperty(MinimalVisualLexicon.NODE_FILL_COLOR));
-		assertEquals(defaultNodeColor, nodeView2.getVisualProperty(MinimalVisualLexicon.NODE_FILL_COLOR));
-		assertEquals(defaultNodeColor, nodeView3.getVisualProperty(MinimalVisualLexicon.NODE_FILL_COLOR));
-		assertEquals(defaultNodePaint, nodeView1.getVisualProperty(MinimalVisualLexicon.NODE_PAINT));
-		assertEquals(defaultNodePaint, nodeView2.getVisualProperty(MinimalVisualLexicon.NODE_PAINT));
-		assertEquals(defaultNodePaint, nodeView3.getVisualProperty(MinimalVisualLexicon.NODE_PAINT));
+		assertEquals(defaultNodeColor, nodeView1.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR));
+		assertEquals(defaultNodeColor, nodeView2.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR));
+		assertEquals(defaultNodeColor, nodeView3.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR));
+		assertEquals(defaultNodePaint, nodeView1.getVisualProperty(BasicVisualLexicon.NODE_PAINT));
+		assertEquals(defaultNodePaint, nodeView2.getVisualProperty(BasicVisualLexicon.NODE_PAINT));
+		assertEquals(defaultNodePaint, nodeView3.getVisualProperty(BasicVisualLexicon.NODE_PAINT));
 		
 		// Two existing mappings.
 //		assertEquals(2, style.getAllVisualMappingFunctions().size());
@@ -95,18 +95,18 @@ public abstract class AbstractVisualStyleTest {
 		style.apply(networkView);
 		
 //		// Check defaults
-//		assertEquals(Color.PINK, style.getDefaultValue(MinimalVisualLexicon.NODE_FILL_COLOR));
-//		assertEquals(Color.BLACK, style.getDefaultValue(MinimalVisualLexicon.NODE_PAINT));
+//		assertEquals(Color.PINK, style.getDefaultValue(BasicVisualLexicon.NODE_FILL_COLOR));
+//		assertEquals(Color.BLACK, style.getDefaultValue(BasicVisualLexicon.NODE_PAINT));
 //		
 //		// Check results.
-//		assertEquals(RED1, nodeView1.getVisualProperty(MinimalVisualLexicon.NODE_FILL_COLOR));
-//		assertEquals(GREEN1, nodeView2.getVisualProperty(MinimalVisualLexicon.NODE_FILL_COLOR));
-//		assertEquals(RED2, nodeView1.getVisualProperty(MinimalVisualLexicon.NODE_PAINT));
-//		assertEquals(GREEN2, nodeView2.getVisualProperty(MinimalVisualLexicon.NODE_PAINT));
+//		assertEquals(RED1, nodeView1.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR));
+//		assertEquals(GREEN1, nodeView2.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR));
+//		assertEquals(RED2, nodeView1.getVisualProperty(BasicVisualLexicon.NODE_PAINT));
+//		assertEquals(GREEN2, nodeView2.getVisualProperty(BasicVisualLexicon.NODE_PAINT));
 //		
 //		// Check default values.  Leaf node will be applied.
-//		assertEquals(Color.BLACK, nodeView3.getVisualProperty(MinimalVisualLexicon.NODE_PAINT));
-//		assertEquals(Color.PINK, nodeView3.getVisualProperty(MinimalVisualLexicon.NODE_FILL_COLOR));
+//		assertEquals(Color.BLACK, nodeView3.getVisualProperty(BasicVisualLexicon.NODE_PAINT));
+//		assertEquals(Color.PINK, nodeView3.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR));
 	}
 	
 }

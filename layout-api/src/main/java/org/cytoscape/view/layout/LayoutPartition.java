@@ -43,13 +43,13 @@ import java.util.ListIterator;
 import java.util.Random;
 
 import org.cytoscape.model.CyEdge;
+import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyRow;
 import org.cytoscape.model.CyTableUtil;
-import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
-import org.cytoscape.view.presentation.property.MinimalVisualLexicon;
+import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.work.TaskMonitor;
 
 
@@ -183,10 +183,10 @@ public final class LayoutPartition {
 			v.lock();
 			lockedNodes++;
 		} else {
-			updateMinMax(nv.getVisualProperty(MinimalVisualLexicon.NODE_X_LOCATION),
-						 nv.getVisualProperty(MinimalVisualLexicon.NODE_Y_LOCATION));
-			this.width += nv.getVisualProperty(MinimalVisualLexicon.NODE_WIDTH).doubleValue(); 
-			this.height += nv.getVisualProperty(MinimalVisualLexicon.NODE_HEIGHT).doubleValue();
+			updateMinMax(nv.getVisualProperty(BasicVisualLexicon.NODE_X_LOCATION),
+						 nv.getVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION));
+			this.width += nv.getVisualProperty(BasicVisualLexicon.NODE_WIDTH).doubleValue(); 
+			this.height += nv.getVisualProperty(BasicVisualLexicon.NODE_HEIGHT).doubleValue();
 		}
 	}
 

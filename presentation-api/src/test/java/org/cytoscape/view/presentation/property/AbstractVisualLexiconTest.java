@@ -1,6 +1,9 @@
 package org.cytoscape.view.presentation.property;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.util.Collection;
 import java.util.HashSet;
@@ -10,8 +13,6 @@ import org.cytoscape.view.model.NullDataType;
 import org.cytoscape.view.model.VisualLexicon;
 import org.cytoscape.view.model.VisualLexiconNode;
 import org.cytoscape.view.model.VisualProperty;
-import org.cytoscape.view.presentation.property.DefaultVisualizableVisualProperty;
-import org.junit.Test;
 
 public abstract class AbstractVisualLexiconTest {
 	
@@ -44,28 +45,28 @@ public abstract class AbstractVisualLexiconTest {
 		traverse(children, lexicon);
 		
 		// Test adding
-		final DoubleVisualProperty dummyVP = new DoubleVisualProperty(new Double(10), MinimalVisualLexicon.ARBITRARY_DOUBLE_RANGE, "DUMMY", "Dummy VP", CyNode.class);
+		final DoubleVisualProperty dummyVP = new DoubleVisualProperty(new Double(10), BasicVisualLexicon.ARBITRARY_DOUBLE_RANGE, "DUMMY", "Dummy VP", CyNode.class);
 		
 		
 		try {
-			((AbstractVisualLexicon) lexicon).addVisualProperty(MinimalVisualLexicon.NODE_FILL_COLOR, root);
+			((BasicVisualLexicon) lexicon).addVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR, root);
 		} catch(Exception e) {
 			assertTrue(e instanceof IllegalStateException);
 		}
 		
 		try {
-			((AbstractVisualLexicon) lexicon).addVisualProperty(dummyVP, null);
+			((BasicVisualLexicon) lexicon).addVisualProperty(dummyVP, null);
 		} catch(Exception e) {
 			assertTrue(e instanceof NullPointerException);
 		}
 		
 		try {
-			((AbstractVisualLexicon) lexicon).addVisualProperty(dummyVP, dummyVP);
+			((BasicVisualLexicon) lexicon).addVisualProperty(dummyVP, dummyVP);
 		} catch(Exception e) {
 			assertTrue(e instanceof IllegalArgumentException);
 		}
 		
-		((AbstractVisualLexicon) lexicon).addVisualProperty(dummyVP, root);
+		((BasicVisualLexicon) lexicon).addVisualProperty(dummyVP, root);
 	}
 	
 	

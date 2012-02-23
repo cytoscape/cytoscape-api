@@ -11,7 +11,7 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.NullDataType;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.model.Visualizable;
-import org.cytoscape.view.presentation.property.MinimalVisualLexicon;
+import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.NullVisualProperty;
 import org.junit.After;
 import org.junit.Before;
@@ -29,10 +29,10 @@ public class VisualPropertyTest {
 	
 	@Test
 	public void testVisualProperties() {
-		final VisualProperty<Paint> colorProp = MinimalVisualLexicon.NODE_FILL_COLOR;
+		final VisualProperty<Paint> colorProp = BasicVisualLexicon.NODE_FILL_COLOR;
 		assertEquals(Paint.class, colorProp.getRange().getType());
 		
-		final VisualProperty<Boolean> booleanProp = MinimalVisualLexicon.NODE_VISIBLE;
+		final VisualProperty<Boolean> booleanProp = BasicVisualLexicon.NODE_VISIBLE;
 		assertEquals(Boolean.class, booleanProp.getRange().getType());
 		assertEquals("false", booleanProp.toSerializableString(Boolean.FALSE));
 		assertEquals(false, booleanProp.parseSerializableString("false"));
@@ -40,12 +40,12 @@ public class VisualPropertyTest {
 		assertEquals(false, booleanProp.parseSerializableString("FALSE"));
 		assertEquals(CyNode.class, booleanProp.getTargetDataType());
 		
-		final VisualProperty<Double> doubleProp = MinimalVisualLexicon.NODE_SIZE;
+		final VisualProperty<Double> doubleProp = BasicVisualLexicon.NODE_SIZE;
 		assertEquals(Double.class, doubleProp.getRange().getType());
 		assertEquals("20.0", doubleProp.toSerializableString(Double.valueOf(20)));
 		assertEquals(Double.valueOf(100.12), doubleProp.parseSerializableString("100.12"));
 		
-		final VisualProperty<Paint> paintProp = MinimalVisualLexicon.NODE_FILL_COLOR;
+		final VisualProperty<Paint> paintProp = BasicVisualLexicon.NODE_FILL_COLOR;
 		assertEquals(Paint.class, paintProp.getRange().getType());
 		assertEquals(CyNode.class, paintProp.getTargetDataType());
 		
@@ -81,11 +81,11 @@ public class VisualPropertyTest {
 			assertTrue(e instanceof IllegalArgumentException);
 		}
 		
-		final VisualProperty<Visualizable> visualizableProp = MinimalVisualLexicon.NODE;
+		final VisualProperty<Visualizable> visualizableProp = BasicVisualLexicon.NODE;
 		assertEquals(Visualizable.class, visualizableProp.getRange().getType());
 		assertTrue(visualizableProp.parseSerializableString("test string") instanceof Visualizable );
 		
-		final VisualProperty<String> stringProp = MinimalVisualLexicon.NODE_LABEL;
+		final VisualProperty<String> stringProp = BasicVisualLexicon.NODE_LABEL;
 		assertEquals(String.class, stringProp.getRange().getType());
 		assertEquals("test string", stringProp.toSerializableString("test string"));
 		assertEquals("test string 2", stringProp.parseSerializableString("test string 2"));
@@ -94,5 +94,4 @@ public class VisualPropertyTest {
 		assertEquals(NullDataType.class, nullProp.getRange().getType());
 		assertTrue(nullProp.parseSerializableString("test string") instanceof NullDataType );		
 	}
-
 }

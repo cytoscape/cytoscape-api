@@ -32,28 +32,20 @@
  */
 package org.cytoscape.view.layout;
 
-import org.cytoscape.model.CyTableUtil;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
-import org.cytoscape.view.model.View;
+import org.cytoscape.model.CyTableUtil;
 import org.cytoscape.view.model.CyNetworkView;
-import org.cytoscape.view.presentation.property.MinimalVisualLexicon;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Collection;
-import java.util.Comparator;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
-import java.util.Random;
-
-import java.awt.Dimension;
-import org.cytoscape.work.TaskMonitor;
+import org.cytoscape.view.model.View;
 
 
 /**
