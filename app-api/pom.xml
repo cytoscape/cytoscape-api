@@ -13,7 +13,6 @@
   </properties>
 
   <modelVersion>4.0.0</modelVersion>
-  <groupId>org.cytoscape</groupId>
   <artifactId>app-api</artifactId>
 
   <name>${bundle.symbolicName}</name>
@@ -207,7 +206,14 @@
 			<artifactId>datasource-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.cytoscape</groupId>
+			<artifactId>swing-util-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		
+		
+		<!-- For Testing -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
