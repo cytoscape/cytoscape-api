@@ -3,7 +3,9 @@ package org.cytoscape.app;
 import java.util.Properties;
 
 import org.cytoscape.application.CyApplicationManager;
+import org.cytoscape.application.CyVersion;
 import org.cytoscape.application.swing.CySwingApplication;
+import org.cytoscape.datasource.DataSourceManager;
 import org.cytoscape.event.CyEventHelper;
 import org.cytoscape.io.read.CyNetworkReaderManager;
 import org.cytoscape.io.read.CyPropertyReaderManager;
@@ -25,7 +27,6 @@ import org.cytoscape.view.layout.CyLayoutAlgorithmManager;
 import org.cytoscape.view.model.CyNetworkViewFactory;
 import org.cytoscape.view.model.CyNetworkViewManager;
 import org.cytoscape.view.presentation.RenderingEngineManager;
-import org.cytoscape.view.vizmap.VisualMappingFunction;
 import org.cytoscape.view.vizmap.VisualMappingFunctionFactory;
 import org.cytoscape.view.vizmap.VisualMappingManager;
 import org.cytoscape.view.vizmap.VisualStyleFactory;
@@ -34,7 +35,6 @@ import org.cytoscape.work.swing.DialogTaskManager;
 import org.cytoscape.work.swing.PanelTaskManager;
 import org.cytoscape.work.swing.SubmenuTaskManager;
 import org.cytoscape.work.undo.UndoSupport;
-import org.cytoscape.application.CyVersion;
 
 /**
  * A Java-only api providing access to Cytoscape functionality.
@@ -305,4 +305,12 @@ public interface CyAppAdapter {
 	 */
 	CyVersion getCyVersion();
 	
+	
+	// Datasource API
+	
+	/**
+	 * Returns an instance of {@link DataSourceManager}.
+	 * @return an instance of {@link DataSourceManager}.
+	 */
+	DataSourceManager getDataSourceManager();
 }
