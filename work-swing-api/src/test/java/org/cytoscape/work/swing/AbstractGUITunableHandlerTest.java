@@ -51,10 +51,14 @@ public class AbstractGUITunableHandlerTest {
 		}
 
 		public void handle() { }
+		public void update() { testUpdateCalled = true; }
+
+		public boolean testUpdateCalled = false;
 	}
 
 	private SimpleGUITunableHandler fieldHandler;
 	private SimpleGUITunableHandler methodHandler;
+	private SimpleGUITunableHandler methodHandlerS;
 
 	@Before
 	public void initialise() throws Exception {
@@ -68,6 +72,12 @@ public class AbstractGUITunableHandlerTest {
 		final Method getter = hasAnnotatedMethod.getClass().getMethod("getAnnotatedInt");
 		final Tunable annotatedMethodTunable = getter.getAnnotation(Tunable.class);
 		methodHandler = new SimpleGUITunableHandler(getter, setter, hasAnnotatedMethod, annotatedMethodTunable);
+
+		final Method setterS = hasAnnotatedMethod.getClass().getMethod("setAnnotatedString", String.class);
+		final Method getterS = hasAnnotatedMethod.getClass().getMethod("getAnnotatedString");
+		final Tunable annotatedMethodTunableS = getterS.getAnnotation(Tunable.class);
+		methodHandlerS = new SimpleGUITunableHandler(getterS, setterS, hasAnnotatedMethod, annotatedMethodTunableS);
+
 	}
 
 	@Test
@@ -88,5 +98,22 @@ public class AbstractGUITunableHandlerTest {
 	@Test
 	public void testMethodGetJPanel() throws Exception {
 		assertNotNull("getJPanel() must *not* return null!", methodHandler.getJPanel());
+	}
+
+	@Test
+	public void testNotifyChangeListeners() throws Exception {
+		methodHandler.addChangeListener(methodHandlerS);
+		methodHandler.notifyChangeListeners();
+		assertTrue( methodHandlerS.testUpdateCalled );
+	}
+
+	@Test
+	public void testGetChangeSources() throws Exception {
+		assertEquals("AnnotatedInt", methodHandlerS.getChangeSources()[0]);
+	}
+
+	@Test
+	public void testEmptyGetChangeSources() throws Exception {
+		assertEquals(0, methodHandler.getChangeSources().length);
 	}
 }

@@ -35,7 +35,7 @@ class HasAnnotatedSetterAndGetterMethods {
 		privateInt = newValue;
 	}
 
-	@Tunable(description="Annotated setters and getters", groups={"group2"}, dependsOn="Bob")
+	@Tunable(description="Annotated setters and getters", groups={"group2"}, dependsOn="Bob",listenForChange="homer")
 	public int getPrivateInt() {
 		return privateInt;
 	}

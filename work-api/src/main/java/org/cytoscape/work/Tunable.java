@@ -168,4 +168,38 @@ public @interface Tunable {
 	 *  Note: Blanks/spaces in values are significant!
 	 */
 	String params() default "";
+
+	/**
+	 * Returns a list of Tunable field/method names that will trigger this Tunable to be updated.
+	 * For instance if Tunable B wants to react to a change in Tunable A, then setting the listenForChange
+	 * parameter is one mechanism for achieving this.  The listenForChange parameter will trigger the update
+	 * method on the TunableHandler to be called, which will cause B to be updated. Here is an example:
+	 * <br/>
+	 * <pre><code>
+	 * &#64;Tunable(description="A")
+	 * public String getA() {
+	 *    return a;	
+	 * }
+	 * 
+	 * public void setA(String a) {
+	 *    this.a = a;
+	 * }
+	 *
+	 * // listenForChange="A" means that the value of this 
+	 * // Tunable will be updated every time A is changed.
+	 * &#64;Tunable(description="B",listenForChange="A")
+	 * public String getB() {
+	 *    if ( a.equals("somethingSpecial") )
+	 *        return "hooray!";
+	 *    else
+	 *        return b;	
+	 * }
+	 * 
+	 * public void setB(String b) {
+	 *    this.b = b;
+	 * }
+	 * </code></pre>
+	 * @return a list of Tunable field/method names that will trigger this Tunable to be updated.
+	 */
+	String[] listenForChange() default {};
 }

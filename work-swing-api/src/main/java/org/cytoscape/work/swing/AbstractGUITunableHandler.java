@@ -9,6 +9,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
+import java.util.HashMap;
 
 import javax.swing.JPanel;
 import javax.swing.event.ChangeEvent;
@@ -19,6 +21,9 @@ import javax.swing.event.ListSelectionListener;
 import org.cytoscape.work.AbstractTunableHandler;
 import org.cytoscape.work.Tunable;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 /** Base class for the various Swing implementations of <code>TunableHandler</code>. 
  * @CyAPI.Abstract.Class
@@ -26,6 +31,9 @@ import org.cytoscape.work.Tunable;
 public abstract class AbstractGUITunableHandler
 	extends AbstractTunableHandler implements GUITunableHandler, ActionListener, ChangeListener, ListSelectionListener
 {
+
+	private static final Logger logger = LoggerFactory.getLogger(AbstractGUITunableHandler.class);
+
 	/**
 	 *  If true, the associated GUI element should be laid out next to others in the same group,
 	 *  if false, it should be vertically stacked relative to the others.
@@ -54,9 +62,16 @@ public abstract class AbstractGUITunableHandler
 	private String mustNotMatch;
 
 	/**
-	 * The list of dependencies between the <code>GUITunableHandlers</code>
+	 * The list of GUITunableHandlers that depend on THIS GUITunableHandler.
 	 */
-	private List<GUITunableHandler> dependencies;
+	private List<GUITunableHandler> dependents;
+
+	/**
+	 * The list of GUITunableHandlers that are listening for changes on THIS GUITunableHandler.
+	 */
+	private List<GUITunableHandler> listeners;
+
+	private Map<String,String> lastChangeState;
 
 	/** Standard base class constructor for <code>TunableHandler</code>s that deal with
 	 *  <code>Tunable</code>s that annotate a field.
@@ -89,7 +104,7 @@ public abstract class AbstractGUITunableHandler
                 if (alignment.equalsIgnoreCase("horizontal"))
                         horizontal = true;
                 else if (!alignment.equalsIgnoreCase("vertical"))
-                        System.err.println("*** In AbstractGUITunableHandler: \"alignments\" was specified but is neither \"horizontal\" nor \"vertical\"!");
+                        logger.warn("\"alignments\" was specified but is neither \"horizontal\" nor \"vertical\"!");
 
 		String s = dependsOn();
 		if (!s.isEmpty()) {
@@ -104,7 +119,9 @@ public abstract class AbstractGUITunableHandler
 	        	}
 	        }
 
-		dependencies = new LinkedList<GUITunableHandler>();
+		dependents = new LinkedList<GUITunableHandler>();
+		listeners = new LinkedList<GUITunableHandler>();
+		lastChangeState = new HashMap<String,String>();
 		panel = new JPanel();
 	}
 
@@ -115,6 +132,7 @@ public abstract class AbstractGUITunableHandler
 	 */
 	public void actionPerformed(ActionEvent ae) {
 		notifyDependents();
+		notifyChangeListeners();
 	}
 
 	/**
@@ -124,6 +142,7 @@ public abstract class AbstractGUITunableHandler
 	 */
 	public void stateChanged(ChangeEvent e) {
 		notifyDependents();
+		notifyChangeListeners();
 	}
 
 	/**
@@ -133,8 +152,10 @@ public abstract class AbstractGUITunableHandler
 	 */
 	public void valueChanged(ListSelectionEvent le) {
 		boolean ok = le.getValueIsAdjusting();
-		if (!ok)
+		if (!ok) {
 			notifyDependents();
+			notifyChangeListeners();
+		}
 	}
 
 	/**
@@ -143,8 +164,28 @@ public abstract class AbstractGUITunableHandler
 	public void notifyDependents() {
 		String state = getState();
 		String name = getName();
-		for (GUITunableHandler gh : dependencies)
+		for (GUITunableHandler gh : dependents)
 			gh.checkDependency(name, state);
+	}
+
+	/**
+	 *  Notifies all dependents that this object has changed.
+	 */
+	public void notifyChangeListeners() {
+		String state = getState();
+		String name = getName();
+		for (GUITunableHandler gh : listeners)
+			gh.changeOccurred(name, state);
+	}
+
+	/**
+	 *  Adds the argument as a new dependency to this <code>GUITunableHandler</code>.
+
+	 *  @param gh <code>Handler</code> on which this one will depend on
+	 */
+	public void addChangeListener(GUITunableHandler gh) {
+		if (!listeners.contains(gh))
+			listeners.add(gh);
 	}
 
 	/**
@@ -152,8 +193,8 @@ public abstract class AbstractGUITunableHandler
 	 *  @param gh <code>Handler</code> on which this one will depend on
 	 */
 	public void addDependent(GUITunableHandler gh) {
-		if (!dependencies.contains(gh))
-			dependencies.add(gh);
+		if (!dependents.contains(gh))
+			dependents.add(gh);
 	}
 
 	/** {@inheritDoc} */
@@ -162,13 +203,21 @@ public abstract class AbstractGUITunableHandler
 	}
 
 	/** {@inheritDoc} */
-	public void handleDependents() {
-		if (panel.isEnabled())
-			handle();
+	public String[] getChangeSources() {
+		return listenForChange();
 	}
 
 	/** {@inheritDoc} */
-	final public void checkDependency(final String depName, final String depState) {
+	public final void changeOccurred(final String name, final String state) {
+		String lastState = lastChangeState.get(name);
+		if ( lastState == null || !lastState.equals(state) ) {
+			update();	
+			lastChangeState.put(name,state);
+		}
+	}
+
+	/** {@inheritDoc} */
+	public final void checkDependency(final String depName, final String depState) {
 		// if we don't depend on anything, then we should be enabled
 		if (dependencyName == null || mustMatch == null) {
 			setEnabledContainer(true, panel);
@@ -218,8 +267,14 @@ public abstract class AbstractGUITunableHandler
 		return panel;
 	}
 
-	/** Updates the state of the associated <code>Tunable</code>. */
+	/** {@inheritDoc} */
 	public abstract void handle();
+
+	/** 
+	 * The default implementation is a no-op. You should override this method if 
+	 * you want your tunable to update.
+	 */
+	public void update() { }
 
 	/** Returns a string representation of the value of the <code>Tunable</code> associated with
 	 *  this <code>GUITunableHandler</code>.

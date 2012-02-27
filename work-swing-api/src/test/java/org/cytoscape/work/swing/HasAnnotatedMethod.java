@@ -38,5 +38,12 @@ public class HasAnnotatedMethod {
 
 	public void setAnnotatedInt(int x) { value = x; }
 
+	@Tunable(description="Another annotated field", listenForChange={"AnnotatedInt"}) 
+	public String getAnnotatedString() { return svalue; }
+
+	public void setAnnotatedString(String x) { svalue = x; }
+
 	private int value = 47; 
+
+	private String svalue = "hello";
 }

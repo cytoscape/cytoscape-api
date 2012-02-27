@@ -118,6 +118,13 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	/**
 	 * {@inheritDoc}
 	 */
+	final public String[] listenForChange() {
+		return tunable.listenForChange();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
 	final public String getName() {
 		if (field != null)
 			return field.getName();

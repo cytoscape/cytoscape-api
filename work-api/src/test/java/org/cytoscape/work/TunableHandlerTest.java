@@ -115,6 +115,14 @@ public class TunableHandlerTest {
 	}
 
 	@Test
+	public final void testGetListenForChange() {
+		assertEquals("The listenForChange property of an annotated field is not as expected!",
+		             "marge", fieldHandler.listenForChange()[0]);
+		assertEquals("The listenForChange property of an annotated getter/setter pair is not as expected!",
+		             "homer", getterAndSetterHandler.listenForChange()[0]);
+	}
+
+	@Test
 	public final void testGetQualifiedName() {
 		assertEquals("Qualified name of an annotated field is not as expected!",
 		             "HasAnnotatedField.annotatedInt", fieldHandler.getQualifiedName());
