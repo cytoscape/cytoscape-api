@@ -101,7 +101,7 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 			final LinkedHashMap<String, T> handlerList = new LinkedHashMap<String, T>();
 
 			// Find each public field in the class.
-			for (final Field field : obj.getClass().getFields()) {				
+			for (final Field field : obj.getClass().getFields()) {
 				// See if the field is annotated as a Tunable.
 				if (field.isAnnotationPresent(Tunable.class)) {
 					try {
@@ -123,47 +123,32 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 				}
 			}
 
-			Map<String, Method> getMethodsMap = new HashMap<String,Method>();
-			Map<String, Tunable> tunableMap = new HashMap<String,Tunable>();
-
 			guiProviderMap.clear();
 			
 			// Find each public method in the class.
 			for (final Method method : obj.getClass().getMethods()) {
 				// See if the method is annotated as a Tunable.
-   				if (method.isAnnotationPresent(Tunable.class)) {
+				if (method.isAnnotationPresent(Tunable.class)) {
+					try {
 
-   					final Tunable tunable = method.getAnnotation(Tunable.class);
-   					if (method.getName().startsWith("get")) {
-   						if (!isValidGetter(method)) {
-   							throw new IllegalArgumentException("Invalid getter method specified \"" + method.getName()
-   									+ "\", maybe this method takes arguments or returns void?");
-   						}
+						final Tunable tunable = method.getAnnotation(Tunable.class);
+						final String rootName = validateAndExtractRootName(method); 
+						final Method setter = findCompatibleSetter(obj, rootName, method.getReturnType());
 
-   						final String rootName = method.getName().substring(3);
-   						getMethodsMap.put(rootName, method);
-   						tunableMap.put(rootName, tunable);
+						// Get a handler with for get and set methods:
+						final T handler = getHandler(method, setter, obj, tunable);
 
-   						final Class getterReturnType = method.getReturnType();
-   						final Method setter = findCompatibleSetter(obj, rootName, getterReturnType);
-   						if (setter == null) {
-   							throw new IllegalArgumentException("Can't find a setter compatible with the "
-   									+ method.getName() + "() getter!");
-   						}
+						if (handler == null) {
+							logOrThrowException("Failed to create a handler for " + setter.getName() + "()!",null);
+						} else {
+							handlerList.put("getset" + rootName, handler);
+						}
 
-   						// Get a handler with for get and set methods:
-   						final T handler = getHandler(method, setter, obj, tunableMap.get(rootName));
-   						if (handler == null) {
-   							logOrThrowException("Failed to create a handler for " + setter.getName() + "()!",null);
-   						} else {
-   							handlerList.put("getset" + rootName, handler);
-   						}
-   					} else {
-   						throw new IllegalArgumentException("the name of the method has to start with \"get\" but was "
-   								+ method.getName() + "()!");
-   					}
+					} catch (Throwable t) {
+						logOrThrowException("tunable method intercept failed for " + method.toString(), t);
+					}
 
-   				// See if the method is annotated as providing a GUI...
+				// See if the method is annotated as providing a GUI...
 				} else if (method.isAnnotationPresent(ProvidesGUI.class)) {
 					if (!isJPanelOrJPanelDescendent(method.getReturnType())) {
 						throw new IllegalArgumentException(method.getName() + " annotated with @ProvidesGUI must return JPanel!");
@@ -221,11 +206,20 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 	}
 
 	private Method findCompatibleSetter(final Object obj, final String rootName, final Class getterReturnType) {
+		Method ret;
 		try {
-			return obj.getClass().getMethod("set" + rootName, getterReturnType);
+			// will throw a variety of exceptions
+			ret = obj.getClass().getMethod("set" + rootName, getterReturnType);
+
+			// separate check
+			if ( ret == null )
+				throw new RuntimeException("No setter method complement found for: get" + rootName + "()");
 		} catch (final Exception e) {
-			return null;
+			throw new IllegalArgumentException("Can't find a setter compatible with the get" 
+			                                   + rootName + "() getter!", e);
 		}
+
+		return ret;
 	}
 
 	/**
@@ -311,5 +305,16 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 			throw new IllegalArgumentException(msg, ex);
 		else
 			logger.debug(msg, ex);
+	}
+
+	private final String validateAndExtractRootName(final Method method) {
+		if (!method.getName().startsWith("get")) 
+			throw new IllegalArgumentException("the name of the method has to start with \"get\" but was "
+			                                    + method.getName() + "()!");
+		if (!isValidGetter(method)) 
+			throw new IllegalArgumentException("Invalid getter method specified \"" + method.getName()
+			                                   + "\", maybe this method takes arguments or returns void?");
+
+		return method.getName().substring(3);
 	}
 }
