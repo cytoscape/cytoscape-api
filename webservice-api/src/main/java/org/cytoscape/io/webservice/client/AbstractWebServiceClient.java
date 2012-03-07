@@ -59,7 +59,7 @@ public abstract class AbstractWebServiceClient implements WebServiceClient {
 	private final String description;
 	
 	// By default, this is null.
-	protected final JPanel panel = null;
+	protected JPanel panel;
 	
 	protected Object currentQuery = null;
 
