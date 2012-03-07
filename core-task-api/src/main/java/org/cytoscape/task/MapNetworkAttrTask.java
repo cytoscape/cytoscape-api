@@ -1,4 +1,4 @@
-package org.cytoscape.task;
+	package org.cytoscape.task;
 
 
 import java.util.ArrayList;
@@ -35,10 +35,10 @@ public final class MapNetworkAttrTask extends AbstractTask {
 
 	private static final Logger logger = LoggerFactory.getLogger(MapNetworkAttrTask.class);
 
-	private static final String CURRENT_LOCAL = "Just the current network";
+	private static final String CURRENT_LOCAL = "Only to the current network";
 	private static final String CURRENT_SHARED = "All networks related to current network";
 	private static final String ALL_SHARED = "All networks";
-	private static final String INDEPENDENT = "None (make table independent)";
+	private static final String INDEPENDENT = "None (create Global Table w/o mapping)";
 
 	@Tunable(description="Would you like to map this table to:")
 	public ListSingleSelection<String> whichTable;
@@ -78,6 +78,9 @@ public final class MapNetworkAttrTask extends AbstractTask {
 		this.rootNetworkManager = rootNetworkManager;
 
 		this.whichTable = new ListSingleSelection<String>(CURRENT_SHARED, CURRENT_LOCAL, ALL_SHARED, INDEPENDENT);
+		
+		// Default selected item is map to local.
+		this.whichTable.setSelectedValue(CURRENT_LOCAL);
 
 		if (type != CyNode.class && type != CyEdge.class)
 			throw new IllegalArgumentException("\"type\" must be CyNode.class or CyEdge.class!");
