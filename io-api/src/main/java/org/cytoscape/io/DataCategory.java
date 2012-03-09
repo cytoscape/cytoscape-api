@@ -35,6 +35,11 @@ public enum DataCategory {
 	 */ 
 	VIZMAP, 
 	
+	/**
+	 * Data to be imported is Script file
+	 */
+	SCRIPT,
+	
 	/** 
 	* Data to be import/export is not specified (unknown)
 	*/ 
