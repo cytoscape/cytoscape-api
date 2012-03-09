@@ -39,6 +39,7 @@
 		<module>application-api</module>
 		<module>datasource-api</module>
 		<module>group-api</module>
+		<module>webservice-swing-api</module>
 	</modules>
 
 	<dependencyManagement>

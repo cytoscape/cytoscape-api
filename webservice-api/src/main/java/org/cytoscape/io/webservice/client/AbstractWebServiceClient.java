@@ -34,11 +34,8 @@
 */
 package org.cytoscape.io.webservice.client;
 
-import java.awt.Container;
 import java.net.URI;
 import java.net.URISyntaxException;
-
-import javax.swing.JPanel;
 
 import org.cytoscape.io.webservice.WebServiceClient;
 
@@ -51,18 +48,14 @@ import org.cytoscape.io.webservice.WebServiceClient;
  */
 public abstract class AbstractWebServiceClient implements WebServiceClient {
 
-	/** Service location */
+	// Globally-unique service location.
 	protected final URI serviceURI;
 	
 	// Display Name for this client.
 	private final String displayName;
 	private final String description;
 	
-	// By default, this is null.
-	protected JPanel panel;
-	
-	protected Object currentQuery = null;
-
+	protected Object currentQuery;
 
 	/**
 	 * Constructs this AbstractWebServiceClient.
@@ -100,12 +93,6 @@ public abstract class AbstractWebServiceClient implements WebServiceClient {
 	@Override
 	public URI getServiceLocation() {
 		return this.serviceURI;
-	}
-
-
-	@Override
-	public Container getQueryBuilderGUI() {
-		return panel;
 	}
 	
 	

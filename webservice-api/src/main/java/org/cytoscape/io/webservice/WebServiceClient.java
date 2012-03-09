@@ -34,12 +34,8 @@
  */
 package org.cytoscape.io.webservice;
 
-import java.awt.Container;
 import java.net.URI;
 
-import javax.swing.JPanel;
-
-import org.cytoscape.work.ProvidesGUI;
 import org.cytoscape.work.TaskFactory;
 
 /**
@@ -76,15 +72,6 @@ public interface WebServiceClient extends TaskFactory {
 	 *         return value.
 	 */
 	String getDescription();
-
-	
-	/**
-	 * Returns query builder UI.  Since this is a TaskFactory, 
-	 * createTaskIterator() method should use parameters from this GUI.
-	 * 
-	 * @return query builder UI.
-	 */
-	Container getQueryBuilderGUI();
 	
 	
 	/**
