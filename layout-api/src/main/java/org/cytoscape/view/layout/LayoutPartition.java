@@ -454,9 +454,9 @@ public final class LayoutPartition {
 	 *
 	 * @return average location of the nodes as a Dimension
 	 */
-	public Point getAverageLocation() {
+	public LayoutPoint getAverageLocation() {
 		int nodes = nodeCount() - lockedNodes;
-		return new Point(averageX / nodes, averageY / nodes);
+		return new LayoutPoint(averageX / nodes, averageY / nodes);
 	}
 
 	/**
