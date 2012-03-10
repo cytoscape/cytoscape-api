@@ -32,11 +32,11 @@
  */
 package org.cytoscape.view.layout;
 
-import java.awt.Dimension;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -65,9 +65,9 @@ import org.cytoscape.work.TaskMonitor;
  */
 public final class LayoutPartition {
 	
-	private ArrayList<LayoutNode> nodeList;
-	private ArrayList<LayoutEdge> edgeList;
-	private HashMap<CyNode, LayoutNode> nodeToLayoutNode; 
+	private List<LayoutNode> nodeList;
+	private List<LayoutEdge> edgeList;
+	private Map<CyNode, LayoutNode> nodeToLayoutNode; 
 	private int nodeIndex = 0;
 	private int partitionNumber = 0;
 	private EdgeWeighter edgeWeighter = null;
@@ -448,18 +448,15 @@ public final class LayoutPartition {
 		return lockedNodes;
 	}
 
+
 	/**
 	 * Return the average location of the nodes in this partition
 	 *
 	 * @return average location of the nodes as a Dimension
-	 * @see Dimension
 	 */
-	public Dimension getAverageLocation() {
+	public Point getAverageLocation() {
 		int nodes = nodeCount() - lockedNodes;
-		final Dimension result = new Dimension();
-		result.setSize(averageX / nodes, averageY / nodes);
-
-		return result;
+		return new Point(averageX / nodes, averageY / nodes);
 	}
 
 	/**
@@ -543,8 +540,8 @@ public final class LayoutPartition {
 	 * and filled.  This is used by the static method PartitionUtil.partition()
 	 */
 	void trimToSize() {
-		nodeList.trimToSize();
-		edgeList.trimToSize();
+		((ArrayList<LayoutNode>) nodeList).trimToSize();
+		((ArrayList<LayoutEdge>) edgeList).trimToSize();
 	}
 
 	private void updateMinMax(double x, double y) {

@@ -14,7 +14,7 @@ public interface VisualMappingFunctionFactory {
 	 * Create a new {@linkplain VisualMappingFunction}.
 	 * 
 	 * @param <K> Data type of controlling attribute.
-	 * @param <V> Data type of {@linkplain VisualProperty}, such as {@linkplain java.awt.Color}, {@linkplain String}, etc.
+	 * @param <V> Data type of {@linkplain VisualProperty}, such as {@linkplain Double}, {@linkplain String}, etc.
 	 * 
 	 * @param attributeName Controlling attribute name.  This is a name of the column in a data table.
 	 * @param attrValueType Data type of controlling attribute.
