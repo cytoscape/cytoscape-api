@@ -1,7 +1,6 @@
 package org.cytoscape.group.events;
 
 
-import org.cytoscape.group.CyGroupManager;
 import org.cytoscape.group.CyGroup;
 import org.cytoscape.model.CyNetwork;
 

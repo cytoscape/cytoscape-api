@@ -96,8 +96,17 @@ public interface CyGroupManager {
 	 * known to the group manager.
 	 * 
 	 * @param group  a non-null {@link CyGroup}
+	 * @fires GroupAddedEvent
 	 */
 	public void addGroup(final CyGroup group);
+
+	/**
+	 * Registers a list of groups with the group manager.  Does nothing if the group is already
+	 * known to the group manager.
+	 * 
+	 * @param groups  a list of {@link CyGroup}
+	 */
+	public void addGroups(final List<CyGroup> groups);
 
 	/** Releases all currently held references and resources. */
 	public void reset();

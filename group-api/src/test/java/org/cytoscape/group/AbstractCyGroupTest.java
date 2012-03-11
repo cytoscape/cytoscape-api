@@ -77,7 +77,7 @@ public abstract class AbstractCyGroupTest {
     groupEdges.add(edge4);
 
 		// Create a group
-		group = groupFactory.createGroup(net, groupNodes, groupEdges);
+		group = groupFactory.createGroup(net, groupNodes, groupEdges, true);
 	}
 
 	@Test

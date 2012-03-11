@@ -28,6 +28,7 @@ public final class GroupChangedEvent extends AbstractCyEvent<CyGroup> {
 	 * @param source the {@link CyGroup} that has been changed.
 	 * @param whatChanged the {@link CyNode} or {@link CyEdge} or list of {@link CyNodes} that were added or removed.
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public GroupChangedEvent(final CyGroup source, final Object whatChanged, ChangeType change) {
 		super(source, GroupChangedListener.class);
 
