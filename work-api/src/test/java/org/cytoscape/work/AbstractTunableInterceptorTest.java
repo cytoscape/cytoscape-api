@@ -45,7 +45,6 @@ public class AbstractTunableInterceptorTest {
 	private AbstractTunableInterceptor interceptor;
 	private HasAnnotatedField hasAnnotatedField;
 	private HasAnnotatedSetterAndGetterMethods hasAnnotatedSetterAndGetterMethods;
-	private ProvidesGUIExample providesGUI;
 	
 	@Before
 	public void init() {
@@ -54,7 +53,6 @@ public class AbstractTunableInterceptorTest {
 		interceptor.addTunableHandlerFactory( new BasicTunableHandlerFactory(FakeTunableHandler.class,int.class,Integer.class),null);
 		hasAnnotatedField = new HasAnnotatedField();
 		hasAnnotatedSetterAndGetterMethods = new HasAnnotatedSetterAndGetterMethods();
-		providesGUI = new ProvidesGUIExample();
 		
 	}
 
@@ -62,14 +60,12 @@ public class AbstractTunableInterceptorTest {
 	public final void testLoadTunables() {
 		interceptor.loadTunables(hasAnnotatedField);
 		interceptor.loadTunables(hasAnnotatedSetterAndGetterMethods);
-		interceptor.loadTunables(providesGUI);
 	}
 
 	@Test
 	public final void testHasTunables() {
 		assertTrue("Should have found tunables!", interceptor.hasTunables(hasAnnotatedField));
 		assertTrue("Should have found tunables!", interceptor.hasTunables(hasAnnotatedSetterAndGetterMethods));
-		assertTrue("Should have found tunables!", interceptor.hasTunables(providesGUI));
 	}
 
 	@Test(expected=IllegalArgumentException.class)
@@ -97,25 +93,6 @@ public class AbstractTunableInterceptorTest {
 		interceptor.loadTunables(new HasInvalidAnotatedType());
 	}
 
-	@Test(expected=IllegalArgumentException.class)
-	public final void testInvalidProvidesGUIReturnType() {
-		interceptor.loadTunables(new HasInvalidProvidesGUIMethod());
-	}
-
-	@Test(expected=IllegalArgumentException.class)
-	public final void testInvalidProvidesGUIReturnType2() {
-		interceptor.loadTunables(new HasInvalidProvidesGUIMethod2());
-	}
-
-	@Test(expected=IllegalArgumentException.class)
-	public final void testInvalidProvidesGUIMethodWithArg() {
-		interceptor.loadTunables(new HasInvalidProvidesGUIMethodWithArg());
-	}
-
-	@Test(expected=IllegalArgumentException.class)
-	public final void testInvalidMultipleProvidesGUIMethods() {
-		interceptor.loadTunables(new Has2ProvidesGUIMethods());
-	}
 
 	@Test(expected=IllegalArgumentException.class)
 	public final void testSetterAnnotatedInsteadOfGetter() {
@@ -207,30 +184,6 @@ class SetterAnnotatedInsteadOfGetter {
 }
 
 
-class HasInvalidProvidesGUIMethod {
-	@ProvidesGUI
-	public void badReturnType() { }
-}
-
-class HasInvalidProvidesGUIMethod2 {
-	@ProvidesGUI
-	public Double badReturnType() { return null; }
-}
-
-
-class HasInvalidProvidesGUIMethodWithArg {
-	@ProvidesGUI
-	public JPanel bad(int i) { return null; }
-}
-
-
-class Has2ProvidesGUIMethods {
-	@ProvidesGUI
-	public JPanel providesGUI1() { return null; }
-
-	@ProvidesGUI
-	public JPanel providesGUI2() { return null; }
-}
 
 class BaseFieldClass {
 	@Tunable

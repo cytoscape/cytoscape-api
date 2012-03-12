@@ -130,37 +130,21 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 				// See if the method is annotated as a Tunable.
 				if (method.isAnnotationPresent(Tunable.class)) {
 					try {
-
 						final Tunable tunable = method.getAnnotation(Tunable.class);
 						final String rootName = validateAndExtractRootName(method); 
 						final Method setter = findCompatibleSetter(obj, rootName, method.getReturnType());
-
+						
 						// Get a handler with for get and set methods:
 						final T handler = getHandler(method, setter, obj, tunable);
-
 						if (handler == null) {
 							logOrThrowException("Failed to create a handler for " + setter.getName() + "()!",null);
 						} else {
 							handlerList.put("getset" + rootName, handler);
 						}
-
 					} catch (Throwable t) {
 						logOrThrowException("tunable method intercept failed for " + method.toString(), t);
 					}
-
-				// See if the method is annotated as providing a GUI...
-				} else if (method.isAnnotationPresent(ProvidesGUI.class)) {
-					if (!isJPanelOrJPanelDescendent(method.getReturnType())) {
-						throw new IllegalArgumentException(method.getName() + " annotated with @ProvidesGUI must return JPanel!");
-					} else if (method.getParameterTypes().length != 0) {
-						throw new IllegalArgumentException(method.getName() + " annotated with @ProvidesGUI must take 0 arguments!");
-					} else {
-						if (!guiProviderMap.isEmpty())
-							throw new IllegalArgumentException("Classes must have at most a single @ProvidesGUI annotated method but + "
-							        + method.getDeclaringClass().getName() + " has more than one!");
-						guiProviderMap.put(obj, method);
-					}
-				} else if (method.isAnnotationPresent(ProvidesTitle.class)) {
+				}else if (method.isAnnotationPresent(ProvidesTitle.class)) {
 					if (!String.class.isAssignableFrom(method.getReturnType())) {
 						throw new IllegalArgumentException(method.getName() + " annotated with @ProvidesTitle must return String!");
 					} else if (method.getParameterTypes().length != 0) {
@@ -178,7 +162,8 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 			handlerMap.put(obj, handlerList);
 		}
 	}
-
+	
+	
 	private boolean isJPanelOrJPanelDescendent(final Class c) {
 		Class c0 = c;
 		while (c0 != null && c0 != Object.class) {
@@ -253,7 +238,7 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 				return true;
 		}
 		for (final Method method : o.getClass().getMethods()) {
-			if (method.isAnnotationPresent(Tunable.class) || method.isAnnotationPresent(ProvidesGUI.class))
+			if (method.isAnnotationPresent(Tunable.class))
 				return true;
 		}
 
