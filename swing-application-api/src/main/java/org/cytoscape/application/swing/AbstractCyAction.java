@@ -273,12 +273,12 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 
 		final String foundInToolBar = configProps.get("inToolBar");
 
-		if (foundInToolBar != null)
+		if (foundInToolBar != null && Boolean.parseBoolean(foundInToolBar))
 			inToolBar = true;
 
 		final String foundInMenuBar = configProps.get("inMenuBar");
 
-		if (foundInMenuBar != null)
+		if (foundInMenuBar != null  && Boolean.parseBoolean(foundInMenuBar))
 			inMenuBar = true;
 
 		final String keyComboString = configProps.get("accelerator");
