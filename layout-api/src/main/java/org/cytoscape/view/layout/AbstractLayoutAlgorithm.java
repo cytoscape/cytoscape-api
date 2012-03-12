@@ -272,6 +272,13 @@ public abstract class AbstractLayoutAlgorithm implements CyLayoutAlgorithm {
 		return submenuDef;
 	}
 
+	/**
+	 * This method is a no-op.  Don't use it.
+	 */	
+	public void setSubmenuOptions(ListSingleSelection<String> opts) {
+		// no-op
+	}
+
 	protected void configureLayoutFromSubmenuSelection() {
 		String selectedMenu = submenuDef.getSelectedValue();
 
