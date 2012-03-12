@@ -6,6 +6,7 @@ import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.List;
@@ -29,7 +30,7 @@ import org.slf4j.LoggerFactory;
  * @CyAPI.Abstract.Class
  */
 public abstract class AbstractGUITunableHandler
-	extends AbstractTunableHandler implements GUITunableHandler, ActionListener, ChangeListener, ListSelectionListener
+	extends AbstractTunableHandler implements GUITunableHandler 
 {
 
 	private static final Logger logger = LoggerFactory.getLogger(AbstractGUITunableHandler.class);
@@ -71,7 +72,6 @@ public abstract class AbstractGUITunableHandler
 	 */
 	private List<GUITunableHandler> listeners;
 
-	private Map<String,String> lastChangeState;
 
 	/** Standard base class constructor for <code>TunableHandler</code>s that deal with
 	 *  <code>Tunable</code>s that annotate a field.
@@ -121,43 +121,17 @@ public abstract class AbstractGUITunableHandler
 
 		dependents = new LinkedList<GUITunableHandler>();
 		listeners = new LinkedList<GUITunableHandler>();
-		lastChangeState = new HashMap<String,String>();
 		panel = new JPanel();
 	}
 
-	/**
-	 *  Action listener event handler.
-	 *
-	 *  @param ae specifics of the event (ignored!)
-	 */
-	public void actionPerformed(ActionEvent ae) {
+
+	public void setValue(final Object newValue) throws IllegalAccessException, InvocationTargetException{
+		super.setValue(newValue);
 		notifyDependents();
 		notifyChangeListeners();
+		
 	}
-
-	/**
-	 * Notification of a state change of a <code>GUITunableHandler</code>
-	 *
-	 * @param e  the details of the state change
-	 */
-	public void stateChanged(ChangeEvent e) {
-		notifyDependents();
-		notifyChangeListeners();
-	}
-
-	/**
-	 * Notify a change during the selection of an item in the <code>ListSelection</code> objects
-	 *
-	 * @param le  the specifics of the list selection change
-	 */
-	public void valueChanged(ListSelectionEvent le) {
-		boolean ok = le.getValueIsAdjusting();
-		if (!ok) {
-			notifyDependents();
-			notifyChangeListeners();
-		}
-	}
-
+	
 	/**
 	 *  Notifies all dependents that this object has changed.
 	 */
@@ -174,8 +148,10 @@ public abstract class AbstractGUITunableHandler
 	public void notifyChangeListeners() {
 		String state = getState();
 		String name = getName();
+
 		for (GUITunableHandler gh : listeners)
 			gh.changeOccurred(name, state);
+		
 	}
 
 	/**
@@ -209,11 +185,7 @@ public abstract class AbstractGUITunableHandler
 
 	/** {@inheritDoc} */
 	public final void changeOccurred(final String name, final String state) {
-		String lastState = lastChangeState.get(name);
-		if ( lastState == null || !lastState.equals(state) ) {
-			update();	
-			lastChangeState.put(name,state);
-		}
+			update();
 	}
 
 	/** {@inheritDoc} */
