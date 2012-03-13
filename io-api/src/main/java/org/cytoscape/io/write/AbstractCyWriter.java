@@ -88,7 +88,7 @@ public abstract class AbstractCyWriter<T extends CyWriterManager> extends Abstra
 	 */
 	public final void run(final TaskMonitor tm) throws Exception {
 		if (outputFile == null)
-			throw new NullPointerException("Output file has not be specified!");
+			throw new NullPointerException("Output file has not ben specified!");
 
 		final String desc = getExportFileFormat();
 		if (desc == null)
