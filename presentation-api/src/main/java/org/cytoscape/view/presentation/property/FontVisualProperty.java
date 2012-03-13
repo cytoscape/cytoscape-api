@@ -91,7 +91,7 @@ public final class FontVisualProperty extends AbstractVisualProperty<Font> {
 	public Font parseSerializableString(final String text) {
 		Font font = null;
 		
-		if (text != null) {
+		if (text != null && text.trim().length() !=0) {
 			// e.g. "Monospaced,plain,12"
             String name = text.replaceAll("(\\.[bB]old)?,[a-zA-Z]+,\\d+(\\.\\d+)?", "");
 
