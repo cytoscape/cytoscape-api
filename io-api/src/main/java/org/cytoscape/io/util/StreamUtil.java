@@ -12,6 +12,20 @@ import java.net.URLConnection;
  */
 public interface StreamUtil {
 
+	String URL_PATTERN = "^(jar\\:)?((http|https|ftp|file)+\\:\\/+\\S+)(\\!\\/\\S*)?$";
+
+	/**
+	 * Gets the input stream from given a string.  Attempts to
+	 * determine if the string is a URL or a File and then creates
+	 * the appropriate InputStream.
+	 * Proxy will be used if available.
+	 * 
+	 * @param source The string from which to generate the InputStream.
+	 * @return An input stream from the specified string.
+	 * @throws IOException 
+	 */
+	InputStream getInputStream(final String source) throws IOException;
+
 	/**
 	 * Gets the input stream from given {@link java.net.URL}.
 	 * Proxy will be used if available.
