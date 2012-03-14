@@ -41,7 +41,7 @@ public final class MapNetworkAttrTask extends AbstractTask {
 	private static final String INDEPENDENT = "None (create Global Table w/o mapping)";
 
 	@Tunable(description = "Would you like to map this table to:")
-	public static final ListSingleSelection<String> whichTable = new ListSingleSelection<String>(CURRENT_SHARED,
+	public static ListSingleSelection<String> whichTable = new ListSingleSelection<String>(CURRENT_SHARED,
 			CURRENT_LOCAL, ALL_SHARED, INDEPENDENT);
 	static {
 		// Default selected item is map to local.
