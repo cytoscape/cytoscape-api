@@ -273,11 +273,11 @@ public abstract class AbstractLayoutAlgorithm implements CyLayoutAlgorithm {
 	}
 
 	public void setSubmenuOptions(ListSingleSelection<String> opts) {
-		configureLayoutFromSubmenuSelection();
+		configureLayoutFromSubmenuSelection(opts);
 	}
 
-	protected void configureLayoutFromSubmenuSelection() {
-		String selectedMenu = submenuDef.getSelectedValue();
+	protected void configureLayoutFromSubmenuSelection(ListSingleSelection<String> opts) {
+		String selectedMenu = opts.getSelectedValue();
 
 		if (selectedMenu == null || selectedMenu == "")
 			return;
