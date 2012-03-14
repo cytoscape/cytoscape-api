@@ -272,11 +272,8 @@ public abstract class AbstractLayoutAlgorithm implements CyLayoutAlgorithm {
 		return submenuDef;
 	}
 
-	/**
-	 * This method is a no-op.  Don't use it.
-	 */	
 	public void setSubmenuOptions(ListSingleSelection<String> opts) {
-		// no-op
+		configureLayoutFromSubmenuSelection();
 	}
 
 	protected void configureLayoutFromSubmenuSelection() {
@@ -293,9 +290,9 @@ public abstract class AbstractLayoutAlgorithm implements CyLayoutAlgorithm {
 			selectedMenu = selectedMenu.replaceFirst(SELECTED_NODES_ONLY, "");
 
 		if (selectedMenu.startsWith(NODE_PREFIX))
-			selectedMenu = selectedMenu.replaceFirst(NODE_PREFIX, "");
+			selectedMenu = selectedMenu.substring(NODE_PREFIX.length());
 		if (selectedMenu.startsWith(EDGE_PREFIX))
-			selectedMenu = selectedMenu.replaceFirst(EDGE_PREFIX, "");
+			selectedMenu = selectedMenu.substring(EDGE_PREFIX.length());
 
 		if (selectedMenu.length() > 0)
 			setLayoutAttribute(selectedMenu);
