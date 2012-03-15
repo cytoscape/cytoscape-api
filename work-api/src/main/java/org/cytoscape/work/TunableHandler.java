@@ -97,4 +97,10 @@ public interface TunableHandler {
 	 *  @return the listenForChange property of the tunable
 	 */
 	String[] listenForChange();
+
+	/**
+	 *  Returns the class type of the field or method annotated by <code>Tunable</code>.
+	 *  @return the class type of the field or method annotated by <code>Tunable</code>.
+	 */
+	Class<?> getType();
 }

@@ -66,6 +66,13 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	/** 
 	 * {@inheritDoc}
 	 */
+	final public Class<?> getType() {
+		return field != null ? field.getType() : getter.getReturnType();
+	}
+
+	/** 
+	 * {@inheritDoc}
+	 */
 	final public Object getValue() throws IllegalAccessException, InvocationTargetException {
 		return field != null ? field.get(instance) : getter.invoke(instance);
 	}
