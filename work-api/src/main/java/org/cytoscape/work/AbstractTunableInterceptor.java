@@ -53,12 +53,7 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 	/**
 	 *  Store the Handlers.
 	 */
-	protected final Map<Object, LinkedHashMap<String, T>> handlerMap;
-
-	/**
-	 *  Store the JPanel-returning methods.
-	 */
-	protected final Map<Object, Method> guiProviderMap;
+	protected final Map<Object, List<T>> handlerMap;
 
 	/**
 	 *  Store the title-returning methods.
@@ -77,8 +72,7 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 	 */
 	public AbstractTunableInterceptor() {
 		throwException = false;
-		handlerMap = new HashMap<Object, LinkedHashMap<String, T>>();
-		guiProviderMap = new HashMap<Object, Method>();
+		handlerMap = new HashMap<Object, List<T>>();
 		titleProviderMap = new HashMap<Object, Method>();
 		tunableHandlerFactories = new ArrayList<TunableHandlerFactory<T>>();
 	}
@@ -88,7 +82,6 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 		this.throwException = throwException;
 	}
 
-	// TODO make this private!!!
 	/**
 	 * To detect fields and methods annotated with {@link Tunable}, create 
 	 * a {@link TunableHandler} for each from the factory, and store it in handlerMap.
@@ -96,9 +89,11 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 	 * @param obj A class that contains fields or methods annotated with {@link Tunable} 
 	 * whose value needs to be set or recorded. 
 	 */
-	protected void loadTunables(final Object obj) {
-		if (!handlerMap.containsKey(obj)) {
-			final LinkedHashMap<String, T> handlerList = new LinkedHashMap<String, T>();
+	private List<T> loadTunables(final Object obj) {
+		List<T> handlerList = handlerMap.get(obj);
+		if (handlerList == null) {
+			handlerList = new ArrayList<T>();
+			handlerMap.put(obj, handlerList);
 
 			// Find each public field in the class.
 			for (final Field field : obj.getClass().getFields()) {
@@ -113,18 +108,27 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 
 						// ...add it to the list of Handlers
 						if (handler != null)
-							handlerList.put(field.getName(), handler);
+							handlerList.add(handler);
 						else
 							logOrThrowException("No handler for type: " + field.getType().getName(), null);
 					} catch (final Throwable ex) {
-						logOrThrowException("tunable field intercept failed for "
-							    + field.toString(), ex);
+						logOrThrowException("tunable field intercept failed for " + field.toString(), ex);
+					}
+
+				// Evaluate fields for ContainsTunables annotation. If the field
+				// is annotated, then get the object from the field and evaluate
+				// *it* for tunables.
+				} else if (field.isAnnotationPresent(ContainsTunables.class)) {
+					try { 
+						Object tunableContainer = field.get(obj);
+						if ( !handlerMap.containsKey(tunableContainer) )
+							handlerList.addAll( loadTunables(tunableContainer) );
+					} catch (final Throwable ex) {
+						logOrThrowException("ContainsTunables field intercept failed for " + field.toString(), ex);
 					}
 				}
 			}
 
-			guiProviderMap.clear();
-			
 			// Find each public method in the class.
 			for (final Method method : obj.getClass().getMethods()) {
 				// See if the method is annotated as a Tunable.
@@ -139,43 +143,30 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 						if (handler == null) {
 							logOrThrowException("Failed to create a handler for " + setter.getName() + "()!",null);
 						} else {
-							handlerList.put("getset" + rootName, handler);
+							handlerList.add(handler);
 						}
 					} catch (Throwable t) {
 						logOrThrowException("tunable method intercept failed for " + method.toString(), t);
 					}
-				}else if (method.isAnnotationPresent(ProvidesTitle.class)) {
+				} else if (method.isAnnotationPresent(ProvidesTitle.class)) {
 					if (!String.class.isAssignableFrom(method.getReturnType())) {
 						throw new IllegalArgumentException(method.getName() + " annotated with @ProvidesTitle must return String!");
 					} else if (method.getParameterTypes().length != 0) {
 						throw new IllegalArgumentException(method.getName() + " annotated with @ProvidesTitle must take 0 arguments!");
 					} else {
 						if (titleProviderMap.containsKey(obj)) {
-							throw new IllegalArgumentException("Classes must have at most a single @ProvidesTitle annotated method but + "
-							        + method.getDeclaringClass().getName() + " has more than one!");
+							throw new IllegalArgumentException("Classes must have at most one @ProvidesTitle annotated method but " + method.getDeclaringClass().getName() + " has more than one!");
 						}
 						titleProviderMap.put(obj, method);
 					}
 				}
 			}
-
-			handlerMap.put(obj, handlerList);
 		}
+
+		return handlerList;
 	}
 	
 	
-	private boolean isJPanelOrJPanelDescendent(final Class c) {
-		Class c0 = c;
-		while (c0 != null && c0 != Object.class) {
-			// hack so that we don't need to import swing
-			if (c0.getName().equals( "javax.swing.JPanel" ))
-				return true;
-			c0 = c0.getSuperclass();
-		}
-
-		return false;
-	}
-
 	private boolean isValidGetter(final Method getterCandidate) {
 		// Make sure we're not returning "void":
 		try {
@@ -216,14 +207,11 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 	 * @return The map that contains all the {@link TunableHandler} objects that have been 
 	 * found to process the fields and methods annotated with {@link Tunable}.
 	 */
-	public final Map<String, T> getHandlers(final Object o) {
+	public final List<T> getHandlers(final Object o) {
 		if (o == null)
 			return null;
 
-		// this is a no-op if tunables have already been loaded
-		loadTunables(o);
-
-		return handlerMap.get(o);
+		return loadTunables(o);
 	}
 
 	/** 
@@ -234,8 +222,17 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 	 */
 	public boolean hasTunables(final Object o) {
 		for (final Field field : o.getClass().getFields()) {
-			if (field.isAnnotationPresent(Tunable.class))
+			if (field.isAnnotationPresent(Tunable.class)) {
 				return true;
+			} else if (field.isAnnotationPresent(ContainsTunables.class)) {
+				try { 
+					Object tunableContainer = field.get(o);
+					return hasTunables(tunableContainer);
+				} catch (final Throwable ex) {
+					logger.debug("ContainsTunables field intercept failed for " + field.toString(), ex);
+					return false;
+				}
+			}
 		}
 		for (final Method method : o.getClass().getMethods()) {
 			if (method.isAnnotationPresent(Tunable.class))
