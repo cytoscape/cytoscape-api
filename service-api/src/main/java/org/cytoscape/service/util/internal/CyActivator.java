@@ -3,7 +3,6 @@
 package org.cytoscape.service.util.internal;
 
 
-import org.cytoscape.service.util.internal.CyServiceRegistrarImpl;
 import org.cytoscape.service.util.CyServiceRegistrar;
 import org.osgi.framework.BundleContext;
 import org.cytoscape.service.util.AbstractCyActivator;

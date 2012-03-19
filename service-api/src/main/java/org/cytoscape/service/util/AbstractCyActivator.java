@@ -14,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.cytoscape.service.util.internal.CyServiceListener;
 import org.cytoscape.service.util.internal.RegisterUtil;
+import org.cytoscape.service.util.internal.ServiceUtil;
 
 /**
  * A simple BundleActivator with convenience methods for registering
@@ -79,16 +80,8 @@ public abstract class AbstractCyActivator implements BundleActivator {
 	 * @throws RuntimeException If the requested service can't be found.
 	 */
 	protected final <S> S getService(BundleContext bc, Class<S> serviceClass) {
-		try {
-			ServiceReference ref = bc.getServiceReference(serviceClass.getName());
-			if ( ref == null ) 
-				throw new NullPointerException("ServiceReference is null for: " + serviceClass.getName());
-			gottenServices.add(ref);	
-			return serviceClass.cast( bc.getService(ref) );
-
-		} catch (Exception e) {
-			throw new RuntimeException("Couldn't find service: " + serviceClass.getName(),e);
-		}
+		
+		return ServiceUtil.getService(bc, serviceClass, gottenServices);
 	}
 
 	/**
@@ -104,16 +97,8 @@ public abstract class AbstractCyActivator implements BundleActivator {
 	 * @throws RuntimeException If the requested service can't be found.
 	 */
 	protected final <S> S getService(BundleContext bc, Class<S> serviceClass, String filter) {
-		try { 
-			ServiceReference[] refs = bc.getServiceReferences(serviceClass.getName(),filter);
-			if ( refs == null ) 
-				throw new NullPointerException("ServiceReference is null for: " + serviceClass.getName() + " with filter: " + filter);
-
-			gottenServices.add(refs[0]);	
-			return serviceClass.cast( bc.getService(refs[0]) );
-		} catch (Exception e) {
-			throw new RuntimeException("Couldn't find service: " + serviceClass.getName() + " with filter: " + filter, e);
-		}
+		
+		return ServiceUtil.getService(bc, serviceClass, filter, gottenServices);
 	}
 
 	/**
@@ -131,13 +116,8 @@ public abstract class AbstractCyActivator implements BundleActivator {
 	 * @param additionalFilter An additional filter to be applied to the OSGi services 
 	 */
 	protected final void registerServiceListener(final BundleContext bc, final Object listener, final String registerMethodName, final String unregisterMethodName, final Class<?> serviceClass, final Class<?> methodClass, final String additionalFilter) {
-		try {
-			CyServiceListener serviceListener = new CyServiceListener(bc, listener, registerMethodName, unregisterMethodName, serviceClass, methodClass, additionalFilter);
-			serviceListener.open();
-			serviceListeners.add( serviceListener );
-		} catch (Exception e) {
-			throw new RuntimeException("Could not listen to services for object: " + listener + " with methods: " + registerMethodName + ", " + unregisterMethodName + ", service type: " + serviceClass + ", and additional filter: " + additionalFilter, e); 
-		}
+	
+		ServiceUtil.registerServiceListener(bc, listener, registerMethodName, unregisterMethodName, serviceClass, methodClass, additionalFilter, serviceListeners);
 	}
 
 	/**
@@ -215,24 +195,8 @@ public abstract class AbstractCyActivator implements BundleActivator {
 	 * @param props The service properties to be registered with each service. 
 	 */
 	protected final void registerService(final BundleContext bc, final Object service, final Class<?> serviceClass, final Properties props) {
-		if ( service == null )
-			throw new NullPointerException( "service object is null" );
-		if ( serviceClass == null )
-			throw new NullPointerException( "class is null" );
-		if ( props == null )
-			throw new NullPointerException( "props are null" );
-		if ( bc == null )
-			throw new IllegalStateException( "BundleContext is null" );
-
-		logger.debug("attempting to register service: " + service.toString() + " of type " + serviceClass.getName());
-		ServiceRegistration s = bc.registerService( serviceClass.getName(), service, props );
-
-		Map<Object, ServiceRegistration> registrations = serviceRegistrations.get(serviceClass);
-		if ( registrations == null ) {
-			registrations = new HashMap<Object,ServiceRegistration>();
-			serviceRegistrations.put(serviceClass, registrations );
-		}
-
-		registrations.put(service,s);
+		
+		ServiceUtil.registerService(bc, service, serviceClass, props, serviceRegistrations); 
 	}
+	
 }
