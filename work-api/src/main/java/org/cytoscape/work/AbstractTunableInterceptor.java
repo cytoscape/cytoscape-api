@@ -32,6 +32,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
+import java.util.Collections;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -209,7 +210,7 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 	 */
 	public final List<T> getHandlers(final Object o) {
 		if (o == null)
-			return null;
+			return Collections.emptyList();
 
 		return loadTunables(o);
 	}

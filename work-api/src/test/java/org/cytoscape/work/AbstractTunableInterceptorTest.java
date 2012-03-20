@@ -33,6 +33,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 
 import javax.swing.JPanel;
+import java.util.List;
 
 import static org.junit.Assert.*;
 import org.junit.Before;
@@ -136,6 +137,12 @@ public class AbstractTunableInterceptorTest {
 	public final void testContainsTunablesUninitialized() {
 		Object o = new UninitializedContainsTunablesClass();
 		interceptor.getHandlers(o);
+	}
+
+	@Test
+	public final void testNullTaskObject() {
+		List l = interceptor.getHandlers(null);
+		assertTrue(l.isEmpty());
 	}
 
 }
