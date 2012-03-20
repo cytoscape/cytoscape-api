@@ -28,23 +28,28 @@
 package org.cytoscape.task;
 
 
-import org.cytoscape.work.TaskFactory;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
+import org.cytoscape.work.TaskIterator;
 
 
 /**
- * The assumption is that setEdgeView() will be called before
- * getTask() and that the Task in question operates on the 
- * specified View&lt;CyEdge&gt;.
  * @CyAPI.Spi.Interface
  */
-public interface EdgeViewTaskFactory extends TaskFactory {
-	/** Used to provision this factory with the edge view and associated network view that will
-	 *  be used to create tasks.
-	 *  @param edgeView  a non-null edge view
-	 *  @param netView   a non-null network view associated with the edge view
+public interface EdgeViewTaskFactory {
+	/**
+	 * Creates a new TaskIterator using the given edge view and network view.
+	 * @param edgeView  a non-null edge view
+	 * @param networkView  a non-null network view
 	 */
-	void setEdgeView(View<CyEdge> edgeView, CyNetworkView netView);
+	TaskIterator createTaskIterator(View<CyEdge> edgeView, CyNetworkView networkView);
+	
+	/**
+	 * Returns true if this task factory is ready to produce a TaskIterator.
+	 * @param edgeView  a non-null edge view
+	 * @param networkView  a non-null network view
+	 * @return
+	 */
+	boolean isReady(View<CyEdge> edgeView, CyNetworkView networkView);
 }

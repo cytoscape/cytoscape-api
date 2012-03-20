@@ -30,11 +30,11 @@
  */
 package org.cytoscape.application.swing;
 
-import org.cytoscape.work.TaskFactoryPredicate;
-
-import org.cytoscape.work.swing.DynamicSubmenuListener;
 import javax.swing.Action;
 import javax.swing.JMenuItem;
+
+import org.cytoscape.work.TaskFactory;
+import org.cytoscape.work.swing.DynamicSubmenuListener;
 
 /**
  * A class that allows the enabled state of an Action of JMenuItem to be managed in 
@@ -44,7 +44,7 @@ import javax.swing.JMenuItem;
  */
 public final class TaskFactoryEnableSupport extends AbstractEnableSupport {
 
-	private final TaskFactoryPredicate tfp;
+	private final TaskFactory tfp;
 
 	/**
 	 * Constructor.
@@ -52,7 +52,7 @@ public final class TaskFactoryEnableSupport extends AbstractEnableSupport {
 	 * @param tfp The task factory enabler that indicates whether or not the submenu
 	 * listener should be enabled.
 	 */
-	public TaskFactoryEnableSupport(DynamicSubmenuListener submenuListener, TaskFactoryPredicate tfp) {
+	public TaskFactoryEnableSupport(DynamicSubmenuListener submenuListener, TaskFactory tfp) {
 		super(submenuListener);
 		this.tfp = tfp;
 	}
@@ -63,7 +63,7 @@ public final class TaskFactoryEnableSupport extends AbstractEnableSupport {
 	 * @param tfp The task factory enabler that indicates whether or not the action
 	 * should be enabled.
 	 */
-	public TaskFactoryEnableSupport(Action action, TaskFactoryPredicate tfp) {
+	public TaskFactoryEnableSupport(Action action, TaskFactory tfp) {
 		super(action);
 		this.tfp = tfp;
 	}
@@ -74,7 +74,7 @@ public final class TaskFactoryEnableSupport extends AbstractEnableSupport {
 	 * @param tfp The task factory enabler that indicates whether or not the menu item
 	 * should be enabled.
 	 */
-	public TaskFactoryEnableSupport(JMenuItem menuItem, TaskFactoryPredicate tfp) {
+	public TaskFactoryEnableSupport(JMenuItem menuItem, TaskFactory tfp) {
 		super(menuItem);
 		this.tfp = tfp;
 	}

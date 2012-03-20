@@ -28,8 +28,8 @@
 package org.cytoscape.task;
 
 
-import org.cytoscape.work.TaskFactory;
 import org.cytoscape.model.CyRow;
+import org.cytoscape.work.TaskIterator;
 
 
 /**
@@ -38,10 +38,12 @@ import org.cytoscape.model.CyRow;
  * specified CyNetwork. 
  * @CyAPI.Spi.Interface
  */
-public interface RowTaskFactory extends TaskFactory {
+public interface RowTaskFactory {
 	/** Provisions this factory with the {@link CyRow} that will be passed into any task created
 	 *  by it.
 	 *  @param row  a non-null CyRow
 	 */
-	void setRow(CyRow row);
+	TaskIterator createTaskIterator(CyRow row);
+	
+	boolean isReady(CyRow row);
 }

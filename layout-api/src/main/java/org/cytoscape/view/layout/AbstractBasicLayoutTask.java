@@ -60,14 +60,13 @@ public abstract class AbstractBasicLayoutTask extends AbstractTask {
 	 * @param staticNodes The list of nodes whose positions are meant to be locked and
 	 * not changed.
 	 */
-	public AbstractBasicLayoutTask(final CyNetworkView networkView, final String name, boolean selectedOnly,
-			final Set<View<CyNode>> staticNodes) {
+	public AbstractBasicLayoutTask(String name, final AbstractLayoutAlgorithmContext context) {
 		super();
 
-		this.networkView = networkView;
+		this.networkView = context.getNetworkView();
 		this.name = name;
-		this.selectedOnly = selectedOnly;
-		this.staticNodes = staticNodes;
+		this.selectedOnly = context.useSelectedOnly();
+		this.staticNodes = context.getStaticNodes();
 	}
  
 	@Override

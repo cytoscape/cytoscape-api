@@ -75,9 +75,8 @@ public abstract class AbstractPartitionLayoutTask extends AbstractBasicLayoutTas
 	 * @param staticNodes A set of nodes that should NOT be moved by the
 	 * layout algorithm.
 	 */
-	public AbstractPartitionLayoutTask(final CyNetworkView networkView, final String name,
-				      final boolean singlePartition, final boolean selectedOnly, final Set<View<CyNode>> staticNodes) {
-		super(networkView, name, selectedOnly, staticNodes);
+	public AbstractPartitionLayoutTask(final String name, AbstractLayoutAlgorithmContext context, final boolean singlePartition) {
+		super(name, context);
 		this.singlePartition = singlePartition;
 	}
 

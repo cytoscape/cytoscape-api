@@ -55,8 +55,6 @@ public abstract class AbstractWebServiceClient implements WebServiceClient {
 	private final String displayName;
 	private final String description;
 	
-	protected Object currentQuery;
-
 	/**
 	 * Constructs this AbstractWebServiceClient.
 	 * @param uri Service Location.
@@ -95,8 +93,4 @@ public abstract class AbstractWebServiceClient implements WebServiceClient {
 		return this.serviceURI;
 	}
 	
-	
-	@Override public void setQuery(Object query) {
-		this.currentQuery = query;
-	}
 }

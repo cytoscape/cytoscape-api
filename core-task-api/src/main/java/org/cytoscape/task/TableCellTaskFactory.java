@@ -28,8 +28,8 @@
 package org.cytoscape.task;
 
 
-import org.cytoscape.work.TaskFactory;
 import org.cytoscape.model.CyColumn;
+import org.cytoscape.work.TaskIterator;
 
 
 /**
@@ -37,11 +37,13 @@ import org.cytoscape.model.CyColumn;
  * in question operates on the specified table entry identified by the column and primary key value.
  * @CyAPI.Spi.Interface
  */
-public interface TableCellTaskFactory extends TaskFactory {
+public interface TableCellTaskFactory {
 	/** Used to provision this factory with a {@link CyColumn} and a primary key that will be
 	 *  used to create tasks.
 	 *  @param column  a non-null CyColumn
 	 *  @param primaryKeyValue  a non-null primary key value
 	 */
-	public void setColumnAndPrimaryKey(final CyColumn column, final Object primaryKeyValue);
+	TaskIterator createTaskIterator(final CyColumn column, final Object primaryKeyValue);
+	
+	boolean isReady(final CyColumn column, final Object primaryKeyValue);
 }

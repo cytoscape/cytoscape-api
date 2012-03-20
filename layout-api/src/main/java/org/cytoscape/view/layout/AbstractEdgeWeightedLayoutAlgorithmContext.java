@@ -37,6 +37,7 @@ import org.cytoscape.work.util.ListSingleSelection;
 import org.cytoscape.work.Tunable;
 import org.cytoscape.work.undo.UndoSupport;
 
+import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 import java.util.ArrayList;
@@ -46,7 +47,7 @@ import java.util.ArrayList;
  * can be used by an implementing layout algorithm.
  * @CyAPI.Abstract.Class
  */
-abstract public class AbstractEdgeWeightedLayoutAlgorithm extends AbstractLayoutAlgorithm {
+abstract public class AbstractEdgeWeightedLayoutAlgorithmContext extends AbstractLayoutAlgorithmContext {
 
 	private static final String groupName = "Edge Weight Settings";
 
@@ -72,10 +73,13 @@ abstract public class AbstractEdgeWeightedLayoutAlgorithm extends AbstractLayout
      * @param computerName a computer readable name used to construct property strings.
      * @param humanName a user visible name of the layout.
      * @param supportsSelectedOnly indicates whether only selected nodes should be laid out.
+     * @param supportedNodeAttributes 
+     * @param supportedNodeAttributes 
+     * @param supportedEdgeAttributes 
+     * @param supportedEdgeAttributes 
      */
-    public AbstractEdgeWeightedLayoutAlgorithm(final UndoSupport undo, final String computerName, 
-	                                           final String humanName, boolean supportsSelectedOnly) {
-		super(undo,computerName,humanName,supportsSelectedOnly);
+    public AbstractEdgeWeightedLayoutAlgorithmContext(boolean supportsSelectedOnly, Set<Class<?>> supportedNodeAttributes, Set<Class<?>> supportedEdgeAttributes) {
+		super(supportsSelectedOnly, supportedNodeAttributes, supportedEdgeAttributes);
 	}
 
     /**

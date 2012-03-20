@@ -22,4 +22,6 @@ public interface TaskFactory {
 	 *  Note: Most factory's returned iterator only yields a single <code>Task</code>.
 	 */
 	TaskIterator createTaskIterator();
+	
+	boolean isReady();
 }

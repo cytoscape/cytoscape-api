@@ -28,20 +28,24 @@
 package org.cytoscape.task;
 
 
-import org.cytoscape.work.TaskFactory;
 import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.work.TaskIterator;
 
 
 /**
- * The assumption is that setNetworkView() will be called before
- * getTask() and that the Task in question operates on the 
- * specified CyNetworkView. 
  * @CyAPI.Spi.Interface
  */
-public interface NetworkViewTaskFactory extends TaskFactory {
-	/** Provisions this factory with a {@link CyNetworkView} that will be passed into any tasks
-	 *  created by it.
-	 *  @param netView  a non-null network view
+public interface NetworkViewTaskFactory {
+	/**
+	 * Creates a new TaskIterator using the given {@link CyNetworkView}
+	 * @param networkView  a non-null network view
 	 */
-	void setNetworkView(CyNetworkView netView);
+	TaskIterator createTaskIterator(CyNetworkView networkView);
+	
+	/**
+	 * Returns true if this task factory is ready to produce a TaskIterator.
+	 * @param networkView
+	 * @return
+	 */
+	boolean isReady(CyNetworkView networkView);
 }

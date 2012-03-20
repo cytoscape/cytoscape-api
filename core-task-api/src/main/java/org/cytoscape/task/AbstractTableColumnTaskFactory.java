@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2008, 2010, The Cytoscape Consortium (www.cytoscape.org)
+ Copyright (c) 2010, The Cytoscape Consortium (www.cytoscape.org)
 
  This library is free software; you can redistribute it and/or modify it
  under the terms of the GNU Lesser General Public License as published
@@ -27,25 +27,15 @@
 */
 package org.cytoscape.task;
 
-
-import java.util.Collection;
-
-import org.cytoscape.view.model.CyNetworkView;
-import org.cytoscape.work.TaskIterator;
-
+import org.cytoscape.model.CyColumn;
 
 /**
- * The assumption is that setNetworkViewCollection() will be called before
- * getTask() and that the Task in question operates on the 
- * specified CyNetworks. 
- * @CyAPI.Spi.Interface
+ * A TableColumnTaskFactory that is always ready to produce a TaskIterator.
+ * @CyAPI.Abstract.Class
  */
-public interface NetworkViewCollectionTaskFactory {
-	/** Provisions this factory with the collection of network views that will be passed into
-	 *  any task created by it.
-	 *  @param nets  a non-null collection of {@link CyNetworkView}s
-	 */
-	TaskIterator createTaskIterator(Collection<CyNetworkView> networkViews);
-	
-	boolean isReady(Collection<CyNetworkView> networkViews);
+abstract public class AbstractTableColumnTaskFactory implements TableColumnTaskFactory {
+	@Override
+	public boolean isReady(CyColumn column) {
+		return true;
+	}
 }

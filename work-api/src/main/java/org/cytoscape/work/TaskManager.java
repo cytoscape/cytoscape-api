@@ -14,7 +14,7 @@ public interface TaskManager<T,C> {
 	 * @return a configuration object generated from the Tunables
 	 * read from the TaskFactory.
 	 */
-	 T getConfiguration(TaskFactory factory);
+	 T getConfiguration(TaskFactory factory, Object tunableContext);
 
 	/**
 	 * Allows a user of a TaskManager to set the execution context for
@@ -34,5 +34,7 @@ public interface TaskManager<T,C> {
 	 * @param factory The <code>TaskFactory</code> whose tasks returned by its createTaskIterator()
 	 * method's iterator will be executed
 	 */
-	void execute(TaskFactory factory);
+	void execute(TaskIterator iterator, Object tunableContext);
+	
+	void execute(TaskIterator iterator);
 }

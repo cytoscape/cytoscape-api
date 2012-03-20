@@ -30,21 +30,20 @@
 package org.cytoscape.view.layout;
 
 
-import org.cytoscape.task.NetworkViewTaskFactory;
-import org.cytoscape.work.TaskMonitor;
-import org.cytoscape.view.model.CyNetworkView;
-import org.cytoscape.view.model.View;
-import org.cytoscape.model.CyNode;
-
-import javax.swing.*;
 import java.util.List;
 import java.util.Set;
+
+import org.cytoscape.work.TaskIterator;
 
 /**
  * An extension of NetworkViewTaskFactory specific to layout algorithms.
  * @CyAPI.Spi.Interface
  */
-public interface CyLayoutAlgorithm extends NetworkViewTaskFactory {
+public interface CyLayoutAlgorithm<T extends CyLayoutContext> {
+	TaskIterator createTaskIterator(T layoutContext);
+	boolean isReady(T layoutContext);
+	T createLayoutContext();
+	
 	/**
 	 * Tests to see if this layout supports doing a layout on a subset of the
 	 * nodes in this network view.
@@ -53,13 +52,13 @@ public interface CyLayoutAlgorithm extends NetworkViewTaskFactory {
 	 */
 	public boolean supportsSelectedOnly();
 
-	/**
-	 * Sets the "selectedOnly" flag
-	 *
-	 * @param selectedOnly boolean value that tells the layout algorithm whether to
-	 * only layout the selected nodes
-	 */
-	public void setSelectedOnly(boolean selectedOnly);
+//	/**
+//	 * Sets the "selectedOnly" flag
+//	 *
+//	 * @param selectedOnly boolean value that tells the layout algorithm whether to
+//	 * only layout the selected nodes
+//	 */
+//	public void setSelectedOnly(boolean selectedOnly);
 
 	/**
 	 * Tests to see if this layout supports doing a layout based on node attributes.
@@ -77,12 +76,12 @@ public interface CyLayoutAlgorithm extends NetworkViewTaskFactory {
 	 */
 	public Set<Class<?>> supportsEdgeAttributes();
 
-	/**
-	 * Sets the attribute to use for node- or edge- based attribute layouts
-	 *
-	 * @param attributeName String with the name of the attribute to use
-	 */
-	public void setLayoutAttribute(String attributeName);
+//	/**
+//	 * Sets the attribute to use for node- or edge- based attribute layouts
+//	 *
+//	 * @param attributeName String with the name of the attribute to use
+//	 */
+//	public void setLayoutAttribute(String attributeName);
 
 	/**
 	 * This returns a (possibly empty) List of Strings that is used for

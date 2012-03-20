@@ -28,9 +28,10 @@
 package org.cytoscape.task;
 
 
-import org.cytoscape.work.TaskFactory;
-import org.cytoscape.model.CyNetwork;
 import java.util.Collection;
+
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.work.TaskIterator;
 
 
 /**
@@ -39,10 +40,12 @@ import java.util.Collection;
  * specified CyNetworks. 
  * @CyAPI.Spi.Interface
  */
-public interface NetworkCollectionTaskFactory extends TaskFactory {
+public interface NetworkCollectionTaskFactory {
 	/** Provisions this factory with the collection of networks that will be passed into any task
 	 *  created by it.
 	 *  @param nets  a non-null collection of {@link CyNetwork}s
 	 */
-	void setNetworkCollection(Collection<CyNetwork> nets);
+	TaskIterator createTaskIterator(Collection<CyNetwork> networks);
+	
+	boolean isReady(Collection<CyNetwork> networks);
 }
