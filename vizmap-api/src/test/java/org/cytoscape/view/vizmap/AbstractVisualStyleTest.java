@@ -94,19 +94,22 @@ public abstract class AbstractVisualStyleTest {
 		// Apply mappings.
 		style.apply(networkView);
 		
-//		// Check defaults
-//		assertEquals(Color.PINK, style.getDefaultValue(BasicVisualLexicon.NODE_FILL_COLOR));
-//		assertEquals(Color.BLACK, style.getDefaultValue(BasicVisualLexicon.NODE_PAINT));
-//		
-//		// Check results.
+		// Check defaults
+		assertEquals(Color.PINK, style.getDefaultValue(BasicVisualLexicon.NODE_FILL_COLOR));
+		assertEquals(Color.BLACK, style.getDefaultValue(BasicVisualLexicon.NODE_PAINT));
+		
+		// Check results.
+		assertEquals(RED1, nodeView1.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR));
+		assertEquals(RED1, nodeView2.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR));
+
+		// Apply to individual values
+		style.setDefaultValue(BasicVisualLexicon.NODE_FILL_COLOR, Color.YELLOW);
+		
+		// FIXME!
+//		style.apply(nodeView3);
 //		assertEquals(RED1, nodeView1.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR));
-//		assertEquals(GREEN1, nodeView2.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR));
-//		assertEquals(RED2, nodeView1.getVisualProperty(BasicVisualLexicon.NODE_PAINT));
-//		assertEquals(GREEN2, nodeView2.getVisualProperty(BasicVisualLexicon.NODE_PAINT));
-//		
-//		// Check default values.  Leaf node will be applied.
-//		assertEquals(Color.BLACK, nodeView3.getVisualProperty(BasicVisualLexicon.NODE_PAINT));
-//		assertEquals(Color.PINK, nodeView3.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR));
+//		assertEquals(RED1, nodeView2.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR));
+//		assertEquals(Color.YELLOW, nodeView3.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR));		
 	}
 	
 }
