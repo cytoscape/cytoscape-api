@@ -844,8 +844,8 @@ public abstract class AbstractCyNetworkTest {
 		// As long as the object is not null and is an instance of CyRow, we
 		// should be satisfied.  Don't test any other properties of CyRow.
 		// Leave that to the CyRow unit tests.
-		assertNotNull("cyattrs exists", net.getRow(net,"USER"));
-		assertTrue("cyattrs is CyRow", net.getRow(net,"USER") instanceof CyRow);
+		assertNotNull("cyattrs exists", net.getRow(net, CyNetwork.DEFAULT_ATTRS));
+		assertTrue("cyattrs is CyRow", net.getRow(net, CyNetwork.DEFAULT_ATTRS) instanceof CyRow);
 	}
 
 	@Test(expected=NullPointerException.class)
@@ -865,24 +865,24 @@ public abstract class AbstractCyNetworkTest {
 
 	@Test
 	public void testDefaultAttributes() {
-		assertEquals(String.class, net.getRow(net).getTable().getColumn("name").getType());
+		assertEquals(String.class, net.getRow(net).getTable().getColumn(CyTableEntry.NAME).getType());
 	}
 
 	@Test
 	public void testGetDefaultNetworkTable() {
 		assertNotNull(net.getDefaultNetworkTable());
-		assertEquals(String.class, net.getDefaultNetworkTable().getColumn("name").getType());
+		assertEquals(String.class, net.getDefaultNetworkTable().getColumn(CyTableEntry.NAME).getType());
 	}
 
 	@Test
 	public void testGetDefaultNodeTable() {
 		assertNotNull(net.getDefaultNodeTable());
-		assertEquals(String.class, net.getDefaultNodeTable().getColumn("name").getType());
+		assertEquals(String.class, net.getDefaultNodeTable().getColumn(CyTableEntry.NAME).getType());
 	}
 
 	@Test
 	public void testGetDefaultEdgeTable() {
 		assertNotNull(net.getDefaultEdgeTable());
-		assertEquals(String.class, net.getDefaultEdgeTable().getColumn("name").getType());
+		assertEquals(String.class, net.getDefaultEdgeTable().getColumn(CyTableEntry.NAME).getType());
 	}
 }
