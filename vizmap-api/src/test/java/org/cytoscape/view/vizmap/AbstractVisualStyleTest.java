@@ -106,10 +106,10 @@ public abstract class AbstractVisualStyleTest {
 		style.setDefaultValue(BasicVisualLexicon.NODE_FILL_COLOR, Color.YELLOW);
 		
 		// FIXME!
-//		style.apply(nodeView3);
-//		assertEquals(RED1, nodeView1.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR));
-//		assertEquals(RED1, nodeView2.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR));
-//		assertEquals(Color.YELLOW, nodeView3.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR));		
+		style.apply(nodeView3);
+		assertEquals(RED1, nodeView1.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR));
+		assertEquals(RED1, nodeView2.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR));
+		assertEquals(Color.YELLOW, nodeView3.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR));		
 	}
 	
 }
