@@ -20,7 +20,6 @@
 		<module>model-api</module>
 		<module>viewmodel-api</module>
 		<module>core-task-api</module>
-		<module>dnd-api</module>
 		<module>equations-api</module>
 		<module>io-api</module>
 		<module>layout-api</module>

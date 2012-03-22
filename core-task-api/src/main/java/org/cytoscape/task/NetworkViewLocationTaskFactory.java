@@ -1,19 +1,18 @@
-
-package org.cytoscape.dnd;
-
+package org.cytoscape.task;
 
 import java.awt.datatransfer.Transferable;
 import java.awt.geom.Point2D;
 
 import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.work.TaskFactory;
 import org.cytoscape.work.TaskIterator;
 
 /**
  * An extension of TaskFactory that provides support for
- * tasks to deal with drag and drop.
+ * tasks to deal with adding node and endge by right click menue.
  * @CyAPI.Spi.Interface
  */
-public interface DropNetworkViewTaskFactory {
+public interface NetworkViewLocationTaskFactory{
 
 	/**
 	 * Sets the drop information for a TaskFactory. 
@@ -21,7 +20,7 @@ public interface DropNetworkViewTaskFactory {
 	 * @param javaPt The raw Java point at which the object was dropped.
 	 * @param xformPt The drop point transformed into Cytoscape coordinates.
 	 */
-	TaskIterator createTaskIterator(CyNetworkView networkView, Transferable t, Point2D javaPt, Point2D xformPt);
+	TaskIterator createTaskIterator(CyNetworkView networkView, Point2D javaPt, Point2D xformPt);
 	
-	boolean isReady(CyNetworkView networkView, Transferable t, Point2D javaPt, Point2D xformPt);
+	boolean isReady(CyNetworkView networkView, Point2D javaPt, Point2D xformPt);
 }
