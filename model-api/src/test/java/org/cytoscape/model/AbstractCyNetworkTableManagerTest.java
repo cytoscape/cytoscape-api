@@ -8,6 +8,10 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 
+/**
+ * Test cases for Network Table Manager.
+ *
+ */
 public abstract class AbstractCyNetworkTableManagerTest {
 	/**
 	 * Must be supplied by implementer.
