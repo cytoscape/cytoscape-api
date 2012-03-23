@@ -34,7 +34,5 @@ public interface TaskManager<T,C> {
 	 * @param factory The <code>TaskFactory</code> whose tasks returned by its createTaskIterator()
 	 * method's iterator will be executed
 	 */
-	void execute(TaskIterator iterator, Object tunableContext);
-	
 	void execute(TaskIterator iterator);
 }
