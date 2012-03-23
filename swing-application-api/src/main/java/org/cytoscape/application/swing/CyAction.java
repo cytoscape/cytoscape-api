@@ -39,11 +39,8 @@ package org.cytoscape.application.swing;
 
 import javax.swing.Action;
 import javax.swing.KeyStroke;
-import javax.swing.event.MenuEvent;
 import javax.swing.event.MenuListener;
 import javax.swing.event.PopupMenuListener;
-import java.awt.event.ActionEvent;
-import java.util.List;
 
 /**
  * An interface that describes how an action should be placed within 

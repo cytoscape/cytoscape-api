@@ -29,16 +29,13 @@
  */
 package org.cytoscape.application.swing;
 
-import org.cytoscape.application.CyApplicationManager;
-
-import org.cytoscape.model.CyEdge;
-import org.cytoscape.model.CyNetwork;
-import org.cytoscape.model.CyNode;
-import org.cytoscape.view.model.CyNetworkView;
-import org.cytoscape.work.swing.DynamicSubmenuListener;
-
 import javax.swing.Action;
 import javax.swing.JMenuItem;
+
+import org.cytoscape.application.CyApplicationManager;
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.work.swing.DynamicSubmenuListener;
 
 /**
  * A class that allows the enabled state of an Action of JMenuItem to managed in 

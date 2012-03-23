@@ -29,16 +29,10 @@
  */
 package org.cytoscape.application.swing;
 
-import org.cytoscape.application.CyApplicationManager;
-
-import org.cytoscape.model.CyEdge;
-import org.cytoscape.model.CyNetwork;
-import org.cytoscape.model.CyNode;
-import org.cytoscape.view.model.CyNetworkView;
-import org.cytoscape.work.swing.DynamicSubmenuListener;
-
 import javax.swing.Action;
 import javax.swing.JMenuItem;
+
+import org.cytoscape.work.swing.DynamicSubmenuListener;
 
 abstract class AbstractEnableSupport {
 
@@ -86,8 +80,12 @@ abstract class AbstractEnableSupport {
 	 */
 	public abstract void updateEnableState();
 
-	protected synchronized final void setEnabled(boolean b) {
+	protected void setEnabled(final boolean b) {
+		
+		//System.out.println(action + ", " + menuItem + " ========> menu enabled: " + b);
+		
 		enableState = b;
+		
 		if ( submenuListener != null )
 			submenuListener.setEnabled(enableState);
 		if ( action != null )

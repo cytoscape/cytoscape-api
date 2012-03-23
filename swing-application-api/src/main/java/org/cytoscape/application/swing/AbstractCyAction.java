@@ -40,6 +40,7 @@ import javax.swing.event.MenuEvent;
 import javax.swing.event.PopupMenuEvent;
 
 import org.cytoscape.application.CyApplicationManager;
+import org.cytoscape.work.ServiceProperties;
 import org.cytoscape.work.TaskFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,7 +55,9 @@ import org.slf4j.LoggerFactory;
  * @CyAPI.Abstract.Class
  */
 public abstract class AbstractCyAction extends AbstractAction implements CyAction {
+	
 	private static final long serialVersionUID = -2245672104075936952L;
+	
 	private static final Logger logger = LoggerFactory.getLogger(AbstractCyAction.class);
 
 	/**
@@ -131,7 +134,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * @param applicationManager The application manager providing context for this action.
 	 * @param enableFor A string declaring which states this action should be enabled for. 
 	 */
-	public AbstractCyAction(final String name, final CyApplicationManager applicationManager, String enableFor) {
+	public AbstractCyAction(final String name, final CyApplicationManager applicationManager, final String enableFor) {
 		super(name);
 		this.enabler = new StringEnableSupport(this,enableFor,applicationManager);
 	}
@@ -161,7 +164,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 */
 	public AbstractCyAction(final Map<String, String> configProps,
 	                        final CyApplicationManager applicationManager) {
-		this(configProps.get("title"), applicationManager, configProps.get("enableFor"));
+		this(configProps.get(ServiceProperties.TITLE), applicationManager, configProps.get(ServiceProperties.ENABLE_FOR));
 		
 		configFromProps( configProps );
 	}
@@ -230,8 +233,8 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	public AbstractCyAction(final Map<String, String> configProps,
 	                        final CyApplicationManager applicationManager,
 	                        final TaskFactory factory) {
-		super(configProps.get("title"));
-		String enableFor = configProps.get("enableFor");
+		super(configProps.get(ServiceProperties.TITLE));
+		String enableFor = configProps.get(ServiceProperties.ENABLE_FOR);
 		if ( enableFor == null )
 			this.enabler = new TaskFactoryEnableSupport(this,factory);
 		else
@@ -242,7 +245,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 
 	private void configFromProps(final Map<String, String> configProps) {
 
-		logger.debug("New CyAction with title: " + configProps.get("title"));
+		logger.debug("New CyAction with title: " + configProps.get(ServiceProperties.TITLE));
 
 		final String prefMenu = configProps.get("preferredMenu");
 
