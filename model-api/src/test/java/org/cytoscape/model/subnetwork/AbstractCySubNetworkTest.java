@@ -37,7 +37,7 @@ import org.cytoscape.event.CyEventHelper;
 import org.cytoscape.event.CyListener;
 
 import org.cytoscape.model.CyTable;
-import org.cytoscape.model.CyTableEntry;
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
@@ -366,13 +366,13 @@ public abstract class AbstractCySubNetworkTest {
 	@Test
 	public void testNodeAddedInSubnetworkHasNameAttr() {
 		n1 = root.addNode();
-		root.getRow(n1).set(CyTableEntry.NAME,"homer");
+		root.getRow(n1).set(CyNetwork.NAME,"homer");
 
 		sub = root.addSubNetwork();
 		sub.addNode(n1);
 	
 		List<CyNode> subNodes = sub.getNodeList();
-		assertEquals( "homer", sub.getRow(subNodes.get(0)).get(CyTableEntry.NAME,String.class) ); 
+		assertEquals( "homer", sub.getRow(subNodes.get(0)).get(CyNetwork.NAME,String.class) ); 
 	}
 
 	@Test
@@ -392,7 +392,7 @@ public abstract class AbstractCySubNetworkTest {
 		n1 = root.addNode();
 		n2 = root.addNode();
 		e1 = root.addEdge(n1,n2,true);
-		root.getRow(e1).set(CyTableEntry.NAME,"homer");
+		root.getRow(e1).set(CyNetwork.NAME,"homer");
 
 		sub = root.addSubNetwork();
 		sub.addNode(n1);
@@ -400,7 +400,7 @@ public abstract class AbstractCySubNetworkTest {
 		sub.addEdge(e1);
 	
 		List<CyEdge> subEdges = sub.getEdgeList();
-		assertEquals( "homer", sub.getRow(subEdges.get(0)).get(CyTableEntry.NAME,String.class) ); 
+		assertEquals( "homer", sub.getRow(subEdges.get(0)).get(CyNetwork.NAME,String.class) ); 
 	}
 
 	@Test

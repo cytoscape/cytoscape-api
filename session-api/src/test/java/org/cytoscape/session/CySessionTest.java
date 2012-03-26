@@ -20,7 +20,7 @@ import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyTable;
-import org.cytoscape.model.CyTableEntry;
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyTableMetadata;
 import org.cytoscape.property.CyProperty;
 import org.cytoscape.property.SimpleCyProperty;
@@ -265,7 +265,7 @@ public class CySessionTest {
 		CyEdge e1 = mock(CyEdge.class);
 		edgeMap.put(new Long(3), e1);
 				
-		Map<Class<? extends CyTableEntry>, Map<Object, ? extends CyTableEntry>> objMap = new HashMap<Class<? extends CyTableEntry>, Map<Object, ? extends CyTableEntry>>();
+		Map<Class<? extends CyIdentifiable>, Map<Object, ? extends CyIdentifiable>> objMap = new HashMap<Class<? extends CyIdentifiable>, Map<Object, ? extends CyIdentifiable>>();
 		objMap.put(CyNetwork.class, netMap);
 		objMap.put(CyNetworkView.class, viewMap);
 		objMap.put(CyNode.class, nodeMap);

@@ -865,24 +865,24 @@ public abstract class AbstractCyNetworkTest {
 
 	@Test
 	public void testDefaultAttributes() {
-		assertEquals(String.class, net.getRow(net).getTable().getColumn(CyTableEntry.NAME).getType());
+		assertEquals(String.class, net.getRow(net).getTable().getColumn(CyNetwork.NAME).getType());
 	}
 
 	@Test
 	public void testGetDefaultNetworkTable() {
 		assertNotNull(net.getDefaultNetworkTable());
-		assertEquals(String.class, net.getDefaultNetworkTable().getColumn(CyTableEntry.NAME).getType());
+		assertEquals(String.class, net.getDefaultNetworkTable().getColumn(CyNetwork.NAME).getType());
 	}
 
 	@Test
 	public void testGetDefaultNodeTable() {
 		assertNotNull(net.getDefaultNodeTable());
-		assertEquals(String.class, net.getDefaultNodeTable().getColumn(CyTableEntry.NAME).getType());
+		assertEquals(String.class, net.getDefaultNodeTable().getColumn(CyNetwork.NAME).getType());
 	}
 
 	@Test
 	public void testGetDefaultEdgeTable() {
 		assertNotNull(net.getDefaultEdgeTable());
-		assertEquals(String.class, net.getDefaultEdgeTable().getColumn(CyTableEntry.NAME).getType());
+		assertEquals(String.class, net.getDefaultEdgeTable().getColumn(CyNetwork.NAME).getType());
 	}
 }

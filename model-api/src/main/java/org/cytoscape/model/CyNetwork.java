@@ -39,7 +39,7 @@ import java.util.List;
  * be directed, undirected, or both.
  * @CyAPI.Api.Interface
  */
-public interface CyNetwork extends CyTableEntry {
+public interface CyNetwork extends CyIdentifiable {
 	/**
 	 * A boolean column created by default for every CyNode or CyEdge that
 	 * holds the selection state of the entry. 
@@ -63,6 +63,13 @@ public interface CyNetwork extends CyTableEntry {
 	 * see {@link CyTableManager} for more information.
 	 */
 	String HIDDEN_ATTRS = "HIDDEN";
+	
+	/**
+	 * A String column created by default for every CyNetwork that
+	 * holds the name of the entry.
+	 */
+	String NAME = "name";
+
 
 	/**
 	 * This method is used to create and add a node to this network.
@@ -299,7 +306,7 @@ public interface CyNetwork extends CyTableEntry {
 	 * @param tableName the name of the table from which to extract the row..
 	 * @return the row in the table of the specified name for this object. 
 	 */
-	CyRow getRow(CyTableEntry entry, String tableName);
+	CyRow getRow(CyIdentifiable entry, String tableName);
  
 	/**
 	 * A convenience method that returns the row in the default table 
@@ -310,6 +317,6 @@ public interface CyNetwork extends CyTableEntry {
 	 * @param entry The entry (node, edge, network) whose row we're looking for. 
 	 * @return the row in the default table for this object. 
 	 */
-	CyRow getRow(CyTableEntry entry);
+	CyRow getRow(CyIdentifiable entry);
 
 }

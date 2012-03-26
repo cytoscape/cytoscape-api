@@ -41,7 +41,7 @@ package org.cytoscape.model;
  * and edges.
  * @CyAPI.Api.Interface
  */
-public interface CyEdge extends CyTableEntry {
+public interface CyEdge extends CyIdentifiable {
 
 	/**
 	 * A String column created by default for every CyEdge that

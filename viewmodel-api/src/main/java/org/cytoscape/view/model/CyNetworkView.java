@@ -39,7 +39,7 @@ import java.util.Collection;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
-import org.cytoscape.model.CyTableEntry;
+import org.cytoscape.model.CyIdentifiable;
 
 /**
  * 
@@ -87,7 +87,7 @@ public interface CyNetworkView extends View<CyNetwork> {
 	 * 
 	 * @return All view objects in this network including network view itself.
 	 */
-	Collection<View<? extends CyTableEntry>> getAllViews();
+	Collection<View<? extends CyIdentifiable>> getAllViews();
 	
 	
 	/**

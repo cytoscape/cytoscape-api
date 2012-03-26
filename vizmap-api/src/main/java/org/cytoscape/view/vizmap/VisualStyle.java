@@ -36,7 +36,7 @@ package org.cytoscape.view.vizmap;
 
 import java.util.Collection;
 
-import org.cytoscape.model.CyTableEntry;
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
@@ -150,6 +150,6 @@ public interface VisualStyle {
 	 * 
 	 * @param viewObject
 	 */
-	void apply(final View<? extends CyTableEntry> view);
+	void apply(final View<? extends CyIdentifiable> view);
 	
 }

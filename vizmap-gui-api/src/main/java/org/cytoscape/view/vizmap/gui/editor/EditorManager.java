@@ -43,7 +43,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.cytoscape.model.CyTable;
-import org.cytoscape.model.CyTableEntry;
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.view.vizmap.mappings.ContinuousMapping;
@@ -155,7 +155,7 @@ public interface EditorManager {
 	 * 
 	 * @return selector
 	 */
-	public PropertyEditor getDataTableComboBoxEditor(final Class<? extends CyTableEntry> targetObjectType);
+	public PropertyEditor getDataTableComboBoxEditor(final Class<? extends CyIdentifiable> targetObjectType);
 	
 	
 	/**

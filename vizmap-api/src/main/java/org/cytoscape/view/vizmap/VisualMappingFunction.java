@@ -35,7 +35,7 @@
 package org.cytoscape.view.vizmap;
 
 import org.cytoscape.model.CyTable;
-import org.cytoscape.model.CyTableEntry;
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyRow;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
@@ -111,5 +111,5 @@ public interface VisualMappingFunction<K, V> {
 	 * @param view target View model to be updated. View should be one of the
 	 *            following: Node, Edge, or Network.
 	 */
-	void apply(final CyRow row, final View<? extends CyTableEntry> view);
+	void apply(final CyRow row, final View<? extends CyIdentifiable> view);
 }

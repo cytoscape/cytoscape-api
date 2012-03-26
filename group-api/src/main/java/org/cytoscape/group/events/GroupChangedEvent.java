@@ -6,7 +6,7 @@ import org.cytoscape.event.AbstractCyEvent;
 import org.cytoscape.group.CyGroup;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNode;
-import org.cytoscape.model.CyTableEntry;
+import org.cytoscape.model.CyIdentifiable;
 
 /**
  * This event signals that a group has changed, either by adding or
@@ -19,7 +19,7 @@ public final class GroupChangedEvent extends AbstractCyEvent<CyGroup> {
 		NODE_ADDED, INTERNAL_EDGE_ADDED, EXTERNAL_EDGE_ADDED,
 		NODES_ADDED, NODES_REMOVED, EDGES_ADDED, EDGES_REMOVED }
 
-	private CyTableEntry whatChanged;
+	private CyIdentifiable whatChanged;
 	private List<CyNode> nodeList;
 	private ChangeType change;
 
@@ -44,7 +44,7 @@ public final class GroupChangedEvent extends AbstractCyEvent<CyGroup> {
 				throw new IllegalArgumentException("the \"whatChanged\" parameter must be a list of nodes for NODES_ADDED or NODES_REMOVED!");
 		} else if ((whatChanged instanceof CyEdge) ||
 		           (whatChanged instanceof CyNode)) {
-			this.whatChanged = (CyTableEntry) whatChanged;
+			this.whatChanged = (CyIdentifiable) whatChanged;
 		} else {
 			throw new IllegalArgumentException("the \"whatChanged\" parameter must be a node or an edge!");
 		}
@@ -56,7 +56,7 @@ public final class GroupChangedEvent extends AbstractCyEvent<CyGroup> {
  	 *
  	 * @return the CyTableEntry (CyNode or CyEdge) that was added or removed.
  	 */
-	public CyTableEntry getChangedObject() {
+	public CyIdentifiable getChangedObject() {
 		return whatChanged;
 	}
 

@@ -117,7 +117,7 @@ public abstract class AbstractCyNetworkTableManagerTest {
 	
 	@Test
 	public void testRemoveDefaultTables() throws Exception {
-		for (Class<? extends CyTableEntry> type : new Class[] { CyNetwork.class, CyNode.class, CyEdge.class }) {
+		for (Class<? extends CyIdentifiable> type : new Class[] { CyNetwork.class, CyNode.class, CyEdge.class }) {
 			try {
 				mgr.removeTable(goodNetwork, type, CyNetwork.DEFAULT_ATTRS);
 				fail();
@@ -128,7 +128,7 @@ public abstract class AbstractCyNetworkTableManagerTest {
 
 	@Test
 	public void testSetDefaultTables() throws Exception {
-		for (Class<? extends CyTableEntry> type : new Class[] { CyNetwork.class, CyNode.class, CyEdge.class }) {
+		for (Class<? extends CyIdentifiable> type : new Class[] { CyNetwork.class, CyNode.class, CyEdge.class }) {
 			try {
 				mgr.setTable(goodNetwork, type, CyNetwork.DEFAULT_ATTRS, table1);
 				fail();

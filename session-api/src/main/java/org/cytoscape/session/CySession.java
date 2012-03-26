@@ -37,7 +37,7 @@ import java.util.Set;
 
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
-import org.cytoscape.model.CyTableEntry;
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyTableMetadata;
 import org.cytoscape.property.CyProperty;
 import org.cytoscape.view.model.CyNetworkView;
@@ -74,7 +74,7 @@ public final class CySession {
 	private final Set<CyProperty<?>> properties;
 	private final Set<VisualStyle> visualStyles;
 	private final Map<String, List<File>> appFiles;
-	private final Map<Class<? extends CyTableEntry>, Map<Object, ? extends CyTableEntry>> objectMap;
+	private final Map<Class<? extends CyIdentifiable>, Map<Object, ? extends CyIdentifiable>> objectMap;
 
 	private static final Logger logger = LoggerFactory.getLogger(CySession.class);
 
@@ -89,7 +89,7 @@ public final class CySession {
 		appFiles = Collections.unmodifiableMap( b.appFiles == null ? new HashMap<String, List<File>>() : b.appFiles );
 		
 		if (b.objectMap == null)
-			objectMap = Collections.unmodifiableMap(new HashMap<Class<? extends CyTableEntry>, Map<Object, ? extends CyTableEntry>>());
+			objectMap = Collections.unmodifiableMap(new HashMap<Class<? extends CyIdentifiable>, Map<Object, ? extends CyIdentifiable>>());
 		else
 			objectMap = Collections.unmodifiableMap(b.objectMap);
 	}
@@ -107,7 +107,7 @@ public final class CySession {
 		private Set<CyProperty<?>> properties;
 		private Set<VisualStyle> visualStyles; 
 		private Map<String, List<File>> appFiles;
-		private Map<Class<? extends CyTableEntry>, Map<Object, ? extends CyTableEntry>> objectMap;
+		private Map<Class<? extends CyIdentifiable>, Map<Object, ? extends CyIdentifiable>> objectMap;
 
 		/**
 		 * Returns a complete instance of CySession based upon the methods called on this instance of Builder.
@@ -194,11 +194,11 @@ public final class CySession {
 		
 		/**
 		 * Returns an instance of Builder that has at least been configured with the specified old ID maps.
-		 * @param map A map of {@link CyTableEntry} types to maps that have former identifiers as keys and {@link CyNode}s,
+		 * @param map A map of {@link CyIdentifiable} types to maps that have former identifiers as keys and {@link CyNode}s,
 		 *            {@link CyEdge}s, {@link CyNetwork}s or {@link CyNetworkView}s as values.
 		 * @return An instance of Builder that has at least been configured with the specified map.
 		 */
-		public Builder objectMap(final Map<Class<? extends CyTableEntry>, Map<Object, ? extends CyTableEntry>> map) { 
+		public Builder objectMap(final Map<Class<? extends CyIdentifiable>, Map<Object, ? extends CyIdentifiable>> map) { 
 			this.objectMap = map; 
 			return this;
 		}
@@ -256,7 +256,7 @@ public final class CySession {
 	 * @return An object ({@link CyNode}, {@link CyEdge}, {@link CyNetwork} or {@link CyNetworkView}) given its former
 	 *         SUID.
 	 */
-	public <T extends CyTableEntry> T getObject(Long oldSUID, Class<T> type) {
+	public <T extends CyIdentifiable> T getObject(Long oldSUID, Class<T> type) {
 		return getObjectInternal(oldSUID, type);
 	}
 	
@@ -271,14 +271,14 @@ public final class CySession {
 	 * @return An object ({@link CyNode}, {@link CyEdge}, {@link CyNetwork} or {@link CyNetworkView}) given its former
 	 *         identifier.
 	 */
-	public <T extends CyTableEntry> T getObject(String oldId, Class<T> type) {
+	public <T extends CyIdentifiable> T getObject(String oldId, Class<T> type) {
 		return getObjectInternal(oldId, type);
 	}
 	
 	@SuppressWarnings("unchecked")
-	private <T extends CyTableEntry> T getObjectInternal(Object oldId, Class<T> type) {
+	private <T extends CyIdentifiable> T getObjectInternal(Object oldId, Class<T> type) {
 		T tableEntry = null;
-		Map<Object, ? extends CyTableEntry> objByIdMap = objectMap.get(type);
+		Map<Object, ? extends CyIdentifiable> objByIdMap = objectMap.get(type);
 		
 		if (objByIdMap != null) {
 			Object obj = objByIdMap.get(oldId);

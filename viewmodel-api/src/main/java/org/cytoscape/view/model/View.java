@@ -34,7 +34,7 @@
 */
 package org.cytoscape.view.model;
 
-import org.cytoscape.model.CyTableEntry;
+import org.cytoscape.model.CyIdentifiable;
 
 
 /**
@@ -47,7 +47,7 @@ import org.cytoscape.model.CyTableEntry;
  * In the future versions, Attributes can be this parameter.
  * @CyAPI.Api.Interface 
  */
-public interface View<S> extends CyTableEntry {
+public interface View<S> extends CyIdentifiable {
 	
 	/**
 	 * Assign a value to the given Visual Property of this view.

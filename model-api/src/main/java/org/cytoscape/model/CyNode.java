@@ -37,7 +37,7 @@ import org.cytoscape.model.events.UnsetNetworkPointerEvent;
  * of nodes and edges.
  * @CyAPI.Api.Interface
  */
-public interface CyNode extends CyTableEntry {
+public interface CyNode extends CyIdentifiable {
 	
 	/**
 	 * An index of this node within this network.  The index is guaranteed to

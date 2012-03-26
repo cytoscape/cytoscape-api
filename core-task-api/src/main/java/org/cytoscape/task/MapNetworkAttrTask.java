@@ -13,7 +13,7 @@ import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.model.CyColumn;
-import org.cytoscape.model.CyTableEntry;
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.subnetwork.CyRootNetworkManager;
 import org.cytoscape.model.subnetwork.CyRootNetwork;
 import org.cytoscape.work.AbstractTask;
@@ -53,7 +53,7 @@ public final class MapNetworkAttrTask extends AbstractTask {
 		return "Map Table";
 	}
 	
-	private final Class<? extends CyTableEntry> type; // Must be node or edge!
+	private final Class<? extends CyIdentifiable> type; // Must be node or edge!
 	private final CyTable newGlobalTable;
 	private final CyNetworkManager networkManager;
 	private final CyApplicationManager applicationManager;
@@ -68,7 +68,7 @@ public final class MapNetworkAttrTask extends AbstractTask {
 	 * @param networkManager The network manager used to access the list of all networks. 
 	 * @param applicationManager The application manager used to access the current network. 
 	 */
-	public MapNetworkAttrTask(final Class<? extends CyTableEntry> type, 
+	public MapNetworkAttrTask(final Class<? extends CyIdentifiable> type, 
 	                          final CyTable newGlobalTable,
 	                          String mappingKey,
 	                          final CyNetworkManager networkManager,
@@ -88,20 +88,20 @@ public final class MapNetworkAttrTask extends AbstractTask {
 
 	
 	/**
-	 * Constructor. Will attempt to map existing tables based on the {@link CyTableEntry#NAME}
+	 * Constructor. Will attempt to map existing tables based on the {@link CyIdentifiable#NAME}
 	 * column.
 	 * @param type The type of table to map to, either CyNode.class or CyEdge.class.
 	 * @param newGlobalTable The table to be mapped. 
 	 * @param networkManager The network manager used to access the list of all networks. 
 	 * @param applicationManager The application manager used to access the current network. 
 	 */
-	public MapNetworkAttrTask(final Class<? extends CyTableEntry> type, 
+	public MapNetworkAttrTask(final Class<? extends CyIdentifiable> type, 
 	                          final CyTable newGlobalTable,
 	                          final CyNetworkManager networkManager,
 	                          final CyApplicationManager applicationManager,
 							  final CyRootNetworkManager rootNetworkManager)
 	{
-		this(type,newGlobalTable,CyTableEntry.NAME,networkManager,applicationManager,rootNetworkManager);
+		this(type,newGlobalTable,CyNetwork.NAME,networkManager,applicationManager,rootNetworkManager);
 	}
 
 
@@ -126,7 +126,7 @@ public final class MapNetworkAttrTask extends AbstractTask {
 			final CyRootNetwork rootNetwork = rootNetworkManager.getRootNetwork(currentNetwork);
 			targetTables.add(type == CyNode.class ? rootNetwork.getSharedNodeTable()
 					                      : rootNetwork.getSharedEdgeTable());
-			if ( mappingKey.equals(CyTableEntry.NAME) )
+			if ( mappingKey.equals(CyNetwork.NAME) )
 				mappingKey = CyRootNetwork.SHARED_NAME;
 		} else if (selection.equals(ALL_SHARED)) {
 			final Set<CyNetwork> networks = networkManager.getNetworkSet();
@@ -136,7 +136,7 @@ public final class MapNetworkAttrTask extends AbstractTask {
 			for (final CyRootNetwork rootNetwork : rootNetworks) 
 				targetTables.add(type == CyNode.class ? rootNetwork.getSharedNodeTable()
 						                      : rootNetwork.getSharedEdgeTable());
-			if ( mappingKey.equals(CyTableEntry.NAME) )
+			if ( mappingKey.equals(CyNetwork.NAME) )
 				mappingKey = CyRootNetwork.SHARED_NAME;
 		} else {
 			// don't map it to anything!

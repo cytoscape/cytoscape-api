@@ -36,7 +36,7 @@
 
 package org.cytoscape.model;
 
-public class DummyGraphObject implements CyTableEntry {
+public class DummyGraphObject implements CyIdentifiable {
 	
 	private static long suidBase = 0;
 
