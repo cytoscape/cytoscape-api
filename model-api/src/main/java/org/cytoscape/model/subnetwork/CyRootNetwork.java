@@ -74,7 +74,7 @@ public interface CyRootNetwork extends CyNetwork {
 
 	/**
 	 * The name of the shared name column found in the SHARED_ATTRS table. This
-	 * column value will be updated any time the value of the CyTableEntry.NAME 
+	 * column value will be updated any time the value of the CyNetwork.NAME 
 	 * column in a default table is set. The purpose of this column is to serve
 	 * as a join key for virtual columns to be added to the shared table. 
 	 */

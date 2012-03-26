@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2008, 2010, The Cytoscape Consortium (www.cytoscape.org)
+ Copyright (c) 2008, 2011, The Cytoscape Consortium (www.cytoscape.org)
 
  This library is free software; you can redistribute it and/or modify it
  under the terms of the GNU Lesser General Public License as published
@@ -28,22 +28,37 @@
 package org.cytoscape.model;
 
 
-/**
- * CyIdentifiable is an interface that indicates that the implementing
- * object can be considered a key into a table. In general, table
- * entries will be things like nodes, edges, and networks..
- * @CyAPI.Api.Interface
- */
-public interface CyIdentifiable {
+import static org.junit.Assert.*;
+import org.junit.Test;
 
-	/**
-	 * This will be used as column name of SUID.
-	 */
-	String SUID = "SUID";
-	
-	/**
-	 * Returns the SUID of the implementing object.
-	 * @return the SUID of the implementing object.
-	 */
-	Long getSUID();
+import org.cytoscape.model.CyEdge;
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyNode;
+
+import java.lang.RuntimeException;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+
+public abstract class AbstractCyIdentifiableTest {
+	protected CyNetwork net;
+
+	@Test
+	public void testGetSUID() {
+		CyNode n1 = net.addNode();
+		assertTrue("suid >= 0", n1.getSUID() >= 0);
+
+		CyNode n2 = net.addNode();
+		assertTrue("suid >= 0", n2.getSUID() >= 0);
+
+		CyEdge e1 = net.addEdge(n1, n2, true);
+		assertTrue("suid >= 0", e1.getSUID() >= 0);
+
+		CyEdge e2 = net.addEdge(n1, n2, false);
+		assertTrue("suid >= 0", e2.getSUID() >= 0);
+
+		assertTrue("suid >= 0", net.getSUID() >= 0);
+	}
 }
