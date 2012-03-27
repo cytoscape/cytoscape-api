@@ -12,54 +12,56 @@ import org.cytoscape.view.model.VisualLexicon;
  * <P>
  * Register/unregister engines are handled through
  * {@linkplain org.cytoscape.view.presentation.events.RenderingEngineAddedEvent}s.
+ * 
  * @CyAPI.Api.Interface
  */
 public interface RenderingEngineManager {
-	
+
 	/**
-	 * Provide default {@link VisualLexicon} from a default engine factory.
-	 * In current implementation, this is always DING's lexicon.
+	 * Provide default {@link VisualLexicon} from a default engine factory. In
+	 * current implementation, this is always DING's lexicon.
 	 * 
 	 * @return default VisualLexicon.
 	 */
 	VisualLexicon getDefaultVisualLexicon();
 
 	/**
-	 * Get a rendering engine for the given view model.
-	 *
+	 * Get rendering engines for the given view model.
+	 * 
 	 * @param viewModel
 	 *            View model for the presentation.
 	 * 
-	 * @return Rendering engine (presentation) for the given
-	 *         view model.
+	 * @return Rendering engines (presentations) associated with the view model.
 	 */
-	RenderingEngine<?> getRenderingEngine(final View<?> viewModel);
-	
+	Collection<RenderingEngine<?>> getRenderingEngines(final View<?> viewModel);
+
 	/**
 	 * Get all {@link RenderingEngine}s registered in this manager.
 	 * 
-	 * @return all rendering engines.  
+	 * @return all rendering engines.
 	 */
 	Collection<RenderingEngine<?>> getAllRenderingEngines();
-	
-	
+
 	/**
 	 * Add new {@link RenderingEngine} to this manager.
 	 * <p>
-	 * This method fires {@link org.cytoscape.view.presentation.events.RenderingEngineAddedEvent}.
+	 * This method fires
+	 * {@link org.cytoscape.view.presentation.events.RenderingEngineAddedEvent}.
 	 * 
-	 * @param engine New engine to be added.
+	 * @param engine
+	 *            New engine to be added.
 	 */
 	void addRenderingEngine(final RenderingEngine<?> engine);
-	
-	
+
 	/**
 	 * Remove a rendering engine.
 	 * 
 	 * <p>
-	 * This method fires {@link org.cytoscape.view.presentation.events.RenderingEngineAboutToBeRemovedEvent}.
+	 * This method fires
+	 * {@link org.cytoscape.view.presentation.events.RenderingEngineAboutToBeRemovedEvent}.
 	 * 
-	 * @param engine engine to be removed.
+	 * @param engine
+	 *            engine to be removed.
 	 */
 	void removeRenderingEngine(final RenderingEngine<?> engine);
 }

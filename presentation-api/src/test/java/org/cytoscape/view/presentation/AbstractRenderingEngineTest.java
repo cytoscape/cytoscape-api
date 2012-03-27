@@ -2,12 +2,9 @@ package org.cytoscape.view.presentation;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
 
 import java.awt.Image;
+import java.awt.print.Printable;
 
 import javax.swing.JPanel;
 
@@ -19,8 +16,6 @@ import org.junit.Test;
 
 /**
  * Basic test case for rendering engine and its factory.
- * 
- * @author kono
  *
  */
 public abstract class AbstractRenderingEngineTest {
@@ -34,23 +29,13 @@ public abstract class AbstractRenderingEngineTest {
 
 	@Before
 	public void setup(){
-		
 		final JPanel panel = new JPanel();
 		engine = factory.createRenderingEngine(panel, networkView);
-
 	}
 	
 	@Test
-	public void testFactory() {
-		
+	public void testCreateImage() {
 		assertNotNull(engine);
-
-		View<CyNetwork> viewModel = engine.getViewModel();
-		assertEquals(viewModel, networkView);
-		
-		final VisualLexicon lexicon = engine.getVisualLexicon();
-		assertNotNull(lexicon);
-		assertEquals(numberOfVP, lexicon.getAllVisualProperties().size());
 		
 		Image img = engine.createImage(400, 400);
 		assertNotNull(img);
@@ -59,34 +44,46 @@ public abstract class AbstractRenderingEngineTest {
 	}
 	
 	@Test
+	public void testCreatePribtable() {
+		assertNotNull(engine);
+		final Printable printable = engine.createPrintable();
+		assertNotNull(printable);
+	}
+	
+	@Test
+	public void testModel() {
+		View<CyNetwork> viewModel = engine.getViewModel();
+		assertEquals(viewModel, networkView);
+	}
+	
+	@Test
+	public void testLexicon() throws Exception {
+		final VisualLexicon lexicon = engine.getVisualLexicon();
+		assertNotNull(lexicon);
+		assertEquals(numberOfVP, lexicon.getAllVisualProperties().size());
+	}
+	
+	@Test
 	public void testSetPropertiesTrue() {
-		
-		engine.setProperties("exportTextAsShape", "true");
+		engine.getProperties().setProperty("exportTextAsShape", "true");
 		assertEquals(true, Boolean.parseBoolean(engine.getProperties().get("exportTextAsShape").toString()));
-		
 	}
 	
 	@Test
 	public void testSetPropertiesFalse() {
-		
-		engine.setProperties("exportTextAsShape", "false");
+		engine.getProperties().setProperty("exportTextAsShape", "false");
 		assertEquals(false, Boolean.parseBoolean(engine.getProperties().get("exportTextAsShape").toString()));
 		
 	}
 	
 	@Test
 	public void testSetPropertiesWrongInput() {
-		
-		engine.setProperties("exportTextAsShape", "wrongInput");
+		engine.getProperties().setProperty("exportTextAsShape", "wrongInput");
 		assertEquals(false, Boolean.parseBoolean(engine.getProperties().get("exportTextAsShape").toString())); 
-	
 	}
 	
 	@Test(expected=NullPointerException.class)
 	public void testSetPropertiesNullException() {
-		
-		engine.setProperties("exportTextAsShape", null);
+		engine.getProperties().setProperty("exportTextAsShape", null);
 	}
-	
-	
 }

@@ -12,23 +12,30 @@ import org.cytoscape.view.model.VisualLexicon;
 import org.cytoscape.view.model.VisualProperty;
 
 /**
- * RenderingEngine is an interface for all visualizers which renders. For a given view-model
- * it renders actual view on display, documents, etc.
+ * RenderingEngine is an interface for all visualizers which renders. For a
+ * given view-model it renders actual view on display, documents, etc.
  * 
  * @param <T>
  *            source data object to be visualized. For now we have only one
- *            implementation for {@link org.cytoscape.model.CyNetwork}, but it can be anything, including
- *            {@link org.cytoscape.model.CyTable}.
+ *            implementation for {@link org.cytoscape.model.CyNetwork}, but it
+ *            can be anything, including {@link org.cytoscape.model.CyTable}.
  * @CyAPI.Api.Interface
  */
 public interface RenderingEngine<T> {
+	
+	/**
+	 * Returns globally-unique ID for this rendering engine.
+	 * 
+	 * @return Unique identifier of this rendering engine.
+	 */
+	String getRenderingEngineID();
 
 	/**
 	 * Returns {@linkplain View} being rendered.
 	 * 
 	 * @return view model.  This is an immutable object.
 	 */
-	public View<T> getViewModel();
+	View<T> getViewModel();
 
 	
 	/**
@@ -36,24 +43,16 @@ public interface RenderingEngine<T> {
 	 * 
 	 * @return Visual Lexicon of this rendering engine.
 	 */
-	public VisualLexicon getVisualLexicon();
+	VisualLexicon getVisualLexicon();
 	
 
 	/**
 	 * Get property values for the rendering engine, like LOD.
-	 * Users can set each property using the {@linkplain setProperty} method.
+	 * Users can set each property using the setProperty method in {@linkplain Properties}.
 	 * 
 	 * @return property values.
 	 */
-	public Properties getProperties();
-	
-
-	/**
-	 * Set property value for the rendering engine, like LOD.
-	 * @param key the property attribute that need to be set.
-	 * @param value the value for the property attribute.
-	 */
-	public void setProperties( String key, String value);
+	Properties getProperties();
 	
 	
 	/**
@@ -61,7 +60,7 @@ public interface RenderingEngine<T> {
 	 * 
 	 * @return A Printable object suitable for submission to a printer.
 	 */
-	public Printable createPrintable();
+	Printable createPrintable();
 	
 
 	/**
@@ -87,7 +86,7 @@ public interface RenderingEngine<T> {
 	 * 
 	 * @return Icon rendered by this engine.
 	 */
-	public <V> Icon createIcon(final VisualProperty<V> vp, final V value, final int width, final int height);
+	<V> Icon createIcon(final VisualProperty<V> vp, final V value, final int width, final int height);
 
 	/**
 	 * Render presentation on the given Java 2D Canvas.
