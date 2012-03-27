@@ -11,7 +11,7 @@ import org.cytoscape.work.TaskIterator;
  * task factories.
  * @CyAPI.Spi.Interface
  */
-public interface InputStreamTaskFactory<T> extends CyFileFilterProvider {
+public interface InputStreamTaskFactory extends CyFileFilterProvider {
 
 	/**
 	 * Sets the input stream that will be read by the Reader created from
@@ -19,9 +19,7 @@ public interface InputStreamTaskFactory<T> extends CyFileFilterProvider {
 	 * @param is The {@link java.io.InputStream} to be read.
 	 * @param inputName The name of the input. 
 	 */
-	TaskIterator createTaskIterator(T tunableContext, InputStream is, String inputName);
+	TaskIterator createTaskIterator(InputStream is, String inputName);
 	
-	boolean isReady(T tunableContext, InputStream is, String inputName);
-	
-	T createTunableContext();
+	boolean isReady(InputStream is, String inputName);
 }
