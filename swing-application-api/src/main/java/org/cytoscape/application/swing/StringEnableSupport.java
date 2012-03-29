@@ -29,12 +29,16 @@
  */
 package org.cytoscape.application.swing;
 
+import java.util.Collection;
+import java.util.List;
+
 import javax.swing.Action;
 import javax.swing.JMenuItem;
 
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.CyNetworkViewManager;
 import org.cytoscape.work.swing.DynamicSubmenuListener;
 
 /**
@@ -57,6 +61,7 @@ import org.cytoscape.work.swing.DynamicSubmenuListener;
 public final class StringEnableSupport extends AbstractEnableSupport {
 
 	private final CyApplicationManager applicationManager;
+	private final CyNetworkViewManager networkViewManager;
 	private final String enableFor;
 
 	/**
@@ -101,8 +106,11 @@ public final class StringEnableSupport extends AbstractEnableSupport {
 	 * See class documentation above for allowable values for this string.
 	 * @param applicationManager The application manager.
 	 */
-	public StringEnableSupport(DynamicSubmenuListener submenuListener, String enableFor, CyApplicationManager applicationManager) {
+	public StringEnableSupport(DynamicSubmenuListener submenuListener, String enableFor,
+			final CyApplicationManager applicationManager, final CyNetworkViewManager networkViewManager) {
 		super(submenuListener);
+
+		this.networkViewManager = networkViewManager;
 		this.enableFor = enableFor;
 		this.applicationManager = applicationManager;
 	}
@@ -114,10 +122,11 @@ public final class StringEnableSupport extends AbstractEnableSupport {
 	 * See class documentation above for allowable values for this string.
 	 * @param applicationManager The application manager.
 	 */
-	public StringEnableSupport(Action action, String enableFor, CyApplicationManager applicationManager) {
+	public StringEnableSupport(Action action, String enableFor, CyApplicationManager applicationManager, final CyNetworkViewManager networkViewManager) {
 		super(action);
 		this.enableFor = enableFor;
 		this.applicationManager = applicationManager;
+		this.networkViewManager = networkViewManager;
 	}
 
 	/**
@@ -127,10 +136,11 @@ public final class StringEnableSupport extends AbstractEnableSupport {
 	 * See class documentation above for allowable values for this string.
 	 * @param applicationManager The application manager.
 	 */
-	public StringEnableSupport(JMenuItem menuItem, String enableFor, CyApplicationManager applicationManager) {
+	public StringEnableSupport(JMenuItem menuItem, String enableFor, CyApplicationManager applicationManager, final CyNetworkViewManager networkViewManager) {
 		super(menuItem);
 		this.enableFor = enableFor;
 		this.applicationManager = applicationManager;
+		this.networkViewManager = networkViewManager;
 	}
 
 	/**
@@ -181,19 +191,23 @@ public final class StringEnableSupport extends AbstractEnableSupport {
 	}
 
 	/**
-	 * Enable the action if the current network exists, is not null,
+	 * Enable the action if the selected network exists, is not null,
 	 * and no view is available for the network.
 	 */
 	private void enableForNetworkWithoutView() {
-		final CyNetwork n = applicationManager.getCurrentNetwork();
-		final CyNetworkView v = applicationManager.getCurrentNetworkView();
+		
+		final CyNetwork network = applicationManager.getCurrentNetwork();
 
-		if (n == null)
+		if (network == null)
 			setEnabled(false);
-		else if ((n != null) && (v == null))
-			setEnabled(true);
-		else
-			setEnabled(false);
+		else {
+			// Network exists.
+			final Collection<CyNetworkView> views = networkViewManager.getNetworkViews(network);
+			if(views.size() == 0)
+				setEnabled(true);
+			else
+				setEnabled(false);
+		}
 	}
 
 	/**

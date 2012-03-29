@@ -15,6 +15,7 @@ import org.cytoscape.view.model.VisualLexicon;
  */
 public interface RenderingEngineFactory<T> {
 
+
 	/**
 	 * A view model can have multiple presentations. This enable developers
 	 * to render multiple View Models in the same display. For example, if
@@ -29,8 +30,7 @@ public interface RenderingEngineFactory<T> {
 	 * 
 	 * @return Rendering Engine for visualization on the visualizationContainer.
 	 */
-	RenderingEngine<T> createRenderingEngine(final Object visualizationContainer,
-			final View<T> viewModel);
+	RenderingEngine<T> createRenderingEngine(final Object visualizationContainer, final View<T> viewModel);
 	
 	
 	/**

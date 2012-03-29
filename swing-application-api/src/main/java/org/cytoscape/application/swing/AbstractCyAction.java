@@ -40,6 +40,7 @@ import javax.swing.event.MenuEvent;
 import javax.swing.event.PopupMenuEvent;
 
 import org.cytoscape.application.CyApplicationManager;
+import org.cytoscape.view.model.CyNetworkViewManager;
 import org.cytoscape.work.ServiceProperties;
 import org.cytoscape.work.TaskFactory;
 import org.slf4j.Logger;
@@ -134,9 +135,9 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * @param applicationManager The application manager providing context for this action.
 	 * @param enableFor A string declaring which states this action should be enabled for. 
 	 */
-	public AbstractCyAction(final String name, final CyApplicationManager applicationManager, final String enableFor) {
+	public AbstractCyAction(final String name, final CyApplicationManager applicationManager, final String enableFor, final CyNetworkViewManager networkViewManager) {
 		super(name);
-		this.enabler = new StringEnableSupport(this,enableFor,applicationManager);
+		this.enabler = new StringEnableSupport(this,enableFor,applicationManager, networkViewManager);
 	}
 
 	/**
@@ -163,8 +164,8 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *            The application manager providing context for this action.
 	 */
 	public AbstractCyAction(final Map<String, String> configProps,
-	                        final CyApplicationManager applicationManager) {
-		this(configProps.get(ServiceProperties.TITLE), applicationManager, configProps.get(ServiceProperties.ENABLE_FOR));
+	                        final CyApplicationManager applicationManager, final CyNetworkViewManager networkViewManager) {
+		this(configProps.get(ServiceProperties.TITLE), applicationManager, configProps.get(ServiceProperties.ENABLE_FOR), networkViewManager);
 		
 		configFromProps( configProps );
 	}
@@ -231,14 +232,14 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *            from this TaskFactory must be handled by a subclass.
 	 */
 	public AbstractCyAction(final Map<String, String> configProps,
-	                        final CyApplicationManager applicationManager,
+	                        final CyApplicationManager applicationManager, final CyNetworkViewManager networkViewManager,
 	                        final TaskFactory factory) {
 		super(configProps.get(ServiceProperties.TITLE));
 		String enableFor = configProps.get(ServiceProperties.ENABLE_FOR);
 		if ( enableFor == null )
 			this.enabler = new TaskFactoryEnableSupport(this,factory);
 		else
-			this.enabler = new StringEnableSupport(this,enableFor,applicationManager);
+			this.enabler = new StringEnableSupport(this,enableFor,applicationManager, networkViewManager);
 		
 		configFromProps( configProps );
 	}
