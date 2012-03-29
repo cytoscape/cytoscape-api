@@ -37,7 +37,6 @@ package org.cytoscape.view.vizmap;
 import java.util.Collection;
 
 import org.cytoscape.model.CyIdentifiable;
-import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
 
@@ -135,14 +134,6 @@ public interface VisualStyle {
 	 */
 	<V, S extends V> void setDefaultValue(final VisualProperty<V> vp, final S value);
 
-	
-//	/**
-//	 * Apply this style to the network view model.
-//	 * 
-//	 * @param networkViewModel target view model to be updated.
-//	 */
-//	void apply(final CyNetworkView networkViewModel);
-//	
 	
 	/**
 	 * Apply visual only to a individual View Object (node/edge), 
