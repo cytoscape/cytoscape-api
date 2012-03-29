@@ -90,15 +90,41 @@ public class BasicCyFileFilter implements CyFileFilter {
 		if (category != this.category) 
 			return false;
 
+		if (extensionsMatch(uri))
+			return true;
+		else
+			return false;
+		
+	}
+
+	private boolean extensionsMatch(URI uri){
+		String extension = getExtension(uri.toString());
+		//logger.info("******URI extension is" + extension + "the task extension is" + this.extensions);
+
+		if (extension != null && extensions.contains(extension))
+			return true;
+		else
+			return false;
+	}
+	
+	
+	/*
+	 * The content types are not checked anymore since some of
+	 * readers have similar content types. Hence, the correct reader
+	 * wasn't picked up.
+	 */
+	private boolean contentTypesMatch(URI uri){
 		try {
 			final URLConnection connection = streamUtil.getURLConnection(uri.toURL());
 			final String contentType = connection.getContentType();
+			//logger.info("******URI content type is" + contentType + "the task content type is" + this.contentTypes);
 
 			// Check for matching content type
 			if ((contentType != null) && contentTypes.contains(contentType)) {
 				logger.info("content type matches: " + contentType);
 				return true;
-			}
+			}else
+				return false;
 
 
 		} catch (IOException ioe) {
@@ -106,15 +132,8 @@ public class BasicCyFileFilter implements CyFileFilter {
 			return false;
 		}
 
-		// No content-type match -- try for an extension match
-		// if no extensions are listed, then match by default
-		String extension = getExtension(uri.toString());
-		if ((extension != null) && (extensions.contains(extension) || extensions.size() == 0 ))
-			return true;
-
-		return false;
 	}
-
+	
 	/**
 	 * This method always returns false in this particular implementation.  You must extend
 	 * this class and override this method to get alternative behavior. Ideally this method
