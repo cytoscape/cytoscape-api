@@ -8,9 +8,6 @@ import java.io.File;
  */
 public interface CyApplicationConfiguration {
 	
-	/** Default configuration directory used for all Cytoscape configuration files */
-	public static final String DEFAULT_CONFIG_DIR = ".cytoscape";
-
 	/**
 	 * Returns absolute path to .cytoscape location.
 	 * By default, this is user's home directory.
@@ -21,4 +18,13 @@ public interface CyApplicationConfiguration {
 	 */
 	File getConfigurationDirectoryLocation();
 
+	/**
+	 * Returns the absolute path to the configuration directory of a
+	 * particular app.  This path might not physically exist and may
+	 * need to be created by the caller.
+	 * @param appClass Any class defined by the app's bundle
+	 * @return the absolute path to the configuration directory of a
+	 *         particular app.
+	 */
+	File getAppConfigurationDirectoryLocation(Class<?> appClass);
 }
