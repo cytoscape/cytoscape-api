@@ -21,6 +21,7 @@ import org.cytoscape.view.model.VisualLexiconNode;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.model.Visualizable;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
+import org.cytoscape.view.presentation.property.values.BendFactory;
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.slf4j.Logger;
@@ -233,6 +234,9 @@ public class BasicVisualLexicon implements VisualLexicon {
 			ArrowShapeVisualProperty.NONE, "EDGE_SOURCE_ARROW_SHAPE", "Edge Source Arrow Shape", CyEdge.class);
 	public static final VisualProperty<ArrowShape> EDGE_TARGET_ARROW_SHAPE = new ArrowShapeVisualProperty(
 			ArrowShapeVisualProperty.NONE, "EDGE_TARGET_ARROW_SHAPE", "Edge Target Arrow Shape", CyEdge.class);
+	
+	public static final EdgeBendVisualProperty EDGE_BEND = new EdgeBendVisualProperty(
+			EdgeBendVisualProperty.DEFAULT_EDGE_BEND, "EDGE_BEND", "Edge Bend");
 
 	/**
 	 * Constructor for VisualLexicon. The parameters are required for all
@@ -253,8 +257,12 @@ public class BasicVisualLexicon implements VisualLexicon {
 		this.identifierLookup.put(CyNode.class, new HashMap<String, VisualProperty<?>>());
 		this.identifierLookup.put(CyEdge.class, new HashMap<String, VisualProperty<?>>());
 		this.identifierLookup.put(CyNetwork.class, new HashMap<String, VisualProperty<?>>());
-
+		
 		addVisualProperties(rootVisualProperty);
+	}
+	
+	public void addBendFactory(final BendFactory bendFactory, final Map props) {
+		EDGE_BEND.setBendFactory(bendFactory);
 	}
 
 	private void addVisualProperties(final VisualProperty<NullDataType> root) {
@@ -336,6 +344,8 @@ public class BasicVisualLexicon implements VisualLexicon {
 
 		addVisualProperty(EDGE_SOURCE_ARROW_SHAPE, EDGE);
 		addVisualProperty(EDGE_TARGET_ARROW_SHAPE, EDGE);
+		
+		addVisualProperty(EDGE_BEND, EDGE);
 
 		createLookupMap();
 	}
@@ -411,6 +421,8 @@ public class BasicVisualLexicon implements VisualLexicon {
 		addIdentifierMapping(CyEdge.class, "edgeSourceArrowShape", EDGE_SOURCE_ARROW_SHAPE);
 		addIdentifierMapping(CyEdge.class, "edgeTargetArrowShape", EDGE_TARGET_ARROW_SHAPE);
 
+		addIdentifierMapping(CyEdge.class, "edgeBend", EDGE_BEND);
+		
 		// TODO add more mappings!
 	}
 

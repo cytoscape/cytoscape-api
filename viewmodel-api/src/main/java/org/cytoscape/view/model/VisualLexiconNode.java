@@ -37,7 +37,6 @@ public final class VisualLexiconNode {
 		
 		if(parent != null)
 			parent.getChildren().add(this);
-		
 	}
 	
 	
