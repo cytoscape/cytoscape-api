@@ -36,6 +36,7 @@ import org.cytoscape.event.CyEvent;
 import org.cytoscape.event.CyEventHelper;
 import org.cytoscape.event.CyListener;
 
+import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyEdge;
@@ -46,6 +47,7 @@ import org.cytoscape.model.DummyCyEdge;
 
 import java.lang.RuntimeException;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -55,9 +57,11 @@ import java.util.Set;
 
 
 /**
- * DOCUMENT ME!
+ * Base test cases for sub network.
  */
 public abstract class AbstractCySubNetworkTest {
+	
+	
 	protected CyRootNetwork root;
 	protected CyRootNetwork root2;
 
@@ -433,6 +437,88 @@ public abstract class AbstractCySubNetworkTest {
 	
 		List<CyEdge> subEdges = sub.getEdgeList();
 		assertTrue(sub.getRow(subEdges.get(0)).get(CyNetwork.SELECTED,Boolean.class) ); 
+	}
+	
+	
+	/**
+	 * Test for checking contents of tables in the subnetworks.
+	 */
+	@Test
+	public void testAddSubnetwork() {
+		// Add two nodes and one edge to the root
+		n1 = root.addNode();
+		n2 = root.addNode();
+		e1 = root.addEdge(n1, n2, true);
+		
+		root.getRow(n1).set(CyRootNetwork.NAME, "node1");
+		root.getRow(n2).set(CyRootNetwork.NAME, "node2");
+		root.getRow(e1).set(CyRootNetwork.NAME, "edge1");
+		
+		root.getSharedNodeTable().getRow(n1.getSUID()).set(CyRootNetwork.SHARED_NAME, "node1");
+		root.getSharedNodeTable().getRow(n2.getSUID()).set(CyRootNetwork.SHARED_NAME, "node2");
+		root.getSharedEdgeTable().getRow(e1.getSUID()).set(CyRootNetwork.SHARED_NAME, "edge1");
+		
+		System.out.println("Root network class = " + root.getClass());
+		
+		// Make sure required columns exists
+		final CyTable nodeTable = root.getDefaultNodeTable();
+		final CyTable edgeTable = root.getDefaultEdgeTable();
+		final CyTable networkTable = root.getDefaultNetworkTable();
+		
+		final CyTable nodeSharedTable = root.getSharedNodeTable();
+		final CyTable edgeSharedTable = root.getSharedEdgeTable();
+		final CyTable networkSharedTable = root.getSharedNetworkTable();
+		
+		
+		final Collection<CyColumn> nodeColumns = nodeTable.getColumns();
+		for(CyColumn col: nodeColumns)
+			System.out.println("Node Table column: " + col.getName());
+		
+		final Collection<CyColumn> nodeSharedColumns = nodeSharedTable.getColumns();
+		for(CyColumn col: nodeSharedColumns)
+			System.out.println("Shared Node Table column: " + col.getName());
+		
+		
+		assertNotNull(nodeTable.getColumn(CyRootNetwork.NAME));
+		assertNotNull(nodeSharedTable.getColumn(CyRootNetwork.SHARED_NAME));
+		assertNotNull(edgeTable.getColumn(CyRootNetwork.NAME));
+		assertNotNull(edgeSharedTable.getColumn(CyRootNetwork.SHARED_NAME));
+		assertNotNull(networkTable.getColumn(CyRootNetwork.NAME));
+		assertNotNull(networkSharedTable.getColumn(CyRootNetwork.SHARED_NAME));
+		
+		// Make sure all values exists in the original table
+		assertEquals("node1", root.getRow(n1).get(CyRootNetwork.NAME, String.class));
+		assertEquals("node2", root.getRow(n2).get(CyRootNetwork.NAME, String.class));
+		
+		assertEquals("edge1", edgeSharedTable.getRow(e1.getSUID()).get(CyRootNetwork.SHARED_NAME, String.class));
+		assertEquals("node1", nodeSharedTable.getRow(n1.getSUID()).get(CyRootNetwork.SHARED_NAME, String.class));
+		assertEquals("node2", nodeSharedTable.getRow(n2.getSUID()).get(CyRootNetwork.SHARED_NAME, String.class));
+		
+		// Copy the entire network to the sub
+		final CySubNetwork newNet = root.addSubNetwork();
+		newNet.addNode(n1);
+		newNet.addNode(n2);
+		newNet.addEdge(e1);
+		final CyTable newNetNodeTable = newNet.getDefaultNodeTable();
+		
+		final Collection<CyColumn> newNodeColumns = newNetNodeTable.getColumns();
+		for(CyColumn col: newNodeColumns)
+			System.out.println("New Node Table column: " + col.getName());
+		
+		assertEquals(4, newNodeColumns.size());
+		
+		final CyColumn nameCol = newNetNodeTable.getColumn(CyRootNetwork.NAME);
+		final CyColumn sharedNameCol = newNetNodeTable.getColumn(CyRootNetwork.SHARED_NAME);
+		assertNotNull(nameCol);
+		assertNotNull(sharedNameCol);
+		
+		final String nameN1 = newNet.getRow(n1).get(CyRootNetwork.NAME, String.class);
+		assertNotNull(nameN1);
+		assertEquals("node1", nameN1);
+		
+		final String sharedNameN1 = newNet.getRow(n1).get(CyRootNetwork.SHARED_NAME, String.class);
+		assertNotNull(sharedNameN1);
+		assertEquals("node1", sharedNameN1);
 	}
 
 	// TODO
