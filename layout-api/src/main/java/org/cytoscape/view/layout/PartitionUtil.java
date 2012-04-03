@@ -95,28 +95,24 @@ public final class PartitionUtil {
 
 		final CyNetwork network = networkView.getModel();
 
-		Map<Integer,Integer> nodesSeenMap = new HashMap<Integer,Integer>(); 
-		Map<Integer,Integer> edgesSeenMap = new HashMap<Integer,Integer>(); 
-		Map<Integer,View<CyNode>> nodesToViews = new HashMap<Integer,View<CyNode>>(); 
+		Map<CyNode,Integer> nodesSeenMap = new HashMap<CyNode,Integer>(); 
+		Map<CyEdge,Integer> edgesSeenMap = new HashMap<CyEdge,Integer>(); 
+		Map<CyNode,View<CyNode>> nodesToViews = new HashMap<CyNode,View<CyNode>>(); 
 
 		// Initialize the maps
 		for (View<CyNode> nv: networkView.getNodeViews()){
-			int node = nv.getModel().getIndex();
-			nodesSeenMap.put(node, m_NODE_HAS_NOT_BEEN_SEEN);
-			nodesToViews.put(node, nv);
+			nodesSeenMap.put(nv.getModel(), m_NODE_HAS_NOT_BEEN_SEEN);
+			nodesToViews.put(nv.getModel(), nv);
 		}
 
 		for (CyEdge edge: network.getEdgeList()) {
-			int edgeIndex = edge.getIndex();
-			edgesSeenMap.put(edgeIndex, m_NODE_HAS_NOT_BEEN_SEEN);
+			edgesSeenMap.put(edge, m_NODE_HAS_NOT_BEEN_SEEN);
 		}
 
 		// OK, now traverse the graph
 		for (CyNode node: nodeSet) {
-			int nodeIndex = node.getIndex();
-
 			// Have we seen this already?
-			if (nodesSeenMap.get(nodeIndex) == m_NODE_HAS_BEEN_SEEN)
+			if (nodesSeenMap.get(node) == m_NODE_HAS_BEEN_SEEN)
 				continue;
 
 			// Nope, first time
@@ -125,7 +121,7 @@ public final class PartitionUtil {
 			// Set the edge weighter
 			part.setEdgeWeighter(edgeWeighter);
 
-			nodesSeenMap.put(nodeIndex, m_NODE_HAS_BEEN_SEEN);
+			nodesSeenMap.put(node, m_NODE_HAS_BEEN_SEEN);
 
 			// Traverse through all connected nodes
 			traverse(network, networkView, nodesToViews, node, part, nodesSeenMap, edgesSeenMap);
@@ -167,13 +163,11 @@ public final class PartitionUtil {
 	  * @param edgesSeenMap       A map of edges already visited.
 	  */
 	private static void traverse(CyNetwork network, CyNetworkView networkView,
-	                             Map<Integer,View<CyNode>> nodesToViews, CyNode node,
-	                             LayoutPartition partition, Map<Integer,Integer> nodesSeenMap, 
-								 Map<Integer,Integer> edgesSeenMap ) {
-		int nodeIndex = node.getIndex();
-
+	                             Map<CyNode,View<CyNode>> nodesToViews, CyNode node,
+	                             LayoutPartition partition, Map<CyNode,Integer> nodesSeenMap, 
+	                             Map<CyEdge,Integer> edgesSeenMap ) {
 		// Get the View<CyNode>
-		View<CyNode> nv = nodesToViews.get(nodeIndex);
+		View<CyNode> nv = nodesToViews.get(node);
 
 		// Add this node to the partition
 		partition.addNode(network, nv, false);
@@ -181,15 +175,13 @@ public final class PartitionUtil {
 		// Iterate through each connected edge
 		for (CyEdge incidentEdge: network.getAdjacentEdgeList(node, CyEdge.Type.ANY)){
 
-			int edgeIndex = incidentEdge.getIndex();
-
 			// Have we already seen this edge?
-			if (edgesSeenMap.get(edgeIndex) == m_NODE_HAS_BEEN_SEEN) {
+			if (edgesSeenMap.get(incidentEdge) == m_NODE_HAS_BEEN_SEEN) {
 				// Yes, continue since it means we *must* have seen both sides
 				continue;
 			}
 
-			edgesSeenMap.put(edgeIndex, m_NODE_HAS_BEEN_SEEN);
+			edgesSeenMap.put(incidentEdge, m_NODE_HAS_BEEN_SEEN);
 
 			// Add the edge to the partition
 			partition.addEdge(incidentEdge,network.getRow(incidentEdge));
@@ -203,12 +195,10 @@ public final class PartitionUtil {
 				otherNode = incidentEdge.getSource();
 			}
 
-			int incidentNodeIndex = otherNode.getIndex();
-
 			// Have we seen the connecting node yet?
-			if (nodesSeenMap.get(incidentNodeIndex) == m_NODE_HAS_NOT_BEEN_SEEN) {
+			if (nodesSeenMap.get(otherNode) == m_NODE_HAS_NOT_BEEN_SEEN) {
 				// Mark it as having been seen
-				nodesSeenMap.put(incidentNodeIndex, m_NODE_HAS_BEEN_SEEN);
+				nodesSeenMap.put(otherNode, m_NODE_HAS_BEEN_SEEN);
 
 				// Traverse through this one
 				traverse(network, networkView, nodesToViews, otherNode, partition, nodesSeenMap, edgesSeenMap);

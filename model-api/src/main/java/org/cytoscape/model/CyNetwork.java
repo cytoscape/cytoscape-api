@@ -192,7 +192,7 @@ public interface CyNetwork extends CyIdentifiable {
 	 * @return the associated CyNode or null if there is no
 	 * node with that index in this network.
 	 */
-	CyNode getNode(int index);
+	CyNode getNode(long index);
 
 	/**
 	 * Return the CyEdge that has the index. To iterate
@@ -205,7 +205,7 @@ public interface CyNetwork extends CyIdentifiable {
 	 * @return the associated CyEdge or null if there is no
 	 * edge with that index in this network.
 	 */
-	CyEdge getEdge(int index);
+	CyEdge getEdge(long index);
 
 	/**
 	 * Get the list of nodes that neighbor this node where the

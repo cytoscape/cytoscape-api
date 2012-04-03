@@ -114,12 +114,11 @@ public abstract class AbstractCyNodeTest {
 		assertEquals(0,net.getNodeCount());
 		CyNode n0 = net.addNode();
 		CyNode n1 = net.addNode();
-		int n0i = n0.getIndex();
-		int n1i = n1.getIndex();
-		assertEquals(0,n0i);
-		assertEquals(1,n1i);
+		long n0i = n0.getIndex();
+		long n1i = n1.getIndex();
 		net.removeNodes(Collections.singletonList(n0));
-		assertEquals(1,n1i);
+		long nnli = n1.getIndex();
+		assertEquals(nnli,n1i);
 	}
 
 	@Test
@@ -127,14 +126,12 @@ public abstract class AbstractCyNodeTest {
 		assertEquals(0,net.getNodeCount());
 		CyNode n0 = net.addNode();
 		CyNode n1 = net.addNode();
-		int n0i = n0.getIndex();
-		int n1i = n1.getIndex();
-		assertEquals(0,n0i);
-		assertEquals(1,n1i);
-		assertEquals(net.getNode(0),n0);
-		assertEquals(net.getNode(1),n1);
+		long n0i = n0.getIndex();
+		long n1i = n1.getIndex();
+		assertEquals(net.getNode(n0i),n0);
+		assertEquals(net.getNode(n1i),n1);
 		assertTrue( net.removeNodes(Collections.singletonList(n0)) );
-		assertNull(net.getNode(0));
-		assertEquals(n1,net.getNode(1));
+		assertNull(net.getNode(n0i));
+		assertEquals(n1,net.getNode(n1i));
 	}
 }

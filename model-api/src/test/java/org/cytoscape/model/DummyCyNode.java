@@ -40,17 +40,17 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class DummyCyNode extends DummyGraphObject implements CyNode {
-	int ind;
+	long ind;
 	CyNetwork nested;
 
-	public DummyCyNode(int x) {
+	public DummyCyNode(long x) {
 		super();
 		ind = x;
 		nested = null;
 	}
 
-	public int getIndex() {
-		return ind;
+	public long getIndex() {
+		return getSUID().longValue();
 	}
 
 	public List<CyNode> getNeighborList(CyEdge.Type edgeType) {

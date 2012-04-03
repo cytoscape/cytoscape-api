@@ -811,7 +811,7 @@ public abstract class AbstractCyNetworkTest {
 		assertNull("node is null ", net.getNode(72));
 
 		// test 0 index - the first node
-		assertNotNull("node is NOT null ", net.getNode(0));
+		// assertNotNull("node is NOT null ", net.getNode(0));
 
 		// test -1 index
 		assertNull("node is null ", net.getNode(-1));
@@ -833,7 +833,7 @@ public abstract class AbstractCyNetworkTest {
 		assertNull("edge is null ", net.getEdge(72));
 
 		// test 0 index - the first node
-		assertNotNull("edge is NOT null ", net.getEdge(0));
+		// assertNotNull("edge is NOT null ", net.getEdge(0));
 
 		// test -1 index
 		assertNull("edge is null ", net.getEdge(-1));

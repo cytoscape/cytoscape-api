@@ -39,10 +39,10 @@ package org.cytoscape.model;
 public class DummyCyEdge extends DummyGraphObject implements CyEdge {
 	CyNode source;
 	CyNode target;
-	int index;
+	long index;
 	boolean directed;
 
-	public DummyCyEdge(CyNode src, CyNode tgt, boolean dir, int ind) {
+	public DummyCyEdge(CyNode src, CyNode tgt, boolean dir, long ind) {
 		super();
 		source = src;
 		target = tgt;
@@ -50,8 +50,8 @@ public class DummyCyEdge extends DummyGraphObject implements CyEdge {
 		index = ind;
 	}
 
-	public int getIndex() {
-		return index;
+	public long getIndex() {
+		return getSUID().longValue();
 	}
 
 	public CyNode getSource() {

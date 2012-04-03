@@ -46,7 +46,7 @@ public interface CyNode extends CyIdentifiable {
 	 * necessarily an index into {@link CyNetwork#getNodeList}.
 	 * @return An index for this node within this network.
 	 */
-	int getIndex();
+	long getIndex();
 
 	/**
 	 * Returns the network referenced by this node.  If no 

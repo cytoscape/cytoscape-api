@@ -89,7 +89,7 @@ public interface CyEdge extends CyIdentifiable {
 	 * necessarily an index into {@link CyNetwork#getEdgeList}.
 	 * @return An index for this edge within this network.
 	 */
-	int getIndex();
+	long getIndex();
 
 	/**
 	 * Returns the source node determining this edge. It will never be null.
