@@ -371,12 +371,26 @@ public abstract class AbstractCySubNetworkTest {
 	public void testNodeAddedInSubnetworkHasNameAttr() {
 		n1 = root.addNode();
 		root.getRow(n1).set(CyNetwork.NAME,"homer");
+		root.getSharedNodeTable().getRow(n1.getSUID()).set(CyRootNetwork.SHARED_NAME,"homer");
 
+		final String originalNodeName = root.getRow(n1).get(CyNetwork.NAME, String.class);
+		assertNotNull(originalNodeName);
+		assertEquals("homer", originalNodeName);
+		
 		sub = root.addSubNetwork();
 		sub.addNode(n1);
 	
-		List<CyNode> subNodes = sub.getNodeList();
-		assertEquals( "homer", sub.getRow(subNodes.get(0)).get(CyNetwork.NAME,String.class) ); 
+		final List<CyNode> subNodes = sub.getNodeList();
+		assertEquals(1, subNodes.size());
+		final CyNode subNode = subNodes.get(0);
+		String newName = sub.getDefaultNodeTable().getRow(subNode.getSUID()).get(CyNetwork.NAME, String.class);
+		String newSharedName = sub.getDefaultNodeTable().getRow(subNode.getSUID()).get(CyRootNetwork.SHARED_NAME, String.class);
+		
+		assertEquals( "homer", newName);
+		assertEquals( "homer", newSharedName);
+		
+		assertEquals( "homer", sub.getRow(subNode).get(CyRootNetwork.SHARED_NAME, String.class) ); 
+		assertEquals( "homer", sub.getRow(subNode).get(CyNetwork.NAME,String.class) ); 
 	}
 
 	@Test
@@ -397,14 +411,26 @@ public abstract class AbstractCySubNetworkTest {
 		n2 = root.addNode();
 		e1 = root.addEdge(n1,n2,true);
 		root.getRow(e1).set(CyNetwork.NAME,"homer");
+		root.getRow(e1).set(CyEdge.INTERACTION, "pp");
+		
+		root.getSharedEdgeTable().getRow(e1.getSUID()).set(CyRootNetwork.SHARED_NAME,"homer");
+		
+		final String originalName = root.getRow(e1).get(CyNetwork.NAME, String.class);
+		assertEquals("homer", originalName);
 
 		sub = root.addSubNetwork();
 		sub.addNode(n1);
 		sub.addNode(n2);
 		sub.addEdge(e1);
 	
-		List<CyEdge> subEdges = sub.getEdgeList();
-		assertEquals( "homer", sub.getRow(subEdges.get(0)).get(CyNetwork.NAME,String.class) ); 
+		final List<CyEdge> subEdges = sub.getEdgeList();
+		assertEquals(1, subEdges.size());
+		final CyEdge newEdge = subEdges.get(0);
+		final CyRow row = sub.getRow(newEdge);
+		
+		assertEquals( "homer", row.get(CyRootNetwork.SHARED_NAME, String.class)); 
+		assertEquals( "homer", row.get(CyNetwork.NAME, String.class)); 
+		assertEquals( "pp", row.get(CyEdge.INTERACTION, String.class)); 
 	}
 
 	@Test
