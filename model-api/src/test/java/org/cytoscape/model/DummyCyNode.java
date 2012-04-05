@@ -49,10 +49,6 @@ public class DummyCyNode extends DummyGraphObject implements CyNode {
 		nested = null;
 	}
 
-	public long getIndex() {
-		return getSUID().longValue();
-	}
-
 	public List<CyNode> getNeighborList(CyEdge.Type edgeType) {
 		return new ArrayList<CyNode>();
 	}

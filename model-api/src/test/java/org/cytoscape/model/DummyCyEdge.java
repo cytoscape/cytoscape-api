@@ -50,10 +50,6 @@ public class DummyCyEdge extends DummyGraphObject implements CyEdge {
 		index = ind;
 	}
 
-	public long getIndex() {
-		return getSUID().longValue();
-	}
-
 	public CyNode getSource() {
 		return source;
 	}

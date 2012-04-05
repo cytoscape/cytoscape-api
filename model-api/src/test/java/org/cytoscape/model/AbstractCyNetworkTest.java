@@ -44,7 +44,7 @@ public abstract class AbstractCyNetworkTest {
 	public void testAddNode() {
 		CyNode n = net.addNode();
 		assertNotNull("node is not null", n);
-		assertTrue("node index >= 0", n.getIndex() >= 0);
+		assertTrue("node index >= 0", n.getSUID() >= 0);
 
 		// Doesn't make sense for subnetworks
 		//assertTrue("node index < num node", n.getIndex() < net.getNodeCount());
@@ -130,14 +130,14 @@ public abstract class AbstractCyNetworkTest {
 		// add a directed edge
 		CyEdge e1 = net.addEdge(n1, n2, true);
 		assertNotNull("edge is not null", e1);
-		assertTrue("edge index >= 0", e1.getIndex() >= 0);
+		assertTrue("edge index >= 0", e1.getSUID() >= 0);
 		//assertTrue("edge index < num edge", e1.getIndex() < net.getEdgeCount());
 		assertEquals("edge count", 1, net.getEdgeCount());
 
 		// add an undirected edge
 		CyEdge e2 = net.addEdge(n2, n3, false);
 		assertNotNull("edge is not null", e2);
-		assertTrue("edge index >= 0", e2.getIndex() >= 0);
+		assertTrue("edge index >= 0", e2.getSUID() >= 0);
 		//assertTrue("edge index < num edge", e2.getIndex() < net.getEdgeCount());
 		assertEquals("edge count", 2, net.getEdgeCount());
 
@@ -803,9 +803,9 @@ public abstract class AbstractCyNetworkTest {
 		CyNode n2 = net.addNode();
 		CyNode n3 = net.addNode();
 
-		assertEquals("nodes are equivalent", n1, net.getNode(n1.getIndex()));
-		assertEquals("nodes are equivalent", n2, net.getNode(n2.getIndex()));
-		assertEquals("nodes are equivalent", n3, net.getNode(n3.getIndex()));
+		assertEquals("nodes are equivalent", n1, net.getNode(n1.getSUID()));
+		assertEquals("nodes are equivalent", n2, net.getNode(n2.getSUID()));
+		assertEquals("nodes are equivalent", n3, net.getNode(n3.getSUID()));
 
 		// test random index
 		assertNull("node is null ", net.getNode(72));
@@ -826,8 +826,8 @@ public abstract class AbstractCyNetworkTest {
 		CyEdge e1 = net.addEdge(n1, n2, true);
 		CyEdge e2 = net.addEdge(n2, n3, true);
 
-		assertEquals("edges are equivalent", e1, net.getEdge(e1.getIndex()));
-		assertEquals("edges are equivalent", e2, net.getEdge(e2.getIndex()));
+		assertEquals("edges are equivalent", e1, net.getEdge(e1.getSUID()));
+		assertEquals("edges are equivalent", e2, net.getEdge(e2.getSUID()));
 
 		// test random index
 		assertNull("edge is null ", net.getEdge(72));

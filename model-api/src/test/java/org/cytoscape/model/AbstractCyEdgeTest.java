@@ -62,8 +62,8 @@ public abstract class AbstractCyEdgeTest {
 
 	@Test
 	public void testGetIndex() {
-		assertTrue("edge index >= 0", eDir.getIndex() >= 0);
-		assertTrue("edge index >= 0", eUndir.getIndex() >= 0);
+		assertTrue("edge index >= 0", eDir.getSUID() >= 0);
+		assertTrue("edge index >= 0", eUndir.getSUID() >= 0);
 	}
 
 	@Test

@@ -81,16 +81,6 @@ public interface CyEdge extends CyIdentifiable {
 		ANY;
 	}
 
-
-	/**
-	 * An index of this edge within this network.  The index is guaranteed to
-	 * be between 0 and (the number of edges in the network) - 1. This index
-	 * can be used as a parameter to {@link CyNetwork#getEdge}, however it is not
-	 * necessarily an index into {@link CyNetwork#getEdgeList}.
-	 * @return An index for this edge within this network.
-	 */
-	long getIndex();
-
 	/**
 	 * Returns the source node determining this edge. It will never be null.
 	 * For undirected networks this method will consistently 

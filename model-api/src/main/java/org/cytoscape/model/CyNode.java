@@ -38,16 +38,6 @@ import org.cytoscape.model.events.UnsetNetworkPointerEvent;
  * @CyAPI.Api.Interface
  */
 public interface CyNode extends CyIdentifiable {
-	
-	/**
-	 * An index of this node within this network.  The index is guaranteed to
-	 * be between 0 and (the number of nodes in the network) - 1. This index
-	 * can be used as a parameter to {@link CyNetwork#getNode}, however it is not
-	 * necessarily an index into {@link CyNetwork#getNodeList}.
-	 * @return An index for this node within this network.
-	 */
-	long getIndex();
-
 	/**
 	 * Returns the network referenced by this node.  If no 
 	 * network has been specified this method will return null.
