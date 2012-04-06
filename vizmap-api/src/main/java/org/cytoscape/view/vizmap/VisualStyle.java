@@ -35,6 +35,7 @@
 package org.cytoscape.view.vizmap;
 
 import java.util.Collection;
+import java.util.Set;
 
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.View;
@@ -143,4 +144,26 @@ public interface VisualStyle {
 	 */
 	void apply(final View<? extends CyIdentifiable> view);
 	
+	/**
+	 * Get all dependencies for this style.
+	 * 
+	 * @return set of dependencies associated with this style.
+	 */
+	Set<VisualPropertyDependency<?>> getAllVisualPropertyDependencies();
+
+
+	/**
+	 * Add a new {@linkplain VisualPropertyDependency}.
+	 * 
+	 * @param dependency new dependency to be added 
+	 */
+	void addVisualPropertyDependency(final VisualPropertyDependency<?> dependency);
+	
+	
+	/**
+	 * Remove a {@linkplain VisualPropertyDependency}.
+	 * 
+	 * @param dependency
+	 */
+	void removeVisualPropertyDependency(final VisualPropertyDependency<?> dependency);
 }

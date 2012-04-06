@@ -18,9 +18,7 @@ public final class VisualLexiconNode {
 	
 	private final VisualLexiconNode parent;
 	private final Collection<VisualLexiconNode> children;
-	
-	private boolean isDepend;
-	
+		
 	/**
 	 * Constructs this VisualLexiconNode.
 	 * @param vp the {@link VisualProperty} to wrap.
@@ -33,28 +31,11 @@ public final class VisualLexiconNode {
 		this.vp = vp;
 		this.parent = parent;
 		this.children = new HashSet<VisualLexiconNode>();
-		this.isDepend = false;
 		
 		if(parent != null)
 			parent.getChildren().add(this);
 	}
-	
-	
-	/**
-	 * Sets the dependency of this VisualLexiconNode.
-	 * @param depend True to make this VisualLexiconNode dependent on its parent, false otherwise.
-	 */
-	public void setDependency(boolean depend) {
-		this.isDepend = depend;
-	}
-	
-	/**
-	 * Returns true if this VisualLexiconNode is dependent on its parent.
-	 * @return true if this VisualLexiconNode is dependent on its parent.
-	 */
-	public boolean isDepend() {
-		return isDepend;
-	}
+
 	
 	/**
 	 * Returns wrapped {@linkplain VisualProperty} object.

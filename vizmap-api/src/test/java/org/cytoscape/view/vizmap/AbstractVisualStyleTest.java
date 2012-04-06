@@ -112,4 +112,9 @@ public abstract class AbstractVisualStyleTest {
 		assertEquals(Color.YELLOW, nodeView3.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR));		
 	}
 	
+	@Test
+	public void testDependency() {
+		// TODO add tests
+	}
+	
 }
