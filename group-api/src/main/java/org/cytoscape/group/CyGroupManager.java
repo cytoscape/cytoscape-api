@@ -39,17 +39,22 @@ import org.cytoscape.model.CyNode;
 
 
 /**
- * Basic access to groups in an instance of Cytoscape.
+ * The CyGroupManager maintains information about all of the groups
+ * an instance of Cytoscape.
  * @CyAPI.Api.Interface
  */
 public interface CyGroupManager {
 	/**
-	 * Provides the set of all the groups known to the groups manager in a particular network.
+	 * Provides the set of all the groups known to the groups 
+	 * manager in a particular network.
 	 * 
-	 * @param network the network to get the groups from.  If the network is null, then
-	 * return only those groups that have been designated as "global" (no referenced network)
-	 * for this {@link CyRootNetwork}
-	 * @return the complete set of all the currently known groups in a Cytoscape network
+	 * @param network the network to get the groups from.  If 
+	 *                the network is null, then return only those 
+	 *                groups that have been designated as 
+	 *                "global" (no referenced network)
+	 *                for this {@link CyRootNetwork}
+	 * @return the complete set of all the currently known groups 
+	 *         in a Cytoscape network
 	 */
 	public Set<CyGroup> getGroupSet(CyNetwork network);
 
@@ -92,8 +97,8 @@ public interface CyGroupManager {
 	public void destroyGroup(CyGroup group);
 
 	/**
-	 * Registers a group with the group manager.  Does nothing if the group is already
-	 * known to the group manager.
+	 * Registers a group with the group manager.  Does nothing 
+	 * if the group is already known to the group manager.
 	 * 
 	 * @param group  a non-null {@link CyGroup}
 	 * @fires GroupAddedEvent
@@ -101,8 +106,8 @@ public interface CyGroupManager {
 	public void addGroup(final CyGroup group);
 
 	/**
-	 * Registers a list of groups with the group manager.  Does nothing if the group is already
-	 * known to the group manager.
+	 * Registers a list of groups with the group manager.  Does 
+	 * nothing if the group is already known to the group manager.
 	 * 
 	 * @param groups  a list of {@link CyGroup}
 	 */

@@ -6,6 +6,21 @@ import org.cytoscape.model.CyTable;
   
 public interface Aggregator<T> {
 	/**
+ 	 * Return the Class this aggregator supports
+ 	 *
+ 	 * @return the {@link Class} supported
+ 	 */
+	public Class getSupportedType();
+
+	/**
+ 	 * This gets the name of the handling type supported
+ 	 * by this aggregator, suitable for use in a menu.  
+ 	 *
+ 	 * @return a name for the handling type
+ 	 */
+	public String toString();
+
+	/**
 	 * Aggregate the column for the members of the specified group into
 	 * the group.
 	 *

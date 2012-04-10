@@ -57,23 +57,30 @@ public interface CyGroupFactory {
 	 *
 	 * @param network the {@link CyNetwork} this group is part of
 	 * @param nodes the {@link CyNode}s that are part of this group.
-	 * @param edges the {@link CyEdge}s that are part of this group.  If this is null, the edges
+	 * @param edges the {@link CyEdge}s that are part of this group.  
+	 *              If this is null, the edges are determined based
+	 *              on the node connectivity
 	 * @param register if true, register the {@link CyGroup}
-	 * are determined based on the node connectivity.
 	 * @return A new {@link CyGroup} as part of the designated network.
 	 */
-	public CyGroup createGroup(CyNetwork network, List<CyNode> nodes, List<CyEdge> edges, boolean register);
+	public CyGroup createGroup(CyNetwork network, 
+	                           List<CyNode> nodes, List<CyEdge> edges, 
+	                           boolean register);
 
 	/**
-	 * Creates a CyGroup object in the referenced network from an existing {@link CyNode}.
+	 * Creates a CyGroup object in the referenced network from 
+	 * an existing {@link CyNode}.
 	 *
 	 * @param network the {@link CyNetwork} this group is part of
 	 * @param node the {@link CyNode} to convert into a group
 	 * @param nodes the {@link CyNode}s that are part of this group.
-	 * @param edges the {@link CyEdge}s that are part of this group.  If this is null, the edges
+	 * @param edges the {@link CyEdge}s that are part of this group.  
+	 *              If this is null, the edges are determined based
+	 *              on the node connectivity
 	 * @param register if true, register the {@link CyGroup}
-	 * are determined based on the node connectivity.
 	 * @return A new {@link CyGroup} as part of the designated network.
 	 */
-	public CyGroup createGroup(CyNetwork network, CyNode node, List<CyNode>nodes, List<CyEdge> edges, boolean register);
+	public CyGroup createGroup(CyNetwork network, 
+	                           CyNode node, List<CyNode>nodes, 
+	                           List<CyEdge> edges, boolean register);
 }

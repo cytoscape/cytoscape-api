@@ -65,7 +65,7 @@ public interface CyGroupSettings {
  }
 
 	/**
-	 * Get the action to use when the user double-clicks on a group node or member node.
+	 * Get the default action to use when the user double-clicks on a group node or member node.
 	 * This settings has no impact if Cytoscape is headless.
 	 *
 	 * @return the double-click action
@@ -73,12 +73,30 @@ public interface CyGroupSettings {
 	public DoubleClickAction getDoubleClickAction();
 
 	/**
-	 * Set the action to use when the user double-clicks on a group node or member node.
+	 * Get the action to use when the user double-clicks a specific group node or member node.
+	 * This settings has no impact if Cytoscape is headless.
+	 *
+	 * @param group the group we're interested in
+	 * @return the double-click action
+	 */
+	public DoubleClickAction getDoubleClickAction(CyGroup group);
+
+	/**
+	 * Set the default action to use when the user double-clicks on a group node or member node.
 	 * This settings has no impact if Cytoscape is headless.
 	 *
 	 * @param action the double-click action
 	 */
 	public void setDoubleClickAction(DoubleClickAction action);
+
+	/**
+	 * Set the action to use when the user double-clicks on a specific group node or member node.
+	 * This settings has no impact if Cytoscape is headless.
+	 *
+	 * @param group the group we're interested in
+	 * @param action the double-click action
+	 */
+	public void setDoubleClickAction(CyGroup group, DoubleClickAction action);
 
 	/**
 	 * Determine whether attribute aggregation (aggregating all of the attributes from member nodes
@@ -89,6 +107,15 @@ public interface CyGroupSettings {
 	public boolean getEnableAttributeAggregation();
 
 	/**
+	 * Determine whether attribute aggregation (aggregating all of the attributes from member nodes
+	 * onto the group node) is enabled for a specific group.
+	 *
+	 * @param group the group we're interested in
+	 * @return whether attribute aggregation is enabled (true) or not (false)
+	 */
+	public boolean getEnableAttributeAggregation(CyGroup group);
+
+	/**
 	 * Set whether attribute aggregation (aggregating all of the attributes from member nodes
 	 * onto the group node).
 	 *
@@ -96,14 +123,34 @@ public interface CyGroupSettings {
 	 */
 	public void setEnableAttributeAggregation(boolean aggregateAttributes);
 
+	/**
+	 * Set whether attribute aggregation (aggregating all of the attributes from member nodes
+	 * onto the group node) is enabled for a specific group.
+	 *
+	 * @param group the group we're interested in
+	 * @param aggregateAttributes whether attribute aggregation is enabled (true) or not (false)
+	 */
+	public void setEnableAttributeAggregation(CyGroup group, boolean aggregateAttributes);
+
+	/**
+ 	 * The the {@link Aggregator} for a specific group and column
+ 	 *
+ 	 * @param group the group to get the aggregator for
+ 	 * @param column the column to get the aggregator for
+ 	 * @return the aggregator to use for this group and column
+ 	 */
   public Aggregator getAggregator(CyGroup group, CyColumn column);
 
   public void setDefaultAggregation(CyGroup group, Class ovClass, Aggregator agg);
+  public Aggregator getDefaultAggregation(CyGroup group, Class ovClass);
 
   public void setDefaultAggregation(Class ovClass, Aggregator agg);
+  public Aggregator getDefaultAggregation(Class ovClass);
 
   public void setOverrideAggregation(CyGroup group, CyColumn column, Aggregator agg);
+  public Aggregator getOverrideAggregation(CyGroup group, CyColumn column);
 
   public void setOverrideAggregation(CyColumn column, Aggregator agg);
+  public Aggregator getOverrideAggregation(CyColumn column);
 
 }

@@ -37,11 +37,17 @@ import java.util.Set;
 
 
 /**
- * An object that represents a group of nodes and edges.  Groups at the model
- * layer are a simple extension of a CyNode that creates a subnetwork for every
- * for every group.  Groups may be added to networks in the same way that nodes
- * are.  To determine if a node in a network is a group, use the instanceof keyword
- * to check for CyGroup: if (node instanceof CyGroup).
+ * An object that represents a group of nodes and edges.  A CyGroup
+ * is an object that encapsulates a {@link CyNode} that represents
+ * a collection of {@link CyNode}s and connecting {@link CyEdge}s
+ * stored as a {@link CyNetwork}.  In addition a CyGroup maintains
+ * information about the links between the nodes in the group and
+ * nodes external to the group.  Groups may be collapsed or expanded.
+ * A collapsed group is represented in a network as the {@link CyNode}
+ * representing the group and a series of "meta" edges that represent
+ * the edges between nodes within the group and external nodes.  Like
+ * any other node, the group node can also have edges connecting to other
+ * nodes.
  *
  * @CyAPI.Api.Interface
  */
@@ -156,8 +162,9 @@ public interface CyGroup {
 	CyRootNetwork getRootNetwork(); // Should this return a CyNetwork instead?
 
 	/**
-	 * Add a group to an additional network.  When groups are created, they are created in
-	 * a particular network.  The can also be shown in other networks, as long as all of
+	 * Add a group to an additional network.  When groups are created, 
+	 * they are created in a particular network.  The can also be shown 
+	 * in other networks, as long as all of
 	 * the networks are in the same {@link CyRootNetwork}
 	 *
 	 * @param network the {@link CyNetwork} to add the group to
@@ -187,27 +194,32 @@ public interface CyGroup {
 	public boolean isInNetwork(CyNetwork network);
 
 	/**
-	 * Collapse this group in the designated network.  Note that this is a "model-level"
-	 * collapse, which removes all of the member nodes and edges and replaces them
-	 * with the node that represents the group in the network.  This does not imply
-	 * a specific visual representation.
+	 * Collapse this group in the designated network.  Note that this is 
+	 * a "model-level" collapse, which removes all of the member nodes 
+	 * and edges and replaces them with the node that represents the 
+	 * group in the network.  This does not imply a specific visual 
+	 * representation.
 	 *
-	 * @param network the {@link CyNetwork} that this group should be collapsed in
+	 * @param network the {@link CyNetwork} that this group should 
+	 *                be collapsed in
 	 */
 	void collapse(CyNetwork network);
 
 	/**
-	 * Expand this group in the designated network.  Note that this is a "model-level"
-	 * expansion, which removes the node that represents the group from the network
-	 * and adds all of the member nodes and edges. This does not imply
-	 * a specific visual representation.
+	 * Expand this group in the designated network.  Note that this 
+	 * is a "model-level" expansion, which removes the node that 
+	 * represents the group from the network and adds all of the 
+	 * member nodes and edges. This does not imply a specific 
+	 * visual representation.
 	 *
-	 * @param network the {@link CyNetwork} that this group should be expanded in
+	 * @param network the {@link CyNetwork} that this group 
+	 *                 should be expanded in
 	 */
 	void expand(CyNetwork network);
 
 	/**
-	 * Return whether this group is expanded or collapsed in the designated network.
+	 * Return whether this group is expanded or collapsed in the 
+	 * designated network.
 	 *
 	 * @param network the {@link CyNetwork} we're interested in
 	 * @return true if the group is collapsed in that network.
