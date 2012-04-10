@@ -79,6 +79,13 @@ public interface CyRootNetwork extends CyNetwork {
 	 * as a join key for virtual columns to be added to the shared table. 
 	 */
 	String SHARED_NAME = "shared name";
+	
+	/**
+	 * The name of the shared interaction column found in the SHARED_ATTRS table. This
+	 * column value will be updated any time the value of the CyNetwork.EDGE 
+	 * column in a default table is set. 
+	 */
+	String SHARED_INTERACTION = "shared interaction";
 
 	/**
 	 * Create an empty {@link CySubNetwork}. 

@@ -404,14 +404,13 @@ public abstract class AbstractCySubNetworkTest {
 		List<CyNode> subNodes = sub.getNodeList();
 		assertTrue( sub.getRow(subNodes.get(0)).get(CyNetwork.SELECTED,Boolean.class) ); 
 	}
-/*
+
 	@Test
 	public void testEdgeAddedInSubnetworkHasNameAttr() {
 		n1 = root.addNode();
 		n2 = root.addNode();
 		e1 = root.addEdge(n1,n2,true);
 		root.getRow(e1).set(CyNetwork.NAME,"homer");
-		root.getRow(e1).set(CyEdge.INTERACTION, "pp");
 		
 		root.getSharedEdgeTable().getRow(e1.getSUID()).set(CyRootNetwork.SHARED_NAME,"homer");
 		
@@ -429,16 +428,18 @@ public abstract class AbstractCySubNetworkTest {
 		final CyRow row = sub.getRow(newEdge);
 		
 		assertEquals( "homer", row.get(CyRootNetwork.SHARED_NAME, String.class)); 
-		assertEquals( "homer", row.get(CyNetwork.NAME, String.class)); 
-		assertEquals( "pp", row.get(CyEdge.INTERACTION, String.class)); 
+		assertEquals( "homer", row.get(CyNetwork.NAME, String.class));  
 	}
-*/
+
+	
 	@Test
 	public void testEdgeAddedInSubnetworkHasInteractionAttr() {
 		n1 = root.addNode();
 		n2 = root.addNode();
 		e1 = root.addEdge(n1,n2,true);
 		root.getRow(e1).set(CyEdge.INTERACTION,"marge");
+		root.getSharedEdgeTable().getRow(e1.getSUID()).set(CyRootNetwork.SHARED_INTERACTION,"marge");
+
 
 		sub = root.addSubNetwork();
 		sub.addNode(n1);
@@ -448,7 +449,8 @@ public abstract class AbstractCySubNetworkTest {
 		List<CyEdge> subEdges = sub.getEdgeList();
 		assertEquals( "marge", sub.getRow(subEdges.get(0)).get(CyEdge.INTERACTION,String.class) ); 
 	}
-/*
+	
+
 	@Test
 	public void testEdgeAddedInSubnetworkHasSelectedAttr() {
 		n1 = root.addNode();
@@ -464,7 +466,7 @@ public abstract class AbstractCySubNetworkTest {
 		List<CyEdge> subEdges = sub.getEdgeList();
 		assertTrue(sub.getRow(subEdges.get(0)).get(CyNetwork.SELECTED,Boolean.class) ); 
 	}
-*/
+
 	
 	/**
 	 * Test for checking contents of tables in the subnetworks.
