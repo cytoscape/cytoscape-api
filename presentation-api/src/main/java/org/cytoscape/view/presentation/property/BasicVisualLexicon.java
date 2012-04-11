@@ -108,6 +108,9 @@ public class BasicVisualLexicon implements VisualLexicon {
 
 	public static final VisualProperty<Boolean> NODE_SELECTED = new BooleanVisualProperty(false, "NODE_SELECTED",
 			"Node Selected", true, CyNode.class);
+	
+	public static final VisualProperty<Boolean> NODE_NESTED_NETWORK_IMAGE_VISIBLE = new BooleanVisualProperty(false,
+			"NODE_NESTED_NETWORK_IMAGE_VISIBLE", "Nested Network Image Visible", CyNode.class);
 
 	// ///// Edge VP ///////
 	public static final VisualProperty<Paint> EDGE_PAINT = new PaintVisualProperty(Color.gray, PAINT_RANGE,
@@ -275,16 +278,33 @@ public class BasicVisualLexicon implements VisualLexicon {
 		addVisualProperty(NETWORK_SCALE_FACTOR, NETWORK);
 		addVisualProperty(NETWORK_TITLE, NETWORK);
 		addVisualProperty(NETWORK_BACKGROUND_PAINT, NETWORK);
-		addVisualProperty(NETWORK_WIDTH, NETWORK_SIZE);
-		addVisualProperty(NETWORK_HEIGHT, NETWORK_SIZE);
 		addVisualProperty(NETWORK_CENTER_X_LOCATION, NETWORK);
 		addVisualProperty(NETWORK_CENTER_Y_LOCATION, NETWORK);
-
+		addVisualProperty(NETWORK_CENTER_Z_LOCATION, NETWORK);
+		
+		// Level 2: Network-related VP
+		addVisualProperty(NETWORK_WIDTH, NETWORK_SIZE);
+		addVisualProperty(NETWORK_HEIGHT, NETWORK_SIZE);
+		addVisualProperty(NETWORK_DEPTH, NETWORK_SIZE);
+		
 		// Level 2: Children of node VP
 		addVisualProperty(NODE_PAINT, NODE);
 		addVisualProperty(NODE_SIZE, NODE);
+		addVisualProperty(NODE_SHAPE, NODE);
 		addVisualProperty(NODE_VISIBLE, NODE);
 		addVisualProperty(NODE_SELECTED, NODE);
+		addVisualProperty(NODE_NESTED_NETWORK_IMAGE_VISIBLE, NODE);
+		addVisualProperty(NODE_X_LOCATION, NODE);
+		addVisualProperty(NODE_Y_LOCATION, NODE);
+		addVisualProperty(NODE_Z_LOCATION, NODE);
+		addVisualProperty(NODE_LABEL, NODE);
+		addVisualProperty(NODE_BORDER_WIDTH, NODE);
+		addVisualProperty(NODE_BORDER_LINE_TYPE, NODE);
+		addVisualProperty(NODE_TRANSPARENCY, NODE);
+		addVisualProperty(NODE_BORDER_TRANSPARENCY, NODE);
+		addVisualProperty(NODE_LABEL_FONT_FACE, NODE);
+		addVisualProperty(NODE_LABEL_TRANSPARENCY, NODE);
+		addVisualProperty(NODE_TOOLTIP, NODE);
 
 		// Level 2: Children of edge VP
 		addVisualProperty(EDGE_PAINT, EDGE);
@@ -292,60 +312,32 @@ public class BasicVisualLexicon implements VisualLexicon {
 		addVisualProperty(EDGE_SELECTED, EDGE);
 		addVisualProperty(EDGE_WIDTH, EDGE);
 		addVisualProperty(EDGE_LABEL, EDGE);
-
-		// Level 3 - 4: Node-related VP
-		addVisualProperty(NODE_X_LOCATION, NODE);
-		addVisualProperty(NODE_Y_LOCATION, NODE);
-		addVisualProperty(NODE_LABEL, NODE);
-
-		addVisualProperty(NODE_FILL_COLOR, NODE_PAINT);
-		addVisualProperty(NODE_LABEL_COLOR, NODE_PAINT);
-		addVisualProperty(NODE_WIDTH, NODE_SIZE);
-		addVisualProperty(NODE_HEIGHT, NODE_SIZE);
-
-		// Level 3: Edge-related VP
-		addVisualProperty(EDGE_LABEL_COLOR, EDGE_PAINT);
-
-		addVisualProperty(NODE_Z_LOCATION, NODE);
-		addVisualProperty(NODE_DEPTH, NODE_SIZE);
-
-		addVisualProperty(NETWORK_CENTER_Z_LOCATION, NETWORK);
-		addVisualProperty(NETWORK_DEPTH, NETWORK_SIZE);
-
-		addVisualProperty(NODE_SHAPE, NODE);
-
-		addVisualProperty(NODE_SELECTED_PAINT, NODE_PAINT);
-		addVisualProperty(NODE_BORDER_WIDTH, NODE);
-		addVisualProperty(NODE_BORDER_LINE_TYPE, NODE);
-		addVisualProperty(NODE_TRANSPARENCY, NODE);
-		addVisualProperty(NODE_BORDER_TRANSPARENCY, NODE);
-
-		addVisualProperty(NODE_BORDER_PAINT, NODE_PAINT);
-		addVisualProperty(NODE_TOOLTIP, NODE);
-		addVisualProperty(NODE_LABEL_FONT_SIZE, NODE_SIZE);
-
-		addVisualProperty(NODE_LABEL_FONT_FACE, NODE);
-		addVisualProperty(NODE_LABEL_TRANSPARENCY, NODE);
-
 		addVisualProperty(EDGE_LINE_TYPE, EDGE);
-
 		addVisualProperty(EDGE_TOOLTIP, EDGE);
-
 		addVisualProperty(EDGE_LABEL_FONT_FACE, EDGE);
 		addVisualProperty(EDGE_LABEL_FONT_SIZE, EDGE);
 		addVisualProperty(EDGE_LABEL_TRANSPARENCY, EDGE);
+		addVisualProperty(EDGE_TRANSPARENCY, EDGE);
+		addVisualProperty(EDGE_SOURCE_ARROW_SHAPE, EDGE);
+		addVisualProperty(EDGE_TARGET_ARROW_SHAPE, EDGE);
+		addVisualProperty(EDGE_BEND, EDGE);
 
+		// Level 3 - 4: Node-related VP
+		addVisualProperty(NODE_FILL_COLOR, NODE_PAINT);
+		addVisualProperty(NODE_SELECTED_PAINT, NODE_PAINT);
+		addVisualProperty(NODE_BORDER_PAINT, NODE_PAINT);
+		addVisualProperty(NODE_LABEL_COLOR, NODE_PAINT);
+		addVisualProperty(NODE_LABEL_FONT_SIZE, NODE_SIZE);
+		addVisualProperty(NODE_WIDTH, NODE_SIZE);
+		addVisualProperty(NODE_HEIGHT, NODE_SIZE);
+		addVisualProperty(NODE_DEPTH, NODE_SIZE);
+
+		// Level 3: Edge-related VP
+		addVisualProperty(EDGE_LABEL_COLOR, EDGE_PAINT);
 		addVisualProperty(EDGE_SELECTED_PAINT, EDGE_PAINT);
 		addVisualProperty(EDGE_UNSELECTED_PAINT, EDGE_PAINT);
 		addVisualProperty(EDGE_STROKE_SELECTED_PAINT, EDGE_SELECTED_PAINT);
 		addVisualProperty(EDGE_STROKE_UNSELECTED_PAINT, EDGE_UNSELECTED_PAINT);
-
-		addVisualProperty(EDGE_TRANSPARENCY, EDGE);
-
-		addVisualProperty(EDGE_SOURCE_ARROW_SHAPE, EDGE);
-		addVisualProperty(EDGE_TARGET_ARROW_SHAPE, EDGE);
-		
-		addVisualProperty(EDGE_BEND, EDGE);
 
 		createLookupMap();
 	}
@@ -422,8 +414,6 @@ public class BasicVisualLexicon implements VisualLexicon {
 		addIdentifierMapping(CyEdge.class, "edgeTargetArrowShape", EDGE_TARGET_ARROW_SHAPE);
 
 		addIdentifierMapping(CyEdge.class, "edgeBend", EDGE_BEND);
-		
-		// TODO add more mappings!
 	}
 
 	@Override
