@@ -34,10 +34,9 @@ import java.lang.reflect.Type;
 
 import java.util.Collections;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.WeakHashMap;
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
@@ -73,8 +72,8 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 	 */
 	public AbstractTunableInterceptor() {
 		throwException = false;
-		handlerMap = new HashMap<Object, List<T>>();
-		titleProviderMap = new HashMap<Object, Method>();
+		handlerMap = new WeakHashMap<Object, List<T>>();
+		titleProviderMap = new WeakHashMap<Object, Method>();
 		tunableHandlerFactories = new ArrayList<TunableHandlerFactory<T>>();
 	}
 
