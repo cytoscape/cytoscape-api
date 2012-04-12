@@ -68,6 +68,17 @@ public interface CyGroupManager {
 	public List<CyGroup> getGroupsForNode(CyNode node);
 
 	/**
+	 * Return the list of {@link CyGroup}s this node is in for
+	 * a particular network.
+	 *
+	 * @param node the {@link CyNode} we want get the groups for
+	 * @param network the {@link CyNetwork} we want to restrict our search to
+	 * @return the list of {@link CyGroup}s the node is in
+	 * null if it is not in any groups
+	 */
+	public List<CyGroup> getGroupsForNode(CyNode node, CyNetwork network);
+
+	/**
 	 * Test to see if this node represents a {@link CyGroup} in
 	 * a particular {@link CyNetwork}.
 	 *
