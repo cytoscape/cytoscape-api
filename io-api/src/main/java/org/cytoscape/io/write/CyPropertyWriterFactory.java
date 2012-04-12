@@ -17,5 +17,5 @@ public interface CyPropertyWriterFactory extends CyWriterFactory {
 	 * @param property The property object to be written. In general 
 	 * this object should be of types described in {@link org.cytoscape.property.CyProperty}.
 	 */
-	CyWriter getWriterTask(OutputStream os, Object property);
+	CyWriter createWriter(OutputStream os, Object property);
 }

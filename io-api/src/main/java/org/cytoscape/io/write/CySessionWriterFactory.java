@@ -18,5 +18,5 @@ public interface CySessionWriterFactory extends CyWriterFactory {
 	 * @param os The stream to which the data will be written. 
 	 * @param session The {@link org.cytoscape.session.CySession} to be written.
 	 */
-	CyWriter getWriterTask(OutputStream os, CySession session);
+	CyWriter createWriter(OutputStream os, CySession session);
 }

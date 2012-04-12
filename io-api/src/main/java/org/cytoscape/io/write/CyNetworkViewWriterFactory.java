@@ -19,7 +19,7 @@ public interface CyNetworkViewWriterFactory extends CyWriterFactory {
 	 * @param os The stream to write to. 
 	 * @param view The {@link CyNetworkView} to be written.
 	 */
-	CyWriter getWriterTask(OutputStream os, CyNetworkView view);
+	CyWriter createWriter(OutputStream os, CyNetworkView view);
 
 	/**
 	 * Creates a single Task that will write the specified network to the
@@ -27,5 +27,5 @@ public interface CyNetworkViewWriterFactory extends CyWriterFactory {
 	 * @param os The stream to write to. 
 	 * @param network The {@link CyNetwork} to be written.
 	 */
-	CyWriter getWriterTask(OutputStream os, CyNetwork network);
+	CyWriter createWriter(OutputStream os, CyNetwork network);
 }

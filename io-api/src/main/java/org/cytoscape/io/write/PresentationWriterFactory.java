@@ -20,5 +20,5 @@ public interface PresentationWriterFactory extends CyWriterFactory {
 	 * @param re The {@link RenderingEngine} used to generate the image of the
 	 * View it contains.
 	 */
-	CyWriter getWriterTask(OutputStream os, final RenderingEngine<?> re);
+	CyWriter createWriter(OutputStream os, final RenderingEngine<?> re);
 }

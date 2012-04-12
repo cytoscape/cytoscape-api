@@ -17,5 +17,5 @@ public interface CyTableWriterFactory extends CyWriterFactory {
 	 * @param os The stream to which the data will be written. 
 	 * @param table The {@link CyTable} to be written.
 	 */
-	CyWriter getWriterTask(OutputStream os, CyTable table);
+	CyWriter createWriter(OutputStream os, CyTable table);
 }
