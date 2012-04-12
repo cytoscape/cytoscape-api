@@ -11,7 +11,7 @@ import org.cytoscape.view.vizmap.VisualStyle;
  * A {@link CyWriterManager} specific to writing {@link org.cytoscape.view.vizmap.VisualStyle} objects. 
  * @CyAPI.Api.Interface
  */
-public interface VizmapWriterManager extends CyWriterManager {
+public interface VizmapWriterManager extends CyWriterManager<VizmapWriterFactory> {
 
 	/**
 	 * Returns the {@link CyWriter} Task that will attempt to write the specified vizmap to the

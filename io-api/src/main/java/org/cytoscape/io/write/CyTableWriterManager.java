@@ -43,7 +43,7 @@ import java.io.OutputStream;
  * A {@link CyWriterManager} specific to writing {@link org.cytoscape.model.CyTable} objects. 
  * @CyAPI.Api.Interface
  */
-public interface CyTableWriterManager extends CyWriterManager {
+public interface CyTableWriterManager extends CyWriterManager<CyTableWriterFactory> {
 
 	/**
 	 * Returns the {@link CyWriter} Task that will attempt to write the specified table to the

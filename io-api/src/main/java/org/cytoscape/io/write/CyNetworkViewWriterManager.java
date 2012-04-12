@@ -46,7 +46,7 @@ import org.cytoscape.view.model.CyNetworkView;
  * {@link org.cytoscape.view.model.CyNetworkView} objects. 
  * @CyAPI.Api.Interface
  */
-public interface CyNetworkViewWriterManager extends CyWriterManager {
+public interface CyNetworkViewWriterManager extends CyWriterManager<CyNetworkViewWriterFactory> {
 
 	/**
 	 * Returns the {@link CyWriter} Task that will attempt to write the specified network to the

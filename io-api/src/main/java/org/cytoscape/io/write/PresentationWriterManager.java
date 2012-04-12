@@ -45,7 +45,7 @@ import java.io.OutputStream;
  * A {@link CyWriterManager} specific to writing View objects. 
  * @CyAPI.Api.Interface
  */
-public interface PresentationWriterManager extends CyWriterManager {
+public interface PresentationWriterManager extends CyWriterManager<PresentationWriterFactory> {
 
 	/**
 	 * Returns the {@link CyWriter} Task that will attempt to write the specified view to the

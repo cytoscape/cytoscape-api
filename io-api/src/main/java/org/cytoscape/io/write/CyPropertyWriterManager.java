@@ -40,9 +40,10 @@ import java.util.List;
  * {@link org.cytoscape.property.CyProperty} for information on types of object expected.
  * @CyAPI.Api.Interface
  */
-public interface CyPropertyWriterManager extends CyWriterManager {
-	/** Returns the <code>CyFileFilter</code>s known to this <code>CyWriter</code> manager.
-	 *  @return the set of known file filters.
+public interface CyPropertyWriterManager extends CyWriterManager<CyPropertyWriterFactory> {
+	/** 
+	 * Returns the <code>CyFileFilter</code>s known to this <code>CyWriter</code> manager.
+	 * @return the set of known file filters.
 	 */
 	List<CyFileFilter> getAvailableWriterFilters();
 

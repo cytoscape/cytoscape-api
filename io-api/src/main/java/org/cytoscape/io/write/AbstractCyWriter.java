@@ -24,7 +24,7 @@ import java.util.ArrayList;
  * @param <T> Generic type that extends CyWriterManager.
  * @CyAPI.Abstract.Class
  */
-public abstract class AbstractCyWriter<T extends CyWriterManager> extends AbstractTask
+public abstract class AbstractCyWriter<S extends CyWriterFactory,T extends CyWriterManager<S>> extends AbstractTask
 	implements CyWriter
 {
 	/** The file to be written. */
