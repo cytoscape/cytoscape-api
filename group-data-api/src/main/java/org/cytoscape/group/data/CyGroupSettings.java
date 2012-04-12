@@ -38,19 +38,27 @@ import org.cytoscape.model.CyTable;
 
 /**
  * CyGroupSettings provides interfaces to access user-requested settings
- * that influence how the {@link CyGroup} system works.  There are several groups
- * of settings that influence different aspects of groups: visual settings,
- * attribute aggregation settings, user interaction settings.
+ * that influence how the {@link CyGroup} system works.  There are 
+ * two groups of settings that influence different aspects of 
+ * groups: visual settings and attribute aggregation settings.
  *
  * <b>Visual Settings</b>
+ * <ul><li>Double-click action: what should happen when a user double-clicks 
+ * on a group node or a group member.  This can be either: 
+ * <i>None</i>, <i>ExpandContract</i>,
+ * or <i>Select</i>.</li>
+ * <li>Use nested networks: if this setting is set to true, then
+ * when a group is collapsed a nested netwrok will be created for
+ * the group</li>
+ * <li>Hide group node: if this setting is set to true, then
+ * when a group is expanded, the group node is hidden.  There are
+ * certain (limited) use cases where a user might want the group node
+ * as well as all member nodes visible in the network at the same
+ * time.</li>
+ * </ul>
  *
  * <b>Attribute Aggregation Settings</b>
  *
- * <b>User Interaction Settings</b>
- * <ul><li>Double-click action: what should happen when a user double-clicks 
- * on a group node or a group member.  This can be either: <i>None</i>, <i>ExpandContract</i>,
- * or <i>Select</i>.</li>
- * </ul>
  */
 
 public interface CyGroupSettings {
@@ -65,16 +73,18 @@ public interface CyGroupSettings {
  }
 
 	/**
-	 * Get the default action to use when the user double-clicks on a group node or member node.
-	 * This settings has no impact if Cytoscape is headless.
+	 * Get the default action to use when the user double-clicks on a 
+	 * group node or member node. This setting has no impact if Cytoscape 
+	 * is headless.
 	 *
 	 * @return the double-click action
 	 */
 	public DoubleClickAction getDoubleClickAction();
 
 	/**
-	 * Get the action to use when the user double-clicks a specific group node or member node.
-	 * This settings has no impact if Cytoscape is headless.
+	 * Get the action to use when the user double-clicks a specific 
+	 * group node or member node.  This setting has no impact if 
+	 * Cytoscape is headless.
 	 *
 	 * @param group the group we're interested in
 	 * @return the double-click action
@@ -82,16 +92,18 @@ public interface CyGroupSettings {
 	public DoubleClickAction getDoubleClickAction(CyGroup group);
 
 	/**
-	 * Set the default action to use when the user double-clicks on a group node or member node.
-	 * This settings has no impact if Cytoscape is headless.
+	 * Set the default action to use when the user double-clicks on a 
+	 * group node or member node.  This setting has no impact if 
+	 * Cytoscape is headless.
 	 *
 	 * @param action the double-click action
 	 */
 	public void setDoubleClickAction(DoubleClickAction action);
 
 	/**
-	 * Set the action to use when the user double-clicks on a specific group node or member node.
-	 * This settings has no impact if Cytoscape is headless.
+	 * Set the action to use when the user double-clicks on a specific 
+	 * group node or member node.  This setting has no impact if 
+	 * Cytoscape is headless.
 	 *
 	 * @param group the group we're interested in
 	 * @param action the double-click action
@@ -99,16 +111,117 @@ public interface CyGroupSettings {
 	public void setDoubleClickAction(CyGroup group, DoubleClickAction action);
 
 	/**
-	 * Determine whether attribute aggregation (aggregating all of the attributes from member nodes
-	 * onto the group node).
+	 * Get the setting controlling whether to visualize a collapsed
+	 * group as a nested network.
+	 *
+	 * @return the nested network setting
+	 */
+	public boolean getUseNestedNetworks();
+
+	/**
+	 * Get the setting controlling whether to visualize a specific 
+	 * collapsed group as a nested network.
+	 *
+	 * @param group the group we're interested in
+	 * @return the nested network setting
+	 */
+	public boolean getUseNestedNetworks(CyGroup group);
+
+	/**
+	 * Set the setting controlling whether to visualize a collapsed
+	 * group as a nested network.
+	 *
+	 * @param useNN if true, use nested networks to visualize the
+	 * collapsed node.
+	 */
+	public void setUseNestedNetworks(boolean useNN);
+
+	/**
+	 * Set the setting controlling whether to visualize a collapsed
+	 * group as a nested network.
+	 *
+	 * @param group the group we're interested in
+	 * @param useNN if true, use nested networks to visualize the
+	 * collapsed node.
+	 */
+	public void setUseNestedNetworks(CyGroup group, boolean useNN);
+
+	/**
+	 * Get the setting controlling whether to hide the
+	 * group node when a group is expanded.
+	 *
+	 * @return the hide group node setting
+	 */
+	public boolean getHideGroupNode();
+
+	/**
+	 * Get the setting controlling whether to hide the
+	 * group node when a specific group is expanded.
+	 *
+	 * @param group the group we're interested in
+	 * @return the hide group node setting
+	 */
+	public boolean getHideGroupNode(CyGroup group);
+
+	/**
+	 * Set the setting controlling whether to hide the
+	 * group node when a group is expanded.
+	 *
+	 * @param hideGroup the hide group setting
+	 */
+	public void setHideGroupNode(boolean hideGroup);
+
+	/**
+	 * Set the setting controlling whether to hide the
+	 * group node when a group is expanded.
+	 *
+	 * @param group the group we're interested in
+	 * @param hideGroup the hide group setting
+	 */
+	public void setHideGroupNode(CyGroup group, boolean hideGroup);
+
+	/**
+	 * Get the default opacity of group nodes 
+	 *
+	 * @return opacity as a percentage from 0.0-100.0
+	 */
+	public double getGroupNodeOpacity();
+
+	/**
+	 * Get the opacity of a particular group node 
+	 *
+	 * @param group the group we're interested in
+	 * @return opacity as a percentage from 0.0-100.0
+	 */
+	public double getGroupNodeOpacity(CyGroup group);
+
+	/**
+	 * Set the default opacity of group nodes 
+	 *
+	 * @param opacity opacity as a percentage from 0.0-100.0
+	 */
+	public void setGroupNodeOpacity(double opacity);
+
+	/**
+	 * Set the default opacity of a particular group node
+	 *
+	 * @param group the group we're interested in
+	 * @param opacity opacity as a percentage from 0.0-100.0
+	 */
+	public void setGroupNodeOpacity(CyGroup group, double opacity);
+
+	/**
+	 * Determine whether attribute aggregation (aggregating all of the 
+	 * attributes from member nodes onto the group node).
 	 *
 	 * @return whether attribute aggregation is enabled (true) or not (false)
 	 */
 	public boolean getEnableAttributeAggregation();
 
 	/**
-	 * Determine whether attribute aggregation (aggregating all of the attributes from member nodes
-	 * onto the group node) is enabled for a specific group.
+	 * Determine whether attribute aggregation (aggregating all of the 
+	 * attributes from member nodes onto the group node) is enabled for 
+	 * a specific group.
 	 *
 	 * @param group the group we're interested in
 	 * @return whether attribute aggregation is enabled (true) or not (false)
@@ -116,21 +229,25 @@ public interface CyGroupSettings {
 	public boolean getEnableAttributeAggregation(CyGroup group);
 
 	/**
-	 * Set whether attribute aggregation (aggregating all of the attributes from member nodes
-	 * onto the group node).
+	 * Set whether attribute aggregation (aggregating all of the 
+	 * attributes from member nodes onto the group node).
 	 *
-	 * @param aggregateAttributes whether attribute aggregation is enabled (true) or not (false)
+	 * @param aggregateAttributes whether attribute aggregation 
+	 * is enabled (true) or not (false)
 	 */
 	public void setEnableAttributeAggregation(boolean aggregateAttributes);
 
 	/**
-	 * Set whether attribute aggregation (aggregating all of the attributes from member nodes
-	 * onto the group node) is enabled for a specific group.
+	 * Set whether attribute aggregation (aggregating all of the 
+	 * attributes from member nodes onto the group node) is enabled 
+	 * for a specific group.
 	 *
 	 * @param group the group we're interested in
-	 * @param aggregateAttributes whether attribute aggregation is enabled (true) or not (false)
+	 * @param aggregateAttributes whether attribute aggregation is 
+	 * enabled (true) or not (false)
 	 */
-	public void setEnableAttributeAggregation(CyGroup group, boolean aggregateAttributes);
+	public void setEnableAttributeAggregation(CyGroup group, 
+	                                          boolean aggregateAttributes);
 
 	/**
  	 * The the {@link Aggregator} for a specific group and column
@@ -141,16 +258,81 @@ public interface CyGroupSettings {
  	 */
   public Aggregator getAggregator(CyGroup group, CyColumn column);
 
-  public void setDefaultAggregation(CyGroup group, Class ovClass, Aggregator agg);
+	/**
+ 	 * Set the default aggregator to use for a specific group and class.
+ 	 *
+ 	 * @param group the group to set the aggregator for
+ 	 * @param ovClass the Class to set the aggregator for
+ 	 * @param agg the {@link Aggregator} to use
+ 	 */
+  public void setDefaultAggregation(CyGroup group, Class ovClass, 
+	                                  Aggregator agg);
+
+	/**
+ 	 * Get the default aggregator to use for a specific group and class.
+ 	 *
+ 	 * @param group the group to get the aggregator for
+ 	 * @param ovClass the Class to get the aggregator for
+ 	 * @return the {@link Aggregator} to use
+ 	 */
   public Aggregator getDefaultAggregation(CyGroup group, Class ovClass);
 
+	/**
+ 	 * Set the default aggregator to use for a class.
+ 	 *
+ 	 * @param ovClass the Class to set the aggregator for
+ 	 * @param agg the {@link Aggregator} to use
+ 	 */
   public void setDefaultAggregation(Class ovClass, Aggregator agg);
+
+	/**
+ 	 * Get the default aggregator to use for a class.
+ 	 *
+ 	 * @param ovClass the Class to get the aggregator for
+ 	 * @return the {@link Aggregator} to use
+ 	 */
   public Aggregator getDefaultAggregation(Class ovClass);
 
-  public void setOverrideAggregation(CyGroup group, CyColumn column, Aggregator agg);
+	/**
+ 	 * Set the aggregator to use for a specific group and {@link CyColumn}.
+ 	 * An override aggregator will be use for this node and this column
+ 	 * only, reguardless of what the default aggregation is set to.
+ 	 *
+ 	 * @param group the group to set the override for
+ 	 * @param column the CyColumn to set the override for
+ 	 * @param agg the {@link Aggregator} to use
+ 	 */
+  public void setOverrideAggregation(CyGroup group, CyColumn column, 
+	                                   Aggregator agg);
+
+	/**
+ 	 * Get the aggregator to use for a specific group and {@link CyColumn}.
+ 	 * An override aggregator will be use for this node and this column
+ 	 * only, reguardless of what the default aggregation is set to.
+ 	 *
+ 	 * @param group the group to get the override for
+ 	 * @param column the CyColumn to get the override for
+ 	 * @return the {@link Aggregator} to use
+ 	 */
   public Aggregator getOverrideAggregation(CyGroup group, CyColumn column);
 
+	/**
+ 	 * Set the aggregator to use for a {@link CyColumn}.
+ 	 * An override aggregator will be use for this column
+ 	 * only, reguardless of what the default aggregation is set to.
+ 	 *
+ 	 * @param column the CyColumn to set the override for
+ 	 * @param agg the {@link Aggregator} to use
+ 	 */
   public void setOverrideAggregation(CyColumn column, Aggregator agg);
-  public Aggregator getOverrideAggregation(CyColumn column);
 
+	/**
+ 	 * Get the aggregator to use for a specific {@link CyColumn}.
+ 	 * An override aggregator will be use for this column
+ 	 * only, reguardless of what the default aggregation is set to.
+ 	 *
+ 	 * @param column the CyColumn to get the override for
+ 	 * @return the {@link Aggregator} to use
+ 	 */
+  public Aggregator getOverrideAggregation(CyColumn column);
 }
