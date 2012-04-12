@@ -21,5 +21,11 @@ public interface InputStreamTaskFactory extends CyFileFilterProvider {
 	 */
 	TaskIterator createTaskIterator(InputStream is, String inputName);
 	
+	/**
+	 * Returns true if the factory is ready to be produce a TaskIterator and false otherwise.
+	 * @param is The {@link java.io.InputStream} to be read.
+	 * @param inputName The name of the input.
+	 * @return true if the factory is ready to be produce a TaskIterator and false otherwise.
+	 */
 	boolean isReady(InputStream is, String inputName);
 }
