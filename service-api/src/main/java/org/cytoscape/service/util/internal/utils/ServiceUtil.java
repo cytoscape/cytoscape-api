@@ -1,4 +1,4 @@
-package org.cytoscape.service.util.internal;
+package org.cytoscape.service.util.internal.utils;
 
 import java.util.HashMap;
 import java.util.List;
@@ -15,7 +15,7 @@ public final class ServiceUtil {
 		
 	}
 
-	static public <S> S getService(BundleContext bc, Class<S> serviceClass, List<ServiceReference> gottenServices) {
+	public static <S> S getService(BundleContext bc, Class<S> serviceClass, List<ServiceReference> gottenServices) {
 		try {
 			ServiceReference ref = bc.getServiceReference(serviceClass.getName());
 			if ( ref == null ) 
@@ -29,7 +29,7 @@ public final class ServiceUtil {
 		}
 	}
 
-	static public <S> S getService(BundleContext bc, Class<S> serviceClass, String filter, List<ServiceReference> gottenServices) {
+	public static <S> S getService(BundleContext bc, Class<S> serviceClass, String filter, List<ServiceReference> gottenServices) {
 		try { 
 			ServiceReference[] refs = bc.getServiceReferences(serviceClass.getName(),filter);
 			if ( refs == null ) 
@@ -42,7 +42,7 @@ public final class ServiceUtil {
 		}
 	}
 	
-	static public void registerServiceListener(final BundleContext bc, final Object listener, final String registerMethodName, 
+	public static void registerServiceListener(final BundleContext bc, final Object listener, final String registerMethodName, 
 			final String unregisterMethodName, final Class<?> serviceClass, final Class<?> methodClass, final String additionalFilter , 
 			List<CyServiceListener> serviceListeners) {
 		try {
@@ -55,7 +55,7 @@ public final class ServiceUtil {
 		}
 	}
 	
-	static public void registerService(final BundleContext bc, final Object service, final Class<?> serviceClass, final Properties props, 
+	public static void registerService(final BundleContext bc, final Object service, final Class<?> serviceClass, final Properties props, 
 			Map<Class,Map<Object,ServiceRegistration>> serviceRegistrations) {
 		
 		if ( service == null )

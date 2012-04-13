@@ -12,9 +12,9 @@ import org.osgi.framework.ServiceRegistration;
 import org.osgi.framework.ServiceReference; 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.cytoscape.service.util.internal.CyServiceListener;
-import org.cytoscape.service.util.internal.RegisterUtil;
-import org.cytoscape.service.util.internal.ServiceUtil;
+import org.cytoscape.service.util.internal.utils.CyServiceListener;
+import org.cytoscape.service.util.internal.utils.RegisterUtil;
+import org.cytoscape.service.util.internal.utils.ServiceUtil;
 
 /**
  * A simple BundleActivator with convenience methods for registering

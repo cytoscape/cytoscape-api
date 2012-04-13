@@ -15,6 +15,8 @@ import org.slf4j.LoggerFactory;
 
 import org.cytoscape.service.util.AbstractCyActivator;
 import org.cytoscape.service.util.CyServiceRegistrar;
+import org.cytoscape.service.util.internal.utils.RegisterUtil;
+import org.cytoscape.service.util.internal.utils.ServiceUtil;
 
 public class CyServiceRegistrarImpl  implements CyServiceRegistrar{
 	

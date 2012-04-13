@@ -33,7 +33,7 @@
  along with this library; if not, write to the Free Software Foundation,
  Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
 */
-package org.cytoscape.service.util.internal;
+package org.cytoscape.service.util.internal.utils;
 
 
 import java.util.List;
@@ -54,7 +54,7 @@ public class RegisterUtil {
 		return interfaces;
 	}
 	
-	static void addAllInterfaces(List<Class<?>> list, Class<?> clazz) {
+	private static void addAllInterfaces(List<Class<?>> list, Class<?> clazz) {
 		for ( Class<?> c : clazz.getInterfaces() ) {
 			list.add(c);
 			addAllInterfaces(list, c);
