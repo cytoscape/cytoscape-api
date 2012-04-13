@@ -30,7 +30,7 @@
 package org.cytoscape.equations;
 
 
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.Map;
 import java.util.Set;
 
@@ -44,7 +44,7 @@ public final class Equation {
 	private final Map<String, Object> defaultVariableValues;
 	private final Object[] code;
 	private final int[] sourceLocations;
-	private final Class type;
+	private final Class<?> type;
 
 	/**
 	 *  Constructs an <code>Equation</code>.
@@ -58,13 +58,13 @@ public final class Equation {
 	 */
 	public Equation(final String equation, final Set<String> variableReferences,
 	                final Map<String, Object> defaultVariableValues, final Object[] code,
-	                final int[] sourceLocations, final Class type)
+	                final int[] sourceLocations, final Class<?> type)
 	{
 		this.equation              = equation;
 		this.variableReferences    = variableReferences;
 		this.defaultVariableValues = defaultVariableValues;
-		this.code                  = code;
-		this.sourceLocations       = sourceLocations;
+		this.code                  = Arrays.copyOf(code, code.length);
+		this.sourceLocations       = Arrays.copyOf(sourceLocations, sourceLocations.length);
 		this.type                  = type;
 	}
 
@@ -112,5 +112,5 @@ public final class Equation {
 	/** The overall type of the Equation, e.g. Long.class, String.class etc.
 	 *  @return the type of this 
 	 */
-	public Class getType() { return type; }
+	public Class<?> getType() { return type; }
 }
