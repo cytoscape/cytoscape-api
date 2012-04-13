@@ -41,7 +41,7 @@ import java.util.Collection;
  */
 public abstract class AbstractNetworkCollectionTask extends AbstractTask {
 	/** The collection of networks that descendants will operate on. */
-	final protected Collection<CyNetwork> networks;
+	protected final Collection<CyNetwork> networks;
 
 	/** Base Constructor for a task that will operate on a collection of networks
 	 *  @param networks  a collection of networks

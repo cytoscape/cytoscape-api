@@ -39,10 +39,10 @@ import org.cytoscape.work.AbstractTask;
  */
 public abstract class AbstractEdgeViewTask extends AbstractTask {
 	/** The edge view that descendant tasks will operate on. */
-	final protected View<CyEdge> edgeView;
+	protected final View<CyEdge> edgeView;
 
 	/** The network view associated with {@link #edgeView}. */
-	final protected CyNetworkView netView; // TODO: should be renamed to networkView
+	protected final CyNetworkView netView; // TODO: should be renamed to networkView
 
 	/** Base constructor for all tasks that need an edge view to operate on.
 	 *  @param edgeView  the edge view to work with for this task

@@ -41,7 +41,7 @@ import java.util.TreeSet;
  * @CyAPI.Abstract.Class
  */
 public abstract class AbstractFunction implements Function {
-	final private ArgDescriptor[] argDescriptors;
+	private final ArgDescriptor[] argDescriptors;
 
 	/** 
 	 * Base class constructor for easy creation of <code>Function</code>s from function argument descriptors.

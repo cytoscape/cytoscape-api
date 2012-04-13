@@ -24,7 +24,7 @@ public abstract class AbstractTask implements Task {
 	 * @param newTasks tasks to insert after the current task in the TaskIterator that is being managed by
 	 * this class.
 	 */
-	final protected void insertTasksAfterCurrentTask(final Task... newTasks) {
+	protected final void insertTasksAfterCurrentTask(final Task... newTasks) {
 		taskIterator.insertTasksAfter(this, newTasks);
 	}
 
@@ -32,7 +32,7 @@ public abstract class AbstractTask implements Task {
 	 * @param newTasks the TaskIterator to insert after the current task in the TaskIterator that is being 
 	 * managed by this class.
 	 */
-	final protected void insertTasksAfterCurrentTask(final TaskIterator newTasks) {
+	protected final void insertTasksAfterCurrentTask(final TaskIterator newTasks) {
 		taskIterator.insertTasksAfter(this, newTasks);
 	}
 

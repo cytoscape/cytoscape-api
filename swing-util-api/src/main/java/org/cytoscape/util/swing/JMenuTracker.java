@@ -46,9 +46,9 @@ import java.util.StringTokenizer;
  * @CyAPI.Final.Class
  */
 public final class JMenuTracker {
-	final private Map<String, MenuGravityTracker> menuMap;
-	final private JMenuBar rootMenuBar;
-	final private PopupMenuGravityTracker rootPopupGravityTracker;
+	private final Map<String, MenuGravityTracker> menuMap;
+	private final JMenuBar rootMenuBar;
+	private final PopupMenuGravityTracker rootPopupGravityTracker;
 	private double largeGravity = Double.MAX_VALUE / 2.0;
 
 	/**

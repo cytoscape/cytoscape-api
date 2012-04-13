@@ -39,7 +39,7 @@ import java.util.Collection;
  */
 public abstract class AbstractNetworkViewCollectionTask extends AbstractTask {
 	/** A collection of network views to operate on for any descendants of this class. */
-	final protected Collection<CyNetworkView> networkViews;
+	protected final Collection<CyNetworkView> networkViews;
 
 	/** Base class for any tasks that need to operate on a collection of network views.
 	 *  @param networkViews  must be a non-null collection of network views

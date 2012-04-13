@@ -20,11 +20,11 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 		KEY_START, LOOKING_FOR_EQUAL_SIGN, VALUE_START, LOOKING_FOR_SEMICOLON;
 	}
 
-	final private Field field;
-	final private Method getter;
-	final private Method setter;
-	final private Object instance;
-	final private Tunable tunable;
+	private final Field field;
+	private final Method getter;
+	private final Method setter;
+	private final Object instance;
+	private final Tunable tunable;
 
 	/** 
 	 * Standard base class constructor for <code>TunableHandler</code>s that deal with

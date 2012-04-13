@@ -38,7 +38,7 @@ import org.cytoscape.work.AbstractTask;
  */
 public abstract class AbstractNetworkViewTask extends AbstractTask {
 	/** The network view that descendants of this class will operate on. */
-	final protected CyNetworkView view; // TODO: should be renamed to networkView
+	protected final CyNetworkView view; // TODO: should be renamed to networkView
 
 	/** A base class for tasks that need to operate on a network view.
 	 *  @param view  must be a non-empty network view for descendants to operate on

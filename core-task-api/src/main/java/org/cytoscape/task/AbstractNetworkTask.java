@@ -41,7 +41,7 @@ public abstract class AbstractNetworkTask extends AbstractTask {
     /**
      * The network that descendants of this class will operate on.
      */
-    final protected CyNetwork network;
+    protected final CyNetwork network;
 
     /**
      * Base class for tasks that need to operate on a {@link CyNetwork}
