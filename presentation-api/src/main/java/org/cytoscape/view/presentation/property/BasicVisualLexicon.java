@@ -264,7 +264,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 		addVisualProperties(rootVisualProperty);
 	}
 	
-	public void addBendFactory(final BendFactory bendFactory, final Map props) {
+	public final void addBendFactory(final BendFactory bendFactory, final Map props) {
 		EDGE_BEND.setBendFactory(bendFactory);
 	}
 
@@ -417,12 +417,12 @@ public class BasicVisualLexicon implements VisualLexicon {
 	}
 
 	@Override
-	public Set<VisualProperty<?>> getAllVisualProperties() {
+	public final Set<VisualProperty<?>> getAllVisualProperties() {
 		return new HashSet<VisualProperty<?>>(visualPropertyMap.keySet());
 	}
 
 	@Override
-	public Collection<VisualProperty<?>> getAllDescendants(final VisualProperty<?> prop) {
+	public final Collection<VisualProperty<?>> getAllDescendants(final VisualProperty<?> prop) {
 		if (prop == null)
 			throw new NullPointerException("Target visual property cannot be null.");
 
@@ -433,7 +433,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 	}
 
 	@Override
-	public VisualProperty<NullDataType> getRootVisualProperty() {
+	public final VisualProperty<NullDataType> getRootVisualProperty() {
 		return this.rootVisualProperty;
 	}
 
@@ -463,7 +463,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 	 * @param parent
 	 *            the parent of the VisualProperty to insert.
 	 */
-	protected void addVisualProperty(final VisualProperty<?> vp, final VisualProperty<?> parent) {
+	protected final void addVisualProperty(final VisualProperty<?> vp, final VisualProperty<?> parent) {
 		if (this.visualPropertyMap.containsKey(vp))
 			throw new IllegalStateException("The key " + vp.getIdString() + " already exists in the lexicon.");
 
@@ -482,12 +482,12 @@ public class BasicVisualLexicon implements VisualLexicon {
 	}
 
 	@Override
-	public VisualLexiconNode getVisualLexiconNode(final VisualProperty<?> vp) {
+	public final VisualLexiconNode getVisualLexiconNode(final VisualProperty<?> vp) {
 		return this.visualPropertyMap.get(vp);
 	}
 
 	@Override
-	public VisualProperty<?> lookup(final Class<?> type, final String id) {
+	public final VisualProperty<?> lookup(final Class<?> type, final String id) {
 		if (id == null || type == null)
 			return null;
 
@@ -499,7 +499,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 	}
 
 	@Override
-	public boolean isSupported(VisualProperty<?> vp) {
+	public final boolean isSupported(VisualProperty<?> vp) {
 		return visualPropertyMap.containsKey(vp);
 	}
 
