@@ -64,7 +64,7 @@ public final class FunctionUtil {
 			try {
 				return Double.parseDouble((String)arg);
 			} catch (final Exception e) {
-				throw new IllegalArgumentException("can't convert \"" + arg + "\" to a floating point number!");
+				throw new IllegalArgumentException("can't convert \"" + arg + "\" to a floating point number!", e);
 			}
 		}
 		if (arg.getClass() == Boolean.class)
@@ -139,9 +139,9 @@ public final class FunctionUtil {
 		if (arg.getClass() == String.class) {
 			final String argAsString = (String)arg;
 
-			if (argAsString.equalsIgnoreCase(Boolean.valueOf(true).toString()))
+			if (argAsString.equalsIgnoreCase(Boolean.TRUE.toString()))
 				return true;
-			if (argAsString.equalsIgnoreCase(Boolean.valueOf(false).toString()))
+			if (argAsString.equalsIgnoreCase(Boolean.FALSE.toString()))
 				return false;
 			throw new IllegalArgumentException("can't convert \"" + argAsString + "\" to a boolean!");
 		}
@@ -218,18 +218,18 @@ public final class FunctionUtil {
 	 *  @return the sample variance of the numbers in x[]
 	 */
 	static public double calcSampleVariance(final double[] x) {
-		final int N = x.length;
-		if (N < 2)
+		final int n = x.length;
+		if (n < 2)
 			throw new IllegalArgumentException("can't calculate a variance with fewer than 2 values!");
 
-		final double[] xSquared = new double[N];
-		for (int i = 0; i < N; ++i)
+		final double[] xSquared = new double[n];
+		for (int i = 0; i < n; ++i)
 			xSquared[i] = x[i] * x[i];
 
 		final double sumOfX = numericallySafeSum(x);
 		final double sumOfXSquared = numericallySafeSum(xSquared);
 
-		return (sumOfXSquared - (sumOfX * sumOfX) / (double)N) / (double)(N - 1);
+		return (sumOfXSquared - (sumOfX * sumOfX) / (double)n) / (double)(n - 1);
 	}
 
 	/** Converts a List<Double> to a regular double[]
@@ -484,17 +484,17 @@ public final class FunctionUtil {
 	 */
 	static private Boolean convertToBoolean(final Object arg) {
 		if (arg.getClass() == Double.class)
-			return (Double)arg == 0.0 ? false : true;
+			return (Double)arg == 0.0 ? Boolean.FALSE : Boolean.TRUE;
 		if (arg.getClass() == Long.class)
-			return (double)(Long)arg == 0L ? false : true;
+			return (Long)arg == 0L ? Boolean.FALSE : Boolean.TRUE;
 		if (arg.getClass() == Integer.class)
-			return (double)(Integer)arg == 0 ? false : true;
+			return (Integer)arg == 0 ? Boolean.FALSE : Boolean.TRUE;
 		if (arg.getClass() == String.class) {
 			final String s = (String)arg;
 			if (s.equalsIgnoreCase("true"))
-				return true;
+				return Boolean.TRUE;
 			if (s.equalsIgnoreCase("false"))
-				return false;
+				return Boolean.FALSE;
 			return null;
 		}
 		if (arg.getClass() == Boolean.class)
@@ -508,7 +508,7 @@ public final class FunctionUtil {
 	 *  @return null if the translation failed, the input object if no translation was necessary or a new object if a successful translation was possible
 	 */
 	static public Object translateObjectType(final Object input) {
-		final Class type = input.getClass();
+		final Class<?> type = input.getClass();
 		if (type == Double.class || type == Long.class || type == Boolean.class || type == String.class)
 			return input;
 

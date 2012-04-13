@@ -1,6 +1,7 @@
 package org.cytoscape.equations;
 
 
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.TreeMap;
@@ -44,7 +45,7 @@ public class EquationTest {
 
 	@Test
 	public void testGetSourceLocations() {
-		assertEquals("getSourceLocations() failed!", sourceLocations, eqn.getSourceLocations());
+		assertArrayEquals("getSourceLocations() failed!", sourceLocations, eqn.getSourceLocations());
 	}
 
 	@Test
