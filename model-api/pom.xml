@@ -16,7 +16,7 @@
 	<groupId>org.cytoscape</groupId>
 	<artifactId>model-api</artifactId>
 
-	<name>${bundle.symbolicName} [${bundle.namespace}]</name>
+	<name>Cytoscape Model API (${project.artifactId})</name>
 
 	<packaging>bundle</packaging>
 

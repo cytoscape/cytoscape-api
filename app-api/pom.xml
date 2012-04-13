@@ -15,7 +15,7 @@
   <modelVersion>4.0.0</modelVersion>
   <artifactId>app-api</artifactId>
 
-  <name>${bundle.symbolicName}</name>
+  <name>Cytoscape App API (${project.artifactId})</name>
 
   <packaging>bundle</packaging>
 

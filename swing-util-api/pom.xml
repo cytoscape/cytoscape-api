@@ -16,7 +16,7 @@
   <groupId>org.cytoscape</groupId>
   <artifactId>swing-util-api</artifactId>
 
-  <name>${bundle.symbolicName}</name>
+  <name>Cytoscape Swing Utility API (${project.artifactId})</name>
 
   <packaging>bundle</packaging>
 

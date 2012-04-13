@@ -17,7 +17,7 @@
 	<groupId>org.cytoscape</groupId>
 	<artifactId>webservice-swing-api</artifactId>
 
-	<name>${bundle.symbolicName} [${bundle.namespace}]</name>
+	<name>Cytoscape Webservice Swing API (${project.artifactId})</name>
 
 	<packaging>bundle</packaging>
 

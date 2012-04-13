@@ -16,7 +16,7 @@
 	<groupId>org.cytoscape</groupId>
 	<artifactId>presentation-api</artifactId>
 
-	<name>${bundle.symbolicName} [${bundle.namespace}]</name>
+	<name>Cytoscape Presentation API (${project.artifactId})</name>
 
 	<packaging>bundle</packaging>
 

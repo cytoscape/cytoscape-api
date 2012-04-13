@@ -16,7 +16,7 @@
 	<groupId>org.cytoscape</groupId>
 	<artifactId>vizmap-api</artifactId>
 
-	<name>${bundle.symbolicName} (VizMap API Bundle)</name>
+	<name>Cytoscape VizMap API (${project.artifactId})</name>
 
 	<packaging>bundle</packaging>
 

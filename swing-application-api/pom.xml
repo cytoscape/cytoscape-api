@@ -13,7 +13,7 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<artifactId>swing-application-api</artifactId>
-	<name>Cytoscape Swing Application API</name>
+	<name>Cytoscape Swing Application API (${project.artifactId})</name>
 	
 	<packaging>bundle</packaging>
 

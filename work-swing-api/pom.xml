@@ -16,7 +16,7 @@
 	<groupId>org.cytoscape</groupId>
 	<artifactId>work-swing-api</artifactId>
 
-	<name>${bundle.symbolicName}</name>
+	<name>Cytoscape Work Swing API (${project.artifactId})</name>
 
 	<packaging>bundle</packaging>
 

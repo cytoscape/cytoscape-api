@@ -16,7 +16,7 @@
 	<groupId>org.cytoscape</groupId>
 	<artifactId>viewmodel-api</artifactId>
 
-	<name>${bundle.symbolicName} (View Model API Bundle)</name>
+	<name>Cytoscape View Model API (${project.artifactId})</name>
 
 	<packaging>bundle</packaging>
 
