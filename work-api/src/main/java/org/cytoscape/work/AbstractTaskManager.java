@@ -48,7 +48,7 @@ public abstract class AbstractTaskManager<T,C> implements TaskManager<T,C> {
 	 * @param tunableRecorder The TunableRecorder service to be added to this task manager.
 	 * @param props The service properties associated with the tunableRecorder service. 
 	 */
-	final public void addTunableRecorder(TunableRecorder tunableRecorder, Map props) {
+	public final void addTunableRecorder(TunableRecorder tunableRecorder, Map props) {
 		if ( tunableRecorder != null )
 			tunableRecorders.add(tunableRecorder);			
 	}
@@ -58,7 +58,7 @@ public abstract class AbstractTaskManager<T,C> implements TaskManager<T,C> {
 	 * @param tunableRecorder The TunableRecorder service to be removed from this task manager.
 	 * @param props The service properties associated with the tunableRecorder service. 
 	 */
-	final public void removeTunableRecorder(TunableRecorder tunableRecorder, Map props) {
+	public final void removeTunableRecorder(TunableRecorder tunableRecorder, Map props) {
 		if ( tunableRecorder != null )
 			tunableRecorders.remove(tunableRecorder);			
 	}

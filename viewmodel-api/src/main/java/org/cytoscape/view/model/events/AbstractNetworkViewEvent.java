@@ -21,7 +21,7 @@ class AbstractNetworkViewEvent extends AbstractCyEvent<CyNetworkViewManager> {
 		this.view = view;
 	}
 
-	final public CyNetworkView getNetworkView() {
+	public final CyNetworkView getNetworkView() {
 		return view;
 	}
 }

@@ -16,7 +16,7 @@ public abstract class AbstractTask implements Task {
 	/** This method is typically used by a {@link TaskIterator} to set itself on the newly added Task.
 	 * @param taskIterator TaskIterator that will set itself on the newly added task.
 	 */
-	final public void setTaskIterator(final TaskIterator taskIterator) {
+	public final void setTaskIterator(final TaskIterator taskIterator) {
 		this.taskIterator = taskIterator;
 	}
 

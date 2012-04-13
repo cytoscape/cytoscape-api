@@ -67,7 +67,7 @@ public interface CyTable extends CyIdentifiable {
 		}
 
 		@Override
-		final public String toString() { return humanReadableRepresentation; }
+		public final String toString() { return humanReadableRepresentation; }
 	}
 	
 	/**

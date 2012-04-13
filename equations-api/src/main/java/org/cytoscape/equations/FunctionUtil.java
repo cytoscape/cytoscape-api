@@ -55,7 +55,7 @@ public final class FunctionUtil {
 	 *  @return the converted argument as a "double"
 	 *  @throws IllegalArgumentException if the argument cannot be converted to a "double"
 	 */
-	static public double getArgAsDouble(final Object arg) throws IllegalArgumentException {
+	public static double getArgAsDouble(final Object arg) throws IllegalArgumentException {
 		if (arg.getClass() == Double.class)
 			return (Double)arg;
 		if (arg.getClass() == Long.class)
@@ -78,7 +78,7 @@ public final class FunctionUtil {
 	 *  @return the converted argument as a "double"
 	 *  @throws IllegalArgumentException if the argument cannot be converted to a "double"
 	 */
-	static public String getArgAsString(final Object arg) throws IllegalArgumentException {
+	public static String getArgAsString(final Object arg) throws IllegalArgumentException {
 		if (arg.getClass() == Boolean.class)
 			return (Boolean)arg ? "TRUE" : "FALSE";
 		if (arg.getClass() == Double.class) {
@@ -104,7 +104,7 @@ public final class FunctionUtil {
 	 *  @return the converted argument as a "long"
 	 *  @throws IllegalArgumentException if the argument cannot be converted to a "long"
 	 */
-	static public long getArgAsLong(final Object arg) throws IllegalArgumentException {
+	public static long getArgAsLong(final Object arg) throws IllegalArgumentException {
 		if (arg.getClass() == Double.class)
 			return EquationUtil.doubleToLong((Double)arg);
 		if (arg.getClass() == Long.class)
@@ -127,7 +127,7 @@ public final class FunctionUtil {
 	 *  @return the converted argument as a "boolean"
 	 *  @throws IllegalArgumentException if the argument cannot be converted to a "boolean"
 	 */
-	static public boolean getArgAsBoolean(final Object arg) throws IllegalArgumentException {
+	public static boolean getArgAsBoolean(final Object arg) throws IllegalArgumentException {
 		if (arg.getClass() == Double.class) {
 			final double d = (Double)arg;
 			return d == 0.0 ? false : true;
@@ -155,7 +155,7 @@ public final class FunctionUtil {
 	 *  @param a  the numbers that will be summed up
 	 *  @return the sum of the elements of "a"
 	 */
-	static public double numericallySafeSum(final double a[]) {
+	public static double numericallySafeSum(final double a[]) {
 		int positiveCount = 0;
 		for (double d : a) {
 			if (d >= 0.0)
@@ -197,7 +197,7 @@ public final class FunctionUtil {
 	 *  @param  i  the integer that will be converted
 	 *  @return the String representation of the ith ordinal
 	 */
-	static public String getOrdinal(final int i) {
+	public static String getOrdinal(final int i) {
 		if ((i % 100) == 11)
 			return Integer.toString(i) + "th";
 
@@ -217,7 +217,7 @@ public final class FunctionUtil {
 	 *  @param x  the numbers whose sample variance will be calculated
 	 *  @return the sample variance of the numbers in x[]
 	 */
-	static public double calcSampleVariance(final double[] x) {
+	public static double calcSampleVariance(final double[] x) {
 		final int n = x.length;
 		if (n < 2)
 			throw new IllegalArgumentException("can't calculate a variance with fewer than 2 values!");
@@ -236,7 +236,7 @@ public final class FunctionUtil {
 	 *  @param  a  the list that will be converted
 	 *  @return the converted array
 	 */
-	static public double[] listToArray(final List<Double> a) {
+	public static double[] listToArray(final List<Double> a) {
 		final double[] x = new double[a.size()];
 		int i = 0;
 		for (double d : a)
@@ -249,7 +249,7 @@ public final class FunctionUtil {
 	 *  @param type  the type that will be tested
 	 *  @return true, if type is Double.class, Long.class, String.class or Boolean.class, else false
 	 */
-	static public boolean isScalarArgType(final Class type) {
+	public static boolean isScalarArgType(final Class type) {
 		return type == Double.class || type == Long.class || type == String.class || type == Boolean.class;
 	}
 
@@ -257,7 +257,7 @@ public final class FunctionUtil {
 	 *  @param listClassCandidate  the type that will be tested
 	 *  @return true if "listClassCandidate" is an implementer of interface List, else false
 	 */
-	static public boolean isTypeOfList(final Class listClassCandidate) {
+	public static boolean isTypeOfList(final Class listClassCandidate) {
 		if (listClassCandidate == List.class)
 			return true;
 		if (listClassCandidate == ArrayList.class)
@@ -293,7 +293,7 @@ public final class FunctionUtil {
 	 *  <code>Boolean.class</code> to "argTypes".
 	 *  @param argTypes  the list that will be augmented
 	 */
-	static public void addScalarArgumentTypes(final List<Class> argTypes) {
+	public static void addScalarArgumentTypes(final List<Class> argTypes) {
 		argTypes.add(Double.class);
 		argTypes.add(Long.class);
 		argTypes.add(String.class);
@@ -307,7 +307,7 @@ public final class FunctionUtil {
 	 *  @throws IllegalArgumentException if any scalar argument cannot be converted to a double or any list
 	 *          argument contains an element that cannot be converted to a number.
 	 */
-	static public double[] getDoubles(final Object[] args) throws FunctionError {
+	public static double[] getDoubles(final Object[] args) throws FunctionError {
 		final List<Double> numbers = new ArrayList<Double>();
 
 		for (int i = 0; i < args.length; ++i) {
@@ -344,7 +344,7 @@ public final class FunctionUtil {
 	 *  @throws IllegalArgumentException if any scalar argument cannot be converted to a long or any list
 	 *          argument contains an element that cannot be converted to a number.
 	 */
-	static public long[] getLongs(final Object[] args) throws FunctionError {
+	public static long[] getLongs(final Object[] args) throws FunctionError {
 		final List<Long> numbers = new ArrayList<Long>();
 
 		for (int i = 0; i < args.length; ++i) {
@@ -378,7 +378,7 @@ public final class FunctionUtil {
 	 *  @param args  the objects that will be converted to Strings
 	 *  @return the converted array
 	 */
-	static public String[] getStrings(final Object[] args) {
+	public static String[] getStrings(final Object[] args) {
 		final List<String> strings = new ArrayList<String>();
 
 		for (final Object arg : args) {
@@ -401,7 +401,7 @@ public final class FunctionUtil {
 	 *  @throws IllegalArgumentException if any scalar argument cannot be converted to a boolean or any list
 	 *          argument contains an element that cannot be converted to a number.
 	 */
-	static public boolean[] getBooleans(final Object[] args) throws FunctionError {
+	public static boolean[] getBooleans(final Object[] args) throws FunctionError {
 		final List<Boolean> booleans = new ArrayList<Boolean>();
 
 		for (int i = 0; i < args.length; ++i) {
@@ -507,7 +507,7 @@ public final class FunctionUtil {
 	 *  @param input  the object that will be mapped to one of the scalar types that are internally supported by equations
 	 *  @return null if the translation failed, the input object if no translation was necessary or a new object if a successful translation was possible
 	 */
-	static public Object translateObjectType(final Object input) {
+	public static Object translateObjectType(final Object input) {
 		final Class<?> type = input.getClass();
 		if (type == Double.class || type == Long.class || type == Boolean.class || type == String.class)
 			return input;

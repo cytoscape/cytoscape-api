@@ -19,7 +19,7 @@ public final class SetCurrentNetworkViewEvent extends AbstractCyEvent<CyApplicat
 	 * Returns the network view associated with this event. The view returned may be null!
 	 * @return the network view associated with this event.
 	 */
-	final public CyNetworkView getNetworkView() {
+	public final CyNetworkView getNetworkView() {
 		return view;
 	}
 

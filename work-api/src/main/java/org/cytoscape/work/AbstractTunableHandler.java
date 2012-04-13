@@ -66,14 +66,14 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	/** 
 	 * {@inheritDoc}
 	 */
-	final public Class<?> getType() {
+	public final Class<?> getType() {
 		return field != null ? field.getType() : getter.getReturnType();
 	}
 
 	/** 
 	 * {@inheritDoc}
 	 */
-	final public Object getValue() throws IllegalAccessException, InvocationTargetException {
+	public final Object getValue() throws IllegalAccessException, InvocationTargetException {
 		return field != null ? field.get(instance) : getter.invoke(instance);
 	}
 
@@ -92,49 +92,49 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	/**
 	 * {@inheritDoc}
 	 */
-	final public String getDescription() {
+	public final String getDescription() {
 		return tunable.description();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	final public String[] getGroups() {
+	public final String[] getGroups() {
 		return tunable.groups();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	final public boolean controlsMutuallyExclusiveNestedChildren() {
+	public final boolean controlsMutuallyExclusiveNestedChildren() {
 		return tunable.xorChildren();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	final public String getChildKey() {
+	public final String getChildKey() {
 		return tunable.xorKey();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	final public String dependsOn() {
+	public final String dependsOn() {
 		return tunable.dependsOn();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	final public String[] listenForChange() {
+	public final String[] listenForChange() {
 		return tunable.listenForChange();
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	final public String getName() {
+	public final String getName() {
 		if (field != null)
 			return field.getName();
 		else
@@ -144,7 +144,7 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	/**
 	 * {@inheritDoc}
 	 */
-	final public String getQualifiedName() {
+	public final String getQualifiedName() {
 		final String unqualifiedClassName =
 			field == null ? getter.getDeclaringClass().toString() : field.getDeclaringClass().toString();
 		
@@ -154,7 +154,7 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	/**
 	 * {@inheritDoc}
 	 */
-	final public Properties getParams() throws IllegalArgumentException {
+	public final Properties getParams() throws IllegalArgumentException {
 		final String rawString = tunable.params();
 		final Properties keyValuesPairs = new Properties();
 
