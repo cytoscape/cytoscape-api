@@ -1,4 +1,4 @@
-package org.cytoscape.view.presentation.property;
+package org.cytoscape.view.presentation.property.values;
 
 /**
  * Object used as a Visual Property value.

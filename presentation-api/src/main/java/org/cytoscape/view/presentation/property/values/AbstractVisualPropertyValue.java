@@ -1,4 +1,5 @@
-package org.cytoscape.view.presentation.property;
+package org.cytoscape.view.presentation.property.values;
+
 
 /**
  * Base class for all {@link VisualPropertyValue}.

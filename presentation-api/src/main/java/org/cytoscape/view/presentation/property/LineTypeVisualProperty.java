@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.DiscreteRange;
+import org.cytoscape.view.presentation.property.values.AbstractVisualPropertyValue;
 import org.cytoscape.view.presentation.property.values.LineType;
 
 /**
