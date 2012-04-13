@@ -10,6 +10,11 @@ import org.cytoscape.view.model.VisualProperty;
  * @CyAPI.Static.Class
  */
 public final class VisualPropertyUtil {
+	
+	/**
+	 * So no one else can contruct this!
+	 */
+	private VisualPropertyUtil() {}
 
 	/**
 	 * Check whether the given {@linkplain VisualProperty} is a child of parent vp or not.
@@ -30,7 +35,7 @@ public final class VisualPropertyUtil {
 		if(lexicon == null)
 			throw new NullPointerException("Lexicon is null.");
 		
-		if(lexicon.getAllVisualProperties().contains(vp) == false)
+		if(!lexicon.getAllVisualProperties().contains(vp))
 			throw new IllegalArgumentException("No such Visual Porperty in the lexicon: " + vp.getDisplayName());
 		
 		
@@ -40,7 +45,7 @@ public final class VisualPropertyUtil {
 		if(node.getParent() == null)
 			return false;
 
-		if (vp == parent || node.getParent().getVisualProperty() == parent)
+		if (vp.equals(parent) || node.getParent().getVisualProperty().equals(parent))
 			return true;
 
 		
