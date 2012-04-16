@@ -41,11 +41,11 @@ import javax.swing.event.PopupMenuEvent;
 
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.view.model.CyNetworkViewManager;
-import org.cytoscape.work.ServiceProperties;
 import org.cytoscape.work.TaskFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import static org.cytoscape.work.ServiceProperties.*;
 
 /**
  * An abstract implementation of the CyAction interface. Instead of using this
@@ -135,9 +135,10 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * @param applicationManager The application manager providing context for this action.
 	 * @param enableFor A string declaring which states this action should be enabled for. 
 	 */
-	public AbstractCyAction(final String name, final CyApplicationManager applicationManager, final String enableFor, final CyNetworkViewManager networkViewManager) {
+	public AbstractCyAction(final String name, final CyApplicationManager applicationManager, final String enableFor,
+			final CyNetworkViewManager networkViewManager) {
 		super(name);
-		this.enabler = new StringEnableSupport(this,enableFor,applicationManager, networkViewManager);
+		this.enabler = new StringEnableSupport(this, enableFor, applicationManager, networkViewManager);
 	}
 
 	/**
@@ -163,11 +164,11 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * @param applicationManager
 	 *            The application manager providing context for this action.
 	 */
-	public AbstractCyAction(final Map<String, String> configProps,
-	                        final CyApplicationManager applicationManager, final CyNetworkViewManager networkViewManager) {
-		this(configProps.get(ServiceProperties.TITLE), applicationManager, configProps.get(ServiceProperties.ENABLE_FOR), networkViewManager);
-		
-		configFromProps( configProps );
+	public AbstractCyAction(final Map<String, String> configProps, final CyApplicationManager applicationManager,
+			final CyNetworkViewManager networkViewManager) {
+		this(configProps.get(TITLE), applicationManager, configProps.get(ENABLE_FOR), networkViewManager);
+
+		configFromProps(configProps);
 	}
 
 	/**
@@ -194,12 +195,11 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *            The task factory predicate that indicates whether or not this 
 	 *            action should be enabled.
 	 */
-	public AbstractCyAction(final Map<String, String> configProps,
-	                        final TaskFactory predicate) {
-		super(configProps.get("title"));
-		this.enabler = new TaskFactoryEnableSupport(this,predicate);
+	public AbstractCyAction(final Map<String, String> configProps, final TaskFactory predicate) {
+		super(configProps.get(TITLE));
 		
-		configFromProps( configProps );
+		this.enabler = new TaskFactoryEnableSupport(this, predicate);
+		configFromProps(configProps);
 	}
 
 	/**
@@ -231,52 +231,52 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *            TaskFactory is not used by the AbstractCyAction in any other way.  Any execution of tasks
 	 *            from this TaskFactory must be handled by a subclass.
 	 */
-	public AbstractCyAction(final Map<String, String> configProps,
-	                        final CyApplicationManager applicationManager, final CyNetworkViewManager networkViewManager,
-	                        final TaskFactory factory) {
-		super(configProps.get(ServiceProperties.TITLE));
-		String enableFor = configProps.get(ServiceProperties.ENABLE_FOR);
-		if ( enableFor == null )
-			this.enabler = new TaskFactoryEnableSupport(this,factory);
-		else
-			this.enabler = new StringEnableSupport(this,enableFor,applicationManager, networkViewManager);
+	public AbstractCyAction(final Map<String, String> configProps, final CyApplicationManager applicationManager,
+			final CyNetworkViewManager networkViewManager, final TaskFactory factory) {
+		super(configProps.get(TITLE));
 		
-		configFromProps( configProps );
+		final String enableFor = configProps.get(ENABLE_FOR);
+		if (enableFor == null)
+			this.enabler = new TaskFactoryEnableSupport(this, factory);
+		else
+			this.enabler = new StringEnableSupport(this, enableFor, applicationManager, networkViewManager);
+
+		configFromProps(configProps);
 	}
 
 	private void configFromProps(final Map<String, String> configProps) {
 
-		logger.debug("New CyAction with title: " + configProps.get(ServiceProperties.TITLE));
+		logger.debug("New CyAction with title: " + configProps.get(TITLE));
 
-		final String prefMenu = configProps.get("preferredMenu");
+		final String prefMenu = configProps.get(PREFERRED_MENU);
 
 		if (prefMenu != null)
 			setPreferredMenu(prefMenu);
 
-		final URL largeIconURL = getURL( configProps.get("largeIconURL") );
+		final URL largeIconURL = getURL( configProps.get(LARGE_ICON_URL) );
 		if ( largeIconURL != null ) 
 			putValue(LARGE_ICON_KEY, new ImageIcon(largeIconURL));
 
-		final URL smallIconURL = getURL( configProps.get("smallIconURL") );
+		final URL smallIconURL = getURL( configProps.get(SMALL_ICON_URL) );
 		if ( smallIconURL != null ) 
 			putValue(SMALL_ICON, new ImageIcon(smallIconURL));
 
-		final String tooltip = configProps.get("tooltip");
+		final String tooltip = configProps.get(TOOLTIP);
 
 		if (tooltip != null)
 			putValue(SHORT_DESCRIPTION, tooltip);
 
-		final String foundInToolBar = configProps.get("inToolBar");
+		final String foundInToolBar = configProps.get(IN_TOOL_BAR);
 
 		if (foundInToolBar != null && Boolean.parseBoolean(foundInToolBar))
 			inToolBar = true;
 
-		final String foundInMenuBar = configProps.get("inMenuBar");
+		final String foundInMenuBar = configProps.get(IN_MENU_BAR);
 
 		if (foundInMenuBar != null  && Boolean.parseBoolean(foundInMenuBar))
 			inMenuBar = true;
 
-		final String keyComboString = configProps.get("accelerator");
+		final String keyComboString = configProps.get(ACCELERATOR);
 
 		if (keyComboString != null) {
 			final KeyStroke command = AcceleratorParser.parse(keyComboString);
@@ -285,7 +285,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 				setAcceleratorKeyStroke(command);
 		}
 
-		final String menuGravityString = configProps.get("menuGravity");
+		final String menuGravityString = configProps.get(MENU_GRAVITY);
 
 		if (menuGravityString != null) {
 			try {
@@ -295,7 +295,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 			}
 		}
 
-		final String toolbarGravityString = configProps.get("toolBarGravity");
+		final String toolbarGravityString = configProps.get(TOOL_BAR_GRAVITY);
 
 		if (toolbarGravityString != null) {
 			try {
@@ -304,7 +304,6 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 				logger.warn("failed to set toolBarGravity with: " + toolbarGravityString, nfe);
 			}
 		}
-
 		setEnabled(true);
 	}
 
@@ -313,13 +312,14 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *
 	 * @param name The name of the action.
 	 */
-	public void setName(String name) {
+	public void setName(final String name) {
 		this.name = name;
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public String getName() {
 		return name;
 	}
@@ -330,6 +330,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *
 	 * @return true if this CyAction should be included in menu bar.
 	 */
+	@Override
 	public boolean isInMenuBar() {
 		return inMenuBar;
 	}
@@ -339,6 +340,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *
 	 * @return true if this Action should be included in the toolbar.
 	 */
+	@Override
 	public boolean isInToolBar() {
 		return inToolBar;
 	}
@@ -355,6 +357,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public float getMenuGravity() {
 		return menuGravity;
 	}
@@ -371,6 +374,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public float getToolbarGravity() {
 		return toolbarGravity;
 	}
@@ -389,6 +393,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public KeyStroke getAcceleratorKeyStroke() {
 		return acceleratorKeyStroke;
 	}
@@ -396,6 +401,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public String getPreferredMenu() {
 		return preferredMenu;
 	}
@@ -413,6 +419,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public boolean useCheckBoxMenuItem() {
 		return useCheckBoxMenuItem;
 	}
@@ -422,6 +429,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *
 	 * @param e The triggering event.
 	 */
+	@Override
 	public void menuCanceled(MenuEvent e) {
 		enabler.updateEnableState();
 	}
@@ -431,6 +439,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *
 	 * @param e The triggering event.
 	 */
+	@Override
 	public void menuDeselected(MenuEvent e) {
 		enabler.updateEnableState();
 	}
@@ -445,6 +454,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *
 	 * @param e The triggering event.
 	 */
+	@Override
 	public void menuSelected(MenuEvent e) {
 		enabler.updateEnableState();
 	}
@@ -459,6 +469,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *
 	 * @param e The triggering event.
 	 */
+	@Override
 	public void popupMenuWillBecomeVisible(PopupMenuEvent e) {
 		enabler.updateEnableState();
 	}
@@ -468,6 +479,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *
 	 * @param e The triggering event.
 	 */
+	@Override
 	public void popupMenuWillBecomeInvisible(PopupMenuEvent e) {
 	}
 
@@ -476,6 +488,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *
 	 * @param e The triggering event.
 	 */
+	@Override
 	public void popupMenuCanceled(PopupMenuEvent e) {
 	}
 
@@ -484,19 +497,21 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * on the enableFor state of the action and the state of the
 	 * system.
 	 */
+	@Override
 	public void updateEnableState() {
 		enabler.updateEnableState();
 	}
 
-	private URL getURL(String s) {
+	
+	private URL getURL(final String s) {
 		if ( s == null )
 			return null;
+		
 		try {
-			URL u = new URL(s);
-			return u;
+			return new URL(s);
 		} catch (MalformedURLException e) {
 			logger.warn("Incorrectly formatted URL string: '" + s +"'",e);
+			return null;
 		}
-		return null;
 	}
 }
