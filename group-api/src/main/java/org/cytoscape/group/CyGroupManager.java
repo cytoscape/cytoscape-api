@@ -52,7 +52,7 @@ public interface CyGroupManager {
 	 *                the network is null, then return only those 
 	 *                groups that have been designated as 
 	 *                "global" (no referenced network)
-	 *                for this {@link CyRootNetwork}
+	 *                for this {@link org.cytoscape.model.subnetwork.CyRootNetwork}
 	 * @return the complete set of all the currently known groups 
 	 *         in a Cytoscape network
 	 */
@@ -110,9 +110,9 @@ public interface CyGroupManager {
 	/**
 	 * Registers a group with the group manager.  Does nothing 
 	 * if the group is already known to the group manager.
+	 * Fires GroupAddedEvent.
 	 * 
 	 * @param group  a non-null {@link CyGroup}
-	 * @fires GroupAddedEvent
 	 */
 	public void addGroup(final CyGroup group);
 

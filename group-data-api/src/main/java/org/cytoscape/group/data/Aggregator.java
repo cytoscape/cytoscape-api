@@ -3,7 +3,12 @@ package org.cytoscape.group.data;
 import org.cytoscape.group.CyGroup;
 import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyTable;
-  
+
+/**
+ * The Aggregator interface acts as a service interface for
+ * different methods of aggregating attribute data for the
+ * nodes in a {@link CyGroup}.
+ */
 public interface Aggregator<T> {
 	/**
  	 * Return the Class this aggregator supports

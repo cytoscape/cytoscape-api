@@ -15,9 +15,24 @@ import org.cytoscape.model.CyIdentifiable;
  * @CyAPI.Final.Class
  */
 public final class GroupChangedEvent extends AbstractCyEvent<CyGroup> {
+	/**
+	 * An enum describing the type of change that happened to the group.
+	 */ 
 	public enum ChangeType {
-		NODE_ADDED, INTERNAL_EDGE_ADDED, EXTERNAL_EDGE_ADDED,
-		NODES_ADDED, NODES_REMOVED, EDGES_ADDED, EDGES_REMOVED }
+		/** A single node was added. */
+		NODE_ADDED, 
+		/** A single internal edge was added. */
+		INTERNAL_EDGE_ADDED, 
+		/** A single external edge was added. */
+		EXTERNAL_EDGE_ADDED,
+		/** Mulitple nodes were added. */
+		NODES_ADDED, 
+		/** One or more nodes were removed. */
+		NODES_REMOVED, 
+		/** Multiple edges were added. */
+		EDGES_ADDED, 
+		/** One or more edges were removed. */
+		EDGES_REMOVED }
 
 	private CyIdentifiable whatChanged;
 	private List<CyNode> nodeList;
@@ -26,7 +41,7 @@ public final class GroupChangedEvent extends AbstractCyEvent<CyGroup> {
 	/**
 	 * Constructs event.
 	 * @param source the {@link CyGroup} that has been changed.
-	 * @param whatChanged the {@link CyNode} or {@link CyEdge} or list of {@link CyNodes} that were added or removed.
+	 * @param whatChanged the {@link CyNode} or {@link CyEdge} or list of {@link CyNode}s that were added or removed.
 	 */
 	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public GroupChangedEvent(final CyGroup source, final Object whatChanged, ChangeType change) {

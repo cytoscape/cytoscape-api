@@ -18,16 +18,16 @@ public interface CyGroupAggregationManager {
  	 * provide a specific aggregation algorithm for a specific CyColumn
  	 * type.
  	 *
- 	 * @param aggregator the {@Link Aggregator} 
+ 	 * @param aggregator the {@link Aggregator} 
  	 */
-	public void addAggregator(Aggregator aggregator);
+	void addAggregator(Aggregator aggregator);
 
 	/**
  	 * Remove an aggregator from the available aggregators.
  	 *
- 	 * @param aggregator the {@Link Aggregator} to remove
+ 	 * @param aggregator the {@link Aggregator} to remove
  	 */
-	public void removeAggregator(Aggregator aggregator);
+	void removeAggregator(Aggregator aggregator);
 
 	/**
  	 * Get the list of aggregators for a particular Class.
@@ -35,19 +35,19 @@ public interface CyGroupAggregationManager {
  	 * @param type the {@link Class} to get aggregators for
  	 * @return the list of aggregators
  	 */
-	public List<Aggregator> getAggregators(Class type);
+	List<Aggregator> getAggregators(Class type);
 
 	/**
  	 * Get the list of aggregators. 
  	 *
  	 * @return the list of aggregators
  	 */
-	public List<Aggregator> getAggregators();
+	List<Aggregator> getAggregators();
 
 	/**
  	 * Get the list of classes for which have aggregators.
  	 *
  	 * @return the list of classes we're aggregating
  	 */
-	public List<Class> getSupportedClasses();
+	List<Class> getSupportedClasses();
 } 

@@ -40,22 +40,40 @@ package org.cytoscape.group.data;
  * AttributeHandlingType arrays defined below.
  */
 public enum AttributeHandlingType {
+	/** No aggregation. */
 	NONE("None"),
+	/** Aggregated as comma-separated values. */
 	CSV("Comma-separated Values"),
+	/** Aggregated as tab-separated values. */
 	TSV("Tab-separated Values"),
+	/** Aggregated as most common value. */
 	MCV("Most Common Value"),
+	/** Aggregated as the sum of all values. */
 	SUM("Sum"),
+	/** Aggregated as the average of all values. */
 	AVG("Average"),
+	/** Aggregated as the minimum value. */
 	MIN("Minimum value"),
+	/** Aggregated as the maximum value. */
 	MAX("Maximum value"),
+	/** Aggregated as the median value. */
 	MEDIAN("Median value"),
+	/** Aggregated as a concatenation of all values. */
 	CONCAT("Concatenate"),
+	/** Aggregated as unique values. */
 	UNIQUE("Unique Values"),
+	/** Aggregated as a logical AND of all values. */
 	AND("Logical AND"),
+	/** Aggregated as a logical OR of all values. */
 	OR("Logical OR"),
+	/** Default, no aggregation. */
 	DEFAULT("(no override)");
 
 	private String name;
 	private AttributeHandlingType(String s) { name = s; }
+	/**
+	 * Returns a human readable name for this enum value. 
+	 * @return a human readable name for this enum value. 
+	 */
 	public String toString() { return name; }
 }
