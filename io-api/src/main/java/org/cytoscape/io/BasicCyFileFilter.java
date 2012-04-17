@@ -4,12 +4,11 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.MalformedURLException;
 import java.net.URI;
 import java.net.URLConnection;
-import java.util.Set;
 import java.util.HashSet;
-import javax.swing.filechooser.FileFilter;
+import java.util.Set;
+
 import org.cytoscape.io.util.StreamUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -39,8 +38,7 @@ public class BasicCyFileFilter implements CyFileFilter {
 	 * @param category The type of data this filter is meant to support.
 	 * @param streamUtil An instance of the StreamUtil service.
 	 */
-	public BasicCyFileFilter(final Set<String> extensions,
-			final Set<String> contentTypes, final String description,
+	public BasicCyFileFilter(final Set<String> extensions, final Set<String> contentTypes, final String description,
 			final DataCategory category, StreamUtil streamUtil) {
 
 		this.extensions = extensions;
@@ -98,42 +96,13 @@ public class BasicCyFileFilter implements CyFileFilter {
 	}
 
 	private boolean extensionsMatch(URI uri){
-		String extension = getExtension(uri.toString());
-		//logger.info("******URI extension is" + extension + "the task extension is" + this.extensions);
-
+		final String extension = getExtension(uri.toString());
 		if (extension != null && extensions.contains(extension))
 			return true;
 		else
 			return false;
 	}
-	
-	
-	/*
-	 * The content types are not checked anymore since some of
-	 * readers have similar content types. Hence, the correct reader
-	 * wasn't picked up.
-	 */
-	private boolean contentTypesMatch(URI uri){
-		try {
-			final URLConnection connection = streamUtil.getURLConnection(uri.toURL());
-			final String contentType = connection.getContentType();
-			//logger.info("******URI content type is" + contentType + "the task content type is" + this.contentTypes);
 
-			// Check for matching content type
-			if ((contentType != null) && contentTypes.contains(contentType)) {
-				logger.info("content type matches: " + contentType);
-				return true;
-			}else
-				return false;
-
-
-		} catch (IOException ioe) {
-			logger.warn("Caught an exception trying to check content type",ioe);
-			return false;
-		}
-
-	}
-	
 	/**
 	 * This method always returns false in this particular implementation.  You must extend
 	 * this class and override this method to get alternative behavior. Ideally this method
@@ -178,6 +147,7 @@ public class BasicCyFileFilter implements CyFileFilter {
 	 * Returns a human readable description of this class.
 	 * @return a human readable description of this class.
 	 */
+	@Override
 	public String toString() {
 		String s = description + " [category: " + category + "]  [extensions: ";
 		for ( String ext : extensions )
