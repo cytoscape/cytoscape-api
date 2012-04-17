@@ -6,13 +6,13 @@ import static org.junit.Assert.assertNotNull;
 
 import java.net.URI;
 
-import org.cytoscape.io.webservice.client.AbstractWebServiceClient;
+import org.cytoscape.io.webservice.WebServiceClient;
 import org.cytoscape.work.TaskIterator;
 import org.junit.Test;
 
 public abstract class AbstractWebServiceClientTest {
 
-	protected AbstractWebServiceClient client;
+	protected WebServiceClient client;
 	protected URI locationUri;
 	protected String displayName;
 	protected String description;
