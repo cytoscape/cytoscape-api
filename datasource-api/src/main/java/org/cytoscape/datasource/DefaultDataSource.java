@@ -10,7 +10,7 @@ import org.cytoscape.io.DataCategory;
  * In general, most of the data sources can be encoded with this default implementation. 
  *
  */
-public class DefaultDataSource implements DataSource {
+public final class DefaultDataSource implements DataSource {
 	
 	private final String name;
 	private final String provider;

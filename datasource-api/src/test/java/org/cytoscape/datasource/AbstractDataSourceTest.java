@@ -1,17 +1,54 @@
 package org.cytoscape.datasource;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
+import java.net.URL;
+
+import org.cytoscape.io.DataCategory;
 import org.junit.Test;
 
 public abstract class AbstractDataSourceTest {
 
-	private final DataSource source;
-	
-	AbstractDataSourceTest(final DataSource source) {
-		this.source = source;
-	}
+	protected DataSource source;
+	protected String provider;
+	protected String name;
+	protected String description;
+	protected DataCategory category;
+	protected URL location;
+
 	
 	@Test
 	public void testDataSource() {
-		source.getDataCategory();
+		assertNotNull(source);
+	}
+
+	@Test
+	public void testGetProvider() {
+		final String provider = source.getProvider();
+		assertEquals(this.provider, provider);
+	}
+
+	@Test
+	public void testGetName() {
+		final String name = source.getName();
+		assertEquals(this.name, name);
+	}
+
+	@Test
+	public void testGetDescription() {
+		assertEquals(this.description, source.getDescription());
+	}
+
+	@Test
+	public void testGetDataCategory() {
+		final DataCategory category = source.getDataCategory();
+		assertEquals(this.category, category);
+	}
+
+	@Test
+	public void testGetLocation() {
+		final URL location = source.getLocation();
+		assertEquals(this.location, location);
 	}
 }
