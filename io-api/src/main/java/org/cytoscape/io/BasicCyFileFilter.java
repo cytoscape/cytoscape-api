@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.URI;
-import java.net.URLConnection;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,10 +13,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- * This is meant to be an basic implementation of {@link CyFileFilter} that can either be
- * used directly or extended to provide different acceptance criteria. Only the 
- * accepts() methods may be overridden.
- * @CyAPI.Abstract.Class 
+ * This is meant to be an basic implementation of {@link CyFileFilter} that can
+ * either be used directly or extended to provide different acceptance criteria.
+ * Only the accepts() methods may be overridden.
+ * 
+ * @CyAPI.Abstract.Class
  */
 public class BasicCyFileFilter implements CyFileFilter {
 
@@ -30,13 +30,20 @@ public class BasicCyFileFilter implements CyFileFilter {
 	private static final Logger logger = LoggerFactory.getLogger(BasicCyFileFilter.class);
 
 	/**
-	 * Creates a file filter from the specified arguments. 
-	 * Note that a "." before the extension is not needed and will be ignored.
-	 * @param extensions The set of valid extensions for this filter.
-	 * @param contentTypes The set of valid MIME content types that this filter should recognize. 
-	 * @param description A human readable description of the filter.
-	 * @param category The type of data this filter is meant to support.
-	 * @param streamUtil An instance of the StreamUtil service.
+	 * Creates a file filter from the specified arguments. Note that a "."
+	 * before the extension is not needed and will be ignored.
+	 * 
+	 * @param extensions
+	 *            The set of valid extensions for this filter.
+	 * @param contentTypes
+	 *            The set of valid MIME content types that this filter should
+	 *            recognize.
+	 * @param description
+	 *            A human readable description of the filter.
+	 * @param category
+	 *            The type of data this filter is meant to support.
+	 * @param streamUtil
+	 *            An instance of the StreamUtil service.
 	 */
 	public BasicCyFileFilter(final Set<String> extensions, final Set<String> contentTypes, final String description,
 			final DataCategory category, StreamUtil streamUtil) {
@@ -49,6 +56,7 @@ public class BasicCyFileFilter implements CyFileFilter {
 
 		for (String ex : extensions)
 			d += "*." + ex + ", ";
+
 		d = d.substring(0, d.length() - 2);
 		d += ")";
 
@@ -58,23 +66,29 @@ public class BasicCyFileFilter implements CyFileFilter {
 	}
 
 	/**
-	 * Creates a file filter from the specified arguments. 
-	 * Note that a "." before the extension is not needed and will be ignored.
-	 * @param extensions The set of valid extensions for this filter.
-	 * @param contentTypes The set of valid MIME content types that this filter should recognize. 
-	 * @param description A human readable description of the filter.
-	 * @param category The type of data this filter is meant to support.
-	 * @param streamUtil An instance of the StreamUtil service.
+	 * Creates a file filter from the specified arguments. Note that a "."
+	 * before the extension is not needed and will be ignored.
+	 * 
+	 * @param extensions
+	 *            The set of valid extensions for this filter.
+	 * @param contentTypes
+	 *            The set of valid MIME content types that this filter should
+	 *            recognize.
+	 * @param description
+	 *            A human readable description of the filter.
+	 * @param category
+	 *            The type of data this filter is meant to support.
+	 * @param streamUtil
+	 *            An instance of the StreamUtil service.
 	 */
-	public BasicCyFileFilter(final String[] extensions,
-			final String[] contentTypes, final String description,
+	public BasicCyFileFilter(final String[] extensions, final String[] contentTypes, final String description,
 			final DataCategory category, StreamUtil streamUtil) {
 		this(createSet(extensions), createSet(contentTypes), description, category, streamUtil);
 	}
 
 	private static Set<String> createSet(String[] values) {
 		Set<String> set = new HashSet<String>();
-		for ( String v : values )
+		for (String v : values)
 			set.add(v);
 		return set;
 	}
@@ -85,17 +99,17 @@ public class BasicCyFileFilter implements CyFileFilter {
 	public boolean accepts(URI uri, DataCategory category) {
 
 		// Check data category
-		if (category != this.category) 
+		if (category != this.category)
 			return false;
 
 		if (extensionsMatch(uri))
 			return true;
 		else
 			return false;
-		
+
 	}
 
-	private boolean extensionsMatch(URI uri){
+	private boolean extensionsMatch(URI uri) {
 		final String extension = getExtension(uri.toString());
 		if (extension != null && extensions.contains(extension))
 			return true;
@@ -104,12 +118,16 @@ public class BasicCyFileFilter implements CyFileFilter {
 	}
 
 	/**
-	 * This method always returns false in this particular implementation.  You must extend
-	 * this class and override this method to get alternative behavior. Ideally this method
-	 * would return true if this class is capable of processing the specified InputStream.
-	 * @param stream The stream that references the file we'd like to read.
-	 * @param category The type of input that we're considering. 
-	 * @return Always returns false in this particular implementation. 
+	 * This method always returns false in this particular implementation. You
+	 * must extend this class and override this method to get alternative
+	 * behavior. Ideally this method would return true if this class is capable
+	 * of processing the specified InputStream.
+	 * 
+	 * @param stream
+	 *            The stream that references the file we'd like to read.
+	 * @param category
+	 *            The type of input that we're considering.
+	 * @return Always returns false in this particular implementation.
 	 */
 	public boolean accepts(InputStream stream, DataCategory category) {
 		return false;
@@ -145,15 +163,16 @@ public class BasicCyFileFilter implements CyFileFilter {
 
 	/**
 	 * Returns a human readable description of this class.
+	 * 
 	 * @return a human readable description of this class.
 	 */
 	@Override
 	public String toString() {
 		String s = description + " [category: " + category + "]  [extensions: ";
-		for ( String ext : extensions )
+		for (String ext : extensions)
 			s += ext + ",";
 		s += "]   [contentTypes: ";
-		for ( String c : contentTypes )
+		for (String c : contentTypes)
 			s += c + ",";
 		s += "]";
 
@@ -161,10 +180,12 @@ public class BasicCyFileFilter implements CyFileFilter {
 	}
 
 	/**
-	 * Returns a string of the characters following the last '.' in the
-	 * input string, which is to say the file extension assuming that the
-	 * input string represents a file name. Will return null if no '.' is found.
-	 * @param filename the file name as a string.
+	 * Returns a string of the characters following the last '.' in the input
+	 * string, which is to say the file extension assuming that the input string
+	 * represents a file name. Will return null if no '.' is found.
+	 * 
+	 * @param filename
+	 *            the file name as a string.
 	 * @return a string representing the file extension of the input string.
 	 */
 	protected final String getExtension(String filename) {
@@ -181,15 +202,18 @@ public class BasicCyFileFilter implements CyFileFilter {
 
 	/**
 	 * Returns a string containing the specified number of lines from the
-	 * beginning of the file.  This is useful for testing input streams. 
-	 * @param stream the input stream from which to read the header.
-	 * @param numLines the number of lines from the beginning of the file.
+	 * beginning of the file. This is useful for testing input streams.
+	 * 
+	 * @param stream
+	 *            the input stream from which to read the header.
+	 * @param numLines
+	 *            the number of lines from the beginning of the file.
 	 * @return a string containing the specified number of lines from the
-	 * beginning of the file.
+	 *         beginning of the file.
 	 */
 	protected final String getHeader(InputStream stream, int numLines) {
-		
-		String header; 
+
+		String header;
 		BufferedReader br = new BufferedReader(new InputStreamReader(stream));
 
 		try {
@@ -199,7 +223,10 @@ public class BasicCyFileFilter implements CyFileFilter {
 			header = "";
 		} finally {
 			if (br != null)
-				try { br.close(); } catch (IOException e) {}
+				try {
+					br.close();
+				} catch (IOException e) {
+				}
 
 			br = null;
 		}
@@ -207,8 +234,7 @@ public class BasicCyFileFilter implements CyFileFilter {
 		return header;
 	}
 
-	private final String parseHeader(BufferedReader bufferedReader, int numLines)
-			throws IOException {
+	private final String parseHeader(BufferedReader bufferedReader, int numLines) throws IOException {
 		StringBuilder header = new StringBuilder();
 
 		try {
