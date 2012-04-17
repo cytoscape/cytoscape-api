@@ -1,35 +1,23 @@
 package org.cytoscape.webservice;
 
-import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
 import java.net.URI;
 
-import org.cytoscape.io.webservice.WebServiceClient;
+import org.cytoscape.io.webservice.client.AbstractWebServiceClient;
 import org.cytoscape.work.TaskIterator;
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 public abstract class AbstractWebServiceClientTest {
 
-	protected WebServiceClient client;
+	protected AbstractWebServiceClient client;
 	protected URI locationUri;
 	protected String displayName;
 	protected String description;
 	
 	protected Object queryObject;
-	
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
-
-	
 	
 	@Test
 	public void testGetServiceLocation() {
