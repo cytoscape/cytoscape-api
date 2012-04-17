@@ -31,7 +31,7 @@
  You should have received a copy of the GNU Lesser General Public License
  along with this library; if not, write to the Free Software Foundation,
  Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
-*/
+ */
 package org.cytoscape.io.webservice.client;
 
 import java.net.URI;
@@ -39,58 +39,57 @@ import java.net.URISyntaxException;
 
 import org.cytoscape.io.webservice.WebServiceClient;
 
-
-
 /**
- * Abstract class for all web service clients.
- * All clients MUST extend this class.
+ * Abstract class for all web service clients. All clients MUST extend this
+ * class.
+ *
  * @CyAPI.Abstract.Class
  */
 public abstract class AbstractWebServiceClient implements WebServiceClient {
 
 	// Globally-unique service location.
-	protected final URI serviceURI;
-	
+	private final URI serviceURI;
+
 	// Display Name for this client.
 	private final String displayName;
 	private final String description;
-	
+
 	/**
 	 * Constructs this AbstractWebServiceClient.
-	 * @param uri Service Location.
+	 *
+	 * @param uri
+	 *            Service Location.
 	 */
 	public AbstractWebServiceClient(final String uri, final String displayName, final String description) {
-		
+
 		// Create URI
 		try {
 			this.serviceURI = new URI(uri);
 		} catch (URISyntaxException e) {
-			e.printStackTrace();
 			throw new IllegalArgumentException("URI string is invalid.");
 		}
-		
+
 		this.displayName = displayName;
 		this.description = description;
 	}
 
-
-	@Override public String getDisplayName() {
+	@Override
+	public final String getDisplayName() {
 		return displayName;
 	}
 
-
-	@Override public String getDescription() {
+	@Override
+	public final String getDescription() {
 		return description;
 	}
-	
-	@Override public String toString() {
+
+	@Override
+	public final String toString() {
 		return this.displayName;
 	}
 
-
 	@Override
-	public URI getServiceLocation() {
+	public final URI getServiceLocation() {
 		return this.serviceURI;
 	}
-	
 }

@@ -46,25 +46,23 @@ import org.cytoscape.work.TaskIterator;
  * @CyAPI.Spi.Interface
  */
 public interface WebServiceClient {
-	
+
 	/**
-	 * Returns resource location of this service, i.e., service URL.
-	 * This is guaranteed to be globally unique and can be used as identifier.
+	 * Returns resource location of this service, i.e., service URL. This is
+	 * guaranteed to be globally unique and can be used as identifier.
 	 * 
 	 * @return URI of the service.
 	 */
 	URI getServiceLocation();
 
-	
 	/**
 	 * Returns display name of this client. This is more human readable name for
-	 * this client.  This may not be unique.
+	 * this client. This may not be unique.
 	 * 
 	 * @return display name for this client.
 	 */
 	String getDisplayName();
-	
-	
+
 	/**
 	 * Get human-readable description of this client.
 	 * 
@@ -72,13 +70,13 @@ public interface WebServiceClient {
 	 *         return value.
 	 */
 	String getDescription();
-	
-	
+
 	/**
 	 * Set query for the tasks to be executed.
 	 * 
-	 * @param query query object.  This is client-dependent.
+	 * @param query
+	 *            query object. This is client-dependent.
 	 */
 	TaskIterator createTaskIterator(Object query);
-	
+
 }
