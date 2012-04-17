@@ -9,7 +9,7 @@ import org.cytoscape.work.TaskIterator;
 
 /**
  * An extension of TaskFactory that provides support for
- * tasks to deal with adding node and endge by right click menue.
+ * tasks to deal with adding node and edge by right click menu.
  * @CyAPI.Spi.Interface
  */
 public interface NetworkViewLocationTaskFactory{

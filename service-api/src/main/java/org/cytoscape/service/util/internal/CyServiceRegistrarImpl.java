@@ -2,6 +2,7 @@
 package org.cytoscape.service.util.internal;
 
 
+import java.lang.annotation.Inherited;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.Dictionary;
@@ -30,6 +31,9 @@ public class CyServiceRegistrarImpl  implements CyServiceRegistrar{
 		serviceRegistrations = new HashMap<Class,Map<Object,ServiceRegistration>>();
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void registerAllServices(Object o, Properties props) {
 		for ( Class c : RegisterUtil.getAllInterfaces(o.getClass()) ) {
 			if ( !c.getName().startsWith("java") ) 
@@ -37,6 +41,9 @@ public class CyServiceRegistrarImpl  implements CyServiceRegistrar{
 		}
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void registerService(Object service, Class serviceClass, Properties props) {
 		
 		ServiceUtil.registerService(bc, service, serviceClass, props, serviceRegistrations);
@@ -44,6 +51,9 @@ public class CyServiceRegistrarImpl  implements CyServiceRegistrar{
 	}
 
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void unregisterAllServices(Object o) {
 		for ( Class c : RegisterUtil.getAllInterfaces(o.getClass()) ) {
 			if ( !c.getName().startsWith("java") ) { 
@@ -53,6 +63,9 @@ public class CyServiceRegistrarImpl  implements CyServiceRegistrar{
 	}
 
 
+	/**
+	 * {@inheritDoc}
+	 */
 	public void unregisterService(Object o, Class c) {
 		if ( o == null )
 			throw new NullPointerException( "service object is null" );
@@ -75,6 +88,9 @@ public class CyServiceRegistrarImpl  implements CyServiceRegistrar{
 		serviceRegistrations.get(c).remove(o);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public <S> S getService(Class<S> serviceClass) {
 		
@@ -82,7 +98,9 @@ public class CyServiceRegistrarImpl  implements CyServiceRegistrar{
 		
 	}
 
-
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public <S> S getService(Class<S> serviceClass, String filter) {
 	
@@ -90,6 +108,9 @@ public class CyServiceRegistrarImpl  implements CyServiceRegistrar{
 		return ServiceUtil.getService(bc, serviceClass, filter, null);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void registerServiceListener(Object listener,
 		String registerMethodName, String unregisterMethodName,
@@ -98,6 +119,9 @@ public class CyServiceRegistrarImpl  implements CyServiceRegistrar{
 		ServiceUtil.registerServiceListener(bc, listener, registerMethodName, unregisterMethodName, serviceClass, methodClass, additionalFilter, null);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void registerServiceListener(Object listener,
 			String registerMethodName, String unregisterMethodName,
@@ -106,6 +130,9 @@ public class CyServiceRegistrarImpl  implements CyServiceRegistrar{
 		
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void registerServiceListener(Object listener,
 			String registerMethodName, String unregisterMethodName,
@@ -114,6 +141,9 @@ public class CyServiceRegistrarImpl  implements CyServiceRegistrar{
 		
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public void registerServiceListener(Object listener,
 			String registerMethodName, String unregisterMethodName,
