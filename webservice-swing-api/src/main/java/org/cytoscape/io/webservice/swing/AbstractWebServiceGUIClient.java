@@ -17,8 +17,11 @@ public abstract class AbstractWebServiceGUIClient extends AbstractWebServiceClie
 		super(uri, displayName, description);
 	}
 
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
-	public final Container getQueryBuilderGUI() {
+	public Container getQueryBuilderGUI() {
 		return gui;
 	}
 }
