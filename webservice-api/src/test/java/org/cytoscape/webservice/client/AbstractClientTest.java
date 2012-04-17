@@ -7,7 +7,9 @@ import org.cytoscape.webservice.AbstractWebServiceClientTest;
 import org.cytoscape.work.Task;
 import org.cytoscape.work.TaskIterator;
 import org.junit.Before;
+import org.junit.Test;
 
+import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 public class AbstractClientTest extends AbstractWebServiceClientTest {
@@ -20,6 +22,16 @@ public class AbstractClientTest extends AbstractWebServiceClientTest {
 		this.displayName = "dummy";
 		this.queryObject = "test query";
 		client = new DummyClient(uriString, displayName, description);
+	}
+	
+	@Test(expected=IllegalArgumentException.class)
+	public void testConstructor() throws Exception {
+		client = new DummyClient("123()    69&&&6 *!", displayName, description);
+	}
+	
+	@Test
+	public void testToString() {
+		assertEquals(this.displayName, client.toString());
 	}
 	
 	private final class DummyClient extends AbstractWebServiceClient {

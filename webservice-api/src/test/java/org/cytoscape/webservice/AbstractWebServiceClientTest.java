@@ -26,6 +26,7 @@ public abstract class AbstractWebServiceClientTest {
 		assertEquals(locationUri, serviceLocation);
 	}
 
+
 	@Test
 	public void testGetDisplayName() {
 		final String displayName = client.getDisplayName();
