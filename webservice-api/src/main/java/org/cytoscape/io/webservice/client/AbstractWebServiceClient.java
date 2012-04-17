@@ -61,12 +61,10 @@ public abstract class AbstractWebServiceClient implements WebServiceClient {
 	 *            Service Location.
 	 */
 	public AbstractWebServiceClient(final String uri, final String displayName, final String description) {
-
-		// Create URI
 		try {
 			this.serviceURI = new URI(uri);
 		} catch (URISyntaxException e) {
-			throw new IllegalArgumentException("URI string is invalid.");
+			throw new IllegalArgumentException("Given URI String is invalid: " + uri, e);
 		}
 
 		this.displayName = displayName;
