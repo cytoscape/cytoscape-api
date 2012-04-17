@@ -5,7 +5,7 @@ import java.awt.Container;
 import org.cytoscape.io.webservice.client.AbstractWebServiceClient;
 
 /**
- * Abstract class for web service client with Swing GUI.
+ * Abstract base class for web service clients with Swing GUI.
  *
  */
 public abstract class AbstractWebServiceGUIClient extends AbstractWebServiceClient implements WebServiceGUIClient {
@@ -18,8 +18,7 @@ public abstract class AbstractWebServiceGUIClient extends AbstractWebServiceClie
 	}
 
 	@Override
-	public Container getQueryBuilderGUI() {
+	public final Container getQueryBuilderGUI() {
 		return gui;
 	}
-
 }
