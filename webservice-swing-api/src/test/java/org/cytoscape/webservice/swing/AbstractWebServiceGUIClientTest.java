@@ -1,18 +1,10 @@
 package org.cytoscape.webservice.swing;
 
-import java.awt.Container;
-
-import org.cytoscape.io.webservice.swing.WebServiceGUIClient;
-import org.cytoscape.webservice.AbstractWebServiceClientTest;
 import org.junit.Test;
 
 
-public abstract class AbstractWebServiceGUIClientTest extends AbstractWebServiceClientTest {
+public abstract class AbstractWebServiceGUIClientTest {
 
 	@Test
-	public void testGetQueryBuilderGUI() {
-		WebServiceGUIClient guiClient = (WebServiceGUIClient) client;
-		final Container builder = guiClient.getQueryBuilderGUI();
-	}
-
+	public abstract void testGetQueryBuilderGUI();
 }
