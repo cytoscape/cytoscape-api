@@ -58,22 +58,23 @@ package org.cytoscape.view.vizmap.mappings;
  * domain value. This distinction is needed to support different ranges of
  * interpolation above and below the same domain value, plus allow a distinctly
  * different value for exact matches.
+ *
  * @param <T> the generic type for this BoundaryRangeValues.
  * @CyAPI.Final.Class
  */
 public final class BoundaryRangeValues<T> {
 	/**
-	 *
+	 * Will be used for interpolation upon smaller domain values
 	 */
 	public final T lesserValue;
 
 	/**
-	 *
+	 * Will be used when the domain value is exactly equal to the associated boundary domain value
 	 */
 	public final T equalValue;
 
 	/**
-	 *
+	 * Will be used for interpolation upon larger domain values
 	 */
 	public final T greaterValue;
 
@@ -96,8 +97,7 @@ public final class BoundaryRangeValues<T> {
 	/**
 	 * Creates a new BoundaryRangeValues object. This is a copy constructor.
 	 *
-	 * @param original
-	 *            DOCUMENT ME!
+	 * @param original original value.
 	 */
 	public BoundaryRangeValues(final BoundaryRangeValues<T> original) {
 		this.equalValue = original.equalValue;
@@ -106,14 +106,11 @@ public final class BoundaryRangeValues<T> {
 	}
 
 	/**
-	 * DOCUMENT ME!
-	 *
-	 * @return DOCUMENT ME!
+	 * {@inheritDoc}
 	 */
+	@Override
 	public String toString() {
-		String returnVal = "{" + lesserValue.toString() + "," + equalValue.toString() + ","
-		                   + greaterValue.toString() + "}";
-
-		return returnVal;
+		return "{" + lesserValue.toString() + "," + equalValue.toString() + 
+				"," + greaterValue.toString() + "}";
 	}
 }
