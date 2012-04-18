@@ -30,9 +30,11 @@ public class ContinuousMappingPointTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
+	@Test(expected=IllegalArgumentException.class)
 	public void testContinuousMappingPoint() {
 		assertNotNull(point);
+		// This throws exception
+		final ContinuousMappingPoint<String, Paint> badPoint = new ContinuousMappingPoint<String, Paint>("Test", brv1);
 	}
 
 	@Test

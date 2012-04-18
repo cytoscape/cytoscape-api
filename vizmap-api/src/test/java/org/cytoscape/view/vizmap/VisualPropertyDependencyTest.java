@@ -43,9 +43,16 @@ public class VisualPropertyDependencyTest {
 	public void tearDown() throws Exception {
 	}
 
-	@Test
+	@Test(expected=IllegalArgumentException.class)
 	public void testVisualPropertyDependency() {
 		assertNotNull(dependency);
+		
+		final Set<VisualProperty<Paint>> badSet = new HashSet<VisualProperty<Paint>>();
+		badSet.add(BasicVisualLexicon.EDGE_LABEL_COLOR);
+		badSet.add(BasicVisualLexicon.NODE_FILL_COLOR);
+		
+		// This throws exception
+		final VisualPropertyDependency<Paint> badDependency = new VisualPropertyDependency<Paint>(displayName, badSet, lexicon);
 	}
 
 	@Test
