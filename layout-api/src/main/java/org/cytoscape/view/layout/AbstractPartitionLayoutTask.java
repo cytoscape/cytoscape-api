@@ -22,7 +22,7 @@ import org.slf4j.LoggerFactory;
  *  method as an argument.
  *  @CyAPI.Abstract.Class
  */
-public abstract class AbstractPartitionLayoutTask extends AbstractBasicLayoutTask {
+public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 	
 	private static Logger logger = LoggerFactory.getLogger(AbstractPartitionLayoutTask.class);
 	
@@ -70,13 +70,15 @@ public abstract class AbstractPartitionLayoutTask extends AbstractBasicLayoutTas
 	 * @param name The name of the layout algorithm. 
 	 * @param singlePartition Whether this layout algorithm should execute on a 
 	 * single partition instead of multiple partitions. 
+	 * @param supportedNodeAttributeTypes 
+	 * @param supportedEdgeAttributeTypes 
 	 * @param selectedOnly Whether the this layout algorithm should execute on
 	 * just the nodes currently selected.
 	 * @param staticNodes A set of nodes that should NOT be moved by the
 	 * layout algorithm.
 	 */
-	public AbstractPartitionLayoutTask(final String name, AbstractLayoutAlgorithmContext context, final boolean singlePartition) {
-		super(name, context);
+	public AbstractPartitionLayoutTask(final String name, final boolean singlePartition, CyNetworkView networkView, Set<View<CyNode>> nodesToLayOut, Set<Class<?>> supportedNodeAttributeTypes, Set<Class<?>> supportedEdgeAttributeTypes, List<String> initialAttributes) {
+		super(name, networkView, nodesToLayOut, supportedNodeAttributeTypes, supportedEdgeAttributeTypes, initialAttributes);
 		this.singlePartition = singlePartition;
 	}
 
@@ -87,15 +89,6 @@ public abstract class AbstractPartitionLayoutTask extends AbstractBasicLayoutTas
 	 * @param partition The LayoutPartion to be laid out. 
 	 */
 	public abstract void layoutPartion(LayoutPartition partition);
-
-	/**
-	 * Returns true if the layout supports only applying the layout to selected nodes.
-	 *
-	 * @return True if the layout supports only applying the layout to selected nodes.
-	 */
-	public boolean supportsSelectedOnly() {
-		return true;
-	}
 
 	/**
 	 * Used for 
@@ -131,27 +124,17 @@ public abstract class AbstractPartitionLayoutTask extends AbstractBasicLayoutTas
 
 		this.taskMonitor = taskMonitor;
 		
+		boolean useAllNodes = nodesToLayOut.size() == networkView.getNodeViews().size();
+		
 		// Depending on whether we are partitioned or not,
 		// we use different initialization.  Note that if the user only wants
 		// to lay out selected nodes, partitioning becomes a very bad idea!
-		if (selectedOnly || singlePartition) {
+		if (singlePartition && !useAllNodes) {
 			// We still use the partition abstraction, even if we're
 			// not partitioning.  This makes the code further down
 			// much cleaner
-			LayoutPartition partition = new LayoutPartition(networkView, selectedOnly, edgeWeighter);
+			LayoutPartition partition = new LayoutPartition(networkView, nodesToLayOut, edgeWeighter);
 			partition.setTaskMonitor(taskMonitor);
-			partitionList = new ArrayList(1);
-			partitionList.add(partition);
-		} else if (staticNodes != null && staticNodes.size() > 0) {
-			// Someone has programmatically locked a set of nodes -- construct
-			// the list of unlocked nodes
-			List<CyNode> unlockedNodes = new ArrayList();
-			for (CyNode node: network.getNodeList()) {
-				if (!isLocked(networkView.getNodeView(node))) {
-					unlockedNodes.add(node);
-				}
-			}
-			LayoutPartition partition = new LayoutPartition(networkView, unlockedNodes, edgeWeighter);
 			partitionList = new ArrayList(1);
 			partitionList.add(partition);
 		} else {
@@ -198,7 +181,7 @@ public abstract class AbstractPartitionLayoutTask extends AbstractBasicLayoutTas
 					return;
 				}
 
-			if (!selectedOnly && !singlePartition) {
+			if (useAllNodes && !singlePartition) {
 				// System.out.println("Offsetting partition #"+partition.getPartitionNumber()+" to "+next_x_start+", "+next_y_start);
 				// OFFSET
 				partition.offset(next_x_start, next_y_start);

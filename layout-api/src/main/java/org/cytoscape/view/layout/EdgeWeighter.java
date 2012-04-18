@@ -37,26 +37,6 @@ import org.cytoscape.model.CyRow;
 import org.cytoscape.work.Tunable;
 
 /**
- * An enum describing different weighting strategies. 
- * @CyAPI.Enum.Class
- */
-enum WeightTypes {
-	GUESS("Heuristic"),
-	LOG("-Log(value)"),
-	DISTANCE("1 - normalized value"),
-	WEIGHT("normalized value");
-
-	private String name;
-	private WeightTypes(String str) { name=str; }
-
-	/**
-	 * Returns the name of the weighting type.
-	 * @return the name of the weighting type.
-	 */	
-	public String toString() { return name; }
-}
-
-/**
  * The EdgeWeighter class.  This class is used as a container for information
  * about how to interpret weights in an weighted layout.
  * @CyAPI.Final.Class

@@ -46,7 +46,6 @@ import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyRow;
-import org.cytoscape.model.CyTableUtil;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
@@ -120,28 +119,11 @@ public final class LayoutPartition {
 	 * @param nodeSet the nodes to be considered
 	 * @param edgeWeighter the weighter to use for edge weighting
 	 */
-	public LayoutPartition(CyNetworkView networkView, Collection<CyNode> nodeSet, EdgeWeighter edgeWeighter) {
+	public LayoutPartition(CyNetworkView networkView, Collection<View<CyNode>> nodeSet, EdgeWeighter edgeWeighter) {
 		initialize(networkView, nodeSet, edgeWeighter);
 	}
 
-
-	/**
-	 * LayoutPartition: use this constructor to create a LayoutPartition that
-	 * includes the entire network.
-	 *
-	 * @param networkView the CyNetworkView to use
-	 * @param selectedOnly if true, only include selected nodes in the partition
-	 * @param edgeWeighter the weighter to use for edge weighting
-	 */
-	public LayoutPartition(CyNetworkView networkView, boolean selectedOnly, EdgeWeighter edgeWeighter) {
-		if (selectedOnly) {
-			initialize(networkView,CyTableUtil.getNodesInState(networkView.getModel(),"selected",true),edgeWeighter);
-		} else {
-			initialize(networkView,networkView.getModel().getNodeList(),edgeWeighter);
-		}
-	}
-
-	private void initialize(CyNetworkView networkView, Collection<CyNode> nodeSet, EdgeWeighter edgeWeighter) {
+	private void initialize(CyNetworkView networkView, Collection<View<CyNode>> nodeSet, EdgeWeighter edgeWeighter) {
 
 		this.edgeWeighter = edgeWeighter;
 
@@ -497,16 +479,14 @@ public final class LayoutPartition {
 	}
 
 	
-	private void nodeListInitialize(CyNetworkView networkView, Collection<CyNode> nodeSet) {
+	private void nodeListInitialize(CyNetworkView networkView, Collection<View<CyNode>> nodeSet) {
 		this.nodeList = new ArrayList<LayoutNode>(networkView.getModel().getNodeCount());
 
 		for (View<CyNode>nv: networkView.getNodeViews()){
-			final CyNode node = nv.getModel();
-
-			if (!nodeSet.contains(node))
-				addNode(networkView.getModel(),nv, true);
+			if (!nodeSet.contains(nv))
+				addNode(networkView.getModel(), nv, true);
 			else
-				addNode(networkView.getModel(),nv, false);
+				addNode(networkView.getModel(), nv, false);
 		}
 	}
 

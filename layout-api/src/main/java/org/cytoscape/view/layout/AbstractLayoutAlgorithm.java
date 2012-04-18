@@ -31,10 +31,14 @@ package org.cytoscape.view.layout;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.cytoscape.model.CyNode;
+import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.View;
 import org.cytoscape.work.TunableValidator;
 import org.cytoscape.work.TunableValidator.ValidationState;
 
@@ -45,10 +49,8 @@ import org.cytoscape.work.TunableValidator.ValidationState;
  */
 public abstract class AbstractLayoutAlgorithm<T extends CyLayoutContext> implements CyLayoutAlgorithm<T> {
 
-	private final boolean supportsSelectedOnly;
 	private final String humanName;
 	private final String computerName;
-	
 	
 	/**
 	 * The Constructor.
@@ -57,10 +59,9 @@ public abstract class AbstractLayoutAlgorithm<T extends CyLayoutContext> impleme
 	 * @param humanName a user visible name of the layout.
 	 * @param supportsSelectedOnly indicates whether only selected nodes should be laid out.
 	 */
-	public AbstractLayoutAlgorithm(final String computerName, final String humanName, boolean supportsSelectedOnly) {
+	public AbstractLayoutAlgorithm(final String computerName, final String humanName) {
 		this.computerName = computerName;
 		this.humanName = humanName;
-		this.supportsSelectedOnly = supportsSelectedOnly;
 	}
 
 	/**
@@ -80,14 +81,6 @@ public abstract class AbstractLayoutAlgorithm<T extends CyLayoutContext> impleme
 	}
 
 	/**
-	 * Indicates whether this algorithm supports applying the layout 
-	 * only to selected nodes.
-	 */
-	public final boolean supportsSelectedOnly() {
-		return supportsSelectedOnly;
-	}
-
-	/**
 	 * Returns the types of node attributes supported by
 	 * this algorithm.  This should be overridden by the
 	 * specific algorithm.
@@ -96,7 +89,7 @@ public abstract class AbstractLayoutAlgorithm<T extends CyLayoutContext> impleme
 	 * if node attributes are not supported
 	 */
 	@Override
-	public Set<Class<?>> supportsNodeAttributes() {
+	public Set<Class<?>> getSupportedNodeAttributeTypes() {
 		return new HashSet<Class<?>>();
 	}
 
@@ -109,7 +102,7 @@ public abstract class AbstractLayoutAlgorithm<T extends CyLayoutContext> impleme
 	 * if edge attributes are not supported
 	 */
 	@Override
-	public Set<Class<?>> supportsEdgeAttributes() {
+	public Set<Class<?>> getSupportedEdgeAttributeTypes() {
 		return new HashSet<Class<?>>();
 	}
 
@@ -124,12 +117,15 @@ public abstract class AbstractLayoutAlgorithm<T extends CyLayoutContext> impleme
 	 */
 	@Override
 	public List<String> getInitialAttributeList() {
-		return new ArrayList<String>();
+		return Collections.emptyList();
 	}
 
 	@Override
-	public boolean isReady(T tunableContext) {
-		if (tunableContext.getNetworkView() == null) {
+	public boolean isReady(CyNetworkView view, T tunableContext, Set<View<CyNode>> nodesToLayout) {
+		if (view == null || nodesToLayout == null) {
+			return false;
+		}
+		if (nodesToLayout.size() == 0 && view.getNodeViews().size() == 0) {
 			return false;
 		}
 		if (tunableContext instanceof TunableValidator) {
@@ -138,5 +134,4 @@ public abstract class AbstractLayoutAlgorithm<T extends CyLayoutContext> impleme
 		}
 		return true;
 	}
-	
 }

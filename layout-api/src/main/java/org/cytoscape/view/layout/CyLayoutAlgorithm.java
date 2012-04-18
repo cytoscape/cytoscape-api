@@ -33,6 +33,9 @@ package org.cytoscape.view.layout;
 import java.util.List;
 import java.util.Set;
 
+import org.cytoscape.model.CyNode;
+import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.View;
 import org.cytoscape.work.TaskIterator;
 
 /**
@@ -40,48 +43,23 @@ import org.cytoscape.work.TaskIterator;
  * @CyAPI.Spi.Interface
  */
 public interface CyLayoutAlgorithm<T extends CyLayoutContext> {
-	TaskIterator createTaskIterator(T layoutContext);
-	boolean isReady(T layoutContext);
+	TaskIterator createTaskIterator(CyNetworkView networkView, T layoutContext, Set<View<CyNode>> nodesToLayOut);
+	boolean isReady(CyNetworkView networkView, T layoutContext, Set<View<CyNode>> nodesToLayOut);
 	T createLayoutContext();
 	
 	/**
-	 * Tests to see if this layout supports doing a layout on a subset of the
-	 * nodes in this network view.
-	 *
-	 * @return true if layout supports layouts on a subset of the nodes
-	 */
-	public boolean supportsSelectedOnly();
-
-//	/**
-//	 * Sets the "selectedOnly" flag
-//	 *
-//	 * @param selectedOnly boolean value that tells the layout algorithm whether to
-//	 * only layout the selected nodes
-//	 */
-//	public void setSelectedOnly(boolean selectedOnly);
-
-	/**
 	 * Tests to see if this layout supports doing a layout based on node attributes.
 	 *
-	 * @return byte array of allowable attribute types or "null" if not supported.  If the
-	 *              first type is "-1", all types are supported
+	 * @return types of allowable attribute types.
 	 */
-	public Set<Class<?>> supportsNodeAttributes();
+	public Set<Class<?>> getSupportedNodeAttributeTypes();
 
 	/**
 	 * Tests to see if this layout supports doing a layout based on edge attributes.
 	 *
-	 * @return type array of allowable attribute types or "null" if not supported.  If the
-	 *              first type is "-1", all types are supported
+	 * @return types of allowable attribute types.
 	 */
-	public Set<Class<?>> supportsEdgeAttributes();
-
-//	/**
-//	 * Sets the attribute to use for node- or edge- based attribute layouts
-//	 *
-//	 * @param attributeName String with the name of the attribute to use
-//	 */
-//	public void setLayoutAttribute(String attributeName);
+	public Set<Class<?>> getSupportedEdgeAttributeTypes();
 
 	/**
 	 * This returns a (possibly empty) List of Strings that is used for
