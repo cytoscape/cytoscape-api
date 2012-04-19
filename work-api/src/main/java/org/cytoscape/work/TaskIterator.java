@@ -134,6 +134,31 @@ public final class TaskIterator implements Iterator<Task> {
 	public int getNumTasks() {
 		return numTasks;
 	}
+	
+	/**
+	 * Adds the given task to the end of this iterator.
+	 * @param task task to insert
+	 */
+	public void append(Task task) {
+		++numTasks;
+
+		tryToAddSelfReferenceToTask(task);
+		tasks.add(task);
+	}
+	
+	/**
+	 * Adds the tasks in the given TaskIterator to the end of this iterator.
+	 * @param taskIterator the tasks to insert
+	 */
+	public void append(TaskIterator taskIterator) {
+		numTasks += taskIterator.getNumTasks();
+		
+		while (taskIterator.hasNext()) {
+			final Task newTask = taskIterator.next();
+			tryToAddSelfReferenceToTask(newTask);
+			tasks.add(newTask);
+		}
+	}
 }
 
 

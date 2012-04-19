@@ -88,6 +88,44 @@ public class TaskIteratorTest {
 		final TaskIterator iter = new TaskIterator(initialTask, initialTask2);
 		assertEquals(2,iter.getNumTasks());
 	}
+	
+	@Test
+	public final void testAppendTask() throws Exception {
+		final Task initialTask = new SimpleTask(1);
+		final TaskIterator iter = new TaskIterator(initialTask);
+		iter.append(new SimpleTask(2));
+		iter.append(new SimpleTask(3));
+
+		Task firstTask = iter.next();
+		assertEquals("Task sequence error (1)!", 1, ((SimpleTask)firstTask).getId());
+		Task secondTask = iter.next();
+		assertEquals("Task sequence error (2)!", 2, ((SimpleTask)secondTask).getId());
+		Task thirdTask = iter.next();
+		assertEquals("Task sequence error (3)!", 3, ((SimpleTask)thirdTask).getId());
+		
+		iter.append(new SimpleTask(4));
+		Task fourthTask = iter.next();
+		assertEquals("Task sequence error (4)!", 4, ((SimpleTask)fourthTask).getId());
+	}
+	
+	@Test
+	public final void testAppendTaskIterator() throws Exception {
+		final Task initialTask = new SimpleTask(1);
+		final TaskIterator iter = new TaskIterator(initialTask);
+		final TaskIterator iter2 = new TaskIterator(new SimpleTask(2), new SimpleTask(3));
+		iter.append(iter2);
+
+		Task firstTask = iter.next();
+		assertEquals("Task sequence error (1)!", 1, ((SimpleTask)firstTask).getId());
+		Task secondTask = iter.next();
+		assertEquals("Task sequence error (2)!", 2, ((SimpleTask)secondTask).getId());
+		Task thirdTask = iter.next();
+		assertEquals("Task sequence error (3)!", 3, ((SimpleTask)thirdTask).getId());
+		
+		iter.append(new TaskIterator(new SimpleTask(4)));
+		Task fourthTask = iter.next();
+		assertEquals("Task sequence error (4)!", 4, ((SimpleTask)fourthTask).getId());
+	}
 }
 
 
