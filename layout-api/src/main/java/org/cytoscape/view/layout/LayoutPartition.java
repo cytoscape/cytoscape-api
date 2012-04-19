@@ -251,6 +251,7 @@ public final class LayoutPartition {
 	 * edges from the calculation (not the graph) when certain conditions
 	 * are met.
 	 */
+	// TODO: is this necessary?
 	public void calculateEdgeWeights() {
 
 		// Use a ListIterator so that we can modify the list

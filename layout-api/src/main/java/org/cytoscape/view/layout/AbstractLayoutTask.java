@@ -41,9 +41,8 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 	 * names to be used for generating selection submenus. 
 	 */
 	public ListSingleSelection<String> getWeightingOptions() {
-		if (weightingOptions != null) {
+		if (weightingOptions != null)
 			return weightingOptions;
-		}
 		
 		List<String> possibleValues = new ArrayList<String>(initialAttributes);
 

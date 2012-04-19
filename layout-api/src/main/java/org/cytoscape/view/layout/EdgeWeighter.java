@@ -32,7 +32,6 @@
  */
 package org.cytoscape.view.layout;
 
-import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyRow;
 import org.cytoscape.work.Tunable;
 
@@ -95,8 +94,6 @@ public final class EdgeWeighter {
 	public void setWeight(LayoutEdge layoutEdge) {
 		CyRow row = layoutEdge.getRow();
 		double eValue = 0.5; // FIXME: shouldn't we expose the default edge weight somehow?
-
-		// System.out.println("Setting weight for "+layoutEdge+" using "+weightAttribute);
 
 		if (weightAttribute != null && row.isSet(weightAttribute)) {
 			final Class<?> type = row.getTable().getColumn(weightAttribute).getType();
