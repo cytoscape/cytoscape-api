@@ -36,10 +36,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Map;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
+import java.util.Map;
 import java.util.Random;
 
 import org.cytoscape.model.CyEdge;
@@ -49,7 +49,6 @@ import org.cytoscape.model.CyRow;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
-import org.cytoscape.work.TaskMonitor;
 
 
 /**
@@ -59,13 +58,13 @@ import org.cytoscape.work.TaskMonitor;
  * static methods that are used to partition an existing graph.
  *
  * @author <a href="mailto:scooter@cgl.ucsf.edu">Scooter Morris</a>
- * @version 0.9
+ * 
  * @CyAPI.Final.Class
  */
 public final class LayoutPartition {
 	
-	private List<LayoutNode> nodeList;
-	private List<LayoutEdge> edgeList;
+	private ArrayList<LayoutNode> nodeList;
+	private ArrayList<LayoutEdge> edgeList;
 	private Map<CyNode, LayoutNode> nodeToLayoutNode; 
 	private int nodeIndex = 0;
 	private int partitionNumber = 0;
@@ -83,28 +82,17 @@ public final class LayoutPartition {
 	private double averageX = 0;
 	private double averageY = 0;
 
-	// Keep track of the number of locked nodes we have in
-	// this partition
+	// Keep track of the number of locked nodes we have in this partition
 	private int lockedNodes = 0;
 
-	/** The {@link TaskMonitor} associated with this LayoutPartition. */
-	protected TaskMonitor taskMonitor = null;
-	
-	/**
-	 * Sets the {@link TaskMonitor} for this LayoutPartition.
-	 * @param taskMonitor the TaskMonitor to use.
-	 */
-	public void setTaskMonitor(final TaskMonitor taskMonitor) {
-		this.taskMonitor = taskMonitor;
-	}
-	
+
 	/**
 	 * LayoutPartition: use this constructor to create an empty LayoutPartition.
 	 *
 	 * @param nodeCount    The number of nodes in the new partition.
 	 * @param edgeCount    The number of edges in the new partition.
 	 */
-	public LayoutPartition(int nodeCount, int edgeCount) {
+	public LayoutPartition(final int nodeCount, final int edgeCount) {
 		nodeList = new ArrayList<LayoutNode>(nodeCount);
 		edgeList = new ArrayList<LayoutEdge>(edgeCount);
 		nodeToLayoutNode = new HashMap<CyNode,LayoutNode>(nodeCount);
@@ -229,8 +217,7 @@ public final class LayoutPartition {
 	 * @param node the LayoutNode to move
 	 */
 	public void moveNodeToLocation(LayoutNode node) {
-		// We provide this routine so that we can keep our
-		// min/max values updated
+		// We provide this routine so that we can keep our min/max values updated
 		if (node.isLocked())
 			return;
 
@@ -244,14 +231,14 @@ public final class LayoutPartition {
 	 * difficult to record source and target until it has completed.
 	 */
 	public void fixEdges() {
-		for (LayoutEdge lEdge: edgeList) {
+		for (final LayoutEdge lEdge: edgeList) {
 			// Get the underlying edge
-			CyEdge edge = lEdge.getEdge();
-			CyNode target = (CyNode) edge.getTarget();
-			CyNode source = (CyNode) edge.getSource();
+			final CyEdge edge = lEdge.getEdge();
+			final CyNode target = edge.getTarget();
+			final CyNode source = edge.getSource();
 
-			LayoutNode sourceLayoutNode = nodeToLayoutNode.get(source);
-			LayoutNode targetLayoutNode = nodeToLayoutNode.get(target);
+			final LayoutNode sourceLayoutNode = nodeToLayoutNode.get(source);
+			final LayoutNode targetLayoutNode = nodeToLayoutNode.get(target);
 			if (sourceLayoutNode != null && targetLayoutNode != null) {
 				// Add the connecting nodes
 				lEdge.addNodes(sourceLayoutNode, targetLayoutNode);
@@ -460,9 +447,6 @@ public final class LayoutPartition {
 		}
 	}
 
-	/**
-	 * Reset routines
-	 */
 
 	/**
 	 * Reset all of the data maintained for the LayoutNodes
@@ -490,16 +474,13 @@ public final class LayoutPartition {
 		}
 	}
 
-	private void edgeListInitialize(CyNetworkView networkView) {
+	private void edgeListInitialize(final CyNetworkView networkView) {
 		for (View<CyEdge>ev: networkView.getEdgeViews()){
-			CyEdge edge = ev.getModel();
-			// Make sure we clean up after any previous layouts
-			//ev.clearBends(); 
-			
-			// FIXME: this will mean some cleanup in VisualProperty, right?
+			final CyEdge edge = ev.getModel();
 			final CyNode source = edge.getSource();
 			final CyNode target = edge.getTarget();
 
+			// Ignore self edge
 			if (source == target)
 				continue;
 
@@ -520,11 +501,11 @@ public final class LayoutPartition {
 	 * and filled.  This is used by the static method PartitionUtil.partition()
 	 */
 	void trimToSize() {
-		((ArrayList<LayoutNode>) nodeList).trimToSize();
-		((ArrayList<LayoutEdge>) edgeList).trimToSize();
+		nodeList.trimToSize();
+		edgeList.trimToSize();
 	}
 
-	private void updateMinMax(double x, double y) {
+	private void updateMinMax(final double x, final double y) {
 		minX = Math.min(minX, x);
 		minY = Math.min(minY, y);
 		maxX = Math.max(maxX, x);
@@ -533,9 +514,8 @@ public final class LayoutPartition {
 		averageY += y;
 	}
 
-	private void updateWeights(LayoutEdge newEdge) {
-		if (edgeWeighter != null) {
+	private void updateWeights(final LayoutEdge newEdge) {
+		if (edgeWeighter != null)
 			edgeWeighter.setWeight(newEdge);
-		}
 	}
 }

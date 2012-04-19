@@ -56,8 +56,6 @@ public final class EdgeWeighter {
 	public String weightAttribute = null;
 
 
-	private final static double EPSILON = .001;
-
 	// Default normalization bounds
 	private final static double LOWER_BOUND = .1f;
 	private final static double UPPER_BOUND = .9f;
@@ -95,7 +93,6 @@ public final class EdgeWeighter {
 	}
 
 	public void setWeight(LayoutEdge layoutEdge) {
-		CyEdge edge = layoutEdge.getEdge();
 		CyRow row = layoutEdge.getRow();
 		double eValue = 0.5; // FIXME: shouldn't we expose the default edge weight somehow?
 
@@ -195,16 +192,16 @@ public final class EdgeWeighter {
 	}
 
 	private double logNormalize(double weight) {
-		if (normalFactor == Double.MAX_VALUE) {
+		if (normalFactor == Double.MAX_VALUE)
 			normalFactor = (upperBounds-lowerBounds)/(maxLogWeight-minLogWeight);
-		}
+
 		return (weight-minLogWeight)*normalFactor+lowerBounds;
 	}
 
 	private double normalize(double weight) {
-		if (normalFactor == Double.MAX_VALUE) {
+		if (normalFactor == Double.MAX_VALUE)
 			normalFactor = (upperBounds-lowerBounds)/(maxWeight-minWeight);
-		}
+
 		return (weight-minWeight)*normalFactor+lowerBounds;
 	}
 

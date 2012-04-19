@@ -43,6 +43,7 @@ import org.cytoscape.model.CyRow;
  * @CyAPI.Final.Class
  */
 public final class LayoutEdge {
+	
 	// instance variables
 	private LayoutNode v1;
 	private LayoutNode v2;

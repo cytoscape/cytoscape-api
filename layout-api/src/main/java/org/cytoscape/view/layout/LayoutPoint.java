@@ -7,20 +7,19 @@ package org.cytoscape.view.layout;
  */
 public final class LayoutPoint {
 	
-	private final Double x;
-	private final Double y;
+	private final double x;
+	private final double y;
 
-	public LayoutPoint(final Double x, final Double y) {
+	public LayoutPoint(final double x, final double y) {
 		this.x = x;
 		this.y = y;
 	}
 	
-	public Double getX() {
+	public double getX() {
 		return x;
 	}
 	
-	public Double getY() {
+	public double getY() {
 		return y;
 	}
-	
 }

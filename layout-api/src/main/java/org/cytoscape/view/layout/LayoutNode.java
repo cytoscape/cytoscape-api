@@ -51,12 +51,10 @@ import java.util.List;
  */
 public final class LayoutNode {
 	// static (class) variables
-	static final double EPSILON = 0.0000001D;
+	private static final double EPSILON = 0.0000001D;
 
 	// instance variables
 	private double x;
-
-	// instance variables
 	private double y;
 	private double dispX;
 	private double dispY;
@@ -65,7 +63,8 @@ public final class LayoutNode {
 	private View<CyNode> nodeView;
 	private int index;
 	private boolean isLocked = false;
-	private ArrayList<LayoutNode> neighbors = null;
+
+	private List<LayoutNode> neighbors = null;
 
 	/**
 	 * The main constructor for a LayoutNode.
@@ -370,7 +369,7 @@ public final class LayoutNode {
 	 * @return        String containing the node's identifier
 	 */
 	public String getIdentifier() {
-		return String.valueOf(node.getSUID());
+		return node.getSUID().toString();
 	}
 
 	/**
@@ -378,8 +377,8 @@ public final class LayoutNode {
 	 *
 	 * @return        Degree of this node
 	 */
-	public double getDegree() {
-		return (double)neighbors.size();
+	public int getDegree() {
+		return neighbors.size();
 	}
 
 	/**
@@ -397,9 +396,7 @@ public final class LayoutNode {
 	 * @return        String containing the node's X,Y displacement
 	 */
 	public String printDisp() {
-		String ret = new String("" + dispX + ", " + dispY);
-
-		return ret;
+		return "" + dispX + ", " + dispY;
 	}
 
 	/**
@@ -408,8 +405,6 @@ public final class LayoutNode {
 	 * @return        String containing the node's X,Y location
 	 */
 	public String printLocation() {
-		String ret = new String("" + x + ", " + y);
-
-		return ret;
+		return "" + x + ", " + y;
 	}
 }

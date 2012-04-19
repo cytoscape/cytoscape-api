@@ -74,7 +74,7 @@ public final class PartitionUtil {
 	                             boolean selectedOnly, EdgeWeighter edgeWeighter) {
 
 		if (selectedOnly)
-			return partition(networkView, CyTableUtil.getNodesInState(networkView.getModel(),"selected",true),edgeWeighter);
+			return partition(networkView, CyTableUtil.getNodesInState(networkView.getModel(), CyNetwork.SELECTED ,true), edgeWeighter);
 		else
 			return partition(networkView,networkView.getModel().getNodeList(),edgeWeighter);
 	}
@@ -91,32 +91,30 @@ public final class PartitionUtil {
 	 */
 	public static List<LayoutPartition> partition(CyNetworkView networkView,
 	                             Collection<CyNode> nodeSet, EdgeWeighter edgeWeighter) {
-		List<LayoutPartition> partitions = new ArrayList<LayoutPartition>();
-
+		final List<LayoutPartition> partitions = new ArrayList<LayoutPartition>();
 		final CyNetwork network = networkView.getModel();
 
-		Map<CyNode,Integer> nodesSeenMap = new HashMap<CyNode,Integer>(); 
-		Map<CyEdge,Integer> edgesSeenMap = new HashMap<CyEdge,Integer>(); 
-		Map<CyNode,View<CyNode>> nodesToViews = new HashMap<CyNode,View<CyNode>>(); 
+		final Map<CyNode,Integer> nodesSeenMap = new HashMap<CyNode,Integer>(); 
+		final Map<CyEdge,Integer> edgesSeenMap = new HashMap<CyEdge,Integer>(); 
+		final Map<CyNode,View<CyNode>> nodesToViews = new HashMap<CyNode,View<CyNode>>(); 
 
 		// Initialize the maps
-		for (View<CyNode> nv: networkView.getNodeViews()){
+		for(final View<CyNode> nv: networkView.getNodeViews()){
 			nodesSeenMap.put(nv.getModel(), m_NODE_HAS_NOT_BEEN_SEEN);
 			nodesToViews.put(nv.getModel(), nv);
 		}
 
-		for (CyEdge edge: network.getEdgeList()) {
+		for (CyEdge edge: network.getEdgeList())
 			edgesSeenMap.put(edge, m_NODE_HAS_NOT_BEEN_SEEN);
-		}
 
 		// OK, now traverse the graph
-		for (CyNode node: nodeSet) {
+		for (final CyNode node: nodeSet) {
 			// Have we seen this already?
 			if (nodesSeenMap.get(node) == m_NODE_HAS_BEEN_SEEN)
 				continue;
 
 			// Nope, first time
-			LayoutPartition part = new LayoutPartition(network.getNodeCount(),
+			final LayoutPartition part = new LayoutPartition(network.getNodeCount(),
 			                                           network.getEdgeCount());
 			// Set the edge weighter
 			part.setEdgeWeighter(edgeWeighter);
@@ -138,16 +136,11 @@ public final class PartitionUtil {
 		}
 
 		// Now sort the partitions based on the partition's node count
-		Collections.sort(partitions,
-			new Comparator<LayoutPartition>() {
-				public int compare(LayoutPartition p1, LayoutPartition p2) {
-					return (p2.size() - p1.size());
-				}
-
-				public boolean equals(LayoutPartition obj) {
-					return false;
-				}
-			});
+		Collections.sort(partitions, new Comparator<LayoutPartition>() {
+			public int compare(LayoutPartition p1, LayoutPartition p2) {
+				return (p2.size() - p1.size());
+			}
+		});
 
 		return partitions; 
 	}
@@ -167,13 +160,13 @@ public final class PartitionUtil {
 	                             LayoutPartition partition, Map<CyNode,Integer> nodesSeenMap, 
 	                             Map<CyEdge,Integer> edgesSeenMap ) {
 		// Get the View<CyNode>
-		View<CyNode> nv = nodesToViews.get(node);
+		final View<CyNode> nv = nodesToViews.get(node);
 
 		// Add this node to the partition
 		partition.addNode(network, nv, false);
 
 		// Iterate through each connected edge
-		for (CyEdge incidentEdge: network.getAdjacentEdgeList(node, CyEdge.Type.ANY)){
+		for (final CyEdge incidentEdge: network.getAdjacentEdgeList(node, CyEdge.Type.ANY)){
 
 			// Have we already seen this edge?
 			if (edgesSeenMap.get(incidentEdge) == m_NODE_HAS_BEEN_SEEN) {
