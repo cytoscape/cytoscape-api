@@ -40,11 +40,36 @@ import org.cytoscape.work.TaskIterator;
 
 /**
  * An extension of NetworkViewTaskFactory specific to layout algorithms.
+ *
  * @CyAPI.Spi.Interface
  */
 public interface CyLayoutAlgorithm<T extends CyLayoutContext> {
+	
+	/**
+	 * 
+	 * @param networkView
+	 * @param layoutContext
+	 * @param nodesToLayOut
+	 * 
+	 * @return taskIterator contains layout tasks.
+	 */
 	TaskIterator createTaskIterator(CyNetworkView networkView, T layoutContext, Set<View<CyNode>> nodesToLayOut);
+	
+	
+	/**
+	 * 
+	 * @param networkView
+	 * @param layoutContext
+	 * @param nodesToLayOut
+	 * 
+	 * @return
+	 */
 	boolean isReady(CyNetworkView networkView, T layoutContext, Set<View<CyNode>> nodesToLayOut);
+	
+	/**
+	 * 
+	 * @return
+	 */
 	T createLayoutContext();
 	
 	/**
@@ -52,14 +77,14 @@ public interface CyLayoutAlgorithm<T extends CyLayoutContext> {
 	 *
 	 * @return types of allowable attribute types.
 	 */
-	public Set<Class<?>> getSupportedNodeAttributeTypes();
+	Set<Class<?>> getSupportedNodeAttributeTypes();
 
 	/**
 	 * Tests to see if this layout supports doing a layout based on edge attributes.
 	 *
 	 * @return types of allowable attribute types.
 	 */
-	public Set<Class<?>> getSupportedEdgeAttributeTypes();
+	Set<Class<?>> getSupportedEdgeAttributeTypes();
 
 	/**
 	 * This returns a (possibly empty) List of Strings that is used for
@@ -72,7 +97,7 @@ public interface CyLayoutAlgorithm<T extends CyLayoutContext> {
 	 *
 	 * @return List of column names (i.e. attributes) used for attribute-based layouts.
 	 */
-	public List<String> getInitialAttributeList();
+	List<String> getInitialAttributeList();
 
 	/**
 	 * Returns the computer-readable name of the layout.  To get
@@ -80,5 +105,5 @@ public interface CyLayoutAlgorithm<T extends CyLayoutContext> {
 	 *
 	 * @return The computer-readable name of the layout.
 	 */
-	public String getName();
+	String getName();
 }

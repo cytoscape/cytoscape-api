@@ -30,7 +30,6 @@
 package org.cytoscape.view.layout;
 
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
@@ -54,10 +53,8 @@ public abstract class AbstractLayoutAlgorithm<T extends CyLayoutContext> impleme
 	
 	/**
 	 * The Constructor.
-	 * @param undo the UndoSupport object used for allowing undo of layouts.
 	 * @param computerName a computer readable name used to construct property strings.
 	 * @param humanName a user visible name of the layout.
-	 * @param supportsSelectedOnly indicates whether only selected nodes should be laid out.
 	 */
 	public AbstractLayoutAlgorithm(final String computerName, final String humanName) {
 		this.computerName = computerName;
@@ -68,6 +65,7 @@ public abstract class AbstractLayoutAlgorithm<T extends CyLayoutContext> impleme
 	 * A computer readable name used to construct property strings.
 	 * @return a computer readable name used to construct property strings.
 	 */
+	@Override
 	public String getName() {
 		return computerName;
 	}
@@ -76,6 +74,7 @@ public abstract class AbstractLayoutAlgorithm<T extends CyLayoutContext> impleme
 	 * Used to get the user-visible name of the layout.
 	 * @return the user-visible name of the layout.
 	 */
+	@Override
 	public String toString() {
 		return humanName;
 	}
@@ -122,12 +121,12 @@ public abstract class AbstractLayoutAlgorithm<T extends CyLayoutContext> impleme
 
 	@Override
 	public boolean isReady(CyNetworkView view, T tunableContext, Set<View<CyNode>> nodesToLayout) {
-		if (view == null || nodesToLayout == null) {
+		if (view == null || nodesToLayout == null)
 			return false;
-		}
-		if (nodesToLayout.size() == 0 && view.getNodeViews().size() == 0) {
+		
+		if (nodesToLayout.size() == 0 && view.getNodeViews().size() == 0)
 			return false;
-		}
+		
 		if (tunableContext instanceof TunableValidator) {
 			StringBuilder errors = new StringBuilder();
 			return ((TunableValidator) tunableContext).getValidationState(errors) == ValidationState.OK;
