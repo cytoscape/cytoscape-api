@@ -103,11 +103,6 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 */
 	protected boolean inMenuBar = true;
 
-	/**
-	 * The string defining the possible system states that the
-	 * action is enabled for.
-	 */
-	protected String enableFor = null;
 
 	/**
 	 * The name of the action.
