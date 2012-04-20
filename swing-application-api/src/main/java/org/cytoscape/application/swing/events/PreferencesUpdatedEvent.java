@@ -9,6 +9,7 @@ import java.util.Properties;
  * @CyAPI.Final.Class
  */
 public final class PreferencesUpdatedEvent extends AbstractCyEvent<Object> {
+
 	private final Properties oldProps;
 	private final Properties newProps;
 
