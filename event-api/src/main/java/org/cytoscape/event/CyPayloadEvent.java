@@ -39,6 +39,13 @@ import java.util.Collection;
 
 /**
  * An extension of CyEvent specifically for payload events.
+ * A payload event is a single event that contains a
+ * collection of payload objects, which represent the state
+ * change of the event. Payload events are used in cases
+ * where many small changes can be combined into a single
+ * event object (such as node creation or table row 
+ * modification).  The goal is to prevent too many events
+ * from being fired.
  * @param <S> The event source type.
  * @param <P> The payload type.
  * @CyAPI.Spi.Interface
