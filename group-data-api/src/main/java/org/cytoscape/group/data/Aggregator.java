@@ -7,7 +7,9 @@ import org.cytoscape.model.CyTable;
 /**
  * The Aggregator interface acts as a service interface for
  * different methods of aggregating attribute data for the
- * nodes in a {@link CyGroup}.
+ * nodes in a {@link CyGroup}. Aggregators are used to combine
+ * the attribute values of the nodes contained within a Group
+ * into a representative attribute value for the Group itself. 
  */
 public interface Aggregator<T> {
 	/**
