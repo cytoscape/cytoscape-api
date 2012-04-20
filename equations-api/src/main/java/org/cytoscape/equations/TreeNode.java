@@ -2,6 +2,9 @@ package org.cytoscape.equations;
 
 import java.util.Stack;
 
+/**
+ * The interface for a node within the Equation parse tree.
+ */
 public interface TreeNode {
 
 	/** Returns the start of the location in the equation where the code was found that was
