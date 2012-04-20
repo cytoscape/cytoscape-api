@@ -7,7 +7,8 @@ import java.net.URLConnection;
 
 /**
  * A stateless utility class that provides special handling to support
- * InputStreams and URLConnections over the network. 
+ * InputStreams and URLConnections over the network. If you intend to
+ * support the use of proxy servers, you should use this service.
  * @CyAPI.Api.Interface
  */
 public interface StreamUtil {
