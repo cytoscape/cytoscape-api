@@ -36,6 +36,7 @@ import static org.mockito.Mockito.*;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Set;
 
 
 public class CyTableUtilTest {
@@ -117,23 +118,38 @@ public class CyTableUtilTest {
 		assertEquals( 1, edges.size() );
 	}
 
-	@Test
+	@Test(expected=NullPointerException.class)
 	public void testNullNetworkNodes() {
-		try {
 		List<CyNode> nodes = CyTableUtil.getNodesInState(null,columnName,false);
-		} catch (NullPointerException npe) {
-			return;
-		}
-		fail("didn't catch expected npe");
+	}
+
+	@Test(expected=NullPointerException.class)
+	public void testNullNetworkEdges() {
+		List<CyEdge> nodes = CyTableUtil.getEdgesInState(null,columnName,false);
 	}
 
 	@Test
-	public void testNullNetworkEdges() {
-		try {
-		List<CyEdge> nodes = CyTableUtil.getEdgesInState(null,columnName,false);
-		} catch (NullPointerException npe) {
-			return;
-		}
-		fail("didn't catch expected npe");
+	public void testGetColumnNames() {
+		CyTable t = mock(CyTable.class);
+
+		CyColumn c1 = mock(CyColumn.class);
+		when(c1.getName()).thenReturn("c1");
+
+		CyColumn c2 = mock(CyColumn.class);
+		when(c2.getName()).thenReturn("c2");
+
+		List<CyColumn> cols = new ArrayList<CyColumn>();
+		cols.add(c1);
+		cols.add(c2);
+
+		when(t.getColumns()).thenReturn(cols);
+
+		Set<String> names = CyTableUtil.getColumnNames(t);
+
+		assertNotNull(names);
+		assertEquals(2,names.size());
+		assertTrue(names.contains("c1"));
+		assertTrue(names.contains("c2"));
 	}
+
 }

@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2010, The Cytoscape Consortium (www.cytoscape.org)
+ Copyright (c) 2008, 2011, The Cytoscape Consortium (www.cytoscape.org)
 
  This library is free software; you can redistribute it and/or modify it
  under the terms of the GNU Lesser General Public License as published
@@ -25,41 +25,38 @@
  along with this library; if not, write to the Free Software Foundation,
  Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
 */
-package org.cytoscape.model.events;
+package org.cytoscape.model;
 
 
-import org.cytoscape.event.AbstractCyEvent;
+import static org.junit.Assert.*;
+import org.junit.Test;
 
-import org.cytoscape.model.CyNetwork;
-import org.cytoscape.model.CyNode;
+public class CyTableEnumTest {
 
-
-/** Base class for all nested network events. */
-class AbstractNestedNetworkEvent extends AbstractCyEvent<CyNode> {
-	private final CyNode node;
-	private final CyNetwork network;
-
-	AbstractNestedNetworkEvent(final Class<?> listenerClass, final CyNode node, final CyNetwork network) {
-		super(node, listenerClass);
-		if (network == null)
-			throw new NullPointerException("network cannot be null!");
-		this.node = node;
-		this.network = network;
+	// verify that we don't add values
+	@Test
+	public void testMutabilityEnumSize() {
+		assertEquals(3, CyTable.Mutability.values().length);
 	}
 
-	/**
-	 * Returns the CyNode for this event.
-	 * @return The CyNode for this event.
-	 */
-	public CyNode getNode() {
-		return node;
+	// verify that we don't change the enum values
+	@Test
+	public void testMutabilityEnumValues() {
+		assertNotNull(CyTable.Mutability.valueOf("MUTABLE"));
+		assertNotNull(CyTable.Mutability.valueOf("PERMANENTLY_IMMUTABLE"));
+		assertNotNull(CyTable.Mutability.valueOf("IMMUTABLE_DUE_TO_VIRT_COLUMN_REFERENCES"));
 	}
 
-	/**
-	 * Returns the CyNetwork for this event.
-	 * @return The CyNetwork for this event.
-	 */
-	public CyNetwork getNetwork() {
-		return network;
+	// verify that we don't add values
+	@Test
+	public void testSavePolicyEnumSize() {
+		assertEquals(2, CyTable.SavePolicy.values().length);
+	}
+
+	// verify that we don't change the enum values
+	@Test
+	public void testSavePolicyEnumValues() {
+		assertNotNull(CyTable.SavePolicy.valueOf("DO_NOT_SAVE"));
+		assertNotNull(CyTable.SavePolicy.valueOf("SESSION_FILE"));
 	}
 }

@@ -1,5 +1,5 @@
 /*
- Copyright (c) 2010, The Cytoscape Consortium (www.cytoscape.org)
+ Copyright (c) 2008, 2011, The Cytoscape Consortium (www.cytoscape.org)
 
  This library is free software; you can redistribute it and/or modify it
  under the terms of the GNU Lesser General Public License as published
@@ -28,38 +28,56 @@
 package org.cytoscape.model.events;
 
 
-import org.cytoscape.event.AbstractCyEvent;
+import java.util.ArrayList;
+import java.util.Collection;
 
-import org.cytoscape.model.CyNetwork;
-import org.cytoscape.model.CyNode;
+import static org.junit.Assert.*;
+import org.junit.Before;
+import org.junit.Test;
+
+import org.cytoscape.model.CyTable;
+
+import static org.mockito.Mockito.*;
 
 
-/** Base class for all nested network events. */
-class AbstractNestedNetworkEvent extends AbstractCyEvent<CyNode> {
-	private final CyNode node;
-	private final CyNetwork network;
+public class RowsSetEventTest {
+	RowsSetEvent event;
+	Collection<RowSetRecord> recordCollection;
+	CyTable table;
 
-	AbstractNestedNetworkEvent(final Class<?> listenerClass, final CyNode node, final CyNetwork network) {
-		super(node, listenerClass);
-		if (network == null)
-			throw new NullPointerException("network cannot be null!");
-		this.node = node;
-		this.network = network;
+	@Before
+	public void setUp() {
+		recordCollection = new ArrayList<RowSetRecord>();
+		recordCollection.add( new RowSetRecord(null,null,null,null));
+		recordCollection.add( new RowSetRecord(null,null,null,null));
+
+		table = mock(CyTable.class);
+		event = new RowsSetEvent(table,recordCollection);
 	}
 
-	/**
-	 * Returns the CyNode for this event.
-	 * @return The CyNode for this event.
-	 */
-	public CyNode getNode() {
-		return node;
+	@Test
+	public void testGetNode() {
+		for ( RowSetRecord n : event.getPayloadCollection() )
+			assertTrue( recordCollection.contains(n));
 	}
 
-	/**
-	 * Returns the CyNetwork for this event.
-	 * @return The CyNetwork for this event.
-	 */
-	public CyNetwork getNetwork() {
-		return network;
+	@Test
+	public void testGetSource() {
+		assertEquals( event.getSource(), table );
+	}
+
+	@Test
+	public void testGetListenerClass() {
+		assertEquals( event.getListenerClass(), RowsSetListener.class );
+	}
+
+	@Test(expected=NullPointerException.class)
+	public void testNullNode() {
+		RowsSetEvent ev = new RowsSetEvent(table, null);
+	}
+
+	@Test(expected=NullPointerException.class)
+	public void testNullTable() {
+		RowsSetEvent ev = new RowsSetEvent(null, recordCollection);
 	}
 }
