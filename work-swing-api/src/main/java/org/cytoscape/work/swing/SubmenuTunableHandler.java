@@ -2,10 +2,9 @@ package org.cytoscape.work.swing;
 
 
 import javax.swing.JMenuItem;
-import java.util.List;
 
-import org.cytoscape.work.TunableHandler;
 import org.cytoscape.work.TaskFactory;
+import org.cytoscape.work.TunableHandler;
 
 /**
  * A TunableHandler specifically for generating dynamic submenus.
