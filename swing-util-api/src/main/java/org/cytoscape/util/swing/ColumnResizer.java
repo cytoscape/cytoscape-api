@@ -59,7 +59,11 @@ public final class ColumnResizer {
 
 	private ColumnResizer() {}
 
-	
+
+	/**
+	 * Adjust the columns in the table to their preferred widths.
+	 * @param table The table whose columns should be adjusted.
+	 */
 	public static void adjustColumnPreferredWidths(JTable table) {
 		// strategy - get max width for cells in column and
 		// make that the preferred width
@@ -74,12 +78,10 @@ public final class ColumnResizer {
 				Component comp = rend.getTableCellRendererComponent(table, value, false, false,
 				                                                    row, col);
 				maxwidth = Math.max(comp.getPreferredSize().width, maxwidth);
-			} // for row
+			} 
 
-			/*
-			 * this version of the width set considers the column header's
-			 * preferred width too
-			 */
+			// this version of the width set considers the column header's
+			// preferred width too
 			TableColumn column = columnModel.getColumn(col);
 			TableCellRenderer headerRenderer = column.getHeaderRenderer();
 
@@ -91,14 +93,12 @@ public final class ColumnResizer {
 			                                                                    false, false, 0, col);
 			maxwidth = Math.max(maxwidth, headerComp.getPreferredSize().width);
 
-			/*
-			 * If the value is too big, adjust to fixed maximum val.
-			 */
+			// If the value is too big, adjust to fixed maximum val.
 			if (DEFLMAX_WIDTH < maxwidth) {
 				maxwidth = DEFLMAX_WIDTH;
 			}
 
 			column.setPreferredWidth(maxwidth + 20);
-		} // for col
+		} 
 	}
 }

@@ -422,8 +422,9 @@ public class BasicCollapsiblePanel extends JPanel {
         }
     }
     
-    /** Sets the tooltip text of this BasicCollapsiblePanel.
-     * @param The string to set as the tooltip.
+    /** 
+	 * Sets the tooltip text of this BasicCollapsiblePanel.
+     * @param text The string to set as the tooltip.
      */
     public void setToolTipText(String text)
     {

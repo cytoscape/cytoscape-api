@@ -72,9 +72,9 @@ public class OpenBrowserImpl implements OpenBrowser {
 	}
 
 	/**
-	 *  DOCUMENT ME!
-	 *
-	 * @param url DOCUMENT ME!
+	 * Opens the specified URL in the system default web browser. 
+	 * @param url The URL to open
+	 * @return true if the URL opens successfully.
 	 */
 	public boolean openURL(String url) {
 		

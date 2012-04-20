@@ -206,7 +206,7 @@ public final class JTreeTable extends JTable {
 
 		/**
 		 * Constructs this TreeTabelCellRenderer.
-		 * @param model DOCUMENT ME!
+		 * @param model The tree table model to be rendered. 
 		 */
 		public TreeTableCellRenderer(TreeModel model) {
 			super(model);
