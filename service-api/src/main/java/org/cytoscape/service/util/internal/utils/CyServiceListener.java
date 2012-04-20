@@ -145,4 +145,13 @@ public class CyServiceListener extends ServiceTracker {
 			props.setProperty(key,ref.getProperty(key).toString());
 		return props;
 	}
+	
+	/**
+	 * This method is only for testing use. It should not be used or overwritten
+	 * in any other classes of the package.
+	 * @return
+	 */
+	Method getRegisMethod(){
+		return this.registerMethod;
+	}
 }

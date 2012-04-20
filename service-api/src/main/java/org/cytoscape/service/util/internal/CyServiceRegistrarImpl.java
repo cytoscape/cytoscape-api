@@ -30,15 +30,21 @@ public class CyServiceRegistrarImpl  implements CyServiceRegistrar{
 		this.bc = bc;
 		serviceRegistrations = new HashMap<Class,Map<Object,ServiceRegistration>>();
 	}
+	
+	/**
+	 * This method is provided only for testing reason and shuld not be used
+	 * or overwritten anywhere else.
+	 * @return the map of service registrations in this implementation class.  
+	 */
+	 Map<Class,Map<Object,ServiceRegistration>> getServiceRegistrations(){
+		return this.serviceRegistrations;
+	}
 
 	/**
 	 * {@inheritDoc}
 	 */
-	public void registerAllServices(Object o, Properties props) {
-		for ( Class c : RegisterUtil.getAllInterfaces(o.getClass()) ) {
-			if ( !c.getName().startsWith("java") ) 
-				registerService(o,c,props);
-		}
+	public void registerAllServices(Object service, Properties props) {
+		ServiceUtil.registerAllServices(bc, service, props, serviceRegistrations);
 	}
 
 	/**

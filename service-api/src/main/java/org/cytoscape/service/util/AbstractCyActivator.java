@@ -21,7 +21,7 @@ import org.cytoscape.service.util.internal.utils.ServiceUtil;
  * OSGi services and either getting references to single services or
  * registering interest in all services of a specified type.  
  *
- * Users should extend this class and at implement the start(BundleContext bc)
+ * Users should extend this class and implement the start(BundleContext bc)
  * method.  
  * @CyAPI.Abstract.Class
  */
@@ -42,6 +42,15 @@ public abstract class AbstractCyActivator implements BundleActivator {
 		gottenServices = new ArrayList<ServiceReference>();
 	}
 
+	/**
+	 * This method is provided only for testing reason and shuld not be used
+	 * or overwritten anywhere else.
+	 * @return the map of service registrations in this class.  
+	 */
+	 Map<Class,Map<Object,ServiceRegistration>> getServiceRegistrations(){
+		return this.serviceRegistrations;
+	}
+	
 	/**
 	 * A default implementation of the BundleActivator.stop() method that cleans
 	 * up any services registered, services gotten, or services being listened
@@ -176,14 +185,8 @@ public abstract class AbstractCyActivator implements BundleActivator {
 	 * @param props The service properties to be registered with each service. 
 	 */
 	protected final void registerAllServices(final BundleContext bc, final Object service, final Properties props) {
-		List<Class<?>> interfaces = RegisterUtil.getAllInterfaces(service.getClass());
-		logger.debug("attempting to register " + interfaces.size() + " services for: " + service.toString());
-		for ( Class<?> c : interfaces )  {
-			if ( c.getName().startsWith("java") ) 
-				logger.debug("NOT registering service: " + service.toString() + " as type " + c.getName() + " because it is a core java interface.");
-			else 
-				registerService(bc, service, c, props);
-		}
+		
+		ServiceUtil.registerAllServices(bc, service, props, serviceRegistrations);
 	}
 
 	/**

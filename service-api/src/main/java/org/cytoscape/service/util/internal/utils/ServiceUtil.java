@@ -136,5 +136,26 @@ public final class ServiceUtil {
 
 		registrations.put(service,s);
 	}
+	/**
+	 * This method registers an object as an OSGi service
+	 * for all interfaces that the object implements
+	 * and with the specified properties. Note that this method
+	 * will NOT register services for any packages with names that
+	 * begin with "java", which is an effort to avoid registering
+	 * meaningless services for core Java APIs.
+	 * @param bc The BundleContext used to find services.
+	 * @param service The object to be registered as one or more services.
+	 * @param props The service properties to be registered with each service. 
+	 * @param serviceRegistrations A reference to the map of the classes and the objects that register the services. 
+	 * The service registered by this class will be added to the map if the reference is not null.
+	 */
+	public static void registerAllServices(final BundleContext bc, final Object service, final Properties props, 
+			Map<Class,Map<Object,ServiceRegistration>> serviceRegistrations) {
+		for ( Class c : RegisterUtil.getAllInterfaces(service.getClass()) ) {
+			if ( !c.getName().startsWith("java") ) 
+				registerService(bc, service, c, props, serviceRegistrations);
+		}
+	}
+
 
 }

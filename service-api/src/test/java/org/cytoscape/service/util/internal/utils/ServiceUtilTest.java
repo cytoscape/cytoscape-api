@@ -197,12 +197,45 @@ public class ServiceUtilTest {
 		Map<Class, Map<Object,ServiceRegistration>> sr =  new HashMap<Class, Map<Object,ServiceRegistration>>();
 		ServiceRegistration s = mock(ServiceRegistration.class);
 		when(bc.registerService(Object.class.getName(), service, props)).thenReturn(s);
-		Map<Object, ServiceRegistration> registrations = new HashMap<Object, ServiceRegistration>();
+		//Map<Object, ServiceRegistration> registrations = new HashMap<Object, ServiceRegistration>();
 		//sr.put(Object.class, registrations); 
 		
 		ServiceUtil.registerService(bc, service, Object.class, props, sr);
 		
 		assertTrue(sr.get(Object.class).get(service).equals(s));
+	}
+	
+	//===================================================
+	
+	private interface DummyInterface {
+	}
+	private class DummyClass implements DummyInterface{
+		
+	}
+	
+	private interface DummyInterface2 extends DummyInterface{
+		
+	}
+
+	private class DummyClass2 implements DummyInterface2{
+		
+	}
+	
+	@Test
+	public void testRegisterAllServices(){
+		
+		DummyClass2 service = new DummyClass2();
+		Properties props = mock (Properties.class);
+		Map<Class, Map<Object, ServiceRegistration>> sr =  new HashMap<Class, Map<Object,ServiceRegistration>>();
+		ServiceRegistration s = mock(ServiceRegistration.class);
+		ServiceRegistration s2 = mock(ServiceRegistration.class);
+		when(bc.registerService(DummyInterface2.class.getName(), service, props)).thenReturn(s2); 
+		when(bc.registerService(DummyInterface.class.getName(), service, props)).thenReturn(s); 
+		
+		ServiceUtil.registerAllServices(bc, service, props, sr);
+		assertTrue(sr.get(DummyInterface2.class).get(service).equals(s2));
+		assertTrue(sr.get(DummyInterface.class).get(service).equals(s));
+
 	}
 	
 }
