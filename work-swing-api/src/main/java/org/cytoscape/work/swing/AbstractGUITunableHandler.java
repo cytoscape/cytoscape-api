@@ -3,25 +3,16 @@ package org.cytoscape.work.swing;
 
 import java.awt.Component;
 import java.awt.Container;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
-import java.util.HashMap;
 
 import javax.swing.JPanel;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 
 import org.cytoscape.work.AbstractTunableHandler;
 import org.cytoscape.work.Tunable;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -258,7 +249,7 @@ public abstract class AbstractGUITunableHandler
 			final Object value = getValue();
 			return value == null ? "" : value.toString();
 		} catch (final Exception e) {
-			e.printStackTrace();
+			logger.warn("Could not get state.", e);
 			return "";
 		}
 	}

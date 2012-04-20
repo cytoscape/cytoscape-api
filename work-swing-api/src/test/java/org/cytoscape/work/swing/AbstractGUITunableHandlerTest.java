@@ -24,9 +24,8 @@
  You should have received a copy of the GNU Lesser General Public License
  along with this library; if not, write to the Free Software Foundation,
  Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
-*/
+ */
 package org.cytoscape.work.swing;
-
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
@@ -34,24 +33,28 @@ import java.lang.reflect.Method;
 import org.cytoscape.work.Tunable;
 
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
+
 import org.junit.Before;
 import org.junit.Test;
 
-
 public class AbstractGUITunableHandlerTest {
-	private static class SimpleGUITunableHandler extends AbstractGUITunableHandler {
-		SimpleGUITunableHandler(final Method getter, final Method setter, 
-		                        final Object instance, final Tunable tunable) {
+
+	private static final class SimpleGUITunableHandler extends AbstractGUITunableHandler {
+		SimpleGUITunableHandler(final Method getter, final Method setter, final Object instance, final Tunable tunable) {
 			super(getter, setter, instance, tunable);
 		}
 
-		SimpleGUITunableHandler(final Field field, final Object instance, 
-		                        final Tunable tunable) {
+		SimpleGUITunableHandler(final Field field, final Object instance, final Tunable tunable) {
 			super(field, instance, tunable);
 		}
 
-		public void handle() { }
-		public void update() { testUpdateCalled = true; }
+		public void handle() {
+		}
+
+		public void update() {
+			testUpdateCalled = true;
+		}
 
 		public boolean testUpdateCalled = false;
 	}
@@ -104,7 +107,7 @@ public class AbstractGUITunableHandlerTest {
 	public void testNotifyChangeListeners() throws Exception {
 		methodHandler.addChangeListener(methodHandlerS);
 		methodHandler.notifyChangeListeners();
-		assertTrue( methodHandlerS.testUpdateCalled );
+		assertTrue(methodHandlerS.testUpdateCalled);
 	}
 
 	@Test
@@ -115,5 +118,67 @@ public class AbstractGUITunableHandlerTest {
 	@Test
 	public void testEmptyGetChangeSources() throws Exception {
 		assertEquals(0, methodHandler.getChangeSources().length);
+	}
+
+	@Test(expected=IllegalArgumentException.class)
+	public void testSetValue() throws Exception {
+		fieldHandler.setValue(null);
+	}
+
+
+	@Test
+	public void testNotifyDependents() {
+		GUITunableHandler gh = mock(GUITunableHandler.class);
+		fieldHandler.addDependent(gh);
+		fieldHandler.notifyDependents();
+		verify(gh, times(1)).checkDependency(anyString(), anyString());
+	}
+
+	@Test
+	public void testAddChangeListener() {
+		GUITunableHandler gh = mock(GUITunableHandler.class);
+		fieldHandler.addChangeListener(gh);
+		fieldHandler.notifyChangeListeners();
+		verify(gh, times(1)).changeOccurred(anyString(), anyString());
+	}
+
+
+	@Test
+	public void testGetDependency() {
+		assertNotNull(fieldHandler.getDependency());
+	}
+
+	@Test
+	public void testChangeOccurred() {
+		String name = "test name";
+		String state = "test state";
+		fieldHandler.changeOccurred(name, state);
+	}
+
+	@Test
+	public void testCheckDependency() {
+		String depName = "depName";
+		String depState = "dep state";
+		fieldHandler.checkDependency(depName, depState);
+	}
+
+	@Test
+	public void testGetJPanel() {
+		assertNotNull(fieldHandler.getJPanel());
+	}
+
+	@Test
+	public void testHandle() {
+		fieldHandler.handle();
+	}
+
+	@Test
+	public void testUpdate() {
+		fieldHandler.update();
+	}
+
+	@Test
+	public void testGetState() {
+		assertEquals("42", fieldHandler.getState());
 	}
 }
