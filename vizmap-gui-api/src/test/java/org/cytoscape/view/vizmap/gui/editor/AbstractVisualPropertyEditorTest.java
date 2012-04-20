@@ -39,7 +39,7 @@ public class AbstractVisualPropertyEditorTest {
 	
 	@Test
 	public void testGetClass(){
-		assertEquals(DummyEditor.class,  editor.getClass());
+		assertEquals(Object.class,  editor.getType());
 	}
 	
 	@Test
