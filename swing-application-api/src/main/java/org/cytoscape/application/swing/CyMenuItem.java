@@ -1,5 +1,3 @@
-
-
 /*
  File: CyMenuItem.java
 
@@ -52,6 +50,7 @@ public final class CyMenuItem {
 
 	/**
 	 * Constructor.
+	 *
 	 * @param menuItem to JMenuItem to be added to the menu.
 	 * @param gravity the gravity of the menu item to be added. 
 	 */
