@@ -30,15 +30,14 @@
 package org.cytoscape.util.swing;
 
 
-import javax.swing.JMenu;
-import javax.swing.JMenuBar;
-import javax.swing.JPopupMenu;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
+
+import javax.swing.JMenu;
+import javax.swing.JMenuBar;
+import javax.swing.JPopupMenu;
 
 
 /**
@@ -49,7 +48,6 @@ public final class JMenuTracker {
 	private final Map<String, MenuGravityTracker> menuMap;
 	private final JMenuBar rootMenuBar;
 	private final PopupMenuGravityTracker rootPopupGravityTracker;
-	private double largeGravity = Double.MAX_VALUE / 2.0;
 
 	/**
 	 * This constructor allows you to specify a root JPopupMenu that all parent-less

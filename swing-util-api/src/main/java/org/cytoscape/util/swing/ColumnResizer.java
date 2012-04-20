@@ -49,23 +49,17 @@ import java.awt.*;
  * From <i>Swing Hacks</i> by Joshua Marinacci and Chris Adamson.<br>
  * 2005 Oreilly & Associates Inc. ISBN: 0-596-00907-0<br>
  * </p>
- * Customized by Keiichiro Ono
  *
- * @since Cytoscape 2.4
- * @version 1.0
  * @author Joshua Marinacci, Chris Adamson, Keiichiro Ono
  * @CyAPI.Static.Class 
  */
 public final class ColumnResizer {
+	
 	private static final int DEFLMAX_WIDTH = 280;
 
 	private ColumnResizer() {}
 
-	/**
-	 *  DOCUMENT ME!
-	 *
-	 * @param table DOCUMENT ME!
-	 */
+	
 	public static void adjustColumnPreferredWidths(JTable table) {
 		// strategy - get max width for cells in column and
 		// make that the preferred width

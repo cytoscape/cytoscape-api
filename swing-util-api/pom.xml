@@ -1,114 +1,121 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 
-  <parent>
-    <groupId>org.cytoscape</groupId>
-    <artifactId>api-parent</artifactId>
-    <version>3.0.0-alpha8-SNAPSHOT</version>
-  </parent>
+	<parent>
+		<groupId>org.cytoscape</groupId>
+		<artifactId>api-parent</artifactId>
+		<version>3.0.0-alpha8-SNAPSHOT</version>
+	</parent>
 
-  <properties>
-    <bundle.symbolicName>org.cytoscape.swing-util-api</bundle.symbolicName>
-    <bundle.namespace>org.cytoscape.util.swing</bundle.namespace>
-  </properties>
+	<properties>
+		<bundle.symbolicName>org.cytoscape.swing-util-api</bundle.symbolicName>
+		<bundle.namespace>org.cytoscape.util.swing</bundle.namespace>
+	</properties>
 
-  <modelVersion>4.0.0</modelVersion>
-  <groupId>org.cytoscape</groupId>
-  <artifactId>swing-util-api</artifactId>
+	<modelVersion>4.0.0</modelVersion>
+	<artifactId>swing-util-api</artifactId>
 
-  <name>Cytoscape Swing Utility API (${project.artifactId})</name>
+	<name>Cytoscape Swing Utility API (${project.artifactId})</name>
 
-  <packaging>bundle</packaging>
+	<packaging>bundle</packaging>
 
-  <repositories>
-    <!-- bootstrap for cytoscape dependencies, namely the parent POM snapshots -->
-    <repository>
-      <id>cytoscape_snapshots</id>
-      <snapshots>
-        <enabled>true</enabled>
-      </snapshots>
-      <releases>
-        <enabled>false</enabled>
-      </releases>
-      <name>Cytoscape Snapshots</name>
-      <url>http://code.cytoscape.org/nexus/content/repositories/snapshots/</url>
-    </repository>
-    <!-- bootstrap for cytoscape dependencies, namely the parent POM releases -->
-    <repository>
-      <id>cytoscape_releases</id>
-      <snapshots>
-        <enabled>false</enabled>
-      </snapshots>
-      <releases>
-        <enabled>true</enabled>
-      </releases>
-      <name>Cytoscape Releases</name>
-      <url>http://code.cytoscape.org/nexus/content/repositories/releases/</url>
-    </repository>
-  </repositories>
+	<repositories>
+		<!-- bootstrap for cytoscape dependencies, namely the parent POM snapshots -->
+		<repository>
+			<id>cytoscape_snapshots</id>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<name>Cytoscape Snapshots</name>
+			<url>http://code.cytoscape.org/nexus/content/repositories/snapshots/</url>
+		</repository>
+		<!-- bootstrap for cytoscape dependencies, namely the parent POM releases -->
+		<repository>
+			<id>cytoscape_releases</id>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<name>Cytoscape Releases</name>
+			<url>http://code.cytoscape.org/nexus/content/repositories/releases/</url>
+		</repository>
+	</repositories>
 
-  <build>
-    <resources>
-      <resource>
-        <directory>src/main/resources</directory>
-      </resource>
-      <resource>
-        <directory>.</directory>
-        <includes>
-          <include>plugin.xml</include>
-          <include>plugin.properties</include>
-          <include>icons/**</include>
-        </includes>
-      </resource>
-    </resources>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.felix</groupId>
-        <artifactId>maven-bundle-plugin</artifactId>
-        <version>${maven-bundle-plugin.version}</version>
-        <extensions>true</extensions>
-        <configuration>
-          <instructions>
-            <Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
-            <Bundle-Version>${project.version}</Bundle-Version>
-            <Export-Package>!${bundle.namespace}.internal.*,${bundle.namespace}.*;version="${project.version}"</Export-Package>
-            <Private-Package>${bundle.namespace}.internal.*</Private-Package>
-            <Bundle-Activator>${bundle.namespace}.internal.CyActivator</Bundle-Activator>
-          </instructions>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <scope>test</scope>
-    </dependency>
-    <dependency>
-      <groupId>org.cytoscape</groupId>
-      <artifactId>property-api</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.cytoscape</groupId>
-      <artifactId>service-api</artifactId>
-      <version>${project.version}</version>
-    </dependency>
-    <dependency>
-      <groupId>org.osgi</groupId>
-      <artifactId>org.osgi.core</artifactId>
-      <version>${osgi.api.version}</version>
-    </dependency>
-    <dependency>
-	  <groupId>org.cytoscape</groupId>
-	  <artifactId>model-api</artifactId>
-      <version>${project.version}</version>
-	</dependency>
-	<dependency>
-	  <groupId>org.cytoscape</groupId>
-	  <artifactId>application-api</artifactId>
-	  <version>${project.version}</version>
-	</dependency>
-  </dependencies>
+	<build>
+		<resources>
+			<resource>
+				<directory>src/main/resources</directory>
+			</resource>
+			<resource>
+				<directory>.</directory>
+				<includes>
+					<include>plugin.xml</include>
+					<include>plugin.properties</include>
+					<include>icons/**</include>
+				</includes>
+			</resource>
+		</resources>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+				<version>${maven-bundle-plugin.version}</version>
+				<extensions>true</extensions>
+				<configuration>
+					<instructions>
+						<Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
+						<Bundle-Version>${project.version}</Bundle-Version>
+						<Export-Package>!${bundle.namespace}.internal.*,${bundle.namespace}.*;version="${project.version}"</Export-Package>
+						<Private-Package>${bundle.namespace}.internal.*</Private-Package>
+						<Bundle-Activator>${bundle.namespace}.internal.CyActivator</Bundle-Activator>
+					</instructions>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+	<dependencies>
+		<dependency>
+			<groupId>org.cytoscape</groupId>
+			<artifactId>property-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.cytoscape</groupId>
+			<artifactId>service-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>${osgi.api.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.cytoscape</groupId>
+			<artifactId>model-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.cytoscape</groupId>
+			<artifactId>application-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+
+		<!-- Testing -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-all</artifactId>
+			<scope>test</scope>
+		</dependency>
+	</dependencies>
 </project>

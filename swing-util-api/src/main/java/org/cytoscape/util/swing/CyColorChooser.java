@@ -45,35 +45,38 @@ import java.awt.event.ActionListener;
 /**
  * This is an annoying re-implementation of JColorChooser.showDialog() that remembers
  * recently used colors between invocations of the chooser dialog.
+ *
  * @CyAPI.Static.Class 
  */
 public final class CyColorChooser {
-	protected static JColorChooser chooser = new JColorChooser();
-	protected static ColorListener listener = new ColorListener();
-	protected static Color color;
+	
+	private static JColorChooser chooser = new JColorChooser();
+	private static ColorListener listener = new ColorListener();
+	
+	private static Color color;
 
 	private CyColorChooser() {}
 
 	/**
-	 *  DOCUMENT ME!
-	 *
-	 * @param component DOCUMENT ME!
-	 * @param title DOCUMENT ME!
-	 * @param initialColor DOCUMENT ME!
-	 *
-	 * @return  DOCUMENT ME!
+	 * Display custom color chooser dialog.
+	 * 
+	 * @param parent parent component of this dialog
+	 * @param title Title of this dialog
+	 * @param initialColor Initially selected color.
+	 * 
+	 * @return New Color or null if canceled.
 	 */
-	public static Color showDialog(Component component, String title, Color initialColor) {
+	public static Color showDialog(final Component parent, final String title, final Color initialColor) {
 		if (initialColor != null)
 			chooser.setColor(initialColor);
 
-		JDialog dialog = JColorChooser.createDialog(component, title, true, chooser, listener, null);
+		final JDialog dialog = JColorChooser.createDialog(parent, title, true, chooser, listener, null);
 		dialog.setVisible(true);
 
 		return color;
 	}
 
-	static class ColorListener implements ActionListener {
+	private static final class ColorListener implements ActionListener {
 		public void actionPerformed(ActionEvent e) {
 			color = chooser.getColor();
 		}

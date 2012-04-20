@@ -55,6 +55,7 @@ import org.slf4j.LoggerFactory;
  * @CyAPI.Final.Class 
  */
 public final class JTreeTable extends JTable {
+	
 	private final static long serialVersionUID = 1202339868625600L;
 	private final static Logger logger = LoggerFactory.getLogger( JTreeTable.class );
 
