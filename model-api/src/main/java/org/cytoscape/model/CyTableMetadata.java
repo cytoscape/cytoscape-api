@@ -2,7 +2,9 @@ package org.cytoscape.model;
 
 /**
  * A snapshot of information about a relationship shared between a CyTable
- * instance and an associated CyNetworks.
+ * instance and an associated CyNetworks. The interface is used to capture
+ * table information for serialization and shouldn't be needed for most
+ * normal use of tables.
  * @CyAPI.Api.Interface
  */
 public interface CyTableMetadata {

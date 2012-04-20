@@ -2,7 +2,8 @@ package org.cytoscape.model;
 
 /**
  * Information object for columns that stores extra Virtual Column information
- * if applicable.
+ * if applicable. See {@link CyTable#addVirtualColumn} for details on
+ * what virtual columns are.
  * @CyAPI.Api.Interface
  */
 public interface VirtualColumnInfo {

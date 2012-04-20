@@ -239,7 +239,11 @@ public interface CyTable extends CyIdentifiable {
 	int getRowCount();
 
 	/** 
-	 * Adds a "virtual" column to the the current table.
+	 * Adds a "virtual" column to the the current table. 
+	 * A virtual column is a column in one table that points to a column in a different table. 
+	 * Instead of duplicating the column data found in the other table, a virtual column allows 
+	 * us to share that data by reference. A virtual column requires that columns be matched
+	 * according to the primary key of the other table with a column in this table.
 	 * @param virtualColumn  The name of the new virtual column, if this name already exists,
 	 *                       new column names with -1, -2 and so appended to this name on will
 	 *                       be tried until a non-existing name will be found.
@@ -258,6 +262,10 @@ public interface CyTable extends CyIdentifiable {
 	                        String targetJoinKey, boolean isImmutable);
 
 	/** Adds all columns in another table as "virtual" columns to the the current table.
+	 * A virtual column is a column in one table that points to a column in a different table. 
+	 * Instead of duplicating the column data found in the other table, a virtual column allows 
+	 * us to share that data by reference. A virtual column requires that columns be matched
+	 * according to the primary key of the other table with a column in this table.
 	 *  @param sourceTable    The table that really contains the column that we're adding (all
 	 *                        updates and lookups of this new column will be redirected to here).
 	 *                        The table will be joined on the primary key column of this table.
@@ -281,10 +289,13 @@ public interface CyTable extends CyIdentifiable {
 	 */
 	void setSavePolicy(SavePolicy policy);
 
-	/** Swaps the contents and properties, like mutability etc. of "otherTable" with this table.
-	 *  @param otherTable  the table that we're being swapped with.
-	 *  Note: the one "property" that is not being swapped is the SUID!  Also, no events are being
-	 *        fired to give any listeners a chance to react to the exchange!
+	/** 
+	 * Swaps the contents and properties (such as mutability) of "otherTable" with this table.
+	 * This method is used to copy tables for backup, undo, and deletion and generally shouldn't
+	 * be needed for most normal work.
+	 * @param otherTable  the table that we're being swapped with.
+	 * Note: the one "property" that is not being swapped is the SUID!  Also, no events are being
+	 *       fired to give any listeners a chance to react to the exchange!
 	 */
 	void swap(CyTable otherTable);
 }

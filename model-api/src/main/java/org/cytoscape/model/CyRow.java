@@ -113,8 +113,10 @@ public interface CyRow {
 	Map<String, Object> getAllValues();
 
 	/**
-	 * Note that the returned object may well not be of the type that get() for this column might
-	 * return!  You should therefore almost always use get() instead!
+	 * Returns the Object that contains the value for the specified column.
+	 * The returned object may or may not be of the type that get() for this 
+	 * column will return, for example it may return an equation object that
+	 * has not yet been evaluated!
 	 * @param columnName The name identifying the attribute.
 	 * @return The row Object that represents the value in a column.
 	 */

@@ -43,6 +43,8 @@ public interface CyNetworkFactory {
 
 	/**
 	 * Returns a new, empty {@link CyNetwork} object where the associated default tables are private. 
+	 * This method should only be used in special cases where the network created is not intended to
+	 * be used or shared like a normal network within the system.
 	 * @return A new, empty {@link CyNetwork} object. 
 	 */
 	CyNetwork createNetworkWithPrivateTables();

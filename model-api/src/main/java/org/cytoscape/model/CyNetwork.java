@@ -216,7 +216,8 @@ public interface CyNetwork extends CyIdentifiable {
 	 * are no neighbor nodes found.
 	 * This method should never return null.
 	 * Modifying this list (if allowed by the implementation)
-	 * has no effect on the network.
+	 * has no effect on the network. This method only returns immediate
+	 * neighbors.
 	 *
 	 * @param node the node whose neighbors we're looking for
 	 * @param edgeType the directionality of the edges we're interested in
@@ -261,8 +262,9 @@ public interface CyNetwork extends CyIdentifiable {
 	 * Get the list of edges that connect two nodes.  The {@link CyEdge.Type} enum is
 	 * used to determine whether the list includes undirected, directed,
 	 * incoming, or outgoing edges. The list will be empty if no connecting
-	 * edges are found.
-	 * This method should never return null.
+	 * edges are found. 
+	 * This method should never return null. This method will NOT find the
+	 * shortest path between two nodes that are not already immediate neighbors.
 	 * Modifying this list (if allowed by the implementation)
 	 * has no effect on the network.
 	 *
