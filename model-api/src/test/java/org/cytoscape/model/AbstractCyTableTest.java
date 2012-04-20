@@ -517,6 +517,83 @@ public abstract class AbstractCyTableTest {
 		assertEquals(table.getColumn("someInt").getType(), Integer.class);
 		assertNull(table.getColumn("nonExistentColumnName"));
 	}
+	
+	@Test
+	public void testGetColumnIsCaseInsensitive() {
+		final String NAME = "Test";
+		table.createColumn(NAME, String.class, false);
+		final CyColumn col1 = table.getColumn(NAME);
+		assertNotNull(col1);
+		assertEquals(col1, table.getColumn("tEsT"));
+		assertEquals(col1, table.getColumn(NAME.toLowerCase()));
+		assertEquals(col1, table.getColumn(NAME.toUpperCase()));
+	}
+	
+	@Test
+	public void testDeleteColumnIsCaseInsensitive() {
+		final String NAME = "Test";
+		// Simple column
+		table.createColumn(NAME, String.class, false);
+		assertNotNull(table.getColumn(NAME));
+		table.deleteColumn(NAME.toLowerCase());
+		assertNull(table.getColumn(NAME));
+		// List column
+		table.createListColumn(NAME, String.class, false);
+		assertNotNull(table.getColumn(NAME));
+		table.deleteColumn(NAME.toUpperCase());
+		assertNull(table.getColumn(NAME));
+	}
+	
+	@Test
+	public void testGetMatchingRowsIsCaseInsensitive() {
+		final String NAME = "Test";
+		table.createColumn(NAME, String.class, false);
+		table.getRow(1L).set(NAME, "A");
+		table.getRow(2L).set(NAME, "A");
+		table.getRow(3L).set(NAME, "B");
+		assertEquals(2, table.getMatchingRows(NAME.toLowerCase(), "A").size());
+		assertEquals(1, table.getMatchingRows(NAME.toUpperCase(), "B").size());
+	}
+	
+	@Test
+	public void testCountMatchingRowsIsCaseInsensitive() {
+		final String NAME = "Test";
+		table.createColumn(NAME, String.class, false);
+		table.getRow(1L).set(NAME, "A");
+		table.getRow(2L).set(NAME, "A");
+		table.getRow(3L).set(NAME, "B");
+		assertEquals(2, table.countMatchingRows(NAME.toLowerCase(), "A"));
+		assertEquals(1, table.countMatchingRows(NAME.toUpperCase(), "B"));
+	}
+	
+	@Test
+	public void testGetValueFromRowIsCaseInsensitive() {
+		final String NAME = "Test";
+		table.createColumn(NAME, String.class, false);
+		table.getRow(1L).set(NAME, "A");
+		assertEquals("A", table.getRow(1L).get(NAME.toLowerCase(), String.class));
+		assertEquals("A", table.getRow(1L).get(NAME.toUpperCase(), String.class));
+	}
+	
+	@Test
+	public void testGetListFromRowIsCaseInsensitive() {
+		final String NAME = "Test";
+		table.createListColumn(NAME, String.class, false);
+		final ArrayList<String> list = new ArrayList<String>();
+		list.add("A");
+		table.getRow(1L).set(NAME, list);
+		assertEquals(list, table.getRow(1L).getList(NAME.toLowerCase(), String.class));
+		assertEquals(list, table.getRow(1L).getList(NAME.toUpperCase(), String.class));
+	}
+	
+	@Test
+	public void testAddVirtualColumnIsCaseInsensitive() {
+		table.createColumn("Col_A", Long.class, false);
+		table2.createColumn("Col_B", String.class, false);
+		assertEquals("VirtualCol_A", table.addVirtualColumn("VirtualCol_A", "COL_B", table2, "col_a", false));
+		assertEquals("VirtualCol_A", table.getColumn("VIRTUALCOL_a").getName());
+		assertEquals("virtualcol_a-1", table.addVirtualColumn("virtualcol_a", "col_b", table2, "COL_A", false));
+	}
 
 	@Test
 	public void testGetRowCount() {
@@ -1030,7 +1107,7 @@ public abstract class AbstractCyTableTest {
 	}
 	
 	@Test (expected=IllegalArgumentException.class)
-	public void testCreatColumnDefaultCaseMatch(){
+	public void testCreateColumnDefaultCaseMatch(){
 		
 		table.createColumn("test", String.class, false);
 		table.createColumn("Test", String.class, false, "");
@@ -1038,14 +1115,14 @@ public abstract class AbstractCyTableTest {
 	
 	
 	@Test (expected=IllegalArgumentException.class)
-	public void testCreatListColumnsCaseMatch(){
+	public void testCreateListColumnsCaseMatch(){
 		
 		table.createColumn("test", String.class, false);
 		table.createListColumn("Test", String.class, false);
 	}
 	
 	@Test (expected=IllegalArgumentException.class)
-	public void testCreatListColumnsCaseMatch2(){
+	public void testCreateListColumnsCaseMatch2(){
 		
 		table.createColumn("test", String.class, false);
 		table.createListColumn("Test", String.class, false, null );
