@@ -33,15 +33,22 @@ import org.cytoscape.work.TaskIterator;
 
 
 /**
- * The assumption is that setTable() will be called before getTask() and that the Task in question
- * operates on the specified CyTable. 
+ * A task factory that creates one or more tasks that operate on the specified CyTable.
  * @CyAPI.Spi.Interface
  */
 public interface TableTaskFactory {
-	/** Used to provision this factory with a {@link CyTable} that will be used to create tasks.
-	 *  @param table a non-null CyTable
+
+	/** 
+	 * Used to provision this factory with a {@link CyTable} that will be used to create tasks.
+	 * @param table a non-null CyTable
+	 * @return A TaskIterator object containing one or more {@link org.cytoscape.work.Task} objects to execute.
 	 */
 	TaskIterator createTaskIterator(CyTable table);
-	
+
+    /**
+     * Returns true if this task factory is ready to produce a TaskIterator.
+	 * @param table a non-null CyTable
+     * @return true if this task factory is ready to produce a TaskIterator.
+     */
 	boolean isReady(CyTable table);
 }

@@ -33,19 +33,21 @@ import org.cytoscape.work.TaskIterator;
 
 
 /**
+ * A task factory that creates one or more tasks that operate on the specified CyNetworkView. 
  * @CyAPI.Spi.Interface
  */
 public interface NetworkViewTaskFactory {
 	/**
 	 * Creates a new TaskIterator using the given {@link CyNetworkView}
 	 * @param networkView  a non-null network view
+	 * @return A TaskIterator object containing one or more {@link org.cytoscape.work.Task} objects to execute.
 	 */
 	TaskIterator createTaskIterator(CyNetworkView networkView);
 	
 	/**
 	 * Returns true if this task factory is ready to produce a TaskIterator.
 	 * @param networkView
-	 * @return
+	 * @return true if this task factory is ready to produce a TaskIterator.
 	 */
 	boolean isReady(CyNetworkView networkView);
 }

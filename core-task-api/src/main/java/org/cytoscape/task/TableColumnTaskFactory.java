@@ -33,15 +33,21 @@ import org.cytoscape.work.TaskIterator;
 
 
 /**
- * The assumption is that setColumn() will be called before getTask() and that the Task in question
- * operates on the specified CyColumn. 
+ *  A task factory that creates one or more tasks that operate on the specified CyColumn.
  * @CyAPI.Spi.Interface
  */
 public interface TableColumnTaskFactory {
-	/** Used to provision this factory with a {@link CyColumn} that will be used to create tasks.
-	 *  @param column a non-null CyColumn.
+	/** 
+	 * Used to provision this factory with a {@link CyColumn} that will be used to create tasks.
+	 * @param column a non-null CyColumn.
+	 * @return A TaskIterator object containing one or more {@link org.cytoscape.work.Task} objects to execute.
 	 */
 	TaskIterator createTaskIterator(final CyColumn column);
-	
+
+    /**
+     * Returns true if this task factory is ready to produce a TaskIterator.
+	 * @param column a non-null CyColumn.
+     * @return true if this task factory is ready to produce a TaskIterator.
+     */
 	boolean isReady(final CyColumn column);
 }

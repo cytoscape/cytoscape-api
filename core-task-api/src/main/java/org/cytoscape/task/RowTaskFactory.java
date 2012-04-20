@@ -33,17 +33,21 @@ import org.cytoscape.work.TaskIterator;
 
 
 /**
- * The assumption is that setRow() will be called before
- * getTask() and that the Task in question operates on the 
- * specified CyNetwork. 
+ * A task factory that creates one or more tasks that operate on the specified CyRow.
  * @CyAPI.Spi.Interface
  */
 public interface RowTaskFactory {
-	/** Provisions this factory with the {@link CyRow} that will be passed into any task created
-	 *  by it.
-	 *  @param row  a non-null CyRow
+	/** 
+	 * Provisions this factory with the {@link CyRow} that will be passed into any task created by it.
+	 * @param row  a non-null CyRow
+	 * @return A TaskIterator object containing one or more {@link org.cytoscape.work.Task} objects to execute.
 	 */
 	TaskIterator createTaskIterator(CyRow row);
 	
+    /**
+     * Returns true if this task factory is ready to produce a TaskIterator.
+	 * @param row  a non-null CyRow
+     * @return true if this task factory is ready to produce a TaskIterator.
+     */
 	boolean isReady(CyRow row);
 }

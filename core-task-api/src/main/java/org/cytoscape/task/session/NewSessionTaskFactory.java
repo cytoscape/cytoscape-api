@@ -6,20 +6,14 @@ import org.cytoscape.work.TaskIterator;
 
 /**
  * This interface provides a task iterator for creating a new session.
- * @author rozagh
- *
  */
 public interface NewSessionTaskFactory extends TaskFactory {
 	
-
 	/**
-	 * Creates a task iterator for creating anew session and
-	 *  destroying the current session based on the input.The created
-	 *  task runs synchronously in the current thread and it will not 
-	 *  create a task monitor. 
-	 * @param destroyCurrentSession
-	 * @return
+	 * Creates a task iterator for creating a new session and
+	 * destroying the current session based on the input.
+	 * @param destroyCurrentSession Whether or not to destroy the current session.
+	 * @return A TaskIterator object containing one or more {@link org.cytoscape.work.Task} objects to execute. 
 	 */
-	TaskIterator createTaskIterator(final boolean destroyCurrentSession);
-
+	TaskIterator createTaskIterator(boolean destroyCurrentSession);
 }

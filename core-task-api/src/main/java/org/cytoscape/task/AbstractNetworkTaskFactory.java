@@ -7,6 +7,11 @@ import org.cytoscape.model.CyNetwork;
  * @CyAPI.Abstract.Class
  */
 public abstract class AbstractNetworkTaskFactory implements NetworkTaskFactory {
+	/**
+	 * Always returns true.
+	 * @param network The network.
+	 * @return always returns true.
+	 */
 	@Override
 	public boolean isReady(CyNetwork network) {
 		return true;

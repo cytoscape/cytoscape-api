@@ -33,17 +33,25 @@ import org.cytoscape.work.TaskIterator;
 
 
 /**
- * The assumption is that setColumnAndPrimaryKey() will be called before getTask() and that the Task
- * in question operates on the specified table entry identified by the column and primary key value.
+ * A task factory that creates one or more tasks that operate on the specified CyColumn
+ * along with primary key.
  * @CyAPI.Spi.Interface
  */
 public interface TableCellTaskFactory {
-	/** Used to provision this factory with a {@link CyColumn} and a primary key that will be
-	 *  used to create tasks.
-	 *  @param column  a non-null CyColumn
-	 *  @param primaryKeyValue  a non-null primary key value
+	/** 
+	 * Used to provision this factory with a {@link CyColumn} and a primary key that will be
+	 * used to create tasks.
+	 * @param column  a non-null CyColumn
+	 * @param primaryKeyValue  a non-null primary key value
+	 * @return A TaskIterator object containing one or more {@link org.cytoscape.work.Task} objects to execute.
 	 */
 	TaskIterator createTaskIterator(final CyColumn column, final Object primaryKeyValue);
-	
+
+    /**
+     * Returns true if this task factory is ready to produce a TaskIterator.
+	 * @param column  a non-null CyColumn
+	 * @param primaryKeyValue  a non-null primary key value
+     * @return true if this task factory is ready to produce a TaskIterator.
+     */
 	boolean isReady(final CyColumn column, final Object primaryKeyValue);
 }

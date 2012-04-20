@@ -34,6 +34,11 @@ import org.cytoscape.model.CyColumn;
  * @CyAPI.Abstract.Class
  */
 abstract public class AbstractTableColumnTaskFactory implements TableColumnTaskFactory {
+	/**
+	 * Always returns true.
+	 * @param column The table column. 
+	 * @return always returns true.
+	 */
 	@Override
 	public boolean isReady(CyColumn column) {
 		return true;

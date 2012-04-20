@@ -33,8 +33,9 @@ import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.work.TaskIterator;
 
-
 /**
+ * A task factory that creates one or more tasks that operate on the specified View&lt;CyEdge&gt; within
+ * the specified CyNetworkView.
  * @CyAPI.Spi.Interface
  */
 public interface EdgeViewTaskFactory {
@@ -42,6 +43,7 @@ public interface EdgeViewTaskFactory {
 	 * Creates a new TaskIterator using the given edge view and network view.
 	 * @param edgeView  a non-null edge view
 	 * @param networkView  a non-null network view
+	 * @return A TaskIterator object containing one or more {@link org.cytoscape.work.Task} objects to execute.
 	 */
 	TaskIterator createTaskIterator(View<CyEdge> edgeView, CyNetworkView networkView);
 	
@@ -49,7 +51,7 @@ public interface EdgeViewTaskFactory {
 	 * Returns true if this task factory is ready to produce a TaskIterator.
 	 * @param edgeView  a non-null edge view
 	 * @param networkView  a non-null network view
-	 * @return
+	 * @return true if this task factory is ready to produce a TaskIterator.
 	 */
 	boolean isReady(View<CyEdge> edgeView, CyNetworkView networkView);
 }

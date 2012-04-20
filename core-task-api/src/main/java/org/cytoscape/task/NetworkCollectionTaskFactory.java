@@ -35,17 +35,22 @@ import org.cytoscape.work.TaskIterator;
 
 
 /**
- * The assumption is that setNetworkCollection() will be called before
- * getTask() and that the Task in question operates on the 
- * specified CyNetworks. 
+ * Produces a task iterator for the specified collection of networks. 
  * @CyAPI.Spi.Interface
  */
 public interface NetworkCollectionTaskFactory {
-	/** Provisions this factory with the collection of networks that will be passed into any task
-	 *  created by it.
-	 *  @param nets  a non-null collection of {@link CyNetwork}s
+	/** 
+	 * Provisions this factory with the collection of networks that will be passed into any task
+	 * created by it.
+	 * @param networks a non-null collection of {@link CyNetwork}s
+	 * @return A TaskIterator object containing one or more {@link org.cytoscape.work.Task} objects to execute.
 	 */
 	TaskIterator createTaskIterator(Collection<CyNetwork> networks);
 	
+	/** 
+	 * Returns true if this task factory is ready to produce a task iterator.
+	 * @param networks a non-null collection of {@link CyNetwork}s
+	 * @return true if this task factory is ready to produce a task iterator.
+	 */
 	boolean isReady(Collection<CyNetwork> networks);
 }

@@ -50,7 +50,6 @@ public interface MapNetworkAttrTaskFactory extends TaskFactory {
 	 * @param type The type of table to map to, either CyNode.class or CyEdge.class.
 	 * @param newGlobalTable The table to be mapped. 
 	 * @param mappingKey The column name in the existing table used to join with the primary key in the new table.
-	 * @param mappingType The type of mapping to be performed.
 	 */
 	TaskIterator createTaskIterator(final Class<? extends CyIdentifiable> type, 
 	                          final CyTable newGlobalTable,

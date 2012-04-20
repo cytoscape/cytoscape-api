@@ -9,6 +9,11 @@ import org.cytoscape.view.model.CyNetworkView;
  * @CyAPI.Abstract.Class
  */
 public abstract class AbstractNetworkViewCollectionTaskFactory implements NetworkViewCollectionTaskFactory {
+	/**
+	 * Always returns true.
+	 * @param networkViews The collection of network views.
+	 * @return always returns true.
+	 */
 	@Override
 	public boolean isReady(Collection<CyNetworkView> networkViews) {
 		return true;

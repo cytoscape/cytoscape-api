@@ -35,18 +35,27 @@ import org.cytoscape.work.TaskIterator;
 
 
 /**
- * The assumption is that setNodeView() will be called before
- * getTask() and that the Task in question operates on the 
- * specified View&lt;CyNode&gt;.
+ * A task factory that creates a task that operates on the specified View&lt;CyNode&gt; within
+ * the specified CyNetworkView.
  * @CyAPI.Spi.Interface
  */
 public interface NodeViewTaskFactory {
-	/** Provisions this factory with the node view and its associated network view, both of
-	 *  which will be passed into any task that will be created by this factory.
-	 *  @param nodeView  a non-null node view
-	 *  @param netView   the non-null network view associated with the node view
+	/** 
+	 * Provisions this factory with the node view and its associated network view, both of
+	 * which will be passed into any task that will be created by this factory.
+	 * @param nodeView  a non-null node view
+	 * @param networkView   the non-null network view associated with the node view
+	 * @return A TaskIterator object containing one or more {@link org.cytoscape.work.Task} objects to execute.
 	 */
 	TaskIterator createTaskIterator(View<CyNode> nodeView, CyNetworkView networkView);
 	
+	/** 
+	 * Returns true if the node view and network view are in a state that is
+	 * ready to be processed by the generated tasks and false otherwise.
+	 * @param nodeView  a non-null node view
+	 * @param networkView   the non-null network view associated with the node view
+	 * @return true if the node view and network view are in a state that is
+	 * ready to be processed by the generated tasks and false otherwise.
+	 */
 	boolean isReady(View<CyNode> nodeView, CyNetworkView networkView);
 }
