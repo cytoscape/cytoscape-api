@@ -13,5 +13,5 @@ public interface CytoPanelStateChangedListener extends CyListener {
 	 * Handles specified event.
 	 * @param e The event to be handled.
 	 */
-	public void handleEvent(CytoPanelStateChangedEvent e);
+	void handleEvent(CytoPanelStateChangedEvent e);
 }

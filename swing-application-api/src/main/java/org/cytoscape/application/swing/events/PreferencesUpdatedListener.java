@@ -13,5 +13,5 @@ public interface PreferencesUpdatedListener extends CyListener {
 	 * Process the specified event.
 	 * @param e The even to be processed.
 	 */
-	public void handleEvent(PreferencesUpdatedEvent e);
+	void handleEvent(PreferencesUpdatedEvent e);
 }

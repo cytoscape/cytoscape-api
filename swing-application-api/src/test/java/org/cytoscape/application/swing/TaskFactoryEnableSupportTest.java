@@ -22,6 +22,7 @@ public class TaskFactoryEnableSupportTest {
 	@Mock
 	private TaskFactory tfp;
 
+	@Mock
 	private DynamicSubmenuListener submenuListener;
 
 	@Before

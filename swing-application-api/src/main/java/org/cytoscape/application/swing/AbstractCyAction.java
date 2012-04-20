@@ -112,7 +112,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	/**
 	 * A support class for deciding whether the action should be enabled.
 	 */
-	private final AbstractEnableSupport enabler; 
+	private final AbstractEnableSupport enabler;
 
 	/**
 	 * Creates a new AbstractCyAction object.
