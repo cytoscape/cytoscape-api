@@ -1,4 +1,4 @@
-package org.cytoscape.datasource;
+package org.cytoscape.io.datasource;
 
 import java.util.Collection;
 

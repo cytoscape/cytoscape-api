@@ -1,4 +1,4 @@
 /**
  * API to provide data files as a bundle.
  */
-package org.cytoscape.datasource;
+package org.cytoscape.io.datasource;

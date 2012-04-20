@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.net.URL;
 
 import org.cytoscape.io.DataCategory;
+import org.cytoscape.io.datasource.DefaultDataSource;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

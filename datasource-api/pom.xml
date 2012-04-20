@@ -9,8 +9,8 @@
 	</parent>
 
 	<properties>
-		<bundle.symbolicName>org.cytoscape.datasource-api</bundle.symbolicName>
-		<bundle.namespace>org.cytoscape.datasource</bundle.namespace>
+		<bundle.symbolicName>org.cytoscape.io.datasource-api</bundle.symbolicName>
+		<bundle.namespace>org.cytoscape.io.datasource</bundle.namespace>
 	</properties>
 
 	<modelVersion>4.0.0</modelVersion>

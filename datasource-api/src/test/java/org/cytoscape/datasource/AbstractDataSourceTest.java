@@ -6,6 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import java.net.URL;
 
 import org.cytoscape.io.DataCategory;
+import org.cytoscape.io.datasource.DataSource;
 import org.junit.Test;
 
 public abstract class AbstractDataSourceTest {
