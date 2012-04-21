@@ -66,19 +66,24 @@ public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 
 	/**
 	 * Creates a new AbstractPartitionLayoutTask object.
-	 * @param networkView the CyNetworkView being partitioned.
 	 * @param name The name of the layout algorithm. 
 	 * @param singlePartition Whether this layout algorithm should execute on a 
 	 * single partition instead of multiple partitions. 
-	 * @param supportedNodeAttributeTypes 
-	 * @param supportedEdgeAttributeTypes 
-	 * @param selectedOnly Whether the this layout algorithm should execute on
-	 * just the nodes currently selected.
-	 * @param staticNodes A set of nodes that should NOT be moved by the
-	 * layout algorithm.
+	 * @param networkView the CyNetworkView being partitioned.
+	 * @param nodesToLayOut the set of nodes to layout. 
+	 * @param supportedNodeAttributeTypes The types of node attributes supported by this algorithm. 
+	 * @param supportedEdgeAttributeTypes The types of edge attributes supported by this algorithm. 
+	 * @param initialAttributes A list of attribute column names supported by this layout.
 	 */
-	public AbstractPartitionLayoutTask(final String name, final boolean singlePartition, CyNetworkView networkView, Set<View<CyNode>> nodesToLayOut, Set<Class<?>> supportedNodeAttributeTypes, Set<Class<?>> supportedEdgeAttributeTypes, List<String> initialAttributes) {
-		super(name, networkView, nodesToLayOut, supportedNodeAttributeTypes, supportedEdgeAttributeTypes, initialAttributes);
+	public AbstractPartitionLayoutTask(final String name, 
+	                                   final boolean singlePartition, 
+	                                   CyNetworkView networkView, 
+	                                   Set<View<CyNode>> nodesToLayOut, 
+	                                   Set<Class<?>> supportedNodeAttributeTypes, 
+	                                   Set<Class<?>> supportedEdgeAttributeTypes, 
+	                                   List<String> initialAttributes) {
+		super(name, networkView, nodesToLayOut, supportedNodeAttributeTypes, 
+		      supportedEdgeAttributeTypes, initialAttributes);
 		this.singlePartition = singlePartition;
 	}
 

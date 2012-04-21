@@ -112,15 +112,19 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 	
 	/**
 	 * Constructor.
+	 * @param name The name of the layout algorithm. 
 	 * @param networkView The network view that the layout algorithm will be applied to.
-	 * @param name The name of the algorithm.  Used for setting attributes associated with 
-	 * this layout.
-	 * @param selectedOnly Indicates whether the layout should be applied to the selected nodes
-	 * or not.
-	 * @param staticNodes The list of nodes whose positions are meant to be locked and
-	 * not changed.
+	 * @param nodesToLayOut The set of nodes to be laid out. 
+	 * @param supportedNodeAttributeTypes The set of supported node attribute types. 
+	 * @param supportedEdgeAttributeTypes The set of supported edge attribute types. 
+	 * @param initialAttributes The list of initial attribute column names.
 	 */
-	public AbstractLayoutTask(String name, CyNetworkView networkView, Set<View<CyNode>> nodesToLayOut, Set<Class<?>> supportedNodeAttributeTypes, Set<Class<?>> supportedEdgeAttributeTypes, List<String> initialAttributes) {
+	public AbstractLayoutTask(String name, 
+	                          CyNetworkView networkView, 
+	                          Set<View<CyNode>> nodesToLayOut, 
+	                          Set<Class<?>> supportedNodeAttributeTypes, 
+	                          Set<Class<?>> supportedEdgeAttributeTypes, 
+	                          List<String> initialAttributes) {
 		super();
 
 		this.networkView = networkView;
@@ -136,6 +140,9 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 		this.initialAttributes = initialAttributes;
 	}
  
+	/**
+	 * {@inheritDoc}
+	 */
 	@Override
 	public final void run(final TaskMonitor taskMonitor) {
 		final long start = System.currentTimeMillis();

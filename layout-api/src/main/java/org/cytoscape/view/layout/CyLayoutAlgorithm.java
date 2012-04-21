@@ -46,42 +46,38 @@ import org.cytoscape.work.TaskIterator;
 public interface CyLayoutAlgorithm<T extends CyLayoutContext> {
 	
 	/**
-	 * 
-	 * @param networkView
-	 * @param layoutContext
-	 * @param nodesToLayOut
-	 * 
+	 * Creates a task iterator containing the layout tasks.
+	 * @param networkView The network view that the layout algorithm should be applied to.
+	 * @param layoutContext The layout context for this layout algorithm.
+	 * @param nodesToLayOut The set of node views to layout.
 	 * @return taskIterator contains layout tasks.
 	 */
 	TaskIterator createTaskIterator(CyNetworkView networkView, T layoutContext, Set<View<CyNode>> nodesToLayOut);
 	
 	
 	/**
-	 * 
-	 * @param networkView
-	 * @param layoutContext
-	 * @param nodesToLayOut
-	 * 
-	 * @return
+	 * Returns true if the task factory is ready to produce a task iterator.
+	 * @param networkView The network view that the layout algorithm should be applied to.
+	 * @param layoutContext The layout context for this layout algorithm.
+	 * @param nodesToLayOut The set of node views to layout.
+	 * @return true if the task factory is ready to produce a task iterator.
 	 */
 	boolean isReady(CyNetworkView networkView, T layoutContext, Set<View<CyNode>> nodesToLayOut);
 	
 	/**
-	 * 
-	 * @return
+	 * Returns the layout context object.
+	 * @return The layout context object.
 	 */
 	T createLayoutContext();
 	
 	/**
 	 * Tests to see if this layout supports doing a layout based on node attributes.
-	 *
 	 * @return types of allowable attribute types.
 	 */
 	Set<Class<?>> getSupportedNodeAttributeTypes();
 
 	/**
 	 * Tests to see if this layout supports doing a layout based on edge attributes.
-	 *
 	 * @return types of allowable attribute types.
 	 */
 	Set<Class<?>> getSupportedEdgeAttributeTypes();
@@ -94,7 +90,6 @@ public interface CyLayoutAlgorithm<T extends CyLayoutContext> {
 	 * to allow the user to perform an unweighted layout.  Note that this value
 	 * will be set using setLayoutAttribute() just like other attributes, so the
 	 * layout algorithm will need to check for it.
-	 *
 	 * @return List of column names (i.e. attributes) used for attribute-based layouts.
 	 */
 	List<String> getInitialAttributeList();
@@ -102,7 +97,6 @@ public interface CyLayoutAlgorithm<T extends CyLayoutContext> {
 	/**
 	 * Returns the computer-readable name of the layout.  To get
 	 * a human readable name, use toString().
-	 *
 	 * @return The computer-readable name of the layout.
 	 */
 	String getName();
