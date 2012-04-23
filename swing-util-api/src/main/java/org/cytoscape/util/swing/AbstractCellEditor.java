@@ -30,11 +30,13 @@ import java.util.EventObject;
  * @CyAPI.Abstract.Class
  */
 public class AbstractCellEditor implements CellEditor {
+	
 	protected EventListenerList listenerList = new EventListenerList();
 
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public Object getCellEditorValue() {
 		return null;
 	}
@@ -42,6 +44,7 @@ public class AbstractCellEditor implements CellEditor {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public boolean isCellEditable(EventObject e) {
 		return true;
 	}
@@ -49,6 +52,7 @@ public class AbstractCellEditor implements CellEditor {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public boolean shouldSelectCell(EventObject anEvent) {
 		return false;
 	}
@@ -56,6 +60,7 @@ public class AbstractCellEditor implements CellEditor {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public boolean stopCellEditing() {
 		return true;
 	}
@@ -63,12 +68,14 @@ public class AbstractCellEditor implements CellEditor {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void cancelCellEditing() {
 	}
 
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void addCellEditorListener(CellEditorListener l) {
 		listenerList.add(CellEditorListener.class, l);
 	}
@@ -76,6 +83,7 @@ public class AbstractCellEditor implements CellEditor {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public void removeCellEditorListener(CellEditorListener l) {
 		listenerList.remove(CellEditorListener.class, l);
 	}
