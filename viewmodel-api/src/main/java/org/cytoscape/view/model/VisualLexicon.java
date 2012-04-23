@@ -38,12 +38,8 @@ import java.util.Collection;
 import java.util.Set;
 
 /**
- * 
- * A {@linkplain org.cytoscape.view.presentation.RenderingEngine} should provide <strong>one, immutable</strong> lexicon implementing this interface.
- * 
- * This is a pre-defined tree of VisualProperties designed by the {@linkplain org.cytoscape.view.presentation.RenderingEngine} developer.
- * 
- * @since Cytoscape 3.0
+ * A RenderingEngine should provide <strong>one, immutable</strong> lexicon implementing this interface.
+ * This is a pre-defined tree of VisualProperties designed by the RenderingEngine developer.
  * @CyAPI.Api.Interface
  */
 public interface VisualLexicon {
