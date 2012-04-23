@@ -44,13 +44,30 @@ import org.cytoscape.view.model.Range;
  */
 public final class DoubleVisualProperty extends AbstractVisualProperty<Double> {
 
-	public DoubleVisualProperty(final Double def, final Range<Double> range, final String id, final String name, final Class<?> targetDataType) {
-		this(def, range, id, name, false, targetDataType);
+	/**
+	 * Constructor.
+	 * @param def The double value. 
+	 * @param range The allowable range of values for specified doubles.
+	 * @param id A machine readable string identifying this visual property used for XML serialization. 
+	 * @param displayName A human readable string used for displays and user interfaces. 
+	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
+	 */
+	public DoubleVisualProperty(final Double def, final Range<Double> range, final String id, final String displayName, final Class<?> modelDataType) {
+		this(def, range, id, displayName, false, modelDataType);
 	}
 
+	/**
+	 * Constructor.
+	 * @param def The double value. 
+	 * @param range The allowable range of values for specified doubles.
+	 * @param id A machine readable string identifying this visual property used for XML serialization. 
+	 * @param displayName A human readable string used for displays and user interfaces. 
+	 * @param ignoreDefault Whether the default value should be ignored. 
+	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
+	 */
 	public DoubleVisualProperty(final Double def, final Range<Double> range, final String id,
-			final String name, final boolean ignoreDefault, final Class<?> targetDataType) {
-		super(def, range, id, name, targetDataType);
+			final String displayName, final boolean ignoreDefault, final Class<?> modelDataType) {
+		super(def, range, id, displayName, modelDataType);
 		this.shouldIgnoreDefault = ignoreDefault;
 	}
 

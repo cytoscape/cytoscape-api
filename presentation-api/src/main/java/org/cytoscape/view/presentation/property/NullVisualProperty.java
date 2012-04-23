@@ -25,8 +25,13 @@ public final class NullVisualProperty extends AbstractVisualProperty<NullDataTyp
 				NullDataType.class, nRange);
 	}
 
-	public NullVisualProperty(final String id, final String name) {
-		super(dummyObject, NULL_RANGE, id, name, Object.class);
+	/**
+	 * Constructor.
+	 * @param id A machine readable string identifying this visual property used for XML serialization. 
+	 * @param displayName A human readable string used for displays and user interfaces. 
+	 */
+	public NullVisualProperty(final String id, final String displayName) {
+		super(dummyObject, NULL_RANGE, id, displayName, Object.class);
 	}
 
 	

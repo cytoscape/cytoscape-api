@@ -45,31 +45,24 @@ import org.cytoscape.view.model.Range;
 public final class IntegerVisualProperty extends AbstractVisualProperty<Integer> {
 
 	/**
-	 * Use specific range
-	 * @param def
-	 * @param id
-	 * @param name
-	 * @param targetDataType
-	 * @param range the {@link Range} for this IntegerVisualProperty.
+	 * Constructor.
+	 * @param def The default Integer value.
+	 * @param range The allowable range for Integer values of this visual property. 
+	 * @param id A machine readable string identifying this visual property used for XML serialization. 
+	 * @param displayName A human readable string used for displays and user interfaces. 
+	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
 	 */
-	public IntegerVisualProperty(final Integer def, final Range<Integer> range, final String id, final String name,
-			final Class<?> targetDataType) {
-		super(def, range, id, name, targetDataType);
+	public IntegerVisualProperty(final Integer def, final Range<Integer> range, final String id, final String displayName, final Class<?> modelDataType) {
+		super(def, range, id, displayName, modelDataType);
 	}
 
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String toSerializableString(final Integer value) {
 		return value.toString();
 	}
 
 	
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public Integer parseSerializableString(final String text) {
 		// Cytoscape 2.x serializes integer attributes as decimals (e.g."1.0")!

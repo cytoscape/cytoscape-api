@@ -54,8 +54,15 @@ public final class NodeShapeVisualProperty extends AbstractVisualProperty<NodeSh
 		NODE_SHAPE_RANGE = new DiscreteRange<NodeShape>(NodeShape.class, new HashSet<NodeShape>(DEFAULT_SHAPES.values()));
 	}
 
-	public NodeShapeVisualProperty(NodeShape defaultValue, String id, String displayName, Class<?> targetObjectDataType) {
-		super(defaultValue, NODE_SHAPE_RANGE, id, displayName, targetObjectDataType);
+	/**
+	 * Constructor.
+	 * @param defaultValue The default NodeShape value.
+	 * @param id A machine readable string identifying this visual property used for XML serialization. 
+	 * @param displayName A human readable string used for displays and user interfaces. 
+	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
+	 */
+	public NodeShapeVisualProperty(NodeShape defaultValue, String id, String displayName, Class<?> modelDataType) {
+		super(defaultValue, NODE_SHAPE_RANGE, id, displayName, modelDataType);
 	}
 
 	@Override
@@ -73,6 +80,11 @@ public final class NodeShapeVisualProperty extends AbstractVisualProperty<NodeSh
 		return shape;
 	}
 
+	/**
+	 * Returns true if the specified shape is one of the possible default shape values.
+	 * @param shape the node shape to be checked.
+	 * @return True if the specified shape is one of the possible default shape values.
+	 */
 	public static boolean isDefaultShape(final NodeShape shape) {
 		return DEFAULT_SHAPES.containsValue(shape);
 	}

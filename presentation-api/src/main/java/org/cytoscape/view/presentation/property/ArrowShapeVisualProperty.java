@@ -16,14 +16,22 @@ import org.cytoscape.view.presentation.property.values.ArrowShape;
  */
 public final class ArrowShapeVisualProperty extends AbstractVisualProperty<ArrowShape> {
 	
-	// Preset arrow shapes
+
+	/** No arrow */
 	public static final ArrowShape NONE = new ArrowShapeImpl("None", "NONE");
+	/** Diamond shaped arrow */
 	public static final ArrowShape DIAMOND = new ArrowShapeImpl("Diamond", "DIAMOND");
+	/** Triangle shaped arrow */
 	public static final ArrowShape DELTA = new ArrowShapeImpl("Delta", "DELTA");
+	/** Pointy triangle shaped arrow */
 	public static final ArrowShape ARROW = new ArrowShapeImpl("Arrow", "ARROW");
+	/** T shaped arrow */
 	public static final ArrowShape T = new ArrowShapeImpl("T", "T");
+	/** Circle shaped arrow */
 	public static final ArrowShape CIRCLE = new ArrowShapeImpl("Circle", "CIRCLE");
+	/** Top Half of a triangle shaped arrow */
 	public static final ArrowShape HALF_TOP = new ArrowShapeImpl("Half Top", "HALF_TOP");
+	/** Bottom Half of a triangle shaped arrow */
 	public static final ArrowShape HALF_BOTTOM = new ArrowShapeImpl("Half Bottom", "HALF_BOTTOM");
 
 	private static final DiscreteRange<ArrowShape> ARROW_SHAPE_RANGE;
@@ -42,11 +50,17 @@ public final class ArrowShapeVisualProperty extends AbstractVisualProperty<Arrow
 		
 		ARROW_SHAPE_RANGE = new DiscreteRange<ArrowShape>(ArrowShape.class, new HashSet<ArrowShape>(DEFAULT_SHAPES.values()));
 	}
-	
 
+	/**
+	 * Constructor.
+	 * @param defaultValue The default arrow shape.
+	 * @param id A machine readable string identifying this visual property used for XML serialization. 
+	 * @param displayName A human readable string used for displays and user interfaces. 
+	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
+	 */
 	public ArrowShapeVisualProperty(ArrowShape defaultValue, String id, String displayName,
-			Class<?> targetObjectDataType) {
-		super(defaultValue, ARROW_SHAPE_RANGE, id, displayName, targetObjectDataType);
+			Class<?> modelDataType) {
+		super(defaultValue, ARROW_SHAPE_RANGE, id, displayName, modelDataType);
 	}
 
 	@Override

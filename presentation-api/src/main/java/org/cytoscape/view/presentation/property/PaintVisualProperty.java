@@ -50,12 +50,20 @@ import org.cytoscape.view.model.Range;
  */
 public final class PaintVisualProperty extends AbstractVisualProperty<Paint> { 
 
-	public PaintVisualProperty(final Paint def, final Range<Paint> range, final String id, final String name, final Class<?> targetDataType) {
-		super(def, range, id, name, targetDataType);
+	/**
+	 * Constructor.
+	 * @param def The default paint value.
+	 * @param id A machine readable string identifying this visual property used for XML serialization. 
+	 * @param displayName A human readable string used for displays and user interfaces. 
+	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
+	 */
+	public PaintVisualProperty(final Paint def, final Range<Paint> range, final String id, final String displayName, final Class<?> modelDataType) {
+		super(def, range, id, displayName, modelDataType);
 	}
 	
 	
-	@Override public String toSerializableString(final Paint paint) {
+	@Override 
+	public String toSerializableString(final Paint paint) {
 		if (paint instanceof Color == false)
 			throw new UnsupportedOperationException("Currently, this implementation supports only Color object.");
 		
@@ -68,7 +76,8 @@ public final class PaintVisualProperty extends AbstractVisualProperty<Paint> {
 	}
 
 	
-	@Override public Paint parseSerializableString(final String text) {
+	@Override 
+	public Paint parseSerializableString(final String text) {
 		if (text == null) 
 			throw new IllegalArgumentException("invalid color format: null");
 		

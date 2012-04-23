@@ -39,9 +39,16 @@ public final class LineTypeVisualProperty extends AbstractVisualProperty<LineTyp
 		LINE_TYPE_RANGE = new DiscreteRange<LineType>(LineType.class, new HashSet<LineType>(lineTypes.values()));
 	}
 
+	/**
+	 * Constructor.
+	 * @param defaultValue The default LineType value.
+	 * @param id A machine readable string identifying this visual property used for XML serialization. 
+	 * @param displayName A human readable string used for displays and user interfaces. 
+	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
+	 */
 	public LineTypeVisualProperty(LineType defaultValue,
-			String id, String displayName, Class<?> targetObjectDataType) {
-		super(defaultValue, LINE_TYPE_RANGE, id, displayName, targetObjectDataType);
+			String id, String displayName, Class<?> modelDataType) {
+		super(defaultValue, LINE_TYPE_RANGE, id, displayName, modelDataType);
 	}
 
 	@Override

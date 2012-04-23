@@ -58,12 +58,27 @@ public final class BooleanVisualProperty extends AbstractVisualProperty<Boolean>
 		BOOLEAN_RANGE = new DiscreteRange<Boolean>(Boolean.class, bRange); 
 	}
 	
-	public BooleanVisualProperty(final Boolean def, final String id, final String name, final Class<?> targetDataType) {
-		this(def, id, name, false, targetDataType);
+	/**
+	 * Constructor.
+	 * @param def The boolean value. 
+	 * @param id A machine readable string identifying this visual property used for XML serialization. 
+	 * @param displayName A human readable string used for displays and user interfaces. 
+	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
+	 */
+	public BooleanVisualProperty(final Boolean def, final String id, final String displayName, final Class<?> modelDataType) {
+		this(def, id, displayName, false, modelDataType);
 	}
 	
-	public BooleanVisualProperty(final Boolean def, final String id, final String name, final Boolean ignoreDefault, final Class<?> targetDataType) {
-		super(def, BOOLEAN_RANGE, id, name, targetDataType);
+	/**
+	 * Constructor.
+	 * @param def The boolean value. 
+	 * @param id A machine readable string identifying this visual property used for XML serialization. 
+	 * @param displayName A human readable string used for displays and user interfaces. 
+	 * @param ignoreDefault Whether the default value should be ignored. 
+	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
+	 */
+	public BooleanVisualProperty(final Boolean def, final String id, final String displayName, final Boolean ignoreDefault, final Class<?> modelDataType) {
+		super(def, BOOLEAN_RANGE, id, displayName, modelDataType);
 		this.shouldIgnoreDefault = ignoreDefault;
 	}
 	

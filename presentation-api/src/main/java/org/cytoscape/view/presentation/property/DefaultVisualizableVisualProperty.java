@@ -28,14 +28,13 @@ public final class DefaultVisualizableVisualProperty extends
 	}
 
 	/**
-	 * Constructs this DefaultVisualProperty.
-	 * @param id the id for this DefaultVisualProperty.
-	 * @param name the name for this DefaultVisualProperty.
-	 * @param targetDataType #ASKMIKE
+	 * @param id A machine readable string identifying this visual property used for XML serialization. 
+	 * @param displayName A human readable string used for displays and user interfaces. 
+	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
 	 */
 	public DefaultVisualizableVisualProperty(final String id,
-			final String name, final Class<?> targetDataType) {
-		super(visualizable, VISUALIZABLE_RANGE, id, name, targetDataType);
+			final String displayName, final Class<?> modelDataType) {
+		super(visualizable, VISUALIZABLE_RANGE, id, displayName, modelDataType);
 	}
 
 	@Override

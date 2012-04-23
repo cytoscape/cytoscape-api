@@ -72,9 +72,16 @@ public final class FontVisualProperty extends AbstractVisualProperty<Font> {
 		};
 	}
 
+	/**
+	 * Constructor.
+	 * @param def The default font value. 
+	 * @param id A machine readable string identifying this visual property used for XML serialization. 
+	 * @param displayName A human readable string used for displays and user interfaces. 
+	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
+	 */
 	public FontVisualProperty(final Font def, final String id,
-			final String name, final Class<?> targetDataType) {
-		super(def, FONT_RANGE, id, name, targetDataType);
+			final String displayName, final Class<?> modelDataType) {
+		super(def, FONT_RANGE, id, displayName, modelDataType);
 	}
 
 	@Override

@@ -12,21 +12,36 @@ import org.cytoscape.view.presentation.property.values.Bend;
 import org.cytoscape.view.presentation.property.values.BendFactory;
 import org.cytoscape.view.presentation.property.values.Handle;
 
+/**
+ * Visual Property for Edge {@link Bend} values.
+ * 
+ * @CyAPI.Final.Class
+ */
 public class EdgeBendVisualProperty extends AbstractVisualProperty<Bend> {
 
-	private static final Range<Bend> EDGE_BEND_RANGE;
+	/**
+	 * The default edge bend.  This "bend" is empty and contains no actual bend.
+	 */
 	public static final Bend DEFAULT_EDGE_BEND = new EmptyBendImpl();
 
-	static {
-		EDGE_BEND_RANGE = new ContinuousRange<Bend>(Bend.class, DEFAULT_EDGE_BEND, DEFAULT_EDGE_BEND, true, true);
-	}
-	
+	private static final Range<Bend> EDGE_BEND_RANGE = new ContinuousRange<Bend>(Bend.class, DEFAULT_EDGE_BEND, DEFAULT_EDGE_BEND, true, true);
+
 	private BendFactory bendFactory;
 
+	/**
+	 * Constructor.
+	 * @param defaultValue The default bend to use.
+	 * @param id A machine readable string identifying this visual property used for XML serialization. 
+	 * @param displayName A human readable string used for displays and user interfaces. 
+	 */
 	public EdgeBendVisualProperty(Bend defaultValue, String id, String displayName) {
 		super(defaultValue, EDGE_BEND_RANGE, id, displayName, CyEdge.class);
 	}
-	
+
+	/**
+	 * Sets the bend factory that is used behind the scenes to create bend objects.
+	 * @param bendFactory The bend factory to use for this instance.
+	 */
 	public void setBendFactory(final BendFactory bendFactory) {
 		this.bendFactory = bendFactory;
 	}
