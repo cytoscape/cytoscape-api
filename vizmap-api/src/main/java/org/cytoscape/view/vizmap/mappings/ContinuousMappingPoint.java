@@ -35,19 +35,14 @@
   Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
 */
 
-//----------------------------------------------------------------------------
-// $Revision: 10980 $
-// $Date: 2007-07-17 10:16:16 -0700 (Tue, 17 Jul 2007) $
-// $Author: kono $
-//----------------------------------------------------------------------------
 package org.cytoscape.view.vizmap.mappings;
 
 import org.cytoscape.view.vizmap.mappings.BoundaryRangeValues;
 
-
 /**
  * Encapsulates a ContinuousMapping Point with a single point value
  * and associated {@link BoundaryRangeValues}.
+ * @param <K> Generic type of the attribute mapped.
  * @param <V> The generic type of associated {@link BoundaryRangeValues}.
  * @CyAPI.Final.Class
  */

@@ -5,13 +5,15 @@ import java.util.List;
 import org.cytoscape.view.vizmap.VisualMappingFunction;
 
 /**
- *
- * @param <K>
- * @param <V>
+ * An interface describing a continuous mapping from attribute value
+ * to visual property.
+ * @param <K> Generic type of the attribute mapped.
+ * @param <V> Generic type of the VisualProperty used in this mapping.
  * @CyAPI.Api.Interface
  */
 public interface ContinuousMapping<K, V> extends VisualMappingFunction<K,V>{
 
+	/** A label string for this mapping. */
 	public static final String CONTINUOUS = "Continuous Mapping";
 
 	/**
@@ -41,8 +43,7 @@ public interface ContinuousMapping<K, V> extends VisualMappingFunction<K,V>{
 	/**
 	 * Gets Specified Point.
 	 *  
-	 * @param index
-	 *            Index Value.
+	 * @param index Index Value.
 	 * @return ContinuousMappingPoint.
 	 */
 	public ContinuousMappingPoint<K, V> getPoint(int index);

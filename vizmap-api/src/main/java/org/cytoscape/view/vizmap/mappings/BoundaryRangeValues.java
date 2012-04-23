@@ -35,16 +35,9 @@
   Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
  */
 
-// BoundaryRangeValues.java
-//----------------------------------------------------------------------------
-// $Revision: 10059 $
-// $Date: 2007-04-20 16:29:49 -0700 (Fri, 20 Apr 2007) $
-// $Author: kono $
-//----------------------------------------------------------------------------
 package org.cytoscape.view.vizmap.mappings;
 
 
-//----------------------------------------------------------------------------
 /**
  * This class defines a data object representing the range values associated
  * with a particular domain value, called a boundary value. The domain value is
@@ -81,12 +74,9 @@ public final class BoundaryRangeValues<T> {
 	/**
 	 * Creates a new BoundaryRangeValues object.
 	 *
-	 * @param lesser
-	 *            Object used for values less than this point.
-	 * @param equal
-	 *            Object used for value equal to this point.
-	 * @param greater
-	 *            Object used for values greater than this point.
+	 * @param lesser Object used for values less than this point.
+	 * @param equal Object used for value equal to this point.
+	 * @param greater Object used for values greater than this point.
 	 */
 	public BoundaryRangeValues(T lesser, T equal, T greater) {
 		lesserValue = lesser;
@@ -105,9 +95,6 @@ public final class BoundaryRangeValues<T> {
 		this.greaterValue = original.greaterValue;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String toString() {
 		return "{" + lesserValue.toString() + "," + equalValue.toString() + 

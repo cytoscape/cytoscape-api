@@ -5,13 +5,15 @@ import java.util.Map;
 import org.cytoscape.view.vizmap.VisualMappingFunction;
 
 /**
- * 
- * @param <K>
- * @param <V>
+ * An interface describing a discrete mapping from attribute value
+ * to visual property.
+ * @param <K> Generic type of the attribute mapped.
+ * @param <V> Generic type of the VisualProperty used in this mapping.
  * @CyAPI.Api.Interface
  */
 public interface DiscreteMapping<K, V> extends VisualMappingFunction<K,V>{
 
+	/** A label string describing the mapping. */
 	public static final String DISCRETE = "Discrete Mapping";
 
 	/**
