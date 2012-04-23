@@ -140,7 +140,7 @@ public interface VisualStyle {
 	 * Apply visual only to a individual View Object (node/edge), 
 	 * not the entire network view.
 	 * 
-	 * @param viewObject
+	 * @param view The view that the visual property should be applied to.
 	 */
 	void apply(final View<? extends CyIdentifiable> view);
 	

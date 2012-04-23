@@ -12,7 +12,7 @@ import org.cytoscape.view.model.VisualProperty;
  * dependency is enabled.
  *
  * @param <T> type of {@linkplain VisualProperty} value in this group.
- * 
+ * @CyAPI.Api.Interface 
  */
 public final class VisualPropertyDependency<T> {
 	
@@ -22,7 +22,14 @@ public final class VisualPropertyDependency<T> {
 	private final VisualProperty<T> parentVisualProperty;
 	
 	private boolean enabled;
-	
+
+	/**
+	 * Constructor.
+	 * @param displayName A human readable name for use in user interfaces.
+	 * @param vpSet The set of visual properties.
+	 * @param lexicon The visual lexicon used by this dependency. The lexicon determines
+	 * the parent visual property for this dependency.
+	 */
 	public VisualPropertyDependency(final String displayName, final Set<VisualProperty<T>> vpSet, final VisualLexicon lexicon) {
 		this.displayName = displayName;
 		this.vpSet = vpSet;
@@ -73,15 +80,27 @@ public final class VisualPropertyDependency<T> {
 	public Set<VisualProperty<?>> getVisualProperties() {
 		return Collections.<VisualProperty<?>>unmodifiableSet(vpSet);
 	}
-	
+
+	/**
+	 * Enables or disables the dependency based on the boolean parameter.
+	 * @param enable Whether to enable (true) or disable (false) this dependency.
+	 */
 	public void setDependency(boolean enable) {
 		this.enabled = enable;
 	}
-	
+
+	/**
+	 * Returns whether or not this dependency is enabled.
+	 * @return whether or not this dependency is enabled.
+	 */
 	public boolean isDependencyEnabled() {
 		return enabled;
 	}
 	
+	/**
+	 * Returns the parent visual property for this dependency. 
+	 * @return the parent visual property for this dependency. 
+	 */
 	public VisualProperty<T> getParentVisualProperty() {
 		return parentVisualProperty;
 	}
