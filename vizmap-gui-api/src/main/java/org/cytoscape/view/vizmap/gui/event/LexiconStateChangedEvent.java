@@ -7,9 +7,6 @@ import org.cytoscape.view.model.VisualProperty;
 
 /**
  * Tell listeners a enabled/disabled visual properties.
- * 
- * TODO: Refactor dependency mechanism.
- * 
  * @CyAPI.Final.Class
  */
 public final class LexiconStateChangedEvent extends AbstractCyEvent<Object> {

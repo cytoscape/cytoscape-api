@@ -50,8 +50,7 @@ import org.cytoscape.view.vizmap.mappings.ContinuousMapping;
 
 
 /**
- * Manages all editor objects for ViaMap GUI.
- * 
+ * Manages all editor objects for the VizMap GUI.
  *
  * @CyAPI.Api.Interface
  */
@@ -103,6 +102,11 @@ public interface EditorManager {
 
 	
 	/**
+	 * Returns the continuous editor for the specified visual property.
+	 * 
+	 * @param vp The visual property.
+	 * 
+	 * @return the continuous editor for the specified visual property.
 	 */
 	PropertyEditor getContinuousEditor(final VisualProperty<?> vp);
 	
@@ -140,7 +144,7 @@ public interface EditorManager {
 
 
 	/**
-	 * Get {@link JComboBox} type editor 
+	 * Get {@link javax.swing.JComboBox} type editor 
 	 * 
 	 * @param editorName name (ID) of editor
 	 * 

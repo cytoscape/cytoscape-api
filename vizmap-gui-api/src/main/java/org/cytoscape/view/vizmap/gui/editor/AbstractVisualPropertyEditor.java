@@ -62,20 +62,39 @@ import com.l2fprod.common.swing.renderer.DefaultCellRenderer;
  * @CyAPI.Abstract.Class
  */
 public abstract class AbstractVisualPropertyEditor<T> implements VisualPropertyEditor<T> {
-	
+
+	/**
+	 * The type of the property editor.
+	 */
 	protected final Class<T> type;
+
+	/**
+	 * The property editor.
+	 */
 	protected final PropertyEditor propertyEditor;
-	private final ContinuousEditorType continuousEditorType;
+
+	/**
+	 * The {@link Window} that holds the editor.
+	 */
 	protected Window vpValueEditor;
-		
+
+	/**
+	 * The cell renderer for discrete mappings.
+	 */
 	protected TableCellRenderer discreteTableCellRenderer;
+
+	/**
+	 * The cell renderer for continuous mappings.
+	 */
 	protected TableCellRenderer continuousTableCellRenderer;
+
+	private final ContinuousEditorType continuousEditorType;
 
 	/**
 	 * Creates a new AbstractVisualPropertyEditor object.
-	 * @param type The type of this AbstractVisualPropertyEditor object.
+	 * @param type The type of this property editor.
 	 * @param propertyEditor the {@link PropertyEditor} to construct this with.
-	 *
+	 * @param continuousEditorType the {@link ContinuousEditorType} to construct this with.
 	 */
 	public AbstractVisualPropertyEditor(final Class<T> type, final PropertyEditor propertyEditor, ContinuousEditorType continuousEditorType) {
 		this.type = type;
@@ -83,38 +102,19 @@ public abstract class AbstractVisualPropertyEditor<T> implements VisualPropertyE
 		this.continuousEditorType = continuousEditorType;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override public Class<T> getType() {
+	@Override 
+	public Class<T> getType() {
 		return this.type;
 	}
 
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override public PropertyEditor getPropertyEditor() {
+	@Override 
+	public PropertyEditor getPropertyEditor() {
 		return propertyEditor;
 	}
 
-//	/**
-//	 * {@inheritDoc}
-//	 */
-//	@Override public T showVisualPropertyValueEditor() {
-//		if(vpValueEditor == null) {
-//			// Search value editor repository 
-//		}
-//		vpValueEditor.setVisible(true);
-//		
-//		//TODO: need new interface for value editor
-//		return null;
-//	}
-
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override public TableCellRenderer getDiscreteTableCellRenderer() {
+	@Override 
+	public TableCellRenderer getDiscreteTableCellRenderer() {
 		return discreteTableCellRenderer;
 	}
 	
@@ -130,10 +130,8 @@ public abstract class AbstractVisualPropertyEditor<T> implements VisualPropertyE
 		return this.continuousEditorType;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override public Icon getDefaultIcon(int width, int height) {
+	@Override 
+	public Icon getDefaultIcon(int width, int height) {
 		// By default, it does not return actual icon.  This should be implemented child classes.
 		return null;
 	}
