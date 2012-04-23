@@ -20,14 +20,14 @@ public class CyActivator extends AbstractCyActivator {
 	}
 
 
+	@Override
 	public void start(BundleContext bc) {
-		CyProperty cytoscapePropertiesServiceRef = getService(bc,CyProperty.class,"(cyPropertyName=cytoscape3.props)");
+		CyProperty<Properties> cytoscapePropertiesServiceRef = getService(bc,CyProperty.class,"(cyPropertyName=cytoscape3.props)");
 		
 		FileUtilImpl fileUtil = new FileUtilImpl(cytoscapePropertiesServiceRef);
-		OpenBrowserImpl openBrowser = new OpenBrowserImpl(cytoscapePropertiesServiceRef);
+		OpenBrowserImpl openBrowser = new OpenBrowserImpl();
 		
 		registerService(bc,fileUtil,FileUtil.class, new Properties());
 		registerService(bc,openBrowser,OpenBrowser.class, new Properties());
 	}
 }
-

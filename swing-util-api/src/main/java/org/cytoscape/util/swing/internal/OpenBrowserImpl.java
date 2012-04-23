@@ -33,7 +33,7 @@
   You should have received a copy of the GNU Lesser General Public License
   along with this library; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
-*/
+ */
 
 //-------------------------------------------------------------------------
 // $Revision: 13206 $
@@ -42,16 +42,12 @@
 //-------------------------------------------------------------------------
 package org.cytoscape.util.swing.internal;
 
-
 import java.awt.Desktop;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.Properties;
 
-import org.cytoscape.property.CyProperty;
 import org.cytoscape.util.swing.OpenBrowser;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -59,43 +55,24 @@ public class OpenBrowserImpl implements OpenBrowser {
 
 	private final Logger logger = LoggerFactory.getLogger(OpenBrowserImpl.class);
 
-	private final Properties props;
-
-	private final static String UNIX_PATH = "htmlview";
-	private final static String MAC_PATH = "open";
-	private final static String WIN_PATH = "rundll32 url.dll,FileProtocolHandler";
-
-	public OpenBrowserImpl(CyProperty<Properties> cyProps) {
-		if ( cyProps == null )
-			throw new NullPointerException("Properties is null");	
-		this.props = cyProps.getProperties();
-	}
-
 	/**
-	 * Opens the specified URL in the system default web browser. 
-	 * @param url The URL to open
+	 * Opens the specified URL in the system default web browser.
+	 *
 	 * @return true if the URL opens successfully.
 	 */
-	public boolean openURL(String url) {
-		
-		Desktop desktop  = Desktop.getDesktop();
-		
-		try{
+	@Override
+	public boolean openURL(final String url) {
+		final Desktop desktop = Desktop.getDesktop();
+		try {
 			URI uri = new URI(url);
 			desktop.browse(uri);
-		}catch (IOException ioe) {
-			
-			logger.warn("Open browser IOException",ioe);	
+		} catch (IOException ioe) {
+			logger.warn("Could not open web browser: ", ioe);
 			return false;
-			
 		} catch (URISyntaxException e) {
-			
-			logger.warn("Url conversion to URI exception", e);
+			logger.warn("This URI is invalid: " + url, e);
 			return false;
-			
 		}
-		
 		return true;
 	}
-
 }

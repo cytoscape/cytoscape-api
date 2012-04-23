@@ -60,14 +60,14 @@ public final class JTreeTable extends JTable {
 	private final static Logger logger = LoggerFactory.getLogger( JTreeTable.class );
 
 	/** A subclass of JTree. */
-	protected TreeTableCellRenderer tree;
+	private TreeTableCellRenderer tree;
 
 	/**
 	 * Creates a new JTreeTable object.
 	 *
 	 * @param treeTableModel The tree table model. 
 	 */
-	public JTreeTable(TreeTableModel treeTableModel) {
+	public JTreeTable(final TreeTableModel treeTableModel) {
 		super();
 
 		// Create the tree. It will be used as a renderer and editor.
@@ -150,9 +150,8 @@ public final class JTreeTable extends JTable {
 	public void updateUI() {
 		super.updateUI();
 
-		if (tree != null) {
+		if (tree != null)
 			tree.updateUI();
-		}
 
 		// Use the tree's default foreground and background colors in the
 		// table.
@@ -171,6 +170,7 @@ public final class JTreeTable extends JTable {
 	 * Returns the row being edited. 
 	 * @return the row being edited. 
 	 */
+	@Override
 	public int getEditingRow() {
 		return (getColumnClass(editingColumn) == TreeTableModel.class) ? (-1) : editingRow;
 	}

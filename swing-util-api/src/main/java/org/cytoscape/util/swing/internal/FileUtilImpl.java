@@ -53,10 +53,10 @@ import org.cytoscape.util.swing.FileUtil;
 
 
 class FileUtilImpl implements FileUtil {
+	
 	private final Properties coreProperties;
 
-	FileUtilImpl(final CyProperty<Properties> cyCoreProperty)
-	{
+	FileUtilImpl(final CyProperty<Properties> cyCoreProperty) {
 		coreProperties = cyCoreProperty.getProperties();
 	}
 
@@ -65,8 +65,7 @@ class FileUtilImpl implements FileUtil {
 	 */
 	@Override
 	public File getFile(final Component parent, final String title, final int load_save_custom,
-	                    final Collection<FileChooserFilter> filters)
-	{
+			final Collection<FileChooserFilter> filters) {
 		return getFile(parent, title, load_save_custom, null, null, filters);
 	}
 

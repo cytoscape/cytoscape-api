@@ -47,6 +47,7 @@ import javax.swing.LayoutStyle;
  * @CyAPI.Final.Class 
  */
 public final class JStatusBar extends JPanel {
+	
 	private final static long serialVersionUID = 1202339875133611L;
 
 	/**
@@ -61,7 +62,7 @@ public final class JStatusBar extends JPanel {
 	 * 
 	 * @param text The String to set the left label to.
 	 */
-	public void setLeftLabel(String text) {
+	public void setLeftLabel(final String text) {
 		leftLabel.setText(text);
 	}
 
@@ -70,7 +71,7 @@ public final class JStatusBar extends JPanel {
 	 * 
 	 * @param text The String to set the center label to.
 	 */
-	public void setCenterLabel(String text) {
+	public void setCenterLabel(final String text) {
 		centerLabel.setText(text);
 	}
 
@@ -79,7 +80,7 @@ public final class JStatusBar extends JPanel {
 	 * 
 	 * @param text The String to set the right label to.
 	 */
-	public void setRightLabel(String text) {
+	public void setRightLabel(final String text) {
 		rightLabel.setText(text);
 	}
 
