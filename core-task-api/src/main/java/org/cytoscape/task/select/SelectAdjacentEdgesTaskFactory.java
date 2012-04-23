@@ -5,8 +5,7 @@ import org.cytoscape.task.NetworkTaskFactory;
 
 /**
  * This interface provides a task iterator for selecting adjacent edges.
- * @author rozagh
- *
+ * @CyAPI.Api.Interface
  */
 public interface SelectAdjacentEdgesTaskFactory extends NetworkTaskFactory{
 

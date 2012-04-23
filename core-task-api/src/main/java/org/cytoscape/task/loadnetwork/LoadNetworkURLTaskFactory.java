@@ -10,8 +10,7 @@ import org.cytoscape.work.TaskIterator;
 
 /**
  * This interface provides a task iterator for loading a URL into a network.
- * @author rozagh
- *
+ * @CyAPI.Api.Interface
  */
 public interface LoadNetworkURLTaskFactory extends TaskFactory{
 	

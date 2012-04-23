@@ -5,8 +5,7 @@ import org.cytoscape.task.NetworkViewTaskFactory;
 
 /**
  * This interface provides a task iterator for applying the preferred layout.
- * @author rozagh
- *
+ * @CyAPI.Api.Interface
  */
 public interface ApplyPreferredLayoutTaskFactory extends NetworkViewTaskFactory {
 

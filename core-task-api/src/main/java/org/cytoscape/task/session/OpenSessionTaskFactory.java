@@ -8,15 +8,12 @@ import org.cytoscape.work.TaskIterator;
 
 /**
  * This interface provides a task iterator for loading a session.
- * @author rozagh
- *
+ * @CyAPI.Api.Interface
  */
 public interface OpenSessionTaskFactory extends TaskFactory {
 	
 	/**
 	 * Creates a task iterator for loading a session from a file.
-	 * The created task run synchronously in the current thread and it will not 
-	 * create a task monitor.
 	 * @param file The input file for loading the session from.
 	 * @return a task iterator of type {@link TaskIterator}. 
 	 */

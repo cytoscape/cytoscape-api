@@ -1,6 +1,6 @@
 
 /**
  * This package include an interface to create task iterators for
- * connecting selected nodes. 
+ * editing specified networks. 
  */
 package org.cytoscape.task.edit;

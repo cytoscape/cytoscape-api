@@ -4,8 +4,7 @@ import org.cytoscape.task.NetworkCollectionTaskFactory;
 
 /**
  * This interface provides a task iterator for destruction of networks.
- * @author rozagh
- *
+ * @CyAPI.Api.Interface
  */
 public interface DestroyNetworkTaskFactory extends NetworkCollectionTaskFactory{
 

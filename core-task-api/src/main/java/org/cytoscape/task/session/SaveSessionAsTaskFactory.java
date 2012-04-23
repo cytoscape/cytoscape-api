@@ -8,15 +8,12 @@ import org.cytoscape.work.TaskIterator;
 /**
  * This interface provides a task iterator for saving a session in a
  * specified file.
- * @author rozagh
- *
+ * @CyAPI.Api.Interface
  */
 public interface SaveSessionAsTaskFactory extends TaskFactory{
 	
 	/**
-	 * Creates a task iterator for saving the session in a specified file.The 
-	 * created task will run synchronously in the current thread and will not
-	 * create a task monitor. 
+	 * Creates a task iterator for saving the session in a specified file.
 	 * @param file The file that the session is written on.
 	 * @return a task iterator of type {@link TaskIterator}.
 	 */

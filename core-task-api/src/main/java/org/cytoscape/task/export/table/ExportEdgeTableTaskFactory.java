@@ -8,7 +8,7 @@ import org.cytoscape.work.TaskIterator;
 
 /**
  * This interface provides a task iterator for exporting the edge table.
- * @author rozagh
+ * @CyAPI.Api.Interface
  *
  */
 public interface ExportEdgeTableTaskFactory extends NetworkViewTaskFactory{

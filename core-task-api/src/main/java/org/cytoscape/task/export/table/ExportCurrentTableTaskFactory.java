@@ -7,7 +7,7 @@ import org.cytoscape.work.TaskIterator;
 /**
  * This interface provides a task iterator for exporting the current 
  * table.
- * @author rozagh
+ * @CyAPI.Api.Interface
  *
  */
 public interface ExportCurrentTableTaskFactory extends TableTaskFactory {

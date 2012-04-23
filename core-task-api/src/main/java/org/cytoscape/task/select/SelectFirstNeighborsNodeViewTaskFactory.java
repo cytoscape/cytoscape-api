@@ -5,8 +5,7 @@ import org.cytoscape.task.NodeViewTaskFactory;
 
 /**
  * This interface provides a task iterator for selecting neighbor nodes. 
- * @author rozagh
- *
+ * @CyAPI.Api.Interface
  */
 public interface SelectFirstNeighborsNodeViewTaskFactory extends NodeViewTaskFactory {
 

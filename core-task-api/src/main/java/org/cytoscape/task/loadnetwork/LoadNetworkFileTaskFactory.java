@@ -8,8 +8,7 @@ import org.cytoscape.work.TaskIterator;
 
 /**
  * This interface provides a task iterator for loading networks from files.
- * @author rozagh
- *
+ * @CyAPI.Api.Interface
  */
 public interface LoadNetworkFileTaskFactory extends TaskFactory{
 	

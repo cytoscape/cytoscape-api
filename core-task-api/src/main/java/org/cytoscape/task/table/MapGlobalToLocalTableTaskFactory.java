@@ -6,8 +6,7 @@ import org.cytoscape.work.TaskIterator;
 
 /**
  * This interface provides a task iterator for mapping a global to a local table.
- * @author rozagh
- *
+ * @CyAPI.Api.Interface
  */
 public interface MapGlobalToLocalTableTaskFactory extends TaskFactory{
 

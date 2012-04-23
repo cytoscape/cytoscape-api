@@ -7,8 +7,7 @@ import org.cytoscape.work.TaskIterator;
 
 /**
  * This interface provides a task iterator for renaming a column.
- * @author rozagh
- *
+ * @CyAPI.Api.Interface
  */
 public interface RenameColumnTaskFactory extends TableColumnTaskFactory {
 

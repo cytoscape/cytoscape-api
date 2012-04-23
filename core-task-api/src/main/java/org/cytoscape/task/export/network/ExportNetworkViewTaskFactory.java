@@ -5,9 +5,10 @@ import java.io.File;
 import org.cytoscape.task.NetworkViewTaskFactory;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.work.TaskIterator;
+
 /**
  * This interface provides a task iterator for exporting network views.
- * @author rozagh
+ * @CyAPI.Api.Interface
  *
  */
 public interface ExportNetworkViewTaskFactory extends NetworkViewTaskFactory{
