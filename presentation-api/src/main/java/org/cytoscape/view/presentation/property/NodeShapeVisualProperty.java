@@ -11,19 +11,29 @@ import org.cytoscape.view.presentation.property.values.NodeShape;
 
 /**
  * Visual Property for {@link NodeShape} values.
+ * This implementation provides basic default shapes. Other shapes can be
+ * provided by the rendering engine.
  * 
  * @CyAPI.Final.Class
  */
 public final class NodeShapeVisualProperty extends AbstractVisualProperty<NodeShape> {
 
-	// Presets
+
+	/** Rectangular shape. */
 	public static final NodeShape RECTANGLE = new NodeShapeImpl("Rectangle", "RECTANGLE");
+	/** Rectangular shape with rounded corners. */
 	public static final NodeShape ROUND_RECTANGLE = new NodeShapeImpl("Round Rectangle", "ROUND_RECTANGLE");
+	/** Triangular shape. */
 	public static final NodeShape TRIANGLE = new NodeShapeImpl("Triangle", "TRIANGLE");
+	/** Parallelogram shape. */
 	public static final NodeShape PARALLELOGRAM = new NodeShapeImpl("Parallelogram", "PARALLELOGRAM");
+	/** Diamond shape. */
 	public static final NodeShape DIAMOND = new NodeShapeImpl("Diamond", "DIAMOND");
+	/** Ellipse shape. */
 	public static final NodeShape ELLIPSE = new NodeShapeImpl("Ellipse", "ELLIPSE");
+	/** Hexagonal shape. */
 	public static final NodeShape HEXAGON = new NodeShapeImpl("Hexagon", "HEXAGON");
+	/** Octagonal shape. */
 	public static final NodeShape OCTAGON = new NodeShapeImpl("Octagon", "OCTAGON");
 
 	private static final DiscreteRange<NodeShape> NODE_SHAPE_RANGE;

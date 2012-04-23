@@ -10,17 +10,22 @@ import org.cytoscape.view.presentation.property.values.AbstractVisualPropertyVal
 import org.cytoscape.view.presentation.property.values.LineType;
 
 /**
- * Visual Property for {@link LineType} values.
+ * Visual Property for {@link LineType} values. This class provide basic default line types.  
+ * Others will be provided by rendering engines.
  * 
  * @CyAPI.Final.Class
  */
 public final class LineTypeVisualProperty extends AbstractVisualProperty<LineType> {
 	
-	// Default basic line types.  Others will be provided from rendering engines.
+	/** Solid line */
 	public static final LineType SOLID = new LineTypeImpl("Solid", "SOLID");
+	/** Long dash followed by short space */
 	public static final LineType LONG_DASH = new LineTypeImpl("Dash", "LONG_DASH");
+	/** Equal dash and space */
 	public static final LineType EQUAL_DASH = new LineTypeImpl("Equal Dash", "EQUAL_DASH");
+	/** Dash space dot space dash, etc.*/
 	public static final LineType DASH_DOT = new LineTypeImpl( "Dash Dot", "DASH_DOT");
+	/** Dot space dot, etc. */ 
 	public static final LineType DOT = new LineTypeImpl("Dots", "DOT");
 
 	

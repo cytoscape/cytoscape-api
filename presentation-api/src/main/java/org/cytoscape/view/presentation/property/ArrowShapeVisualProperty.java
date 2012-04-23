@@ -11,6 +11,8 @@ import org.cytoscape.view.presentation.property.values.ArrowShape;
 
 /**
  * Visual Property for {@link ArrowShape} values.
+ * This implementation provides basic default shapes.  Rendering
+ * Engines can provide others.
  * 
  * @CyAPI.Final.Class
  */
