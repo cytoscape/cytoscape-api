@@ -83,6 +83,10 @@ import org.cytoscape.task.table.DeleteColumnTaskFactory;
 import org.cytoscape.task.table.DeleteTableTaskFactory;
 import org.cytoscape.task.table.RenameColumnTaskFactory;
 import org.cytoscape.task.table.MapNetworkAttrTaskFactory;
+import org.cytoscape.work.TaskFactory;
+import org.cytoscape.task.TableCellTaskFactory;
+import org.cytoscape.task.group.GroupNodesTaskFactory;
+import org.cytoscape.task.NodeViewTaskFactory;
 
 
 /**
@@ -413,6 +417,12 @@ public interface CyAppAdapter {
 	LoadAttributesURLTaskFactory get_LoadAttributesURLTaskFactory();
 
 	/**
+	 * Returns an instance of {@link TaskFactory}.
+	 * @return an instance of {@link TaskFactory}.
+	 */	
+	TaskFactory get_ProxySettingsTaskFactory();
+	
+	/**
 	 * Returns an instance of {@link DeleteSelectedNodesAndEdgesTaskFactory}.
 	 * @return an instance of {@link DeleteSelectedNodesAndEdgesTaskFactory}.
 	 */
@@ -653,10 +663,10 @@ public interface CyAppAdapter {
 	OpenSessionTaskFactory get_OpenSessionTaskFactory();
 
 	/**
-	 * Returns an instance of {@link saveSessionTaskFactory}.
-	 * @return an instance of {@link saveSessionTaskFactory}.
+	 * Returns an instance of {@link TaskFactory}.
+	 * @return an instance of {@link TaskFactory}.
 	 */
-//	SaveSessionTaskFactory get_saveSessionTaskFactory();
+	TaskFactory get_saveSessionTaskFactory();
 
 	
 	/**
@@ -686,6 +696,12 @@ public interface CyAppAdapter {
 	RenameColumnTaskFactory get_RenameColumnTaskFactory();
 
 	/**
+	 * Returns an instance of {@link TableCellTaskFactory}.
+	 * @return an instance of {@link TableCellTaskFactory}.
+	 */	
+	TableCellTaskFactory get_CopyValueToEntireColumnTaskFactory();
+	
+	/**
 	 * Returns an instance of {@link DeleteTableTaskFactory}.
 	 * @return an instance of {@link DeleteTableTaskFactory}.
 	 */
@@ -697,35 +713,35 @@ public interface CyAppAdapter {
 	 */
 	ConnectSelectedNodesTaskFactory get_ConnectSelectedNodesTaskFactory();
 
-//	/**
-//	 * Returns an instance of {@link GroupNodesTaskFactory}.
-//	 * @return an instance of {@link GroupNodesTaskFactory}.
-//	 */
-//	GroupNodesTaskFactory get_GroupNodesTaskFactory();
-//
-//	/**
-//	 * Returns an instance of {@link UnGroupTaskFactory}.
-//	 * @return an instance of {@link UnGroupTaskFactory}.
-//	 */
-//	UnGroupTaskFactory get_UnGroupTaskFactory();
-//
-//	/**
-//	 * Returns an instance of {@link 	CollapseGroupTaskFactory}.
-//	 * @return an instance of {@link 	CollapseGroupTaskFactory}.
-//	 */
-//	CollapseGroupTaskFactory get_CollapseGroupTaskFactory();
-//
-//	/**
-//	 * Returns an instance of {@link ExpandGroupTaskFactory}.
-//	 * @return an instance of {@link ExpandGroupTaskFactory}.
-//	 */
-//	ExpandGroupTaskFactory get_ExpandGroupTaskFactory();
-//
-//	/**
-//	 * Returns an instance of {@link UnGroupNodesTaskFactory}.
-//	 * @return an instance of {@link UnGroupNodesTaskFactory}.
-//	 */
-//	UnGroupNodesTaskFactory get_UnGroupNodesTaskFactory();
+	/**
+	 * Returns an instance of {@link GroupNodesTaskFactory}.
+	 * @return an instance of {@link GroupNodesTaskFactory}.
+	 */
+	GroupNodesTaskFactory get_GroupNodesTaskFactory();
+
+	/**
+	 * Returns an instance of {@link UnGroupTaskFactory}.
+	 * @return an instance of {@link UnGroupTaskFactory}.
+	 */
+	NetworkViewTaskFactory get_UnGroupTaskFactory();
+
+	/**
+	 * Returns an instance of {@link 	NodeViewTaskFactory}.
+	 * @return an instance of {@link 	NodeViewTaskFactory}.
+	 */
+	NodeViewTaskFactory get_CollapseGroupTaskFactory();
+
+	/**
+	 * Returns an instance of {@link NodeViewTaskFactory}.
+	 * @return an instance of {@link NodeViewTaskFactory}.
+	 */
+	NodeViewTaskFactory get_ExpandGroupTaskFactory();
+
+	/**
+	 * Returns an instance of {@link NodeViewTaskFactory}.
+	 * @return an instance of {@link NodeViewTaskFactory}.
+	 */
+	NodeViewTaskFactory get_UnGroupNodesTaskFactory();
 
 	/**
 	 * Returns an instance of {@link MapNetworkAttrTaskFactory}.
