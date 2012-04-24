@@ -23,6 +23,8 @@ public interface ValueEditor<V> {
 	<S extends V> V showEditor(Component parent, S initialValue);
 	
 	/**
+	 * Get type of the value to be edited.
+	 * 
 	 * @return the type of value returned by the value editor.
 	 */
 	Class<V> getType();

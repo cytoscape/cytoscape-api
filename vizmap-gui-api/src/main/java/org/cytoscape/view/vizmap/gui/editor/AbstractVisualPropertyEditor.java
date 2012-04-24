@@ -37,7 +37,6 @@
 package org.cytoscape.view.vizmap.gui.editor;
 
 import java.awt.Component;
-import java.awt.Window;
 import java.beans.PropertyEditor;
 
 import javax.swing.Icon;
@@ -46,11 +45,8 @@ import javax.swing.JTable;
 import javax.swing.table.TableCellRenderer;
 
 import org.cytoscape.view.vizmap.mappings.ContinuousMapping;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.l2fprod.common.swing.renderer.DefaultCellRenderer;
-
 
 
 /**
@@ -66,17 +62,12 @@ public abstract class AbstractVisualPropertyEditor<T> implements VisualPropertyE
 	/**
 	 * The type of the property editor.
 	 */
-	protected final Class<T> type;
+	private final Class<T> type;
 
 	/**
 	 * The property editor.
 	 */
 	protected final PropertyEditor propertyEditor;
-
-	/**
-	 * The {@link Window} that holds the editor.
-	 */
-	protected Window vpValueEditor;
 
 	/**
 	 * The cell renderer for discrete mappings.
@@ -88,6 +79,7 @@ public abstract class AbstractVisualPropertyEditor<T> implements VisualPropertyE
 	 */
 	protected TableCellRenderer continuousTableCellRenderer;
 
+	
 	private final ContinuousEditorType continuousEditorType;
 
 	/**
@@ -131,10 +123,14 @@ public abstract class AbstractVisualPropertyEditor<T> implements VisualPropertyE
 
 	@Override 
 	public Icon getDefaultIcon(int width, int height) {
-		// By default, it does not return actual icon.  This should be implemented child classes.
+		// By default, this class does not return actual icon.  This should be implemented by child class.
 		return null;
 	}
 	
+	/**
+	 * Cell renderer for the Continuous Editors
+	 *
+	 */
 	private static final class ContinuousMappingCellRenderer extends DefaultCellRenderer {
 
 		private static final long serialVersionUID = -6734053848878359286L;

@@ -42,11 +42,8 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.cytoscape.model.CyTable;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.VisualProperty;
-import org.cytoscape.view.vizmap.VisualStyle;
-import org.cytoscape.view.vizmap.mappings.ContinuousMapping;
 
 
 /**
@@ -97,7 +94,7 @@ public interface EditorManager {
 	 * 
 	 * @throws Exception
 	 */
-	public <V> V showVisualPropertyValueEditor(Component parentComponent, VisualProperty<V> type, V initialVal)
+	<V> V showVisualPropertyValueEditor(Component parentComponent, VisualProperty<V> type, V initialVal)
 			throws Exception;
 
 	
