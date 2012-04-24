@@ -112,7 +112,12 @@ public class BasicVisualLexicon implements VisualLexicon {
 	public static final VisualProperty<Boolean> NODE_NESTED_NETWORK_IMAGE_VISIBLE = new BooleanVisualProperty(true,
 			"NODE_NESTED_NETWORK_IMAGE_VISIBLE", "Nested Network Image Visible", CyNode.class);
 
-	// ///// Edge VP ///////
+	
+	public static final VisualProperty<Double> NODE_LABEL_WIDTH = new DoubleVisualProperty(100d, NONE_ZERO_POSITIVE_DOUBLE_RANGE,
+			"NODE_LABEL_WIDTH", "Node Label Width", CyNode.class);
+	
+	////////////////////////////////// Edge VP ////////////////////////////////////////
+	
 	public static final VisualProperty<Paint> EDGE_PAINT = new PaintVisualProperty(Color.gray, PAINT_RANGE,
 			"EDGE_PAINT", "Edge Paint", CyEdge.class);
 
@@ -331,6 +336,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 		addVisualProperty(NODE_WIDTH, NODE_SIZE);
 		addVisualProperty(NODE_HEIGHT, NODE_SIZE);
 		addVisualProperty(NODE_DEPTH, NODE_SIZE);
+		addVisualProperty(NODE_LABEL_WIDTH, NODE_SIZE);
 
 		// Level 3: Edge-related VP
 		addVisualProperty(EDGE_LABEL_COLOR, EDGE_PAINT);
@@ -370,7 +376,8 @@ public class BasicVisualLexicon implements VisualLexicon {
 		addIdentifierMapping(CyNode.class, "nodeHeight", NODE_HEIGHT);
 		addIdentifierMapping(CyNode.class, "nodeLabel", NODE_LABEL);
 		addIdentifierMapping(CyNode.class, "nodeLabelColor", NODE_LABEL_COLOR);
-
+		addIdentifierMapping(CyNode.class, "nodeLabelWidth", NODE_LABEL_WIDTH);
+		
 		addIdentifierMapping(CyEdge.class, "edgeColor", EDGE_PAINT);
 		addIdentifierMapping(CyEdge.class, "edgeLineWidth", EDGE_WIDTH);
 		addIdentifierMapping(CyEdge.class, "edgeLabel", EDGE_LABEL);

@@ -51,22 +51,25 @@ import org.slf4j.LoggerFactory;
  * @CyAPI.Final.Class
  */
 public final class FontVisualProperty extends AbstractVisualProperty<Font> {
+	
+	private static final Logger logger = LoggerFactory.getLogger(FontVisualProperty.class);
 
 	private static final Range<Font> FONT_RANGE;
 	private static final int DEF_FONT_SIZE = 12;
 	
-	private static final Logger logger = LoggerFactory.getLogger(FontVisualProperty.class);
+	private static final Font DEFAULT_FONT = new Font("SansSerif", Font.PLAIN, DEF_FONT_SIZE);
 
 	static {
 		final Set<Font> fontSet = new HashSet<Font>();
 		final Font[] allFonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
 
-		for(Font f: allFonts)
+		for (Font f : allFonts)
 			fontSet.add(f.deriveFont(DEF_FONT_SIZE));
-		
+
 		FONT_RANGE = new DiscreteRange<Font>(Font.class, fontSet) {
 			// Takes any String as valid value.
-			@Override public boolean inRange(Font value) {
+			@Override
+			public boolean inRange(Font value) {
 				return true;
 			}
 		};
@@ -79,8 +82,7 @@ public final class FontVisualProperty extends AbstractVisualProperty<Font> {
 	 * @param displayName A human readable string used for displays and user interfaces. 
 	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
 	 */
-	public FontVisualProperty(final Font def, final String id,
-			final String displayName, final Class<?> modelDataType) {
+	public FontVisualProperty(final Font def, final String id, final String displayName, final Class<?> modelDataType) {
 		super(def, FONT_RANGE, id, displayName, modelDataType);
 	}
 
@@ -96,33 +98,24 @@ public final class FontVisualProperty extends AbstractVisualProperty<Font> {
 
 	@Override
 	public Font parseSerializableString(final String text) {
-		Font font = null;
-		
-		if (text != null && text.trim().length() !=0) {
+		if (text != null && text.trim().length() != 0) {
 			// e.g. "Monospaced,plain,12"
-            String name = text.replaceAll("(\\.[bB]old)?,[a-zA-Z]+,\\d+(\\.\\d+)?", "");
+			String name = text.replaceAll("(\\.[bB]old)?,[a-zA-Z]+,\\d+(\\.\\d+)?", "");
 
-            boolean bold = text.matches("(?i).*\\.bold,[a-zA-Z]+,.*");
-            int style = bold ? Font.BOLD : Font.PLAIN;
-            int size = 12;
+			boolean bold = text.matches("(?i).*\\.bold,[a-zA-Z]+,.*");
+			int style = bold ? Font.BOLD : Font.PLAIN;
+			int size = DEF_FONT_SIZE;
 
-            String sSize = text.replaceAll(".+,[^,]+,", "");
-            
-            try {
-                size = Integer.parseInt(sSize);
-            } catch (NumberFormatException nfe) {
-                logger.warn("Cannot parse font size in '" + text +"'", nfe);
-            }
+			String sSize = text.replaceAll(".+,[^,]+,", "");
 
-            font = new Font(name, style, size);
-        }
-		
-		return font;
-	}
+			try {
+				size = Integer.parseInt(sSize);
+			} catch (NumberFormatException nfe) {
+				logger.warn("Cannot parse font size in '" + text + "'", nfe);
+			}
 
-	private static Set<Font> getSystemFonts() {
-		//TODO: implement this.
-		final Set<Font> fontSet = new HashSet<Font>();
-		return fontSet;
+			return new Font(name, style, size);
+		} else
+			return DEFAULT_FONT;
 	}
 }

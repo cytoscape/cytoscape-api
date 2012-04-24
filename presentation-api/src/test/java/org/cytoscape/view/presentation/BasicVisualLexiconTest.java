@@ -46,7 +46,7 @@ public class BasicVisualLexiconTest extends AbstractVisualLexiconTest {
 
 	@Test
 	public void test2DLexicon() throws Exception {
-		assertEquals(58, richLex.getAllVisualProperties().size());
+		assertEquals(59, richLex.getAllVisualProperties().size());
 	}
 
 	@Test
@@ -71,7 +71,7 @@ public class BasicVisualLexiconTest extends AbstractVisualLexiconTest {
 		assertEquals(richLex.getAllDescendants(BasicVisualLexicon.NODE_PAINT).size(), nodePaintChild.size());
 
 		Collection<VisualProperty<?>> nodeChildren = richLex.getAllDescendants(BasicVisualLexicon.NODE);
-		assertEquals(25, nodeChildren.size());
+		assertEquals(26, nodeChildren.size());
 
 		Collection<VisualProperty<?>> edgeChildren = richLex.getAllDescendants(BasicVisualLexicon.EDGE);
 		assertEquals(19, edgeChildren.size());
