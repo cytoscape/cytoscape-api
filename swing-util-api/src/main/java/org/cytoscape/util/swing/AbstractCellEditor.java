@@ -29,7 +29,7 @@ import java.util.EventObject;
  * should be probably be overridden.
  * @CyAPI.Abstract.Class
  */
-public class AbstractCellEditor implements CellEditor {
+public abstract class AbstractCellEditor implements CellEditor {
 	
 	protected EventListenerList listenerList = new EventListenerList();
 
@@ -65,12 +65,6 @@ public class AbstractCellEditor implements CellEditor {
 		return true;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	@Override
-	public void cancelCellEditing() {
-	}
 
 	/**
 	 * {@inheritDoc}

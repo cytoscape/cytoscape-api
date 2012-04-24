@@ -337,6 +337,9 @@ public final class JTreeTable extends JTable {
 
 			return false;
 		}
+
+		@Override
+		public void cancelCellEditing() {}
 	}
 
 	/**
