@@ -4,13 +4,13 @@ import org.cytoscape.event.CyListener;
 
 
 /**
- * Listener for {@link GroupChangedEvent}
+ * Listener for {@link GroupNodesRemovedEvent}
  * @CyAPI.Spi.Interface
  */
-public interface GroupChangedListener extends CyListener {
+public interface GroupNodesRemovedListener extends CyListener {
 	/**
 	 * The method that should handle the specified event.
 	 * @param e The event to be handled.
 	 */
-	public void handleEvent(GroupChangedEvent e);
+	public void handleEvent(GroupNodesRemovedEvent e);
 }
