@@ -46,7 +46,7 @@ public abstract class AbstractTreeTableModel implements TreeTableModel {
 	/**
 	 * The root of this AbstractTreeTableModel.
 	 */
-	protected Object root;
+	private Object root;
 	/**
 	 * The {@link EventListenerList} associated with this AbstractTreeTableModel.
 	 */
@@ -236,7 +236,7 @@ public abstract class AbstractTreeTableModel implements TreeTableModel {
 	 *
 	 * @return the class of the column specified in the argument. 
 	 */
-	public Class getColumnClass(int column) {
+	public Class<?> getColumnClass(int column) {
 		return Object.class;
 	}
 
