@@ -52,17 +52,18 @@ public class BasicCyFileFilter implements CyFileFilter {
 		this.contentTypes = contentTypes;
 		this.category = category;
 
-		String d = description == null ? "(" : description + " (";
+		final StringBuilder builder = new StringBuilder();
+		builder.append(description == null ? "(" : description + " (");
 
 		for (String ex : extensions)
-			d += "*." + ex + ", ";
+			builder.append("*." + ex + ", ");
 
+		String d = builder.toString();
 		d = d.substring(0, d.length() - 2);
 		d += ")";
 
 		this.description = d;
 		this.streamUtil = streamUtil;
-
 	}
 
 	/**
@@ -168,9 +169,13 @@ public class BasicCyFileFilter implements CyFileFilter {
 	 */
 	@Override
 	public String toString() {
-		String s = description + " [category: " + category + "]  [extensions: ";
+		final StringBuilder builder = new StringBuilder();
+		builder.append(description + " [category: " + category + "]  [extensions: ");
+		
 		for (String ext : extensions)
-			s += ext + ",";
+			builder.append(ext + ",");
+		
+		String s = builder.toString();
 		s += "]   [contentTypes: ";
 		for (String c : contentTypes)
 			s += c + ",";
