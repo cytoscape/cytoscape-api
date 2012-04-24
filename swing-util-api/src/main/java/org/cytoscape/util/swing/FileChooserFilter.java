@@ -1,6 +1,7 @@
 package org.cytoscape.util.swing;
 
 import java.io.File;
+import java.lang.reflect.Array;
 import java.util.Arrays;
 import javax.swing.filechooser.FileFilter;
 
@@ -39,8 +40,12 @@ public final class FileChooserFilter extends FileFilter {
 	 */
 	public FileChooserFilter(final String description, final String[] extensions) {
 		super();
+		
+		if(extensions == null)
+			throw new IllegalArgumentException("extensions should not be null.");
+		
 		this.description = description;
-		this.extensions = extensions;
+		this.extensions = Arrays.copyOf(extensions, extensions.length);
 	}
 
 	/**
@@ -54,7 +59,7 @@ public final class FileChooserFilter extends FileFilter {
 		if (file.isDirectory())
 			return true;
 
-		String fileName = file.getName().toLowerCase();
+		final String fileName = file.getName().toLowerCase();
 
 		if (extensions != null) {
 			for (int i = 0; i < extensions.length; i++) {
@@ -112,7 +117,6 @@ public final class FileChooserFilter extends FileFilter {
 			if (!extensions[i].equals(otherFilter.extensions[i]))
 				return false;
 		}
-
 		return true;
 	}
 }
