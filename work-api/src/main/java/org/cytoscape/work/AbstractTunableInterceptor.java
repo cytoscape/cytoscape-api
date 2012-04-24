@@ -181,20 +181,15 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 		return getterCandidate.getParameterTypes().length == 0;
 	}
 
-	private Method findCompatibleSetter(final Object obj, final String rootName, final Class getterReturnType) {
+	private Method findCompatibleSetter(final Object obj, final String rootName, final Class<?> getterReturnType) {
 		Method ret;
 		try {
 			// will throw a variety of exceptions
 			ret = obj.getClass().getMethod("set" + rootName, getterReturnType);
-
-			// separate check
-			if ( ret == null )
-				throw new RuntimeException("No setter method complement found for: get" + rootName + "()");
 		} catch (final Exception e) {
-			throw new IllegalArgumentException("Can't find a setter compatible with the get" 
-			                                   + rootName + "() getter!", e);
+			throw new IllegalArgumentException("Can't find a setter compatible with the get" + rootName + "() getter!",
+					e);
 		}
-
 		return ret;
 	}
 
