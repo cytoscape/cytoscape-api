@@ -26,7 +26,7 @@ public class CyActionTest extends AbstractCyActionTest {
 		configProps.put(ServiceProperties.ACCELERATOR, "cmd s");
 		configProps.put(ServiceProperties.COMMAND, "test");
 		configProps.put(ServiceProperties.COMMAND_NAMESPACE, "dummy");
-		configProps.put(ServiceProperties.ENABLE_FOR, StringEnableSupport.ENABLE_FOR_NETWORK);
+		configProps.put(ServiceProperties.ENABLE_FOR, ActionEnableSupport.ENABLE_FOR_NETWORK);
 		configProps.put(ServiceProperties.ID, "dummyAction");
 		configProps.put(ServiceProperties.IN_MENU_BAR, "true");
 		configProps.put(ServiceProperties.IN_TOOL_BAR, "false");

@@ -133,7 +133,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	public AbstractCyAction(final String name, final CyApplicationManager applicationManager, final String enableFor,
 			final CyNetworkViewManager networkViewManager) {
 		super(name);
-		this.enabler = new StringEnableSupport(this, enableFor, applicationManager, networkViewManager);
+		this.enabler = new ActionEnableSupport(this, enableFor, applicationManager, networkViewManager);
 	}
 
 	/**
@@ -151,7 +151,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *            <li>tooltip - (The toolbar or menu tooltip.)</li>
 	 *            <li>inToolBar - (Whether the action should be in the toolbar.)</li>
 	 *            <li>inMenuBar - (Whether the action should be in a menu.)</li>
-	 *            <li>enableFor - (System state that the action should be enabled for. See {@link StringEnableSupport} for more detail.)</li>
+	 *            <li>enableFor - (System state that the action should be enabled for. See {@link ActionEnableSupport} for more detail.)</li>
 	 *            <li>accelerator - (Accelerator key bindings.)</li>
 	 *            <li>menuGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the menu.)</li>
 	 *            <li>toolBarGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the toolbar.)</li>
@@ -213,7 +213,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *            <li>inToolBar - (Whether the action should be in the toolbar.)</li>
 	 *            <li>inMenuBar - (Whether the action should be in a menu.)</li>
 	 *            <li>enableFor - (<i>Will only use this value if the TaskFactory is not a TaskFactoryPredicate!</i> 
-	 *                             See {@link StringEnableSupport} for more detail.)</li>
+	 *                             See {@link ActionEnableSupport} for more detail.)</li>
 	 *            <li>accelerator - (Accelerator key bindings.)</li>
 	 *            <li>menuGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the menu.)</li>
 	 *            <li>toolBarGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the toolbar.)</li>
@@ -234,7 +234,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		if (enableFor == null)
 			this.enabler = new TaskFactoryEnableSupport(this, factory);
 		else
-			this.enabler = new StringEnableSupport(this, enableFor, applicationManager, networkViewManager);
+			this.enabler = new ActionEnableSupport(this, enableFor, applicationManager, networkViewManager);
 
 		configFromProps(configProps);
 	}

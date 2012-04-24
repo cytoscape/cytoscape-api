@@ -42,7 +42,7 @@ import org.cytoscape.work.swing.DynamicSubmenuListener;
  * 
  * @CyAPI.Final.Class
  */
-public final class TaskFactoryEnableSupport extends AbstractEnableSupport {
+final class TaskFactoryEnableSupport extends AbstractEnableSupport {
 
 	private final TaskFactory tfp;
 

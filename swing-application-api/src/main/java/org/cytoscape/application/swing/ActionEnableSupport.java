@@ -1,5 +1,5 @@
 /*
- File: StringEnableSupport.java
+ File: ActionEnableSupport.java
 
  Copyright (c) 2006, 2010, The Cytoscape Consortium (www.cytoscape.org)
 
@@ -58,7 +58,7 @@ import org.cytoscape.work.swing.DynamicSubmenuListener;
  * 
  * @CyAPI.Final.Class
  */
-public final class StringEnableSupport extends AbstractEnableSupport {
+public final class ActionEnableSupport extends AbstractEnableSupport {
 
 	private final CyApplicationManager applicationManager;
 	private final CyNetworkViewManager networkViewManager;
@@ -106,7 +106,7 @@ public final class StringEnableSupport extends AbstractEnableSupport {
 	 * See class documentation above for allowable values for this string.
 	 * @param applicationManager The application manager.
 	 */
-	public StringEnableSupport(DynamicSubmenuListener submenuListener, String enableFor,
+	public ActionEnableSupport(DynamicSubmenuListener submenuListener, String enableFor,
 			final CyApplicationManager applicationManager, final CyNetworkViewManager networkViewManager) {
 		super(submenuListener);
 
@@ -122,7 +122,7 @@ public final class StringEnableSupport extends AbstractEnableSupport {
 	 * See class documentation above for allowable values for this string.
 	 * @param applicationManager The application manager.
 	 */
-	public StringEnableSupport(Action action, String enableFor, CyApplicationManager applicationManager, final CyNetworkViewManager networkViewManager) {
+	public ActionEnableSupport(Action action, String enableFor, CyApplicationManager applicationManager, final CyNetworkViewManager networkViewManager) {
 		super(action);
 		this.enableFor = enableFor;
 		this.applicationManager = applicationManager;
@@ -136,7 +136,7 @@ public final class StringEnableSupport extends AbstractEnableSupport {
 	 * See class documentation above for allowable values for this string.
 	 * @param applicationManager The application manager.
 	 */
-	public StringEnableSupport(JMenuItem menuItem, String enableFor, CyApplicationManager applicationManager, final CyNetworkViewManager networkViewManager) {
+	public ActionEnableSupport(JMenuItem menuItem, String enableFor, CyApplicationManager applicationManager, final CyNetworkViewManager networkViewManager) {
 		super(menuItem);
 		this.enableFor = enableFor;
 		this.applicationManager = applicationManager;

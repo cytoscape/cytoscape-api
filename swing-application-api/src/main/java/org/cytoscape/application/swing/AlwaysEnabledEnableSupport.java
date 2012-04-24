@@ -39,7 +39,7 @@ import javax.swing.JMenuItem;
  * 
  * @CyAPI.Final.Class
  */
-public final class AlwaysEnabledEnableSupport extends AbstractEnableSupport {
+final class AlwaysEnabledEnableSupport extends AbstractEnableSupport {
 
 
 	/**
