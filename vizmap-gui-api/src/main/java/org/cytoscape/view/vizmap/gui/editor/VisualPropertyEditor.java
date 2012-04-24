@@ -54,16 +54,17 @@ public interface VisualPropertyEditor<T> {
 
 	/**
 	 * Returns the type of object managed in the Visual property.
+	 *
 	 * @return the type of object managed in the Visual property.
 	 */
 	Class<T> getType();
 
-//	/**
-//	 * Returns continuous mapping editor for the Visual Property. Return value
-//	 * is null if Continuous Editor does not exist.
-//	 * @return a continuous mapping editor for the Visual Property.
-//	 */
-//	PropertyEditor getContinuousMappingEditor();
+
+	/**
+	 * Returns type of Continuous Editor.
+	 * 
+	 * @return type of {@link ContinuousMappingEditor}
+	 */
 	ContinuousEditorType getContinuousEditorType();
 
 	/**
@@ -72,14 +73,6 @@ public interface VisualPropertyEditor<T> {
 	 */
 	PropertyEditor getPropertyEditor();
 
-//	/**
-//	 * Display editor and get user input. Note: editor is associated with data
-//	 * type (String, Number, Color...), so we do not need to provide
-//	 * VisualProperty as parameter.
-//	 * 
-//	 * @return the user input or null.
-//	 */
-//	T showVisualPropertyValueEditor();
 
 	/**
 	 * A custom cell renderer for Discrete table cells. 
@@ -93,7 +86,7 @@ public interface VisualPropertyEditor<T> {
 	 * 
 	 * @return a TableCellRenderer Continuous table cells. 
 	 */
-	TableCellRenderer getContinuousTableCellRenderer(PropertyEditor continuousMappingEditor);
+	TableCellRenderer getContinuousTableCellRenderer(ContinuousMappingEditor<? extends Number, T> continuousMappingEditor);
 
 	/**
 	 * This is for default view editor.

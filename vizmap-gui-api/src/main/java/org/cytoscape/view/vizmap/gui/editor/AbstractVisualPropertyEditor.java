@@ -119,9 +119,8 @@ public abstract class AbstractVisualPropertyEditor<T> implements VisualPropertyE
 	}
 	
 	@Override
-	public TableCellRenderer getContinuousTableCellRenderer(PropertyEditor continuousMappingEditor) {
-		// Return default cell renderer for 
-		return new ContinuousMappingCellRenderer((ContinuousMappingEditor<?, ?>) continuousMappingEditor);
+	public TableCellRenderer getContinuousTableCellRenderer(final ContinuousMappingEditor<? extends Number, T> continuousMappingEditor) {
+		return new ContinuousMappingCellRenderer(continuousMappingEditor);
 	}
 
 
@@ -136,7 +135,7 @@ public abstract class AbstractVisualPropertyEditor<T> implements VisualPropertyE
 		return null;
 	}
 	
-	private final class ContinuousMappingCellRenderer extends DefaultCellRenderer {
+	private static final class ContinuousMappingCellRenderer extends DefaultCellRenderer {
 
 		private static final long serialVersionUID = -6734053848878359286L;
 

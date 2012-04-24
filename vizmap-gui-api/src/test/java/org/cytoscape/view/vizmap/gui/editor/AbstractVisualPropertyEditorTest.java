@@ -29,6 +29,7 @@ public class AbstractVisualPropertyEditorTest {
 	DummyEditor editor;
 	PropertyEditor propertyEditor;
 	ContinuousEditorType continuousEditorType;
+	
 	@Before
 	public void testAbstractVisualPropertyEditor(){
 
@@ -45,6 +46,12 @@ public class AbstractVisualPropertyEditorTest {
 	@Test
 	public void testGetPropertyEditor(){
 		assertEquals(propertyEditor, editor.getPropertyEditor());
+	}
+	
+	@Test
+	public void testGetContinuousTableCellRenderer(){
+		ContinuousMappingEditor<?,?> continuousEditor = mock(ContinuousMappingEditor.class);
+		assertNotNull(editor.getContinuousTableCellRenderer((ContinuousMappingEditor<? extends Number, Object>) continuousEditor));
 	}
 	
 	@Test
