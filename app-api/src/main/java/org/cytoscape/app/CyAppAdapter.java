@@ -40,8 +40,8 @@ import org.cytoscape.task.layout.ApplyPreferredLayoutTaskFactory;
 import org.cytoscape.task.loadnetwork.LoadNetworkFileTaskFactory;
 import org.cytoscape.task.loadnetwork.LoadNetworkURLTaskFactory;
 import org.cytoscape.task.loadvizmap.LoadVizmapFileTaskFactory;
-import org.cytoscape.task.loaddatatable.LoadAttributesFileTaskFactory;
-import org.cytoscape.task.loaddatatable.LoadAttributesURLTaskFactory;
+import org.cytoscape.task.loaddatatable.LoadTableFileTaskFactory;
+import org.cytoscape.task.loaddatatable.LoadTableURLTaskFactory;
 import org.cytoscape.task.networkobjects.DeleteSelectedNodesAndEdgesTaskFactory;
 import org.cytoscape.task.select.InvertSelectedEdgesTaskFactory;
 import org.cytoscape.task.select.InvertSelectedNodesTaskFactory;
@@ -405,16 +405,16 @@ public interface CyAppAdapter {
 	LoadVizmapFileTaskFactory get_LoadVizmapFileTaskFactory();
 
 	/**
-	 * Returns an instance of {@link LoadAttributesFileTaskFactory}.
-	 * @return an instance of {@link LoadAttributesFileTaskFactory}.
+	 * Returns an instance of {@link LoadTableFileTaskFactory}.
+	 * @return an instance of {@link LoadTableFileTaskFactory}.
 	 */
-	LoadAttributesFileTaskFactory get_LoadAttributesFileTaskFactory();
+	LoadTableFileTaskFactory get_LoadTableFileTaskFactory();
 
 	/**
-	 * Returns an instance of {@link LoadAttributesURLTaskFactory}.
-	 * @return an instance of {@link LoadAttributesURLTaskFactory}.
+	 * Returns an instance of {@link LoadTableURLTaskFactory}.
+	 * @return an instance of {@link LoadTableURLTaskFactory}.
 	 */
-	LoadAttributesURLTaskFactory get_LoadAttributesURLTaskFactory();
+	LoadTableURLTaskFactory get_LoadTableURLTaskFactory();
 
 	/**
 	 * Returns an instance of {@link TaskFactory}.

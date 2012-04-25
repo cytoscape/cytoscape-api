@@ -10,7 +10,7 @@ import org.cytoscape.work.TaskIterator;
  * This interface provides a task iterator for loading an attribute URL to a table.
  * @CyAPI.Api.Interface
  */
-public interface LoadAttributesURLTaskFactory extends TaskFactory {
+public interface LoadTableURLTaskFactory extends TaskFactory {
 	
 	/**
 	 * Creates a task iterator for loading an attribute URL to the global table. The created task
