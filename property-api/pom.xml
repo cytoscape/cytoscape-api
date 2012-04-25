@@ -13,7 +13,6 @@
 	</properties>
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.cytoscape</groupId>
 	<artifactId>property-api</artifactId>
 
 	<name>Cytoscape Property API (${project.artifactId})</name>
@@ -40,7 +39,7 @@
 			<plugin>
 				<groupId>org.jvnet.jaxb2.maven2</groupId>
 				<artifactId>maven-jaxb2-plugin</artifactId>
-				<version>0.7.4</version>
+				<version>0.8.1</version>
 				<executions>
 					<execution>
 						<id>bookmarks</id>
@@ -55,6 +54,7 @@
 							</schemaIncludes>
 							<generatePackage>org.cytoscape.property.bookmark</generatePackage>
 							<verbose>true</verbose>
+							<encoding>UTF-8</encoding>
 							<removeOldOutput>false</removeOldOutput>
 							<forceRegenerate>true</forceRegenerate>
 						</configuration>
