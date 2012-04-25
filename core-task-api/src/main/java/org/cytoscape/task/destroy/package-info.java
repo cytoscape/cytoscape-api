@@ -1,5 +1,5 @@
 /**
- * This package includes a set of interfaces for creating task iterators
- * for destroying networks and network views. 
+ * This package includes a set of task factory interfaces for deleting or
+ * or destroying objects within Cytoscape. 
  */
 package org.cytoscape.task.destroy;
