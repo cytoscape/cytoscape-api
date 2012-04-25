@@ -1,4 +1,4 @@
-package org.cytoscape.task.layout;
+package org.cytoscape.task.visualization;
 
 import org.cytoscape.task.NetworkViewTaskFactory;
 import org.cytoscape.view.model.CyNetworkView;
