@@ -1,4 +1,4 @@
-package org.cytoscape.task.group;
+package org.cytoscape.task.edit;
 
 import org.cytoscape.task.NetworkViewTaskFactory;
 
