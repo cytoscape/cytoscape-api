@@ -82,7 +82,7 @@ import org.cytoscape.task.edit.ConnectSelectedNodesTaskFactory;
 import org.cytoscape.task.edit.EditNetworkTitleTaskFactory;
 import org.cytoscape.task.edit.GroupNodesTaskFactory;
 import org.cytoscape.task.edit.MapGlobalToLocalTableTaskFactory;
-import org.cytoscape.task.edit.MapNetworkAttrTaskFactory;
+import org.cytoscape.task.edit.MapTableToNetworkTablesTaskFactory;
 import org.cytoscape.task.edit.RenameColumnTaskFactory;
 import org.cytoscape.work.TaskFactory;
 import org.cytoscape.task.TableCellTaskFactory;
@@ -744,9 +744,9 @@ public interface CyAppAdapter {
 	NodeViewTaskFactory get_UnGroupNodesTaskFactory();
 
 	/**
-	 * Returns an instance of {@link MapNetworkAttrTaskFactory}.
-	 * @return an instance of {@link MapNetworkAttrTaskFactory}.
+	 * Returns an instance of {@link MapTableToNetworkTablesTaskFactory}.
+	 * @return an instance of {@link MapTableToNetworkTablesTaskFactory}.
 	 */
-	MapNetworkAttrTaskFactory get_MapNetworkAttrTaskFactory();
+	MapTableToNetworkTablesTaskFactory get_MapTableToNetworkTablesTaskFactory();
 
 }

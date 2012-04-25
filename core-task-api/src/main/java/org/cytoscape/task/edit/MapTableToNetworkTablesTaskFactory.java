@@ -5,7 +5,12 @@ import org.cytoscape.model.CyTable;
 import org.cytoscape.work.TaskFactory;
 import org.cytoscape.work.TaskIterator;
 
-public interface MapNetworkAttrTaskFactory extends TaskFactory {
+/**
+ * This interface provides a task factory that maps a global table to various combinations
+ * of network tables.
+ * @CyAPI.Api.Interface
+ */
+public interface MapTableToNetworkTablesTaskFactory extends TaskFactory {
 	
 	enum MappingType { 
 		CURRENT_LOCAL("Only to the current network"),
