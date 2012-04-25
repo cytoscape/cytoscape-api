@@ -1,4 +1,4 @@
-package org.cytoscape.task.title;
+package org.cytoscape.task.edit;
 
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.task.NetworkTaskFactory;

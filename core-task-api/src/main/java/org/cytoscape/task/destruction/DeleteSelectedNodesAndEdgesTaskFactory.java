@@ -1,4 +1,4 @@
-package org.cytoscape.task.networkobjects;
+package org.cytoscape.task.destruction;
 
 import org.cytoscape.task.NetworkTaskFactory;
 

@@ -1,4 +1,4 @@
-package org.cytoscape.task.table;
+package org.cytoscape.task.destruction;
 
 import org.cytoscape.task.TableColumnTaskFactory;
 

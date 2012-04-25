@@ -1,4 +1,4 @@
-package org.cytoscape.task.export;
+package org.cytoscape.task.write;
 
 import java.io.File;
 

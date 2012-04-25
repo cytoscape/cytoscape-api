@@ -1,4 +1,4 @@
-package org.cytoscape.task.session;
+package org.cytoscape.task.creation;
 
 
 import org.cytoscape.work.TaskFactory;

@@ -1,4 +1,4 @@
-package org.cytoscape.task.table;
+package org.cytoscape.task.edit;
 
 import org.cytoscape.model.CyColumn;
 import org.cytoscape.task.TableColumnTaskFactory;
