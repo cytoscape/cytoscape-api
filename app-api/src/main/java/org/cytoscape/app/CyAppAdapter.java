@@ -36,7 +36,8 @@ import org.cytoscape.work.swing.SubmenuTaskManager;
 import org.cytoscape.work.undo.UndoSupport;
 import org.cytoscape.task.visualize.ApplyPreferredLayoutTaskFactory;
 import org.cytoscape.task.visualize.ApplyVisualStyleTaskFactory;
-import org.cytoscape.task.write.ExportCurrentTableTaskFactory;
+import org.cytoscape.task.write.ExportSelectedTableTaskFactory;
+import org.cytoscape.task.write.ExportTableTaskFactory;
 import org.cytoscape.task.write.ExportNetworkImageTaskFactory;
 import org.cytoscape.task.write.ExportNetworkViewTaskFactory;
 import org.cytoscape.task.write.ExportVizmapTaskFactory;
@@ -639,11 +640,17 @@ public interface CyAppAdapter {
 	ExportNetworkViewTaskFactory get_ExportNetworkViewTaskFactory();
 
 	/**
-	 * Returns an instance of {@link ExportCurrentTableTaskFactory}.
-	 * @return an instance of {@link ExportCurrentTableTaskFactory}.
+	 * Returns an instance of {@link ExportSelectedTableTaskFactory}.
+	 * @return an instance of {@link ExportSelectedTableTaskFactory}.
 	 */
-	ExportCurrentTableTaskFactory get_ExportCurrentTableTaskFactory();
-
+	ExportSelectedTableTaskFactory get_ExportSelectedTableTaskFactory();
+	
+	/**
+	 * Returns an instance of {@link ExportTableTaskFactory}.
+	 * @return an instance of {@link ExportTableTaskFactory}.
+	 */
+	ExportTableTaskFactory get_ExportTableTaskFactory();
+	
 	/**
 	 * Returns an instance of {@link ExportVizmapTaskFactory}.
 	 * @return an instance of {@link ExportVizmapTaskFactory}.
