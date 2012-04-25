@@ -1,4 +1,4 @@
-package org.cytoscape.task.creation;
+package org.cytoscape.task.create;
 
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.work.TaskFactory;

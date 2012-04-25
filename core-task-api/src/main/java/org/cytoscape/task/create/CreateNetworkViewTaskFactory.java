@@ -1,5 +1,5 @@
 
-package org.cytoscape.task.creation;
+package org.cytoscape.task.create;
 
 import org.cytoscape.task.NetworkTaskFactory;
 

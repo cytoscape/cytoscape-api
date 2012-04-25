@@ -1,4 +1,4 @@
-package org.cytoscape.task.visualization;
+package org.cytoscape.task.visualize;
 
 import org.cytoscape.task.NetworkViewTaskFactory;
 
