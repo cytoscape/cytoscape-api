@@ -24,17 +24,19 @@
  You should have received a copy of the GNU Lesser General Public License
  along with this library; if not, write to the Free Software Foundation,
  Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
-*/
+ */
 package org.cytoscape.model;
-
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
-import org.junit.Before;
+import java.util.Set;
+
 import org.junit.Test;
-
 
 public abstract class AbstractCyTableManagerTest {
 	/**
@@ -46,10 +48,10 @@ public abstract class AbstractCyTableManagerTest {
 	 * Must be supplied by implementer.
 	 */
 	protected CyNetwork goodNetwork;
+	protected CyTable globalTable;
 
-	@Before
-	public void setUp() {
-	}
+	protected CyNetworkTableManager networkTableMgr;
+	protected CyNetworkManager networkManager;
 
 	@Test
 	public void testReset() {
@@ -61,8 +63,52 @@ public abstract class AbstractCyTableManagerTest {
 
 	@Test
 	public void testAddTable() {
+		final Set<CyTable> allTables = mgr.getAllTables(true);
+		int numberOfTables = allTables.size();
+		CyTable newTable = mock(CyTable.class);
+		when(newTable.getSUID()).thenReturn(Long.valueOf(200000));
+		mgr.addTable(newTable);
+		assertEquals(newTable, mgr.getTable(newTable.getSUID()));
+
+		assertEquals(numberOfTables + 1, mgr.getAllTables(true).size());
+	}
+
+	@Test
+	public void testGetGlobalTables() {
+		assertNotNull(mgr.getGlobalTables());
+
+		mgr.addTable(globalTable);
 		mgr.addTable(goodNetwork.getDefaultNodeTable());
-		assertEquals(goodNetwork.getDefaultNodeTable(),
-		             mgr.getTable(goodNetwork.getDefaultNodeTable().getSUID()));
+
+		assertEquals(1, mgr.getGlobalTables().size());
+		assertEquals(globalTable, mgr.getGlobalTables().iterator().next());
+	}
+
+	@Test
+	public void testGetLocalTables() {
+
+		// At this point, one network is added to the manager.
+		final int tableCount = mgr.getAllTables(true).size();
+
+		// Root Network has 3 tables, and Sub Network has 6 tables.
+		assertEquals(9, tableCount);
+		assertEquals(6, mgr.getAllTables(false).size());
+
+		Set<CyTable> nodeTables = mgr.getLocalTables(CyNode.class);
+		Set<CyTable> edgeTables = mgr.getLocalTables(CyEdge.class);
+		Set<CyTable> networkTables = mgr.getLocalTables(CyNetwork.class);
+
+		assertNotNull(nodeTables);
+		assertNotNull(edgeTables);
+		assertNotNull(networkTables);
+
+		assertEquals(tableCount, nodeTables.size() + edgeTables.size() + networkTables.size());
+		assertEquals(3, networkTables.size());
+		assertEquals(3, nodeTables.size());
+		assertEquals(3, edgeTables.size());
+
+		assertTrue(networkTables.contains(goodNetwork.getDefaultNetworkTable()));
+		final CyTable hidden = networkTableMgr.getTable(goodNetwork, CyNetwork.class, CyNetwork.HIDDEN_ATTRS);
+		assertTrue(networkTables.contains(hidden));
 	}
 }

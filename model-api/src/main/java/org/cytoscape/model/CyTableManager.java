@@ -37,6 +37,7 @@ import java.util.Set;
  * @CyAPI.Api.Interface
  */
 public interface CyTableManager {
+
 	/**
 	 * Returns a Set of all tables with the specified visibility.
 	 * @param includePrivate Whether to include private CyTables
@@ -67,6 +68,23 @@ public interface CyTableManager {
 	 */
 	void deleteTable(long suid);
 
-	/** Releases all currently held references and resources. */
-	public void reset();
+	/**
+	 * Releases all currently held references and resources.
+	 */
+	void reset();
+	
+	/**
+	 * Returns a set of all global tables.
+	 * @return All registered global tables
+	 */
+	Set<CyTable> getGlobalTables();
+	
+	/**
+	 * Returns set of all local tabses for the given data type.
+	 * 
+	 * @param type Type of the graph object, i.e., node, edge or network.
+	 * 
+	 * @return Set of all registered tables associated with the given data type.
+	 */
+	Set<CyTable> getLocalTables(Class<? extends CyIdentifiable> type);
 }

@@ -160,6 +160,8 @@ public class AbstractGUITunableHandlerTest {
 		String depName = "depName";
 		String depState = "dep state";
 		fieldHandler.checkDependency(depName, depState);
+		
+		fieldHandler.checkDependency(null, depState);
 	}
 
 	@Test
