@@ -1,4 +1,4 @@
-package org.cytoscape.task.loaddatatable;
+package org.cytoscape.task.read;
 
 import java.net.URL;
 

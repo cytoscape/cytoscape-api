@@ -1,4 +1,4 @@
-package org.cytoscape.task.export.vizmap;
+package org.cytoscape.task.export;
 
 import java.io.File;
 

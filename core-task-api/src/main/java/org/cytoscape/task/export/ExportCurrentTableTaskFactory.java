@@ -1,4 +1,4 @@
-package org.cytoscape.task.export.table;
+package org.cytoscape.task.export;
 
 import org.cytoscape.model.CyTable;
 import org.cytoscape.task.TableTaskFactory;

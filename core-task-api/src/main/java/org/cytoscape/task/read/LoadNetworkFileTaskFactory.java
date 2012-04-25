@@ -1,4 +1,4 @@
-package org.cytoscape.task.loadnetwork;
+package org.cytoscape.task.read;
 
 import java.io.File;
 

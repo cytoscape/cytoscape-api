@@ -1,4 +1,4 @@
-package org.cytoscape.task.loadnetwork;
+package org.cytoscape.task.read;
 
 import java.net.URL;
 import java.util.Set;

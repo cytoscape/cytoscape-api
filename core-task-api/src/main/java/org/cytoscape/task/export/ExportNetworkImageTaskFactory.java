@@ -1,4 +1,4 @@
-package org.cytoscape.task.export.graphics;
+package org.cytoscape.task.export;
 
 import org.cytoscape.task.NetworkViewTaskFactory;
 

@@ -1,5 +1,5 @@
 
-package org.cytoscape.task.loadvizmap;
+package org.cytoscape.task.read;
 
 import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.work.TaskFactory;
