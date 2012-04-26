@@ -34,6 +34,7 @@
  */
 package org.cytoscape.view.presentation.property;
 
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.Range;
 
@@ -52,7 +53,7 @@ public final class DoubleVisualProperty extends AbstractVisualProperty<Double> {
 	 * @param displayName A human readable string used for displays and user interfaces. 
 	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
 	 */
-	public DoubleVisualProperty(final Double def, final Range<Double> range, final String id, final String displayName, final Class<?> modelDataType) {
+	public DoubleVisualProperty(final Double def, final Range<Double> range, final String id, final String displayName, final Class<? extends CyIdentifiable> modelDataType) {
 		this(def, range, id, displayName, false, modelDataType);
 	}
 
@@ -66,7 +67,7 @@ public final class DoubleVisualProperty extends AbstractVisualProperty<Double> {
 	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
 	 */
 	public DoubleVisualProperty(final Double def, final Range<Double> range, final String id,
-			final String displayName, final boolean ignoreDefault, final Class<?> modelDataType) {
+			final String displayName, final boolean ignoreDefault, final Class<? extends CyIdentifiable> modelDataType) {
 		super(def, range, id, displayName, modelDataType);
 		this.shouldIgnoreDefault = ignoreDefault;
 	}

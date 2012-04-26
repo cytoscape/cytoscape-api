@@ -39,6 +39,7 @@ import java.awt.Color;
 import java.awt.Paint;
 import java.util.StringTokenizer;
 
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.Range;
 
@@ -57,7 +58,7 @@ public final class PaintVisualProperty extends AbstractVisualProperty<Paint> {
 	 * @param displayName A human readable string used for displays and user interfaces. 
 	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
 	 */
-	public PaintVisualProperty(final Paint def, final Range<Paint> range, final String id, final String displayName, final Class<?> modelDataType) {
+	public PaintVisualProperty(final Paint def, final Range<Paint> range, final String id, final String displayName, final Class<? extends CyIdentifiable> modelDataType) {
 		super(def, range, id, displayName, modelDataType);
 	}
 	

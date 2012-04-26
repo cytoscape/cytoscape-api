@@ -3,6 +3,7 @@ package org.cytoscape.view.presentation.property;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.DiscreteRange;
 import org.cytoscape.view.model.Range;
@@ -33,7 +34,7 @@ public final class DefaultVisualizableVisualProperty extends
 	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
 	 */
 	public DefaultVisualizableVisualProperty(final String id,
-			final String displayName, final Class<?> modelDataType) {
+			final String displayName, final Class<? extends CyIdentifiable> modelDataType) {
 		super(visualizable, VISUALIZABLE_RANGE, id, displayName, modelDataType);
 	}
 

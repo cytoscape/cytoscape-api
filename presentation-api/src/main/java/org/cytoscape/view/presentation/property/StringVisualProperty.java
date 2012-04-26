@@ -34,6 +34,7 @@
  */
 package org.cytoscape.view.presentation.property;
 
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.Range;
 
@@ -52,11 +53,8 @@ public final class StringVisualProperty extends AbstractVisualProperty<String> {
 	 * @param displayName A human readable string used for displays and user interfaces. 
 	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
 	 */
-	public StringVisualProperty(final String def,
-								final Range<String> range,
-								final String id,
-								final String displayName,
-								final Class<?> modelDataType) {
+	public StringVisualProperty(final String def, final Range<String> range, final String id, final String displayName,
+			final Class<? extends CyIdentifiable> modelDataType) {
 		super(def, range, id, displayName, modelDataType);
 	}
 	
@@ -69,12 +67,8 @@ public final class StringVisualProperty extends AbstractVisualProperty<String> {
 	 * @param ignoreDefault Whether the default value should be ignored or not. 
 	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
 	 */
-	public StringVisualProperty(final String def,
-								final Range<String> range,
-								final String id,
-								final String displayName,
-								final boolean ignoreDefault,
-								final Class<?> modelDataType) {
+	public StringVisualProperty(final String def, final Range<String> range, final String id, final String displayName,
+			final boolean ignoreDefault, final Class<? extends CyIdentifiable> modelDataType) {
 		super(def, range, id, displayName, modelDataType);
 		this.shouldIgnoreDefault = ignoreDefault;
 	}

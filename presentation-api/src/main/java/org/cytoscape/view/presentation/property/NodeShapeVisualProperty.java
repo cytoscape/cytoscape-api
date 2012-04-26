@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.DiscreteRange;
 import org.cytoscape.view.presentation.property.values.AbstractVisualPropertyValue;
@@ -71,7 +72,7 @@ public final class NodeShapeVisualProperty extends AbstractVisualProperty<NodeSh
 	 * @param displayName A human readable string used for displays and user interfaces. 
 	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
 	 */
-	public NodeShapeVisualProperty(NodeShape defaultValue, String id, String displayName, Class<?> modelDataType) {
+	public NodeShapeVisualProperty(NodeShape defaultValue, String id, String displayName, Class<? extends CyIdentifiable> modelDataType) {
 		super(defaultValue, NODE_SHAPE_RANGE, id, displayName, modelDataType);
 	}
 

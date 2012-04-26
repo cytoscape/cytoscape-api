@@ -34,6 +34,7 @@
  */
 package org.cytoscape.view.presentation.property;
 
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.Range;
 
@@ -52,7 +53,7 @@ public final class IntegerVisualProperty extends AbstractVisualProperty<Integer>
 	 * @param displayName A human readable string used for displays and user interfaces. 
 	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
 	 */
-	public IntegerVisualProperty(final Integer def, final Range<Integer> range, final String id, final String displayName, final Class<?> modelDataType) {
+	public IntegerVisualProperty(final Integer def, final Range<Integer> range, final String id, final String displayName, final Class<? extends CyIdentifiable> modelDataType) {
 		super(def, range, id, displayName, modelDataType);
 	}
 

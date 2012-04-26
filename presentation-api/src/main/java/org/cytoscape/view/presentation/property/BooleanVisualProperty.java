@@ -38,6 +38,7 @@ package org.cytoscape.view.presentation.property;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.DiscreteRange;
 import org.cytoscape.view.model.Range;
@@ -65,7 +66,7 @@ public final class BooleanVisualProperty extends AbstractVisualProperty<Boolean>
 	 * @param displayName A human readable string used for displays and user interfaces. 
 	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
 	 */
-	public BooleanVisualProperty(final Boolean def, final String id, final String displayName, final Class<?> modelDataType) {
+	public BooleanVisualProperty(final Boolean def, final String id, final String displayName, final Class<? extends CyIdentifiable> modelDataType) {
 		this(def, id, displayName, false, modelDataType);
 	}
 	
@@ -77,7 +78,7 @@ public final class BooleanVisualProperty extends AbstractVisualProperty<Boolean>
 	 * @param ignoreDefault Whether the default value should be ignored. 
 	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
 	 */
-	public BooleanVisualProperty(final Boolean def, final String id, final String displayName, final Boolean ignoreDefault, final Class<?> modelDataType) {
+	public BooleanVisualProperty(final Boolean def, final String id, final String displayName, final Boolean ignoreDefault, final Class<? extends CyIdentifiable> modelDataType) {
 		super(def, BOOLEAN_RANGE, id, displayName, modelDataType);
 		this.shouldIgnoreDefault = ignoreDefault;
 	}

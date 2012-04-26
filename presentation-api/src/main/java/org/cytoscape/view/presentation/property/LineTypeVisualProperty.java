@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.DiscreteRange;
 import org.cytoscape.view.presentation.property.values.AbstractVisualPropertyValue;
@@ -52,7 +53,7 @@ public final class LineTypeVisualProperty extends AbstractVisualProperty<LineTyp
 	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
 	 */
 	public LineTypeVisualProperty(LineType defaultValue,
-			String id, String displayName, Class<?> modelDataType) {
+			String id, String displayName, Class<? extends CyIdentifiable> modelDataType) {
 		super(defaultValue, LINE_TYPE_RANGE, id, displayName, modelDataType);
 	}
 

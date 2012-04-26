@@ -3,6 +3,7 @@ package org.cytoscape.view.presentation.property;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.DiscreteRange;
 import org.cytoscape.view.model.NullDataType;
@@ -31,7 +32,7 @@ public final class NullVisualProperty extends AbstractVisualProperty<NullDataTyp
 	 * @param displayName A human readable string used for displays and user interfaces. 
 	 */
 	public NullVisualProperty(final String id, final String displayName) {
-		super(dummyObject, NULL_RANGE, id, displayName, Object.class);
+		super(dummyObject, NULL_RANGE, id, displayName, CyIdentifiable.class);
 	}
 
 	

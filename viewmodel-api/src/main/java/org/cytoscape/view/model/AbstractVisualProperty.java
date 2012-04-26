@@ -34,6 +34,8 @@
  */
 package org.cytoscape.view.model;
 
+import org.cytoscape.model.CyIdentifiable;
+
 
 /**
  * An abstract implementation of VisualProperty that omits the methods dealing
@@ -57,7 +59,7 @@ public abstract class AbstractVisualProperty<T> implements VisualProperty<T> {
 	/** If this is true, default value will be ignored by VizMapper. */
 	protected boolean shouldIgnoreDefault;
 	
-	private final Class<?> targetObjectDataType;
+	private final Class<? extends CyIdentifiable> targetObjectDataType;
 
 	
 	/**
@@ -70,19 +72,19 @@ public abstract class AbstractVisualProperty<T> implements VisualProperty<T> {
 	 * @param targetObjectDataType the type of the target object for this visual property. 
 	 * 
 	 */
-	@SuppressWarnings("unchecked")
-	public AbstractVisualProperty(final T defaultValue, final Range<T> range, final String id, final String displayName, final Class<?> targetObjectDataType) {
-		if(defaultValue == null)
+	public AbstractVisualProperty(final T defaultValue, final Range<T> range, final String id,
+			final String displayName, final Class<? extends CyIdentifiable> targetObjectDataType) {
+		if (defaultValue == null)
 			throw new NullPointerException("defaultValue should not be null.");
-		
-		if(id == null)
+
+		if (id == null)
 			throw new NullPointerException("id should not be null.");
-		
-		if(displayName == null)
+
+		if (displayName == null)
 			throw new NullPointerException("displayName should not be null.");
-		
+
 		this.range = range;
-		
+
 		this.defaultValue = defaultValue;
 		this.id = id;
 		this.name = displayName;
@@ -117,7 +119,7 @@ public abstract class AbstractVisualProperty<T> implements VisualProperty<T> {
 		return this.shouldIgnoreDefault;
 	}
 	
-	@Override public Class<?> getTargetDataType() {
+	@Override public Class<? extends CyIdentifiable> getTargetDataType() {
 		return this.targetObjectDataType;
 	}
 

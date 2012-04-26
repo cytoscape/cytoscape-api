@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.DiscreteRange;
 import org.cytoscape.view.presentation.property.values.AbstractVisualPropertyValue;
@@ -61,7 +62,7 @@ public final class ArrowShapeVisualProperty extends AbstractVisualProperty<Arrow
 	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
 	 */
 	public ArrowShapeVisualProperty(ArrowShape defaultValue, String id, String displayName,
-			Class<?> modelDataType) {
+			Class<? extends CyIdentifiable> modelDataType) {
 		super(defaultValue, ARROW_SHAPE_RANGE, id, displayName, modelDataType);
 	}
 

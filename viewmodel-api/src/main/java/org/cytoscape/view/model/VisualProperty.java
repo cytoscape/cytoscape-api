@@ -34,6 +34,8 @@
 */
 package org.cytoscape.view.model;
 
+import org.cytoscape.model.CyIdentifiable;
+
 
 
 /**
@@ -113,6 +115,6 @@ public interface VisualProperty<T> {
 	 * @return target data type of this visual property.  CyNode, CyEdge, or CyNetwork.
 	 * 
 	 */
-	Class<?> getTargetDataType();
+	Class<? extends CyIdentifiable> getTargetDataType();
 
 }
