@@ -79,12 +79,16 @@ import org.cytoscape.task.destroy.DeleteTableTaskFactory;
 import org.cytoscape.task.destroy.DestroyNetworkTaskFactory;
 import org.cytoscape.task.destroy.DestroyNetworkViewTaskFactory;
 import org.cytoscape.task.NetworkViewTaskFactory;
+import org.cytoscape.task.edit.CollapseGroupTaskFactory;
 import org.cytoscape.task.edit.ConnectSelectedNodesTaskFactory;
 import org.cytoscape.task.edit.EditNetworkTitleTaskFactory;
+import org.cytoscape.task.edit.ExpandGroupTaskFactory;
 import org.cytoscape.task.edit.GroupNodesTaskFactory;
 import org.cytoscape.task.edit.MapGlobalToLocalTableTaskFactory;
 import org.cytoscape.task.edit.MapTableToNetworkTablesTaskFactory;
 import org.cytoscape.task.edit.RenameColumnTaskFactory;
+import org.cytoscape.task.edit.UnGroupNodesTaskFactory;
+import org.cytoscape.task.edit.UnGroupTaskFactory;
 import org.cytoscape.work.TaskFactory;
 import org.cytoscape.task.TableCellTaskFactory;
 import org.cytoscape.task.NodeViewTaskFactory;
@@ -417,11 +421,6 @@ public interface CyAppAdapter {
 	 */
 	LoadTableURLTaskFactory get_LoadTableURLTaskFactory();
 
-	/**
-	 * Returns an instance of {@link TaskFactory}.
-	 * @return an instance of {@link TaskFactory}.
-	 */	
-	TaskFactory get_ProxySettingsTaskFactory();
 	
 	/**
 	 * Returns an instance of {@link DeleteSelectedNodesAndEdgesTaskFactory}.
@@ -591,29 +590,6 @@ public interface CyAppAdapter {
 	 */
 	DestroyNetworkViewTaskFactory get_DestroyNetworkViewTaskFactory();
 
-	/**
-	 * Returns an instance of {@link NetworkViewTaskFactory}.
-	 * @return an instance of {@link NetworkViewTaskFactory}.
-	 */
-	NetworkViewTaskFactory get_ZoomInTaskFactory();
-
-	/**
-	 * Returns an instance of {@link NetworkViewTaskFactory}.
-	 * @return an instance of {@link NetworkViewTaskFactory}.
-	 */
-	NetworkViewTaskFactory get_ZoomOutTaskFactory();
-
-	/**
-	 * Returns an instance of {@link NetworkViewTaskFactory}.
-	 * @return an instance of {@link NetworkViewTaskFactory}.
-	 */
-	NetworkViewTaskFactory get_FitSelectedTaskFactory();
-
-	/**
-	 * Returns an instance of {@link NetworkViewTaskFactory}.
-	 * @return an instance of {@link NetworkViewTaskFactory}.
-	 */
-	NetworkViewTaskFactory get_fitContentTaskFactory();
 
 	/**
 	 * Returns an instance of {@link EditNetworkTitleTaskFactory}.
@@ -669,12 +645,6 @@ public interface CyAppAdapter {
 	 */
 	OpenSessionTaskFactory get_OpenSessionTaskFactory();
 
-	/**
-	 * Returns an instance of {@link TaskFactory}.
-	 * @return an instance of {@link TaskFactory}.
-	 */
-	TaskFactory get_saveSessionTaskFactory();
-
 	
 	/**
 	 * Returns an instance of {@link SaveSessionAsTaskFactory}.
@@ -701,12 +671,6 @@ public interface CyAppAdapter {
 	 * @return an instance of {@link RenameColumnTaskFactory}.
 	 */
 	RenameColumnTaskFactory get_RenameColumnTaskFactory();
-
-	/**
-	 * Returns an instance of {@link TableCellTaskFactory}.
-	 * @return an instance of {@link TableCellTaskFactory}.
-	 */	
-	TableCellTaskFactory get_CopyValueToEntireColumnTaskFactory();
 	
 	/**
 	 * Returns an instance of {@link DeleteTableTaskFactory}.
@@ -730,25 +694,25 @@ public interface CyAppAdapter {
 	 * Returns an instance of {@link UnGroupTaskFactory}.
 	 * @return an instance of {@link UnGroupTaskFactory}.
 	 */
-	NetworkViewTaskFactory get_UnGroupTaskFactory();
+	UnGroupTaskFactory get_UnGroupTaskFactory();
 
 	/**
-	 * Returns an instance of {@link 	NodeViewTaskFactory}.
-	 * @return an instance of {@link 	NodeViewTaskFactory}.
+	 * Returns an instance of {@link 	CollapseGroupTaskFactory}.
+	 * @return an instance of {@link 	CollapseGroupTaskFactory}.
 	 */
-	NodeViewTaskFactory get_CollapseGroupTaskFactory();
+	CollapseGroupTaskFactory get_CollapseGroupTaskFactory();
 
 	/**
-	 * Returns an instance of {@link NodeViewTaskFactory}.
-	 * @return an instance of {@link NodeViewTaskFactory}.
+	 * Returns an instance of {@link ExpandGroupTaskFactory}.
+	 * @return an instance of {@link ExpandGroupTaskFactory}.
 	 */
-	NodeViewTaskFactory get_ExpandGroupTaskFactory();
+	ExpandGroupTaskFactory get_ExpandGroupTaskFactory();
 
 	/**
-	 * Returns an instance of {@link NodeViewTaskFactory}.
-	 * @return an instance of {@link NodeViewTaskFactory}.
+	 * Returns an instance of {@link UnGroupNodesTaskFactory}.
+	 * @return an instance of {@link UnGroupNodesTaskFactory}.
 	 */
-	NodeViewTaskFactory get_UnGroupNodesTaskFactory();
+	UnGroupNodesTaskFactory get_UnGroupNodesTaskFactory();
 
 	/**
 	 * Returns an instance of {@link MapTableToNetworkTablesTaskFactory}.
