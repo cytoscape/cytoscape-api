@@ -79,4 +79,10 @@ public interface ServiceProperties {
 	 * Specify relative location of the action in the tool bar
 	 */
 	public static final String TOOL_BAR_GRAVITY = "toolBarGravity";
+	
+	/**
+	 * Action will be added to network panel's context menu if this
+	 * flag is set to true
+	 */
+	public static final String IN_NETWORK_PANEL_CONTEXT_MENU = "inNetworkPanelContextMenu";
 }
