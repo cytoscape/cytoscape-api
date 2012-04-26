@@ -83,4 +83,17 @@ public interface CyGroupFactory {
 	public CyGroup createGroup(CyNetwork network, 
 	                           CyNode node, List<CyNode>nodes, 
 	                           List<CyEdge> edges, boolean register);
+
+	/**
+	 * Creates a CyGroup object in the referenced network from 
+	 * an existing {@link CyNode}. If the {@link CyNode} has a
+	 * network pointer in the same root network as the referenced
+	 * network, it is used as the group network.
+	 *
+	 * @param network the {@link CyNetwork} this group is part of
+	 * @param node the {@link CyNode} to convert into a group
+	 * @param register if true, register the {@link CyGroup}
+	 * @return A new {@link CyGroup} as part of the designated network.
+	 */
+	public CyGroup createGroup(CyNetwork network, CyNode node, boolean register);
 }

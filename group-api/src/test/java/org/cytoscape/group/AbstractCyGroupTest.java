@@ -95,7 +95,9 @@ public abstract class AbstractCyGroupTest {
 
 	@Test
 	public void testAddExternalEdge() {
-		group.addExternalEdge(edge5);
+		List<CyEdge> edgeList = new ArrayList<CyEdge>();
+		edgeList.add(edge5);
+		group.addEdges(edgeList);
     assertTrue("group external edge count = 3", group.getExternalEdgeList().size() == 3);
 	}
 

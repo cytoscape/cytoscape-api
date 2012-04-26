@@ -95,29 +95,6 @@ public interface CyGroup {
 	CyNetwork getGroupNetwork();
 
 	/**
-	 * Add a node to a group
-	 *
-	 * @param node the node to add
-	 */
-	void addNode(CyNode node);
-
-	/**
-	 * Add an internal edge to a group.  Both the source and destination
-	 * nodes must already be added.
-	 *
-	 * @param edge the edge to add
-	 */
-	void addInternalEdge(CyEdge edge);
-
-	/**
-	 * Add an external edge to a group.  One of the source and destination
-	 * nodes must already be added.
-	 *
-	 * @param edge the edge to add
-	 */
-	void addExternalEdge(CyEdge edge);
-
-	/**
 	 * Add a list of nodes and their edges
 	 *
 	 * @param nodes the list of nodes to add
