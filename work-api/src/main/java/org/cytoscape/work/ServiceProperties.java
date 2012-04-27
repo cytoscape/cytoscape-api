@@ -85,4 +85,9 @@ public interface ServiceProperties {
 	 * flag is set to true
 	 */
 	public static final String IN_NETWORK_PANEL_CONTEXT_MENU = "inNetworkPanelContextMenu";
+	
+	/**
+	 * Preferred action properties. 
+	 */
+	public static final String PREFERRED_ACTION = "preferredAction";
 }
