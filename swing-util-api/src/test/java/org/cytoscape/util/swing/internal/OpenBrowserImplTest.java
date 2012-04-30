@@ -2,7 +2,10 @@ package org.cytoscape.util.swing.internal;
 
 import static org.junit.Assert.assertFalse;
 
+import java.awt.Desktop;
+
 import org.cytoscape.util.swing.OpenBrowser;
+import org.junit.Assume;
 import org.junit.Test;
 
 public class OpenBrowserImplTest {
@@ -12,6 +15,8 @@ public class OpenBrowserImplTest {
 	
 	@Test
 	public void testOpenURL() {
+		Assume.assumeTrue(Desktop.isDesktopSupported());
+
 		// Invalid URL
 		assertFalse(openBrowser.openURL("123 @#$ ww ?*  cyto"));
 		
