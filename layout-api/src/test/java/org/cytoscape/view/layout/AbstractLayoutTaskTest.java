@@ -47,17 +47,6 @@ public abstract class AbstractLayoutTaskTest {
 	}
 
 	@Test
-	public void testGetWeightingOptions() {
-		assertNotNull(task.getWeightingOptions());
-	}
-
-	@Test
-	public void testSetWeightingOptions() {
-		ListSingleSelection<String> opts = new ListSingleSelection<String>("op1", "op2");
-		task.setWeightingOptions(opts);
-	}
-
-	@Test
 	public abstract void testAbstractLayoutTaskConstructor();
 
 	@Test

@@ -1,13 +1,10 @@
 package org.cytoscape.view.layout;
 
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyRow;
@@ -16,7 +13,7 @@ import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskMonitor;
-import org.cytoscape.work.util.ListSingleSelection;
+import org.cytoscape.work.undo.UndoSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,62 +27,6 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class AbstractLayoutTask extends AbstractTask {
 	
-	private static final String NODE_PREFIX = "(Node) "; 
-	private static final String EDGE_PREFIX = "(Edge) ";
-	
-	/**
-	 * Never use this method from within a layout to access the submenu options,
-     * instead call the configureLayoutFromSubmenuSelection() method to configure
-	 * the layout based on menu selection. 
-	 * @return The list single selection object that specifies the submenu
-	 * names to be used for generating selection submenus. 
-	 */
-	public ListSingleSelection<String> getWeightingOptions() {
-		if (weightingOptions != null)
-			return weightingOptions;
-		
-		List<String> possibleValues = new ArrayList<String>(initialAttributes);
-
-		Set<Class<?>> nodeAttrTypes = supportedNodeAttributeTypes;
-		Set<Class<?>> edgeAttrTypes = supportedEdgeAttributeTypes;
-		CyNetwork network = networkView.getModel();
-		
-		if (nodeAttrTypes != null && !nodeAttrTypes.isEmpty()) {
-			for (final CyColumn column : network .getDefaultNodeTable().getColumns())
-				if (nodeAttrTypes.contains(column.getType()))
-					possibleValues.add(NODE_PREFIX + column.getName());
-		} else if (edgeAttrTypes != null && !edgeAttrTypes.isEmpty()) {
-			for (final CyColumn column : network.getDefaultEdgeTable().getColumns())
-				if (edgeAttrTypes.contains(column.getType()))
-					possibleValues.add(EDGE_PREFIX + column.getName());
-		}
-
-		weightingOptions = new ListSingleSelection<String>(possibleValues);
-		if (possibleValues.size() > 0) {
-			weightingOptions.setSelectedValue(possibleValues.get(0));
-		}
-		return weightingOptions;
-	}
-
-	public void setWeightingOptions(ListSingleSelection<String> opts) {
-		configureLayoutFromSubmenuSelection(opts);
-	}
-
-	private final void configureLayoutFromSubmenuSelection(ListSingleSelection<String> opts) {
-		String selectedMenu = opts.getSelectedValue();
-
-		if (selectedMenu == null || selectedMenu == "")
-			return;
-
-		if (selectedMenu.startsWith(NODE_PREFIX))
-			selectedMenu = selectedMenu.substring(NODE_PREFIX.length());
-		if (selectedMenu.startsWith(EDGE_PREFIX))
-			selectedMenu = selectedMenu.substring(EDGE_PREFIX.length());
-
-		if (selectedMenu.length() > 0)
-			layoutAttribute = selectedMenu;
-	}
-
 	private static final Logger logger = LoggerFactory.getLogger(AbstractLayoutTask.class);
 	private final String name;
 	
@@ -98,46 +39,47 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 	 * The network view that the layout will be applied to.
 	 */
 	protected final CyNetworkView networkView;
+	
+	/**
+	 * The node views that will be laid out by the algorithm.
+	 */
 	protected final Set<View<CyNode>> nodesToLayOut;
 	
-	protected String layoutAttribute; 
-	private final Set<Class<?>> supportedNodeAttributeTypes;
-	private final Set<Class<?>> supportedEdgeAttributeTypes;
-	private List<String> initialAttributes;
-	private ListSingleSelection<String> weightingOptions;
+	/** 
+	 * The attribute to be used for this layout. May be null and/or ignored.
+	 */
+	protected final String layoutAttribute;
 	
-	public AbstractLayoutTask(String name, CyNetworkView networkView, Set<View<CyNode>> nodesToLayOut) {
-		this(name, networkView, nodesToLayOut, null, null, null);
-	}
+	/**
+	 * Undo support for the task.
+	 */
+	protected final UndoSupport undo;
 	
 	/**
 	 * Constructor.
 	 * @param name The name of the layout algorithm. 
 	 * @param networkView The network view that the layout algorithm will be applied to.
 	 * @param nodesToLayOut The set of nodes to be laid out. 
-	 * @param supportedNodeAttributeTypes The set of supported node attribute types. 
-	 * @param supportedEdgeAttributeTypes The set of supported edge attribute types. 
-	 * @param initialAttributes The list of initial attribute column names.
+	 * @param layoutAttribute The name of the attribute to use for the layout.  May be null or empty.
 	 */
 	public AbstractLayoutTask(String name, 
 	                          CyNetworkView networkView, 
 	                          Set<View<CyNode>> nodesToLayOut, 
-	                          Set<Class<?>> supportedNodeAttributeTypes, 
-	                          Set<Class<?>> supportedEdgeAttributeTypes, 
-	                          List<String> initialAttributes) {
+	                          String layoutAttribute,
+	                          UndoSupport undo) {
 		super();
 
 		this.networkView = networkView;
 		this.name = name;
+		this.undo = undo;
 
 		if (nodesToLayOut.size() == 0) {
 			this.nodesToLayOut = new HashSet<View<CyNode>>(networkView.getNodeViews());
 		} else {
 			this.nodesToLayOut = Collections.unmodifiableSet(nodesToLayOut);
 		}
-		this.supportedNodeAttributeTypes = supportedNodeAttributeTypes;
-		this.supportedEdgeAttributeTypes = supportedEdgeAttributeTypes;
-		this.initialAttributes = initialAttributes;
+
+		this.layoutAttribute = layoutAttribute;
 	}
  
 	/**
@@ -156,6 +98,9 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 		
 		if (nodesToLayOut.size() == 0 && networkView.getNodeViews().size() == 0)
 			return;
+		
+		if ( undo != null )
+			undo.postEdit(new LayoutEdit(name,networkView));
 
 		// this is overridden by children and does the actual layout
 		doLayout(taskMonitor);

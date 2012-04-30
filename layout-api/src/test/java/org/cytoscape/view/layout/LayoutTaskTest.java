@@ -9,9 +9,10 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.work.TaskMonitor;
-import org.junit.After;
+import org.cytoscape.work.undo.UndoSupport;
 import org.junit.Before;
 import org.mockito.MockitoAnnotations;
+import static org.mockito.Mockito.*;
 
 public class LayoutTaskTest extends AbstractLayoutTaskTest {
 
@@ -22,8 +23,7 @@ public class LayoutTaskTest extends AbstractLayoutTaskTest {
 		name = "test";
 		nodesToLayOut.add(networkView.getNodeView(source));
 		nodesToLayOut.add(networkView.getNodeView(target));
-		task = new DummyLayoutTask(name, networkView, nodesToLayOut, supportedNodeAttributeTypes,
-				supportedEdgeAttributeTypes, initialAttributes);
+		task = new DummyLayoutTask(name, networkView, nodesToLayOut, "");
 	}
 
 	@Override
@@ -31,8 +31,7 @@ public class LayoutTaskTest extends AbstractLayoutTaskTest {
 		name = "test";
 		nodesToLayOut.add(networkView.getNodeView(source));
 		nodesToLayOut.add(networkView.getNodeView(target));
-		task = new DummyLayoutTask(name, networkView, nodesToLayOut, supportedNodeAttributeTypes,
-				supportedEdgeAttributeTypes, initialAttributes);
+		task = new DummyLayoutTask(name, networkView, nodesToLayOut,"");
 		assertNotNull(task);
 
 		AbstractLayoutTask task2 = new DummyLayoutTask(name, networkView, nodesToLayOut);
@@ -47,14 +46,11 @@ public class LayoutTaskTest extends AbstractLayoutTaskTest {
 	private static final class DummyLayoutTask extends AbstractLayoutTask {
 
 		public DummyLayoutTask(String name, CyNetworkView networkView, Set<View<CyNode>> nodesToLayOut) {
-			super(name, networkView, nodesToLayOut);
+			super(name, networkView, nodesToLayOut,"", mock(UndoSupport.class));
 		}
 
-		public DummyLayoutTask(String name, CyNetworkView networkView, Set<View<CyNode>> nodesToLayOut,
-				Set<Class<?>> supportedNodeAttributeTypes, Set<Class<?>> supportedEdgeAttributeTypes,
-				List<String> initialAttributes) {
-			super(name, networkView, nodesToLayOut, supportedNodeAttributeTypes, supportedEdgeAttributeTypes,
-					initialAttributes);
+		public DummyLayoutTask(String name, CyNetworkView networkView, Set<View<CyNode>> nodesToLayOut, String attr) {
+			super(name, networkView, nodesToLayOut,"", mock(UndoSupport.class));
 
 		}
 

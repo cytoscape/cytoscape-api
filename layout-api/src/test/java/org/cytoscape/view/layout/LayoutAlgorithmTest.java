@@ -17,21 +17,17 @@ public class LayoutAlgorithmTest extends AbstractLayoutAlgorithmTest {
 		this.layout = new DummyLayout(computerName, humanName);
 	}
 
-	private static final class DummyLayout extends AbstractLayoutAlgorithm<CyLayoutContext> {
+	private static final class DummyLayout extends AbstractLayoutAlgorithm {
 
 		public DummyLayout(String computerName, String humanName) {
-			super(computerName, humanName);
+			super(computerName, humanName, null);
 		}
 
 		@Override
-		public TaskIterator createTaskIterator(CyNetworkView networkView, CyLayoutContext layoutContext,
-				Set<View<CyNode>> nodesToLayOut) {
+		public TaskIterator createTaskIterator(CyNetworkView networkView, Object layoutContext,
+				Set<View<CyNode>> nodesToLayOut, String attrName) {
 			return null;
 		}
 
-		@Override
-		public CyLayoutContext createLayoutContext() {
-			return null;
-		}
 	}
 }

@@ -19,7 +19,7 @@ import org.junit.Test;
 
 public abstract class AbstractLayoutAlgorithmTest {
 
-	protected CyLayoutAlgorithm<CyLayoutContext> layout;
+	protected CyLayoutAlgorithm layout;
 	protected String computerName;
 	protected String humanName;
 
@@ -50,10 +50,6 @@ public abstract class AbstractLayoutAlgorithmTest {
 		assertEquals(0, layout.getSupportedEdgeAttributeTypes().size());
 	}
 
-	@Test
-	public void testGetInitialAttributeList() {
-		assertEquals(0, layout.getInitialAttributeList().size());
-	}
 
 	@Test
 	public void testIsReady() {
@@ -65,19 +61,19 @@ public abstract class AbstractLayoutAlgorithmTest {
 		CyEdge edge = network.addEdge(source, target, true);
 
 		final CyNetworkView networkView = support.getNetworkViewFactory().createNetworkView(network);
-		CyLayoutContext layoutContext = mock(CyLayoutContext.class);
+		Object layoutContext = layout.createLayoutContext();
 		Set<View<CyNode>> nodesToLayOut = new HashSet<View<CyNode>>();
 		nodesToLayOut.add(networkView.getNodeView(source));
 		nodesToLayOut.add(networkView.getNodeView(target));
 
-		assertFalse(layout.isReady(null, null, null));
-		assertFalse(layout.isReady(null, layoutContext, null));
+		assertFalse(layout.isReady(null, null, null, null));
+		assertFalse(layout.isReady(null, layoutContext, null, ""));
 		Set<View<CyNode>> emptySet = new HashSet<View<CyNode>>();
 		CyNetworkView emptyView = support.getNetworkView();
-		assertFalse(layout.isReady(emptyView, layoutContext, emptySet));
+		assertFalse(layout.isReady(emptyView, layoutContext, emptySet, "asdf"));
 
 		// Valid case
-		assertTrue(layout.isReady(networkView, layoutContext, nodesToLayOut));
+		assertTrue(layout.isReady(networkView, layoutContext, nodesToLayOut, ""));
 
 	}
 }

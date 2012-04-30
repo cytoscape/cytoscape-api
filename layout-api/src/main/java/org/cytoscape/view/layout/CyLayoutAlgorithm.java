@@ -30,7 +30,7 @@
 package org.cytoscape.view.layout;
 
 
-import java.util.List;
+import java.util.Collections;
 import java.util.Set;
 
 import org.cytoscape.model.CyNode;
@@ -39,20 +39,27 @@ import org.cytoscape.view.model.View;
 import org.cytoscape.work.TaskIterator;
 
 /**
- * An extension of NetworkViewTaskFactory specific to layout algorithms.
+ * A task factory specifically for layout algorithms.
  *
  * @CyAPI.Spi.Interface
  */
-public interface CyLayoutAlgorithm<T extends CyLayoutContext> {
+public interface CyLayoutAlgorithm {
+	
+	/**
+	 * A convenience declaration for an empty set signifying that all node views
+	 * should be laid out when creating the task iterator.
+	 */
+	Set<View<CyNode>> ALL_NODE_VIEWS = Collections.emptySet();
 	
 	/**
 	 * Creates a task iterator containing the layout tasks.
 	 * @param networkView The network view that the layout algorithm should be applied to.
 	 * @param layoutContext The layout context for this layout algorithm.
 	 * @param nodesToLayOut The set of node views to layout.
+	 * @param layoutAttribute The possibly null name of the attribute to use for this layout.
 	 * @return taskIterator contains layout tasks.
 	 */
-	TaskIterator createTaskIterator(CyNetworkView networkView, T layoutContext, Set<View<CyNode>> nodesToLayOut);
+	TaskIterator createTaskIterator(CyNetworkView networkView,  Object layoutContext, Set<View<CyNode>> nodesToLayOut, String layoutAttribute);
 	
 	
 	/**
@@ -60,39 +67,44 @@ public interface CyLayoutAlgorithm<T extends CyLayoutContext> {
 	 * @param networkView The network view that the layout algorithm should be applied to.
 	 * @param layoutContext The layout context for this layout algorithm.
 	 * @param nodesToLayOut The set of node views to layout.
+	 * @param layoutAttribute The possibly null name of the attribute to use for this layout.
 	 * @return true if the task factory is ready to produce a task iterator.
 	 */
-	boolean isReady(CyNetworkView networkView, T layoutContext, Set<View<CyNode>> nodesToLayOut);
+	boolean isReady(CyNetworkView networkView,  Object layoutContext, Set<View<CyNode>> nodesToLayOut, String layoutAttribute);
 	
 	/**
-	 * Returns the layout context object.
-	 * @return The layout context object.
+	 * Returns a new layout context object. This method can be used to create
+	 * custom configurations for layouts.
+	 * @return a new layout context object.
 	 */
-	T createLayoutContext();
+	Object createLayoutContext();
 	
 	/**
-	 * Tests to see if this layout supports doing a layout based on node attributes.
+	 * Returns the default instance of the layout context. This is the default
+	 * layout configuration used in most cases.
+	 * @return the default instance of the layout context.
+	 */
+	Object getDefaultLayoutContext();
+	
+	/**
+	 * Returns the set of node attribute types potentially used by this layout algorithm.
+	 * May (and frequently will) return an empty set.
 	 * @return types of allowable attribute types.
 	 */
 	Set<Class<?>> getSupportedNodeAttributeTypes();
 
 	/**
-	 * Tests to see if this layout supports doing a layout based on edge attributes.
+	 * Returns the set of node attribute types potentially used by this layout algorithm.
+	 * May (and frequently will) return an empty set.
 	 * @return types of allowable attribute types.
 	 */
 	Set<Class<?>> getSupportedEdgeAttributeTypes();
 
 	/**
-	 * This returns a (possibly empty) List of Strings that is used for
-	 * the attribute list in the menu for attribute-based layouts.  This
-	 * allows layout algorithms to provide "special" attributes.  For example,
-	 * a force directed layout might want to set the list to ["(unweighted)"]
-	 * to allow the user to perform an unweighted layout.  Note that this value
-	 * will be set using setLayoutAttribute() just like other attributes, so the
-	 * layout algorithm will need to check for it.
-	 * @return List of column names (i.e. attributes) used for attribute-based layouts.
+	 * Returns true if this algorithm supports being applied to only the currently selected nodes.
+	 * @return true if this algorithm supports being applied to only the currently selected nodes.
 	 */
-	List<String> getInitialAttributeList();
+	boolean getSupportsSelectedOnly();
 
 	/**
 	 * Returns the computer-readable name of the layout.  To get

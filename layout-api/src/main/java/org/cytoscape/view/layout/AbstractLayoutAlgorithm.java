@@ -29,10 +29,7 @@
 */
 package org.cytoscape.view.layout;
 
-
-import java.util.Collections;
 import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
 import org.cytoscape.model.CyNode;
@@ -40,87 +37,78 @@ import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.work.TunableValidator;
 import org.cytoscape.work.TunableValidator.ValidationState;
+import org.cytoscape.work.undo.UndoSupport;
 
 
 /**
  * The AbstractLayoutAlgorithm provides a basic implementation of a layout TaskFactory.
  * @CyAPI.Abstract.Class
  */
-public abstract class AbstractLayoutAlgorithm<T extends CyLayoutContext> implements CyLayoutAlgorithm<T> {
+public abstract class AbstractLayoutAlgorithm implements CyLayoutAlgorithm {
 
 	private final String humanName;
 	private final String computerName;
+	private Object defaultContext;
+	
+	/**
+	 * An undo support object available for use 
+	 */
+	protected final UndoSupport undoSupport;
 	
 	/**
 	 * The Constructor.
 	 * @param computerName a computer readable name used to construct property strings.
 	 * @param humanName a user visible name of the layout.
 	 */
-	public AbstractLayoutAlgorithm(final String computerName, final String humanName) {
+	public AbstractLayoutAlgorithm(final String computerName, final String humanName, UndoSupport undoSupport) {
 		this.computerName = computerName;
 		this.humanName = humanName;
+		this.undoSupport = undoSupport;
 	}
 
-	/**
-	 * A computer readable name used to construct property strings.
-	 * @return a computer readable name used to construct property strings.
-	 */
+	@Override
+	public Object createLayoutContext() {
+		return new Object();
+	}
+	
+	public final Object getDefaultLayoutContext() {
+		if (defaultContext == null)
+				defaultContext = createLayoutContext();
+		return defaultContext;
+	}
+	
 	@Override
 	public String getName() {
 		return computerName;
 	}
 
-	/**
-	 * Used to get the user-visible name of the layout.
-	 * @return the user-visible name of the layout.
-	 */
+
 	@Override
 	public String toString() {
 		return humanName;
 	}
 
-	/**
-	 * Returns the types of node attributes supported by
-	 * this algorithm.  This should be overridden by the
-	 * specific algorithm.
-	 *
-	 * @return the list of supported attribute types, or null
-	 * if node attributes are not supported
-	 */
+
 	@Override
 	public Set<Class<?>> getSupportedNodeAttributeTypes() {
 		return new HashSet<Class<?>>();
 	}
 
-	/**
-	 * Returns the types of edge attributes supported by
-	 * this algorithm.  This should be overridden by the
-	 * specific algorithm.
-	 *
-	 * @return the list of supported attribute types, or null
-	 * if edge attributes are not supported
-	 */
+
 	@Override
 	public Set<Class<?>> getSupportedEdgeAttributeTypes() {
 		return new HashSet<Class<?>>();
 	}
+	
 
-	/**
-	 * This returns the list of "attributes" that are provided
-	 * by an algorithm for internal purposes.  For example,
-	 * an edge-weighted algorithm might seed the list of
-	 * attributes with "unweighted".  This should be overloaded
-	 * by algorithms that intend to return custom attributes.
-	 *
-	 * @return A (possibly empty) list of attributes
-	 */
 	@Override
-	public List<String> getInitialAttributeList() {
-		return Collections.emptyList();
+	public boolean getSupportsSelectedOnly() {
+		return false;
 	}
 
+
 	@Override
-	public boolean isReady(CyNetworkView view, T tunableContext, Set<View<CyNode>> nodesToLayout) {
+	public boolean isReady(CyNetworkView view, Object tunableContext, Set<View<CyNode>> nodesToLayout, String attributeName) {
 		if (view == null || nodesToLayout == null)
 			return false;
 		

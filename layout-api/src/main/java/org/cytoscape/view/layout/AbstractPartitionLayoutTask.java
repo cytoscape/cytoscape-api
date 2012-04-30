@@ -10,6 +10,7 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.work.TaskMonitor;
+import org.cytoscape.work.undo.UndoSupport;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -45,7 +46,7 @@ public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 	/**
 	 * The EdgeWeighter used for edge weight calculations.
 	 */
-	protected EdgeWeighter edgeWeighter = null;
+	protected EdgeWeighter edgeWeighter;
 	
 	private final boolean singlePartition;
 
@@ -71,19 +72,16 @@ public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 	 * single partition instead of multiple partitions. 
 	 * @param networkView the CyNetworkView being partitioned.
 	 * @param nodesToLayOut the set of nodes to layout. 
-	 * @param supportedNodeAttributeTypes The types of node attributes supported by this algorithm. 
-	 * @param supportedEdgeAttributeTypes The types of edge attributes supported by this algorithm. 
-	 * @param initialAttributes A list of attribute column names supported by this layout.
+	 * @param layoutAttribute the name of the attribute to use for this layout.
+	 * Allowed to be empty or null.
 	 */
 	public AbstractPartitionLayoutTask(final String name, 
 	                                   final boolean singlePartition, 
 	                                   CyNetworkView networkView, 
-	                                   Set<View<CyNode>> nodesToLayOut, 
-	                                   Set<Class<?>> supportedNodeAttributeTypes, 
-	                                   Set<Class<?>> supportedEdgeAttributeTypes, 
-	                                   List<String> initialAttributes) {
-		super(name, networkView, nodesToLayOut, supportedNodeAttributeTypes, 
-		      supportedEdgeAttributeTypes, initialAttributes);
+	                                   Set<View<CyNode>> nodesToLayOut,
+	                                   String layoutAttribute,
+	                                   UndoSupport undo) {
+		super(name, networkView, nodesToLayOut, layoutAttribute, undo);
 		this.singlePartition = singlePartition;
 	}
 
@@ -134,12 +132,12 @@ public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 		// Depending on whether we are partitioned or not,
 		// we use different initialization.  Note that if the user only wants
 		// to lay out selected nodes, partitioning becomes a very bad idea!
-		if (singlePartition && !useAllNodes) {
+		if (singlePartition || !useAllNodes) {
 			// We still use the partition abstraction, even if we're
 			// not partitioning.  This makes the code further down
 			// much cleaner
 			LayoutPartition partition = new LayoutPartition(networkView, nodesToLayOut, edgeWeighter);
-			partitionList = new ArrayList(1);
+			partitionList = new ArrayList<LayoutPartition>(1);
 			partitionList.add(partition);
 		} else {
 			partitionList = PartitionUtil.partition(networkView, false, edgeWeighter);

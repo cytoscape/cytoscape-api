@@ -50,10 +50,16 @@ public final class EdgeWeighter {
 
 	@Tunable(description="The maximum edge weight to consider", groups={"Edge Weight Settings"})
 	public double maxWeightCutoff = Double.MAX_VALUE;
+	
+	@Tunable(description="The default edge weight to consider", groups={"Edge Weight Settings"})
+	public double defaultEdgeWeight = 0.5;
+	
+	private String weightAttribute = "";
 
-	@Tunable(description="The edge attribute that contains the weights", groups={"Edge Weight Settings"})
-	public String weightAttribute = null;
-
+	
+	public void setWeightAttribute(String weightAttribute) {
+		this.weightAttribute = weightAttribute;
+	}
 
 	// Default normalization bounds
 	private final static double LOWER_BOUND = .1f;
@@ -93,7 +99,7 @@ public final class EdgeWeighter {
 
 	public void setWeight(LayoutEdge layoutEdge) {
 		CyRow row = layoutEdge.getRow();
-		double eValue = 0.5; // FIXME: shouldn't we expose the default edge weight somehow?
+		double eValue = defaultEdgeWeight;
 
 		if (weightAttribute != null && row.isSet(weightAttribute)) {
 			final Class<?> type = row.getTable().getColumn(weightAttribute).getType();

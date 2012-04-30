@@ -8,10 +8,10 @@ import java.util.Set;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
-import org.junit.After;
+import org.cytoscape.work.undo.UndoSupport;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
+import static org.mockito.Mockito.*;
 
 public class AbstractPartitionLayoutTaskTest extends LayoutTaskTest {
 
@@ -51,8 +51,7 @@ public class AbstractPartitionLayoutTaskTest extends LayoutTaskTest {
 		public DummyPartitionTask(String name, boolean singlePartition, CyNetworkView networkView,
 				Set<View<CyNode>> nodesToLayOut, Set<Class<?>> supportedNodeAttributeTypes,
 				Set<Class<?>> supportedEdgeAttributeTypes, List<String> initialAttributes) {
-			super(name, singlePartition, networkView, nodesToLayOut, supportedNodeAttributeTypes,
-					supportedEdgeAttributeTypes, initialAttributes);
+			super(name, singlePartition, networkView, nodesToLayOut, "", mock(UndoSupport.class));
 			// TODO Auto-generated constructor stub
 		}
 
