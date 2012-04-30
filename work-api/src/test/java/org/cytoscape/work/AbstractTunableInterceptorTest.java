@@ -32,7 +32,6 @@ import java.lang.reflect.Field;
 
 import java.lang.reflect.Method;
 
-import javax.swing.JPanel;
 import java.util.List;
 
 import static org.junit.Assert.*;

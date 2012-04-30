@@ -28,7 +28,6 @@
 package org.cytoscape.work.undo;
 
 
-import javax.swing.undo.UndoableEdit;
 
 import org.junit.Before;
 import org.junit.Test;
