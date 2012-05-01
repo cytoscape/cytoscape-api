@@ -19,6 +19,9 @@ import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.model.CyTableFactory;
 import org.cytoscape.model.CyTableManager;
 import org.cytoscape.model.subnetwork.CyRootNetworkManager;
+import org.cytoscape.group.CyGroupFactory;
+import org.cytoscape.group.CyGroupManager;
+import org.cytoscape.group.data.CyGroupAggregationManager;
 import org.cytoscape.property.CyProperty;
 import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.session.CySessionManager;
@@ -146,6 +149,28 @@ public interface CyAppAdapter {
 	 * @return an instance of {@link CyNetworkManager}.
 	 */
 	CyNetworkManager getCyNetworkManager(); 
+
+	//
+	// group api
+	//
+
+	/**
+	 * Returns an instance of {@link CyGroupFactory}.
+	 * @return an instance of {@link CyGroupFactory}.
+	 */
+	CyGroupFactory getCyGroupFactory(); 
+
+	/**
+	 * Returns an instance of {@link CyGroupAggregationManager}.
+	 * @return an instance of {@link CyGroupAggregationManager}.
+	 */
+	CyGroupAggregationManager getCyGroupAggregationManager(); 
+
+	/**
+	 * Returns an instance of {@link CyGroupManager}.
+	 * @return an instance of {@link CyGroupManager}.
+	 */
+	CyGroupManager getCyGroupManager(); 
 
 	//
 	// viewmodel api
