@@ -94,11 +94,6 @@ public abstract class CyAppAdapterTest {
 	} 
 
 	@Test
-	public void testSubmenuTaskManager() { 
-		assertNotNull("SubmenuTaskManager exists", adapter.getSubmenuTaskManager());
-	} 
-
-	@Test
 	public void testGetRenderingEngineManager() { 
 		assertNotNull("RenderingEngineManager exists", adapter.getRenderingEngineManager());
 	} 

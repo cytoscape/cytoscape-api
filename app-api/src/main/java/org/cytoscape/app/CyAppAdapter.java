@@ -35,7 +35,6 @@ import org.cytoscape.view.vizmap.VisualStyleFactory;
 import org.cytoscape.work.TaskManager;
 import org.cytoscape.work.swing.DialogTaskManager;
 import org.cytoscape.work.swing.PanelTaskManager;
-import org.cytoscape.work.swing.SubmenuTaskManager;
 import org.cytoscape.work.undo.UndoSupport;
 import org.cytoscape.task.visualize.ApplyPreferredLayoutTaskFactory;
 import org.cytoscape.task.visualize.ApplyVisualStyleTaskFactory;
@@ -230,12 +229,6 @@ public interface CyAppAdapter {
 	 * @return an instance of {@link DialogTaskManager}.
 	 */
 	DialogTaskManager getDialogTaskManager();
-
-	/**
-	 * Returns an instance of {@link SubmenuTaskManager}.
-	 * @return an instance of {@link SubmenuTaskManager}.
-	 */
-	SubmenuTaskManager getSubmenuTaskManager();
 
 	/**
 	 * Returns an instance of {@link PanelTaskManager}.
