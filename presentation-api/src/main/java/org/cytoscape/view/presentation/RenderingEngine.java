@@ -24,13 +24,6 @@ import org.cytoscape.view.model.VisualProperty;
 public interface RenderingEngine<T> {
 	
 	/**
-	 * Returns globally-unique ID for this rendering engine.
-	 * 
-	 * @return Unique identifier of this rendering engine.
-	 */
-	String getRenderingEngineID();
-
-	/**
 	 * Returns {@linkplain View} being rendered.
 	 * 
 	 * @return view model.  This is an immutable object.
