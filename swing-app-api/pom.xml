@@ -8,14 +8,14 @@
   </parent>
 
   <properties>
-    <bundle.symbolicName>org.cytoscape.app-api</bundle.symbolicName>
-    <bundle.namespace>org.cytoscape.app</bundle.namespace>
+    <bundle.symbolicName>org.cytoscape.swing-app-api</bundle.symbolicName>
+    <bundle.namespace>org.cytoscape.app.swing</bundle.namespace>
   </properties>
 
   <modelVersion>4.0.0</modelVersion>
-  <artifactId>app-api</artifactId>
+  <artifactId>swing-app-api</artifactId>
 
-  <name>Cytoscape App API (${project.artifactId})</name>
+  <name>Cytoscape Swing App API (${project.artifactId})</name>
 
   <packaging>bundle</packaging>
 
@@ -132,66 +132,35 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.cytoscape</groupId>
-			<artifactId>session-api</artifactId>
+			<artifactId>app-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.cytoscape</groupId>
-			<artifactId>core-task-api</artifactId>
+			<artifactId>swing-application-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.cytoscape</groupId>
-			<artifactId>io-api</artifactId>
+			<artifactId>work-swing-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.cytoscape</groupId>
-			<artifactId>group-api</artifactId>
+			<artifactId>vizmap-gui-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.cytoscape</groupId>
-			<artifactId>group-data-api</artifactId>
+			<artifactId>swing-util-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.cytoscape</groupId>
-			<artifactId>service-api</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.cytoscape</groupId>
-			<artifactId>layout-api</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.cytoscape</groupId>
-			<artifactId>property-api</artifactId>
+			<artifactId>webservice-swing-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 
-		<!-- 
-	     These dependencies aren't used to build this bundle,
-	     but we include them here to get them into the 
-		 jar-with-dependencies and javadoc. 
-		 -->
-		<dependency>
-			<groupId>org.cytoscape</groupId>
-			<artifactId>equations-api</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.cytoscape</groupId>
-			<artifactId>webservice-api</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.cytoscape</groupId>
-			<artifactId>datasource-api</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		
 		
 		<!-- For Testing -->
 		<dependency>

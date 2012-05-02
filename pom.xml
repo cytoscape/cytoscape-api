@@ -24,6 +24,7 @@
 		<module>io-api</module>
 		<module>layout-api</module>
 		<module>app-api</module>
+		<module>swing-app-api</module>
 		<module>presentation-api</module>
 		<module>property-api</module>
 		<module>session-api</module>

@@ -69,11 +69,6 @@ public abstract class CyAppAdapterTest {
 	} 
 
 	@Test
-	public void testGetCySwingApplication() { 
-		assertNotNull("CySwingApplication exists", adapter.getCySwingApplication());
-	} 
-
-	@Test
 	public void testCyTableManager() { 
 		assertNotNull("CyTableManager exists", adapter.getCyTableManager());
 	} 
@@ -81,16 +76,6 @@ public abstract class CyAppAdapterTest {
 	@Test
 	public void testUndoSupport() { 
 		assertNotNull("UndoSupport exists", adapter.getUndoSupport());
-	} 
-
-	@Test
-	public void testDialogTaskManager() { 
-		assertNotNull("DialogTaskManager exists", adapter.getDialogTaskManager());
-	} 
-
-	@Test
-	public void testPanelTaskManager() { 
-		assertNotNull("PanelTaskManager exists", adapter.getPanelTaskManager());
 	} 
 
 	@Test
@@ -143,12 +128,10 @@ public abstract class CyAppAdapterTest {
 		assertNotNull("CySessionWriterManager exists", adapter.getCySessionWriterManager());
 	} 
 
-/*
 	@Test
 	public void testCyTableWriterManager() { 
 		assertNotNull("CyTableWriterManager exists", adapter.getCyTableWriterManager());
 	} 
-	*/
 
 	@Test
 	public void testPresentationWriterManager() { 

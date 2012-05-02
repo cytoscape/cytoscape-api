@@ -3,7 +3,6 @@ package org.cytoscape.app;
 import java.util.Properties;
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.CyVersion;
-import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.io.datasource.DataSourceManager;
 import org.cytoscape.event.CyEventHelper;
 import org.cytoscape.io.read.CyNetworkReaderManager;
@@ -14,6 +13,7 @@ import org.cytoscape.io.write.CyNetworkViewWriterManager;
 import org.cytoscape.io.write.CyPropertyWriterManager;
 import org.cytoscape.io.write.CySessionWriterManager;
 import org.cytoscape.io.write.PresentationWriterManager;
+import org.cytoscape.io.write.CyTableWriterManager;
 import org.cytoscape.model.CyNetworkFactory;
 import org.cytoscape.model.CyNetworkManager;
 import org.cytoscape.model.CyTableFactory;
@@ -33,8 +33,6 @@ import org.cytoscape.view.vizmap.VisualMappingFunctionFactory;
 import org.cytoscape.view.vizmap.VisualMappingManager;
 import org.cytoscape.view.vizmap.VisualStyleFactory;
 import org.cytoscape.work.TaskManager;
-import org.cytoscape.work.swing.DialogTaskManager;
-import org.cytoscape.work.swing.PanelTaskManager;
 import org.cytoscape.work.undo.UndoSupport;
 import org.cytoscape.task.visualize.ApplyPreferredLayoutTaskFactory;
 import org.cytoscape.task.visualize.ApplyVisualStyleTaskFactory;
@@ -221,22 +219,6 @@ public interface CyAppAdapter {
 	UndoSupport getUndoSupport();
 	
 	//
-	// work swing api
-	//
-
-	/**
-	 * Returns an instance of {@link DialogTaskManager}.
-	 * @return an instance of {@link DialogTaskManager}.
-	 */
-	DialogTaskManager getDialogTaskManager();
-
-	/**
-	 * Returns an instance of {@link PanelTaskManager}.
-	 * @return an instance of {@link PanelTaskManager}.
-	 */
-	PanelTaskManager getPanelTaskManager();
-
-	//
 	// presentation api
 	//
 
@@ -288,16 +270,6 @@ public interface CyAppAdapter {
 	 * @return an instance of {@link CyLayoutAlgorithmManager}.
 	 */
 	CyLayoutAlgorithmManager getCyLayoutAlgorithmManager();
-
-	//
-	// swing application api
-	//
-
-	/**
-	 * Returns an instance of {@link CySwingApplication}.
-	 * @return an instance of {@link CySwingApplication}.
-	 */
-	CySwingApplication getCySwingApplication();
 
 	//
 	// property api
@@ -356,8 +328,8 @@ public interface CyAppAdapter {
 	/**
 	 * Returns an instance of {@link CyTableWriterManager}.
 	 * @return an instance of {@link CyTableWriterManager}.
-	CyTableWriterManager getCyTableWriterManager();
 	 */
+	CyTableWriterManager getCyTableWriterManager();
 
 	/**
 	 * Returns an instance of {@link PresentationWriterManager}.
