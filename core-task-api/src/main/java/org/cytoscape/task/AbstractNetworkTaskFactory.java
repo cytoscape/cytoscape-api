@@ -8,12 +8,12 @@ import org.cytoscape.model.CyNetwork;
  */
 public abstract class AbstractNetworkTaskFactory implements NetworkTaskFactory {
 	/**
-	 * Always returns true.
+	 * Returns true if the supplied network is not null.
 	 * @param network The network.
-	 * @return always returns true.
+	 * @return true if the supplied network is not null.
 	 */
 	@Override
 	public boolean isReady(CyNetwork network) {
-		return true;
+		return network != null;
 	}
 }

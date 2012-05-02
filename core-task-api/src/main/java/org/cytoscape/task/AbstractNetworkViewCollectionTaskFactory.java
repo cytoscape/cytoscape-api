@@ -10,12 +10,12 @@ import org.cytoscape.view.model.CyNetworkView;
  */
 public abstract class AbstractNetworkViewCollectionTaskFactory implements NetworkViewCollectionTaskFactory {
 	/**
-	 * Always returns true.
+	 * Returns true if the supplied collection is not null.
 	 * @param networkViews The collection of network views.
-	 * @return always returns true.
+	 * @return true if the supplied collection is not null.
 	 */
 	@Override
 	public boolean isReady(Collection<CyNetworkView> networkViews) {
-		return true;
+		return networkViews != null;
 	}
 }

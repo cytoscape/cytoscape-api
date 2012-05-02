@@ -8,12 +8,12 @@ import org.cytoscape.model.CyTable;
  */
 public abstract class AbstractTableTaskFactory implements TableTaskFactory {
 	/**
-	 * Always returns true.
+	 * Returns true if the supplied table is not null.
 	 * @param table The table. 
-	 * @return always returns true.
+	 * @return true if the supplied table is not null.
 	 */
 	@Override
 	public boolean isReady(CyTable table) {
-		return true;
+		return table != null;
 	}
 }

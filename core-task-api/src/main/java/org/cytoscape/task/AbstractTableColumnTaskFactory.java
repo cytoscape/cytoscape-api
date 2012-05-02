@@ -35,12 +35,12 @@ import org.cytoscape.model.CyColumn;
  */
 abstract public class AbstractTableColumnTaskFactory implements TableColumnTaskFactory {
 	/**
-	 * Always returns true.
+	 * Returns true if the supplied column is not null.
 	 * @param column The table column. 
-	 * @return always returns true.
+	 * @return true if the supplied column is not null.
 	 */
 	@Override
 	public boolean isReady(CyColumn column) {
-		return true;
+		return column != null;
 	}
 }

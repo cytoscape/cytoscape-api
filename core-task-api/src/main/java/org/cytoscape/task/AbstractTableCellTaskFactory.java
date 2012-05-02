@@ -8,13 +8,13 @@ import org.cytoscape.model.CyColumn;
  */
 public abstract class AbstractTableCellTaskFactory implements TableCellTaskFactory {
 	/**
-	 * Always returns true.
+	 * Returns true if the supplied column and value are not null.
 	 * @param column The table column. 
 	 * @param primaryKeyValue the value of the primary key 
-	 * @return always returns true.
+	 * @return true if the supplied column and value are not null.
 	 */
 	@Override
 	public boolean isReady(CyColumn column, Object primaryKeyValue) {
-		return true;
+		return column != null && primaryKeyValue != null;
 	}
 }

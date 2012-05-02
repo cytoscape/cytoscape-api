@@ -9,12 +9,12 @@ import org.cytoscape.model.CyNetwork;
  */
 public abstract class AbstractNetworkCollectionTaskFactory implements NetworkCollectionTaskFactory {
 	/**
-	 * Always returns true.
+	 * Returns true if the supplied collection is not null.
 	 * @param networks The collection of networks.
-	 * @return always returns true.
+	 * @return true if the supplied collection is not null.
 	 */
 	@Override
 	public boolean isReady(Collection<CyNetwork> networks) {
-		return true;
+		return networks != null;
 	}
 }
