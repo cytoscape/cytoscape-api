@@ -29,6 +29,6 @@ public final class UpdateNetworkPresentationEvent extends
 	 * associated with this view-model use this event.
 	 */
 	public UpdateNetworkPresentationEvent(final CyNetworkView source) {
-		super(source, UpdateNetworkPresentationEventListener.class);
+		super(source, UpdateNetworkPresentationListener.class);
 	}
 }

@@ -25,6 +25,6 @@ public final class FitSelectedEvent extends AbstractCyEvent<CyNetworkView> {
 	 * @param source target network view for fitting.
 	 */
 	public FitSelectedEvent(final CyNetworkView source) {
-		super(source, FitSelectedEventListener.class);
+		super(source, FitSelectedListener.class);
 	}
 }

@@ -23,6 +23,6 @@ public final class FitContentEvent extends AbstractCyEvent<CyNetworkView> {
 	 * @param source network view to be fitted to the container.
 	 */
 	public FitContentEvent(final CyNetworkView source) {
-		super(source, FitContentEventListener.class);
+		super(source, FitContentListener.class);
 	}
 }

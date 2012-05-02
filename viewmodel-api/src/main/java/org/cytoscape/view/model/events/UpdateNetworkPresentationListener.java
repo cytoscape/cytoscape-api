@@ -8,7 +8,7 @@ import org.cytoscape.event.CyListener;
  * presentation (visualization) once it catches this event.
  * @CyAPI.Spi.Interface
  */
-public interface UpdateNetworkPresentationEventListener extends CyListener {
+public interface UpdateNetworkPresentationListener extends CyListener {
 
 	/**
 	 * Listener implementing this method will redraw the presentation if necessary.
