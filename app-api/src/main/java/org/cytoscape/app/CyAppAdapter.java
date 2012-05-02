@@ -96,11 +96,15 @@ import org.cytoscape.task.NodeViewTaskFactory;
 
 /**
  * A Java-only api providing access to Cytoscape functionality.
- * This class will provide access the various Manager and 
+ * This class will provide access the various core Manager and 
  * Factory interfaces defined in different API jars that are
- * normally made available to apps as OSGi services. Through
+ * normally made available to apps as OSGi services. 
+ * Through
  * these interfaces developers will have access to most management
- * and creational facilities defined in the Cytoscape API.
+ * and creational facilities defined in the Cytoscape API, however
+ * this interface omits all Swing or GUI specific services so that
+ * apps may be written to be independent of the UI. For Swing
+ * and GUI related services see CySwingAppAdapter.
  * This is a convenience interface intended make app development
  * as simple as possible.
  * @CyAPI.Api.Interface

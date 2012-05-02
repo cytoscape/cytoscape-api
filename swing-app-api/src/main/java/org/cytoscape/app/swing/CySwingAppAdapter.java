@@ -8,11 +8,13 @@ import org.cytoscape.app.CyAppAdapter;
 
 
 /**
- * A Java-only api providing access to Cytoscape functionality.
- * This class will provide access the various Manager and 
- * Factory interfaces defined in different API jars that are
- * normally made available to apps as OSGi services. Through
- * these interfaces developers will have access to most management
+ * A Swing-specific extension of {@link CyAppAdapter} that
+ * serves as a Java-only api providing access to core 
+ * Cytoscape functionality.
+ * This class will provide access the various Swing-specific
+ * Manager and Factory interfaces in addition to those defined in
+ * {@link CyAppAdapter}.
+ * Through these interfaces developers will have access to most management
  * and creational facilities defined in the Cytoscape API.
  * This is a convenience interface intended make app development
  * as simple as possible.

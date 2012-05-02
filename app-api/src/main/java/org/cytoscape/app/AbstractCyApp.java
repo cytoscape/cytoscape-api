@@ -4,13 +4,15 @@ package org.cytoscape.app;
 /**
  * The primary app interface for Cytoscape that all
  * apps must extend. App developers will have access 
- * to all Cytoscape 3.X services, but are not required to
- * know about or use Maven, OSGi, or Spring.
- * However, there are limitations on which packages may
+ * to all core Cytoscape 3.X services, but are not required to
+ * know about or use Maven or OSGi. This interface does not
+ * provide access to Swing or GUI related services, for 
+ * that use AbstractCySwingApp found in the org.cytoscape.app.swing
+ * package.
+ * There are limitations on which packages may
  * be included in the app jar based on those already loaded in the classpath.
  * To load alternative versions of the same library used by other apps or 
- * Cytoscape itself, it will be necessary to write your app using OSGi
- * and Spring.
+ * Cytoscape itself, it will be necessary to write your app using OSGi.
  * @CyAPI.Abstract.Class
  */
 public abstract class AbstractCyApp {
@@ -34,7 +36,7 @@ public abstract class AbstractCyApp {
 	 * <br/>
 	 * 
 	 * <blockquote><pre> 
-	 * public class MyApp extends CyApp {
+	 * public class MyApp extends AbstractCyApp {
 	 *    public MyApp(CyAppAdapter adapter) {
 	 *       super(adapter);
 	 *       // app code here
