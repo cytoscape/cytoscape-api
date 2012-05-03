@@ -39,8 +39,8 @@ import java.util.ArrayList;
 import java.util.Set;
 
 
-public class CyTableUtilTest {
-	CyNetwork net;
+public abstract class AbstractCyTableUtilTest {
+	protected CyNetwork net;
 
 	CyRow row1;
 	CyNode node1;
@@ -53,38 +53,23 @@ public class CyTableUtilTest {
 	final String columnName = "asdf";
 
 	@Before
-	public void setUp() {
-		net = mock(CyNetwork.class);
-
-		row1 = mock(CyRow.class);
-		when(row1.get(columnName,Boolean.class)).thenReturn(true);
-
-		node1 = mock(CyNode.class);
-		when(net.getRow(node1)).thenReturn(row1);
-
-		edge1 = mock(CyEdge.class);
-		when(net.getRow(edge1)).thenReturn(row1);
-
-		row2 = mock(CyRow.class);
-		when(row2.get(columnName,Boolean.class)).thenReturn(false);
-
-		node2 = mock(CyNode.class);
-		when(net.getRow(node2)).thenReturn(row2);
-
-		edge2 = mock(CyEdge.class);
-		when(net.getRow(edge2)).thenReturn(row2);
-
-		List<CyNode> nlist = new ArrayList<CyNode>();
-		nlist.add(node1);
-		nlist.add(node2);
-
-		List<CyEdge> elist = new ArrayList<CyEdge>();
-		elist.add(edge1);
-		elist.add(edge2);
-
-		when(net.getNodeList()).thenReturn(nlist);
-		when(net.getEdgeList()).thenReturn(elist);
+	public void internalSetUp() {
+		net = createNetwork();
+		node1 = net.addNode();
+		node2 = net.addNode();
+		edge1 = net.addEdge(node1, node2, true);
+		edge2 = net.addEdge(node1, node2, true);
+		
+		net.getDefaultNodeTable().createColumn(columnName, Boolean.class, false);
+		net.getDefaultEdgeTable().createColumn(columnName, Boolean.class, false);
+		
+		net.getRow(node1).set(columnName, true);
+		net.getRow(node2).set(columnName, false);
+		net.getRow(edge1).set(columnName, true);
+		net.getRow(edge2).set(columnName, false);
 	}
+
+	protected abstract CyNetwork createNetwork();
 
 	@Test
 	public void testGetTrueNodes() {

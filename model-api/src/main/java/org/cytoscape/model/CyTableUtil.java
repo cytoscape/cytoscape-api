@@ -29,6 +29,7 @@ package org.cytoscape.model;
 
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -58,12 +59,13 @@ public class CyTableUtil {
 		if ( net == null )
 			throw new NullPointerException("network is null");
 		List<CyNode> ret = new ArrayList<CyNode>();
-		for ( CyNode node : net.getNodeList() )
-			if ( net.getRow(node).get(columnName,Boolean.class) == state )
-				ret.add( node );
+		Collection<CyRow> rows = net.getDefaultNodeTable().getMatchingRows(columnName, state);
+		for (CyRow row : rows) {
+			ret.add(net.getNode(row.get(CyTable.SUID, Long.class)));
+		}
 		return ret;
 	}
-	
+
 	/**
 	 * A utility method that returns a list of edges that have a boolean attribute
 	 * in the {@link CyNetwork#DEFAULT_ATTRS} namespace specified by columnName and are in 
@@ -80,9 +82,10 @@ public class CyTableUtil {
 		if ( net == null )
 			throw new NullPointerException("network is null");
 		List<CyEdge> ret = new ArrayList<CyEdge>();
-		for ( CyEdge edge : net.getEdgeList() )
-			if ( net.getRow(edge).get(columnName,Boolean.class) == state )
-				ret.add( edge );
+		Collection<CyRow> rows = net.getDefaultEdgeTable().getMatchingRows(columnName, state);
+		for (CyRow row : rows) {
+			ret.add(net.getEdge(row.get(CyTable.SUID, Long.class)));
+		}
 		return ret;
 	}
 
