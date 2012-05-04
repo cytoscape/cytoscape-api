@@ -30,10 +30,10 @@
 package org.cytoscape.task;
 
 
-import org.cytoscape.model.CyNetwork;
-import org.cytoscape.view.model.CyNetworkView;
-import org.cytoscape.work.AbstractTask;
 import java.util.Collection;
+
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.work.AbstractTask;
 
 /** 
  * The base class for all tasks that need to operate on a Collection of {@link CyNetwork}s.

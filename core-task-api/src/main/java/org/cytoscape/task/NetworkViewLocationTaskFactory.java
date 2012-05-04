@@ -1,10 +1,8 @@
 package org.cytoscape.task;
 
-import java.awt.datatransfer.Transferable;
 import java.awt.geom.Point2D;
 
 import org.cytoscape.view.model.CyNetworkView;
-import org.cytoscape.work.TaskFactory;
 import org.cytoscape.work.TaskIterator;
 
 /**

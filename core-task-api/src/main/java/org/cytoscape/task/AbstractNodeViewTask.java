@@ -48,6 +48,7 @@ public abstract class AbstractNodeViewTask extends AbstractTask {
 	 *  @param nodeView  a non-null node view that descendants of this class will operate on
 	 *  @param netView   the non-null network that is associated with {@link #nodeView}
 	 */
+	@SuppressWarnings("javadoc")
 	public AbstractNodeViewTask(final View<CyNode> nodeView, final CyNetworkView netView) {
 		if ( nodeView == null )
 			throw new NullPointerException("NodeView is null");
