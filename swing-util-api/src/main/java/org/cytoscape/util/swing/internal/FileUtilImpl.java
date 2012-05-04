@@ -155,8 +155,9 @@ class FileUtilImpl implements FileUtil {
 					final File[] results = new File[1];
 					String newFileName = chooser.getFile();
 					
-					if (load_save_custom == SAVE)
-						newFileName = addFileExt(filters, newFileName);
+					//We need to do this check in the writers/readers
+					//if (load_save_custom == SAVE)
+					//	newFileName = addFileExt(filters, newFileName);
 					
 					results[0] = new File(chooser.getDirectory() + File.separator + newFileName);
 
