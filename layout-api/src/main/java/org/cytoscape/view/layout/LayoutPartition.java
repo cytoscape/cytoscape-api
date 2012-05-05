@@ -41,6 +41,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Random;
+import java.util.WeakHashMap;
 
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
@@ -95,7 +96,7 @@ public final class LayoutPartition {
 	public LayoutPartition(final int nodeCount, final int edgeCount) {
 		nodeList = new ArrayList<LayoutNode>(nodeCount);
 		edgeList = new ArrayList<LayoutEdge>(edgeCount);
-		nodeToLayoutNode = new HashMap<CyNode,LayoutNode>(nodeCount);
+		nodeToLayoutNode = new WeakHashMap<CyNode,LayoutNode>(nodeCount);
 		partitionNumber = 1;
 	}
 
@@ -118,7 +119,7 @@ public final class LayoutPartition {
 		// Initialize
 		nodeList = new ArrayList<LayoutNode>(networkView.getModel().getNodeCount());
 		edgeList = new ArrayList<LayoutEdge>(networkView.getModel().getEdgeCount());
-		nodeToLayoutNode = new HashMap<CyNode,LayoutNode>(networkView.getModel().getNodeCount());
+		nodeToLayoutNode = new WeakHashMap<CyNode,LayoutNode>(networkView.getModel().getNodeCount());
 
 		// Now, walk the iterators and fill in the values
 		nodeListInitialize(networkView, nodeSet);
