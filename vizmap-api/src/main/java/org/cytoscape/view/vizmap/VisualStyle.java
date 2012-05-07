@@ -38,6 +38,8 @@ import java.util.Collection;
 import java.util.Set;
 
 import org.cytoscape.model.CyIdentifiable;
+import org.cytoscape.model.CyRow;
+import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
 
@@ -137,12 +139,21 @@ public interface VisualStyle {
 
 	
 	/**
-	 * Apply visual only to a individual View Object (node/edge), 
-	 * not the entire network view.
+	 * Apply Visual Style to the entire network view.
 	 * 
+	 * @param networkView The view that the visual property should be applied to.
+	 */
+	void apply(final CyNetworkView networkView);
+
+
+	/**
+	 * Apply Visual Property values only to the given View Object (node or edge).
+	 * If you need to update only few set of node/edge views, then this is more efficient.
+	 * 
+	 * @param row Data table row for the view's model.  This is necessary for applying mapped values.
 	 * @param view The view that the visual property should be applied to.
 	 */
-	void apply(final View<? extends CyIdentifiable> view);
+	void apply(final CyRow row, final View<? extends CyIdentifiable> view);
 	
 	/**
 	 * Get all dependencies for this style.

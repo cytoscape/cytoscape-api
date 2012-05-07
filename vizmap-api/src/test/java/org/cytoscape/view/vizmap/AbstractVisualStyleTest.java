@@ -12,6 +12,7 @@ import java.util.Properties;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
+import org.cytoscape.model.CyRow;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.property.CyProperty;
 import org.cytoscape.view.model.CyNetworkView;
@@ -105,8 +106,8 @@ public abstract class AbstractVisualStyleTest {
 		// Apply to individual values
 		style.setDefaultValue(BasicVisualLexicon.NODE_FILL_COLOR, Color.YELLOW);
 		
-		// FIXME!
-		style.apply(nodeView3);
+		final CyRow row = networkView.getModel().getRow(nodeView3.getModel());
+		style.apply(row, nodeView3);
 		assertEquals(RED1, nodeView1.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR));
 		assertEquals(RED1, nodeView2.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR));
 		assertEquals(Color.YELLOW, nodeView3.getVisualProperty(BasicVisualLexicon.NODE_FILL_COLOR));		
