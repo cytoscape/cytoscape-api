@@ -87,12 +87,12 @@ public class EdgeBendVisualProperty extends AbstractVisualProperty<Bend> {
 
 		@Override
 		public int getIndex(Handle handle) {
-			throw new UnsupportedOperationException("This is a default immutable Bend object.");
+			return -1;
 		}
 
 		@Override
 		public String getSerializableString() {
-			throw new UnsupportedOperationException("This is a default immutable Bend object.");
+			return null;
 		}
 	}
 }
