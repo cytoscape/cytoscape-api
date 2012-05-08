@@ -113,7 +113,7 @@ public interface CyNetworkView extends View<CyNetwork> {
 	/**
 	 * Sets the default value to be used for the specified visual property.
 	 * @param <T> The type of the visual property value. 
-	 * @param <V> The defaule value for the visual property, which must extend T. 
+	 * @param <V> The default value for the visual property, which must extend T. 
 	 * @param vp The visual property whose default value we're specifying.
 	 * @param defaultValue The default value to be used for this visual property for this view. 
 	 */
