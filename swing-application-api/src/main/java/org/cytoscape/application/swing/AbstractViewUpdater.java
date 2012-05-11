@@ -76,10 +76,7 @@ public abstract class AbstractViewUpdater<S> implements RowsSetListener {
 	 */
 	@SuppressWarnings("unchecked")
 	public void handleEvent(RowsSetEvent e) {
-		for (RowSetRecord record : e.getPayloadCollection()) {
-			if (columnName != record.getColumn())
-				continue;
-
+		for (RowSetRecord record : e.getColumnRecords(columnName)) {
 			View<?> v = rowViewMap.get(record.getRow());
 
 			if (v != null)
