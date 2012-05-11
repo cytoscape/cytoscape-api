@@ -104,6 +104,11 @@
 			<artifactId>session-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.cytoscape</groupId>
+			<artifactId>presentation-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 
 		<dependency>
 			<groupId>junit</groupId>
