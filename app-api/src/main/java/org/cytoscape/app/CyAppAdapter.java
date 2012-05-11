@@ -9,6 +9,7 @@ import org.cytoscape.io.read.CyNetworkReaderManager;
 import org.cytoscape.io.read.CyPropertyReaderManager;
 import org.cytoscape.io.read.CySessionReaderManager;
 import org.cytoscape.io.read.CyTableReaderManager;
+import org.cytoscape.io.util.StreamUtil;
 import org.cytoscape.io.write.CyNetworkViewWriterManager;
 import org.cytoscape.io.write.CyPropertyWriterManager;
 import org.cytoscape.io.write.CySessionWriterManager;
@@ -341,6 +342,13 @@ public interface CyAppAdapter {
 	 */
 	PresentationWriterManager getPresentationWriterManager();
 
+	/**
+	 * Returns an instance of {@link StreamUtil}.
+	 * @return an instance of {@link StreamUtil}.
+	 */
+	StreamUtil getStreamUtil();
+	
+	
 	//
 	// service util
 	//
@@ -713,5 +721,4 @@ public interface CyAppAdapter {
 	 * @return an instance of {@link MapTableToNetworkTablesTaskFactory}.
 	 */
 	MapTableToNetworkTablesTaskFactory get_MapTableToNetworkTablesTaskFactory();
-
 }
