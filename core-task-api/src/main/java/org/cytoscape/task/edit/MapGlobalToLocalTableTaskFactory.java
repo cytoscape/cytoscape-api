@@ -1,7 +1,9 @@
 package org.cytoscape.task.edit;
 
+import java.util.Collection;
+
 import org.cytoscape.model.CyTable;
-import org.cytoscape.work.TaskFactory;
+import org.cytoscape.task.TableTaskFactory;
 import org.cytoscape.work.TaskIterator;
 
 
@@ -9,7 +11,7 @@ import org.cytoscape.work.TaskIterator;
  * This interface provides a task iterator for mapping a global to a local table.
  * @CyAPI.Api.Interface
  */
-public interface MapGlobalToLocalTableTaskFactory extends TaskFactory{
+public interface MapGlobalToLocalTableTaskFactory extends TableTaskFactory{
 
 	/**
 	 * Creates a task iterator for mapping a selected global table to a selected local table.
@@ -19,5 +21,6 @@ public interface MapGlobalToLocalTableTaskFactory extends TaskFactory{
 	 * @param localTable The local table to map to. 
 	 * @return A task iterator of type {@link TaskIterator}.
 	 */
-	TaskIterator createTaskIterator(final CyTable globalTable, final CyTable localTable);
+	TaskIterator createTaskIterator(final CyTable globalTable, final Collection<CyTable> localTables);
+
 }
