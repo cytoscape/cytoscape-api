@@ -22,7 +22,6 @@ public final class SessionAboutToBeSavedEvent extends AbstractCyEvent<CySessionM
 	
 	private final Map<String,List<File>> appFileListMap;
 	
-	// TODO should the source be the session manager??
 	/**
 	 * Constructor.
 	 * @param source The {@link CySessionManager} that will be saving the session.
