@@ -115,7 +115,8 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	private final AbstractEnableSupport enabler;
 
 	/**
-	 * Creates a new AbstractCyAction object.
+	 * Creates a new AbstractCyAction object that is
+	 * always enabled.
 	 * @param name The name of the action.
 	 */
 	public AbstractCyAction(final String name) {
@@ -124,11 +125,13 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	}
 
 	/**
-	 * Creates a new AbstractCyAction object.
+	 * Creates a new AbstractCyAction object that is enabled for the
+	 * specific "enableFor" state.
 	 *
 	 * @param name The name of the action.
 	 * @param applicationManager The application manager providing context for this action.
 	 * @param enableFor A string declaring which states this action should be enabled for. 
+	 * @param networkViewManager The network view manager that provides context for this action. 
 	 */
 	public AbstractCyAction(final String name, final CyApplicationManager applicationManager, final String enableFor,
 			final CyNetworkViewManager networkViewManager) {

@@ -54,6 +54,7 @@ import org.cytoscape.work.swing.DynamicSubmenuListener;
  * <li>selectedNodes</li>
  * <li>selectedEdges</li>
  * <li>table</li>
+ * <li>always</li>
  * </ul>
  * 
  * @CyAPI.Final.Class
@@ -98,6 +99,11 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 	 * Enable when at least one network exists.
 	 */
 	public static final String ENABLE_FOR_TABLE = "table";
+
+	/**
+	 * Enable always. 
+	 */
+	public static final String ENABLE_FOR_ALWAYS = "always";
 
 	/**
 	 * Constructor.
@@ -149,6 +155,8 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 	 */
 	public void updateEnableState() {
 		if (enableFor == null)
+			setEnabled(true);
+		else if (enableFor.equals(ENABLE_FOR_ALWAYS))
 			setEnabled(true);
 		else if (enableFor.equals(ENABLE_FOR_NETWORK))
 			enableForNetwork();
