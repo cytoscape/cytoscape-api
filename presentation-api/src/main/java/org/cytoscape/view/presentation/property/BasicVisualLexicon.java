@@ -407,6 +407,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 		addIdentifierMapping(CyNode.class, "nodeToolTip", NODE_TOOLTIP);
 
 		addIdentifierMapping(CyEdge.class, "edgeColor", EDGE_STROKE_UNSELECTED_PAINT);
+		addIdentifierMapping(CyEdge.class, "edgeLabelColor", EDGE_LABEL_COLOR);
 		addIdentifierMapping(CyEdge.class, "edgeLineStyle", EDGE_LINE_TYPE);
 		addIdentifierMapping(CyEdge.class, "edgeToolTip", EDGE_TOOLTIP);
 		addIdentifierMapping(CyEdge.class, "edgeFont", EDGE_LABEL_FONT_FACE);
