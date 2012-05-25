@@ -39,12 +39,13 @@ import java.util.Map;
 public interface CyRow {
 	/**
 	 * Returns the value found for this row in the specified column
-	 * with the specified type.
+	 * with the specified type. If the column name doesn't exist
 	 * @param <T> The generic type of the specified column.
 	 * @param columnName The name identifying the attribute.
 	 * @param type The type of the column.
-	 * @return the value found for this row in the specified column
-	 * Please not that this method cannot be used to retrieve values that are Lists!
+	 * @return The value found for this row in the specified column and
+	 * null if the column does not exist.
+	 * Please note that this method should not be used to retrieve values that are Lists!
 	 */
 	<T> T get(String columnName, Class<?extends T> type);
 
@@ -55,8 +56,9 @@ public interface CyRow {
 	 * @param columnName The name identifying the attribute.
 	 * @param type The type of the column.
 	 * @param defaultValue The value to return if the column has not previously been set. 
-	 * @return the value found for this row in the specified column
-	 * Please not that this method cannot be used to retrieve values that are Lists!
+	 * @return The value found for this row in the specified column, the default value
+	 * if the row has not yet been set, and null if the column does not exist.
+	 * Please note that this method should not be used to retrieve values that are Lists!
 	 */
 	<T> T get(String columnName, Class<?extends T> type, T defaultValue);
 
@@ -66,8 +68,9 @@ public interface CyRow {
 	 * @param <T> the generic type of the elements of the list we wish to retrieve.
 	 * @param columnName The name identifying the attribute.
 	 * @param listElementType  The type of the elements of the list that we wish to retrieve.
-	 * @return the value found for this row in the specified column
-	 * Please not that this method can only be used to retrieve values that are Lists!
+	 * @return The value found for this row in the specified column and
+	 * null if the column does not exist.
+	 * Please note that this method can only be used to retrieve values that are Lists!
 	 */
 	<T> List<T> getList(String columnName, Class<T> listElementType);
 
@@ -78,8 +81,9 @@ public interface CyRow {
 	 * @param columnName The name identifying the attribute.
 	 * @param listElementType  The type of the elements of the list that we wish to retrieve.
 	 * @param defaultValue The List to return if the column has not previously been set. 
-	 * @return the value found for this row in the specified column
-	 * Please not that this method can only be used to retrieve values that are Lists!
+	 * @return The value found for this row in the specified column, the default value
+	 * if the row has not yet been set, and null if the column does not exist.
+	 * Please note that this method can only be used to retrieve values that are Lists!
 	 */
 	<T> List<T> getList(String columnName, Class<T> listElementType, List<T> defaultValue);
 
@@ -92,6 +96,8 @@ public interface CyRow {
 	 * Please note that if "value" is a List it is your responsibility that all the
 	 * elements are of the type specified when the column was created with
 	 * {@link CyTable#createListColumn}!
+	 * @throws IllegalArgumentException If the column does not yet exist or if the 
+	 * the value does not match the column type.
 	 */
 	<T> void set(String columnName, T value);
 

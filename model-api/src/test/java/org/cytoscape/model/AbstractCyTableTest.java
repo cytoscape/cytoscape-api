@@ -33,7 +33,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -170,47 +169,26 @@ public abstract class AbstractCyTableTest {
 		table.createListColumn("someList", String.class, false);
 	}
 
-	@Test
+	@Test(expected=IllegalArgumentException.class)
 	public void testAddBadAttr() {
-		try {
-			attrs.set("nodeColor", Color.white);
-		} catch (IllegalArgumentException e) {
-			// successfully caught the exception
-			return;
-		}
-
-		// shouldn't get here
-		fail();
+		attrs.set("nodeColor", Color.white);
 	}
 
-	@Test
+	@Test(expected=IllegalArgumentException.class)
 	public void testAddBadList() {
 		List<Color> l = new LinkedList<Color>();
 		l.add(Color.white);
 		l.add(Color.red);
 
-		try {
-			attrs.set("someList", l);
-		} catch (IllegalArgumentException e) {
-			// successfully caught the exception
-			return;
-		}
-
-		// shouldn't get here
-		fail();
+		attrs.set("someList", l);
 	}
 
 	// You can't have an attribute with the same name, but
 	// a different type.
-	@Test
+	@Test(expected=Exception.class)
 	public void testAddDuplicateNameAttr() {
 		table.createColumn("something", String.class, false);
-		try {
-			table.createColumn("something", Integer.class, false);
-		} catch (Exception e) {
-			return;
-		}
-		fail();
+		table.createColumn("something", Integer.class, false);
 	}
 
 	@Test

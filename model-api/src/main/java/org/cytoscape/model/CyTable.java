@@ -116,9 +116,9 @@ public interface CyTable extends CyIdentifiable {
 	CyColumn getPrimaryKey();
 
 	/**
-	 * Returns the type of a column for this table.
-	 * @param columnName  The name of the column whose type we desire.
-	 * @return The column type of the column whose column name was provided, or null if there is
+	 * Returns the column for the specified name. 
+	 * @param columnName  The name of the column.
+	 * @return The column for the name provided, or null if there is
 	 *         no column named "columnName".
 	 */
 	CyColumn getColumn(String columnName);
