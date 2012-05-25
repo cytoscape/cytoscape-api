@@ -299,6 +299,15 @@ public interface CyNetwork extends CyIdentifiable {
 	 */
 	CyTable getDefaultEdgeTable();
 
+	/**
+	 * Returns the table with the specified namespace and type from this
+	 * network.
+	 * @param type Type of {@link CyIdentifiable} associated with the table.
+	 * @param namespace The name of the table relative to the network.
+	 * @return the table with the specified namespace and type from the
+	 * network.
+	 */
+	CyTable getTable(Class<? extends CyIdentifiable> type, String namespace);
 	
 	/**
 	 * Returns the row for the specified table name for this object.
