@@ -1,5 +1,5 @@
 
-package org.cytoscape.service.util;
+package org.cytoscape.service.util.internal;
 
 import org.osgi.framework.ServiceRegistration;
 import org.osgi.framework.ServiceReference;

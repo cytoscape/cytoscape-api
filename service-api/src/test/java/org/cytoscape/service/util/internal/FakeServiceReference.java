@@ -1,4 +1,4 @@
-package org.cytoscape.service.util;
+package org.cytoscape.service.util.internal;
 
 import org.osgi.framework.ServiceReference;
 import org.osgi.framework.Bundle;
