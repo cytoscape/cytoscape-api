@@ -45,22 +45,25 @@ import org.cytoscape.model.CyNetwork;
 public interface CyNetworkViewFactory {
 	
 	/** 
-	 * Create a {@linkplain CyNetworkView} from a {@linkplain org.cytoscape.model.CyNetwork} object. 
-	 * 
-	 * This method always checks viewThreshold property value and returns empty view if number of 
-	 * graph objects (nodes and edges) is above the threshold.
-	 * 
-	 * @param network for which the CyNetworkView is to be created
+	 * Create a {@linkplain CyNetworkView} from a {@linkplain CyNetwork} object. 
+	 * This method always checks viewThreshold property value found in cytoscape3.props
+	 * and returns null if the number of graph objects (nodes and edges) is above the threshold.
+	 * This method only creates a CyNetworkView instance and does nothing with respect to visual
+	 * style, layout, or CyNetworkViewManager. 
+	 * @param network Network for which the CyNetworkView is to be created
 	 * @return the view model for the network data model
 	 */
 	public CyNetworkView createNetworkView(final CyNetwork network);
 	
 	/**
 	 * Creates view with or without using viewThreshold property.
-	 * 
-	 * @param network network data model for this view. 
-	 * @param useThreshold if false, this factory creates actual view model by ignoring threshold.
-	 * 
+	 * This method only creates a CyNetworkView instance and does nothing with respect to visual
+	 * style, layout, or CyNetworkViewManager. 
+	 * @param network Network for which the CyNetworkView is to be created
+	 * @param useThreshold If true the view model is created respecting the "viewThreshold" property
+	 * found in cytoscape3.props, which means the view model might not be created if the size of the
+	 * network exceeds the threshold. If false, the view model is created regardless of what the 
+	 * threshold is.
 	 * @return View model for the given data model.
 	 */
 	public CyNetworkView createNetworkView(final CyNetwork network, final Boolean useThreshold);
