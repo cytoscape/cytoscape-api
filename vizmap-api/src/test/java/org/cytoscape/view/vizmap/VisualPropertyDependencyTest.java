@@ -20,6 +20,7 @@ public class VisualPropertyDependencyTest {
 	
 	private VisualPropertyDependency<Paint> dependency;
 	
+	private String id = "TEST_DEPENDENCY";
 	private String displayName = "test dependency";
 	private Set<VisualProperty<Paint>> vpSet;
 
@@ -36,7 +37,7 @@ public class VisualPropertyDependencyTest {
 		vpSet.add(BasicVisualLexicon.NODE_BORDER_PAINT);
 		vpSet.add(BasicVisualLexicon.NODE_FILL_COLOR);
 		
-		dependency = new VisualPropertyDependency<Paint>(displayName, vpSet, lexicon);
+		dependency = new VisualPropertyDependency<Paint>(id, displayName, vpSet, lexicon);
 	}
 
 	@After
@@ -52,7 +53,7 @@ public class VisualPropertyDependencyTest {
 		badSet.add(BasicVisualLexicon.NODE_FILL_COLOR);
 		
 		// This throws exception
-		final VisualPropertyDependency<Paint> badDependency = new VisualPropertyDependency<Paint>(displayName, badSet, lexicon);
+		final VisualPropertyDependency<Paint> badDependency = new VisualPropertyDependency<Paint>(id, displayName, badSet, lexicon);
 	}
 
 	@Test

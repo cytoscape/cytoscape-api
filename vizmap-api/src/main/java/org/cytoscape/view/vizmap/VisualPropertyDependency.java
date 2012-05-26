@@ -16,6 +16,7 @@ import org.cytoscape.view.model.VisualProperty;
  */
 public final class VisualPropertyDependency<T> {
 	
+	private final String id;
 	private final String displayName;
 	private final Set<VisualProperty<T>> vpSet;
 	
@@ -30,7 +31,8 @@ public final class VisualPropertyDependency<T> {
 	 * @param lexicon The visual lexicon used by this dependency. The lexicon determines
 	 * the parent visual property for this dependency.
 	 */
-	public VisualPropertyDependency(final String displayName, final Set<VisualProperty<T>> vpSet, final VisualLexicon lexicon) {
+	public VisualPropertyDependency(final String id, final String displayName, final Set<VisualProperty<T>> vpSet, final VisualLexicon lexicon) {
+		this.id = id;
 		this.displayName = displayName;
 		this.vpSet = vpSet;
 		this.enabled = false;
@@ -69,6 +71,17 @@ public final class VisualPropertyDependency<T> {
 	 */
 	public String getDisplayName() {
 		return displayName;
+	}
+	
+	
+	/**
+	 * Provides serializable string of this dependency.
+	 * Will be used for saving and loading this dependency.
+	 * 
+	 * @return ID of this dependency.
+	 */
+	public String getIdString() {
+		return id;
 	}
 
 
