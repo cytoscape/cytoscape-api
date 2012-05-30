@@ -628,6 +628,26 @@ public abstract class AbstractCyTableTest {
 	}
 
 	@Test
+	public void testVirtualColumnGetNoCreate() {
+		table2.createColumn("s", String.class, false);
+
+		// make sure we don't start with any rows
+		assertEquals(0,table2.getAllRows().size());
+
+		table.addVirtualColumn("s1", "s", table2, table.getPrimaryKey().getName(), false);
+		CyRow row1 = table.getRow(1L);
+
+		// Since there is no row (or data) in table2, this 
+		// should return null.
+		assertNull(row1.get("s1", String.class));
+
+		// Getting data through a virtual column shouldn't create a row in
+		// the target table when no matching row exists, so there should
+		// still be 0 rows.
+		assertEquals(0,table2.getAllRows().size());
+	}
+
+	@Test
 	public void testVirtualColumnSetWithAReplacementValue() {
 		CyRow row1 = table.getRow(1L);
 		CyRow row2 =  table2.getRow(1L);
