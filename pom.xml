@@ -40,6 +40,7 @@
 		<module>datasource-api</module>
 		<module>group-api</module>
 		<module>webservice-swing-api</module>
+		<module>command-executor-api</module>
 	</modules>
 
 	<dependencyManagement>
