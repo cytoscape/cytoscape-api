@@ -88,6 +88,15 @@ public interface CyTable extends CyIdentifiable {
 	 * @return Whether or not this CyTable should be publicly accessible.
 	 */
 	boolean isPublic();
+	
+	/**
+	 * Sets the privacy flag for the CyTable. A public CyTable is a table that is accessible to the user through the user
+	 * interface.  Private or non-public CyTables will not be visible to the user from the
+	 * normal user interface, although they will be accessible to app writers through the API.
+	 * This method may fire CyTablePrivacyChangedEvent.
+	 * @param isPublic if true, the table will be public and if false, the table will be private.
+	 */
+	void setPublic (boolean isPublic);
 
 	/** The table can be deleted if this returns Mutability.MUTABLE, otherwise it cannot be
 	 *  deleted!
