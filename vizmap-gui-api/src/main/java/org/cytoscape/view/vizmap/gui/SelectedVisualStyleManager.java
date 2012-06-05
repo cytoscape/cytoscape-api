@@ -17,13 +17,4 @@ public interface SelectedVisualStyleManager {
 	 * 
 	 */
 	VisualStyle getCurrentVisualStyle();
-
-	/**
-	 * Returns Default Visual Style.
-	 * Manager should always return actual (non-null) Visual Style. 
-	 * 
-	 * @return default Visual Style.  This cannot be null.
- 	 */
-	VisualStyle getDefaultStyle();
-
 }
