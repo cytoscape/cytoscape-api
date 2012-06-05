@@ -16,7 +16,7 @@ import org.cytoscape.view.vizmap.VisualMappingFunction;
 public abstract class AbstractVisualMappingFunction<K, V> implements VisualMappingFunction<K, V> {
 
 	/** Mapping attribute name. */
-	protected final String colunName;
+	protected final String columnName;
 
 	/** Type of attribute. */
 	protected final Class<K> columnType;
@@ -42,14 +42,14 @@ public abstract class AbstractVisualMappingFunction<K, V> implements VisualMappi
 	public AbstractVisualMappingFunction(final String columnName, final Class<K> columnType, final CyTable table,
 			final VisualProperty<V> vp) {
 		this.columnType = columnType;
-		this.colunName = columnName;
+		this.columnName = columnName;
 		this.vp = vp;
 		this.table = table;
 	}
 
 	@Override
 	public String getMappingColumnName() {
-		return colunName;
+		return columnName;
 	}
 
 	@Override
