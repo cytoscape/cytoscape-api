@@ -109,6 +109,15 @@ public interface VisualMappingManager {
 	 */
 	VisualStyle getDefaultVisualStyle();
 	
+	/**
+	 * Returns currently selected Visual Style.
+	 * 
+	 * @return Selected Visual Style.
+	 * 
+	 */
+	VisualStyle getCurrentVisualStyle();
+	
+	
 	/** Returns a Set of all {@link VisualLexicon}s.
 	 * @return a Set of all {@link VisualLexicon}s.
 	 */
