@@ -85,14 +85,7 @@ public interface VisualMappingFunction<K, V> {
 	 * @return data type of controlling attribute.
 	 */
 	Class<K> getMappingColumnType();
-	
-	
-	/**
-	 * Returns table used for this mapping.
-	 * 
-	 * @return CyTable associated with this mapping.
-	 */
-	CyTable getMappingTable();
+
 
 	/**
 	 * Visual Property associated with this function. This field is immutable.

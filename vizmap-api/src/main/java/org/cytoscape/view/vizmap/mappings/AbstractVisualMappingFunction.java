@@ -1,6 +1,5 @@
 package org.cytoscape.view.vizmap.mappings;
 
-import org.cytoscape.model.CyTable;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.vizmap.VisualMappingFunction;
 
@@ -21,9 +20,6 @@ public abstract class AbstractVisualMappingFunction<K, V> implements VisualMappi
 	/** Type of attribute. */
 	protected final Class<K> columnType;
 
-	/** The table used for this mapping. */
-	protected final CyTable table;
-
 	/** Visual Property used in this mapping. */
 	protected final VisualProperty<V> vp;
 
@@ -34,17 +30,13 @@ public abstract class AbstractVisualMappingFunction<K, V> implements VisualMappi
 	 *            Mapping attribute column name.
 	 * @param columnType
 	 *            Type of attribute column.
-	 * @param table
-	 *            The table used to find the column.
 	 * @param vp
 	 *            Visual Property used in this mapping.
 	 */
-	public AbstractVisualMappingFunction(final String columnName, final Class<K> columnType, final CyTable table,
-			final VisualProperty<V> vp) {
+	public AbstractVisualMappingFunction(final String columnName, final Class<K> columnType, final VisualProperty<V> vp) {
 		this.columnType = columnType;
 		this.columnName = columnName;
 		this.vp = vp;
-		this.table = table;
 	}
 
 	@Override
@@ -60,10 +52,5 @@ public abstract class AbstractVisualMappingFunction<K, V> implements VisualMappi
 	@Override
 	public VisualProperty<V> getVisualProperty() {
 		return vp;
-	}
-
-	@Override
-	public CyTable getMappingTable() {
-		return table;
 	}
 }
