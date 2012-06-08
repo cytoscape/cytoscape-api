@@ -41,7 +41,7 @@ import org.cytoscape.work.TaskIterator;
 /**
  * Thin wrapper for SOAP/REST web service clients.
  * 
- * All web service clients <strong>must</strong> implement this method.
+ * All web service clients <strong>must</strong> implement this interface.
  * 
  * @CyAPI.Spi.Interface
  */
@@ -74,8 +74,7 @@ public interface WebServiceClient {
 	/**
 	 * Set query for the tasks to be executed.
 	 * 
-	 * @param query
-	 *            query object. This is client-dependent.
+	 * @param query query object. This is client-dependent.
 	 */
 	TaskIterator createTaskIterator(Object query);
 
