@@ -138,7 +138,7 @@ public interface CyAppAdapter {
 	 * Returns an instance of {@link CyRootNetworkManager}.
 	 * @return an instance of {@link CyRootNetworkManager}.
 	 */
-	CyRootNetworkManager getCyRootNetworkFactory(); 
+	CyRootNetworkManager getCyRootNetworkManager(); 
 
 	/**
 	 * Returns an instance of {@link CyEventHelper}.

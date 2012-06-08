@@ -39,8 +39,8 @@ public abstract class CyAppAdapterTest {
 	}
 
 	@Test
-	public void testGetCyRootNetworkFactory() {
-		assertNotNull("CyRootNetworkFactory exists", adapter.getCyRootNetworkFactory());
+	public void testGetCyRootNetworkManager() {
+		assertNotNull("CyRootNetworkFactory exists", adapter.getCyRootNetworkManager());
 	} 
 
 	@Test
