@@ -117,6 +117,11 @@ public interface CyApplicationManager {
 	 * @param table The table that should be made current.
 	 */
 	public void setCurrentTable(CyTable table);
+
+	/** 
+	 * Releases all currently held references and resources. 
+	 */
+	public void reset();
 	
 	
 }
