@@ -198,9 +198,13 @@ public final class FunctionUtil {
 	 *  @return the String representation of the ith ordinal
 	 */
 	public static String getOrdinal(final int i) {
-		if ((i % 100) == 11)
+		switch (i % 100) {
+		case 11:
+		case 12:
+		case 13:
 			return Integer.toString(i) + "th";
-
+		}
+		
 		switch (i % 10) {
 		case 1:
 			return Integer.toString(i) + "st";

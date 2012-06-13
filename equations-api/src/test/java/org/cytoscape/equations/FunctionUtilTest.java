@@ -184,6 +184,16 @@ public class FunctionUtilTest {
 	}
 
 	@Test
+	public void testGetOrdinal6() {
+		assertEquals("getOrdinal() failed!", "12th", FunctionUtil.getOrdinal(12));
+	}
+
+	@Test
+	public void testGetOrdinal7() {
+		assertEquals("getOrdinal() failed!", "13th", FunctionUtil.getOrdinal(13));
+	}
+
+	@Test
 	public void testCalcSampleVariance() {
 		final double[] x = { 2.2, 2.2 };
 		assertEquals("calcSampleVariance() failed!", 0.0, FunctionUtil.calcSampleVariance(x), 0.0001);
