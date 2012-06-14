@@ -214,6 +214,14 @@ public interface CyTable extends CyIdentifiable {
 	boolean rowExists(Object primaryKey);
 
 	/**
+	 * Deletes the rows corresponding to the given primary keys and returns true if
+	 * at least one row was deleted.
+	 * @param primaryKeys The primary keys of the rows to delete.
+	 * @return true if at least one row was deleted.
+	 */
+	boolean deleteRows(Collection<?> primaryKeys);
+	
+	/**
 	 * Return a list of all the rows stored in this data table.
 	 * @return a list of all the rows stored in this data table.
 	 */
