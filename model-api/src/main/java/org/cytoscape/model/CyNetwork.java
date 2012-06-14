@@ -182,30 +182,30 @@ public interface CyNetwork extends CyIdentifiable {
 	boolean containsEdge(CyNode from, CyNode to);
 
 	/**
-	 * Return the CyNode that has the index. To iterate
+	 * Return the CyNode that has the SUID. To iterate
 	 * over all nodes, iterate over getNodeList(). We make
 	 * no guarantees on what represent valid values for the index.
 	 * The only valid indices are those accessed from existing 
 	 * nodes.
 	 *
-	 * @param index the index of the CyNode to get
+	 * @param suid the SUID of the CyNode to get
 	 * @return the associated CyNode or null if there is no
 	 * node with that index in this network.
 	 */
-	CyNode getNode(long index);
+	CyNode getNode(long suid);
 
 	/**
-	 * Return the CyEdge that has the index. To iterate
+	 * Return the CyEdge that has the SUID. To iterate
 	 * over all edges, iterate over getEdgeList(). We make
 	 * no guarantees on what represent valid values for the index.
 	 * The only valid indices are those accessed from existing 
 	 * edges.
 	 *
-	 * @param index the index of the CyEdge to get
+	 * @param suid the SUID of the CyEdge to get
 	 * @return the associated CyEdge or null if there is no
 	 * edge with that index in this network.
 	 */
-	CyEdge getEdge(long index);
+	CyEdge getEdge(long suid);
 
 	/**
 	 * Get the list of nodes that neighbor this node where the
