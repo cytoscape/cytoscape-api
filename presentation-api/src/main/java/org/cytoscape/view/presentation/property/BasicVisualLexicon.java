@@ -113,7 +113,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 			"NODE_NESTED_NETWORK_IMAGE_VISIBLE", "Nested Network Image Visible", CyNode.class);
 
 	
-	public static final VisualProperty<Double> NODE_LABEL_WIDTH = new DoubleVisualProperty(100d, NONE_ZERO_POSITIVE_DOUBLE_RANGE,
+	public static final VisualProperty<Double> NODE_LABEL_WIDTH = new DoubleVisualProperty(200d, NONE_ZERO_POSITIVE_DOUBLE_RANGE,
 			"NODE_LABEL_WIDTH", "Node Label Width", CyNode.class);
 	
 	////////////////////////////////// Edge VP ////////////////////////////////////////
