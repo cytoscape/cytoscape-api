@@ -196,7 +196,6 @@ public class BasicCollapsiblePanel extends JPanel {
 	 */
 	@Override
 	public Component add(Component comp) {
-		System.out.println("adding component to collapse: " + comp.toString());
 		return panel.add(comp);
 	}
 
@@ -207,7 +206,6 @@ public class BasicCollapsiblePanel extends JPanel {
 	 */
 	@Override
 	public Component add(Component comp, int index) {
-		System.out.println("adding component to collapse: " + comp.toString());
 		return panel.add(comp,index);
 	}
 
@@ -218,7 +216,6 @@ public class BasicCollapsiblePanel extends JPanel {
 	 */
 	@Override
 	public void add(Component comp, Object constraints) {
-		System.out.println("adding component to collapse: " + comp.toString());
 		panel.add(comp,constraints);
 	}
 
@@ -230,7 +227,6 @@ public class BasicCollapsiblePanel extends JPanel {
 	 */
 	@Override
 	public void add(Component comp, Object constraints, int index) {
-		System.out.println("adding component to collapse: " + comp.toString());
 		panel.add(comp,constraints,index);
 	}
 
@@ -241,7 +237,6 @@ public class BasicCollapsiblePanel extends JPanel {
 	 */
 	@Override
 	public Component add(String name, Component comp) {
-		System.out.println("adding component to collapse: " + comp.toString());
 		return panel.add(name,comp);
 	}
 
