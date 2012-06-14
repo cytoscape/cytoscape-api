@@ -17,6 +17,7 @@ import java.net.URL;
 import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -74,26 +75,30 @@ public class BasicCollapsiblePanel extends JPanel {
 	
 	private static final long serialVersionUID = 2010434345567315524L;
 	// Border
-	CollapsableTitledBorder border; // includes upper left component and line
-									// type
-	Border collapsedBorderLine = BorderFactory.createEmptyBorder(2, 2, 2, 2); // no
-																				// border
-	Border expandedBorderLine = null; // because this is null, default is used,
-										// etched lowered border on MAC
+	// includes upper left component and line type
+	private CollapsableTitledBorder border; 
 
-	// Title
-	AbstractButton titleComponent; // displayed in the titled border
+	// no border
+	private Border collapsedBorderLine = BorderFactory.createEmptyBorder(2, 2, 2, 2); 
+
+	// because this is null, default is used,
+	// etched lowered border on MAC
+	private Border expandedBorderLine = null; 
+
+	// Title displayed in the titled border
+	// protected scope for unit testing
+	AbstractButton titleComponent; 
 
 	// Expand/Collapse button
-	final static int COLLAPSED = 0, EXPANDED = 1; // image States
-	ImageIcon[] iconArrow = createExpandAndCollapseIcon();
-	JButton arrow = createArrowButton();
+	private final static int COLLAPSED = 0, EXPANDED = 1; // image States
+	private ImageIcon[] iconArrow = createExpandAndCollapseIcon();
+	private JButton arrow = createArrowButton();
 
 	// Content Pane
-	JPanel panel;
+	private JPanel panel;
 
 	// Container State
-	boolean collapsed; // stores curent state of the collapsable panel
+	private boolean collapsed; // stores curent state of the collapsable panel
 
 	/**
 	 * Constructor for an option button controlled collapsible panel. This is
@@ -141,10 +146,11 @@ public class BasicCollapsiblePanel extends JPanel {
 		setLayout(new BorderLayout());
 
 		panel = new JPanel();
-		panel.setLayout(new BorderLayout());
+		//panel.setLayout(new BorderLayout());
+		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
 
-		add(titleComponent, BorderLayout.CENTER);
-		add(panel, BorderLayout.CENTER);
+		super.add(titleComponent, BorderLayout.CENTER);
+		super.add(panel, BorderLayout.CENTER);
 		setCollapsed(collapsed);
 
 		placeTitleComponent();
@@ -185,13 +191,58 @@ public class BasicCollapsiblePanel extends JPanel {
 	}
 
 	/**
-	 * This method will not add components as might be expected, instead use the
-	 * method getContentPane() which will return a panel, and you may use add()
-	 * on that. This is true for all similar add() methods.
+	 * Overridden to add any new components to the content panel, as might be expected.
+	 * @param comp The component to add.
 	 */
 	@Override
-	public Component add(Component c) {
-		return super.add(c);
+	public Component add(Component comp) {
+		System.out.println("adding component to collapse: " + comp.toString());
+		return panel.add(comp);
+	}
+
+	/**
+	 * Overridden to add any new components to the content panel, as might be expected.
+	 * @param comp The component to add.
+	 * @param index The index at which to add the component. 
+	 */
+	@Override
+	public Component add(Component comp, int index) {
+		System.out.println("adding component to collapse: " + comp.toString());
+		return panel.add(comp,index);
+	}
+
+	/**
+	 * Overridden to add any new components to the content panel, as might be expected.
+	 * @param comp The component to add.
+	 * @param constraints The constraints to adding. 
+	 */
+	@Override
+	public void add(Component comp, Object constraints) {
+		System.out.println("adding component to collapse: " + comp.toString());
+		panel.add(comp,constraints);
+	}
+
+	/**
+	 * Overridden to add any new components to the content panel, as might be expected.
+	 * @param comp The component to add.
+	 * @param constraints The constraints to adding. 
+	 * @param index The index at which to add the component. 
+	 */
+	@Override
+	public void add(Component comp, Object constraints, int index) {
+		System.out.println("adding component to collapse: " + comp.toString());
+		panel.add(comp,constraints,index);
+	}
+
+	/**
+	 * Overridden to add any new components to the content panel, as might be expected.
+	 * @param name The name of the component to add. 
+	 * @param comp The component to add.
+	 */
+	@Override
+	public Component add(String name, Component comp) {
+		System.out.println("adding component to collapse: " + comp.toString());
+		return panel.add(name,comp);
 	}
 
 	/**
@@ -211,7 +262,7 @@ public class BasicCollapsiblePanel extends JPanel {
 			border = new CollapsableTitledBorder(collapsedBorderLine, titleComponent);
 		} else {
 			// expand the panel, add content and set border to titled border
-			add(panel, BorderLayout.NORTH);
+			super.add(panel, BorderLayout.NORTH);
 			arrow.setIcon(iconArrow[EXPANDED]);
 			border = new CollapsableTitledBorder(expandedBorderLine, titleComponent);
 		}
