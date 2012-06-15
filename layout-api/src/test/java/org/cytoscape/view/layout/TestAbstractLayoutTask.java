@@ -11,6 +11,8 @@ import java.util.Set;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
+import org.cytoscape.view.model.VisualProperty;
+import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.work.TaskMonitor;
 import org.cytoscape.work.undo.UndoSupport;
 import org.cytoscape.work.util.ListSingleSelection;
@@ -35,6 +37,10 @@ public class TestAbstractLayoutTask {
 		nodeViews.add(mock(View.class));
 		nodeViews.add(mock(View.class));
 		nodeViews.add(mock(View.class));
+		
+		for (View<?> view : nodeViews) {
+			when(view.getVisualProperty(BasicVisualLexicon.NODE_VISIBLE)).thenReturn(true);
+		}
 
 		when(networkView.getNodeViews()).thenReturn(nodeViews);
 	}

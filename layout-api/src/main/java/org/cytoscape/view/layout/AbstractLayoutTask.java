@@ -11,6 +11,7 @@ import org.cytoscape.model.CyRow;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
+import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.work.AbstractTask;
 import org.cytoscape.work.TaskMonitor;
 import org.cytoscape.work.undo.UndoSupport;
@@ -74,7 +75,12 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 		this.undo = undo;
 
 		if (nodesToLayOut.size() == 0) {
-			this.nodesToLayOut = new HashSet<View<CyNode>>(networkView.getNodeViews());
+			this.nodesToLayOut = new HashSet<View<CyNode>>();
+			for (View<CyNode> view : networkView.getNodeViews()) {
+				if (view.getVisualProperty(BasicVisualLexicon.NODE_VISIBLE)) {
+					this.nodesToLayOut.add(view);
+				}
+			}
 		} else {
 			this.nodesToLayOut = Collections.unmodifiableSet(nodesToLayOut);
 		}
