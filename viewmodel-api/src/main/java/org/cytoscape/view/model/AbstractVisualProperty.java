@@ -92,17 +92,14 @@ public abstract class AbstractVisualProperty<T> implements VisualProperty<T> {
 		this.targetObjectDataType = targetObjectDataType;
 	}
 
-	
 	@Override
 	public Range<T> getRange() {
 		return range;
 	}
-
 	
 	@Override public T getDefault() {
 		return defaultValue;
 	}
-
 	
 	@Override
 	public String getIdString() {
@@ -123,4 +120,8 @@ public abstract class AbstractVisualProperty<T> implements VisualProperty<T> {
 		return this.targetObjectDataType;
 	}
 
+	@Override
+	public String toString() {
+		return this.getClass().getSimpleName() + " [id=" + id + ", defaultValue=" + defaultValue + "]";
+	}
 }
