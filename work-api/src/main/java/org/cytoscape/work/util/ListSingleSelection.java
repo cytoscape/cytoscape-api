@@ -38,6 +38,8 @@ package org.cytoscape.work.util;
 
 import java.util.Arrays;
 import java.util.List;
+import org.slf4j.Logger; 
+import org.slf4j.LoggerFactory; 
 
 
 /**
@@ -47,6 +49,8 @@ import java.util.List;
  * @CyAPI.Final.Class 
  */
 public final class ListSingleSelection<T> extends ListSelection<T> {
+
+	private static final Logger logger = LoggerFactory.getLogger(ListSingleSelection.class);
 	
 	/**
 	 * The item that will be selected.
@@ -107,7 +111,8 @@ public final class ListSingleSelection<T> extends ListSelection<T> {
 	 */
 	public void setSelectedValue(T val) {
 		if (!values.contains(val))
-			throw new IllegalArgumentException("value not contained in list of possible values\n possible items = "+this.getPossibleValues());
+			logger.warn("value not contained in list of possible values possible items = "+ 
+			            Arrays.toString(getPossibleValues().toArray()));
 
 		selected = val;
 	}

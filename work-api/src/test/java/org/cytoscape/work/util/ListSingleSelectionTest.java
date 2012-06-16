@@ -37,7 +37,7 @@ import java.util.List;
 
 public class ListSingleSelectionTest {
 	private ListSingleSelection<String> lss;
-	
+
 	@Before
 	public void init() {
 		lss = new ListSingleSelection<String>("carrots", "cabbages", "brocolli", "cucumbers");
@@ -49,9 +49,10 @@ public class ListSingleSelectionTest {
 		assertEquals("Selected value not as expected!", "cabbages", lss.getSelectedValue());
 	}
 
-	@Test(expected=IllegalArgumentException.class)
-	public final void testSetSelectedValueWithInvalidSelection() throws Exception {
+	@Test
+	public final void testSetSelectedValueWithRiskySelection() throws Exception {
 		lss.setSelectedValue("oranges");
+		assertEquals("Selected value not as expected!", "oranges", lss.getSelectedValue());
 	}
 
 	@Test(expected=NullPointerException.class)
