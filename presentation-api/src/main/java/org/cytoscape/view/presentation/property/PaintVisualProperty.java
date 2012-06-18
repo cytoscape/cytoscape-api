@@ -37,11 +37,19 @@ package org.cytoscape.view.presentation.property;
 
 import java.awt.Color;
 import java.awt.Paint;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.Range;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  *  Visual Property for {@link Paint} values.
@@ -50,6 +58,15 @@ import org.cytoscape.view.model.Range;
  * @CyAPI.Final.Class
  */
 public final class PaintVisualProperty extends AbstractVisualProperty<Paint> { 
+
+	private static final Map<String, String> COLOR_MAP = new HashMap<String, String>();
+	private static final String COLOR_CODE_RESOURCE = "cross_browser_color_code.txt";
+	
+	private static final Logger logger = LoggerFactory.getLogger(PaintVisualProperty.class);
+
+	static {
+		buildColorCodeTable(PaintVisualProperty.class.getClassLoader().getResource(COLOR_CODE_RESOURCE));
+	}
 
 	/**
 	 * Constructor.
@@ -78,31 +95,37 @@ public final class PaintVisualProperty extends AbstractVisualProperty<Paint> {
 
 	
 	@Override 
-	public Paint parseSerializableString(final String text) {
+	public Paint parseSerializableString(String text) {
 		if (text == null) 
-			throw new IllegalArgumentException("invalid color format: null");
+			return null;
+		
+		text = text.trim().toUpperCase();
+		text = COLOR_MAP.containsKey(text) ? COLOR_MAP.get(text) : text;
 		
 		// Start by seeing if this is a hex representation
 		if (text.startsWith("#")) {
 			try {
 				return Color.decode(text);
 			} catch (NumberFormatException e) {
-				throw new IllegalArgumentException("invalid hex RGB format");	
+				logger.error("Invalid hex RGB format: " + text, e);
+				return null;
 			}
 		}
 
 		// could be an RGB color, such as "rgb(255,0,255)"
-		String s = text.replaceAll("(?i)rgb *\\(", "").replaceAll("\\)", "");
+		final String s = text.replaceAll("(?i)rgb *\\(", "").replaceAll("\\)", "");
 		
 		// ok, this must be 3 comma separated integers now
-		StringTokenizer strtok = new StringTokenizer(s, ",");
+		final StringTokenizer strtok = new StringTokenizer(s, ",");
 
-		if (strtok.countTokens() != 3) 
-			throw new IllegalArgumentException("not all RGB integers specified");	
+		if (strtok.countTokens() != 3) {
+			logger.error("Not all RGB integers specified: " + text);
+			return null;
+		}
 
-		String red = strtok.nextToken().trim();
-		String green = strtok.nextToken().trim();
-		String blue = strtok.nextToken().trim();
+		final String red = strtok.nextToken().trim();
+		final String green = strtok.nextToken().trim();
+		final String blue = strtok.nextToken().trim();
 
 		try {
 			int r = Integer.parseInt(red);
@@ -111,7 +134,33 @@ public final class PaintVisualProperty extends AbstractVisualProperty<Paint> {
 
 			return new Color(r, g, b);
 		} catch (NumberFormatException e) {
-			throw new IllegalArgumentException("invalid RGB format");	
+			logger.error("Invalid hex RGB format: " + text, e);
+			return null;
+		}
+	}
+	
+	private static void buildColorCodeTable(final URL resourceURL) {
+		BufferedReader bufRd = null;
+		String line;
+
+		try {
+			bufRd = new BufferedReader(new InputStreamReader(resourceURL.openStream()));
+			while ((line = bufRd.readLine()) != null) {
+				String[] parts = line.split("\\t");
+				COLOR_MAP.put(parts[0].trim().toUpperCase(), parts[1].trim());
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (bufRd != null) {
+				try {
+					bufRd.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				} finally {
+					bufRd = null;
+				}
+			}
 		}
 	}
 }
