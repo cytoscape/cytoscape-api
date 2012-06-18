@@ -12,7 +12,7 @@ import java.util.HashSet;
  * 
  * @CyAPI.Final.Class
  */
-public final class VisualLexiconNode {
+public final class VisualLexiconNode implements Comparable<VisualLexiconNode> {
 	
 	private final VisualProperty<?> vp;
 	
@@ -67,6 +67,16 @@ public final class VisualLexiconNode {
 	 */
 	public Collection<VisualLexiconNode> getChildren() {
 		return children;
+	}
+
+
+	/**
+	 * {@inheritDoc}
+	 * Compare by display name of this Visual Property.
+	 */
+	@Override
+	public int compareTo(final VisualLexiconNode other) {
+		return this.getVisualProperty().getDisplayName().compareTo(other.getVisualProperty().getDisplayName());
 	}
 
 }
