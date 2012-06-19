@@ -88,6 +88,16 @@ public final class NodeShapeVisualProperty extends AbstractVisualProperty<NodeSh
 		if (value != null)
 			shape = DEFAULT_SHAPES.get(value.toUpperCase());
 		
+		if (shape == null) {
+			// Try to find the shape in the range (it might have been added by a private visual lexicon)
+			for (final NodeShape ns : NODE_SHAPE_RANGE.values()) {
+				if (ns.getSerializableString().equalsIgnoreCase(value)) {
+					shape = ns;
+					break;
+				}
+			}
+		}
+		
 		return shape;
 	}
 

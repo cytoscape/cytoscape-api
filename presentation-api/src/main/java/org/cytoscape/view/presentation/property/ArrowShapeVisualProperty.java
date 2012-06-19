@@ -78,6 +78,16 @@ public final class ArrowShapeVisualProperty extends AbstractVisualProperty<Arrow
 		if (value != null)
 			shape = DEFAULT_SHAPES.get(value.toUpperCase());
 		
+		if (shape == null) {
+			// Try to find the shape in the range (it might have been added by a private visual lexicon)
+			for (final ArrowShape as : ARROW_SHAPE_RANGE.values()) {
+				if (as.getSerializableString().equalsIgnoreCase(value)) {
+					shape = as;
+					break;
+				}
+			}
+		}
+		
 		return shape;
 	}
 	

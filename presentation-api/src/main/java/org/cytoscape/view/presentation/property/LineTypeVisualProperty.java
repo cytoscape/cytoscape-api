@@ -71,7 +71,18 @@ public final class LineTypeVisualProperty extends AbstractVisualProperty<LineTyp
 			lineType = lineTypes.get(value);
 		}
 		
-		if (lineType == null) lineType = SOLID;
+		if (lineType == null) {
+			// Try to find it in the range (it might have been added by a private visual lexicon)
+			for (final LineType lt : LINE_TYPE_RANGE.values()) {
+				if (lt.getSerializableString().equalsIgnoreCase(value)) {
+					lineType = lt;
+					break;
+				}
+			}
+		}
+		
+		if (lineType == null)
+			lineType = SOLID;
 		
 		return lineType;
 	}
