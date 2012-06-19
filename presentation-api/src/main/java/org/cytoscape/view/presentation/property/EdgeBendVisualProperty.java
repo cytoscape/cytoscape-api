@@ -2,7 +2,6 @@ package org.cytoscape.view.presentation.property;
 
 import java.util.Collections;
 import java.util.List;
-import java.util.Map;
 
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.view.model.AbstractVisualProperty;
