@@ -1,10 +1,12 @@
 package org.cytoscape.view.layout;
 
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
+import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyRow;
@@ -107,6 +109,9 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 		
 		if ( undo != null )
 			undo.postEdit(new LayoutEdit(name,networkView));
+		
+		// Clear Edge Bends.
+		clearEdgeBends();
 
 		// this is overridden by children and does the actual layout
 		doLayout(taskMonitor);
@@ -122,6 +127,21 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 		networkAttributes.set(LAYOUT_ALGORITHM, name);
 
 		logger.debug("Layout finished in " + (System.currentTimeMillis() - start) + " msec.");
+	}
+	
+	/**
+	 * Clears edge bend values ASSIGNED TO EACH EDGE.
+	 * Default Edge Bend value will not be cleared.
+	 * 
+	 * TODO: should we clear mapping, too?
+	 */
+	private final void clearEdgeBends() {
+		final Collection<View<CyEdge>> edgeViews = networkView.getEdgeViews();
+		
+		for(final View<CyEdge> edgeView: edgeViews) {
+			edgeView.setVisualProperty(BasicVisualLexicon.EDGE_BEND, null);
+			edgeView.clearValueLock(BasicVisualLexicon.EDGE_BEND);
+		}
 	}
 
 	/**

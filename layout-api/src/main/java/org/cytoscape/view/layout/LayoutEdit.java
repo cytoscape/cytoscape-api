@@ -8,14 +8,19 @@ import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NETWOR
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NETWORK_CENTER_Y_LOCATION;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NETWORK_CENTER_Z_LOCATION;
 import static org.cytoscape.view.presentation.property.BasicVisualLexicon.NETWORK_SCALE_FACTOR;
+import static org.cytoscape.view.presentation.property.BasicVisualLexicon.EDGE_BEND;
 
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.WeakHashMap;
 
+import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
+import org.cytoscape.view.presentation.property.values.Bend;
 import org.cytoscape.work.undo.AbstractCyEdit;
 
 
@@ -25,6 +30,8 @@ import org.cytoscape.work.undo.AbstractCyEdit;
 public final class LayoutEdit extends AbstractCyEdit {
 	private final CyNetworkView view;
 	private List<NodeViewAndLocations> nodeViewsAndLocations;
+	private Map<View<CyEdge>, Bend> bendMap;
+	
 	private double networkScale;
 	private double networkCenterX;
 	private double networkCenterY;
@@ -32,15 +39,17 @@ public final class LayoutEdit extends AbstractCyEdit {
 
 	/**
 	 * Constructor.
-	 * @param name The name that will appear in the undo menu.
-	 * @param view The view whose current position will be tracked.
+	 * 
+	 * @param name
+	 *            The name that will appear in the undo menu.
+	 * @param view
+	 *            The view whose current position will be tracked.
 	 */
 	public LayoutEdit(String name, final CyNetworkView view) {
 		super(name);
-
-		this.view        = view;
-
+		this.view = view;
 		saveNodeViewsAndLocations();
+		saveEdgeViews();
 	}
 
 	@Override
@@ -59,9 +68,15 @@ public final class LayoutEdit extends AbstractCyEdit {
 		final double oldNetworkCenterX = networkCenterX;
 		final double oldNetworkCenterY = networkCenterY;
 		final double oldNetworkCenterZ = networkCenterZ;
+		final Map<View<CyEdge>, Bend> oldEdgeBends = bendMap;
+		
 		saveNodeViewsAndLocations();
+		saveEdgeViews();
+		
 		for (final NodeViewAndLocations nodeViewAndLocation : oldNodeViewsAndLocations)
 			nodeViewAndLocation.restoreLocations();
+		for(View<CyEdge> edgeView: oldEdgeBends.keySet())
+			edgeView.setVisualProperty(EDGE_BEND, oldEdgeBends.get(edgeView));
 
 		view.setVisualProperty(NETWORK_SCALE_FACTOR, oldNetworkScale);
 		view.setVisualProperty(NETWORK_CENTER_X_LOCATION, oldNetworkCenterX);
@@ -81,6 +96,15 @@ public final class LayoutEdit extends AbstractCyEdit {
 		nodeViewsAndLocations = new ArrayList<NodeViewAndLocations>(nodeViews.size());
 		for (final View<CyNode> nodeView : nodeViews)
 			nodeViewsAndLocations.add(new NodeViewAndLocations(nodeView));
+	}
+	
+	private void saveEdgeViews() {
+		this.bendMap = new WeakHashMap<View<CyEdge>, Bend>();
+		final Collection<View<CyEdge>> edgeViews = view.getEdgeViews();
+		for (final View<CyEdge> edgeView : edgeViews) {
+			bendMap.put(edgeView, edgeView.getVisualProperty(EDGE_BEND));
+		}
+			
 	}
 }
 
