@@ -140,6 +140,9 @@ public final class PartitionUtil {
 			public int compare(LayoutPartition p1, LayoutPartition p2) {
 				return (p2.size() - p1.size());
 			}
+			public boolean equals(LayoutPartition obj) {
+			    return false;
+			}
 		});
 
 		return partitions; 

@@ -218,6 +218,7 @@ public final class LayoutPartition {
 	 * @param node the LayoutNode to move
 	 */
 	public void moveNodeToLocation(LayoutNode node) {
+		
 		// We provide this routine so that we can keep our min/max values updated
 		if (node.isLocked())
 			return;
@@ -507,7 +508,8 @@ public final class LayoutPartition {
 		edgeList.trimToSize();
 	}
 
-	private void updateMinMax(final double x, final double y) {
+	private void updateMinMax(final double x, final double y) {		
+		
 		minX = Math.min(minX, x);
 		minY = Math.min(minY, y);
 		maxX = Math.max(maxX, x);

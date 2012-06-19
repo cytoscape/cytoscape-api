@@ -49,7 +49,7 @@ import java.util.List;
  * these are often wrapped by LayoutPartition methods.
  * @CyAPI.Final.Class
  */
-public final class LayoutNode {
+public final class LayoutNode implements Comparable<LayoutNode> {
 	// static (class) variables
 	private static final double EPSILON = 0.0000001D;
 
@@ -406,5 +406,10 @@ public final class LayoutNode {
 	 */
 	public String printLocation() {
 		return "" + x + ", " + y;
+	}
+
+	@Override
+	public int compareTo(LayoutNode nodeView) {
+		return getIdentifier().compareTo(nodeView.getIdentifier());
 	}
 }

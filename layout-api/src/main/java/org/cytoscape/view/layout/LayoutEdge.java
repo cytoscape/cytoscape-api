@@ -42,7 +42,7 @@ import org.cytoscape.model.CyRow;
  * LayoutNodes that are joined by this edge.
  * @CyAPI.Final.Class
  */
-public final class LayoutEdge {
+public final class LayoutEdge implements Comparable<LayoutEdge> {
 	
 	// instance variables
 	private LayoutNode v1;
@@ -177,6 +177,15 @@ public final class LayoutEdge {
 	}
 
 	/**
+	   * Return the edge's identifier.
+	   *
+	   * @return        String containing the edge's identifier
+	   */
+	  public String getIdentifier() {
+			return this.edge.getSUID().toString();
+		}
+
+	/**
 	 * Return a string representation for this LayoutEdge.
 	 *
 	 * @return    A String containing the name of the Edge, the connecting LayoutNodes
@@ -185,6 +194,7 @@ public final class LayoutEdge {
 	public String toString() {
 		String source = "undefined";
 		String target = "undefined";
+		String edgeId = "undefined";
 
 		if (v1 != null)
 			source = v1.getIdentifier();
@@ -192,7 +202,15 @@ public final class LayoutEdge {
 		if (v2 != null)
 			target = v2.getIdentifier();
 
-		return "Edge " + edge.getSUID() + " connecting " + source + " and " + target
+		if (this.edge != null)
+		    edgeId = getIdentifier();
+
+		return "Edge " + edgeId + " connecting " + source + " and " + target
 		       + " with weight " + weight;
+	}
+
+	@Override
+	public int compareTo(LayoutEdge edgeView) {
+		return getIdentifier().compareTo(edgeView.getIdentifier());
 	}
 }
