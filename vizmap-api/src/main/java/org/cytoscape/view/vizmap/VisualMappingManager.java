@@ -62,8 +62,7 @@ public interface VisualMappingManager {
 	 * @param visualStyle Visual Style to be set.
 	 * @param networkViewModel The target network view model.
 	 */
-	void setVisualStyle(final VisualStyle visualStyle,
-			final CyNetworkView networkViewModel);
+	void setVisualStyle(final VisualStyle visualStyle, final CyNetworkView networkViewModel);
 
 	/**
 	 * Returns the {@linkplain VisualStyle} associated with the target network
@@ -110,15 +109,23 @@ public interface VisualMappingManager {
 	VisualStyle getDefaultVisualStyle();
 	
 	/**
+	 * Set the specified {@link VisualStyle} as the current one. 
+	 * 
+	 * @param visualStyle the {@link VisualStyle} that will become the current style.
+	 */
+	void setCurrentVisualStyle(VisualStyle visualStyle);
+	
+	/**
 	 * Returns currently selected Visual Style.
 	 * 
 	 * @return Selected Visual Style.
-	 * 
 	 */
 	VisualStyle getCurrentVisualStyle();
 	
 	
-	/** Returns a Set of all {@link VisualLexicon}s.
+	/**
+	 * Returns a Set of all {@link VisualLexicon}s.
+	 * 
 	 * @return a Set of all {@link VisualLexicon}s.
 	 */
 	Set<VisualLexicon> getAllVisualLexicon();

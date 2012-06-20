@@ -18,6 +18,11 @@ public abstract class AbstractVisualMappingManagerTest {
 	}
 
 	@Test
+	public void testGetDefaultVisualStyle() {
+		assertNotNull(vmm.getDefaultVisualStyle());
+	}
+	
+	@Test
 	public void testGetAndSetVisualStyle() {
 		final VisualStyle style1 = mock(VisualStyle.class);
 		final VisualStyle style2 = mock(VisualStyle.class);
@@ -47,10 +52,8 @@ public abstract class AbstractVisualMappingManagerTest {
 		assertEquals(style3, vmm.getVisualStyle(view3));
 	}
 
-
 	@Test
 	public void testAddAndRemoveVisualStyle() {
-		
 		int originalSize = vmm.getAllVisualStyles().size();
 		
 		final VisualStyle style1 = mock(VisualStyle.class);
@@ -61,6 +64,24 @@ public abstract class AbstractVisualMappingManagerTest {
 		assertEquals(originalSize + 2, vmm.getAllVisualStyles().size());
 		vmm.removeVisualStyle(style2);
 		assertEquals(originalSize + 1, vmm.getAllVisualStyles().size());
+	}
+	
+	@Test
+	public void testGetCurrentVisualStyle() {
+		assertNotNull(vmm.getCurrentVisualStyle());
+	}
+	
+	@Test
+	public void testGetAndSetCurrentVisualStyle() {
+		assertNotNull(vmm.getCurrentVisualStyle());
+		assertEquals(vmm.getDefaultVisualStyle(), vmm.getCurrentVisualStyle());
 		
+		VisualStyle style = mock(VisualStyle.class);
+		vmm.setCurrentVisualStyle(style);
+		assertEquals(style, vmm.getCurrentVisualStyle());
+		
+		// Setting null current style
+		vmm.setCurrentVisualStyle(null);
+		assertEquals(vmm.getDefaultVisualStyle(), vmm.getCurrentVisualStyle());
 	}
 }
