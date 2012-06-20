@@ -61,7 +61,9 @@ public class CyTableUtil {
 		List<CyNode> ret = new ArrayList<CyNode>();
 		Collection<CyRow> rows = net.getDefaultNodeTable().getMatchingRows(columnName, state);
 		for (CyRow row : rows) {
-			ret.add(net.getNode(row.get(CyTable.SUID, Long.class)));
+			CyNode node = net.getNode(row.get(CyTable.SUID, Long.class));
+			if (node != null)
+				ret.add(node);
 		}
 		return ret;
 	}
@@ -84,7 +86,9 @@ public class CyTableUtil {
 		List<CyEdge> ret = new ArrayList<CyEdge>();
 		Collection<CyRow> rows = net.getDefaultEdgeTable().getMatchingRows(columnName, state);
 		for (CyRow row : rows) {
-			ret.add(net.getEdge(row.get(CyTable.SUID, Long.class)));
+			CyEdge edge = net.getEdge(row.get(CyTable.SUID, Long.class));
+			if (edge != null)
+				ret.add(edge);
 		}
 		return ret;
 	}
