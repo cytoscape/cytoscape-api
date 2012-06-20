@@ -175,7 +175,7 @@ public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 			setTaskStatus(1);
 
 			// Partitions Requiring Layout
-		/*	if (partition.nodeCount() > 1) {
+			if (partition.nodeCount() > 1) {
 				try {
 					layoutPartion(partition);
 				} catch (Throwable _e) {
@@ -201,40 +201,6 @@ public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 			} else {
 				continue;
 			}
-*/
-			// Partitions Requiring Layout
-			if (partition.nodeCount() >=  1) { // LABEL
-				try {
-					layoutPartion(partition);
-				} catch (OutOfMemoryError _e) {
-					System.gc();
-					logger.error("Layout algorithm failed: Out of memory");
-					return;
-				} catch (Exception _e) {
-					logger.error("Layout algorithm failed: ", (Throwable)_e);
-					return;
-				}
-
-				if (useAllNodes && !singlePartition) {
-					// logger.debug("Offsetting partition #"+partition.getPartitionNumber()+" to "+next_x_start+", "+next_y_start);
-					// OFFSET
-					partition.offset(next_x_start, next_y_start);
-				}
-
-				// single nodes
-			} else if ( partition.nodeCount() == 1 ) { // TODO: do something with this!!!
-				// Reset our bounds
-				partition.resetNodes();
-
-				// Single node -- get it
-				LayoutNode node = (LayoutNode) partition.getNodeList().get(0);
-				node.setLocation(next_x_start, next_y_start);
-				partition.moveNodeToLocation(node);
-			} else {
-				logger.info("No nodes in partition "+partition.getPartitionNumber()+" -- skipping");
-				continue;
-			}
-			
 			double last_max_x = partition.getMaxX();
 			double last_max_y = partition.getMaxY();
 
