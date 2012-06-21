@@ -2,20 +2,16 @@ package org.cytoscape.view.model.events;
 
 import java.util.Collection;
 
-import org.cytoscape.event.AbstractCyEvent;
 import org.cytoscape.event.AbstractCyPayloadEvent;
+import org.cytoscape.model.CyEdge;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
-import org.cytoscape.model.CyEdge;
 
 /**
  * When edge {@link View}s are about to be removed from a {@linkplain CyNetworkView}, this event will be fired.
  * @CyAPI.Final.Class 
  */
-public final class AboutToRemoveEdgeViewsEvent extends AbstractCyEvent<CyNetworkView> {
-	
-	private final Collection<View<CyEdge>> payload;
-	
+public final class AboutToRemoveEdgeViewsEvent extends AbstractCyPayloadEvent<CyNetworkView, View<CyEdge>> {
 	/**
 	 * Creates the event for about to be removed edge views.
 	 * 
@@ -24,18 +20,6 @@ public final class AboutToRemoveEdgeViewsEvent extends AbstractCyEvent<CyNetwork
 	 * 
 	 */
 	public AboutToRemoveEdgeViewsEvent(CyNetworkView source, Collection<View<CyEdge>> payload) {
-		super(source,AboutToRemoveEdgeViewsListener.class);
-		if ( payload == null )
-			throw new NullPointerException("edge view payload is null");
-		this.payload = payload;
+		super(source,AboutToRemoveEdgeViewsListener.class,payload);
 	}
-	
-	/** 
-	 * Returns the Collection of Views of type CyEdge that are about to be removed. 
-	 * @return the Collection of Views of type CyEdge that are about to be removed. 
-	 */
-	public Collection<View<CyEdge>> getEdgeViews() {
-		return payload;
-	}
-
 }
