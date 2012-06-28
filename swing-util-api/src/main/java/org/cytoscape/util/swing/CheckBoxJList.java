@@ -64,9 +64,8 @@ import javax.swing.event.ListSelectionListener;
  * <p>
  *     Customized by Keiichiro Ono
  * </p>
- * @CyAPI.Final.Class 
  */
-public final class CheckBoxJList extends JList implements ListSelectionListener {
+public class CheckBoxJList extends JList implements ListSelectionListener {
 	
 	private final static long serialVersionUID = 120233987581935L;
 	
