@@ -1,5 +1,9 @@
 package org.cytoscape.view.presentation.property.values;
 
+import org.cytoscape.model.CyEdge;
+import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.View;
+
 
 /**
  * Factory of the handle object.
@@ -15,5 +19,5 @@ public interface HandleFactory {
 	 * 
 	 * @return instance of new handle.
 	 */
-	Handle createHandle(double x, double y);
+	Handle createHandle(final CyNetworkView graphView, final View<CyEdge> view, double x, double y);
 }
