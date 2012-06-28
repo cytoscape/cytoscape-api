@@ -36,8 +36,11 @@
 package org.cytoscape.service.util.internal.utils;
 
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,12 +52,12 @@ public class RegisterUtil {
 	private static final Logger logger = LoggerFactory.getLogger(RegisterUtil.class);
 
 	public static List<Class<?>> getAllInterfaces(Class<?> clazz) {
-		List<Class<?>> interfaces = new ArrayList<Class<?>>();
+		Set<Class<?>> interfaces = new HashSet<Class<?>>();
 		addAllInterfaces(interfaces, clazz);
-		return interfaces;
+		return new ArrayList<Class<?>>(interfaces);
 	}
 	
-	private static void addAllInterfaces(List<Class<?>> list, Class<?> clazz) {
+	private static void addAllInterfaces(Set<Class<?>> list, Class<?> clazz) {
 		for ( Class<?> c : clazz.getInterfaces() ) {
 			list.add(c);
 			addAllInterfaces(list, c);
