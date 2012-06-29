@@ -28,12 +28,13 @@ public class RegisterUtilTest {
 		assertEquals(DummyInterface.class, interfaces.get(0));
 
 	}
+	
 	@Test
 	public void TestGetAllInterfaces2 (){
 		
 		List<Class<?>> interfaces = RegisterUtil.getAllInterfaces(DummyClass2.class);
-		assertEquals(DummyInterface2.class, interfaces.get(0));
-		assertEquals(DummyInterface.class, interfaces.get(1));
+		assertTrue(interfaces.contains(DummyInterface.class));
+		assertTrue(interfaces.contains(DummyInterface2.class));
 
 	}
 }
