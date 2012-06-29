@@ -36,6 +36,7 @@ package org.cytoscape.view.model;
 
 import java.util.Collection;
 
+import org.cytoscape.model.CyDisposable;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
@@ -49,7 +50,7 @@ import org.cytoscape.model.CyIdentifiable;
  * Consolidated data structure for graph object views.
  * @CyAPI.Api.Interface
  */
-public interface CyNetworkView extends View<CyNetwork> {
+public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 
 	/**
 	 * Returns a View for a specified Node.

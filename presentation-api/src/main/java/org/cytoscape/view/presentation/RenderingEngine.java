@@ -7,6 +7,7 @@ import java.util.Properties;
 
 import javax.swing.Icon;
 
+import org.cytoscape.model.CyDisposable;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualLexicon;
 import org.cytoscape.view.model.VisualProperty;
@@ -21,7 +22,7 @@ import org.cytoscape.view.model.VisualProperty;
  *            can be anything, including {@link org.cytoscape.model.CyTable}.
  * @CyAPI.Api.Interface
  */
-public interface RenderingEngine<T> {
+public interface RenderingEngine<T> extends CyDisposable {
 	
 	/**
 	 * Returns {@linkplain View} being rendered.

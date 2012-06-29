@@ -39,7 +39,7 @@ import java.util.List;
  * be directed, undirected, or both.
  * @CyAPI.Api.Interface
  */
-public interface CyNetwork extends CyIdentifiable {
+public interface CyNetwork extends CyIdentifiable, CyDisposable {
 	/**
 	 * A boolean column created by default for every CyNode or CyEdge that
 	 * holds the selection state of the entry. 
