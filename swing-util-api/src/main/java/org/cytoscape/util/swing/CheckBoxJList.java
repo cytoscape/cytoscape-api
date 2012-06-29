@@ -38,6 +38,8 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -65,7 +67,7 @@ import javax.swing.event.ListSelectionListener;
  *     Customized by Keiichiro Ono
  * </p>
  */
-public class CheckBoxJList extends JList implements ListSelectionListener {
+public class CheckBoxJList extends JList implements ListSelectionListener	 {
 	
 	private final static long serialVersionUID = 120233987581935L;
 	
@@ -81,6 +83,9 @@ public class CheckBoxJList extends JList implements ListSelectionListener {
 	 * has been updated.
 	 */
 	public static final String LIST_UPDATED = "LIST_UPDATED";
+	
+	private int lastIndex = 0;
+	private int firstIndex = 0;
 
 	static {
 		UIDefaults uid = UIManager.getLookAndFeel().getDefaults();
@@ -97,6 +102,17 @@ public class CheckBoxJList extends JList implements ListSelectionListener {
 		selectionCache = new HashSet<Integer>();
 		setCellRenderer(new CheckBoxListCellRenderer());
 		addListSelectionListener(this);
+		this.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				processClick();
+			}
+		});
+	}
+
+	protected void processClick() {
+		if(selectionCache.size() == 1 && (this.getSelectedIndex() == firstIndex || this.getSelectedIndex() == lastIndex))
+			fireSelectionValueChanged(0, 0, false);
 	}
 
 	/**
@@ -130,6 +146,9 @@ public class CheckBoxJList extends JList implements ListSelectionListener {
 	public void valueChanged(ListSelectionEvent lse) {
 		
 		if (!lse.getValueIsAdjusting()) {
+			firstIndex = lse.getFirstIndex();
+			lastIndex = lse.getLastIndex();
+			
 			removeListSelectionListener(this);
 
 			// remember everything selected as a result of this action
