@@ -2,8 +2,6 @@
 
 package org.cytoscape.command;
 
-import org.cytoscape.work.TaskIterator;
-import java.io.File; 
 import java.util.List;
 
 public interface AvailableCommands {
