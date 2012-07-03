@@ -47,6 +47,7 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
+			                <generateDirectory>${project.build.directory}/generated-sources/xjc/bookmarks</generateDirectory>
 							<schemaDirectory>src/main/resources/xsd</schemaDirectory>
 							<schemaIncludes>
 								<include>bookmarks.xsd</include>
@@ -55,8 +56,6 @@
 							<generatePackage>org.cytoscape.property.bookmark</generatePackage>
 							<verbose>true</verbose>
 							<encoding>UTF-8</encoding>
-							<removeOldOutput>false</removeOldOutput>
-							<forceRegenerate>true</forceRegenerate>
 						</configuration>
 					</execution>
 				</executions>
