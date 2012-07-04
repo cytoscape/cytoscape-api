@@ -57,4 +57,10 @@ public interface CyNetworkTableManager {
 	 * @return a read-only set of all networks managed by this instance. 
 	 */
 	Set<CyNetwork> getNetworkSet();
+
+	/**
+	 * Removes all tables associated with the given network.
+	 * @param network the network whose tables should be removed.
+	 */
+	void removeAllTables(CyNetwork network);
 }
