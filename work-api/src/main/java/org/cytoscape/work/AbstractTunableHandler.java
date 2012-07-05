@@ -1,6 +1,8 @@
 package org.cytoscape.work;
 
 
+import java.lang.ref.Reference;
+import java.lang.ref.WeakReference;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -20,7 +22,7 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	private final Field field;
 	private final Method getter;
 	private final Method setter;
-	private final Object instance;
+	private final Reference<?> instance;
 	private final Tunable tunable;
 
 	/** 
@@ -37,7 +39,7 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 		this.field = field;
 		this.getter = null;
 		this.setter = null;
-		this.instance = instance;
+		this.instance = new WeakReference<Object>(instance);
 		this.tunable = tunable;
 	}
 
@@ -56,7 +58,7 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 		this.field = null;
 		this.getter = getter;
 		this.setter = setter;
-		this.instance = instance;
+		this.instance = new WeakReference<Object>(instance);
 		this.tunable = tunable;
 	}
 
@@ -71,7 +73,7 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	 * {@inheritDoc}
 	 */
 	public final Object getValue() throws IllegalAccessException, InvocationTargetException {
-		return field != null ? field.get(instance) : getter.invoke(instance);
+		return field != null ? field.get(instance.get()) : getter.invoke(instance.get());
 	}
 
 	/**
@@ -80,9 +82,9 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	 public void setValue(final Object newValue) throws IllegalAccessException, InvocationTargetException {
 		 
 		if (field != null)
-			field.set(instance, newValue);
+			field.set(instance.get(), newValue);
 		else
-			setter.invoke(instance, newValue);
+			setter.invoke(instance.get(), newValue);
 		
 	}
 
