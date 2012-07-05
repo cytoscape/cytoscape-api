@@ -79,10 +79,10 @@ abstract public class AbstractBounded<N extends Comparable<N>> {
 	 */
 	 public AbstractBounded(final N lower, final N initValue, final N upper, boolean lowerStrict, boolean upperStrict) {
 		if (lower == null)
-			throw new NullPointerException("lower bound is null!");
+			throw new NullPointerException("lower bound is null.");
 
 		if (upper == null)
-			throw new NullPointerException("upper bound is null!");
+			throw new NullPointerException("upper bound is null.");
 
 		if (lower.compareTo(upper) >= 0)
 			throw new IllegalArgumentException("lower value is greater than or equal to upper value");
@@ -146,7 +146,7 @@ abstract public class AbstractBounded<N extends Comparable<N>> {
 	 */
 	public void setValue(final N v) {
 		if (v == null)
-			throw new NullPointerException("value is null!");
+			throw new NullPointerException("value is null.");
 
 		synchronized (this) {
 			final int up = v.compareTo(upper);

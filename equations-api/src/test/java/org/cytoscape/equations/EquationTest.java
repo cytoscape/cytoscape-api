@@ -30,27 +30,27 @@ public class EquationTest {
 
 	@Test
 	public void testToString() {
-		assertEquals("toString() failed!", "=$A+$B", eqn.toString());
+		assertEquals("toString() failed.", "=$A+$B", eqn.toString());
 	}
 
 	@Test
 	public void testGetVariableReferences() {
-		assertEquals("getVariableReferences() failed!", variableReferences, eqn.getVariableReferences());
+		assertEquals("getVariableReferences() failed.", variableReferences, eqn.getVariableReferences());
 	}
 
 	@Test
 	public void testGetCode() {
-		assertArrayEquals("getCode() failed!", code, eqn.getCode());
+		assertArrayEquals("getCode() failed.", code, eqn.getCode());
 	}
 
 	@Test
 	public void testGetSourceLocations() {
-		assertArrayEquals("getSourceLocations() failed!", sourceLocations, eqn.getSourceLocations());
+		assertArrayEquals("getSourceLocations() failed.", sourceLocations, eqn.getSourceLocations());
 	}
 
 	@Test
 	public void testGetType() {
-		assertEquals("getType() failed!", Long.class, eqn.getType());
+		assertEquals("getType() failed.", Long.class, eqn.getType());
 	}
 
 	@Test
@@ -58,12 +58,12 @@ public class EquationTest {
 		final Equation other =
 			new Equation("=$A+$B", variableReferences, new TreeMap<String, Object>(),
 			             code, sourceLocations, Long.class);
-		assertTrue("equals() failed!", eqn.equals(other));
+		assertTrue("equals() failed.", eqn.equals(other));
 	}
 
 	@Test
 	public void testEqualsWithExpectedFailure() {
 		final Object other = new Integer(12);
-		assertFalse("equals() failed!", eqn.equals(other));
+		assertFalse("equals() failed.", eqn.equals(other));
 	}
 }

@@ -60,7 +60,7 @@ public final class JMenuTracker {
 	 */
 	public JMenuTracker(final JPopupMenu rootPopupMenu) {
 		if (rootPopupMenu == null)
-			throw new NullPointerException("root popupmenu for menus is null!");
+			throw new NullPointerException("root popupmenu for menus is null.");
 
 		this.rootPopupGravityTracker = new PopupMenuGravityTracker(rootPopupMenu);
 		this.rootMenuBar = null;
@@ -78,7 +78,7 @@ public final class JMenuTracker {
 	 */
 	public JMenuTracker(final JMenuBar rootMenuBar) {
 		if (rootMenuBar == null)
-			throw new NullPointerException("root menubar for menus is null!");
+			throw new NullPointerException("root menubar for menus is null.");
 
 		this.rootPopupGravityTracker = null;
 		this.rootMenuBar = rootMenuBar;
@@ -126,7 +126,7 @@ public final class JMenuTracker {
 				else if (rootMenuBar == null && rootPopupGravityTracker != null)
 					rootPopupGravityTracker.addMenu(menu, nameAndGravity.getGravity());
 				else
-					throw new IllegalStateException("we have no root popup menu or menu bar!");
+					throw new IllegalStateException("we have no root popup menu or menu bar.");
 
 				gravityTracker = new MenuGravityTracker(menu);
 				menuMap.put(menu_key, gravityTracker);
@@ -172,7 +172,7 @@ public final class JMenuTracker {
 			case LOOKING_FOR_OPENING_BRACKET:
 				if (ch == '.') {
 					if (menuName.length() == 0)
-						throw new IllegalArgumentException("zero-length menu name found!");
+						throw new IllegalArgumentException("zero-length menu name found.");
 					namesAndGravities.add(new MenuNameAndGravity(menuName.toString(),
 										     GravityTracker.USE_ALPHABETIC_ORDER));
 					menuName = new StringBuilder();
@@ -190,7 +190,7 @@ public final class JMenuTracker {
 					try {
 						gravity = Double.parseDouble(gravityAsString.toString());
 					} catch (NumberFormatException e) {
-						throw new IllegalArgumentException("bad \"gravity\" in menu string! ("
+						throw new IllegalArgumentException("bad \"gravity\" in menu string. ("
 										   + menuString + ")");
 					}
 					namesAndGravities.add(new MenuNameAndGravity(menuName.toString(),
@@ -201,7 +201,7 @@ public final class JMenuTracker {
 				break;
 			case LOOKING_FOR_PERIOD:
 				if (ch != '.')
-					throw new IllegalArgumentException("period expected in menu string! ("
+					throw new IllegalArgumentException("period expected in menu string. ("
 									   + menuString + ")");
 				state = ParseState.LOOKING_FOR_OPENING_BRACKET;
 				break;
@@ -213,7 +213,7 @@ public final class JMenuTracker {
 								     GravityTracker.USE_ALPHABETIC_ORDER));
 		else if (state != ParseState.LOOKING_FOR_PERIOD)
 			throw new IllegalArgumentException("incomplete \"gravity\" specification in menu string ("
-							   + menuName + ")! ("
+							   + menuName + "). ("
 							   + menuString + ")");
 
 		return namesAndGravities;

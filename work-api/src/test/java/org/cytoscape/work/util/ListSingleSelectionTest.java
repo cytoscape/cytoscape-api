@@ -46,13 +46,13 @@ public class ListSingleSelectionTest {
 	@Test
 	public final void testSetAndGetSelectedValue() throws Exception {
 		lss.setSelectedValue("cabbages");
-		assertEquals("Selected value not as expected!", "cabbages", lss.getSelectedValue());
+		assertEquals("Selected value not as expected.", "cabbages", lss.getSelectedValue());
 	}
 
 	@Test
 	public final void testSetSelectedValueWithRiskySelection() throws Exception {
 		lss.setSelectedValue("oranges");
-		assertEquals("Selected value not as expected!", "oranges", lss.getSelectedValue());
+		assertEquals("Selected value not as expected.", "oranges", lss.getSelectedValue());
 	}
 
 	@Test(expected=NullPointerException.class)

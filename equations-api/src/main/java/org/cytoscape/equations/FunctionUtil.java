@@ -64,13 +64,13 @@ public final class FunctionUtil {
 			try {
 				return Double.parseDouble((String)arg);
 			} catch (final Exception e) {
-				throw new IllegalArgumentException("can't convert \"" + arg + "\" to a floating point number!", e);
+				throw new IllegalArgumentException("can't convert \"" + arg + "\" to a floating point number.", e);
 			}
 		}
 		if (arg.getClass() == Boolean.class)
 			return (Boolean)arg ? 1.0 : 0.0;
 
-		throw new IllegalArgumentException("can't convert argument to a floating point number!");
+		throw new IllegalArgumentException("can't convert argument to a floating point number.");
 	}
 
 	/** Assumes that "arg" is a "String", "Boolean", "Long" or a "Double and converts it to "String".
@@ -113,13 +113,13 @@ public final class FunctionUtil {
 			try {
 				return Long.parseLong((String)arg);
 			} catch (final Exception e) {
-				throw new IllegalArgumentException("can't convert \"" + arg + "\" to a whole number!");
+				throw new IllegalArgumentException("can't convert \"" + arg + "\" to a whole number.");
 			}
 		}
 		if (arg.getClass() == Boolean.class)
 			return (Boolean)arg ? 1L : 0L;
 
-		throw new IllegalArgumentException("can't convert argument to a whole number!");
+		throw new IllegalArgumentException("can't convert argument to a whole number.");
 	}
 
 	/** Assumes that "arg" is a "String", "Boolean", "Long" or a "Double and converts it to "boolean".
@@ -143,12 +143,12 @@ public final class FunctionUtil {
 				return true;
 			if (argAsString.equalsIgnoreCase(Boolean.FALSE.toString()))
 				return false;
-			throw new IllegalArgumentException("can't convert \"" + argAsString + "\" to a boolean!");
+			throw new IllegalArgumentException("can't convert \"" + argAsString + "\" to a boolean.");
 		}
 		if (arg.getClass() == Boolean.class)
 			return (Boolean)arg;
 
-		throw new IllegalArgumentException("can't convert argument to a boolean!");
+		throw new IllegalArgumentException("can't convert argument to a boolean.");
 	}
 
 	/** Carefully adds the numbers in "a" minimising loss of precision.
@@ -224,7 +224,7 @@ public final class FunctionUtil {
 	public static double calcSampleVariance(final double[] x) {
 		final int n = x.length;
 		if (n < 2)
-			throw new IllegalArgumentException("can't calculate a variance with fewer than 2 values!");
+			throw new IllegalArgumentException("can't calculate a variance with fewer than 2 values.");
 
 		final double[] xSquared = new double[n];
 		for (int i = 0; i < n; ++i)
@@ -322,13 +322,13 @@ public final class FunctionUtil {
 					final Double d = convertToDouble(listElement);
 					if (d == null)
 						throw new FunctionError("can't convert list element \"" + listElement
-						                        + "\" to a number!", i);
+						                        + "\" to a number.", i);
 					numbers.add(d);
 				}
 			} else {
 				final Double d = convertToDouble(arg);
 				if (d == null)
-					throw new FunctionError("can't convert \"" + arg + "\" to a number!", i);
+					throw new FunctionError("can't convert \"" + arg + "\" to a number.", i);
 				numbers.add(d);
 			}
 		}
@@ -359,13 +359,13 @@ public final class FunctionUtil {
 					final Long l = convertToLong(listElement);
 					if (l == null)
 						throw new FunctionError("can't convert list element \"" + listElement
-						                        + "\" to an integer!", i);
+						                        + "\" to an integer.", i);
 					numbers.add(l);
 				}
 			} else {
 				final Long l = convertToLong(arg);
 				if (l == null)
-					throw new FunctionError("can't convert \"" + arg + "\" to an integer!", i);
+					throw new FunctionError("can't convert \"" + arg + "\" to an integer.", i);
 				numbers.add(l);
 			}
 		}
@@ -416,13 +416,13 @@ public final class FunctionUtil {
 					final Boolean b = convertToBoolean(listElement);
 					if (b == null)
 						throw new FunctionError("can't convert list element \"" + listElement
-						                        + "\" to a boolean value!", i);
+						                        + "\" to a boolean value.", i);
 					booleans.add(b);
 				}
 			} else {
 				final Boolean b = convertToBoolean(arg);
 				if (b == null)
-					throw new FunctionError("can't convert \"" + arg + "\" to a boolean number!", i);
+					throw new FunctionError("can't convert \"" + arg + "\" to a boolean number.", i);
 				booleans.add(b);
 			}
 		}

@@ -52,11 +52,11 @@ public final class ColumnNameChangedEvent extends AbstractCyEvent<CyTable> {
 		super(source, ColumnNameChangedListener.class);
 
 		if (oldColumnName == null)
-			throw new NullPointerException("\"oldColumnName\" must not be null!");
+			throw new NullPointerException("\"oldColumnName\" must not be null.");
 		this.oldColumnName = oldColumnName;
 
 		if (newColumnName == null)
-			throw new NullPointerException("\"newColumnName\" must not be null!");
+			throw new NullPointerException("\"newColumnName\" must not be null.");
 		this.newColumnName = newColumnName;
 	}
 

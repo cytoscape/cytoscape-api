@@ -13,25 +13,25 @@ public class AbstractFunctionTest {
 	@Test
 	public void testGetUsageDescription() {
 		final String usage = sf.getUsageDescription();
-		assertTrue("The usage description was either null or the empty string!", usage != null && !usage.isEmpty());
+		assertTrue("The usage description was either null or the empty string.", usage != null && !usage.isEmpty());
 	}
 
 	@Test
 	public void testValidateArgTypes() {
 		final Class<?>[] argTypes = { Double.class, Double.class };
-		assertEquals("The validateArgTypes() method is buggy!", sf.getReturnType(), sf.validateArgTypes(argTypes));
+		assertEquals("The validateArgTypes() method is buggy.", sf.getReturnType(), sf.validateArgTypes(argTypes));
 	}
 
 	@Test
 	public void testValidateArgTypesWithBadArgs() {
 		final Class<?>[] argTypes = { StringList.class, StringList.class };
-		assertNull("The validateArgTypes() method is buggy!", sf.validateArgTypes(argTypes));
+		assertNull("The validateArgTypes() method is buggy.", sf.validateArgTypes(argTypes));
 	}
 
 	@Test
 	public void testValidateArgTypesWithTooManyArgs() {
 		final Class<?>[] argTypes = { Double.class, Double.class, StringList.class };
-		assertNull("The validateArgTypes() method is buggy!", sf.validateArgTypes(argTypes));
+		assertNull("The validateArgTypes() method is buggy.", sf.validateArgTypes(argTypes));
 	}
 
 	@Test
@@ -40,11 +40,11 @@ public class AbstractFunctionTest {
 		final Class<?>[] singleArgArgList = { Double.class };
 
 		final List<Class<?>> nextArgs1 = sf.getPossibleArgTypes(empytyArgList);
-		assertTrue("Empty arg list resulted in incorrect behaviour of getPossibleArgTypes()!",
+		assertTrue("Empty arg list resulted in incorrect behaviour of getPossibleArgTypes().",
 			   nextArgs1.contains(Double.class));
 
 		final List<Class<?>> nextArgs2 = sf.getPossibleArgTypes(singleArgArgList);
-		assertTrue("Single arg arg list resulted in incorrect behaviour of getPossibleArgTypes()!",
+		assertTrue("Single arg arg list resulted in incorrect behaviour of getPossibleArgTypes().",
 			   nextArgs2.contains(Double.class) && nextArgs2.contains(null));
 	}
 

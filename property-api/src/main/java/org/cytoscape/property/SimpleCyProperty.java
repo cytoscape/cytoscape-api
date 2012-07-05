@@ -28,13 +28,13 @@ public final class SimpleCyProperty<P> implements CyProperty<P> {
 							final Class<? extends P> propertyType,
 							final CyProperty.SavePolicy savePolicy) {
 		if (name == null)
-			throw new NullPointerException("\"name\" parameter is null!");
+			throw new NullPointerException("\"name\" parameter is null.");
 		if (properties == null)
-			throw new NullPointerException("\"properties\" parameter is null!");
+			throw new NullPointerException("\"properties\" parameter is null.");
 		if (propertyType == null)
-			throw new NullPointerException("\"propertyType\" parameter is null!");
+			throw new NullPointerException("\"propertyType\" parameter is null.");
 		if (savePolicy == null)
-			throw new NullPointerException("\"savePolicy\" parameter is null!");
+			throw new NullPointerException("\"savePolicy\" parameter is null.");
 
 		this.name = name;
 		this.properties = properties;

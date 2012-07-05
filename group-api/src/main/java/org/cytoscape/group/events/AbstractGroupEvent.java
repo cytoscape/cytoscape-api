@@ -16,7 +16,7 @@ class AbstractGroupEvent extends AbstractCyEvent<CyGroup> {
 		super(source, listenerClass);
 
 		if (network == null)
-			throw new NullPointerException("the \"network\" parameter must never be null!");
+			throw new NullPointerException("the \"network\" parameter must never be null.");
 		this.net = network;
 	}
 

@@ -25,7 +25,7 @@ public abstract class AbstractCyApp {
 
 	// so no one calls this constructor
 	private AbstractCyApp() {
-		throw new NullPointerException("no adapter provided!");
+		throw new NullPointerException("no adapter provided.");
 	}
 
 	/**

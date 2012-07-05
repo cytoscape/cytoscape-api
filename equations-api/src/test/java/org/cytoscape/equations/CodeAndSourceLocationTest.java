@@ -18,11 +18,11 @@ public class CodeAndSourceLocationTest {
 
 	@Test
 	public void testGetCode() {
-		assertEquals("getCode() is broken!", code, casl.getCode());
+		assertEquals("getCode() is broken.", code, casl.getCode());
 	}
 
 	@Test
 	public void testGetSourceLocation() {
-		assertEquals("getSourceLocation() is broken!", 25, casl.getSourceLocation());
+		assertEquals("getSourceLocation() is broken.", 25, casl.getSourceLocation());
 	}
 }

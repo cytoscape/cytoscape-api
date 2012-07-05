@@ -49,8 +49,8 @@ public class ListMultipleSelectionTest {
 		selectedValues.add("cabbages");
 		selectedValues.add("brocolli");
 		lms.setSelectedValues(selectedValues);
-		assertTrue("Expected Selected value not found! (1)", lms.getSelectedValues().contains("cabbages"));
-		assertTrue("Expected Selected value not found! (1)", lms.getSelectedValues().contains("brocolli"));
+		assertTrue("Expected Selected value not found. (1)", lms.getSelectedValues().contains("cabbages"));
+		assertTrue("Expected Selected value not found. (1)", lms.getSelectedValues().contains("brocolli"));
 	}
 
 	@Test(expected=IllegalArgumentException.class)

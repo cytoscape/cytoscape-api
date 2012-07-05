@@ -35,7 +35,7 @@ package org.cytoscape.work;
  * {
  *   // Throw a high level exception that gives a high level explanation
  *   // that makes sense for a non-technical user.
- *   throw new Exception("Oops! Looks like you specified an invalid file.", exception)
+ *   throw new Exception("Oops. Looks like you specified an invalid file.", exception)
  * }
  * </code></pre></p>
  * Any helpful messages for the user should be contained in
@@ -53,7 +53,7 @@ package org.cytoscape.work;
  * {
  *   if (myParameter == null)
  *   {
- *     taskMonitor.setStatusMessage("Whoa, looks like you didn't specified the parameter!");
+ *     taskMonitor.setStatusMessage("Whoa, looks like you didn't specified the parameter.");
  *     return;
  *   }
  * }
@@ -63,7 +63,7 @@ package org.cytoscape.work;
  * public void run(TaskMonitor taskMonitor) throws Exception
  * {
  *   if (myParameter == null)
- *     throw new Exception("Whoa, looks like you didn't specified the parameter!");
+ *     throw new Exception("Whoa, looks like you didn't specified the parameter.");
  * }
  * </code></pre></p>
  * This is done because it is possible for the <code>TaskManager</code> to close
@@ -84,11 +84,11 @@ package org.cytoscape.work;
  * {
  *   taskMonitor.setStatusMessage("Starting part A...");
  *   ... // do part A
- *   taskMonitor.setStatusMessage("Part A is done!");
+ *   taskMonitor.setStatusMessage("Part A is done.");
  *
  *   taskMonitor.setStatusMessage("Starting part B...");
  *   ... // do part B
- *   taskMonitor.setStatusMessage("Part B is done!");
+ *   taskMonitor.setStatusMessage("Part B is done.");
  * }
  * </code></pre></p>
  * Setting the status message after part A is unnecessary
@@ -131,7 +131,7 @@ package org.cytoscape.work;
  *   ... // Some complicated calculation
  *   
  *   // This is unnecessary:
- *   taskMonitor.setStatusMessage("We're all done!");
+ *   taskMonitor.setStatusMessage("We're all done.");
  *   taskMonitor.setProgress(1.0);
  * }
  * </code></pre></p>

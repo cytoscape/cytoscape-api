@@ -34,7 +34,7 @@ package org.cytoscape.event;
  * <p> <b> Any class implementing this interface must implement the
  * method:
  * <p> <code>public void handleEvent(ZZZ e);</code>
- * <p>where ZZZ extends CyEvent! </b> 
+ * <p>where ZZZ extends CyEvent. </b> 
  * <p>
  * Unfortunately, we can't parameterize this
  * because Java doesn't verify generic types, meaning a class 

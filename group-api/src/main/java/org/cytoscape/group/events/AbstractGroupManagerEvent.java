@@ -16,7 +16,7 @@ class AbstractGroupManagerEvent extends AbstractCyEvent<CyGroupManager> {
 		super(source, listenerClass);
 
 		if (group == null)
-			throw new NullPointerException("the \"group\" parameter must never be null!");
+			throw new NullPointerException("the \"group\" parameter must never be null.");
 		this.group = group;
 	}
 

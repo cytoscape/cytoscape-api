@@ -311,7 +311,7 @@ public interface CyTable extends CyIdentifiable {
 	 * This method is used to copy tables for backup, undo, and deletion and generally shouldn't
 	 * be needed for most normal work.
 	 * @param otherTable  the table that we're being swapped with.
-	 * Note: the one "property" that is not being swapped is the SUID!  Also, no events are being
+	 * Note: the one "property" that is not being swapped is the SUID.  Also, no events are being
 	 *       fired to give any listeners a chance to react to the exchange!
 	 */
 	void swap(CyTable otherTable);

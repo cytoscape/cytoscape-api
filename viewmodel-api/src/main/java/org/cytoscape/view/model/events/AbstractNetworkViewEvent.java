@@ -17,7 +17,7 @@ class AbstractNetworkViewEvent extends AbstractCyEvent<CyNetworkViewManager> {
 		super(source, listenerClass);
 
 		if (view == null)
-			throw new NullPointerException("the \"view\" parameter must never be null!");
+			throw new NullPointerException("the \"view\" parameter must never be null.");
 		this.view = view;
 	}
 

@@ -16,7 +16,7 @@ class AbstractNetworkEvent extends AbstractCyEvent<CyNetworkManager> {
 		super(source, listenerClass);
 
 		if (net == null)
-			throw new NullPointerException("the \"net\" parameter must never be null!");
+			throw new NullPointerException("the \"net\" parameter must never be null.");
 		this.net = net;
 	}
 

@@ -22,7 +22,7 @@ package org.cytoscape.work;
  * 
  * 		String validate(){
  * 			if(name.equals("Johnny"))
- * 			return new String("Please provide a different name!");
+ * 			return new String("Please provide a different name.");
  * 			else return null;
  * 		}
  * 	}

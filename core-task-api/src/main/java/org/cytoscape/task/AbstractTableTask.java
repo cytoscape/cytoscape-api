@@ -45,7 +45,7 @@ public abstract class AbstractTableTask extends AbstractTask {
 	 */
 	public AbstractTableTask(CyTable table) {
 		if (table == null)
-			throw new NullPointerException("\"table\" parameter must *never* be null!");
+			throw new NullPointerException("\"table\" parameter must *never* be null.");
 		this.table = table;
 	}
 }

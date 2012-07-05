@@ -62,7 +62,7 @@ class ListSelection<T> {
 	 */
 	public ListSelection(final List<T> values) {
 		if (values == null)
-			throw new NullPointerException("values is null!");
+			throw new NullPointerException("values is null.");
 
 		this.values = values;
 	}

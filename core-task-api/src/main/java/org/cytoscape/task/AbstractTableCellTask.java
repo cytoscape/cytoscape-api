@@ -47,10 +47,10 @@ public abstract class AbstractTableCellTask extends AbstractTask {
 	 */
 	public AbstractTableCellTask(final CyColumn column, final Object primaryKeyValue) {
 		if (column == null)
-			throw new NullPointerException("\"column\" parameter must *never* be null!");
+			throw new NullPointerException("\"column\" parameter must *never* be null.");
 		this.column = column;
 		if (primaryKeyValue == null)
-			throw new NullPointerException("\"primaryKeyValue\" parameter must *never* be null!");
+			throw new NullPointerException("\"primaryKeyValue\" parameter must *never* be null.");
 		this.primaryKeyValue = primaryKeyValue;
 	}
 }

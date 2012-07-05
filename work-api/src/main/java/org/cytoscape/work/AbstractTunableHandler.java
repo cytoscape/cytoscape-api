@@ -166,7 +166,7 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 			case KEY_START:
 				key = new StringBuilder();
 				if (!Character.isLetter(ch))
-					throw new IllegalArgumentException(getName() + "'s getParams() returns an invalid key!");
+					throw new IllegalArgumentException(getName() + "'s getParams() returns an invalid key.");
 				key.append(ch);
 				state = ParamsParseState.LOOKING_FOR_EQUAL_SIGN;
 				break;
@@ -175,14 +175,14 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 					state = ParamsParseState.VALUE_START;
 				else {
 					if (!Character.isLetter(ch))
-						throw new IllegalArgumentException(getName() + "'s getParams() returns an invalid key!");
+						throw new IllegalArgumentException(getName() + "'s getParams() returns an invalid key.");
 					key.append(ch);
 				}
 				break;
 			case VALUE_START:
 				value = new StringBuilder();
 				if (ch == ';')
-					throw new IllegalArgumentException(getName() + "'s getParams() returns an invalid value!");
+					throw new IllegalArgumentException(getName() + "'s getParams() returns an invalid value.");
 				if (ch == '\\')
 					escaped = true;
 				else
@@ -207,13 +207,13 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 		}
 
 		if (escaped)
-			throw new IllegalArgumentException(getName() + "'s getParams() returns an invalid escaped character!");
+			throw new IllegalArgumentException(getName() + "'s getParams() returns an invalid escaped character.");
 		if (state != ParamsParseState.KEY_START && state != ParamsParseState.LOOKING_FOR_SEMICOLON)
-			throw new IllegalArgumentException(getName() + "'s getParams() returns an incomplete string: \"" + rawString + "\"!");
+			throw new IllegalArgumentException(getName() + "'s getParams() returns an incomplete string: \"" + rawString + "\".");
 
 		if (key != null) {
 			if (value == null)
-				throw new IllegalArgumentException(getName() + "'s getParams() returns a key without a value!");
+				throw new IllegalArgumentException(getName() + "'s getParams() returns a key without a value.");
 			keyValuesPairs.setProperty(key.toString(), value.toString());
 		}
 

@@ -45,7 +45,7 @@ public abstract class AbstractTableColumnTask extends AbstractTask {
 	 */
 	public AbstractTableColumnTask(final CyColumn column) {
 		if (column == null)
-			throw new NullPointerException("\"column\" parameter must *never* be null!");
+			throw new NullPointerException("\"column\" parameter must *never* be null.");
 		this.column = column;
 	}
 }

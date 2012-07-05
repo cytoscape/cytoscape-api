@@ -54,7 +54,7 @@ public final class EquationUtil {
 	 */
 	public static long doubleToLong(final double d) {
 		if (d > Long.MAX_VALUE || d < Long.MIN_VALUE)
-			throw new IllegalArgumentException("floating point value is too large to be converted to a Long!");
+			throw new IllegalArgumentException("floating point value is too large to be converted to a Long.");
 
 		double x = ((Double)d).longValue();
 		if (x != d && d < 0.0)
@@ -70,7 +70,7 @@ public final class EquationUtil {
 	private static boolean isSimpleAttribName(final String attribName) {
 		final int length = attribName.length();
 		if (length == 0)
-			throw new IllegalStateException("empty attribute names should never happen!");
+			throw new IllegalStateException("empty attribute names should never happen.");
 
 		if (!Character.isLetter(attribName.charAt(0)))
 			return false;

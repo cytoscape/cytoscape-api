@@ -50,7 +50,7 @@ public final class TaskIterator implements Iterator<Task> {
 	public void insertTasksAfter(final Task referenceTask, final Task... newTasks) throws IllegalStateException {
 		final int referenceIndex = tasks.indexOf(referenceTask);
 		if (referenceIndex == -1)
-			throw new IllegalStateException("invalid reference task in call to insertTaskAfter()!");
+			throw new IllegalStateException("invalid reference task in call to insertTaskAfter().");
 
 		numTasks += newTasks.length;
 
@@ -70,7 +70,7 @@ public final class TaskIterator implements Iterator<Task> {
 	public void insertTasksAfter(final Task referenceTask, final TaskIterator newTasks) throws IllegalStateException {
 		final int referenceIndex = tasks.indexOf(referenceTask);
 		if (referenceIndex == -1)
-			throw new IllegalStateException("invalid reference task in call to insertTaskAfter()!");
+			throw new IllegalStateException("invalid reference task in call to insertTaskAfter().");
 
 		numTasks += newTasks.getNumTasks();
 
@@ -101,14 +101,14 @@ public final class TaskIterator implements Iterator<Task> {
 			return tasks.get(currentIndex - 1);
 		}
 
-		throw new NoSuchElementException("call to next() even though hasNext() is false!");
+		throw new NoSuchElementException("call to next() even though hasNext() is false.");
 	}
 
 	/**
 	 *  Unsupported -&gt; always throws an exception!
 	 */
 	public void remove() {
-		throw new UnsupportedOperationException("TaskIteratorImpl.remove() has not been implemented!");
+		throw new UnsupportedOperationException("TaskIteratorImpl.remove() has not been implemented.");
 	}
 
 	/** Adds a reference to the TaskIterator to Tasks that are capable of maintaining such a reference, i.e.

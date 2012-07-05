@@ -51,7 +51,7 @@ public abstract class AbstractCyEdit {
 	 */
 	public AbstractCyEdit(String presentationName) {
         if (presentationName == null)
-			throw new NullPointerException("Presentation name must not be null!");
+			throw new NullPointerException("Presentation name must not be null.");
 
 		this.presentationName = presentationName;
 	}

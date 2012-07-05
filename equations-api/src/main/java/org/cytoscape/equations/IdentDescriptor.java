@@ -49,7 +49,7 @@ public final class IdentDescriptor {
 	 */
 	public IdentDescriptor(final Object o) {
 		if (o == null)
-			throw new NullPointerException("argument must not be null!");
+			throw new NullPointerException("argument must not be null.");
 
 		if (o.getClass() == Integer.class) { // Need to map Integer to Long!
 			final Integer i = (Integer)o;
@@ -61,7 +61,7 @@ public final class IdentDescriptor {
 			this.type = List.class;
 		else if (o.getClass() != Long.class && o.getClass() != Double.class && o.getClass() != Boolean.class
 			 && o.getClass() != String.class)
-			throw new IllegalArgumentException("argument is of an unsupported type (" + o.getClass() + ")!");
+			throw new IllegalArgumentException("argument is of an unsupported type (" + o.getClass() + ").");
 		else
 			this.type = o.getClass();
 

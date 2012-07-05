@@ -190,7 +190,7 @@ public @interface Tunable {
 	 * &#64;Tunable(description="B",listenForChange="A")
 	 * public String getB() {
 	 *    if ( a.equals("somethingSpecial") )
-	 *        return "hooray!";
+	 *        return "hooray.";
 	 *    else
 	 *        return b;	
 	 * }

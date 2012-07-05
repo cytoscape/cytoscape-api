@@ -77,7 +77,7 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 		tunableHandlerFactories = new ArrayList<TunableHandlerFactory<T>>();
 	}
 
-	/** Used for testing only! */
+	/** Used for testing only. */
 	void setThrowExceptions(final boolean throwException) {
 		this.throwException = throwException;
 	}
@@ -141,7 +141,7 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 						// Get a handler with for get and set methods:
 						final T handler = getHandler(method, setter, obj, tunable);
 						if (handler == null) {
-							logOrThrowException("Failed to create a handler for " + setter.getName() + "()!",null);
+							logOrThrowException("Failed to create a handler for " + setter.getName() + "().",null);
 						} else {
 							handlerList.add(handler);
 						}
@@ -150,12 +150,12 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 					}
 				} else if (method.isAnnotationPresent(ProvidesTitle.class)) {
 					if (!String.class.isAssignableFrom(method.getReturnType())) {
-						throw new IllegalArgumentException(method.getName() + " annotated with @ProvidesTitle must return String!");
+						throw new IllegalArgumentException(method.getName() + " annotated with @ProvidesTitle must return String.");
 					} else if (method.getParameterTypes().length != 0) {
-						throw new IllegalArgumentException(method.getName() + " annotated with @ProvidesTitle must take 0 arguments!");
+						throw new IllegalArgumentException(method.getName() + " annotated with @ProvidesTitle must take 0 arguments.");
 					} else {
 						if (titleProviderMap.containsKey(obj)) {
-							throw new IllegalArgumentException("Classes must have at most one @ProvidesTitle annotated method but " + method.getDeclaringClass().getName() + " has more than one!");
+							throw new IllegalArgumentException("Classes must have at most one @ProvidesTitle annotated method but " + method.getDeclaringClass().getName() + " has more than one.");
 						}
 						titleProviderMap.put(obj, method);
 					}
@@ -187,7 +187,7 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 			// will throw a variety of exceptions
 			ret = obj.getClass().getMethod("set" + rootName, getterReturnType);
 		} catch (final Exception e) {
-			throw new IllegalArgumentException("Can't find a setter compatible with the get" + rootName + "() getter!",
+			throw new IllegalArgumentException("Can't find a setter compatible with the get" + rootName + "() getter.",
 					e);
 		}
 		return ret;
@@ -287,7 +287,7 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 	private final String validateAndExtractRootName(final Method method) {
 		if (!method.getName().startsWith("get")) 
 			throw new IllegalArgumentException("the name of the method has to start with \"get\" but was "
-			                                    + method.getName() + "()!");
+			                                    + method.getName() + "().");
 		if (!isValidGetter(method)) 
 			throw new IllegalArgumentException("Invalid getter method specified \"" + method.getName()
 			                                   + "\", maybe this method takes arguments or returns void?");

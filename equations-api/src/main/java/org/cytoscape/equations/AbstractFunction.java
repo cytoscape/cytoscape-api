@@ -59,7 +59,7 @@ public abstract class AbstractFunction implements Function {
 				                                   + getName() + "() optional argument "
 				                                   + argDescriptors[i - 1].getArgName()
 				                                   + " is followed by non-optional argument "
-				                                   + argDescriptors[i].getArgName() + "!");
+				                                   + argDescriptors[i].getArgName() + ".");
 			lastArgWasOptional = currentArgIsOptional;
 		}
 
@@ -70,7 +70,7 @@ public abstract class AbstractFunction implements Function {
 			if (alreadySeen.contains(argName))
 				throw new IllegalArgumentException("duplicate argument name "
 				                                   + argName + " for " + getName()
-				                                   + "() specified multiple times!");
+				                                   + "() specified multiple times.");
 			alreadySeen.add(argName);
 		}
 	}
@@ -211,13 +211,13 @@ public abstract class AbstractFunction implements Function {
 			if (currentArgCount == 0) {
 				// Too many actual arguments?
 				if (i == argDescriptors.length)
-					throw new IllegalStateException("number of arguments is too large!");
+					throw new IllegalStateException("number of arguments is too large.");
 
 				currentArgDescriptor = argDescriptors[i++];
 			}
 
 			if (!currentArgDescriptor.isCompatibleWith(leadingArg)) {
-				throw new IllegalStateException("incompatible argument type!");
+				throw new IllegalStateException("incompatible argument type.");
 			} else if (currentArgDescriptor.acceptsMultipleArgs())
 				++currentArgCount;
 			else // We have a single matching argument and need to move on to the next arg descriptor.
