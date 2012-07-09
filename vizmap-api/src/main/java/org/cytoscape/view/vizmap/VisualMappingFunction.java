@@ -86,7 +86,6 @@ public interface VisualMappingFunction<K, V> {
 	 */
 	Class<K> getMappingColumnType();
 
-
 	/**
 	 * Visual Property associated with this function. This field is immutable.
 	 * 
@@ -94,7 +93,6 @@ public interface VisualMappingFunction<K, V> {
 	 */
 	VisualProperty<V> getVisualProperty();
 	
-
 	/**
 	 * Apply mapping to the view model. Once this method is called, Cytoscape
 	 * updates the view model and fires proper events.
@@ -105,4 +103,12 @@ public interface VisualMappingFunction<K, V> {
 	 *            following: Node, Edge, or Network.
 	 */
 	void apply(final CyRow row, final View<? extends CyIdentifiable> view);
+	
+	/**
+	 * Returns the mapped value for a {@linkplain CyRow}.
+	 * 
+	 * @param row The data row used to create the visual property value for the specified view.
+	 * @return The mapped visual property value
+	 */
+	V getMappedValue(final CyRow row);
 }

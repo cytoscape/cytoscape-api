@@ -1,5 +1,8 @@
 package org.cytoscape.view.vizmap.mappings;
 
+import org.cytoscape.model.CyIdentifiable;
+import org.cytoscape.model.CyRow;
+import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.vizmap.VisualMappingFunction;
 
@@ -52,5 +55,13 @@ public abstract class AbstractVisualMappingFunction<K, V> implements VisualMappi
 	@Override
 	public VisualProperty<V> getVisualProperty() {
 		return vp;
+	}
+	
+	@Override
+	public void apply(final CyRow row, final View<? extends CyIdentifiable> view) {
+		final V value = getMappedValue(row);
+		
+		if (value != null)
+			view.setVisualProperty(vp, value);
 	}
 }

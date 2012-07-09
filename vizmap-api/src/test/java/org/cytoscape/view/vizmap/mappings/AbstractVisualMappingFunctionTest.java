@@ -68,6 +68,8 @@ public class AbstractVisualMappingFunctionTest {
 
 		@Override
 		public void apply(CyRow row, View<? extends CyIdentifiable> view) {}
-		
+
+		@Override
+		public V getMappedValue(CyRow row) { return null; }
 	}
 }
