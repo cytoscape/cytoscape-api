@@ -104,7 +104,7 @@ public abstract class AbstractGUITunableHandler
 	        		mustMatch = s.substring(s.indexOf("=") + 1);
 	        		mustNotMatch = "";
 	        	} else {
-	        		dependencyName = s.substring(0, s.indexOf("."));
+	        		dependencyName = s.substring(0, s.indexOf("!"));
 	        		mustNotMatch = s.substring(s.indexOf("=") + 1);
 	        		mustMatch = "";
 	        	}
