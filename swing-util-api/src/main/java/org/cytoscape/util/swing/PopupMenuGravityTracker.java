@@ -95,7 +95,7 @@ public final class PopupMenuGravityTracker implements GravityTracker {
 			menu.remove(menu.getComponentIndex(component));
 	}
 
-        private int getInsertLocation(final String newMenuText, final double newGravity) {
+	private int getInsertLocation(final String newMenuText, final double newGravity) {
 		if (newGravity == GravityTracker.USE_ALPHABETIC_ORDER) {
 			for (int i = 0; i < menu.getComponentCount(); ++i) {
 				final Component item = menu.getComponent(i);
@@ -120,5 +120,5 @@ public final class PopupMenuGravityTracker implements GravityTracker {
 		}
 
 		return menu.getComponentCount();
-        }
+	}
 }

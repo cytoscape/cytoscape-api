@@ -104,6 +104,10 @@ public final class JMenuTracker {
 		if (menuString.isEmpty())
 			throw new IllegalArgumentException("menu string has zero length");
 
+		// Special case: if we have a popup menu and the menu is "." return the rootGravityTracker
+		if (menuString.equals(".") && rootPopupGravityTracker != null)
+			return rootPopupGravityTracker;
+
 		final List<MenuNameAndGravity> namesAndGravities = parseMenuString(menuString);
 		MenuGravityTracker parentGravityTracker = null;
 		MenuGravityTracker gravityTracker = null;

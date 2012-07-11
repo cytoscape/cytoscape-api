@@ -90,4 +90,48 @@ public interface ServiceProperties {
 	 * Preferred action properties. 
 	 */
 	public static final String PREFERRED_ACTION = "preferredAction";
+
+	/**
+	 * Insert separator before this menu item
+	 */
+	public static final String INSERT_SEPARATOR_BEFORE = "insertSeparatorBefore";
+
+	/**
+	 * Insert separator after this menu item
+	 */
+	public static final String INSERT_SEPARATOR_AFTER = "insertSeparatorAfter";
+
+	/**
+ 	 * Define standard context menus.  This is done here so that they will
+ 	 * be consistenty used since this is the only way to define gravity for these...
+ 	 */
+	public static final String APPS_MENU = "Apps[1]"; // Default menu if nothing else is specified
+
+	// Network context menus
+	public static final String NETWORK_ADD_MENU = "Add[-1100]";
+	public static final String NETWORK_DELETE_MENU = "Delete[-1090]";
+	public static final String NETWORK_EDIT_MENU = "Edit[-1080]";
+	public static final String NETWORK_SELECT_MENU = "Select[-1070]";
+	public static final String NETWORK_GROUP_MENU = "Group[-1060]";
+	public static final String NETWORK_LAYOUT_MENU = "Layout[-1050]";
+	public static final String NETWORK_APPS_MENU = "Apps[1]";
+	public static final String NETWORK_PREFERENCES_MENU = "Preferences[1000]";
+
+	// Node context menus
+	public static final String NODE_EDIT_MENU = "Edit[-1100]";
+	public static final String NODE_SELECT_MENU = "Select[-1090]";
+	public static final String NODE_GROUP_MENU = "Group[-1080]";
+	public static final String NODE_NESTED_NETWORKS_MENU = "Nested Networks[-1070]";
+	public static final String NODE_APPS_MENU = "Apps[1]";  // This is the default menu if no preferredMenu is defined
+	public static final String NODE_LINKOUTS_MENU = "Linkouts[1001]";
+	public static final String NODE_DYNAMIC_LINKOUTS_MENU = "Dynamic Linkouts[1050]";
+	public static final String NODE_PREFERENCES_MENU = "Preferences[1100]";
+
+	// Edge context menus
+	public static final String EDGE_EDIT_MENU = "Edit[-1100]";
+	public static final String EDGE_SELECT_MENU = "Select[-1100]";
+	public static final String EDGE_APPS_MENU = "Apps[1]";
+	public static final String EDGE_LINKOUTS_MENU = "Linkouts[1001]";
+	public static final String EDGE_DYNAMIC_LINKOUTS_MENU = "Dynamic Linkouts[1050]";
+	public static final String EDGE_PREFERENCES_MENU = "Preferences[1100]";
 }
