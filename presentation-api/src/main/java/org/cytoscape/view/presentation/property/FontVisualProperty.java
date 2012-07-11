@@ -38,6 +38,8 @@ import java.awt.Font;
 import java.awt.GraphicsEnvironment;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.AbstractVisualProperty;
@@ -59,6 +61,8 @@ public final class FontVisualProperty extends AbstractVisualProperty<Font> {
 	private static final int DEF_FONT_SIZE = 12;
 	
 	private static final Font DEFAULT_FONT = new Font("SansSerif", Font.PLAIN, DEF_FONT_SIZE);
+
+	private static final Pattern CY2_FONT_PATTERN = Pattern.compile("(.+)-(\\d+)-(\\d+)");
 
 	static {
 		final Set<Font> fontSet = new HashSet<Font>();
@@ -100,23 +104,35 @@ public final class FontVisualProperty extends AbstractVisualProperty<Font> {
 	@Override
 	public Font parseSerializableString(final String text) {
 		if (text != null && text.trim().length() != 0) {
-			// e.g. "Monospaced,plain,12"
-			String name = text.replaceAll("(\\.[bB]old)?,[a-zA-Z]+,\\d+(\\.\\d+)?", "");
-
-			boolean bold = text.matches("(?i).*\\.bold,[a-zA-Z]+,.*");
-			int style = bold ? Font.BOLD : Font.PLAIN;
-			int size = DEF_FONT_SIZE;
-
-			String sSize = text.replaceAll(".+,[^,]+,", "");
-
-			try {
-				size = Integer.parseInt(sSize);
-			} catch (NumberFormatException nfe) {
-				logger.warn("Cannot parse font size in '" + text + "'", nfe);
-			}
-
-			return new Font(name, style, size);
+			Matcher matcher = CY2_FONT_PATTERN.matcher(text);
+			if (matcher.matches())
+				return parseCy2Font(matcher.group(1), matcher.group(2), matcher.group(3));
+			else
+				return parseFont(text);
 		} else
 			return DEFAULT_FONT;
+	}
+	
+	private Font parseFont(String text) {
+		// e.g. "Monospaced,plain,12"
+		String name = text.replaceAll("(\\.[bB]old)?,[a-zA-Z]+,\\d+(\\.\\d+)?", "");
+
+		boolean bold = text.matches("(?i).*\\.bold,[a-zA-Z]+,.*");
+		int style = bold ? Font.BOLD : Font.PLAIN;
+		int size = DEF_FONT_SIZE;
+
+		String sSize = text.replaceAll(".+,[^,]+,", "");
+
+		try {
+			size = Integer.parseInt(sSize);
+		} catch (NumberFormatException nfe) {
+			logger.warn("Cannot parse font size in '" + text + "'", nfe);
+		}
+
+		return new Font(name, style, size);
+	}
+	
+	private Font parseCy2Font(String name, String style, String size) {
+		return new Font(name, Integer.parseInt(style), Integer.parseInt(size));
 	}
 }
