@@ -19,12 +19,10 @@ import java.lang.annotation.Target;
  * <br/>
  * 
  * Here is an example of how to use a <code>Tunable</code> annotation:
- * <p><pre>
- * <code>
- * 	<code>@Tunable(description="your last name", group={"Human","pupil"}, params="displayState=collapsed")<code>
+ * <pre>
+ * 	&#64;Tunable(description="your last name", group={"Human","pupil"}, params="displayState=collapsed")
  * 	public String lastName = "Smith";
- * </code>
- * </pre></p>
+ * </pre>
  * 
  * This tunable will be part of a group("<code>pupil</code>"), which is also a part of 
  * a metagroup("<code>Human</code>").<br/>
@@ -46,30 +44,28 @@ public @interface Tunable {
 	 * Used to define all the groups in which the Tunable takes part (by default, 
 	 * its doesn't belong to any group).
 	 * 
-	 * <p><pre><code>
 	 * <b>Example</b>:
-	 * 	<code>@Tunable(description="write your last name", group={"Company","Department","office","identity"})</code>
+	 * <pre>
+	 * 	&#64;Tunable(description="write your last name", group={"Company","Department","office","identity"})
 	 * 	public String lastName = "Smith";
-	 * </code></pre></p>
+	 * </pre>
 	 * 
 	 * This String <code>Tunable</code> will take part of these 4 groups.
 	 * <b>warning</b>: Note that they are set in an order of subgroups of a main one.
 	 * 
-	 * <p><pre>
 	 * <b>Example</b>:
-	 * 
-	 * 	<code>@Tunable(description="write your first name", groups={"Company","Department","office","identity"})</code>
+	 * <pre>
+	 * 	&#64;Tunable(description="write your first name", groups={"Company","Department","office","identity"})
 	 * 	public String firstName = "John";
 	 * 
-	 * 	<code>@Tunable(description="write the name of your office", groups={"Company","Department","office"})</code>
+	 * 	&#64;Tunable(description="write the name of your office", groups={"Company","Department","office"})
 	 * 	public String officeName = "CytoscapeDevelopment's Office";
-	 * 	</code>
+	 * 	</pre>
 	 * 
 	 * Here we have a second item for the identity of a person(the <i>firstName</i>).So, 
 	 * the 2 <code>Tunable</code> <i>lastName</i> and <i>firstName</i> are in the subgroup 
 	 * <i>identity</i> But, the <code>Tunable</code> String officeName will only take part 
 	 * of the upperGroup <i>office</i>, and so won't be set with these other 2 fields.
-	 * </pre></p>
 	 */
 	String[] groups() default {};
 
@@ -85,18 +81,17 @@ public @interface Tunable {
 	 * Key that will refer to the "value" of the <code>Tunable</code> which has 
 	 * <code>xorChildren=true</code>
 	 * 
-	 * <p><pre><code>
 	 * <b>Example</b> : 
-	 * 	<code>@Tunable(description="Single list", group={"TestGroup"}, <b>xorChildren=true</b>)</code>
+	 * <pre>
+	 * 	&#64;Tunable(description="Single list", group={"TestGroup"}, <b>xorChildren=true</b>)
 	 * 	public ListSingleSelection<String> chooser = new ListSingleSelection<String>("<b>Names</b>","<b>FirstNames</b>");
 	 * 	
-	 * 	<code>@Tunable(description="Multi list", group={"TestGroup","Names"}, <b>xorKey="Names"</b>)</code>
+	 * 	&#64;Tunable(description="Multi list", group={"TestGroup","Names"}, <b>xorKey="Names"</b>)
 	 * 	public ListMultipleSelection<String> names = new ListMultipleSelection<String>("Johnson","Turner","Smith");
 	 * 
-	 * 	<code>@Tunable(description="Multi list", group={"TestGroup","First Names"}, <b>xorKey="FirstNames"</b>)</code>
+	 * 	&#64;Tunable(description="Multi list", group={"TestGroup","First Names"}, <b>xorKey="FirstNames"</b>)
 	 * 	public ListMultipleSelection<String> firstnames = new ListMultipleSelection<String>("George","Jane","Sarah");
-	 * </code>
-	 * </pre></p>
+	 * </pre>
 	 *
 	 * Here, the 2 <code>ListMultipleSelection</code> won't be displayed in the GUI at the 
 	 * same time : each of them depends on the xorKey(<i>FirstNames</i> or <i>Names</i>)
@@ -109,20 +104,18 @@ public @interface Tunable {
 	/**
 	 * To add a dependency between 2 or more <code>Tunables</code> 
 	 * 
-	 * <p><pre>
-	 * The <code>JPanel</code> of the <code>Tunable</code> that depends on the 
-	 * other one will be activated only if the value which is required is set.
+	 * <p>The <code>JPanel</code> of the <code>Tunable</code> that depends on the 
+	 * other one will be activated only if the value which is required is set.</p>
 	 * 
-	 * Here is an example of how to add dependencies between <code>Tunables<code> :
+	 * <p>Here is an example of how to add dependencies between <code>Tunables</code>:</p>
 	 * 
-	 * <code>
+	 * <pre>
 	 *   &#64;Tunable(description="Type")
 	 *   public boolean type = false;
 	 *
 	 *   &#64;Tunable(description="Host name",dependsOn="type=true")
 	 *   public String hostname="";
-	 * </code>
-	 *  </pre></p>
+	 * </pre>
 	 * So <code>hostname</code> will be activated if <code>type</code> is set to "true"
 	 */
 	String dependsOn() default "";
@@ -175,7 +168,7 @@ public @interface Tunable {
 	 * parameter is one mechanism for achieving this.  The listenForChange parameter will trigger the update
 	 * method on the TunableHandler to be called, which will cause B to be updated. Here is an example:
 	 * <br/>
-	 * <pre><code>
+	 * <pre>
 	 * &#64;Tunable(description="A")
 	 * public String getA() {
 	 *    return a;	
@@ -198,7 +191,7 @@ public @interface Tunable {
 	 * public void setB(String b) {
 	 *    this.b = b;
 	 * }
-	 * </code></pre>
+	 * </pre>
 	 * @return a list of Tunable field/method names that will trigger this Tunable to be updated.
 	 */
 	String[] listenForChange() default {};
