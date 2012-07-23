@@ -36,16 +36,34 @@ package org.cytoscape.model;
  */
 public interface CyNetworkFactory {
 	/**
-	 * Returns a new, empty {@link CyNetwork} object. 
+	 * Returns a new, empty {@link CyNetwork} object.
+	 * The new network's save policy is {@link SavePolicy#SESSION_FILE} by default.
 	 * @return A new, empty {@link CyNetwork} object. 
 	 */
 	CyNetwork createNetwork();
+	
+	/**
+	 * Returns a new, empty {@link CyNetwork} object.
+	 * @param policy the save policy to follow during the life-cycle of the CyNetwork.
+	 * @return A new, empty {@link CyNetwork} object. 
+	 */
+	CyNetwork createNetwork(SavePolicy policy);
 
 	/**
 	 * Returns a new, empty {@link CyNetwork} object where the associated default tables are private. 
 	 * This method should only be used in special cases where the network created is not intended to
 	 * be used or shared like a normal network within the system.
+	 * The new network's save policy is {@link SavePolicy#SESSION_FILE} by default.
 	 * @return A new, empty {@link CyNetwork} object. 
 	 */
 	CyNetwork createNetworkWithPrivateTables();
+	
+	/**
+	 * Returns a new, empty {@link CyNetwork} object where the associated default tables are private. 
+	 * This method should only be used in special cases where the network created is not intended to
+	 * be used or shared like a normal network within the system.
+	 * @param policy the save policy to follow during the life-cycle of the CyNetwork.
+	 * @return A new, empty {@link CyNetwork} object. 
+	 */
+	CyNetwork createNetworkWithPrivateTables(SavePolicy policy);
 }

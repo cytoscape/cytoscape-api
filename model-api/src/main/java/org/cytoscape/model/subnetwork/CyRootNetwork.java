@@ -40,6 +40,7 @@ import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyTable;
+import org.cytoscape.model.SavePolicy;
 
 import java.util.List;
 
@@ -88,11 +89,31 @@ public interface CyRootNetwork extends CyNetwork {
 	String SHARED_INTERACTION = "shared interaction";
 
 	/**
-	 * Create an empty {@link CySubNetwork}. 
+	 * Create an empty {@link CySubNetwork}.
+	 * The new subnetwork is created with the same save policy of its CyRootNetwork.
 	 * @return  The created {@link CySubNetwork}.
 	 */
 	CySubNetwork addSubNetwork();
+	
+	/**
+	 * Create an empty {@link CySubNetwork} which can have a different save policy from that of this CyRootNetwork.
+	 * @param policy the save policy to follow during the life-cycle of the CyNetwork.
+	 * @return  The created {@link CySubNetwork}.
+	 */
+	CySubNetwork addSubNetwork(SavePolicy policy);
 
+	/**
+	 * Create a {@link CySubNetwork} containing the specified {@link CyNode}s and
+	 * {@link CyEdge}s. The nodes and edges must already exist in this root network.
+	 * Nodes defining the source and target of edges that have not yet been added
+	 * to the subnetwork will be added.
+	 * The new subnetwork is created with the same save policy of its CyRootNetwork.
+	 * @param nodes The nodes to be added to the network. May be null or empty.
+	 * @param edges The edges to be added to the network. May be null or empty.
+	 * @return  The created {@link CySubNetwork}.
+	 */
+	CySubNetwork addSubNetwork(Iterable<CyNode> nodes, Iterable<CyEdge> edges);
+	
 	/**
 	 * Create a {@link CySubNetwork} containing the specified {@link CyNode}s and
 	 * {@link CyEdge}s. The nodes and edges must already exist in this root network.
@@ -100,9 +121,10 @@ public interface CyRootNetwork extends CyNetwork {
 	 * to the subnetwork will be added.
 	 * @param nodes The nodes to be added to the network. May be null or empty.
 	 * @param edges The edges to be added to the network. May be null or empty.
+	 * @param policy the save policy to follow during the life-cycle of the CyNetwork.
 	 * @return  The created {@link CySubNetwork}.
 	 */
-	CySubNetwork addSubNetwork(Iterable<CyNode> nodes, Iterable<CyEdge> edges);
+	CySubNetwork addSubNetwork(Iterable<CyNode> nodes, Iterable<CyEdge> edges, SavePolicy policy);
 
 	/**
 	 * Removes the subnetwork from the root network, but not the nodes and edges contained 

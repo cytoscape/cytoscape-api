@@ -28,12 +28,12 @@
 package org.cytoscape.model;
 
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.List;
 
 import static org.junit.Assert.*;
+
+import org.cytoscape.model.subnetwork.CySubNetwork;
 import org.junit.Test;
 
 
@@ -884,5 +884,13 @@ public abstract class AbstractCyNetworkTest {
 	public void testGetDefaultEdgeTable() {
 		assertNotNull(net.getDefaultEdgeTable());
 		assertEquals(String.class, net.getDefaultEdgeTable().getColumn(CyNetwork.NAME).getType());
+	}
+	
+	@Test
+	public void testGetSavePolicy() {
+		assertEquals(SavePolicy.SESSION_FILE, net.getSavePolicy());
+		
+		if (net instanceof CySubNetwork && net.equals(((CySubNetwork)net).getRootNetwork().getBaseNetwork()))
+			assertEquals(SavePolicy.SESSION_FILE, ((CySubNetwork)net).getRootNetwork().getSavePolicy());
 	}
 }

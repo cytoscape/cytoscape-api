@@ -28,26 +28,23 @@
 package org.cytoscape.model.subnetwork;
 
 
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 import java.util.ArrayList;
-import java.util.Map;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
-import org.cytoscape.event.CyEvent;
-import org.cytoscape.event.CyEventHelper;
-import org.cytoscape.event.CyListener;
-
+import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyEdge;
-import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyTable;
-import org.cytoscape.model.CyColumn;
-import org.cytoscape.model.DummyCyNode;
 import org.cytoscape.model.DummyCyEdge;
-
-import static org.junit.Assert.*;
+import org.cytoscape.model.DummyCyNode;
 import org.junit.Test;
 
 

@@ -71,16 +71,6 @@ public interface CyTable extends CyIdentifiable {
 	}
 	
 	/**
-	 * The SavePolicy of a table specifies whether or not it will be saved.
-	 */
-	public static enum SavePolicy {
-		/** This table should not be saved i.e. this table should not be serialized. */
-		DO_NOT_SAVE,  
-		/** This table should be saved. */
-		SESSION_FILE,
-	}
-
-	/**
 	 * A public CyTable is a table that is accessible to the user through the user
 	 * interface.  Private or non-public CyTables will not be visible to the user from the
 	 * normal user interface, although they will be accessible to app writers through the API.

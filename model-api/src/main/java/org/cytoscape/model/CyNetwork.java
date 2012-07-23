@@ -329,5 +329,10 @@ public interface CyNetwork extends CyIdentifiable, CyDisposable {
 	 * @return the row in the default table for this object. 
 	 */
 	CyRow getRow(CyIdentifiable entry);
-
+	
+	/**
+	 * Returns how (or if) this CyNetwork should be saved.
+	 * @return how (or if) this CyNetwork should be saved.
+	 */
+	SavePolicy getSavePolicy();
 }

@@ -50,13 +50,13 @@ public class CyTableEnumTest {
 	// verify that we don't add values
 	@Test
 	public void testSavePolicyEnumSize() {
-		assertEquals(2, CyTable.SavePolicy.values().length);
+		assertEquals(2, SavePolicy.values().length);
 	}
 
 	// verify that we don't change the enum values
 	@Test
 	public void testSavePolicyEnumValues() {
-		assertNotNull(CyTable.SavePolicy.valueOf("DO_NOT_SAVE"));
-		assertNotNull(CyTable.SavePolicy.valueOf("SESSION_FILE"));
+		assertNotNull(SavePolicy.valueOf("DO_NOT_SAVE"));
+		assertNotNull(SavePolicy.valueOf("SESSION_FILE"));
 	}
 }
