@@ -67,10 +67,6 @@ public final class FileChooserFilter extends FileFilter {
 					return true;
 			}
 
-			for (int i = 0; i < extensions.length; i++) {
-				if (fileName.contains(extensions[i]))
-					return true;
-			}
 		} else
 			throw new IllegalArgumentException("No fileType specified");
 
