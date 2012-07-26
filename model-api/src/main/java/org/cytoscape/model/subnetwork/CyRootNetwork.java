@@ -90,15 +90,19 @@ public interface CyRootNetwork extends CyNetwork {
 
 	/**
 	 * Create an empty {@link CySubNetwork}.
-	 * The new subnetwork is created with the same save policy of its CyRootNetwork.
+	 * The new subnetwork is created with the same save policy of its root network. If you want to set a different 
+	 * save policy to the new subnetwork, just use {@link #addSubNetwork(SavePolicy)}.
 	 * @return  The created {@link CySubNetwork}.
 	 */
 	CySubNetwork addSubNetwork();
 	
 	/**
-	 * Create an empty {@link CySubNetwork} which can have a different save policy from that of this CyRootNetwork.
+	 * Create an empty {@link CySubNetwork} which can have a different save policy from that of this root network,
+	 * as long as the root network's policy is not {@link SavePolicy#DO_NOT_SAVE}.
 	 * @param policy the save policy to follow during the life-cycle of the CyNetwork.
-	 * @return  The created {@link CySubNetwork}.
+	 * @return The created {@link CySubNetwork}.
+	 * @throws IllegalArgumentException if the save policy of this root network is
+	 *         {@link SavePolicy#DO_NOT_SAVE}, and the policy argument is not the same.
 	 */
 	CySubNetwork addSubNetwork(SavePolicy policy);
 
@@ -107,7 +111,8 @@ public interface CyRootNetwork extends CyNetwork {
 	 * {@link CyEdge}s. The nodes and edges must already exist in this root network.
 	 * Nodes defining the source and target of edges that have not yet been added
 	 * to the subnetwork will be added.
-	 * The new subnetwork is created with the same save policy of its CyRootNetwork.
+	 * The new subnetwork is created with the same save policy of its root network. If you want to set a different 
+	 * save policy to the new subnetwork, just use {@link #addSubNetwork(Iterable, Iterable, SavePolicy)}.
 	 * @param nodes The nodes to be added to the network. May be null or empty.
 	 * @param edges The edges to be added to the network. May be null or empty.
 	 * @return  The created {@link CySubNetwork}.
@@ -119,10 +124,14 @@ public interface CyRootNetwork extends CyNetwork {
 	 * {@link CyEdge}s. The nodes and edges must already exist in this root network.
 	 * Nodes defining the source and target of edges that have not yet been added
 	 * to the subnetwork will be added.
+	 * The new {@link CySubNetwork} can have a different save policy from that of this root network, as long as the
+	 * root network's policy is not {@link SavePolicy#DO_NOT_SAVE}.
 	 * @param nodes The nodes to be added to the network. May be null or empty.
 	 * @param edges The edges to be added to the network. May be null or empty.
 	 * @param policy the save policy to follow during the life-cycle of the CyNetwork.
 	 * @return  The created {@link CySubNetwork}.
+	 * @throws IllegalArgumentException if the save policy of this root network is
+	 *         {@link SavePolicy#DO_NOT_SAVE}, and the policy argument is not the same.
 	 */
 	CySubNetwork addSubNetwork(Iterable<CyNode> nodes, Iterable<CyEdge> edges, SavePolicy policy);
 

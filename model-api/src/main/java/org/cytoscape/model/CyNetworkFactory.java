@@ -38,6 +38,8 @@ public interface CyNetworkFactory {
 	/**
 	 * Returns a new, empty {@link CyNetwork} object.
 	 * The new network's save policy is {@link SavePolicy#SESSION_FILE} by default.
+	 * If you want to create a network that should not be saved in session files, use
+	 * the {@link #createNetwork(SavePolicy)} method instead, and set the save policy to {@link SavePolicy#DO_NOT_SAVE}.
 	 * @return A new, empty {@link CyNetwork} object. 
 	 */
 	CyNetwork createNetwork();
@@ -54,6 +56,8 @@ public interface CyNetworkFactory {
 	 * This method should only be used in special cases where the network created is not intended to
 	 * be used or shared like a normal network within the system.
 	 * The new network's save policy is {@link SavePolicy#SESSION_FILE} by default.
+	 * If you want to create a network that should not be saved in session files, use
+	 * the {@link #createNetwork(SavePolicy)} method instead, and set the save policy to {@link SavePolicy#DO_NOT_SAVE}.
 	 * @return A new, empty {@link CyNetwork} object. 
 	 */
 	CyNetwork createNetworkWithPrivateTables();
