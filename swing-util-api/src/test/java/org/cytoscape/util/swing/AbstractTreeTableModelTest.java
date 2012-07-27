@@ -16,6 +16,7 @@ import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.objenesis.instantiator.basic.NewInstanceInstantiator;
 
 public class AbstractTreeTableModelTest {
 	
@@ -24,18 +25,26 @@ public class AbstractTreeTableModelTest {
 	@Mock Object child1;
 	@Mock Object child2;
 	
-	@Mock TreePath path;
+	TreePath path;
+	TreePath path2;
+	
 	@Mock TreeModelListener tListener;
 	
 	@Mock Object source;
-	int[] childIndices = new int[]{};
-	Object[] children = new Object[]{};
 	
-	Object[] pathList = new Object[]{path};
+	int[] childIndices = new int[]{1, 2};
+	Object[] children = new Object[]{child1, child2};
+	
+	Object[] pathList = new Object[]{path, path2};
 
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
+		path=new TreePath(new Object[] {root, child1});
+		path2=new TreePath(new Object[] {root, child2});
+		pathList = new Object[]{path, path2};
+		childIndices = new int[]{1, 2};
+		children = new Object[]{child1, child2};
 		model = new DummyTreeTableModel(root);
 	}
 
@@ -124,9 +133,10 @@ public class AbstractTreeTableModelTest {
 	
 	private static final class DummyTreeTableModel extends AbstractTreeTableModel {
 
+		private static final String DUMMY = "DUMMY";
+		
 		public DummyTreeTableModel(Object root) {
 			super(root);
-			// TODO Auto-generated constructor stub
 		}
 
 		@Override
@@ -143,14 +153,12 @@ public class AbstractTreeTableModelTest {
 
 		@Override
 		public Object getValueAt(Object node, int column) {
-			// TODO Auto-generated method stub
-			return null;
+			return DUMMY;
 		}
 
 		@Override
 		public Object getChild(Object arg0, int arg1) {
-			// TODO Auto-generated method stub
-			return null;
+			return DUMMY;
 		}
 
 		@Override
