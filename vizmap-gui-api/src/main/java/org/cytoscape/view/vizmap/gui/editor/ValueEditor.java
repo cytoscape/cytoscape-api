@@ -27,6 +27,6 @@ public interface ValueEditor<V> {
 	 * 
 	 * @return the type of value returned by the value editor.
 	 */
-	Class<V> getType();
+	Class<V> getValueType();
 
 }
