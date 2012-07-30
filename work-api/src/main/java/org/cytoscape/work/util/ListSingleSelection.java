@@ -38,8 +38,9 @@ package org.cytoscape.work.util;
 
 import java.util.Arrays;
 import java.util.List;
-import org.slf4j.Logger; 
-import org.slf4j.LoggerFactory; 
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 /**
@@ -70,6 +71,8 @@ public final class ListSingleSelection<T> extends ListSelection<T> {
 	 */
 	public ListSingleSelection(final T ... values) {
 		super(Arrays.asList(values));
+		if(!this.values.isEmpty())
+			selected = this.values.get(0);
 	}
 
 	/**
@@ -93,6 +96,8 @@ public final class ListSingleSelection<T> extends ListSelection<T> {
 	 */
 	public ListSingleSelection(final List<T> values) {
 		super(values);
+		if(!this.values.isEmpty())
+			selected = this.values.get(0);
 	}
 
 	/**
@@ -111,8 +116,8 @@ public final class ListSingleSelection<T> extends ListSelection<T> {
 	 */
 	public void setSelectedValue(T val) {
 		if (!values.contains(val))
-			logger.warn("value not contained in list of possible values possible items = "+ 
-			            Arrays.toString(getPossibleValues().toArray()));
+			logger.warn("value not contained in list of possible values possible items = "
+					+ Arrays.toString(getPossibleValues().toArray()));
 
 		selected = val;
 	}
