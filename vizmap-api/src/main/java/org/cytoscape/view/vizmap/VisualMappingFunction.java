@@ -34,7 +34,6 @@
  */
 package org.cytoscape.view.vizmap;
 
-import org.cytoscape.model.CyTable;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyRow;
 import org.cytoscape.view.model.View;
