@@ -1,5 +1,6 @@
 package org.cytoscape.view.vizmap.mappings;
 
+import org.cytoscape.event.CyEventHelper;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyRow;
 import org.cytoscape.view.model.View;
@@ -25,6 +26,8 @@ public abstract class AbstractVisualMappingFunction<K, V> implements VisualMappi
 
 	/** Visual Property used in this mapping. */
 	protected final VisualProperty<V> vp;
+	
+	protected final CyEventHelper eventHelper;
 
 	/**
 	 * Constructs this AbstractVisualMappingFunction.
@@ -36,10 +39,11 @@ public abstract class AbstractVisualMappingFunction<K, V> implements VisualMappi
 	 * @param vp
 	 *            Visual Property used in this mapping.
 	 */
-	public AbstractVisualMappingFunction(final String columnName, final Class<K> columnType, final VisualProperty<V> vp) {
+	public AbstractVisualMappingFunction(final String columnName, final Class<K> columnType, final VisualProperty<V> vp, final CyEventHelper eventHelper) {
 		this.columnType = columnType;
 		this.columnName = columnName;
 		this.vp = vp;
+		this.eventHelper = eventHelper;
 	}
 
 	@Override

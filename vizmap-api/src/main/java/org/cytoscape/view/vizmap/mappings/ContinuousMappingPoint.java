@@ -33,38 +33,55 @@
   You should have received a copy of the GNU Lesser General Public License
   along with this library; if not, write to the Free Software Foundation,
   Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
-*/
+ */
 
 package org.cytoscape.view.vizmap.mappings;
 
+import org.cytoscape.event.CyEventHelper;
+import org.cytoscape.view.vizmap.VisualMappingFunction;
+import org.cytoscape.view.vizmap.events.VisualMappingFunctionChangeRecord;
+import org.cytoscape.view.vizmap.events.VisualMappingFunctionChangedEvent;
 import org.cytoscape.view.vizmap.mappings.BoundaryRangeValues;
 
 /**
- * Encapsulates a ContinuousMapping Point with a single point value
- * and associated {@link BoundaryRangeValues}.
- * @param <K> Generic type of the attribute mapped.
- * @param <V> The generic type of associated {@link BoundaryRangeValues}.
+ * Encapsulates a ContinuousMapping Point with a single point value and
+ * associated {@link BoundaryRangeValues}.
+ * 
+ * @param <K>
+ *            Generic type of the attribute mapped.
+ * @param <V>
+ *            The generic type of associated {@link BoundaryRangeValues}.
  * @CyAPI.Final.Class
  */
 public final class ContinuousMappingPoint<K, V> {
 	private K value;
 	private BoundaryRangeValues<V> range;
 
+	private final ContinuousMapping<K, V> parentMapping;
+	private final CyEventHelper eventHelper;
+
 	/**
 	 * Constructor.
-	 * @param value double.
-	 * @param range BoundaryRangeValues object.
+	 * 
+	 * @param value
+	 *            double.
+	 * @param range
+	 *            BoundaryRangeValues object.
 	 */
-	public ContinuousMappingPoint(K value, BoundaryRangeValues<V> range) {
-		if( value instanceof Number == false)
+	public ContinuousMappingPoint(K value, BoundaryRangeValues<V> range, final ContinuousMapping<K, V> parentMapping,
+			final CyEventHelper eventHelper) {
+		if (value instanceof Number == false)
 			throw new IllegalArgumentException("Value must be a number.");
-		
+
 		this.value = value;
 		this.range = range;
+		this.parentMapping = parentMapping;
+		this.eventHelper = eventHelper;
 	}
 
 	/**
 	 * Gets Point Value.
+	 * 
 	 * @return double value.
 	 */
 	public K getValue() {
@@ -73,14 +90,19 @@ public final class ContinuousMappingPoint<K, V> {
 
 	/**
 	 * Sets Point Value.
-	 * @param value double value.
+	 * 
+	 * @param value
+	 *            double value.
 	 */
 	public void setValue(K value) {
 		this.value = value;
+		eventHelper.addEventPayload((VisualMappingFunction) parentMapping, new VisualMappingFunctionChangeRecord(),
+				VisualMappingFunctionChangedEvent.class);
 	}
 
 	/**
 	 * Gets BoundaryRangeValues.
+	 * 
 	 * @return BoundaryRangeValues Object.
 	 */
 	public BoundaryRangeValues<V> getRange() {
@@ -89,10 +111,14 @@ public final class ContinuousMappingPoint<K, V> {
 
 	/**
 	 * Sets BoundaryRangeValues.
-	 * @param range BoundaryRangeValues Object.
+	 * 
+	 * @param range
+	 *            BoundaryRangeValues Object.
 	 */
 	public void setRange(BoundaryRangeValues<V> range) {
 		this.range = range;
+		eventHelper.addEventPayload((VisualMappingFunction) parentMapping, new VisualMappingFunctionChangeRecord(),
+				VisualMappingFunctionChangedEvent.class);
 	}
 
 }

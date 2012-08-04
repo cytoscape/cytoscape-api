@@ -5,6 +5,7 @@ import static org.junit.Assert.assertNotNull;
 
 import java.awt.Paint;
 
+import org.cytoscape.event.CyEventHelper;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyRow;
 import org.cytoscape.view.model.View;
@@ -14,6 +15,7 @@ import org.cytoscape.view.vizmap.VisualMappingFunction;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
 public class AbstractVisualMappingFunctionTest {
@@ -23,6 +25,9 @@ public class AbstractVisualMappingFunctionTest {
 	private VisualProperty<Paint> vp;
 	
 	private VisualMappingFunction<Double, Paint> function;
+	
+	@Mock
+	CyEventHelper eventHelper;
 
 	@Before
 	public void setUp() throws Exception {
@@ -31,8 +36,7 @@ public class AbstractVisualMappingFunctionTest {
 		attrName = "test mapping function";
 		attrType = Double.class;
 		vp = BasicVisualLexicon.NODE_FILL_COLOR;
-		
-		function = new SimpleMappingFunction<Double, Paint>(attrName, attrType, vp);
+		function = new SimpleMappingFunction<Double, Paint>(attrName, attrType, vp, eventHelper);
 	}
 
 	@After
@@ -62,8 +66,8 @@ public class AbstractVisualMappingFunctionTest {
 
 	private static final class SimpleMappingFunction<K, V> extends AbstractVisualMappingFunction<K, V> {
 
-		public SimpleMappingFunction(String attrName, Class<K> attrType, VisualProperty<V> vp) {
-			super(attrName, attrType, vp);
+		public SimpleMappingFunction(String attrName, Class<K> attrType, VisualProperty<V> vp, CyEventHelper eventHelper) {
+			super(attrName, attrType, vp, eventHelper);
 		}
 
 		@Override
