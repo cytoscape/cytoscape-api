@@ -82,10 +82,14 @@ public final class PaintVisualProperty extends AbstractVisualProperty<Paint> {
 	
 	@Override 
 	public String toSerializableString(final Paint paint) {
-		if (paint instanceof Color == false)
-			throw new UnsupportedOperationException("Currently, this implementation supports only Color object.");
 		
-		final Color color = (Color) paint;
+		final Color color;
+		if (paint instanceof Color == false) {
+			logger.warn("None-Color object found.  Currently, this implementation supports only Color object.");
+			color = Color.white;
+		} else {
+			color = (Color) paint;
+		}
 		
 		String hex = Integer.toHexString(color.getRGB());
 		hex = hex.substring(2, hex.length()); // remove alpha bits
