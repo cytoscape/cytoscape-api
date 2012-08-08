@@ -59,6 +59,12 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 	protected final UndoSupport undo;
 	
 	/**
+	 * Determines whether the resulting set of nodes should be moved back to
+	 * their original centroid after being laid out. 
+	 */
+	protected boolean recenter = true;
+	
+	/**
 	 * Constructor.
 	 * @param name The name of the layout algorithm. 
 	 * @param networkView The network view that the layout algorithm will be applied to.
@@ -113,9 +119,19 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 		// Clear Edge Bends.
 		clearEdgeBends();
 
+		LayoutPoint centroid = null;
+		if (recenter) {
+			centroid = computeCentroid();
+		}
+		
 		// this is overridden by children and does the actual layout
 		doLayout(taskMonitor);
 
+		if (centroid != null) {
+			LayoutPoint newCentroid = computeCentroid();
+			translateNodes(new LayoutPoint(centroid.getX() - newCentroid.getX(), centroid.getY() - newCentroid.getY()));
+		}
+		
 		// Fit Content method always redraw the presentation.
 		networkView.fitContent();
 
@@ -129,6 +145,44 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 		logger.debug("Layout finished in " + (System.currentTimeMillis() - start) + " msec.");
 	}
 	
+	private void translateNodes(LayoutPoint translation) {
+		Collection<View<CyNode>> views;
+		if (nodesToLayOut.size() == 0) {
+			views = networkView.getNodeViews();
+		} else {
+			views = nodesToLayOut;
+		}
+		
+		for (View<CyNode> view : views) {
+			double x = view.getVisualProperty(BasicVisualLexicon.NODE_X_LOCATION);
+			double y = view.getVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION);
+			view.setVisualProperty(BasicVisualLexicon.NODE_X_LOCATION, x + translation.getX());
+			view.setVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION, y + translation.getY());
+		}
+	}
+
+	private LayoutPoint computeCentroid() {
+		Collection<View<CyNode>> views;
+		if (nodesToLayOut.size() == 0) {
+			views = networkView.getNodeViews();
+		} else {
+			views = nodesToLayOut;
+		}
+		
+		double x = 0;
+		double y = 0;
+		double total = 0;
+		for (View<CyNode> view : views) {
+			x += view.getVisualProperty(BasicVisualLexicon.NODE_X_LOCATION);
+			y += view.getVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION);
+			total++;
+		}
+		if (total == 0) {
+			return null;
+		}
+		return new LayoutPoint(x / total, y / total);
+	}
+
 	/**
 	 * Clears edge bend values ASSIGNED TO EACH EDGE.
 	 * Default Edge Bend value will not be cleared.
