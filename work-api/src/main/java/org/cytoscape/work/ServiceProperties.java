@@ -123,7 +123,7 @@ public interface ServiceProperties {
 	public static final String NODE_GROUP_MENU = "Group[-1080]";
 	public static final String NODE_NESTED_NETWORKS_MENU = "Nested Networks[-1070]";
 	public static final String NODE_APPS_MENU = "Apps[1]";  // This is the default menu if no preferredMenu is defined
-	public static final String NODE_LINKOUTS_MENU = "Linkouts[1001]";
+	public static final String NODE_LINKOUTS_MENU = "External Links[1001]";
 	public static final String NODE_DYNAMIC_LINKOUTS_MENU = "Dynamic Linkouts[1050]";
 	public static final String NODE_PREFERENCES_MENU = "Preferences[1100]";
 
@@ -131,7 +131,7 @@ public interface ServiceProperties {
 	public static final String EDGE_EDIT_MENU = "Edit[-1100]";
 	public static final String EDGE_SELECT_MENU = "Select[-1100]";
 	public static final String EDGE_APPS_MENU = "Apps[1]";
-	public static final String EDGE_LINKOUTS_MENU = "Linkouts[1001]";
+	public static final String EDGE_LINKOUTS_MENU = "External Links[1001]";
 	public static final String EDGE_DYNAMIC_LINKOUTS_MENU = "Dynamic Linkouts[1050]";
 	public static final String EDGE_PREFERENCES_MENU = "Preferences[1100]";
 }
