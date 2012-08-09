@@ -69,9 +69,18 @@ import java.util.List;
 public interface CyRootNetwork extends CyNetwork {
 
 	/**
-	 * The name of the table shared by all subnetworks. 
+	 * The name of the table containing the attributes shared
+	 * by all subnetworks of this root network.  
+	 * Direct use of this table is discouraged!
 	 */
 	String SHARED_ATTRS = "SHARED_ATTRS";
+
+	/**
+	 * The name of the table that enables sharing default attributes
+	 * with all subnetworks.
+	 * Direct use of this table is discouraged!
+	 */
+	String SHARED_DEFAULT_ATTRS = "SHARED_DEFAULT_ATTRS";
 
 	/**
 	 * The name of the shared name column found in the SHARED_ATTRS table. This

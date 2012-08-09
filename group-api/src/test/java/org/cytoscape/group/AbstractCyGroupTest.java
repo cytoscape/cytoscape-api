@@ -55,26 +55,26 @@ public abstract class AbstractCyGroupTest {
 
 	protected void defaultSetUp() {
 		CyNode node1 = net.addNode();
-    CyNode node2 = net.addNode();
-    CyNode node3 = net.addNode();
-    CyNode node4 = net.addNode();
-    CyNode node5 = net.addNode();
-    List<CyNode> groupNodes = new ArrayList<CyNode>();
-    groupNodes.add(node1);
-    groupNodes.add(node2);
-    groupNodes.add(node3);
-
-    edge1 = net.addEdge(node1, node2, false);
-    edge2 = net.addEdge(node2, node3, false);
-    edge3 = net.addEdge(node2, node4, false);
-    edge4 = net.addEdge(node2, node5, false);
-    edge5 = net.addEdge(node3, node5, false);
-
-    List<CyEdge> groupEdges = new ArrayList<CyEdge>();
-    groupEdges.add(edge1);
-    groupEdges.add(edge2);
-    groupEdges.add(edge3);
-    groupEdges.add(edge4);
+		CyNode node2 = net.addNode();
+		CyNode node3 = net.addNode();
+		CyNode node4 = net.addNode();
+		CyNode node5 = net.addNode();
+		List<CyNode> groupNodes = new ArrayList<CyNode>();
+		groupNodes.add(node1);
+		groupNodes.add(node2);
+		groupNodes.add(node3);
+	
+		edge1 = net.addEdge(node1, node2, false);
+		edge2 = net.addEdge(node2, node3, false);
+		edge3 = net.addEdge(node2, node4, false);
+		edge4 = net.addEdge(node2, node5, false);
+		edge5 = net.addEdge(node3, node5, false);
+	
+		List<CyEdge> groupEdges = new ArrayList<CyEdge>();
+		groupEdges.add(edge1);
+		groupEdges.add(edge2);
+		groupEdges.add(edge3);
+		groupEdges.add(edge4);
 
 		// Create a group
 		group = groupFactory.createGroup(net, groupNodes, groupEdges, true);
@@ -88,9 +88,9 @@ public abstract class AbstractCyGroupTest {
 
 	@Test
 	public void testGroupCreated() {
-    assertTrue("group node count = 3", group.getNodeList().size() == 3);
-    assertTrue("group internal edge count = 2", group.getInternalEdgeList().size() == 2);
-    assertTrue("group external edge count = 2", group.getExternalEdgeList().size() == 2);
+		assertTrue("group node count = 3", group.getNodeList().size() == 3);
+		assertTrue("group internal edge count = 2", group.getInternalEdgeList().size() == 2);
+		assertTrue("group external edge count = 2", group.getExternalEdgeList().size() == 2);
 	}
 
 	@Test
@@ -98,15 +98,15 @@ public abstract class AbstractCyGroupTest {
 		List<CyEdge> edgeList = new ArrayList<CyEdge>();
 		edgeList.add(edge5);
 		group.addEdges(edgeList);
-    assertTrue("group external edge count = 3", group.getExternalEdgeList().size() == 3);
+		assertTrue("group external edge count = 3", group.getExternalEdgeList().size() == 3);
 	}
 
 	@Test
 	public void testCollapse() {
-    assertTrue("group is not collapsed", !group.isCollapsed(net));
+		assertTrue("group is not collapsed", !group.isCollapsed(net));
 
 		group.collapse(net);
-    assertTrue("group is collapsed", group.isCollapsed(net));
+		assertTrue("group is collapsed", group.isCollapsed(net));
 
 		assertTrue("net has 3 nodes", net.getNodeCount() == 3);
 
@@ -116,11 +116,24 @@ public abstract class AbstractCyGroupTest {
 	@Test
 	public void testExpand() {
 		group.expand(net);
-    assertTrue("group is expanded", !group.isCollapsed(net));
+		assertTrue("group is expanded", !group.isCollapsed(net));
 
 		assertTrue("net has 5 nodes", net.getNodeCount() == 5);
 
 		assertTrue("net does not have group node", !net.containsNode(group.getGroupNode()));
+	}
+
+	@Test
+	public void testAttrs() {
+		net.getDefaultNodeTable().createColumn("asdf",String.class,false);
+		for ( CyNode n : group.getNodeList() )
+			net.getRow(n).set("asdf","a");
+
+		group.collapse(net);
+		group.expand(net);
+
+		for ( CyNode n : group.getNodeList() )
+			assertEquals("a",net.getRow(n).get("asdf",String.class));
 	}
 
 }

@@ -549,6 +549,30 @@ public abstract class AbstractCySubNetworkTest {
 		assertEquals("node1", sharedNameN1);
 	}
 
+	@Test
+	public void testSubNetworkNodeTableColumnsPropagate() {
+		defaultSetup();
+		sub.getDefaultNodeTable().createColumn("ASDFASDF",Integer.class,true); 
+		CySubNetwork sub2 = root.addSubNetwork();
+		assertNotNull( sub2.getDefaultNodeTable().getColumn("ASDFASDF") );
+	}
+
+	@Test
+	public void testSubNetworkEdgeTableColumnsPropagate() {
+		defaultSetup();
+		sub.getDefaultEdgeTable().createColumn("ASDFASDF",Integer.class,true); 
+		CySubNetwork sub2 = root.addSubNetwork();
+		assertNotNull( sub2.getDefaultEdgeTable().getColumn("ASDFASDF") );
+	}
+
+	@Test
+	public void testSubNetworkNetworkTableColumnsPropagate() {
+		defaultSetup();
+		sub.getDefaultNetworkTable().createColumn("ASDFASDF",Integer.class,true); 
+		CySubNetwork sub2 = root.addSubNetwork();
+		assertNotNull( sub2.getDefaultNetworkTable().getColumn("ASDFASDF") );
+	}
+
 	// TODO
 	// add tests that are similar to getNeighbors for getAdjacentEdges and getConnectingEdges
 	//

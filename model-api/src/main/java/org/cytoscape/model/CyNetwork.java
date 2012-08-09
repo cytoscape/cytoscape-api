@@ -57,6 +57,17 @@ public interface CyNetwork extends CyIdentifiable, CyDisposable {
 	String DEFAULT_ATTRS = "USER";
 
 	/**
+	 * The name of the local <b>public</b> 
+	 * CyTable that is created by default for CyNetworks, 
+	 * CyNodes, and CyEdges. This table contains attributes
+	 * which are specific to only this network.
+	 * -- see {@link CyTableManager} for more information.
+	 * The table should be referenced using this constant:
+	 * <code>CyNetwork.DEFAULT_ATTRS</code>.
+	 */
+	String LOCAL_ATTRS = "LOCAL_ATTRS";
+
+	/**
 	 * The name of the default <b>hidden</b> CyTable that is created 
 	 * by default for CyNetworks, CyNodes, and
 	 * CyEdges.  Other CyTables may also be associated with networks -- 

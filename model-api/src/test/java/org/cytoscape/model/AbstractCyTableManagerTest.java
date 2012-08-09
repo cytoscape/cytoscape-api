@@ -88,11 +88,9 @@ public abstract class AbstractCyTableManagerTest {
 	public void testGetLocalTables() {
 
 		// At this point, one network is added to the manager.
-		final int tableCount = mgr.getAllTables(true).size();
-
 		// Root Network has 3 tables, and Sub Network has 6 tables.
-		assertEquals(9, tableCount);
-		assertEquals(6, mgr.getAllTables(false).size());
+		assertEquals(15, mgr.getAllTables(true).size());
+		assertEquals(12, mgr.getAllTables(false).size());
 
 		Set<CyTable> nodeTables = mgr.getLocalTables(CyNode.class);
 		Set<CyTable> edgeTables = mgr.getLocalTables(CyEdge.class);
@@ -102,10 +100,10 @@ public abstract class AbstractCyTableManagerTest {
 		assertNotNull(edgeTables);
 		assertNotNull(networkTables);
 
-		assertEquals(tableCount, nodeTables.size() + edgeTables.size() + networkTables.size());
-		assertEquals(3, networkTables.size());
-		assertEquals(3, nodeTables.size());
-		assertEquals(3, edgeTables.size());
+		assertEquals(12, nodeTables.size() + edgeTables.size() + networkTables.size());
+		assertEquals(4, networkTables.size());
+		assertEquals(4, nodeTables.size());
+		assertEquals(4, edgeTables.size());
 
 		assertTrue(networkTables.contains(goodNetwork.getDefaultNetworkTable()));
 		final CyTable hidden = networkTableMgr.getTable(goodNetwork, CyNetwork.class, CyNetwork.HIDDEN_ATTRS);
