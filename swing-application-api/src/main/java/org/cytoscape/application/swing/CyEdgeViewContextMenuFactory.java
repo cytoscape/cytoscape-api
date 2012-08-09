@@ -37,10 +37,9 @@
  */
 package org.cytoscape.application.swing;
 
-import javax.swing.JMenuItem;
-import org.cytoscape.view.model.CyNetworkView; 
-import org.cytoscape.view.model.View; 
-import org.cytoscape.model.CyEdge; 
+import org.cytoscape.model.CyEdge;
+import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.View;
 
 /**
  * A factory interface used to produce a CyMenuItem (JMenuItem) that
