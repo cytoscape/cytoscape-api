@@ -46,6 +46,18 @@ public interface BookmarksUtil {
 	void saveBookmark(Bookmarks pBookmarks, String pCategoryName,
 			DataSource pDataSource);
 
+	
+	/**
+	 * Store a bookmark object in bookmarks object
+	 * 
+	 * @param pBookmarks bookmarks object
+	 * @param pCategoryName category name
+	 * @param pDataSource a single bookmark
+	 * @param pProvider the name of provider
+	 */
+	void saveBookmark(Bookmarks pBookmarks, String pCategoryName,
+			DataSource pDataSource, String pProvider);
+
 	/**
 	 * Delete a bookmark (pDataSource) from the category (pCategoryName) in the bookmarks object (pBookmarks)
 	 * 
