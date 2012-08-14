@@ -9,7 +9,7 @@ import java.lang.annotation.Target;
 
 /**
  * An annotation designed to signal that the annotated field contains
- * fields and methods that are annotated with the Tunable annotation.
+ * fields and methods that are annotated with the {@link Tunable} annotation.
  * The goal is to allow rich tunable collections to be created by
  * combining the tunables found in fields annotated with ContainsTunables. 
  * <br/>
@@ -17,14 +17,14 @@ import java.lang.annotation.Target;
  * <p><pre><code>
  *
  * public class A {
- *    @Tunable
+ *    &#64;Tunable
  *    public int value = 5;
  * }
  *
  * public class B {
- *    @ContainsTunable
+ *    &#64;ContainsTunable
  *    public A a = new A(); 
- *    @Tunable
+ *    &#64;Tunable
  *    public String name = "homer";
  * }
  *

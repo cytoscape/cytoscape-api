@@ -9,8 +9,8 @@ package org.cytoscape.work;
  * about any <code>Exception</code>s thrown during its
  * execution.
  *
- * <code>Task</code>s are executed via a TaskIterator which will be passed into <code>TaskManager</code>'s
- * <code>execute</code> method.
+ * <code>Task</code>s are executed as part of a {@link TaskIterator}
+ * which will be passed into a {@link TaskManager}'s <code>execute</code> method.
  *
  * <p>Some hints for writing a <code>Task</code>:</p>
  * <p><ul><li><b>Exceptions:</b> 
@@ -18,7 +18,7 @@ package org.cytoscape.work;
  * <li>When an exception is thrown, the <code>Task</code>
  * should not catch it and set a status message or the progress,
  * even to provide explanatory messages for the user.
- * A <code>TaskManager</code> can disregard status message
+ * A {@link TaskManager} may disregard status message
  * and progress updates once an exception is thrown.
  * Any helpful user messages regarding the exception should
  * be contained solely in the exception.</li>
@@ -66,7 +66,7 @@ package org.cytoscape.work;
  *     throw new Exception("Whoa, looks like you didn't specified the parameter.");
  * }
  * </code></pre></p>
- * This is done because it is possible for the <code>TaskManager</code> to close
+ * This is done because it is possible for the {@link TaskManager} to close
  * the <code>Task</code>'s user interface when the <code>Task</code> returns
  * before the user can read the message. Throwing an exception ensures 
  * the user will see the message.</li>
@@ -123,7 +123,7 @@ package org.cytoscape.work;
  *
  * <li>The <code>Task</code> should not set the status message or progress
  * immediately before the <code>Task</code> finishes. This is because the
- * <code>TaskManager</code> may close the <code>Task</code>'s user interface
+ * {@link TaskManager} may close the <code>Task</code>'s user interface
  * before the user has a chance to read it. For example:
  * <p><pre><code>
  * public void run(TaskMonitor taskMonitor) throws Exception
@@ -140,42 +140,39 @@ package org.cytoscape.work;
  * <li>
  * To specify an indefinite state in the progress bar, the <code>Task</code>
  * should set its progress by using the <code>setProgress</code>
- * method of <code>TaskMonitor</code> to <code>0.0</code>. Because the
- * initial progress is <code>0.0</code>, it is not necessary to do this
- * at the beginning of the <code>Task</code>.
+ * method of <code>TaskMonitor</code> to a value less than <code>0</code>. 
  * </li>
  * </ul></ul></p>
  *
- * @author Pasteur
  * @CyAPI.Spi.Interface
  */
 public interface Task {
 	/**
 	 * This method is called when the <code>Task</code> begins execution.
 	 *
-	 * This method should not be called by the programmer, as it will be called by the <code>TaskManager</code>.
+	 * This method should not be called by the programmer, as it will be called by the {@link TaskManager}.
 	 *
-	 * @param taskMonitor This is provided by <code>TaskManager</code>
+	 * @param taskMonitor The {@link TaskMonitor} provided by {@link TaskManager}. 
 	 * to allow the <code>Task</code> to modify its user interface.
 	 *
 	 * @throws Exception The <code>Task</code> is at liberty to
 	 * throw an exception in <code>run</code>. The exception is
-	 * caught by <code>TaskManager</code> and is displayed in the interface.
+	 * caught by {@link TaskManager} and is displayed in the interface.
 	 * If a <code>Task</code> does not throw an exception,
 	 * the <code>Task</code> implementation does <i>not</i>
 	 * need to specify the <code>throws Exception</code> clause 
 	 * for the <code>run</code> method. Moreover, exceptions
 	 * should be <i>the</i> way the <code>Task</code> communicates
 	 * the occurrence of a fatal error, like a low-level exception or an invalid parameter,
-	 * to the <code>TaskManager</code>.
+	 * to the {@link TaskManager}.
 	 */
 	void run(TaskMonitor taskMonitor) throws Exception;
 
 	/**
-	 * This method is called by the <code>TaskManager</code> when the user chooses to cancel the
+	 * This method is called by the {@link TaskManager} when the user chooses to cancel the
 	 * <code>Task</code>.
 	 *
-	 * <p>This method should not be called by the programmer, as it might be called by the <code>TaskManager</code>.</p>
+	 * <p>This method should not be called by the programmer, as it might be called by the {@link TaskManager}.</p>
 	 *
 	 * <p>This method should inform the <code>Task</code> that it must
 	 * terminate execution cleanly and do any necessary cleanup

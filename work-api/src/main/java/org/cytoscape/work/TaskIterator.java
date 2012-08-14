@@ -7,9 +7,10 @@ import java.util.List;
 import java.util.NoSuchElementException;
 
 
-/** A TaskIterator provides the functionality of sequencing tasks.  Tasks provided by TaskIterator
- *  can be executed by calling a TaskManager's execute() method.
- *  @CyAPI.Final.Class
+/** 
+ * A TaskIterator provides the functionality of sequencing {@link Task}s.  {@link Task}s provided by TaskIterator
+ * can be executed by calling a {@link TaskManager}'s execute() method.
+ * @CyAPI.Final.Class
  */
 public final class TaskIterator implements Iterator<Task> {
 	private final List<Task> tasks;
@@ -42,10 +43,11 @@ public final class TaskIterator implements Iterator<Task> {
 		this(initialTasks.length,initialTasks);
 	}
 
-	/** Inserts "newTasks" immediately after "referenceTask".
+	/** 
+	 * Inserts "newTasks" immediately after "referenceTask".
 	 * @param referenceTask task to insert newTasks after.
 	 * @param newTasks tasks to insert after referenceTask.
-	 *  @throws IllegalStateException if "referenceTask" is not known to the iterator.
+	 * @throws IllegalStateException if "referenceTask" is not known to the iterator.
 	 */
 	public void insertTasksAfter(final Task referenceTask, final Task... newTasks) throws IllegalStateException {
 		final int referenceIndex = tasks.indexOf(referenceTask);
@@ -83,17 +85,19 @@ public final class TaskIterator implements Iterator<Task> {
 		}
 	}
 
-	/** Returns true if a call to next() would return another Task, otherwise false.
+	/** 
+	 * Returns true if a call to next() would return another Task, otherwise false.
 	 * @return true if a call to next() would return another Task, otherwise false.
 	 */
 	public boolean hasNext() {
 		return currentIndex < tasks.size();
 	}
 
-	/** Returns the next Task in order if the TaskIterator can still yield more Tasks, otherwise throws
-	 *          an exception.
+	/** 
+	 * Returns the next Task in order if the TaskIterator can still yield more Tasks, otherwise throws
+	 * an exception.
 	 * @return the next Task in order if the TaskIterator can still yield more Tasks, otherwise throws
-	 *          an exception.
+	 * an exception.
 	 */
 	public Task next() {
 		if (currentIndex < tasks.size()) {
@@ -105,14 +109,16 @@ public final class TaskIterator implements Iterator<Task> {
 	}
 
 	/**
-	 *  Unsupported -&gt; always throws an exception!
+	 * Unsupported -&gt; always throws an exception!
+	 * @throws UnsupportedOperationException
 	 */
 	public void remove() {
 		throw new UnsupportedOperationException("TaskIteratorImpl.remove() has not been implemented.");
 	}
 
-	/** Adds a reference to the TaskIterator to Tasks that are capable of maintaining such a reference, i.e.
-	 *  Tasks derived from AbstractTask.
+	/** 
+	 * Adds a reference to the TaskIterator to Tasks that are capable of maintaining such a reference, i.e.
+	 * Tasks derived from AbstractTask.
 	 */
 	private void tryToAddSelfReferenceToTask(final Task newTask) {
 		if (newTask instanceof AbstractTask) {

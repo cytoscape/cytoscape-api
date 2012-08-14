@@ -6,15 +6,24 @@ import java.util.Properties;
 
 /** 
  * Interface for classes that deal with reading out and writing back 
- * <code>Tunable</code>s and their properties.
+ * <code>Tunable</code>s and their properties. TunableHandler classes
+ * are provided to the system via {@link TunableHandlerFactory} services.
+ * Different presentation mediums (e.g. Swing GUI, command line, etc.) 
+ * will demand different TunableHandler and {@link TunableHandlerFactory}
+ * implementations to display, parse, get, and set the necessary 
+ * {@link Tunable} values. Each different type of object (String, Double,
+ * {@link org.cytoscape.work.util.ListSingleSelection} will need its own
+ * TunableHandler/{@link TunableHandlerFactory} pair to process
+ * fields/methods of that type.
+ *
  * @CyAPI.Spi.Interface
  */
 public interface TunableHandler {
 
 	/**
-	 * Returns an object describing a field annotated with 
-	 * {@link Tunable} or null if no field has been associated with this handler.
-	 * @return an object describing a field annotated with @Tunable 
+	 * Returns an object describing a field / get method annotated with 
+	 * {@link Tunable} or null if no field / get method has been associated with this handler.
+	 * @return an object describing a field / get method annotated with @Tunable 
 	 * or null if no field has been associated with this handler
 	 * @throws IllegalAccessException 
 	 * @throws InvocationTargetException 
@@ -22,8 +31,9 @@ public interface TunableHandler {
 	Object getValue() throws IllegalAccessException, InvocationTargetException;
 
 	/** 
-	 * Attempts to set the value "newValue" on the associated Tunable.
-	 * @param newValue the value to be written into the tunable property
+	 * Attempts to set the value of the associated field or set method that has been
+	 * annotated with {@link Tunable}.
+	 * @param newValue the value to be written into field or set method annotated with {@link Tunable} 
 	 * @throws IllegalAccessException 
 	 * @throws InvocationTargetException 
 	 */

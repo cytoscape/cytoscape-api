@@ -8,8 +8,10 @@ import java.util.Map;
  * An API for setting tunable fields and methods with predetermined
  * values in the Tasks found in the specified TaskIterator. This 
  * interface is provided as a convenience to TaskFactory authors
- * who also want to provide an addition API for their Task(s) that
- * are specified with method parameters.
+ * who also want to provide an additional API to their TaskFactories that
+ * allow Tasks to be configured with method parameters.
+ * TunableSetters are provided as OSGi services.
+ * <br/>
  * @CyAPI.Api.Interface
  */
 public interface TunableSetter {

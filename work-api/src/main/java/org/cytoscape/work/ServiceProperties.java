@@ -3,11 +3,9 @@ package org.cytoscape.work;
 /**
  * Reserved keywords for OSGi service properties (meta data).
  * 
- * These properties will be used for {@linkplain TaskFactory} services.
+ * These properties will be used for {@link TaskFactory} services.
  */
 public interface ServiceProperties {
-	
-	// Reserved Key Words for CyActions
 	
 	/**
 	 * Unique ID of an OSGi service.  If you need to filter a service from collection of services, 

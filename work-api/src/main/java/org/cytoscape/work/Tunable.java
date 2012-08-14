@@ -8,104 +8,135 @@ import java.lang.annotation.Target;
 
 
 /**
- * An annotation type that can be applied to a <i>field</i> or a <i>method</i> 
- * in order to allow <code>TunableInterceptor</code> to catch it,
- * and so to use its members to create a corresponding interface for a user.
+ * An annotation type that can be applied to public <i>fields</i> or a <i>methods</i> 
+ * in a {@link Task} object that allows the {@link Task} to be configured 
+ * with user supplied information.  <code>Tunable</code> annotations allow {@link Task}s to
+ * be configured with specific, user supplied data, without needing to produce
+ * a user interface. The {@link TaskManager} is responsible for inferring a 
+ * user interface from the types of the fields or methods being annotated. 
  * 
  * <br/>
- * This interface describes the different members that can be used in the 
- * <code>@Tunable(...)</code> to control the instantiation of user interface to
- * present to a user.
+ * <code>Tunable</code> annotations are suitable only for information that <b>must</b> be
+ * supplied by the user.  For instance, the name of a file to load can only
+ * be known by the user, so is appropriate to be specified by the user.  Other
+ * information necessary for the {@link Task} to execute should be provided
+ * as constructor arguments to the {@link Task}.
+ * 
+ * <br/>
+ * <code>Tunable</code> annotations provide several parameters that can be used to control
+ * the display of <code>Tunable</code>s in the eventual user interface.  These parameters
+ * are documented below.
  * <br/>
  * 
- * Here is an example of how to use a <code>Tunable</code> annotation:
+ * Here is an example of how to use a <code>Tunable</code> annotation for a field annotation:
  * <pre>
  * 	&#64;Tunable(description="your last name", group={"Human","pupil"}, params="displayState=collapsed")
  * 	public String lastName = "Smith";
  * </pre>
  * 
- * This tunable will be part of a group("<code>pupil</code>"), which is also a part of 
- * a metagroup("<code>Human</code>").<br/>
- * If a the user interface auto-generated from this is a GUI, <code>collapsed</code> could 
- * indicate that the initial state of the panel that may display the JTextField with the 
- * <code>lastName</code> will be collapsed and needs to 
- * be expanded in order to see its components.<br>
+ * This tunable will be grouped in the user interface first within the "Human" group, then
+ * within the "pupil" group. How this grouping is displayed to users is a function of which {@link TaskManager}
+ * is used. Likewise, if supported by the {@link TaskManager}, the display state of the <code>Tunable</code>
+ * will initially be collapsed.
+ * <br/>
+ * Here is an example of how to use a <code>Tunable</code> annotation for method annotation.
+ * Method annotations require both a getter and a setter method to get and set a 
+ * value. Only the getter method needs to be annotated.  The getter method must take no arguments
+ * and return a value and be named with the prefix "get".  The setter method does not need a 
+ * {@link Tunable} annotation, however the method must take a single argument of the same type as
+ * the getter method, it must return void, it must be named with the prefix "set", and the
+ * rest of the name must match that of the getter method.
+ * <pre>
+ * 	&#64;Tunable(description="your last name", group={"Human","pupil"}, params="displayState=collapsed")
+ * 	public String getLastName() {
+ *       return lastName;
+ *  }
+ * 
+ *  // NO Tunable annotation for the setter method. 
+ * 	public void setLastName(String newLastName) {
+ *       lastName = newLastName;
+ *  }
+ * </pre>
+ *
  * @CyAPI.Api.Interface
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD,ElementType.METHOD})
 public @interface Tunable {
 	/**
-	 * Human-readable label identifying the tunable as displayed to a user.
+	 * Mandatory, human-readable label identifying the Tunable as displayed to a user.
 	 */
 	String description() default "";
 
 	/**
-	 * Used to define all the groups in which the Tunable takes part (by default, 
-	 * its doesn't belong to any group).
+	 * Used to define the presentation grouping of the Tunable. By default a Tunable
+	 * belongs to the top level group.
 	 * 
 	 * <b>Example</b>:
 	 * <pre>
-	 * 	&#64;Tunable(description="write your last name", group={"Company","Department","office","identity"})
+	 * 	&#64;Tunable(description="write your last name", group={"Company","Department","Office"})
 	 * 	public String lastName = "Smith";
 	 * </pre>
 	 * 
-	 * This String <code>Tunable</code> will take part of these 4 groups.
-	 * <b>warning</b>: Note that they are set in an order of subgroups of a main one.
+	 * The <i>lastName</i> <code>Tunable</code> will be nested within the "Company", "Department", 
+	 * "Office", and "Identity" groups. The order of groups defines their nesting.
 	 * 
 	 * <b>Example</b>:
 	 * <pre>
-	 * 	&#64;Tunable(description="write your first name", groups={"Company","Department","office","identity"})
+	 * 	&#64;Tunable(description="write your first name", groups={"Company","Department","Office","Identity"})
 	 * 	public String firstName = "John";
 	 * 
-	 * 	&#64;Tunable(description="write the name of your office", groups={"Company","Department","office"})
-	 * 	public String officeName = "CytoscapeDevelopment's Office";
+	 * 	&#64;Tunable(description="write the name of your office", groups={"Company","Department","Office"})
+	 * 	public String officeName = "Cytoscape Development";
 	 * 	</pre>
-	 * 
-	 * Here we have a second item for the identity of a person(the <i>firstName</i>).So, 
-	 * the 2 <code>Tunable</code> <i>lastName</i> and <i>firstName</i> are in the subgroup 
-	 * <i>identity</i> But, the <code>Tunable</code> String officeName will only take part 
-	 * of the upperGroup <i>office</i>, and so won't be set with these other 2 fields.
+	 *<br> 
+	 * Here we add a second item (<i>firstName</i>) to the "Identity" group and then add the 
+	 * <i>officeName</i> <code>Tunable</code> to "Office" group.  The "Identity" group will
+	 * appear with <i>officeName</i> within the "Office" group.
 	 */
 	String[] groups() default {};
 
 	
 	/**
-	 * Boolean value to choose if the <code>Tunable</code> will control the display of other, 
-	 * nested child tunables.
+	 * Returns true if this field or method is used to control the display of <i>other</i>
+	 * <code>Tunable</code>s. The <i>other</i> Tunables in question are matched according
+	 * the {@link Tunable#groups} value and the {@link Tunable#xorKey} of the <i>other</i>
+	 * Tunables. See {@link Tunable#xorKey} for a full example.
+	 * @return true if this field or method is used to control the display of <i>other</i>
+	 * <code>Tunable</code>s. 
 	 */
 	boolean xorChildren() default false;
 
 	
 	/**
-	 * Key that will refer to the "value" of the <code>Tunable</code> which has 
-	 * <code>xorChildren=true</code>
+	 * Returns a value that matches one of the values found in a <i>different</i> Tunable
+	 * annotated field or method that returns <code>true</code> for the {@link Tunable#xorChildren}
+	 * method.
 	 * 
 	 * <b>Example</b> : 
 	 * <pre>
-	 * 	&#64;Tunable(description="Single list", group={"TestGroup"}, <b>xorChildren=true</b>)
-	 * 	public ListSingleSelection<String> chooser = new ListSingleSelection<String>("<b>Names</b>","<b>FirstNames</b>");
+	 * 	&#64;Tunable(description="Distance measure", group={"Measure"}, <b>xorChildren=true</b>)
+	 * 	public ListSingleSelection<String> chooser = new ListSingleSelection<String>("<b>Metric</b>","<b>English</b>");
 	 * 	
-	 * 	&#64;Tunable(description="Multi list", group={"TestGroup","Names"}, <b>xorKey="Names"</b>)
-	 * 	public ListMultipleSelection<String> names = new ListMultipleSelection<String>("Johnson","Turner","Smith");
+	 * 	&#64;Tunable(description="Metric distances", group={"Measure","Metric"}, <b>xorKey="Metric"</b>)
+	 * 	public ListSingleSelection<String> metric = new ListSingleSelection<String>("millimeter","meter","kilometer");
 	 * 
-	 * 	&#64;Tunable(description="Multi list", group={"TestGroup","First Names"}, <b>xorKey="FirstNames"</b>)
-	 * 	public ListMultipleSelection<String> firstnames = new ListMultipleSelection<String>("George","Jane","Sarah");
+	 * 	&#64;Tunable(description="English distances", group={"Measure","English"}, <b>xorKey="English"</b>)
+	 * 	public ListSingleSelection<String> english = new ListSingleSelection<String>("inch","yard","mile");
 	 * </pre>
 	 *
-	 * Here, the 2 <code>ListMultipleSelection</code> won't be displayed in the GUI at the 
-	 * same time : each of them depends on the xorKey(<i>FirstNames</i> or <i>Names</i>)
-	 * that will match the "value" (i.e item that has been selected) in the 
-	 * <code>ListSingleSelection</code>
+	 * Based on the selection made in the "chooser" <code>Tunable</code>, either the "metric" or
+	 * the "english" <code>Tunable</code> will be displayed, not both. 
+	 * The <code>xorKey</code> value must match one of the
+	 * values specified in the <code>xorChildren</code> <code>Tunable</code>.
 	 */
 	String xorKey() default "";
 	
 	
 	/**
-	 * To add a dependency between 2 or more <code>Tunables</code> 
-	 * 
-	 * <p>The <code>JPanel</code> of the <code>Tunable</code> that depends on the 
-	 * other one will be activated only if the value which is required is set.</p>
+	 * To add a dependency between two or more <code>Tunables</code>, where
+	 * the display of one <code>Tunable</code> depends on the 
+	 * the state of another. 
 	 * 
 	 * <p>Here is an example of how to add dependencies between <code>Tunables</code>:</p>
 	 * 
@@ -116,7 +147,7 @@ public @interface Tunable {
 	 *   &#64;Tunable(description="Host name",dependsOn="type=true")
 	 *   public String hostname="";
 	 * </pre>
-	 * So <code>hostname</code> will be activated if <code>type</code> is set to "true"
+	 * So <code>hostname</code> will only be displayed if <code>type</code> is set to "true"
 	 */
 	String dependsOn() default "";
 
@@ -136,8 +167,8 @@ public @interface Tunable {
 	 *   <li>
 	 *     slider: used when the object's values range should be represented by a slider, 
 	 *     the value should always be "true".
-	 *     This is being used by <code>AbstractBounded</code> and 
-	 *     <code>AbstractFlexiblyBounded</code>.
+	 *     This can be used by <code>BoundedDouble</code>, 
+	 *     <code>BoundedFloat</code>, and similar classes.
 	 *   </li>
 	 *   <li>
 	 *     alignments: the value should be a comma-separated list of "horizontal" or "vertical".

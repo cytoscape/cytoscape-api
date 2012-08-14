@@ -2,17 +2,18 @@ package org.cytoscape.work;
 
 
 /**
- * Executes the Tasks found in the TaskIterator provided by a TaskFactory. 
+ * Executes the {@link Task}s found in the {@link TaskIterator} provided by a {@link TaskFactory}. 
  * @CyAPI.Api.Interface
  */
 public interface TaskManager<T,C> {
 
 	/**
-	 * Returns a configuration object generated from the Tunables
-	 * read from the TaskFactory.
-	 * @param factory The TaskFactory that will be scanned for Tunables.
-	 * @return a configuration object generated from the Tunables
-	 * read from the TaskFactory.
+	 * Returns a configuration object generated from the {@link Tunable}s
+	 * read from the {@link TaskFactory}.
+	 * @param factory The {@link TaskFactory} that will be scanned for {@link Tunable}s.
+	 * @param tunableContext An object providing context for the {@link Tunable}s. 
+	 * @return a configuration object generated from the {@link Tunable}s
+	 * read from the {@link TaskFactory}.
 	 */
 	 T getConfiguration(TaskFactory factory, Object tunableContext);
 
@@ -25,14 +26,13 @@ public interface TaskManager<T,C> {
 	void setExecutionContext(C context);
 
 	/**
-	 * This method is called to execute the Tasks in a TaskIterator provided
-	 * by a <code>TaskFactory</code>.  
-	 * This method returns once the <code>Task</code>s derived from the <code>TaskIterator</code>
-	 * returned by the <code>TaskFactory</code>'s <code>createTaskIterator()</code> method have
+	 * This method is called to execute the {@link Task}s in a {@link TaskIterator} provided
+	 * by a {@link TaskFactory}.  
+	 * This method returns once the {@link Task}s derived from the {@link TaskIterator}
+	 * returned by the {@link TaskFactory}'s <code>createTaskIterator()</code> method have
 	 * started (but not necessarily completed) execution. 
-	 * It <i>does not wait</i> for the <code>Task</code>s to finish. 
-	 * @param factory The <code>TaskFactory</code> whose tasks returned by its createTaskIterator()
-	 * method's iterator will be executed
+	 * It <i>does not wait</i> for the {@link Task}s to finish. 
+	 * @param iterator The {@link TaskIterator} whose tasks will be executed.
 	 */
 	void execute(TaskIterator iterator);
 }
