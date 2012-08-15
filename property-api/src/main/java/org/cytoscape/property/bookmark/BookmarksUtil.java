@@ -1,8 +1,6 @@
 package org.cytoscape.property.bookmark;
 
 import java.util.List;
-import java.util.Map;
-
 /**
  * A set of utility methods to manipulate the bookmarks.
  * @CyAPI.Api.Interface
@@ -84,12 +82,4 @@ public interface BookmarksUtil {
 	 */
 	boolean containsBookmarks(Bookmarks pBookmarks, String pCategoryName, DataSource pDataSource);
 
-	/**
-	 * Retrive the org.cytoscape.io.datasource.DataSource for the given org.cytoscape.property.internal.bookmark.DataSource.
-	 * 
-	 * @param pDataSource DataSource
-	 * 
-	 * @return org.cytoscape.io.datasource.DataSource if the DataSource exist, null otherwise
-	 */	
-	org.cytoscape.io.datasource.DataSource getCyDataSource(DataSource pDataSource);
 }
