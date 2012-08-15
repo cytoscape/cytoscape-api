@@ -82,4 +82,10 @@ public interface BookmarksUtil {
 	 */
 	boolean containsBookmarks(Bookmarks pBookmarks, String pCategoryName, DataSource pDataSource);
 
+	/**
+	 * Get the provider name from DataSource object
+	 * 
+	 * @param pDataSource a single bookmark
+	 */	
+	String getProvider(DataSource pDataSource);
 }
