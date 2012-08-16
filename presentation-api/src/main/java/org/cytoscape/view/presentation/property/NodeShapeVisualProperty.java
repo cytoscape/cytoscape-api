@@ -107,7 +107,11 @@ public final class NodeShapeVisualProperty extends AbstractVisualProperty<NodeSh
 	 * @return True if the specified shape is one of the possible default shape values.
 	 */
 	public static boolean isDefaultShape(final NodeShape shape) {
-		return DEFAULT_SHAPES.containsValue(shape);
+		for(NodeShape s: DEFAULT_SHAPES.values()) {
+			if(shape.equals(s))
+				return true;
+		}
+		return false;
 	}
 
 	private static final class NodeShapeImpl extends AbstractVisualPropertyValue implements NodeShape {
