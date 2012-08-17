@@ -1,7 +1,6 @@
 package org.cytoscape.io.datasource;
 
 import java.util.Collection;
-
 import org.cytoscape.io.DataCategory;
 
 /**
@@ -36,4 +35,23 @@ public interface DataSourceManager {
 	 * @return all data sources
 	 */
 	Collection<DataSource> getAllDataSources();
+	
+	/**
+	 * Remove a DataSource from the DataSourceManager
+	 * @return true if the dataSource is removed successfully
+	 */	
+	boolean deleteDataSource(DataSource pDataSource);
+
+	/**
+	 * Save a DataSource to the DataSourceManager
+	 * @return void
+	 */		
+	void saveDataSource(DataSource pDataSource);
+
+	/**
+	 * Check if a DataSource already existed in the DataSourceManager
+	 * @return true if the dataSource is in the DataSourceManager
+	 */		
+	boolean containsDataSource(DataSource pDataSource);
+
 }
