@@ -123,6 +123,59 @@ remove ({@link org.cytoscape.model.CyNetworkManager#destroyNetwork}) and inquire
 ({@link org.cytoscape.model.CyNetworkManager#getNetwork}, {@link org.cytoscape.model.CyNetworkManager#getNetworkSet}, and
 {@link org.cytoscape.model.CyNetworkManager#networkExists}).  Similarly, the {@link org.cytoscape.model.CyTableManager}
 is the repository for the information about registered tables.
+<h4>Events ({@link org.cytoscape.model.events})</h4>
+Sometimes, it's useful for an App to receive notification that something has changed within the model.  For example,
+an App that provides the user with a list of available column names would want to update that list when
+a new network was added.  Two very common examples are to be notified when a network has been added, and
+to be notified when the the user has selected something.   Cytoscape 3 event listeners use the OSGi service model rather than
+the older "addXXXListener" used by previous versions of Cytoscape.  To listen for the addition of a new network, for example,
+the App writer would provide a class that implements {@link org.cytoscape.model.events.NetworkAddedListener}.  This interface
+provides a single method: {@link org.cytoscape.model.events.NetworkAddedListener#handleEvent}, which takes as an argument
+the {@link org.cytoscape.model.events.NetworkAddedEvent}, which is fired by the {@link org.cytoscape.model.CyNetworkManager} when
+a new network is added (using {@link org.cytoscape.model.CyNetworkManager#addNetwork}).  In order for this listener
+to be called, it must be registered as an OSGi service.  If the App is an OSGi bundle, this may be done in the 
+<b>CyActivator</b> class provided by the bundle.  If the App is a Simple App (inherits from {@link org.cytoscape.app.AbstractCyApp}) then
+the App implementer should use the following code:
+<dl>
+<dd><pre><code>
+ServiceRegistrar serviceRegistrar = getCyServiceRegistrar(); // This comes from CyAppAdapter
+NetworkAddedListener myListener = new MyListener();
+serviceRegistrar.registerService(myListener, NetworkAddedListener.class, new Properties());
+</code></pre></dd>
+</dl>
+Selection in Cytoscape 3 is actually handled by setting a boolean value in a {@link org.cytoscape.model.CyTable} -- 
+in this case, the {@link org.cytoscape.model.CyNetwork.SELECTED} column in the {@link org.cytoscape.model.CyNetwork.DEFAULT_ATTRS} 
+table for the associated node or edge.  As a result, the way to listen for selection is
+actually to listen for a change in the appropriate row:
+<dl>
+<dd><pre><code>
+public class MyListener implements RowsSetListener {
+	// Probably want a CyNetwork or list of CyNetworks as arguments here?
+	public MyListener() {
+	}
+
+	public void handleEvent(RowsSetEvent e) {
+		Collection&lt;RowSetRecord&gt; rowsSet = e.getColumnRecords(CyNetwork.SELECTED);
+		for (RowSetRecord record: rowsSet) {
+			CyRow row = record.getRow(); // Get the row that was set
+			boolean selected = ((Boolean)record.getValue()).booleanValue();  // What it was set to
+			// Take appropriate action.  For example, might want to get
+			// the node or edge that was selected (or unselected)
+			// CyNode node = network.getNode(row.get(CyIdentifiable.SUID, Long.class));
+		}
+	}
+}
+</code></pre></dd>
+</dl>
+and then, to register the listener...
+<dl>
+<dd><pre><code>
+ServiceRegistrar serviceRegistrar = getCyServiceRegistrar(); // This comes from CyAppAdapter
+NetworkAddedListener myListener = new MyListener();
+serviceRegistrar.registerService(myListener, RowsSetListener.class, new Properties());
+</code></pre></dd>
+</dl>
+
 <h3>Some hints</h3>
 <h4>Selected nodes and edges</h4>
 One of the common requirements for Apps is to be able to get the list of selected nodes or edges.  In Cytoscape, the information
