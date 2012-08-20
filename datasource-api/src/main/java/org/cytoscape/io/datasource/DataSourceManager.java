@@ -35,7 +35,13 @@ public interface DataSourceManager {
 	 * @return all data sources
 	 */
 	Collection<DataSource> getAllDataSources();
-	
+
+	/**
+	 * Returns all data categories
+	 * @return all Data Categories
+	 */
+	Collection<DataCategory> getAllCategories();
+
 	/**
 	 * Remove a DataSource from the DataSourceManager
 	 * @return true if the dataSource is removed successfully
