@@ -53,10 +53,10 @@ or by turning an existing node into an empty group
 ({@link org.cytoscape.group.CyGroupFactory#createGroup(CyNetwork network, CyNode node, boolean register)}):
 <dl><dd><code>CyGroup emptyGroup = groupFactory.createGroup(network, node, true);</code></dd></dl>
 or by providing lists of nodes and edges to be the initial membership of the group
-({@link org.cytoscape.group.CyGroupFactory#createGroup(CyNetwork network, List<CyNode> nodes, List<CyEdge> edges, boolean register)}):
+({@link org.cytoscape.group.CyGroupFactory#createGroup(CyNetwork network, List nodes, List edges, boolean register)}):
 <dl><dd><code>CyGroup emptyGroup = groupFactory.createGroup(network, nodes, edges, true);</code></dd></dl>
 or by adding a list of nodes and edges to an existing node to make it a group
-({@link org.cytoscape.group.CyGroupFactory#createGroup(CyNetwork network, CyNode node, List<CyNode> nodes, List<CyEdge> edges, boolean register)}):
+({@link org.cytoscape.group.CyGroupFactory#createGroup(CyNetwork network, CyNode node, List nodes, List edges, boolean register)}):
 <dl><dd><code>CyGroup emptyGroup = groupFactory.createGroup(network, node, nodes, edges, true);</code></dd></dl>
 In any of these cases, the last argument is a flag to tell the group factory code whether this
 group should be registered with the {@link org.cytoscape.group.CyGroupManager}.  This should almost
@@ -112,7 +112,7 @@ Group events are provided to inform App implementers of changes in the membershi
 ({@link org.cytoscape.group.events.GroupEdgesAddedListener}, 
 {@link org.cytoscape.group.events.GroupNodesAddedListener}, 
 {@link org.cytoscape.group.events.GroupEdgesRemovedListener}, and
-{@link org.cytoscape.group.events.GroupNodesRemovedistener}), when groups are created and
+{@link org.cytoscape.group.events.GroupNodesRemovedListener}), when groups are created and
 destroyed
 ({@link org.cytoscape.group.events.GroupAboutToBeDestroyedListener},
 {@link org.cytoscape.group.events.GroupAddedListener}), and perhaps most usefully when
