@@ -1,0 +1,152 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<HTML>
+<BODY>
+This document represents the API specification for Cytoscape 3.0 using
+a Java Swing front-end.
+<h3>Cytoscape Apps</h3>
+Cytoscape 3 is build on the <a href="http://www.osgi.org">OSGi</a> framework.  
+In keeping with the underlying framework, extending Cytoscape involves adding
+an OSGi "bundle" that registers some set of services.  For Cytoscape, we have
+made the process of creating and deploying extensions a little easier.  Cytoscape
+defines two different types of extensions (called Apps in Cytoscape terminology):
+a "Simple App" and an OSGi Bundle App.  The are only a couple of major differences 
+between a "Simple App" and a "Bundle App".  First, all "Simple Apps" are loaded using
+the same class loader.  This means that it will be much more difficult for "Simple App"
+that use the same external library (not provided by the Cytoscape core) to co-exist.
+And second, "Simple Apps" and "Bundle Apps" access services in the Cytoscape core slightly
+differently.
+<h4>Simple App</h4>
+A Cytoscape "Simple App" will generally be an extension of {@link org.cytoscape.app.swing.AbstractCySwingApp}
+if you intend to use the swing version of Cytoscape, or {@link org.cytoscape.app.AbstractCyApp} if you
+don't need any swing functions.  Apps that inherit from {@link org.cytoscape.app.AbstractCyApp} can access
+most of the Cytoscape core functionality through the protected field 
+{@link org.cytoscape.app.AbstractCyApp#adapter}.
+This field provides methods to access to most of the manager and factory classes in Cytoscape (see
+{@link org.cytoscape.app.CyAppAdapter}.  Apps that inherit from
+{@link org.cytoscape.app.swing.AbstractCySwingApp} can access the same classes using the 
+{@link org.cytoscape.app.swing.AbstractCySwingApp#swingAdapter}, which also provides access to
+some swing-specific classes ({@link org.cytoscape.application.swing.CySwingApplication}, 
+{@link org.cytoscape.work.swing.DialogTaskManager}, and {@link org.cytoscape.work.swing.PanelTaskManager}).
+In either case, the implementation must call super in it's constructor to make these methods
+available:
+<dl><dd><pre><code>
+public class MyApp extends AbstractCyApp {
+    public MyApp(CyAppAdapter adapter) {
+       super(adapter);
+       // app code here
+    }
+}
+</code></pre></dd></dl>
+<h4>Bundle App</h4>
+A "Bundle App" is a little different in that none of the services are provided -- the app is
+responsible for requesting specific services from the OSGi framework.  All "Bundle Apps" should
+have a CyActivator class that extends {@link org.cytoscape.service.util.AbstractCyActivator}.  
+Implementations are required to provide the "start" method, which takes an OSGi BundleContext as
+an argument.  In the sample below, the start method gets a service and registers two services
+that it provides:
+<dl><dd><pre><code>
+public class CyActivator extends AbstractCyActivator {
+  public CyActivator() {
+    super();
+  }
+
+  public void start(BundleContext bc) {
+    CySwingApplication cytoscapeDesktopService = getService(bc,CySwingApplication.class);
+
+    MyCytoPanel myCytoPanel = new MyCytoPanel();
+    Sample02 sample02Action = new Sample02(cytoscapeDesktopService,myCytoPanel);
+
+    registerService(bc,myCytoPanel,CytoPanelComponent.class, new Properties());
+    registerService(bc,sample02Action,CyAction.class, new Properties());
+  }
+}
+</code></pre></dd></dl>
+Both approaches will provide access to all Cytoscape core services, however, when publishing a service
+(e.g. a listener) in the "Simple App" you will need to call the {@link org.cytoscape.app.CyAppAdapter#getCyServiceRegistrar} anyways in order to call the requisite 
+{@link org.cytoscape.service.util.CyServiceRegistrar#registerService} method.
+<h3>Accessing Cytoscape services</h3>
+As briefly described above, accessing Cytoscape tasks and factories depends largely on the approach
+("Simple App" vs. "Bundle App") that you are taking.  In the case of a "Simple App", you will
+probabily just call the appropriate {@link org.cytoscape.app.CyAppAdapter} method.  In the case of
+a "Bundle App", it's a simple matter of calling 
+{@link org.cytoscape.service.util.AbstractCyActivator#getService(BundleContext bc, java.lang.Class)} 
+with the bundle context that was provided
+as an argument to the start method, and the class of the service you want to use.  For example, to
+create a new {@link org.cytoscape.model.CyNetwork}, you could:
+<dl><dd><pre><code>
+public class CyActivator extends AbstractCyActivator {
+  public CyActivator() {
+    super();
+  }
+
+  public void start(BundleContext bc) {
+    CyNetworkFactory factory = getService(bc, CyNetworkFactor.class);
+    // call CyNetworkFactory's createNetwork method, as appropriate
+  }
+}
+</code></pre></dd></dl>
+Providing services to Cytoscape (and other Apps) is also relatively straightforward:
+<dl><dd><pre><code>
+MyService service = new MyService();
+registerService(bc, service, MyService.class, new Properties());
+</code></pre></dd></dl>
+Now, any app wanting to use "MyService" can do so by doing a "getService".  The {@link java.util.Properties}
+object can be passed to the service listener (if there is one for this class).  (For examples 
+on how this can be used in Cytoscape, see <a href="#newContext">Adding a new context menu item</a> below).
+
+<h3>Getting started using the API</h3>
+The Cytoscape 3 core provides significant functionality to the App developer.  Currently, the
+Cytoscape core API has 58 packages: some of which have relatively few interfaces and class (e.g. 
+{@link org.cytoscape.service.util}) and some of which have significantly more (e.g.
+{@link org.cytoscape.model}).  The best way to get starting using the Cytoscape API is to make
+sure you have a thorough understanding of the core Cytoscape model: {@link org.cytoscape.model}.
+This package provides all of the basic network and table concepts used throughout Cytoscape.
+<p>The next package to understand is Cytoscape's view-model: {@link org.cytoscape.view.model}.
+The view-model provides view-level mechanisms for the underlying model, including the way to
+set various visual properties (see 
+{@link org.cytoscape.view.model.View#setVisualProperty}).  After
+developing an understanding of the model and view-model, you should peruse the hints given
+below and then let the needs of your App drive your exploration of the rest of the API.
+<h3>Hints</h3>
+<h4>Writing a listener</h4>
+Listeners in Cytoscape 3 are a little different from "traditional" Java listeners in that
+listeners are not "added" to an object: e.g. there is no equivilent to Java Swing's 
+"addPropertyChangeListener" method.  Instead, in Cytoscape 3, you implement the listener and
+register it as a service.  So, in the example below, the App (a Bundle App in this case) creates
+and registers a listener to {@link org.cytoscape.model.events.NetworkAddedEvent}s:
+<dl><dd><pre><code>
+public class CyActivator extends AbstractCyActivator {
+  public CyActivator() {
+    super();
+  }
+
+  public void start(BundleContext bc) {
+    MyNetworkAddedListener listener = new MyNetworkAddedListener();
+    registerService(bc, listener, NetworkAddedListener.class, new Properties());
+  }
+}
+</code></pre></dd></dl>
+And the code for the actual listener:
+<dl><dd><pre><code>
+public class MyNetworkAddedListener implements NetworkAddedListener {
+  public MyNetworkAddedListener(/* Whatever context your app needs */) {
+  }
+
+  public void handleEvent({@link org.cytoscape.model.events.NetworkAddedEvent} e) {
+    CyNetwork addedNetwork = e.getNetwork();
+    // Respond as appropriate
+  }
+}
+</code></pre></dd></dl>
+Note that you must provide the type of the class or interface you want to register
+(NetworkAddedListener, in this case).
+<h4>Using Tasks and Task Factories</h4>
+TBD
+<h4>Adding a new menu item</h3>
+TBD
+<h4><a name="newContext">Adding a new context menu item</a></h3>
+TBD
+<h4>Listening for selection</h3>
+TBD
+</BODY>
+</HTML>

@@ -113,7 +113,8 @@
           <dependencySourceIncludes>
             <dependencySourceInclude>org.cytoscape:*</dependencySourceInclude>
           </dependencySourceIncludes>
-		  <excludePackageNames>*.internal.*</excludePackageNames>
+          <excludePackageNames>*.internal.*</excludePackageNames>
+          <overview>${project.build.sourceDirectory}/overview.html</overview>
         </configuration>
         <executions>
           <execution>
