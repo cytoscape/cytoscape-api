@@ -50,7 +50,7 @@ public interface CyProperty<P> {
 	 * will be a subdirectory of the "user.home" directory defined in the default Java
 	 * system properties ({@link System#getProperties()}).
 	 */
-	String DEFAULT_PROPS_CONFIG_DIR = ".cytoscape";
+	String DEFAULT_PROPS_CONFIG_DIR = "CytoscapeConfiguration";
 	
 	/**
 	 * Returns the name of the CyProperty.
