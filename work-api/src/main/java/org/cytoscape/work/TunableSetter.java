@@ -27,4 +27,12 @@ public interface TunableSetter {
 	 */
 	TaskIterator createTaskIterator(TaskIterator taskIterator, Map<String,Object> tunableValues);
 
+	/**
+	 * Applies each value from the key-value pairs in tunableValues to the tunable in the
+	 * given object whose name matches the corresponding key.
+	 * @param object The object whose tunables will be set.
+	 * @param tunableValues A map of names to tunable values.  The names must match the field or method
+	 * name of the tunable in question.
+	 */
+	void applyTunables(Object object, Map<String,Object> tunableValues);
 }
