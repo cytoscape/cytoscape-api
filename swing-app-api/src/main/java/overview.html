@@ -141,12 +141,67 @@ public class MyNetworkAddedListener implements NetworkAddedListener {
 Note that you must provide the type of the class or interface you want to register
 (NetworkAddedListener, in this case).
 <h4>Using Tasks and Task Factories</h4>
-TBD
-<h4>Adding a new menu item</h3>
-TBD
-<h4><a name="newContext">Adding a new context menu item</a></h3>
-TBD
-<h4>Listening for selection</h3>
-TBD
+In Cytoscape 3, the basic unit of work is a {@link org.cytoscape.work.Task}.  (Due to some
+unfortunate early mistakes in naming, {@link org.cytoscape.work.Task} is part of 
+{@link org.cytoscape.work} package.  The {@link org.cytoscape.task} package provides a
+list of core task types and some useful core tasks.)
+There three important interfaces that you should be familiar with if you are going to
+implement your own Task: {@link org.cytoscape.work.Task}, {@link org.cytoscape.work.TaskIterator},
+and {@link org.cytoscape.work.TaskFactory}.  In order to make your Task available to
+Cytoscape, you will need to provide a {@link org.cytoscape.work.TaskFactory}.  The
+{@link org.cytoscape.work.TaskFactory} provides two important methods.  The most critical
+is {@link org.cytoscape.work.TaskFactory#createTaskIterator}, which is called by
+Cytoscape to get a {@link org.cytoscape.work.TaskIterator}, which should include <i>at least</i>
+your {@link org.cytoscape.work.Task}. As the name implies, though, a {@link org.cytoscape.work.TaskIterator}
+can include a number of tasks, which will be executed sequentially.  The other method, 
+{@link org.cytoscape.work.TaskFactory#isReady} is called to determine if your {@link org.cytoscape.work.Task}
+can be executed.  For example, if your  {@link org.cytoscape.work.Task} requires the currently selected
+nodes as input, and nothing is selected, this method should return <b>false</b>.
+<p>The {@link org.cytoscape.work.Task} itself has two methods: {@link org.cytoscape.work.Task#run}, which is
+used to execute the task asynchronously in a separate thread, and {@link org.cytoscape.work.Task#cancel}, 
+which is used to signal the Task that it should cancel its activity and return.  The
+{@link org.cytoscape.work.Task#run} method has one argument: a {@link org.cytoscape.work.TaskMonitor}, which
+is used to provide feedback to the user during the operation of the task.
+<p>Cytoscape provides a large number of existing {@link org.cytoscape.work.Task}, 
+and {@link org.cytoscape.work.TaskFactory} interface extensions as well as many abstract base classes.
+You should take care, however, about which base class you use and how you register the task factory
+since generally, the Cytoscape core is listening for the registration of certain types of TaskFactories
+to add them to appropriate menus.  
+<p><i>Something about Tunables?  TunableSetter? Properties?</i></p>
+<h4>Adding a new menu item</h4>
+One common use for a TaskFactory is to add a menu item to one of Cytoscape's standard
+menus.  For example assume we want to add a new item to the Cytoscape <b>App</b> menu.
+We would add to our CyActivator:
+<dl><dd><pre><code>
+NetworkTaskFactory myTaskFactory = new MyTaskFactory();
+Properties myNetworkTaskFactoryProps = new Properties();  
+myNetworkTaskFactoryProps.setProperty(ENABLE_FOR, "network");
+myNetworkTaskFactoryProps.setProperty(PREFERRED_MENU,"App.MyApp.");
+myNetworkTaskFactoryProps.setProperty(MENU_GRAVITY,"1.0");
+myNetworkTaskFactoryProps.setProperty(TITLE,"My Application Task");
+registerService(bc,myTaskFactory,NetworkTaskFactory.class, myNetworkTaskFactoryProps);
+</code></pre></dd></dl>
+This will put a new menu item under App: "App&rarr;MyApp&rarr;My Application Task".  A couple
+of things to note.  First, the properties are all defined as static strings in 
+{@link org.cytoscape.work.ServiceProperties}, and you should always use the symbolic name.
+Second, note the "MENU_GRAVITY" property key.  Cytoscape's menus arrange the order of items in
+the menu using this "MENU_GRAVITY" property.  Generally speaking, larger is further down the menu
+menu.  
+<h4><a name="newContext">Adding a new context menu item</a></h4>
+Adding a node or edge context menu is essentially the same as adding a menu item shown
+above:
+<dl><dd><pre><code>
+NodeViewTaskFactory myTaskFactory = new MyTaskFactory();
+Properties myNodeViewTaskFactoryProps = new Properties();  
+myNodeViewTaskFactoryProps.setProperty(ENABLE_FOR, "selectedNodesOrEdges");
+myNodeViewTaskFactoryProps.setProperty(PREFERRED_MENU,"App.MyApp.");
+myNodeViewTaskFactoryProps.setProperty(MENU_GRAVITY,"1.0");
+myNodeViewTaskFactoryProps.setProperty(IN_TOOL_BAR,"false");
+myNodeViewTaskFactoryProps.setProperty(TITLE,"My Application Task");
+registerService(bc,myTaskFactory,NodeViewTaskFactory.class, myNodeViewTaskFactoryProps);
+</code></pre></dd></dl>
+As with the menu item above, the Cytoscape core will "notice" that this TaskFactory has been
+registered and what it's type is.  When the user does a right-click over a node, all TaskFactories
+of that NodeViewTaskFactory type will be called.
 </BODY>
 </HTML>
