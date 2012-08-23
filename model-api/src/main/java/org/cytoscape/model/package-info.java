@@ -1,23 +1,57 @@
 /**
 This package contains the core interfaces that define the basic network and
-table data types that constitute the foundation of Cytoscape.  Cytoscape supports
-two basic types of data: network data {@link org.cytoscape.model.CyNetwork} and table data  
-{@link org.cytoscape.model.CyTable}.  For the most part, these can be thought of as
-independent, but Cytoscape provides a way to index table rows using network object ids,
-thus providing a linkage between them.  In fact, Cytoscape uses this linkage internally
-to store network metadata in the tables.
+table data structures that are foundational to Cytoscape.  Cytoscape supports
+two basic, separate types of data: network data {@link org.cytoscape.model.CyNetwork} and table data  
+{@link org.cytoscape.model.CyTable}.
+
+<p>
+For the most part, the table and network data structures are
+independent. However, Cytoscape can link them together by indexing table rows using network object ids.
+In fact, Cytoscape uses this linkage internally to store network metadata in the tables.
+</p>
+
 <h3>CyTable</h3>
 A {@link org.cytoscape.model.CyTable} is Cytoscape's representation of tabular data.  A {@link org.cytoscape.model.CyTable}
 consists of a series of columns ({@link org.cytoscape.model.CyColumn}) and rows ({@link org.cytoscape.model.CyRow}).  
-Columns are typed and the type of the column must be defined when it is created. All data access is through the
-{@link org.cytoscape.model.CyRow}, which has a primary key.  The column for the primary key is created when the
-table is created (see {@link org.cytoscape.model.CyTableFactory}).  Cytoscape provides an extention to the standard
-table model that allows a column in one table to refer to a column in another table.  These so-called "virtual" columns
-provide a mechanism for tables to share data.  This is used extensively by Cytoscape to provide shared data between networks.
-When tables are created by Cytoscape, they are provided with a unique identifier (SUID).  This SUID may be used to
+
+<p>
+Columns are typed. A column has a single type that is only defined when it is created.
+A column would have the <i>string type</i> if it stores text. Or it could have the <i>integer type</i>
+if it stores whole numbers. Besides strings and integers, columns can have other types.
+</p>
+
+<p>
+Cell values in the table are accessed through a
+{@link org.cytoscape.model.CyRow}. Each row has a <i>primary key</i>.
+A primary key is the row's unique identifier. No two rows in the
+same table have the same primary key.
+In each table, there is one column designated for storing the primary keys of each row.
+The column for the primary key is created when the
+table is created (see {@link org.cytoscape.model.CyTableFactory}).
+</p>
+
+<p align="center">
+<img src="doc-files/CyTable-CyRows-CyColumns.png">
+</p>
+
+<h4>Virtual Columns</h4>
+<p>
+Cytoscape allows a column in one table to refer to
+the contents of a column in another table. These are called <i>virtual columns</i>.
+They allow tables to share data.
+If cell values change in one virtual column, all other tables with
+that virtual column will change too.
+Virtual columns are used extensively by Cytoscape to provide shared data between networks.
+</p>
+
+<h4>Unique Identifiers (SUIDs)</h4>
+<p>
+Each table in Cytoscape has a unique identifier (SUID).  This SUID may be used to
 uniquely identify the table.  {@link org.cytoscape.model.CyNetwork}s, {@link org.cytoscape.model.CyNode}s, and 
 {@link org.cytoscape.model.CyEdge}s also have SUIDs that uniquely identify them.  They all inherit from the same
 base interface, {@link org.cytoscape.model.CyIdentifiable}.
+</p>
+
 <h4>Creating a CyTable ({@link org.cytoscape.model.CyTableFactory})</h4>
 Usually, App developers would not create new {@link org.cytoscape.model.CyTable}s, but would utilize the default
 tables created for each network (see below).  However, there are some circumstances where it might be desirable
@@ -36,6 +70,10 @@ you can find the {@link org.cytoscape.model.CyTableFactory} service by adding to
 where <code>bc</code> is the OSGi BundleContext. 
 </p>
 
+<p id="CyTable-Footnote1">
+[1] Each row in a table has a unique identifier, called the <i>primary key</i>.
+No two rows in the same table have the same primary key.
+</p>
 <h3>CyNetwork</h3>
 In Cytoscape, a network ({@link org.cytoscape.model.CyNetwork}) is conceptually a collection
 of nodes ({@link org.cytoscape.model.CyNode}) and the edges ({@link org.cytoscape.model.CyEdge}) that connect them.
