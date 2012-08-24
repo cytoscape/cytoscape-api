@@ -6,6 +6,8 @@ import org.cytoscape.io.webservice.client.AbstractWebServiceClient;
 
 /**
  * Abstract base class for web service clients with Swing GUI.
+ * 
+ * @CyAPI.Abstract.Class
  */
 public abstract class AbstractWebServiceGUIClient extends AbstractWebServiceClient implements WebServiceGUIClient {
 

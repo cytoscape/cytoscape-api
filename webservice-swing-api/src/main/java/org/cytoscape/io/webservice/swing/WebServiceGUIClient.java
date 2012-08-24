@@ -5,6 +5,8 @@ import java.awt.Container;
 /** 
  * An interface that allows web service clients to provide
  * their own GUI component.
+ * 
+ * @CyAPI.Spi.Interface
  */
 public interface WebServiceGUIClient {
 
