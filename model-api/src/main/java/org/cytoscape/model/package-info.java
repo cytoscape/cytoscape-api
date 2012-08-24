@@ -1,18 +1,18 @@
 /**
-This package contains the core interfaces that define the basic network and
+This package has the core interfaces that define the basic network and
 table data structures that are foundational to Cytoscape.  Cytoscape supports
-two basic, separate types of data: network data {@link org.cytoscape.model.CyNetwork} and table data  
-{@link org.cytoscape.model.CyTable}.
+two basic, separate types of data: network data ({@link org.cytoscape.model.CyNetwork}) and table data  
+({@link org.cytoscape.model.CyTable}).
 
 <p>
 For the most part, the table and network data structures are
-independent. However, Cytoscape can link them together by indexing table rows using network object ids.
+independent. However, Cytoscape can link them together by matching table rows with network object identifiers.
 In fact, Cytoscape uses this linkage internally to store network metadata in the tables.
 </p>
 
 <h3>CyTable</h3>
-A {@link org.cytoscape.model.CyTable} is Cytoscape's representation of tabular data.  A {@link org.cytoscape.model.CyTable}
-consists of a series of columns ({@link org.cytoscape.model.CyColumn}) and rows ({@link org.cytoscape.model.CyRow}).  
+{@link org.cytoscape.model.CyTable} is Cytoscape's data structure for tabular data.  A {@link org.cytoscape.model.CyTable}
+consists of columns ({@link org.cytoscape.model.CyColumn}) and rows ({@link org.cytoscape.model.CyRow}).  
 
 <p>
 Columns have unique names and are typed. A column has a single type that is only defined when it is created.
@@ -36,11 +36,11 @@ table is created (see {@link org.cytoscape.model.CyTableFactory}).
 
 <h4>Virtual Columns</h4>
 <p>
-Cytoscape allows the contents of a column in one table to 
-be shared with another table. These are called <i>virtual columns</i>.
+You can share the contents of a column in one table 
+with another table. These are called <i>virtual columns</i>.
 If cell values change in one virtual column, all other tables with
 that virtual column will change too.
-Virtual columns are used extensively by Cytoscape to provide shared data between networks.
+Virtual columns are used a lot by Cytoscape to shared data between networks.
 </p>
 
 <p>
@@ -71,18 +71,19 @@ To add a virtual column, you will have to specify a couple things:
 
 <h4>Unique Identifiers (SUIDs)</h4>
 <p>
-Each table in Cytoscape has a unique identifier (SUID).  This SUID may be used to
-uniquely identify the table.  {@link org.cytoscape.model.CyNetwork}s, {@link org.cytoscape.model.CyNode}s, and 
+Each table in Cytoscape has a unique identifier (SUID).
+{@link org.cytoscape.model.CyNetwork}s, {@link org.cytoscape.model.CyNode}s, and 
 {@link org.cytoscape.model.CyEdge}s also have SUIDs that uniquely identify them.  They all inherit from the same
-base interface, {@link org.cytoscape.model.CyIdentifiable}.
+interface, {@link org.cytoscape.model.CyIdentifiable}.
 </p>
 
 <h4>Creating a CyTable ({@link org.cytoscape.model.CyTableFactory})</h4>
-Usually, App developers do not need to create {@link org.cytoscape.model.CyTable}s. Instead, they would use the default
-tables created for each network (see below). However, it is sometimes needed to create {@code CyTable}s for apps
-that need separate tables for storing tabular data that is not directly related to nodes and edges in a network.
+Usually, App developers do not need to create {@link org.cytoscape.model.CyTable}s. Instead, they use 
+tables created for each network (see below). However, apps sometimes need to create separate {@code CyTable}s 
+for storing tabular data that is not directly related to nodes and edges in a network.
 
-<p>Creating a new CyTable depends on the type of App that you are developing.
+<p>
+Creating a new {@code CyTable} depends on the type of App that you are developing.
   <ul>
     <li>
       <i>If your App is a simple app</i>
@@ -108,7 +109,7 @@ that need separate tables for storing tabular data that is not directly related 
 
 <h3>CyNetwork</h3>
 A network ({@link org.cytoscape.model.CyNetwork}) is a collection
-of nodes ({@link org.cytoscape.model.CyNode}) and the edges ({@link org.cytoscape.model.CyEdge}) that connect nodes together.
+of nodes ({@link org.cytoscape.model.CyNode}) and edges ({@link org.cytoscape.model.CyEdge}) that connect nodes together.
 It's important to note that because an edge is defined as a link between two nodes, both
 nodes must exist in the network for the edge to exist. {@code CyNetwork} supports
 <a href="http://www.wikipedia.org/wiki/Multigraph">multigraphs</a>, 
@@ -117,7 +118,7 @@ which means that two nodes can be connected together by more than one edge. {@co
 
 <p>
 Cytoscape does not directly support a network hierarchy, although
-it can be implemented using the Cytoscape model by combining network pointers and subnetworks (see the discussion in
+it can be implemented using the Cytoscape model by combining network pointers and subnetworks (see 
 the next section).
 </p>
 
@@ -127,9 +128,9 @@ Cytoscape's network model is a little more complicated than what a cursory glanc
 ({@link org.cytoscape.model.subnetwork.CyRootNetwork}). Each root network has multiple
 <i>subnetworks</i> ({@link org.cytoscape.model.subnetwork.CySubNetwork}).
 When you are working with a {@link org.cytoscape.model.CyNetwork}, you're really working with a
-{@link org.cytoscape.model.subnetwork.CySubNetwork}. {@code CySubNetwork}s are just {@code CyNetwork}s
+{@link org.cytoscape.model.subnetwork.CySubNetwork}. After all, {@code CySubNetwork}s are just {@code CyNetwork}s
 with a couple additional methods. 
-This structure is hidden since most App implementers don't need
+This structure is hidden since most App developers don't need
 to know about the root network.
 
 <p align="center">
@@ -137,10 +138,10 @@ to know about the root network.
 </p>
 
 <p>
-All nodes and edges really exist in the root network.
-The subnetwork is merely a subset of nodes and edges in the root network.
-The purpose of this structure is so that you can share table data across networks.
+All nodes and edges exist in the root network.
+The subnetwork merely refers to a subset of nodes and edges in the root network.
 Nodes and edges are shared amongst all of the subnetworks with a common root network.
+The purpose of this structure is so that you can share table data across networks.
 You can set up shared tables so that data values in one subnetwork (say for a node) are shared with the
 same node in another subnetwork. This is useful for importing a lot of data (e.g. large expression data sets).
 You can also "save" nodes and edges for later use by keeping them in the root network and removing them
@@ -150,7 +151,7 @@ in the {@link org.cytoscape.group.CyGroup} implementation, which builds a hierar
 
 <p>
 When the first network is created by the {@link org.cytoscape.model.CyNetworkFactory}, a new
-{@link org.cytoscape.model.subnetwork.CyRootNetwork} is actually created. Each root network has a <i>base network</i>, 
+{@link org.cytoscape.model.subnetwork.CyRootNetwork} is first created. Each root network has a <i>base network</i>, 
 which is a {@link org.cytoscape.model.subnetwork.CySubNetwork} that contains everything in the root network. The base network is
 is returned by {@link org.cytoscape.model.CyNetworkFactory#createNetwork}.
 </p>
@@ -165,10 +166,12 @@ method:
 <dd><code>CyRootNetwork rootNetwork = ((CySubNetwork)network).getRootNetwork();</code></dd>
 </dl>
 {@link org.cytoscape.model.subnetwork.CyRootNetwork} provides methods to create and add new subnetworks
-(see {@link org.cytoscape.model.subnetwork.CyRootNetwork#addSubNetwork} for example).
+(see {@link org.cytoscape.model.subnetwork.CyRootNetwork#addSubNetwork}).
 </p>
 
 <h3>CyNetworks and CyTables</h3>
+
+<h4>Types of tables</h4>
 When a {@link org.cytoscape.model.CyNetwork} is created, Cytoscape creates three types of {@link org.cytoscape.model.CyTable}s
 that store information about the network, its nodes, and its edges:
 <ol>
@@ -188,13 +191,12 @@ that store information about the network, its nodes, and its edges:
   </li>
 </ol>
 
-<p>
-Having separate local and shared tables provides lots
-of flexibility for certain applications. However, the App developer will often want to get all of the public information
-about a network, node, or edge, regardless of whether it's shared or local. Cytoscape provides a <i>default table</i>
-that has  all of the local and shared data for a given
-network, node, or edge.
-</p>
+<h5>The default table</h5>
+Local and shared tables provide flexibility for certain scenarios.
+However, App developers usually does not care whether data is local or shared.
+They will often want to get all of the visible information
+about a network, node, or edge, regardless of whether it's shared or local. <i>Default tables</i>
+has all of the local and shared data for networks, nodes, and edges.
 
 <p>
 App implementers should be aware that when a new column is created in the default
@@ -204,8 +206,7 @@ all networks in the same root.  Use the private local table to specifically crea
 local to only this network.
 </p>
 
-<p>
-To obtain one of these tables:
+<h4>Getting a table associated with a network</h4>
 <table border="1" cellpadding="10">
   <tr>
     <td></td>
@@ -260,11 +261,11 @@ To obtain one of these tables:
     <td valign="top">{@code cyNetwork.getTable(CyEdge.class,} {@link org.cytoscape.model.CyNetwork#HIDDEN_ATTRS}{@code )}</td>
   </tr>
 </table>
-</p>
 
+<h4>Getting node and edge data</h4>
 <p>
 There are two ways of getting node and edge data from one of the tables listed above.
-<ul>
+<ol>
   <li>
     First, get the table as shown above. Then use {@link org.cytoscape.model.CyTable#getRow} method.
     Here's an example for getting the hidden attribtues of an edge:
@@ -284,9 +285,10 @@ CyRow edgeRow = hiddenTable.getRow(edge.getSUID());
     }</pre>
     <p>Instead of passing in the SUID, you just pass in the edge itself.</p>
   </li>
-</ul>
+</ol>
 
 <h4>Managing CyNetworks ({@link org.cytoscape.model.CyNetworkManager}) and CyTables ({@link org.cytoscape.model.CyTableManager})</h4>
+
 A generalized graph or network is a very useful data construct that can be usefully used by algorithms and Apps for
 purposes other than providing a user with a network visualization.  Since a lot of Apps will need to know about
 the creation of new networks the user might want to manipulate, Cytoscape provides a mechanism to "register"
@@ -315,11 +317,11 @@ to be called, it must be registered as an OSGi service.
 
 <ul>
   <li>
-    If the App is an OSGi bundle, this may be done in the {@code CyActivator} class provided by the bundle.
+    If the App is an OSGi bundle, register the listener in the {@code CyActivator} class.
   </li>
   <li>
-    If the App is a Simple App (inherits from {@link org.cytoscape.app.AbstractCyApp}) then
-the App implementer should use the following code:
+    If the App is a Simple App, which has a class that inherits from {@link org.cytoscape.app.AbstractCyApp}, then
+the App developer should use the following code:
 <dl>
 <dd><pre><code>
 ServiceRegistrar serviceRegistrar = getCyServiceRegistrar(); // This comes from CyAppAdapter
