@@ -15,7 +15,7 @@ A {@link org.cytoscape.model.CyTable} is Cytoscape's representation of tabular d
 consists of a series of columns ({@link org.cytoscape.model.CyColumn}) and rows ({@link org.cytoscape.model.CyRow}).  
 
 <p>
-Columns are typed. A column has a single type that is only defined when it is created.
+Columns have unique names and are typed. A column has a single type that is only defined when it is created.
 A column would have the <i>string type</i> if it stores text. Or it could have the <i>integer type</i>
 if it stores whole numbers. Besides strings and integers, columns can have other types.
 </p>
@@ -36,12 +36,37 @@ table is created (see {@link org.cytoscape.model.CyTableFactory}).
 
 <h4>Virtual Columns</h4>
 <p>
-Cytoscape allows a column in one table to refer to
-the contents of a column in another table. These are called <i>virtual columns</i>.
-They allow tables to share data.
+Cytoscape allows the contents of a column in one table to 
+be shared with another table. These are called <i>virtual columns</i>.
 If cell values change in one virtual column, all other tables with
 that virtual column will change too.
 Virtual columns are used extensively by Cytoscape to provide shared data between networks.
+</p>
+
+<p>
+To add a virtual column, you will have to specify a couple things:
+  <ul>
+    <li>
+      <i>Target table</i>: the table into which you want to put the virtual column.
+    </li>
+    <li>
+      <i>Target column</i>: the name of the virtual column you want in the target table.
+    </li>
+    <li>
+      <i>Source table</i>: the table from which you want to get your virtual column's contents.
+    </li>
+    <li>
+      <i>Source column</i>: the column in the source table from which you want to get your virtual column's contents.
+    </li>
+    <li>
+      <i>Target join key</i>: the column in the target table whose cells match the source table's primary key column.
+      This is used to match up the rows between the source and target tables.
+    </li>
+  </ul>
+</p>
+
+<p align="center">
+<img src="doc-files/CyTable-virtual-column.png">
 </p>
 
 <h4>Unique Identifiers (SUIDs)</h4>
@@ -53,47 +78,69 @@ base interface, {@link org.cytoscape.model.CyIdentifiable}.
 </p>
 
 <h4>Creating a CyTable ({@link org.cytoscape.model.CyTableFactory})</h4>
-Usually, App developers would not create new {@link org.cytoscape.model.CyTable}s, but would utilize the default
-tables created for each network (see below).  However, there are some circumstances where it might be desirable
-to maintain a separate table for the purposes of maintaining a large shared data store that is not directly related
-to nodes and edges in a network.
-<p>There are two ways of creating a new CyTable, depending on the type of App that you are developing.  If
-your App inherits from {@link org.cytoscape.app.swing.AbstractCySwingApp} or {@link org.cytoscape.app.AbstractCyApp}
-then you have direct access to the {@link org.cytoscape.model.CyTableFactory} through the 
-{@link org.cytoscape.app.CyAppAdapter#getCyTableFactory} method.  If you are implementing an OSGi bundle, then
-you can find the {@link org.cytoscape.model.CyTableFactory} service by adding to your CyActivator 
-(see {@link org.cytoscape.service.util.AbstractCyActivator}):
-<dl>
-<dd>
-<code>CyTableFactory tableFactory = getService(bc, CyTableFactory.class);</code>
-</dd></dl>
-where <code>bc</code> is the OSGi BundleContext. 
+Usually, App developers do not need to create {@link org.cytoscape.model.CyTable}s. Instead, they would use the default
+tables created for each network (see below). However, it is sometimes needed to create {@code CyTable}s for apps
+that need separate tables for storing tabular data that is not directly related to nodes and edges in a network.
+
+<p>Creating a new CyTable depends on the type of App that you are developing.
+  <ul>
+    <li>
+      <i>If your App is a simple app</i>
+      <p>
+      You have a class that inherits from {@link org.cytoscape.app.swing.AbstractCySwingApp} or {@link org.cytoscape.app.AbstractCyApp}.
+      These classes have direct access to the {@link org.cytoscape.model.CyTableFactory} through the
+      {@link org.cytoscape.app.CyAppAdapter#getCyTableFactory} method.
+      </p>
+    </li>
+    <li>
+      <i>If your App is an OSGi bundle</i>
+      <p>
+      You can get the {@link org.cytoscape.model.CyTableFactory} service by adding this to your {@code CyActivator}
+      (see {@link org.cytoscape.service.util.AbstractCyActivator}):
+      <dl><dd>
+      <code>CyTableFactory tableFactory = getService(bc, CyTableFactory.class);</code>
+      </dd></dl>
+      where {@code bc} is the OSGi {@code BundleContext}. 
+      </p>
+    </li>
+  </ul>
 </p>
 
-<p id="CyTable-Footnote1">
-[1] Each row in a table has a unique identifier, called the <i>primary key</i>.
-No two rows in the same table have the same primary key.
-</p>
 <h3>CyNetwork</h3>
-In Cytoscape, a network ({@link org.cytoscape.model.CyNetwork}) is conceptually a collection
-of nodes ({@link org.cytoscape.model.CyNode}) and the edges ({@link org.cytoscape.model.CyEdge}) that connect them.
+A network ({@link org.cytoscape.model.CyNetwork}) is a collection
+of nodes ({@link org.cytoscape.model.CyNode}) and the edges ({@link org.cytoscape.model.CyEdge}) that connect nodes together.
 It's important to note that because an edge is defined as a link between two nodes, both
-nodes must exist in the network for the edge to exist.  Technically, Cytoscape's network model represents
-a <a href="http://www.wikipedia.org/wiki/Multigraph">multigraph</a>, 
-which means that two nodes can be connected by more than one edge. Cytoscape does not support
-a <a href="hhtp://www.wikipedia.org/wiki/Hypergraph">hypergraph</a> 
-(so edges can't connect more than two nodes), nor does Cytoscape directly support a network hierarchy, although
-one can be implemented using the Cytoscape model by combining network pointers and subnetworks (see the discussion in
+nodes must exist in the network for the edge to exist. {@code CyNetwork} supports
+<a href="http://www.wikipedia.org/wiki/Multigraph">multigraphs</a>, 
+which means that two nodes can be connected together by more than one edge. {@code CyNetwork} does not support
+<a href="hhtp://www.wikipedia.org/wiki/Hypergraph">hypergraphs</a>, so edges cannot connect more than two nodes.
+
+<p>
+Cytoscape does not directly support a network hierarchy, although
+it can be implemented using the Cytoscape model by combining network pointers and subnetworks (see the discussion in
 the next section).
+</p>
+
 <h4>CyRootNetwork and CySubNetwork ({@link org.cytoscape.model.subnetwork})</h4>
-Cytoscape's network model is actually a little more complicated than what is implied by looking solely in the
-{@link org.cytoscape.model} package.  Cytoscape actually implements a "forest" of networks, where each "tree" in
-the forest has a "root" ({@link org.cytoscape.model.subnetwork.CyRootNetwork}) and a series of 
-branches ({@link org.cytoscape.model.subnetwork.CySubNetwork}). This is generally hidden since most App implementers don't need
-to know about the root network, and a {@link org.cytoscape.model.subnetwork.CySubNetwork} is also a 
-{@link org.cytoscape.model.CyNetwork} with a couple of extra methods.  Even though this isn't
-commonly used by App implementers, there are some nice features that this provides.  
-Since all nodes and edges will exist in the root network, it means that they are shared amongst all of the subnetworks.  This
+Cytoscape's network model is a little more complicated than what a cursory glance at the
+{@link org.cytoscape.model} package suggests. Cytoscape has multiple <i>root networks</i>
+({@link org.cytoscape.model.subnetwork.CyRootNetwork}). Each root network has multiple
+<i>subnetworks</i> ({@link org.cytoscape.model.subnetwork.CySubNetwork}).
+This structure is hidden since most App implementers don't need
+to know about the root network.
+When you are working with a {@link org.cytoscape.model.CyNetwork}, you're really working with a
+{@link org.cytoscape.model.subnetwork.CySubNetwork}. {@code CySubNetwork}s are just {@code CyNetwork}s
+with a couple additional methods. 
+
+<p align="center">
+<img src="doc-files/CySubNetwork-vs-CyNetwork.png">
+</p>
+
+<p>
+This hierarchy provides some nice features.
+All nodes and edges really exist in the root network, not the subnetwork.
+The subnetwork is merely refers to a subset of nodes and edges in the root network.
+This implies that nodes and edges are shared amongst all of the subnetworks.  This
 allows Cytoscape to set up shared tables so that data values in one subnetwork (say for a node) are shared with the
 same node in another subnetwork.  This can be very useful when importing a lot of data (e.g. large expression data sets).
 The other advantage is that it provides a place to "save" nodes and edges that we might use later.  This is used extensively
@@ -112,6 +159,8 @@ method:
 {@link org.cytoscape.model.subnetwork.CyRootNetwork} provides methods to create and add new subnetworks
 (see {@link org.cytoscape.model.subnetwork.CyRootNetwork#addSubNetwork} for example).
 </p>
+
+
 <h4>CyNetworks and CyTables</h4>
 When a {@link org.cytoscape.model.CyNetwork} is created, Cytoscape also creates a series of {@link org.cytoscape.model.CyTable}s
 to contain information about the network and its nodes and edges.  Some of these tables are public (visible to the user) but local
