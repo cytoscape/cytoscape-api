@@ -12,7 +12,6 @@
 
 	<artifactId>api-parent</artifactId>
 	<packaging>pom</packaging>
-	<version>3.0.0-beta3-SNAPSHOT</version>
 	<name>Cytoscape API Parent Project POM</name>
 
 	<modules>
