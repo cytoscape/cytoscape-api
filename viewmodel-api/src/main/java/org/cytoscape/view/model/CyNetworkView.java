@@ -47,16 +47,29 @@ import org.cytoscape.model.CyIdentifiable;
  * Additional methods for CyNetworkView. Network view should implement BOTH View
  * and CyNetworkView.
  * 
- * Consolidated data structure for graph object views.
+ * <p>
+ * <i>Warning</i>: if you just added a node or edge in
+ * {@link org.cytoscape.model.CyNetwork},
+ * {@link #getNodeView} or {@link #getEdgeView}
+ * will probably return null for the newly created node or edge.
+ * You may have to call
+ * {@link org.cytoscape.event.CyEventHelper#flushPayloadEvents}
+ * <i>prior</i> to calling {@link #getNodeView} or {@link #getEdgeView},
+ * so that the {@code CyNetworkView} gets a chance to create the views.
+ * If you are creating a bunch of nodes and edges at once, call {@code flushPayloadEvents}
+ * <i>after</i> all the nodes and edges are created.
+ * </p>
+ * 
  * @CyAPI.Api.Interface
  */
 public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 
 	/**
 	 * Returns a View for a specified Node.
+     *
 	 * 
 	 * @param node Node object
-	 * 
+     * 
 	 * @return View for the given node object.
 	 */
 	View<CyNode> getNodeView(final CyNode node);
