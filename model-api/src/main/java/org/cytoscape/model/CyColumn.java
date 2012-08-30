@@ -78,10 +78,10 @@ public interface CyColumn {
 	 */
 	CyTable getTable();
 
-	/** Returns all the values, some of which may be null, for this given column.
+	/** Returns all the values, some of which may be null, for this given column. When type is List.class, call getListElementType() get the type of the list elements.
 	 * @param <T> the generic type of the column.
 	 *  @param type  the datatype of this column.  (You can use getType() to obtain it.)
-	 *  @return the values in this column in some arbitrary but consistent order
+	 *  @return the values in this column in some arbitrary but consistent order. When type is List.class, a List<List> is returned.
 	 */
 	<T> List<T> getValues(Class<? extends T> type);
 	
