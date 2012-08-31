@@ -57,17 +57,17 @@ public enum ArgType {
 	ANY(              false,   false,  new Class[] { Boolean.class, Double.class, Long.class, String.class }),
 
 	/** An non-empty sequence of arguments that consist of lists of integers and scalars that can be converted to an integer. */
-	INTS(             false,   true,   new Class[] { LongList.class, Long.class, Double.class, String.class, Boolean.class }),
+	INTS(             false,   true,   new Class[] { List.class, Long.class, Double.class, String.class, Boolean.class }),
 
 	/** An non-empty sequence of arguments that consist of lists of floating point numbers and scalars that can be converted
 	    to a floating point number. */
-	FLOATS(           false,   true,   new Class[] { DoubleList.class, Double.class, Long.class, String.class, Boolean.class }),
+	FLOATS(           false,   true,   new Class[] { List.class, Double.class, Long.class, String.class, Boolean.class }),
 
 	/** An non-empty sequence of arguments that consist of lists of strings and scalars that can be converted to a string. */
-	STRINGS(          false,   true,   new Class[] { StringList.class, String.class, Double.class, Long.class, Boolean.class }),
+	STRINGS(          false,   true,   new Class[] { List.class, String.class, Double.class, Long.class, Boolean.class }),
 
 	/** An non-empty sequence of arguments that consist of lists of booleans and scalars that can be converted to a boolean. */
-	BOOLS(            false,   true,   new Class[] { BooleanList.class, Boolean.class, Double.class, Long.class, String.class }),
+	BOOLS(            false,   true,   new Class[] { List.class, Boolean.class, Double.class, Long.class, String.class }),
 
 	/** A singke integer argument. */
 	STRICT_INT(       false,   false,  new Class[] { Long.class }),
@@ -94,17 +94,17 @@ public enum ArgType {
 	OPT_BOOL(         true,    false,  new Class[] { Boolean.class, Double.class, Long.class, String.class }),
 
 	/** Zero or more arguments that consist of lists of integers and scalars that can be converted to an integer. */
-	OPT_INTS(         true,    true,   new Class[] { LongList.class, Long.class, Double.class, String.class, Boolean.class }),
+	OPT_INTS(         true,    true,   new Class[] { List.class, Long.class, Double.class, String.class, Boolean.class }),
 
 	/** Zero or more arguments that consist of lists of floating point numbers and scalars that can be converted
 	    to a floating point number. */
-	OPT_FLOATS(       true,    true,   new Class[] { DoubleList.class, Double.class, Long.class, String.class, Boolean.class }),
+	OPT_FLOATS(       true,    true,   new Class[] { List.class, Double.class, Long.class, String.class, Boolean.class }),
 
 	/** Zero or more arguments that consist of lists of strings and scalars that can be converted to a string. */
-	OPT_STRINGS(      true,    true,   new Class[] { StringList.class, String.class, Double.class, Long.class, Boolean.class }),
+	OPT_STRINGS(      true,    true,   new Class[] { List.class, String.class, Double.class, Long.class, Boolean.class }),
 
 	/** Zero or more arguments that consist of lists of booleans and scalars that can be converted to a boolean. */
-	OPT_BOOLS(        true,    true,   new Class[] { BooleanList.class, Boolean.class, Double.class, Long.class, String.class }),
+	OPT_BOOLS(        true,    true,   new Class[] { List.class, Boolean.class, Double.class, Long.class, String.class }),
 
 	/** An optional integer argument. */
 	OPT_STRICT_INT(   true,    false,  new Class[] { Long.class }),

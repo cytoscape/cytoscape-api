@@ -1,9 +1,12 @@
 package org.cytoscape.equations;
 
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
 
@@ -32,13 +35,13 @@ public class ArgDescriptorTest {
 
 	@Test
 	public void testIsCompatibleWithWithAnIncompatibleListType() {
-		assertFalse("isCompatibleWith() is broken.", argDesc.isCompatibleWith(StringList.class));
+		assertFalse("isCompatibleWith() is broken.", argDesc.isCompatibleWith(List.class));
 	}
 
 	@Test
 	public void testAnArgDescriptorThatTakesAList() {
 		final ArgDescriptor listArgDesc = new ArgDescriptor(ArgType.STRINGS, "strings", "A list of strings.");
-		assertTrue("isCompatibleWith() is broken.", listArgDesc.isCompatibleWith(StringList.class));
-		assertTrue("isCompatibleWith() is broken.", listArgDesc.isCompatibleWith(List.class));
+		assertTrue("isCompatibleList() is broken.", listArgDesc.isCompatibleList(String.class));
+		assertFalse("isCompatibleList() is broken.", listArgDesc.isCompatibleList(Object.class));
 	}
 }

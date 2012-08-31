@@ -1,9 +1,12 @@
 package org.cytoscape.equations;
 
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+
 import java.util.List;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
 
@@ -24,13 +27,13 @@ public class AbstractFunctionTest {
 
 	@Test
 	public void testValidateArgTypesWithBadArgs() {
-		final Class<?>[] argTypes = { StringList.class, StringList.class };
+		final Class<?>[] argTypes = { List.class, List.class };
 		assertNull("The validateArgTypes() method is buggy.", sf.validateArgTypes(argTypes));
 	}
 
 	@Test
 	public void testValidateArgTypesWithTooManyArgs() {
-		final Class<?>[] argTypes = { Double.class, Double.class, StringList.class };
+		final Class<?>[] argTypes = { Double.class, Double.class, List.class };
 		assertNull("The validateArgTypes() method is buggy.", sf.validateArgTypes(argTypes));
 	}
 
@@ -56,7 +59,7 @@ public class AbstractFunctionTest {
 
 	@Test(expected=IllegalStateException.class)
 	public void testGetPossibleArgTypesWithABadArg() {
-		final Class<?>[] singleArgArgList = { DoubleList.class };
+		final Class<?>[] singleArgArgList = { List.class };
 		sf.getPossibleArgTypes(singleArgArgList);
 	}
 

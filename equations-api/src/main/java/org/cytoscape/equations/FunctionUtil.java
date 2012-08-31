@@ -30,17 +30,9 @@
 package org.cytoscape.equations;
 
 
-import java.util.Arrays;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Stack;
-import java.util.Vector;
-import java.util.concurrent.CopyOnWriteArrayList;
-
-import javax.management.AttributeList;
-import javax.management.relation.RoleList;
-import javax.management.relation.RoleUnresolvedList;
 
 
 /**
@@ -262,34 +254,7 @@ public final class FunctionUtil {
 	 *  @return true if "listClassCandidate" is an implementer of interface List, else false
 	 */
 	public static boolean isTypeOfList(final Class listClassCandidate) {
-		if (listClassCandidate == List.class)
-			return true;
-		if (listClassCandidate == ArrayList.class)
-			return true;
-		if (listClassCandidate == DoubleList.class)
-			return true;
-		if (listClassCandidate == StringList.class)
-			return true;
-		if (listClassCandidate == LongList.class)
-			return true;
-		if (listClassCandidate == BooleanList.class)
-			return true;
-		if (listClassCandidate == Vector.class)
-			return true;
-		if (listClassCandidate == Stack.class)
-			return true;
-		if (listClassCandidate == AttributeList.class)
-			return true;
-		if (listClassCandidate == CopyOnWriteArrayList.class)
-			return true;
-		if (listClassCandidate == LinkedList.class)
-			return true;
-		if (listClassCandidate == RoleList.class)
-			return true;
-		if (listClassCandidate == RoleUnresolvedList.class)
-			return true;
-
-		return false;
+		return List.class.isAssignableFrom(listClassCandidate);
 	}
 
 	/** Adds the scalar types that equations use internally to the argument, i.e. adds

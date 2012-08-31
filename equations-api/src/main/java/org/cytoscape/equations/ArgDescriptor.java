@@ -31,7 +31,6 @@ package org.cytoscape.equations;
 
 
 import java.util.List;
-import java.util.ArrayList;
 
 
 /** 
@@ -83,11 +82,10 @@ public final class ArgDescriptor {
 	 * @return true if the specified class is compatible with this ArgType.
 	 */
 	public boolean isCompatibleWith(final Class type) {
-		if (FunctionUtil.isTypeOfList(type))
-			return isCompatibleList(type);
-
 		for (final Class compatibleType : argType.getCompatibleTypes()) {
 			if (type == compatibleType)
+				return true;
+			if (List.class.equals(compatibleType) && List.class.isAssignableFrom(type))
 				return true;
 		}
 
@@ -95,24 +93,15 @@ public final class ArgDescriptor {
 	}
 
 	/**
-	 * Returns true if "type" is a List type that specifies the element type otherwise we return false.
-	 * @param type The type to be tested.
-	 * @return true if "type" is a List type that specifies the element type otherwise we return false.
-	 */
-	private boolean isSpecificList(final Class type) {
-		return type == DoubleList.class || type == LongList.class || type == StringList.class || type == BooleanList.class;
-	}
-
-	/**
 	 * Returns true if "listType", which must be some type of List is a type compatible with this argument descriptor.
 	 * @param listType A type that is a subclass of List.
 	 * @return true if "listType", which must be some type of List is a type compatible with this argument descriptor.
 	 */
-	private boolean isCompatibleList(final Class listType) {
+	public boolean isCompatibleList(final Class listElementType) {
 		// First we handle the case where "listType" is highly specific...
-		if (isSpecificList(listType)) {
+		if (listElementType != null) {
 			for (final Class compatibleType : argType.getCompatibleTypes()) {
-				if (compatibleType == listType || compatibleType == List.class)
+				if (compatibleType == listElementType)
 					return true;
 			}
 			return false;

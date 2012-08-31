@@ -13,6 +13,7 @@ import javax.management.relation.RoleList;
 import javax.management.relation.RoleUnresolvedList;
 
 import static org.junit.Assert.*;
+
 import org.junit.Test;
 
 
@@ -252,26 +253,6 @@ public class FunctionUtilTest {
 	@Test
 	public void testIsSomeKindOfListWithAnArrayListArg() {
 		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isTypeOfList(ArrayList.class));
-	}
-
-	@Test
-	public void testIsSomeKindOfListWithADoubleListArg() {
-		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isTypeOfList(DoubleList.class));
-	}
-
-	@Test
-	public void testIsSomeKindOfListWithAStringListArg() {
-		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isTypeOfList(StringList.class));
-	}
-
-	@Test
-	public void testIsSomeKindOfListWithALongListArg() {
-		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isTypeOfList(LongList.class));
-	}
-
-	@Test
-	public void testIsSomeKindOfListWithABooleanListArg() {
-		assertTrue("isSomeKindOfList() failed!", FunctionUtil.isTypeOfList(BooleanList.class));
 	}
 
 	@Test
