@@ -25,6 +25,7 @@
 		<module>app-api</module>
 		<module>swing-app-api</module>
 		<module>presentation-api</module>
+		<module>custom-graphics-api</module>
 		<module>property-api</module>
 		<module>session-api</module>
 		<module>swing-application-api</module>
