@@ -180,7 +180,7 @@ method:
 
 <h4>Types of tables</h4>
 For each {@link org.cytoscape.model.CyNetwork}, Cytoscape has several types of {@link org.cytoscape.model.CyTable}s
-that store information for each network object.
+that store information for each type of network object.
 A row in each of these tables contains data for a single network object.
 Here are the types of tables:
 <ol>
@@ -200,9 +200,13 @@ Here are the types of tables:
   </li>
 </ol>
 
+<p align="center">
+<img src="doc-files/CyNetworks-linked-to-CyTables.png">
+</p>
+
 <h5>The default table</h5>
 Most of the time, it is not important whether data is coming from local or shared tables.
-To make it easier to retrieve data regardless if it is from the local or shared table, we
+To make it easier to retrieve data regardless of whether if it is from the local or shared table, we
 established <i>default tables</i>, which have all of the local and shared data together
 in one table.
 
@@ -376,17 +380,30 @@ CyRow edgeRow = hiddenTable.getRow(edge.getSUID());
   </li>
 </ol>
 
-<h4>Managing CyNetworks ({@link org.cytoscape.model.CyNetworkManager}) and CyTables ({@link org.cytoscape.model.CyTableManager})</h4>
+<h4>Registration of Networks and Tables</h4>
+When you first create a network or table, it is not shown to the user.
+In fact, Cytoscape is not even aware that you have just created a table or network.
+You must first <i>register</i> your new table or network with 
+{@link org.cytoscape.model.CyTableManager} or {@link org.cytoscape.model.CyNetworkManager},
+respectively, if you want Cytoscape to be aware of the network or table and for it to
+be shown to the user.
 
-A generalized graph or network is a very useful data construct that can be usefully used by algorithms and Apps for
-purposes other than providing a user with a network visualization.  Since a lot of Apps will need to know about
-the creation of new networks the user might want to manipulate, Cytoscape provides a mechanism to "register"
-networks that are meant to be available to the user.  The {@link org.cytoscape.model.CyNetworkManager} is the repository
+<p>
+You do not have to register networks or tables. The benefit of unregistered networks
+and tables is that you can use
+{@code CyNetwork} and {@code CyTable} as flexible data structures. You can use them in your
+own internal algorithms and storage for intermediary data, where you do not want the user
+to see them.
+</p>
+
+<p>
+The {@link org.cytoscape.model.CyNetworkManager} is the repository
 for the information about registered networks.  It provides mechanisms to add ({@link org.cytoscape.model.CyNetworkManager#addNetwork})
 remove ({@link org.cytoscape.model.CyNetworkManager#destroyNetwork}) and inquire about networks
 ({@link org.cytoscape.model.CyNetworkManager#getNetwork}, {@link org.cytoscape.model.CyNetworkManager#getNetworkSet}, and
 {@link org.cytoscape.model.CyNetworkManager#networkExists}).  Similarly, the {@link org.cytoscape.model.CyTableManager}
 is the repository for the information about registered tables.
+</p>
 
 <h3>Events ({@link org.cytoscape.model.events})</h3>
 Apps can receive notifications that something has changed within the model.  For example,
