@@ -1,13 +1,14 @@
 /**
-This package has the core interfaces that define the basic network and
+This package has the core interfaces of network and
 table data structures that are foundational to Cytoscape.  Cytoscape supports
 two basic, separate types of data: network data ({@link org.cytoscape.model.CyNetwork}) and table data  
 ({@link org.cytoscape.model.CyTable}).
 
 <p>
 For the most part, the table and network data structures are
-independent. However, Cytoscape can link them together by matching table rows with network object identifiers.
-In fact, Cytoscape uses this linkage internally to store network metadata in the tables.
+independent. However, Cytoscape can link them together by matching table rows with <i>network object</i> identifiers.
+(<i>Network object</i> is a phrase that means nodes, edges, or networks.)
+In fact, Cytoscape stores its own internal network object metadata in tables using this linkage.
 </p>
 
 <h3>CyTable</h3>
@@ -16,17 +17,19 @@ consists of columns ({@link org.cytoscape.model.CyColumn}) and rows ({@link org.
 
 <p>
 Columns have unique names and are typed. A column has a single type that is only defined when it is created.
+A column's type cannot be changed after it has been created.
 A column would have the <i>string type</i> if it stores text. Or it could have the <i>integer type</i>
-if it stores whole numbers. Besides strings and integers, columns can have other types.
+if it stores whole numbers. Besides strings and integers, columns can have other types, like booleans, floating
+point numbers, and lists.
 </p>
 
 <p>
-Cell values in the table are accessed through a
-{@link org.cytoscape.model.CyRow}. Each row has a <i>primary key</i>.
-A primary key is the row's unique identifier. No two rows in the
+You can get cell values in a table through a
+{@link org.cytoscape.model.CyRow}. Each row has a <i>primary key</i>,
+which is the row's unique identifier. No two rows in the
 same table have the same primary key.
 In each table, there is one column designated for storing the primary keys of each row.
-The column for the primary key is created when the
+The column for the primary key and its type are specified when the
 table is created (see {@link org.cytoscape.model.CyTableFactory}).
 </p>
 
@@ -40,7 +43,7 @@ You can share the contents of a column in one table
 with another table. These are called <i>virtual columns</i>.
 If cell values change in one virtual column, all other tables with
 that virtual column will change too.
-Virtual columns are used a lot by Cytoscape to shared data between networks.
+Virtual columns are used to share data between networks.
 </p>
 
 <p>
@@ -71,38 +74,43 @@ To add a virtual column, you will have to specify a couple things:
 
 <h4>Unique Identifiers (SUIDs)</h4>
 <p>
-Each table in Cytoscape has a unique identifier (SUID).
-{@link org.cytoscape.model.CyNetwork}s, {@link org.cytoscape.model.CyNode}s, and 
-{@link org.cytoscape.model.CyEdge}s also have SUIDs that uniquely identify them.  They all inherit from the same
+Each {@link org.cytoscape.model.CyTable} has a unique identifier (SUID).
+Network objects ({@link org.cytoscape.model.CyNetwork}s, {@link org.cytoscape.model.CyNode}s, and 
+{@link org.cytoscape.model.CyEdge}s)
+also have SUIDs that uniquely identify them. They all inherit from the same
 interface, {@link org.cytoscape.model.CyIdentifiable}.
+SUIDs are similar to primary keys. SUIDs refer to network objects and {@code CyTable}s,
+whereas primary keys refer only to {@code CyRow}s. You cannot specify SUIDs, and they
+always have the type {@code long}. In contrast to SUIDs, you can control the values of
+primary keys and its type.
+SUIDs do not change in the same session. When the user saves the session and opens it
+up again later, SUIDs will stay the same. If the user imports the same network in two different
+sessions (or imports the same network twice), the SUIDs of network objects are not
+guaranteed to be the same for the same network objects.
 </p>
 
-<h4>Creating a CyTable ({@link org.cytoscape.model.CyTableFactory})</h4>
-Usually, App developers do not need to create {@link org.cytoscape.model.CyTable}s. Instead, they use 
-tables created for each network (see below). However, apps sometimes need to create separate {@code CyTable}s 
-for storing tabular data that is not directly related to nodes and edges in a network.
+<h4>Creating a {@code CyTable}</h4>
+Typically, you do not need to create {@link org.cytoscape.model.CyTable}s yourself. Instead, use 
+tables created for each network object. However, you may need to create separate {@code CyTable}s 
+for storing tabular data not directly related to network objects. To create a
+{@code CyTable}, use {@link org.cytoscape.model.CyTableFactory}.
 
 <p>
-Creating a new {@code CyTable} depends on the type of App that you are developing.
+Before creating a {@code CyTable}, you need a {@code CyTableFactory}. Getting a
+{@code CyTableFactory} depends on your type of app:
   <ul>
     <li>
-      <i>If your App is a simple app</i>
-      <p>
+      <i>If your app is a simple app</i>:
       You have a class that inherits from {@link org.cytoscape.app.swing.AbstractCySwingApp} or {@link org.cytoscape.app.AbstractCyApp}.
-      These classes have direct access to the {@link org.cytoscape.model.CyTableFactory} through the
-      {@link org.cytoscape.app.CyAppAdapter#getCyTableFactory} method.
-      </p>
+      You use one of these classes to get {@link org.cytoscape.model.CyTableFactory} with 
+      the {@link org.cytoscape.app.CyAppAdapter#getCyTableFactory} method.
     </li>
     <li>
-      <i>If your App is an OSGi bundle</i>
-      <p>
-      You can get the {@link org.cytoscape.model.CyTableFactory} service by adding this to your {@code CyActivator}
+      <i>If your app is an OSGi bundle</i>:
+      You can get a {@link org.cytoscape.model.CyTableFactory} by adding this to your {@code CyActivator}
       (see {@link org.cytoscape.service.util.AbstractCyActivator}):
-      <dl><dd>
-      <code>CyTableFactory tableFactory = getService(bc, CyTableFactory.class);</code>
-      </dd></dl>
+      <pre>{@code CyTableFactory tableFactory = getService(bc, CyTableFactory.class); }</pre>
       where {@code bc} is the OSGi {@code BundleContext}. 
-      </p>
     </li>
   </ul>
 </p>
@@ -110,43 +118,43 @@ Creating a new {@code CyTable} depends on the type of App that you are developin
 <h3>CyNetwork</h3>
 A network ({@link org.cytoscape.model.CyNetwork}) is a collection
 of nodes ({@link org.cytoscape.model.CyNode}) and edges ({@link org.cytoscape.model.CyEdge}) that connect nodes together.
-It's important to note that because an edge is defined as a link between two nodes, both
-nodes must exist in the network for the edge to exist. {@code CyNetwork} supports
+An <i>edge</i> is defined as a link between two nodes. This implies that
+nodes must exist in the network for the edge to exist. {@code CyNetwork}s support
 <a href="http://www.wikipedia.org/wiki/Multigraph">multigraphs</a>, 
-which means that two nodes can be connected together by more than one edge. {@code CyNetwork} does not support
+which means that two nodes can be connected together by more than one edge. {@code CyNetwork}s do not support
 <a href="hhtp://www.wikipedia.org/wiki/Hypergraph">hypergraphs</a>, so edges cannot connect more than two nodes.
 
-<p>
-Cytoscape does not directly support a network hierarchy, although
-it can be implemented using the Cytoscape model by combining network pointers and subnetworks (see 
-the next section).
-</p>
+<h4>Nested Networks</h4>
+A <i>metanode</i> is a node that has its own nested network inside of it. Metanodes establish a hierarchy of networks,
+where, in a higher level network, a node contains a nested network. That contained network could, in turn, have
+other metanodes that contain their own nested networks. {@code CyNode}s have <i>network pointers</i>
+(see {@link org.cytoscape.model.CyNode#getNetworkPointer}), which point to the node's nested network.
+However, if you want to use nested networks, use the Groups API ({@link org.cytoscape.group}).
 
-<h4>CyRootNetwork and CySubNetwork ({@link org.cytoscape.model.subnetwork})</h4>
-Cytoscape's network model is a little more complicated than what a cursory glance at the
-{@link org.cytoscape.model} package suggests. Cytoscape has multiple <i>root networks</i>
+<h4>Root networks and subnetworks</h4>
+Cytoscape has multiple <i>root networks</i>
 ({@link org.cytoscape.model.subnetwork.CyRootNetwork}). Each root network has multiple
 <i>subnetworks</i> ({@link org.cytoscape.model.subnetwork.CySubNetwork}).
-When you are working with a {@link org.cytoscape.model.CyNetwork}, you're really working with a
-{@link org.cytoscape.model.subnetwork.CySubNetwork}. After all, {@code CySubNetwork}s are just {@code CyNetwork}s
-with a couple additional methods. 
-This structure is hidden since most App developers don't need
+When you are using a {@link org.cytoscape.model.CyNetwork}, you're really using a
+{@link org.cytoscape.model.subnetwork.CySubNetwork}.
+Accessing root networks and subnetworks is hidden, because you usually do not need
 to know about the root network.
-
-<p align="center">
-<img src="doc-files/CySubNetwork-vs-CyNetwork.png">
-</p>
+Root networks and subnetworks are defined in this subpackage: {@link org.cytoscape.model.subnetwork}.
 
 <p>
 All nodes and edges exist in the root network.
 The subnetwork merely refers to a subset of nodes and edges in the root network.
-Nodes and edges are shared amongst all of the subnetworks with a common root network.
+Nodes and edges are shared amongst all of the subnetworks of the same root network.
 The purpose of this structure is so that you can share table data across networks.
 You can set up shared tables so that data values in one subnetwork (say for a node) are shared with the
 same node in another subnetwork. This is useful for importing a lot of data (e.g. large expression data sets).
 You can also "save" nodes and edges for later use by keeping them in the root network and removing them
 from the subnetwork. This is used extensively
 in the {@link org.cytoscape.group.CyGroup} implementation, which builds a hierarchical structure onto Cytoscape's model.
+</p>
+
+<p align="center">
+<img src="doc-files/CySubNetwork-vs-CyNetwork.png">
 </p>
 
 <p>
@@ -158,22 +166,23 @@ is returned by {@link org.cytoscape.model.CyNetworkFactory#createNetwork}.
 
 <p>
 To create a new 
-{@link org.cytoscape.model.subnetwork.CySubNetwork} that is part of the same {@link org.cytoscape.model.subnetwork.CyRootNetwork},
+{@link org.cytoscape.model.subnetwork.CySubNetwork} with the same {@code CyNetwork}'s {@link org.cytoscape.model.subnetwork.CyRootNetwork},
 cast your {@link org.cytoscape.model.CyNetwork} to 
 {@link org.cytoscape.model.subnetwork.CySubNetwork} and call the {@link org.cytoscape.model.subnetwork.CySubNetwork#getRootNetwork}
 method:
-<dl>
-<dd><code>CyRootNetwork rootNetwork = ((CySubNetwork)network).getRootNetwork();</code></dd>
-</dl>
-{@link org.cytoscape.model.subnetwork.CyRootNetwork} provides methods to create and add new subnetworks
+<pre>{@code CyRootNetwork rootNetwork = ((CySubNetwork)network).getRootNetwork(); }</pre>
+
+{@link org.cytoscape.model.subnetwork.CyRootNetwork} also provides methods to create and add new subnetworks
 (see {@link org.cytoscape.model.subnetwork.CyRootNetwork#addSubNetwork}).
 </p>
 
-<h3>CyNetworks and CyTables</h3>
+<h3>Tables associated to networks</h3>
 
 <h4>Types of tables</h4>
-When a {@link org.cytoscape.model.CyNetwork} is created, Cytoscape creates three types of {@link org.cytoscape.model.CyTable}s
-that store information about the network, its nodes, and its edges:
+For each {@link org.cytoscape.model.CyNetwork}, Cytoscape has several types of {@link org.cytoscape.model.CyTable}s
+that store information for each network object.
+A row in each of these tables contains data for a single network object.
+Here are the types of tables:
 <ol>
   <li>
     <i>Shared</i>: data in this table is shared across
@@ -182,7 +191,7 @@ that store information about the network, its nodes, and its edges:
     visible to the user.
   </li>
   <li>
-    <i>Local</i>: data in this table is local to the
+    <i>Local</i>: data in this table is specific only to the
     network and is visible to the user.
   </li>
   <li>
@@ -192,74 +201,154 @@ that store information about the network, its nodes, and its edges:
 </ol>
 
 <h5>The default table</h5>
-Local and shared tables provide flexibility for certain scenarios.
-However, App developers usually does not care whether data is local or shared.
-They will often want to get all of the visible information
-about a network, node, or edge, regardless of whether it's shared or local. <i>Default tables</i>
-has all of the local and shared data for networks, nodes, and edges.
+Most of the time, it is not important whether data is coming from local or shared tables.
+To make it easier to retrieve data regardless if it is from the local or shared table, we
+established <i>default tables</i>, which have all of the local and shared data together
+in one table.
 
 <p>
-App implementers should be aware that when a new column is created in the default
-table, it is actually created in the public shared table.
+When a new column is created in the default
+table, it is actually created in the shared table.
 This makes the column available to
-all networks in the same root.  Use the private local table to specifically create a column
-local to only this network.
+all networks in the same root. Use the private local table to create a column
+local to only one network.
 </p>
 
 <h4>Getting a table associated with a network</h4>
-<table border="1" cellpadding="10">
-  <tr>
-    <td></td>
-    <td><i>Shared</i></td>
-    <td><i>Local</i></td>
-  </tr>
-  <tr>
-    <td><i>Network Data</i></td>
-    <td>{@code cyNetwork.getTable(CyNetwork.class,} {@link org.cytoscape.model.subnetwork.CyRootNetwork#SHARED_ATTRS}{@code )}</td>
-    <td>{@code cyNetwork.getTable(CyNetwork.class,} {@link org.cytoscape.model.CyNetwork#LOCAL_ATTRS}{@code )}</td>
-  </tr>
-  <tr>
-    <td><i>Node Data</i></td>
-    <td>{@code cyNetwork.getTable(CyNode.class,} {@link org.cytoscape.model.subnetwork.CyRootNetwork#SHARED_ATTRS}{@code )}</td>
-    <td>{@code cyNetwork.getTable(CyNode.class,} {@link org.cytoscape.model.CyNetwork#LOCAL_ATTRS}{@code )}</td>
-  </tr>
-  <tr>
-    <td><i>Edge Data</i></td>
-    <td>{@code cyNetwork.getTable(CyEdge.class,} {@link org.cytoscape.model.subnetwork.CyRootNetwork#SHARED_ATTRS}{@code )}</td>
-    <td>{@code cyNetwork.getTable(CyEdge.class,} {@link org.cytoscape.model.CyNetwork#LOCAL_ATTRS}{@code )}</td>
-  </tr>
-  <tr>
-    <td></td>
-    <td><i>Default</i></td>
-    <td><i>Hidden</i></td>
-  </tr>
-  <tr>
-    <td><i>Network Data</i></td>
-    <td>
-      {@link org.cytoscape.model.CyNetwork#getDefaultNetworkTable}
-      <p align="center">&mdash;<i>or</i>&mdash;</p>
-      {@code cyNetwork.getTable(CyNetwork.class,} {@link org.cytoscape.model.CyNetwork#DEFAULT_ATTRS}{@code )}
-    </td>
-    <td valign="top">{@code cyNetwork.getTable(CyNetwork.class,} {@link org.cytoscape.model.CyNetwork#HIDDEN_ATTRS}{@code )}</td>
-  </tr>
-  <tr>
-    <td><i>Node Data</i></td>
-    <td>
-      {@link org.cytoscape.model.CyNetwork#getDefaultNodeTable}
-      <p align="center">&mdash;<i>or</i>&mdash;</p>
-      {@code cyNetwork.getTable(CyNode.class,} {@link org.cytoscape.model.CyNetwork#DEFAULT_ATTRS}{@code )}
-    </td>
-    <td valign="top">{@code cyNetwork.getTable(CyNode.class,} {@link org.cytoscape.model.CyNetwork#HIDDEN_ATTRS}{@code )}</td>
-  </tr>
-  <tr>
-    <td><i>Edge Data</i></td>
-    <td>
-      {@link org.cytoscape.model.CyNetwork#getDefaultEdgeTable}
-      <p align="center">&mdash;<i>or</i>&mdash;</p>
-      {@code cyNetwork.getTable(CyEdge.class,} {@link org.cytoscape.model.CyNetwork#DEFAULT_ATTRS}{@code )}
-    </td>
-    <td valign="top">{@code cyNetwork.getTable(CyEdge.class,} {@link org.cytoscape.model.CyNetwork#HIDDEN_ATTRS}{@code )}</td>
-  </tr>
+You can get a table associated with a network using the {@link org.cytoscape.model.CyNetwork#getTable} method.
+This method takes two parameters:
+ <ol>
+  <li>
+   The first parameter specifies the type of network object you want:
+   <table border="1" cellpadding="10" style="margin-top: 1em; margin-bottom: 1em;">
+    <tr>
+      <td>
+        <i>If you want...</i>
+      </td>
+      <td>
+        <i>Pass this in as the first parameter:</i>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        network data
+      </td>
+      <td>
+        {@code CyNetwork.class}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        node data
+      </td>
+      <td>
+        {@code CyNode.class}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        edge data
+      </td>
+      <td>
+        {@code CyEdge.class}
+      </td>
+    </tr>
+   </table>
+  </li>
+  <li>
+   The second parameter specifies the type of table you want:
+   <table border="1" cellpadding="10" style="margin-top: 1em; margin-bottom: 1em;">
+    <tr>
+      <td>
+        <i>If you want...</i>
+      </td>
+      <td>
+        <i>Pass this in as the second parameter:</i>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        the shared table
+      </td>
+      <td>
+        {@link org.cytoscape.model.subnetwork.CyRootNetwork#SHARED_ATTRS}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        the local table
+      </td>
+      <td>
+        {@link org.cytoscape.model.CyNetwork#LOCAL_ATTRS}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        the hidden table
+      </td>
+      <td>
+        {@link org.cytoscape.model.CyNetwork#HIDDEN_ATTRS}
+      </td>
+    </tr>
+    <tr>
+      <td>
+        the default table
+      </td>
+      <td>
+        {@link org.cytoscape.model.CyNetwork#DEFAULT_ATTRS}
+      </td>
+    </tr>
+   </table>
+  </li>
+ </ol>
+
+<h5>Getting the default table</h5>
+{@code CyNetwork} has three shortcut methods for getting default tables for each type of network object:
+<table border="1" cellpadding="10" style="margin-top: 1em; margin-bottom: 1em;">
+ <tr>
+   <td>
+     <i>If you want the default table of...</i>
+   </td>
+   <td>
+     <i>Call this method:</i>
+   </td>
+   <td>
+     <i>Which is equivalent to:</i>
+   </td>
+ </tr>
+ <tr>
+   <td>
+     network data
+   </td>
+   <td>
+     {@link org.cytoscape.model.CyNetwork#getDefaultNetworkTable}
+   </td>
+   <td>
+     {@code CyNetwork.getTable(CyNetwork.class, CyNetwork.DEFAULT_ATTRS)}
+   </td>
+ </tr>
+ <tr>
+   <td>
+     node data
+   </td>
+   <td>
+     {@link org.cytoscape.model.CyNetwork#getDefaultNodeTable}
+   </td>
+   <td>
+     {@code CyNetwork.getTable(CyNode.class, CyNetwork.DEFAULT_ATTRS)}
+   </td>
+ </tr>
+ <tr>
+   <td>
+     edge data
+   </td>
+   <td>
+     {@link org.cytoscape.model.CyNetwork#getDefaultEdgeTable}
+   </td>
+   <td>
+     {@code CyNetwork.getTable(CyEdge.class, CyNetwork.DEFAULT_ATTRS)}
+   </td>
+ </tr>
 </table>
 
 <h4>Getting node and edge data</h4>
