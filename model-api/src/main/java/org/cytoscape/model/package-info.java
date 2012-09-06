@@ -206,9 +206,10 @@ Here are the types of tables:
 
 <h5>The default table</h5>
 Most of the time, it is not important whether data is coming from local or shared tables.
-To make it easier to retrieve data regardless of whether if it is from the local or shared table, we
-established <i>default tables</i>, which have all of the local and shared data together
-in one table.
+To make it easier to retrieve data, we
+establish <i>default tables</i>, which combine <i>local tables</i>
+and the <i>shared tables</i> together
+in one table. Default tables do not include <i>hidden tables</i>.
 
 <p>
 When a new column is created in the default
