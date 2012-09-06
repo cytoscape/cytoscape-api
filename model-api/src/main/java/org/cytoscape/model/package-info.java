@@ -176,7 +176,7 @@ method:
 (see {@link org.cytoscape.model.subnetwork.CyRootNetwork#addSubNetwork}).
 </p>
 
-<h3>Tables associated to networks</h3>
+<h3>Tables associated with networks</h3>
 
 <h4>Types of tables</h4>
 For each {@link org.cytoscape.model.CyNetwork}, Cytoscape has several types of {@link org.cytoscape.model.CyTable}s
@@ -419,8 +419,7 @@ the App writer would provide a class that implements {@link org.cytoscape.model.
 provides a single method: {@link org.cytoscape.model.events.NetworkAddedListener#handleEvent}, which takes as an argument
 the {@link org.cytoscape.model.events.NetworkAddedEvent}, which is fired by the {@link org.cytoscape.model.CyNetworkManager} when
 a new network is added (using {@link org.cytoscape.model.CyNetworkManager#addNetwork}).  In order for this listener
-to be called, it must be registered as an OSGi service.
-
+to be called, it must be registered as an OSGi service:
 <ul>
   <li>
     If the App is an OSGi bundle, register the listener in the {@code CyActivator} class.
@@ -428,24 +427,22 @@ to be called, it must be registered as an OSGi service.
   <li>
     If the App is a Simple App, which has a class that inherits from {@link org.cytoscape.app.AbstractCyApp}, then
 the App developer should use the following code:
-<dl>
-<dd><pre><code>
+<pre>{@code
 ServiceRegistrar serviceRegistrar = getCyServiceRegistrar(); // This comes from CyAppAdapter
-NetworkAddedListener myListener = new MyListener();
-serviceRegistrar.registerService(myListener, NetworkAddedListener.class, new Properties());
-</code></pre></dd>
-</dl>
+XYZListener myListener = ...;
+serviceRegistrar.registerService(myListener, XYZListener.class, new Properties());
+}</pre>
   </li>
 </ul>
 </p>
 
 <h4>Selection Event Example</h4>
+Here is an example of listening to selection events.
 Selection in Cytoscape 3 is handled by the boolean column
 {@link org.cytoscape.model.CyNetwork#SELECTED} in the {@link org.cytoscape.model.CyNetwork#DEFAULT_ATTRS} 
 table for a node or edge. To listen for selection,
 you listen for changes in this column:
-<dl>
-<dd><pre><code>
+<pre>{@code
 public class MyListener implements RowsSetListener {
 	// Probably want a CyNetwork or list of CyNetworks as arguments here?
 	public MyListener() {
@@ -462,16 +459,13 @@ public class MyListener implements RowsSetListener {
 		}
 	}
 }
-</code></pre></dd>
-</dl>
+}</pre>
 Now register your listener:
-<dl>
-<dd><pre><code>
+<pre>{@code
 ServiceRegistrar serviceRegistrar = getCyServiceRegistrar(); // This comes from CyAppAdapter
 NetworkAddedListener myListener = new MyListener();
 serviceRegistrar.registerService(myListener, RowsSetListener.class, new Properties());
-</code></pre></dd>
-</dl>
+}</pre>
 
 <h3>Some hints</h3>
 <h4>Selected nodes and edges</h4>
