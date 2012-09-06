@@ -314,7 +314,7 @@ public interface CyNetwork extends CyIdentifiable, CyDisposable {
 	 * Returns the table with the specified namespace and type from this
 	 * network.
 	 * @param type Type of {@link CyIdentifiable} associated with the table.
-	 * @param namespace The name of the table relative to the network.
+	 * @param namespace the {@link CyNetworkTableManager namespace} the table should belong to.
 	 * @return the table with the specified namespace and type from the
 	 * network.
 	 */
@@ -325,10 +325,10 @@ public interface CyNetwork extends CyIdentifiable, CyDisposable {
 	 * A null entry or a an entry not found in this network will return null,
 	 * but otherwise every node or edge in the network is guaranteed to have a row.
 	 * @param entry The entry (node, edge, network) whose row we're looking for. 
-	 * @param tableName the name of the table from which to extract the row..
+	 * @param namespace the {@link CyNetworkTableManager namespace} of the table from which to extract the row.
 	 * @return the row in the table of the specified name for this object. 
 	 */
-	CyRow getRow(CyIdentifiable entry, String tableName);
+	CyRow getRow(CyIdentifiable entry, String namespace);
  
 	/**
 	 * A convenience method that returns the row in the default table 
