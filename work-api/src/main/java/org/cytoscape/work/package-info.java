@@ -49,7 +49,7 @@ values in the {@link org.cytoscape.work.Task} prior to execution.
 
   <p>
   Cytoscape is in an OSGi environment. Its components are deliberately made to
-  be loosely coupled, and this loose coupling is applied to tasks. It changes how we think
+  be loosely coupled, and this loose coupling changes how we think
   about action listeners. With action listeners, you have to explicitly tell
   an object you want to listen to it by calling a method on that object.
   In a loosely decoupled environment, action listeners are not appropriate. Instead,
@@ -75,11 +75,12 @@ values in the {@link org.cytoscape.work.Task} prior to execution.
   some parameters, then it returns a new task initialized with those parameters.
   The task can obtain those parameters either through its constructor or as an
   inner class that has access to the task factory's members.
-  (If you know functional programming, a task is like an inner function
-  that the task factory function returns; the task gets inputs from free variables
-  defined in the task factory function.)
   Moreover, a single task object neatly contains state that does not
   spill over into separate task invocations because of task factories.
+  (If you know a functional programming, here is an
+  analogy: a task is like an inner function
+  that the task factory function returns; the task gets inputs from free variables
+  defined in the task factory function.)
   </p>
   
   <p>
@@ -99,7 +100,9 @@ values in the {@link org.cytoscape.work.Task} prior to execution.
   </ol>
   Cytoscape picks up the task factory, reads its properties, and creates a
   menu item just for that task factory. When that menu item is selected by the user,
-  Cytoscape tells the task factory to create a task, then invokes it.
+  Cytoscape tells the task factory to create a task, then invokes it. Note that tasks
+  are used beyond just creating menu items. They are used for creating toolbar items
+  as well.
   </p>
 
   <p>
@@ -109,52 +112,116 @@ values in the {@link org.cytoscape.work.Task} prior to execution.
   </p>
 
   <p>
-  The analogy of a task as an action listener sweeps many advantages
-  tasks have over action listeners under the rug. Tasks:
+  Most of the time, you export a task factory service, and Cytoscape
+  invokes the task for you. Sometimes, you will want to invoke a task yourself.
+  In this case, you import the {@link org.cytoscape.work.TaskManager} service
+  and call the {@link org.cytoscape.work.TaskManager#execute} method to
+  run the task.
+  </p>
+
+  <p>
+  The analogy of a task as an OSGi version of the action listener sweeps many
+  of its advantages under the rug. Tasks:
   <ul>
-   <li>
-   can inform the user of its progress through {@link org.cytoscape.work.TaskMonitor}.
-   {@code TaskMonitor}s are passed in to the task's {@code run} method.
-   In the task's {@code run} method, call methods like {@link org.cytoscape.work.TaskMonitor#setTitle}
-   or {@link org.cytoscape.work.TaskMonitor#setProgress} to update the user interface.
-   </li>
-   <li>
-   can throw exceptions in the {@code run} method. Cytoscape will catch the exception and
-   inform the user.
-   </li>
    <li>
    are run asynchronously. This means you can encapsulate
    complicated, long-running algorithms entirely in a single task.
    This will not freeze Cytoscape.
    </li>
    <li>
+   can inform the user of its progress through {@link org.cytoscape.work.TaskMonitor}.
+   {@code TaskMonitor}s are passed in to the task's {@code run} method.
+   In the task's {@code run} method, you call its methods to update the user interface.
+   </li>
+   <li>
+   can throw exceptions in the {@code run} method. Cytoscape will catch the exception and
+   inform the user.
+   </li>
+   <li>
    can be cancelled by the user. Tasks are required to implement the {@code cancel} method.
-   Long-running tasks must respond to the user cancelling the task and return from the
+   Long-running tasks are required to respond to user cancellations and return from the
    {@code run} method gracefully.
    </li>
    <li>
    are independent of Swing. Provided that
-   the {@code run} method does not explicitly use any Swing
-   code, the task can be used in other environments like
+   the {@code run} method does not explicitly use Swing,
+   the task can be used in other environments like
    the command-line. When Cytoscape is run as a Swing application,
-   it will create an appropriate Swing interface without you having to 
-   explicitly create it.
+   it will create a Swing interface behind the scenes without you having to 
+   create one.
    </li>
    <li>
    can have user-defined inputs called <i>tunables</i>. When Cytoscape detects that
-   the task has tunables, it creates a user interface that lets the user input values.
-   Cytoscape then fills in the tunables with those values, then executes the task.
+   the task has tunables, it creates a user interface for user input.
+   Cytoscape then fills in the tunables with the user's input, then executes the task.
    Because the work framework is independent of Swing, you will not have to create a
-   Swing dialog to get user input. So if the task is run in the command-line, the user
-   can still provide input parameters. Of course, when Cytoscape is running as a 
+   Swing dialog to get user input. Also, if the task is run in the command-line, the user
+   can still provide input. Of course, when Cytoscape is running as a 
    Swing application, it will, behind-the-scenes, create a Swing dialog for the tunables.
    </li>
   </ul>
   </p>
 
-  <p>
-  </p>
-
   <h3>Examples</h3>
+  <h4>Hello World Menu Item</h4>
+  <pre>{@code
+      // Example that displays a user message at the bottom of the Cytoscape desktop
+      Logger logger = LoggerFactory.getLogger("CyUserMessages");
+      Task myTask = new Task() {
+          public void run(TaskMonitor monitor) {
+              logger.info("Hey chef");
+          }
+
+          public void cancel() {
+          }
+      };
+      TaskFactory myTaskFactory = new TaskFactory() {
+          public TaskIterator createTaskIterator() {
+              return new TaskIterator(myTask);
+          }
+
+          public boolean isReady() {
+              return true;
+          }
+      };
+      Properties props = new Properties();
+      props.setProperty(PREFERRED_MENU,"Apps");
+      props.setProperty(TITLE,"Why, hello there children");
+      props.setProperty(MENU_GRAVITY,"1.0");
+      props.setProperty(TOOLTIP,"Demonstrates how cool the work framework is");
+      registerService(bc, myTaskFactory, TaskFactory.class, props);
+  }</pre>
+
+  <h4>Task monitors and approximating pi</h4>
+  Let's say you want to approximate pi using the Wallis product:
+  <p align="center">
+  <img src="http://latex.codecogs.com/gif.latex?\dpi{120} \frac{\pi}{2}=\prod^\infty_{n=1}\left( \frac{2n}{2n-1} \cdot \frac{2n}{2n+1} \right )=\left( \frac{2}{1} \cdot \frac{2}{3} \right ) \cdot \left( \frac{4}{3} \cdot \frac{4}{5} \right ) \cdot \left( \frac{6}{5} \cdot \frac{6}{7} \right ) \ldots" title="\dpi{150} \frac{\pi}{2}=\prod^\infty_{n=1}\left( \frac{2n}{2n-1} \cdot \frac{2n}{2n+1} \right )=\left( \frac{2}{1} \cdot \frac{2}{3} \right ) \cdot \left( \frac{4}{3} \cdot \frac{4}{5} \right ) \cdot \left( \frac{6}{5} \cdot \frac{6}{7} \right ) \ldots">
+  </p>
+  <pre>{@code
+      // Example that displays a user message at the bottom of the Cytoscape desktop
+      Logger logger = LoggerFactory.getLogger("CyUserMessages");
+      Task myTask = new Task() {
+          public void run(TaskMonitor monitor) {
+          }
+
+          public void cancel() {
+          }
+      };
+      TaskFactory myTaskFactory = new TaskFactory() {
+          public TaskIterator createTaskIterator() {
+              return new TaskIterator(myTask);
+          }
+
+          public boolean isReady() {
+              return true;
+          }
+      };
+      Properties props = new Properties();
+      props.setProperty(PREFERRED_MENU,"Apps");
+      props.setProperty(TITLE,"Calculate Pi");
+      props.setProperty(MENU_GRAVITY,"1.0");
+      props.setProperty(TOOLTIP,"Demonstrates how cool the work framework is");
+      registerService(bc, myTaskFactory, TaskFactory.class, props);
+  }</pre>
 */
 package org.cytoscape.work;
