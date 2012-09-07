@@ -178,7 +178,7 @@
       Task myPiTask = new Task() {
           public void run(TaskMonitor monitor) {
               double pi = 2.0;
-              for (int n = 0; n < iterations; n++) {
+              for (int n = 1; n <= iterations; n++) {
                   pi *= (2 * n) * (2 * n) / ((2 * n - 1) * (2 * n + 1));
               }
               logger.info("Our approximation of pi is: " + Double.toString(pi));
@@ -216,7 +216,7 @@
           public void run(TaskMonitor monitor) {
               monitor.setTitle("Calculating Pi");
               double pi = 2.0;
-              for (int n = 0; n < iterations; n++) {
+              for (int n = 1; n <= iterations; n++) {
                   monitor.setProgress(((double) n) / iterations);
                   pi *= (2 * n) * (2 * n) / ((2 * n - 1) * (2 * n + 1));
               }
@@ -245,7 +245,7 @@
           public void run(TaskMonitor monitor) {
               monitor.setTitle("Calculating Pi");
               double pi = 2.0;
-              for (int n = 0; n < iterations; n++) {
+              for (int n = 1; n <= iterations; n++) {
                   if (cancelled)
                       break;
                   monitor.setProgress(((double) n) / iterations);
