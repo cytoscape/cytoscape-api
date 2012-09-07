@@ -230,7 +230,7 @@
 
   <h4>Cancelling a task</h4>
   The problem with our task is that it
-  does not adequately respond user cancellation.
+  does not adequately respond to user cancellation.
   When the user cancels the task, nothing happens. We have to fill in the
   {@code cancel} method. The main challenge of dealing with cancellation
   is that the thread executing {@code run} is different
@@ -319,7 +319,7 @@
           public void run(TaskMonitor monitor) {
               monitor.setTitle("Calculating Pi");
               double pi = 2.0;
-              for (int n = 0; n < iterations; n++) {
+              for (int n = 1; n <= iterations; n++) {
                   if (cancelled)
                       break;
                   monitor.setProgress(((double) n) / iterations);
