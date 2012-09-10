@@ -10,22 +10,23 @@ import java.awt.geom.Rectangle2D;
  * construct a {@link java.awt.Shape} that has an arbitrary
  * fill {@link java.awt.Paint} and {@link java.awt.Stroke}.
  */
-public interface PaintedShape {
+public interface PaintedShape extends CustomGraphic {
 	/**
  	 * Return the {@link java.awt.Shape}
  	 *
- 	 * @param bounds the bounding box of the {@link org.cytoscape.model.CyNode}.
  	 * @return the {@link java.awt.Shape}
  	 */
-	public Shape getShape(Rectangle2D bounds);
+	public Shape getShape();
+
 	/**
- 	 * Return the {@link java.awt.Paint} to be used to
- 	 * fill the {@link java.awt.Shape}.
+ 	 * Return the {@link java.awt.Paint} to fill the shape with.  This
+ 	 * is a convenience method that is essentially the same as calling
+ 	 * getPaint(getShape().getBounds());
  	 *
- 	 * @param bounds the bounding box of the {@link org.cytoscape.model.CyNode}.
- 	 * @return the fill {@link java.awt.Paint}
+ 	 * @return the {@link java.awt.Paint}
  	 */
-	public Paint getFill(Rectangle2D bounds);
+	public Paint getPaint();
+
 	/**
  	 * Return the {@link java.awt.Stroke} to use to outline the
  	 * {@link java.awt.Shape} provided by the {@link #getShape} method above.
@@ -33,6 +34,7 @@ public interface PaintedShape {
  	 * @return the {@link java.awt.Stroke} to use.
  	 */
 	public Stroke getStroke();
+
 	/**
  	 * Return the {@link java.awt.Paint} to use to color the
  	 * {@link java.awt.Stroke} returned by {@link #getStroke}.
