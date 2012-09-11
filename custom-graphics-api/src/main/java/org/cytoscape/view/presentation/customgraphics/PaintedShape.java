@@ -10,7 +10,7 @@ import java.awt.geom.Rectangle2D;
  * construct a {@link java.awt.Shape} that has an arbitrary
  * fill {@link java.awt.Paint} and {@link java.awt.Stroke}.
  */
-public interface PaintedShape extends CustomGraphic {
+public interface PaintedShape extends CustomGraphicLayer {
 	/**
  	 * Return the {@link java.awt.Shape}
  	 *

@@ -11,10 +11,10 @@ import java.awt.geom.Rectangle2D;
  * This interface defines a the mimimum interface to
  * add a custom graphics to a {@link org.cytoscape.model.CyNode}.
  */
-public interface CustomGraphic {
+public interface CustomGraphicLayer {
 	/**
  	 * Return the bounds of the area covered by this
- 	 * CustomGraphic as a {@link java.awt.Rectangle}
+ 	 * CustomGraphicLayer as a {@link java.awt.Rectangle}
  	 *
  	 * @return the {@link java.awt.Rectangle}
  	 */
@@ -22,7 +22,7 @@ public interface CustomGraphic {
 
 	/**
  	 * Return the bounds of the area covered by this
- 	 * CustomGraphic as a {@link java.awt.Rectangle2D}
+ 	 * CustomGraphicLayer as a {@link java.awt.Rectangle2D}
  	 *
  	 * @return the {@link java.awt.Rectangle2D}
  	 */
@@ -38,11 +38,11 @@ public interface CustomGraphic {
 	public Paint getPaint(Rectangle2D bounds);
 
 	/**
- 	 * Return a new NodeCustomGraphics that has been transformed by the
+ 	 * Return a new CustomGraphicLayer that has been transformed by the
  	 * provided {@link java.awt.geom.AffineTransform}.
  	 *
  	 * @param xform transform to perform on the shape
- 	 * @return the transformed NodeCustomGraphic
+ 	 * @return the transformed CustomGraphicLayer
  	 */
-  public CustomGraphic transform(AffineTransform xform);
+  public CustomGraphicLayer transform(AffineTransform xform);
 }

@@ -8,7 +8,7 @@ import java.util.List;
  * Base interface for all Custom Graphics.
  *
  */
-public interface CyCustomGraphics<T> {
+public interface CyCustomGraphics<T extends CustomGraphicLayer> {
 		
 	/**
 	 * Immutable session-unique identifier of image generated in constructor.
@@ -35,13 +35,18 @@ public interface CyCustomGraphics<T> {
 	 */
 	public void setDisplayName(final String displayName);
 	
+	/**
+	 * Generate a string suitable for serializing the state of this
+	 * custom graphic.
+	 * 
+	 * @return serialized custom graphic state
+	 */
+	public String toSerializableString();
 	
 	/**
-	 * Get layers belongs to this object.
-	 * In current Implementation, ti's always Ding's CustomGraphic object.
-	 * Ordered by Z-Order value.
+	 * Get layers that belong to this object.
 	 * 
-	 * @return Collection of layer objects (in this version, it's CustomGraphics in Ding)
+	 * @return Collection of layer objects (in this version, it's CustomGraphicLayers from Ding)
 	 * 
 	 */
 	public List<T> getLayers();
