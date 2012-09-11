@@ -39,7 +39,10 @@ public interface CyCustomGraphics<T extends CustomGraphicLayer> {
 	 * Generate a string suitable for serializing the state of this
 	 * custom graphic.
 	 * 
-	 * @return serialized custom graphic state
+	 * @return serialized custom graphic state.  Note that the first part of this
+	 *         <b>must</b> be the class of the implementing object followed by a 
+	 *         comma.  This is used by the deserialization logic to recreate the
+	 *         factory objects.
 	 */
 	public String toSerializableString();
 	
