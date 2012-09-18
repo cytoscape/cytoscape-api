@@ -58,6 +58,13 @@ public abstract class AbstractCyTableTest {
 	protected boolean rowCreatedMicroListenerWasCalled;
 	protected boolean rowAboutToBeDeletedMicroListenerWasCalled;
 
+	protected void assertListEquals(List<?> expected, List<?> actual) {
+		assertEquals(expected.size(), actual.size());
+		for (int i = 0; i < expected.size(); i++) {
+			assertEquals(expected.get(i), actual.get(i));
+		}
+	}
+
 	@Test
 	public void testAddStringAttr() {
 		table.createColumn("someString", String.class, false);
@@ -435,7 +442,7 @@ public abstract class AbstractCyTableTest {
 		final List<String> strings = new ArrayList<String>();
 		strings.add("joe");
 		attrs.set("l", strings);
-		assertEquals(attrs.getList("l", String.class), strings);
+		assertListEquals(attrs.getList("l", String.class), strings);
 	}
 
 	@Test(expected=NullPointerException.class)
