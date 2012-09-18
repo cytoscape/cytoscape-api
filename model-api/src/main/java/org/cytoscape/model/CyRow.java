@@ -63,33 +63,37 @@ public interface CyRow {
 	<T> T get(String columnName, Class<?extends T> type, T defaultValue);
 
 	/**
-	 * Returns the value found for this row in the specified column
-	 * with the specified type.
+	 * Returns a list which is a view on the underlying column value for this row.  This means
+	 * updates made to the list are reflected in the column, and vice-versa. 
 	 * @param <T> the generic type of the elements of the list we wish to retrieve.
 	 * @param columnName The name identifying the attribute.
 	 * @param listElementType  The type of the elements of the list that we wish to retrieve.
-	 * @return The value found for this row in the specified column and
+	 * @return Returns a list which is a view on the underlying column value for this row, or
 	 * null if the column does not exist.
 	 * Please note that this method can only be used to retrieve values that are Lists!
 	 */
 	<T> List<T> getList(String columnName, Class<T> listElementType);
 
 	/**
-	 * Returns the value found for this row in the specified column
-	 * with the specified type.
+	 * Returns a list which is a view on the underlying column value for this row.  This means
+	 * updates made to the list are reflected in the column, and vice-versa. 
 	 * @param <T> the generic type of the elements of the list we wish to retrieve.
 	 * @param columnName The name identifying the attribute.
 	 * @param listElementType  The type of the elements of the list that we wish to retrieve.
 	 * @param defaultValue The List to return if the column has not previously been set. 
-	 * @return The value found for this row in the specified column, the default value
+	 * @return Returns a list which is a view on the underlying column value for this row, the default value
 	 * if the row has not yet been set, and null if the column does not exist.
 	 * Please note that this method can only be used to retrieve values that are Lists!
 	 */
 	<T> List<T> getList(String columnName, Class<T> listElementType, List<T> defaultValue);
 
 	/**
-	 * Set the specified column for this row to the specified value.
-	 * To unset a column entry use null for value.
+	 * Sets the specified column for this row to the specified value.
+	 * To unset a column entry use null for value.  When setting a list value
+	 * to this row, the list is copied.  Any further updates to the original
+	 * list are not reflected in the row.  To update the row call
+	 * {@link #getList(String, Class) getList()} and update the resulting list.
+	 * 
 	 * @param <T> The generic type of the value to assign the specified column in this row.
 	 * @param columnName The name identifying the attribute.
 	 * @param value The value to assign the specified column in this row

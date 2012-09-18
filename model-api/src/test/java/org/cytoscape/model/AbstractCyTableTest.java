@@ -424,10 +424,10 @@ public abstract class AbstractCyTableTest {
 		assertNull(attrs.getList("x", String.class));
 	}
 
-	@Test
+	@Test(expected=IllegalArgumentException.class)
 	public void testGetListWithAnInvalidListElementType() {
 		table.createListColumn("x", Long.class, false);
-		assertNull(attrs.getList("x", String.class));
+		attrs.getList("x", String.class);
 	}
 
 	@Test
