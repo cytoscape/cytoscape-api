@@ -11,7 +11,7 @@
    <li>Write an action listener. This could be a named class or an anonymous class.</li>
    <li>Add the {@code ActionListener} to the menu item by calling the {@code addActionListener} method.
   </ol>
-  When the user selects the menu item, your action listener is invoked.
+  When the user selects the menu item, Swing invokes your action listener.
   </p>
 
   <h3>Why tasks?</h3>
@@ -26,11 +26,11 @@
   </p>
 
   <p>
-  We establish <i>tasks</i> as a replacement for action listeners to take advantage
+  We establish {@link org.cytoscape.work.Task}s as a replacement for action listeners to take advantage
   of OSGi's loose coupling. A single task object can be thought of as an
   action listener. Tasks implement the {@code run} method, which is analogous
-  to the action listener's {@code actionPerformed} method. <i>Task factories</i>
-  create tasks. You export task factories as an OSGi service, not tasks.
+  to the action listener's {@code actionPerformed} method. A {@link org.cytoscape.work.TaskFactory}
+  creates tasks. You export a task factory as an OSGi service, not tasks.
   </p>
 
   <h3>Why task factories?</h3>
@@ -44,9 +44,14 @@
   some parameters, then it returns a new task initialized with those parameters.
   The task can obtain those parameters either through its constructor or as an
   inner class that has access to the task factory's members.
-  Moreover, a single task object neatly contains state that does not
-  spill over into separate task invocations.
-  (If you know a functional programming, here is an
+  </p>
+
+  <p>
+  Moreover, a well written task factory returns new instances of {@code Task} each time
+  the task factory is invoked. A new task object per invocation neatly contains state that does not
+  spill over into separate task invocations. Incorrectly written task factories
+  return the same task instance each time it is invoked.
+  (If you know a functional programming language, here is an
   analogy: a task is like an inner function
   that the task factory function returns; the task gets inputs from free variables
   defined in the task factory function.)
@@ -78,9 +83,15 @@
   <h3>Task iterators</h3>
   <p>
   Sometimes when a task is executing, you need to run additional
-  tasks after it is done. <i>Task iterators</i> let you create a series of tasks
+  tasks after it is done. {@link org.cytoscape.work.TaskIterator}s let you create a series of tasks
   that you control what task to execute next, even while a task in that iterator
   is executing.
+  </p>
+
+  <p>
+  In most cases, you do not have to consider task iterators, since you probably be executing a
+  single task and won't be executing a sequence tasks. In this case, when you write a task factory
+  implementation, you return a new task iterator that only contains your task.
   </p>
 
   <h3>Task managers</h3>
@@ -100,7 +111,9 @@
    <li>
    Tasks are run asynchronously. This means you can encapsulate
    complicated, long-running algorithms entirely in a single task.
-   This will not freeze Cytoscape.
+   You do not have to think about threading issues, as this will not freeze Cytoscape.
+   However, if a portion of your task's code invokes Swing, you may have to wrap the 
+   code in a {@link javax.swing.SwingUtilities#invokeLater}.
    </li>
    <li>
    Because tasks can take a long time to complete,
@@ -110,11 +123,16 @@
    </li>
    <li>
    Tasks can throw exceptions in the {@code run} method. Cytoscape will catch the exception and
-   inform the user.
+   inform the user. When a task encounters an exception, it is considered good practice to catch
+   the exception and throw another exception with a high-level explanation that the user
+   can understand. For example, let's say your task is reading from a file, which can cause
+   an {@code IOException} to be thrown. Because the explanation of the {@code IOException} will
+   probably be unhelpful for the user, you should catch {@code IOException} and throw your own
+   exception with an easy to understand explanation and some solutions for the user to remedy the problem.
    </li>
    <li>
    Tasks can be cancelled by the user. Tasks are required to implement the {@code cancel} method.
-   Long-running tasks are required to respond to user cancellations and return from the
+   Long-running tasks must respond to user cancellations and return from the
    {@code run} method gracefully.
    </li>
    <li>
@@ -125,9 +143,9 @@
    </li>
    <li>
    Tasks can have user-defined inputs called <i>tunables</i>. When Cytoscape detects that
-   the task has tunables, it creates a user interface for user input.
-   Cytoscape then fills in the tunables with the user's input, then executes the task.
-   Tunables are great for algorithms with settings that the user can change before
+   the task has tunables, it creates an interface for user input.
+   Cytoscape fills in the tunables with the user's input, then executes the task.
+   Tunables are suited for algorithms with settings that the user can change before
    running the task.
    With tunables, you do not have to manually create a
    Swing dialog to get user input. If the task is run in the command-line, the user
@@ -139,19 +157,22 @@
   <h3>Examples</h3>
   <h4>Hello World Menu Item</h4>
   <pre>{@code
-      // Example that displays a user message at the bottom of the Cytoscape desktop
-      Logger logger = LoggerFactory.getLogger("CyUserMessages");
-      Task myTask = new Task() {
+      class MyTask implements Task {
           public void run(TaskMonitor monitor) {
               logger.info("Hey chef");
           }
 
           public void cancel() {
           }
-      };
+      }
+
+      ...
+
+      // Example that displays a user message at the bottom of the Cytoscape desktop
+      Logger logger = LoggerFactory.getLogger("CyUserMessages");
       TaskFactory myTaskFactory = new TaskFactory() {
           public TaskIterator createTaskIterator() {
-              return new TaskIterator(myTask);
+              return new TaskIterator(new MyTask());
           }
 
           public boolean isReady() {
@@ -169,64 +190,69 @@
   <h4>Approximating &pi;</h4>
   Here is another example of a task that approximates &pi; using the Wallis product:
   <p align="center">
-  <img src="http://latex.codecogs.com/gif.latex?\dpi{100} \frac{\pi}{2}=\prod^\infty_{n=1}\left( \frac{2n}{2n-1} \cdot \frac{2n}{2n+1} \right )=\left( \frac{2}{1} \cdot \frac{2}{3} \right ) \cdot \left( \frac{4}{3} \cdot \frac{4}{5} \right ) \cdot \left( \frac{6}{5} \cdot \frac{6}{7} \right ) \ldots" title="\dpi{150} \frac{\pi}{2}=\prod^\infty_{n=1}\left( \frac{2n}{2n-1} \cdot \frac{2n}{2n+1} \right )=\left( \frac{2}{1} \cdot \frac{2}{3} \right ) \cdot \left( \frac{4}{3} \cdot \frac{4}{5} \right ) \cdot \left( \frac{6}{5} \cdot \frac{6}{7} \right ) \ldots">
+  <img src="http://latex.codecogs.com/gif.latex?\dpi{120} \frac{\pi}{2}=\prod^\infty_{n=1}\left( \frac{2n}{2n-1} \cdot \frac{2n}{2n+1} \right )=\left( \frac{2}{1} \cdot \frac{2}{3} \right ) \cdot \left( \frac{4}{3} \cdot \frac{4}{5} \right ) \cdot \left( \frac{6}{5} \cdot \frac{6}{7} \right ) \ldots">
   </p>
-  <pre>{@code
-      // Example that approximates &pi;
+  <tt><pre>
+      // Example that approximates pi
       Logger logger = LoggerFactory.getLogger("CyUserMessages");
-      final int iterations = 1000;
-      Task myPiTask = new Task() {
+
+      class MyPiTask implements Task {
+          final int iterations = 1000;
           public void run(TaskMonitor monitor) {
               double pi = 2.0;
-              for (int n = 1; n <= iterations; n++) {
-                  pi *= (2 * n) * (2 * n) / ((2 * n - 1) * (2 * n + 1));
+              for (int n = 1; n &lt;= iterations; n++) {
+                  pi *= ((double) (2 * n) * (2 * n)) / ((2 * n - 1) * (2 * n + 1));
               }
               logger.info("Our approximation of pi is: " + Double.toString(pi));
           }
 
           public void cancel() {
           }
-      };
+      }
+
+      ...
+
       TaskFactory myTaskFactory = new TaskFactory() {
           public TaskIterator createTaskIterator() {
-              return new TaskIterator(myPiTask);
+              return new TaskIterator(new MyPiTask());
           }
 
           public boolean isReady() {
               return true;
           }
       };
+
       Properties props = new Properties();
       props.setProperty(PREFERRED_MENU,"Apps");
       props.setProperty(TITLE,"Approximate Pi");
       props.setProperty(MENU_GRAVITY,"1.0");
       props.setProperty(TOOLTIP,"Approximates pi using the Wallis product");
       registerService(bc, myTaskFactory, TaskFactory.class, props);
-  }</pre>
+  </tt></pre>
 
   <h4>Using a task monitor</h4>
   The problem with the above example is that if the &pi; calculation takes a long time,
   the user is not informed of its progress.
-  Here, we modify {@code myPiTask} so that it informs the user during this long calculation
+  Here, we modify {@code MyPiTask} so that it informs the user during this long calculation
   by using the task monitor.
 
-  <pre>{@code
-      final int iterations = 1000;
-      Task myPiTask = new Task() {
+  <tt><pre>
+      class MyPiTask implements Task {
+          final int iterations = 1000;
           public void run(TaskMonitor monitor) {
-              monitor.setTitle("Calculating Pi");
+              <b>monitor.setTitle("Calculating Pi");</b>
               double pi = 2.0;
-              for (int n = 1; n <= iterations; n++) {
-                  monitor.setProgress(((double) n) / iterations);
-                  pi *= (2 * n) * (2 * n) / ((2 * n - 1) * (2 * n + 1));
+              for (int n = 1; n &lt;= iterations; n++) {
+                  <b>monitor.setProgress(((double) n) / iterations);</b>
+                  pi *= ((double) (2 * n) * (2 * n)) / ((2 * n - 1) * (2 * n + 1));
               }
               logger.info("Our approximation of pi is: " + Double.toString(pi));
           }
 
           public void cancel() {
           }
-      };
-  }</pre>
+      }
+  </pre></tt>
 
   <h4>Cancelling a task</h4>
   The problem with our task is that it
@@ -238,31 +264,30 @@
   to communicate cancellation from {@code cancel} to {@code run}.
   Here is how we deal with this issue:
 
-  <pre>{@code
-      final int iterations = 1000;
-      Task myPiTask = new Task() {
-          boolean cancelled = false;
+  <tt><pre>
+      class MyPiTask implements Task {
+          final int iterations = 1000;
           public void run(TaskMonitor monitor) {
               monitor.setTitle("Calculating Pi");
               double pi = 2.0;
-              for (int n = 1; n <= iterations; n++) {
-                  if (cancelled)
-                      break;
+              for (int n = 1; n &lt;= iterations; n++) {
+                  <b>if (cancelled)</b>
+                      <b>break;</b>
                   monitor.setProgress(((double) n) / iterations);
-                  pi *= (2 * n) * (2 * n) / ((2 * n - 1) * (2 * n + 1));
+                  pi *= ((double) (2 * n) * (2 * n)) / ((2 * n - 1) * (2 * n + 1));
               }
-              if (!cancelled)
+              <b>if (!cancelled)</b>
                   logger.info("Our approximation of pi is: " + Double.toString(pi));
           }
 
           public void cancel() {
-              cancelled = true;
+              <b>cancelled = true;</b>
           }
-      };
-  }</pre>
+      }
+  </pre></tt>
 
   When the user hits the Cancel button, Cytoscape invokes the {@code cancel} method.
-  This switches the {@code cancelled} variable to true. When {@code run} starts another
+  This method switches the {@code cancelled} variable to true. When {@code run} starts another
   iteration of the {@code for} loop, it checks the {@code cancelled} variable.
   Since {@code cancelled} was flipped, it stops the loop.
   In other words, the {@code cancel} method tells the {@code run} method to stop through
@@ -272,22 +297,33 @@
   Communicating cancellation through a boolean variable
   works well for tasks with loops, since each loop iteration
   can just check if the variable has changed and stop.
-  </p>
-
-  <p>
   Tasks that do I/O operations, however, require more consideration,
   like a task that downloads a file from some URL.
   There are several ways you can deal with cancellation during an
   I/O operation:
   <ul>
    <li>
-   Create a variable that holds the thread executing {@code run}. When
+   Create a variable in your task that holds the thread executing {@code run}. When
    {@code run} first starts, fill in this variable with the method
    {@link java.lang.Thread#currentThread}. Now the {@code cancel} method
    can know the thread that is executing {@code run}.
    When cancellation occurs, call {@link java.lang.Thread#interrupt}
    on the thread executing {@code run}. Interrupting a thread
-   in an I/O operation will sometimes stop it.
+   in an I/O operation will sometimes stop it. Here's how this would look:
+   <tt><pre>
+     class MyTask implements Task {
+         Thread runThread = null;
+         public void run(TaskMonitor monitor) {
+             runThread = Thread.currentThread();
+
+             ... // complicated I/O operations
+         }
+
+         public void cancel() {
+             runThread.interrupt();
+         }
+     }
+   </pre></tt>
    </li>
    <li>
    If your {@code run} method is reading from an {@link java.io.InputStream},
