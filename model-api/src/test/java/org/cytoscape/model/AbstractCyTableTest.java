@@ -1177,5 +1177,27 @@ public abstract class AbstractCyTableTest {
 		assertEquals(1, table.countMatchingRows("s1", "abc") );
 	}
 	
+	@Test
+	public void testVirtualColumnEvents() {
+		table2.createColumn("s", String.class, false);
+		table.addVirtualColumn("s1", "s", table2, table.getPrimaryKey().getName(), true);
+		CyRow row1 = table.getRow(1L);
+		CyRow row2 = table2.getRow(1L);
+		
+		List<Object> payloads = eventHelper.getAllPayloads();
+		payloads.clear();
+		
+		// If we set a value through the virtual column, all the parent tables
+		// should fire an event
+		row1.set("s1", "test");
+		assertEquals(2, payloads.size());
+		
+		payloads.clear();
+		
+		// If we set a value through the parent table, all the dependent tables
+		// should fire an event
+		row2.set("s", "test2");
+		assertEquals(2, payloads.size());
+	}
 }
 
