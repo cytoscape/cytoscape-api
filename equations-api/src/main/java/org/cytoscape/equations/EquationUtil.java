@@ -70,7 +70,7 @@ public final class EquationUtil {
 	private static boolean isSimpleAttribName(final String attribName) {
 		final int length = attribName.length();
 		if (length == 0)
-			throw new IllegalStateException("empty attribute names should never happen.");
+			throw new IllegalStateException("empty column names should never happen.");
 
 		if (!Character.isLetter(attribName.charAt(0)))
 			return false;
