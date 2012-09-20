@@ -1199,5 +1199,55 @@ public abstract class AbstractCyTableTest {
 		row2.set("s", "test2");
 		assertEquals(2, payloads.size());
 	}
+	
+	@Test
+	public void testVirtualColumnSourceRename() {
+		table2.createColumn("s", String.class, false);
+		table.addVirtualColumn("s1", "s", table2, table.getPrimaryKey().getName(), true);
+		CyRow row1 = table.getRow(1L);
+		CyRow row2 = table2.getRow(1L);
+		
+		String value = "hello";
+		row2.set("s", value);
+		assertEquals(value, row1.get("s1", String.class));
+
+		// Rename the source column
+		table2.getColumn("s").setName("t");
+		
+		// Ensure the link didn't break
+		assertEquals(value, row1.get("s1", String.class));
+
+		// Ensure the metadata is updated
+		VirtualColumnInfo info = table.getColumn("s1").getVirtualColumnInfo();
+		assertEquals("t", info.getSourceColumn());
+	}
+	
+	@Test
+	public void testVirtualColumnTargetJoinKeyRename() {
+		String otherkey = "otherkey";
+		
+		table2.createColumn("s", String.class, false);
+		table.createColumn(otherkey, Long.class, false);
+		table.addVirtualColumn("s1", "s", table2, otherkey, true);
+		CyRow row1 = table.getRow(1L);
+		CyRow row2 = table2.getRow(2L);
+		
+		row1.set(otherkey, 2L);
+		
+		String value = "hello";
+		row2.set("s", value);
+		assertEquals(value, row1.get("s1", String.class));
+
+		// Rename the source column
+		table.getColumn(otherkey).setName("newname");
+		
+		// Ensure the link didn't break
+		assertEquals(value, row1.get("s1", String.class));
+		
+		// Ensure the metadata is updated
+		VirtualColumnInfo info = table.getColumn("s1").getVirtualColumnInfo();
+		assertEquals("newname", info.getTargetJoinKey());
+
+	}
 }
 
