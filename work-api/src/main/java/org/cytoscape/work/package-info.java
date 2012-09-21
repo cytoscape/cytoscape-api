@@ -84,14 +84,15 @@
   <p>
   Sometimes when a task is executing, you need to run additional
   tasks after it is done. {@link org.cytoscape.work.TaskIterator}s let you create a series of tasks
-  that you control what task to execute next, even while a task in that iterator
+  where you choose the task to execute next, even while a task in that iterator
   is executing.
   </p>
 
   <p>
-  In most cases, you do not have to consider task iterators, since you probably be executing a
-  single task and won't be executing a sequence tasks. In this case, when you write a task factory
-  implementation, you return a new task iterator that only contains your task.
+  When you write your task factory implementation, you will return a {@code TaskIterator} that
+  encapsulates your tasks. In most cases, you would want to execute a
+  single task, not a sequence of tasks. In this case, when you write a task factory
+  implementation, you return a new task iterator that only contains your single task.
   </p>
 
   <h3>Task managers</h3>
@@ -113,7 +114,7 @@
    complicated, long-running algorithms entirely in a single task.
    You do not have to think about threading issues, as this will not freeze Cytoscape.
    However, if a portion of your task's code invokes Swing, you may have to wrap the 
-   code in a {@link javax.swing.SwingUtilities#invokeLater}.
+   code in a {@link javax.swing.SwingUtilities#invokeLater(java.lang.Runnable) SwingUtilities.invokeLater}.
    </li>
    <li>
    Because tasks can take a long time to complete,
@@ -128,7 +129,7 @@
    can understand. For example, let's say your task is reading from a file, which can cause
    an {@code IOException} to be thrown. Because the explanation of the {@code IOException} will
    probably be unhelpful for the user, you should catch {@code IOException} and throw your own
-   exception with an easy to understand explanation and some solutions for the user to remedy the problem.
+   exception with an easily understandable explanation and some solutions for the user to remedy the problem.
    </li>
    <li>
    Tasks can be cancelled by the user. Tasks are required to implement the {@code cancel} method.
@@ -144,7 +145,8 @@
    <li>
    Tasks can have user-defined inputs called <i>tunables</i>. When Cytoscape detects that
    the task has tunables, it creates an interface for user input.
-   Cytoscape fills in the tunables with the user's input, then executes the task.
+   Once the user clicks OK, Cytoscape fills in the tunables with the user's input,
+   then executes the task.
    Tunables are suited for algorithms with settings that the user can change before
    running the task.
    With tunables, you do not have to manually create a
@@ -152,6 +154,61 @@
    can still provide input.
    </li>
   </ul>
+  </p>
+
+  <h3>Task Factories in {@link org.cytoscape.task} Package</h3>
+  <p>
+  As stated above, the primary purpose of task factories is that they accept input parameters
+  to be passed on to task instances. While developing Cytoscape, we found that many of our task
+  factories accept the same input parameters. At the top level of the {@link org.cytoscape.task}
+  package, we created a dozen specialized task factories that accept specific inputs.
+  Each interface in this package is a specialized task factory that groups together
+  task factory implementations based on common inputs.
+  </p>
+  
+  <p>
+  For instance, the {@link org.cytoscape.task.NodeViewTaskFactory} takes a node view as an input
+  parameter. Instead of a {@link org.cytoscape.work.TaskFactory}, when you write an
+  implementation to {@code NodeViewTaskFactory}, Cytoscape understands that your task factory
+  expects a node view as input. In terms of the user interface, Cytoscape will create a menu
+  item for your task factory when the user right-clicks on a node. Your task factory
+  will be invoked with the node view the user right-clicked on when the user selects your menu item.
+  In this respect, a {@code NodeViewTaskFactory} defines an action that operates on a node view.
+  </p>
+
+  <p>
+  Subpackages in the {@link org.cytoscape.task} package contain interfaces denoting
+  common user actions in Cytoscape. In most cases, you do not write implementations to these
+  interfaces. Instead, if you want to use the functionality specified by one of these
+  interfaces, you import them as an OSGi service.
+  </p>
+
+  <p>
+  Here's an example. The {@link org.cytoscape.task.create.CloneNetworkTaskFactory CloneNetworkTaskFactory}
+  interface in the {@link org.cytoscape.task.create} subpackage represents the action of
+  duplicating a network. If you want to duplicate a {@code CyNetwork}, you would import the
+  {@code CloneNetworkTaskFactory} as an OSGi service, then invoke its task by passing in
+  the {@code CyNetwork} you want to duplicate to the task factory.
+  </p>
+
+  <p>
+  Sometimes you do write your own implementation to an interface in a
+  {@link org.cytoscape.task} subpackage. For instance, let's say you
+  are developing your own method that analyzses the topology of a network.
+  You encapsulate the analysis in a task. You then export your task factory service
+  as an {@link org.cytoscape.task.analyze.AnalyzeNetworkCollectionTaskFactory}.
+  Exporting your interface using {@code AnalyzeNetworkCollectionTaskFactory}
+  instead of just an {@link org.cytoscape.task.NetworkCollectionTaskFactory}
+  makes the purpose of your task more explicit.
+  </p>
+
+  <p>
+  Before exporting your task through a basic {@link org.cytoscape.work.TaskFactory},
+  it is important to think about the inputs the task needs and its objectives.
+  Is it the case that your task operates on a {@code CyNetwork}?
+  Your task factory should implement {@link org.cytoscape.task.NetworkTaskFactory}.
+  Specialized task factory interfaces in {@link org.cytoscape.task} make 
+  the inputs and the objectives explicit.
   </p>
 
   <h3>Examples</h3>
