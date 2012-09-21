@@ -89,10 +89,10 @@
   </p>
 
   <p>
-  When you write your task factory implementation, you will return a {@code TaskIterator} that
-  encapsulates your tasks. In most cases, you would want to execute a
+  When you write your task factory implementation, you return a {@code TaskIterator} that
+  encapsulates your tasks. In most cases, you want to execute a
   single task, not a sequence of tasks. In this case, when you write a task factory
-  implementation, you return a new task iterator that only contains your single task.
+  implementation, return a new task iterator that only contains your single task.
   </p>
 
   <h3>Task managers</h3>
