@@ -3,6 +3,9 @@ package org.cytoscape.view.presentation.customgraphics;
 import java.awt.Image;
 import java.util.List;
 
+import org.cytoscape.model.CyIdentifiable;
+import org.cytoscape.model.CyNetwork;
+
 
 /**
  * Base interface for all Custom Graphics.
@@ -58,10 +61,12 @@ public interface CyCustomGraphics<T extends CustomGraphicLayer> {
 	/**
 	 * Get layers that belong to this object.
 	 * 
+	 * @param network the node we want the layers for
+	 * @param node the node we want the layers for (currently, only nodes are supported
 	 * @return Collection of layer objects (in this version, it's CustomGraphicLayers from Ding)
 	 * 
 	 */
-	public List<T> getLayers();
+	public List<T> getLayers(CyNetwork network, CyIdentifiable node);
 	
 	
 	/**
