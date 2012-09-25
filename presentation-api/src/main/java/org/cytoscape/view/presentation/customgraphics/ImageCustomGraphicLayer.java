@@ -4,8 +4,8 @@ import java.awt.TexturePaint;
 import java.awt.geom.Rectangle2D;
 
 /**
- * This interface defines a the mimimum interface to
- * add a custom graphics to a {@link org.cytoscape.model.CyNode}.
+ * This interface defines a {@link CustomGraphicLayer} that
+ * paints an image on a node. 
  */
 public interface ImageCustomGraphicLayer extends CustomGraphicLayer {
 	/**

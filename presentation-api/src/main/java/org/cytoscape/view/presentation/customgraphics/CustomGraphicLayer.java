@@ -14,14 +14,6 @@ import java.awt.geom.Rectangle2D;
 public interface CustomGraphicLayer {
 	/**
  	 * Return the bounds of the area covered by this
- 	 * CustomGraphicLayer as a {@link java.awt.Rectangle}
- 	 *
- 	 * @return the {@link java.awt.Rectangle}
- 	 */
-	public Rectangle getBounds();
-
-	/**
- 	 * Return the bounds of the area covered by this
  	 * CustomGraphicLayer as a {@link java.awt.Rectangle2D}
  	 *
  	 * @return the {@link java.awt.Rectangle2D}

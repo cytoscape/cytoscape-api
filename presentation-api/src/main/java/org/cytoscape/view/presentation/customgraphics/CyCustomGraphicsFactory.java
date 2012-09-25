@@ -7,14 +7,23 @@ import java.util.List;
 
 /**
  * This interface provides the factory to create CyCustomGraphics objects.
- * Implementations of CyCustomGraphicsFactory are the objects that should
- * be registered as OSGi services and will be utilized by the renderers to
- * create CyCustomGraphics objects.
+ * CyCustomGraphicsFactory objects should be registered as services in
+ * OSGi and will be used by Renderers to create the actual custom graphics
+ * implementations.  Note that the type of a CyCustomGraphicsFactory is
+ * the type of the underlying {@link CustomGraphicLayer} not the type
+ * of the resulting {@link CyCustomGraphic} object this creates. In general,
+ * the pattern is to add to your CyActivator class:
+ *
+ * <pre>	
+  		CyCustomGraphicsFactory myCustomGraphicsFactory = new MyCustomGraphicsFactory();
+  		registerService(bundleContext, myCustomGraphicsFactory, CyCustomGraphicsFactory.class, new Properites());
+  </pre>
+ *
  *
  */
 public interface CyCustomGraphicsFactory<T extends CustomGraphicLayer> {
 	/**
- 	 * Return the prefix to delineate this custom graphics factory.  This
+ 	 * Return the prefix to identify this custom graphics factory.  This
  	 * is used by the passthrough mapping logic to figure out if a
  	 * given String value should be mapped to this factory.
  	 *
@@ -34,10 +43,11 @@ public interface CyCustomGraphicsFactory<T extends CustomGraphicLayer> {
 
 	/**
  	 * Get a new instance of the CyCustomGraphics based on pulling the data
- 	 * from a URL.
+ 	 * from a URL.  If this {@link CyCustomGraphics} type doesn't support
+ 	 * URLs, this should always return null.
  	 *
  	 * @param url the url that points to the CyCustomGraphics data
- 	 * @return the new instance
+ 	 * @return the new instance, or null if URL references are not supported
  	 */
 	public CyCustomGraphics<T> getInstance(URL url); 
 
@@ -45,7 +55,10 @@ public interface CyCustomGraphicsFactory<T extends CustomGraphicLayer> {
  	 * Get a new instance of the CyCustomGraphics.  The string argument may
  	 * be used by some implementations to create the initial graphics objects.
  	 * For example, a bitmap graphic implementation might use the input argument
- 	 * as a URI that gives the location of an image file.
+ 	 * as a URI that gives the location of an image file.  This is the method
+ 	 * that will be used to take a String passthrough mapping and create the
+ 	 * correct {@link CyCustomGraphics} instance.  Note that the prefix defined
+ 	 * above will get removed from the string before this method is called.
  	 *
  	 * @param input a possible input string that may be used to create the
  	 *              instance.  Not all implementations will use this.
@@ -55,7 +68,8 @@ public interface CyCustomGraphicsFactory<T extends CustomGraphicLayer> {
 
 	/**
  	 * Create a new CyCustomGraphics object by parsing the string
- 	 * resulting from the toSerializableString() method.
+ 	 * resulting from the toSerializableString() method.  This method
+ 	 * will be used to suport serialization of discrete mappings.
  	 */
 	public CyCustomGraphics<T> parseSerializableString(String string);
 
