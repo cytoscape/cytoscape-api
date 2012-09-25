@@ -78,24 +78,7 @@
 			<version>${project.version}</version>
 		</dependency>
 		
-		<!-- Wrapped 3rd party libraries -->
-		<dependency>
-			<groupId>cytoscape-temp</groupId>
-			<artifactId>l2fprod-common-sheet</artifactId>
-			<version>7.3</version>
-		</dependency>
-		<dependency>
-			<groupId>cytoscape-temp</groupId>
-			<artifactId>l2fprod-common-shared</artifactId>
-			<version>7.3</version>
-		</dependency>
-		<dependency>
-			<groupId>cytoscape-temp</groupId>
-			<artifactId>l2fprod-common-fontchooser</artifactId>
-			<version>7.3</version>
-		</dependency>
-
-		      <!-- for testing -->
+		<!-- for testing -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>

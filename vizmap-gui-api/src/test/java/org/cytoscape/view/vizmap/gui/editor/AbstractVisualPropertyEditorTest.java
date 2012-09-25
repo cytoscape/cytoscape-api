@@ -6,11 +6,9 @@ import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
 
 import java.beans.PropertyEditor;
-import java.util.Set;
 
 import javax.swing.table.TableCellRenderer;
 
-import org.cytoscape.view.model.VisualProperty;
 import org.junit.Test;
 import org.junit.Before;
 
@@ -21,14 +19,22 @@ public class AbstractVisualPropertyEditorTest {
 
 		public DummyEditor(Class<Object> type, PropertyEditor propertyEditor,
 				ContinuousEditorType continuousEditorType) {
-			super(type, propertyEditor, continuousEditorType);
+			super(type, propertyEditor, continuousEditorType, new DummyCellRendererFactory());
 		}
 		
+	}
+	
+	private class DummyCellRendererFactory implements ContinuousMappingCellRendererFactory {
+		@Override
+		public TableCellRenderer createTableCellRenderer(ContinuousMappingEditor<? extends Number, ?> editor) {
+			return renderer;
+		}
 	}
 	
 	DummyEditor editor;
 	PropertyEditor propertyEditor;
 	ContinuousEditorType continuousEditorType;
+	TableCellRenderer renderer;
 	
 	@Before
 	public void testAbstractVisualPropertyEditor(){
@@ -36,6 +42,7 @@ public class AbstractVisualPropertyEditorTest {
 		propertyEditor = mock(PropertyEditor.class);
 		continuousEditorType = ContinuousEditorType.COLOR;
 		editor = new DummyEditor(Object.class, propertyEditor, continuousEditorType);
+		renderer = mock(TableCellRenderer.class);
 	}
 	
 	@Test
