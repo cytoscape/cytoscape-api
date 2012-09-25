@@ -154,11 +154,6 @@
 		</dependency>
 		<dependency>
 			<groupId>org.cytoscape</groupId>
-			<artifactId>custom-graphics-api</artifactId>
-			<version>${project.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.cytoscape</groupId>
 			<artifactId>service-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
