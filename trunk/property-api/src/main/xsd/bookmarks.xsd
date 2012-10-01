@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified"
+  xmlns:xlink="http://www.w3.org/1999/xlink">
+  <xs:import namespace="http://www.w3.org/1999/xlink" schemaLocation="xlinks-2001.xsd" />
+  <xs:element name="bookmarks">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element ref="description" />
+        <xs:element maxOccurs="unbounded" ref="category" />
+      </xs:sequence>
+      <xs:attribute name="version" use="required" type="xs:decimal" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="description" type="xs:string" />
+  <xs:element name="category">
+    <xs:complexType>
+      <xs:choice minOccurs="0" maxOccurs="unbounded">
+        <xs:element ref="category" />
+        <xs:element ref="dataSource" />
+      </xs:choice>
+      <xs:attribute name="name" use="required" type="xs:NCName" />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="dataSource">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" maxOccurs="unbounded" ref="attribute" />
+      </xs:sequence>
+      <xs:attribute name="format" />
+      <xs:attribute name="name" use="required" />
+      <xs:attribute ref="xlink:href" use="required" /> 
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="attribute">
+    <xs:complexType mixed="true">
+      <xs:attribute name="name" use="required" type="xs:NCName" />
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

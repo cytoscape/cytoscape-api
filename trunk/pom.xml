@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+	<modelVersion>4.0.0</modelVersion>
+
+	<parent>
+		<artifactId>parent</artifactId>
+		<groupId>org.cytoscape</groupId>
+		<version>3.0.0-beta3</version>
+		<relativePath>../parent</relativePath>
+	</parent>
+
+	<artifactId>api-parent</artifactId>
+	<packaging>pom</packaging>
+	<name>Cytoscape API Parent Project POM</name>
+
+	<modules>
+		<module>event-api</module>
+		<module>model-api</module>
+		<module>viewmodel-api</module>
+		<module>core-task-api</module>
+		<module>equations-api</module>
+		<module>io-api</module>
+		<module>layout-api</module>
+		<module>app-api</module>
+		<module>swing-app-api</module>
+		<module>presentation-api</module>
+		<module>property-api</module>
+		<module>session-api</module>
+		<module>swing-application-api</module>
+		<module>vizmap-api</module>
+		<module>vizmap-gui-api</module>
+		<module>webservice-api</module>
+		<module>work-api</module>
+		<module>work-swing-api</module>
+		<module>service-api</module>
+		<module>swing-util-api</module>
+		<module>application-api</module>
+		<module>datasource-api</module>
+		<module>group-api</module>
+		<module>webservice-swing-api</module>
+		<module>command-executor-api</module>
+	</modules>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>junit</groupId>
+				<artifactId>junit</artifactId>
+				<version>${junit.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.mockito</groupId>
+				<artifactId>mockito-all</artifactId>
+				<version>${mockito.version}</version> 
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+	<!-- Shared dependency for all projects. -->
+	<dependencies>
+		<dependency>
+			<groupId>org.ops4j.pax.logging</groupId>
+			<artifactId>pax-logging-api</artifactId>
+			<version>1.5.2</version>
+			<scope>provided</scope>
+		</dependency>
+	</dependencies>
+
+	<scm>
+		<connection>scm:svn:http://chianti.ucsd.edu/svn/core3/api/tags/api-parent-3.0.0-beta3</connection>
+		<developerConnection>scm:svn:svn+ssh://grenache.ucsd.edu/cellar/common/svn/core3/api/tags/api-parent-3.0.0-beta3</developerConnection>
+		<url>http://chianti.ucsd.edu/svn/core3/api/tags/api-parent-3.0.0-beta3</url>
+	</scm>
+	
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-release-plugin</artifactId>
+				<version>${maven-release-plugin.version}</version>
+				<configuration>
+					<autoVersionSubmodules>true</autoVersionSubmodules>
+					<goals>deploy</goals>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+</project>

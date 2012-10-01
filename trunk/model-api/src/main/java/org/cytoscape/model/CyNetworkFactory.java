@@ -1,0 +1,73 @@
+/*
+ Copyright (c) 2008, 2010, The Cytoscape Consortium (www.cytoscape.org)
+
+ This library is free software; you can redistribute it and/or modify it
+ under the terms of the GNU Lesser General Public License as published
+ by the Free Software Foundation; either version 2.1 of the License, or
+ any later version.
+
+ This library is distributed in the hope that it will be useful, but
+ WITHOUT ANY WARRANTY, WITHOUT EVEN THE IMPLIED WARRANTY OF
+ MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.  The software and
+ documentation provided hereunder is on an "as is" basis, and the
+ Institute for Systems Biology and the Whitehead Institute
+ have no obligations to provide maintenance, support,
+ updates, enhancements or modifications.  In no event shall the
+ Institute for Systems Biology and the Whitehead Institute
+ be liable to any party for direct, indirect, special,
+ incidental or consequential damages, including lost profits, arising
+ out of the use of this software and its documentation, even if the
+ Institute for Systems Biology and the Whitehead Institute
+ have been advised of the possibility of such damage.  See
+ the GNU Lesser General Public License for more details.
+
+ You should have received a copy of the GNU Lesser General Public License
+ along with this library; if not, write to the Free Software Foundation,
+ Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA.
+*/
+package org.cytoscape.model;
+
+
+/**
+ * A singleton factory object used for instantiating CyNetwork 
+ * objects. The CyNetworkFactory should be available as an
+ * OSGi service.
+ * @CyAPI.Api.Interface
+ */
+public interface CyNetworkFactory {
+	/**
+	 * Returns a new, empty {@link CyNetwork} object.
+	 * The new network's save policy is {@link SavePolicy#SESSION_FILE} by default.
+	 * If you want to create a network that should not be saved in session files, use
+	 * the {@link #createNetwork(SavePolicy)} method instead, and set the save policy to {@link SavePolicy#DO_NOT_SAVE}.
+	 * @return A new, empty {@link CyNetwork} object. 
+	 */
+	CyNetwork createNetwork();
+	
+	/**
+	 * Returns a new, empty {@link CyNetwork} object.
+	 * @param policy the save policy to follow during the life-cycle of the CyNetwork.
+	 * @return A new, empty {@link CyNetwork} object. 
+	 */
+	CyNetwork createNetwork(SavePolicy policy);
+
+	/**
+	 * Returns a new, empty {@link CyNetwork} object where the associated default tables are private. 
+	 * This method should only be used in special cases where the network created is not intended to
+	 * be used or shared like a normal network within the system.
+	 * The new network's save policy is {@link SavePolicy#SESSION_FILE} by default.
+	 * If you want to create a network that should not be saved in session files, use
+	 * the {@link #createNetwork(SavePolicy)} method instead, and set the save policy to {@link SavePolicy#DO_NOT_SAVE}.
+	 * @return A new, empty {@link CyNetwork} object. 
+	 */
+	CyNetwork createNetworkWithPrivateTables();
+	
+	/**
+	 * Returns a new, empty {@link CyNetwork} object where the associated default tables are private. 
+	 * This method should only be used in special cases where the network created is not intended to
+	 * be used or shared like a normal network within the system.
+	 * @param policy the save policy to follow during the life-cycle of the CyNetwork.
+	 * @return A new, empty {@link CyNetwork} object. 
+	 */
+	CyNetwork createNetworkWithPrivateTables(SavePolicy policy);
+}
