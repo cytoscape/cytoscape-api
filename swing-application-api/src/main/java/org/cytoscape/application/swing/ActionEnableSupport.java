@@ -69,6 +69,11 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 	 * Enable when at least one network exists.
 	 */
 	public static final String ENABLE_FOR_NETWORK = "network";
+	
+	/**
+	 * Enable when only one network is selected.
+	 */
+	public static final String ENABLE_FOR_SINGLE_NETWORK = "singleNetwork";
 
 	/**
 	 * Enable when at least one network with NO view exists.
@@ -160,6 +165,8 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 			setEnabled(true);
 		else if (enableFor.equals(ENABLE_FOR_NETWORK))
 			enableForNetwork();
+		else if (enableFor.equals(ENABLE_FOR_SINGLE_NETWORK))
+			enableForSingleNetwork();
 		else if (enableFor.equals(ENABLE_FOR_NETWORK_WITHOUT_VIEW))
 			enableForNetworkWithoutView();
 		else if (enableFor.equals(ENABLE_FOR_NETWORK_AND_VIEW))
@@ -190,12 +197,19 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 	 * Enable the action if the current network exists and is not null.
 	 */
 	private void enableForNetwork() {
-		CyNetwork n = applicationManager.getCurrentNetwork();
-
-		if (n == null)
+		final CyNetwork n = applicationManager.getCurrentNetwork();
+		setEnabled(n != null);
+	}
+	
+	private void enableForSingleNetwork() {
+		final CyNetwork n = applicationManager.getCurrentNetwork();
+		
+		if (n == null) {
 			setEnabled(false);
-		else
-			setEnabled(true);
+		} else {
+			final List<CyNetwork> networks = applicationManager.getSelectedNetworks();
+			setEnabled(networks.size() == 1 && networks.contains(n));
+		}
 	}
 
 	/**
@@ -203,18 +217,14 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 	 * and no view is available for the network.
 	 */
 	private void enableForNetworkWithoutView() {
-		
-		final CyNetwork network = applicationManager.getCurrentNetwork();
+		final CyNetwork n = applicationManager.getCurrentNetwork();
 
-		if (network == null)
+		if (n == null) {
 			setEnabled(false);
-		else {
+		} else {
 			// Network exists.
-			final Collection<CyNetworkView> views = networkViewManager.getNetworkViews(network);
-			if(views.size() == 0)
-				setEnabled(true);
-			else
-				setEnabled(false);
+			final Collection<CyNetworkView> views = networkViewManager.getNetworkViews(n);
+			setEnabled(views.isEmpty());
 		}
 	}
 
@@ -222,12 +232,8 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 	 * Enable the action if the current network and view exist and are not null.
 	 */
 	private void enableForNetworkAndView() {
-		CyNetworkView v = applicationManager.getCurrentNetworkView();
-
-		if (v == null)
-			setEnabled(false);
-		else
-			setEnabled(true);
+		final CyNetworkView v = applicationManager.getCurrentNetworkView();
+		setEnabled(v != null);
 	}
 
 	/**
@@ -235,17 +241,14 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 	 * perform the action.
 	 */
 	private void enableForSelectedNodesOrEdges() {
-		final CyNetwork curNetwork = applicationManager.getCurrentNetwork();
+		final CyNetwork n = applicationManager.getCurrentNetwork();
 
 		// Disable if there is no current network.
-		if (curNetwork == null) {
+		if (n == null)
 			setEnabled(false);
-
-			return;
-		}
-
-		setEnabled( ((curNetwork.getDefaultNodeTable().countMatchingRows(CyNetwork.SELECTED, true) > 0) ||
-		             (curNetwork.getDefaultEdgeTable().countMatchingRows(CyNetwork.SELECTED, true) > 0)) ); 
+		else
+			setEnabled( ((n.getDefaultNodeTable().countMatchingRows(CyNetwork.SELECTED, true) > 0) ||
+			             (n.getDefaultEdgeTable().countMatchingRows(CyNetwork.SELECTED, true) > 0)) ); 
 	}
 
 	/**
@@ -255,13 +258,10 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 	private void enableForSelectedNodes() {
 		CyNetwork n = applicationManager.getCurrentNetwork();
 
-		if (n == null) {
+		if (n == null)
 			setEnabled(false);
-
-			return;
-		}
-
-		setEnabled( (n.getDefaultNodeTable().countMatchingRows(CyNetwork.SELECTED, true) > 0) );
+		else
+			setEnabled( (n.getDefaultNodeTable().countMatchingRows(CyNetwork.SELECTED, true) > 0) );
 	}
 
 	/**
@@ -271,13 +271,10 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 	private void enableForSelectedEdges() {
 		CyNetwork n = applicationManager.getCurrentNetwork();
 
-		if (n == null) {
+		if (n == null)
 			setEnabled(false);
-
-			return;
-		}
-
-		setEnabled( (n.getDefaultEdgeTable().countMatchingRows(CyNetwork.SELECTED, true) > 0) );
+		else
+			setEnabled( (n.getDefaultEdgeTable().countMatchingRows(CyNetwork.SELECTED, true) > 0) );
 	}
 
 	/**
@@ -286,5 +283,4 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 	private void enableForTable() {
 		setEnabled(applicationManager.getCurrentTable() != null);
 	}
-
 }
