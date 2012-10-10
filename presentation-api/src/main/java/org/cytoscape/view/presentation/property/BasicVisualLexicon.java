@@ -166,7 +166,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NODE_DEPTH", "Node Depth", CyNode.class);
 
 	public static final VisualProperty<Double> NETWORK_CENTER_Z_LOCATION = new DoubleVisualProperty(0.0,
-			ARBITRARY_DOUBLE_RANGE, "NETWORK_CENTER_Z_LOCATION", "Network Center Z Location", CyNetwork.class);
+			ARBITRARY_DOUBLE_RANGE, "NETWORK_CENTER_Z_LOCATION", "Network Center Z Location", true, CyNetwork.class);
 
 	public static final VisualProperty<Double> NETWORK_DEPTH = new DoubleVisualProperty(0.0,
 			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NETWORK_DEPTH", "Network Depth", CyNetwork.class);
@@ -269,7 +269,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 		addVisualProperties(rootVisualProperty);
 	}
 	
-	public final void addBendFactory(final BendFactory bendFactory, final Map props) {
+	public final void addBendFactory(final BendFactory bendFactory, final Map<?, ?> props) {
 		EDGE_BEND.setBendFactory(bendFactory);
 	}
 
@@ -362,27 +362,6 @@ public class BasicVisualLexicon implements VisualLexicon {
 		addIdentifierMapping(CyNode.class, "w", NODE_WIDTH);
 		addIdentifierMapping(CyNode.class, "h", NODE_HEIGHT);
 		addIdentifierMapping(CyNode.class, "size", NODE_SIZE);
-
-		addIdentifierMapping(CyEdge.class, "fill", EDGE_PAINT);
-		addIdentifierMapping(CyEdge.class, "width", EDGE_WIDTH);
-
-		// 2.x VizMap Properties:
-		addIdentifierMapping(CyNetwork.class, "backgroundColor", NETWORK_BACKGROUND_PAINT);
-
-		addIdentifierMapping(CyNode.class, "nodeFillColor", NODE_FILL_COLOR);
-		addIdentifierMapping(CyNode.class, "nodeSize", NODE_SIZE);
-		addIdentifierMapping(CyNode.class, "nodeWidth", NODE_WIDTH);
-		addIdentifierMapping(CyNode.class, "nodeHight", NODE_HEIGHT);
-		addIdentifierMapping(CyNode.class, "nodeHeight", NODE_HEIGHT);
-		addIdentifierMapping(CyNode.class, "nodeLabel", NODE_LABEL);
-		addIdentifierMapping(CyNode.class, "nodeLabelColor", NODE_LABEL_COLOR);
-		addIdentifierMapping(CyNode.class, "nodeLabelWidth", NODE_LABEL_WIDTH);
-		
-		addIdentifierMapping(CyEdge.class, "edgeColor", EDGE_PAINT);
-		addIdentifierMapping(CyEdge.class, "edgeLineWidth", EDGE_WIDTH);
-		addIdentifierMapping(CyEdge.class, "edgeLabel", EDGE_LABEL);
-
-		// XGMML:
 		addIdentifierMapping(CyNode.class, "type", NODE_SHAPE);
 		addIdentifierMapping(CyNode.class, "outline", NODE_BORDER_PAINT);
 		addIdentifierMapping(CyNode.class, "width", NODE_BORDER_WIDTH);
@@ -392,36 +371,54 @@ public class BasicVisualLexicon implements VisualLexicon {
 		addIdentifierMapping(CyNode.class, "nodeLabelTransparency", NODE_LABEL_TRANSPARENCY);
 		addIdentifierMapping(CyNode.class, "nodeBorderTransparency", NODE_BORDER_TRANSPARENCY);
 
+		addIdentifierMapping(CyEdge.class, "fill", EDGE_PAINT);
+		addIdentifierMapping(CyEdge.class, "width", EDGE_WIDTH);
 		addIdentifierMapping(CyEdge.class, "fill", EDGE_STROKE_UNSELECTED_PAINT);
 		addIdentifierMapping(CyEdge.class, "edgeLineType", EDGE_LINE_TYPE);
 		addIdentifierMapping(CyEdge.class, "edgeLabelFont", EDGE_LABEL_FONT_FACE);
 
 		// 2.x VizMap Properties:
+		addIdentifierMapping(CyNetwork.class, "backgroundColor", NETWORK_BACKGROUND_PAINT);
+
+		addIdentifierMapping(CyNode.class, "nodeFillColor", NODE_FILL_COLOR);
+		addIdentifierMapping(CyNode.class, "nodeSelectionColor", NODE_SELECTED_PAINT);
+		addIdentifierMapping(CyNode.class, "nodeSize", NODE_SIZE);
+		addIdentifierMapping(CyNode.class, "nodeWidth", NODE_WIDTH);
+		addIdentifierMapping(CyNode.class, "nodeHight", NODE_HEIGHT); // We have to be nice with this 2.8 typo!
+		addIdentifierMapping(CyNode.class, "nodeHeight", NODE_HEIGHT);
 		addIdentifierMapping(CyNode.class, "nodeOpacity", NODE_TRANSPARENCY);
 		addIdentifierMapping(CyNode.class, "nodeBorderColor", NODE_BORDER_PAINT);
 		addIdentifierMapping(CyNode.class, "nodeLineWidth", NODE_BORDER_WIDTH);
 		addIdentifierMapping(CyNode.class, "nodeLineStyle", NODE_BORDER_LINE_TYPE);
+		addIdentifierMapping(CyNode.class, "nodeBorderOpacity", NODE_BORDER_TRANSPARENCY);
 		addIdentifierMapping(CyNode.class, "nodeShape", NODE_SHAPE);
 		addIdentifierMapping(CyNode.class, "nodeFont", NODE_LABEL_FONT_FACE);
 		addIdentifierMapping(CyNode.class, "nodeFontSize", NODE_LABEL_FONT_SIZE);
+		addIdentifierMapping(CyNode.class, "nodeShowNestedNetwork", NODE_NESTED_NETWORK_IMAGE_VISIBLE);
+		addIdentifierMapping(CyNode.class, "nodeLabel", NODE_LABEL);
+		addIdentifierMapping(CyNode.class, "nodeLabelColor", NODE_LABEL_COLOR);
+		addIdentifierMapping(CyNode.class, "nodeLabelWidth", NODE_LABEL_WIDTH);
+		addIdentifierMapping(CyNode.class, "nodeLabelOpacity", NODE_LABEL_TRANSPARENCY);
 		addIdentifierMapping(CyNode.class, "nodeToolTip", NODE_TOOLTIP);
 
+		addIdentifierMapping(CyEdge.class, "edgeLineWidth", EDGE_WIDTH);
 		addIdentifierMapping(CyEdge.class, "edgeColor", EDGE_STROKE_UNSELECTED_PAINT);
-		addIdentifierMapping(CyEdge.class, "edgeLabelColor", EDGE_LABEL_COLOR);
+		addIdentifierMapping(CyEdge.class, "edgeSelectionColor", EDGE_STROKE_SELECTED_PAINT);
 		addIdentifierMapping(CyEdge.class, "edgeLineStyle", EDGE_LINE_TYPE);
-		addIdentifierMapping(CyEdge.class, "edgeToolTip", EDGE_TOOLTIP);
-		addIdentifierMapping(CyEdge.class, "edgeFont", EDGE_LABEL_FONT_FACE);
-		addIdentifierMapping(CyEdge.class, "edgeFontSize", EDGE_LABEL_FONT_SIZE);
-		addIdentifierMapping(CyEdge.class, "edgeLabelTransparency", EDGE_LABEL_TRANSPARENCY);
-
-		addIdentifierMapping(CyEdge.class, "edgeTransparency", EDGE_TRANSPARENCY);
-
+		addIdentifierMapping(CyEdge.class, "edgeOpacity", EDGE_TRANSPARENCY);
 		addIdentifierMapping(CyEdge.class, "sourceArrow", EDGE_SOURCE_ARROW_SHAPE);
 		addIdentifierMapping(CyEdge.class, "targetArrow", EDGE_TARGET_ARROW_SHAPE);
 		addIdentifierMapping(CyEdge.class, "edgeSourceArrowShape", EDGE_SOURCE_ARROW_SHAPE);
 		addIdentifierMapping(CyEdge.class, "edgeTargetArrowShape", EDGE_TARGET_ARROW_SHAPE);
-
 		addIdentifierMapping(CyEdge.class, "edgeBend", EDGE_BEND);
+		addIdentifierMapping(CyEdge.class, "edgeLabel", EDGE_LABEL);
+		addIdentifierMapping(CyEdge.class, "edgeFont", EDGE_LABEL_FONT_FACE);
+		addIdentifierMapping(CyEdge.class, "edgeLabelColor", EDGE_LABEL_COLOR);
+		addIdentifierMapping(CyEdge.class, "edgeLabelOpacity", EDGE_LABEL_TRANSPARENCY);
+		addIdentifierMapping(CyEdge.class, "edgeFontSize", EDGE_LABEL_FONT_SIZE);
+		// TODO: missing edge property: addIdentifierMapping(CyEdge.class, "edgeLabelWidth", EDGE_LABEL_WIDTH);
+		addIdentifierMapping(CyEdge.class, "edgeToolTip", EDGE_TOOLTIP);
+		addIdentifierMapping(CyEdge.class, "edgeHandleList", EDGE_BEND);
 	}
 
 	@Override
