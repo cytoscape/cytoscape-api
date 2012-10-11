@@ -20,8 +20,8 @@ public interface TaskMonitor {
 	/**
 	 * Sets the progress completed by the <code>Task</code>.
 	 *
-	 * @param progress Must be between <code>0.0</code> and <code>1.0</code>.
-	 * A value of <code>0.0</code> specifies an indefinite progress bar.
+	 * @param progress Usually a value between <code>0.0</code> and <code>1.0</code>.
+	 * A negative value is used to specify an indefinite progress bar.
 	 */
 	public void setProgress(double progress);
 
