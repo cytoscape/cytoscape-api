@@ -73,12 +73,20 @@ public interface View<S> extends CyIdentifiable {
 	
 
 	/**
+	 * Indicates whether or not the passed visual property is set with a non-null value.
+	 * @param vp the VisualProperty.
+	 * @return true if the view has a non-null value for the VisualProperty.
+	 */
+	boolean isSet(VisualProperty<?> vp);
+	
+	
+	/**
 	 * Set locked value.  This value will be used to bypass the style.
 	 * 
 	 * @param <T> Data type of the visual property.  This can be subclasses of type T.
 	 * @param <V> Value of the visual property.  This can be subclasses of T. 
 	 * @param vp the VisualProperty
-	 * @param value DOCUMENT ME!
+	 * @param value the value that will bypass the style
 	 */
 	<T, V extends T> void setLockedValue(VisualProperty<? extends T> vp, V value);
 

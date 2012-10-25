@@ -45,6 +45,15 @@ public abstract class AbstractViewTest<S> {
 		assertNotNull(view.getVisualProperty(stringVP));
 		
 	}
+	
+	@Test
+	public void testIsSet() {
+		assertFalse(view.isSet(integerVP));
+		view.setVisualProperty(integerVP, 1);
+		assertTrue(view.isSet(integerVP));
+		view.setVisualProperty(integerVP, null);
+		assertFalse(view.isSet(integerVP));
+	}
 
 	@Test
 	public void testLock() {
