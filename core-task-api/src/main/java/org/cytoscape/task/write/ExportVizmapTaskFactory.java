@@ -16,5 +16,5 @@ public interface ExportVizmapTaskFactory extends TaskFactory{
 	 * @param file The file to store the export output in.
 	 * @return a task iterator of type {@link TaskIterator}.
 	 */
-	TaskIterator creatTaskIterator(final File file);
+	TaskIterator createTaskIterator(final File file);
 }

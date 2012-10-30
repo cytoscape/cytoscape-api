@@ -89,9 +89,9 @@ public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 	 * Override this method and layout the LayoutPartion just
 	 * like you would a NetworkView.
 	 *
-	 * @param partition The LayoutPartion to be laid out. 
+	 * @param partition The LayoutPartition to be laid out. 
 	 */
-	public abstract void layoutPartion(LayoutPartition partition);
+	public abstract void layoutPartition(LayoutPartition partition);
 
 	/**
 	 * Used for 
@@ -177,7 +177,7 @@ public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 			// Partitions Requiring Layout
 			if (partition.nodeCount() > 1) {
 				try {
-					layoutPartion(partition);
+					layoutPartition(partition);
 				} catch (Throwable _e) {
 					_e.printStackTrace();
 					return;

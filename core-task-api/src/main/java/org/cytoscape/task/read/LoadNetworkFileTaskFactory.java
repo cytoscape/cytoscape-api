@@ -19,6 +19,6 @@ public interface LoadNetworkFileTaskFactory extends TaskFactory{
 	 * @param file The file for loading into a network
 	 * @return a task iterator of type {@link TaskIterator}
 	 */
-	TaskIterator creatTaskIterator(final File file);
+	TaskIterator createTaskIterator(final File file);
 
 }
