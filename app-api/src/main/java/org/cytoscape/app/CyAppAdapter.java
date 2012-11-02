@@ -71,7 +71,7 @@ import org.cytoscape.task.hide.UnHideAllEdgesTaskFactory;
 import org.cytoscape.task.create.CloneNetworkTaskFactory;
 import org.cytoscape.task.create.CreateNetworkViewTaskFactory;
 import org.cytoscape.task.create.NewEmptyNetworkViewFactory;
-import org.cytoscape.task.create.NewNetworkSelectedNodesAndEdgesTaskFatory;
+import org.cytoscape.task.create.NewNetworkSelectedNodesAndEdgesTaskFactory;
 import org.cytoscape.task.create.NewNetworkSelectedNodesOnlyTaskFactory;
 import org.cytoscape.task.create.NewSessionTaskFactory;
 import org.cytoscape.task.destroy.DeleteColumnTaskFactory;
@@ -563,10 +563,10 @@ public interface CyAppAdapter {
 	NewEmptyNetworkViewFactory get_NewEmptyNetworkViewFactory();
 
 	/**
-	 * Returns an instance of {@link NewNetworkSelectedNodesAndEdgesTaskFatory}.
-	 * @return an instance of {@link NewNetworkSelectedNodesAndEdgesTaskFatory}.
+	 * Returns an instance of {@link NewNetworkSelectedNodesAndEdgesTaskFactory}.
+	 * @return an instance of {@link NewNetworkSelectedNodesAndEdgesTaskFactory}.
 	 */
-	NewNetworkSelectedNodesAndEdgesTaskFatory get_NewNetworkSelectedNodesAndEdgesTaskFatory();
+	NewNetworkSelectedNodesAndEdgesTaskFactory get_NewNetworkSelectedNodesAndEdgesTaskFatory();
 
 	/**
 	 * Returns an instance of {@link NewNetworkSelectedNodesOnlyTaskFactory}.

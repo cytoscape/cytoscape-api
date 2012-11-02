@@ -7,6 +7,6 @@ import org.cytoscape.task.NetworkTaskFactory;
  * from selected nodes and edges.
  * @CyAPI.Api.Interface
  */
-public interface NewNetworkSelectedNodesAndEdgesTaskFatory extends NetworkTaskFactory {
+public interface NewNetworkSelectedNodesAndEdgesTaskFactory extends NetworkTaskFactory {
 
 }
