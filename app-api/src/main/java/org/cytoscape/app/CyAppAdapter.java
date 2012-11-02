@@ -566,7 +566,7 @@ public interface CyAppAdapter {
 	 * Returns an instance of {@link NewNetworkSelectedNodesAndEdgesTaskFactory}.
 	 * @return an instance of {@link NewNetworkSelectedNodesAndEdgesTaskFactory}.
 	 */
-	NewNetworkSelectedNodesAndEdgesTaskFactory get_NewNetworkSelectedNodesAndEdgesTaskFatory();
+	NewNetworkSelectedNodesAndEdgesTaskFactory get_NewNetworkSelectedNodesAndEdgesTaskFactory();
 
 	/**
 	 * Returns an instance of {@link NewNetworkSelectedNodesOnlyTaskFactory}.
