@@ -112,4 +112,10 @@ public interface CyLayoutAlgorithm {
 	 * @return The computer-readable name of the layout.
 	 */
 	String getName();
+	
+	/**
+	 * Returns the human-readable name of the layout.
+	 * @return The human-readable name of the layout.
+	 */
+	String toString();
 }

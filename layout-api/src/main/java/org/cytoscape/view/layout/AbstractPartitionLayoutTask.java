@@ -75,13 +75,13 @@ public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 	 * @param layoutAttribute the name of the attribute to use for this layout.
 	 * Allowed to be empty or null.
 	 */
-	public AbstractPartitionLayoutTask(final String name, 
+	public AbstractPartitionLayoutTask(final String displayName, 
 	                                   final boolean singlePartition, 
 	                                   CyNetworkView networkView, 
 	                                   Set<View<CyNode>> nodesToLayOut,
 	                                   String layoutAttribute,
 	                                   UndoSupport undo) {
-		super(name, networkView, nodesToLayOut, layoutAttribute, undo);
+		super(displayName, networkView, nodesToLayOut, layoutAttribute, undo);
 		this.singlePartition = singlePartition;
 	}
 

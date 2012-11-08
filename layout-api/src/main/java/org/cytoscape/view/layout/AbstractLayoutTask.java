@@ -31,7 +31,7 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 	private static final Logger logger = LoggerFactory.getLogger(AbstractLayoutTask.class);
 
 	// Short name of this algorithm
-	private final String name;
+	private final String displayName;
 
 	/**
 	 * The table column name that provides the layout algorithm name.
@@ -67,7 +67,7 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 	/**
 	 * Constructor.
 	 * 
-	 * @param name
+	 * @param displayName
 	 *            The name of the layout algorithm.
 	 * @param networkView
 	 *            The network view that the layout algorithm will be applied to.
@@ -77,12 +77,12 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 	 *            The name of the attribute to use for the layout. May be null
 	 *            or empty.
 	 */
-	public AbstractLayoutTask(final String name, final CyNetworkView networkView,
+	public AbstractLayoutTask(final String displayName, final CyNetworkView networkView,
 			final Set<View<CyNode>> nodesToLayOut, final String layoutAttribute, final UndoSupport undo) {
 		super();
 
 		this.networkView = networkView;
-		this.name = name;
+		this.displayName = displayName;
 		this.undo = undo;
 
 		if (nodesToLayOut.size() == 0) {
@@ -103,8 +103,10 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 	 */
 	@Override
 	public final void run(final TaskMonitor taskMonitor) {
+		taskMonitor.setTitle(displayName);
+		
 		final long start = System.currentTimeMillis();
-		logger.debug("Layout Start: Algorithm = " + name);
+		logger.debug("Layout Start: Algorithm = " + displayName);
 
 		// do some sanity checking
 		if (networkView == null)
@@ -115,7 +117,7 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 			return;
 
 		if (undo != null)
-			undo.postEdit(new LayoutEdit(name, networkView));
+			undo.postEdit(new LayoutEdit(displayName, networkView));
 
 		LayoutPoint centroid = null;
 		if (recenter)
@@ -136,7 +138,7 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 		if (netAttrsTable.getColumn(LAYOUT_ALGORITHM) == null)
 			netAttrsTable.createColumn(LAYOUT_ALGORITHM, String.class, true);
 
-		networkAttributes.set(LAYOUT_ALGORITHM, name);
+		networkAttributes.set(LAYOUT_ALGORITHM, displayName);
 
 		logger.debug("Layout finished in " + (System.currentTimeMillis() - start) + " msec.");
 	}
