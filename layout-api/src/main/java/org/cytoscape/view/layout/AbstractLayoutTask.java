@@ -1,12 +1,10 @@
 package org.cytoscape.view.layout;
 
-
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyRow;
@@ -21,18 +19,20 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *  This is a basic implementation of a LayoutAlgorithm Task that does
- *  some bookkeeping, but primarily delegates to the doLayout() method.
- *  Extensions of this class are meant to operate on the CyNetworkView 
- *  provided to the constructor (and is available as a protected member 
- *  variable).
- *  @CyAPI.Abstract.Class
+ * This is a basic implementation of a LayoutAlgorithm Task that does some
+ * bookkeeping, but primarily delegates to the doLayout() method. Extensions of
+ * this class are meant to operate on the CyNetworkView provided to the
+ * constructor (and is available as a protected member variable).
+ * 
+ * @CyAPI.Abstract.Class
  */
 public abstract class AbstractLayoutTask extends AbstractTask {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(AbstractLayoutTask.class);
+
+	// Short name of this algorithm
 	private final String name;
-	
+
 	/**
 	 * The table column name that provides the layout algorithm name.
 	 */
@@ -42,40 +42,43 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 	 * The network view that the layout will be applied to.
 	 */
 	protected final CyNetworkView networkView;
-	
+
 	/**
 	 * The node views that will be laid out by the algorithm.
 	 */
 	protected final Set<View<CyNode>> nodesToLayOut;
-	
-	/** 
+
+	/**
 	 * The attribute to be used for this layout. May be null and/or ignored.
 	 */
 	protected final String layoutAttribute;
-	
+
 	/**
 	 * Undo support for the task.
 	 */
 	protected final UndoSupport undo;
-	
+
 	/**
 	 * Determines whether the resulting set of nodes should be moved back to
-	 * their original centroid after being laid out. 
+	 * their original centroid after being laid out.
 	 */
 	protected boolean recenter = true;
-	
+
 	/**
 	 * Constructor.
-	 * @param name The name of the layout algorithm. 
-	 * @param networkView The network view that the layout algorithm will be applied to.
-	 * @param nodesToLayOut The set of nodes to be laid out. 
-	 * @param layoutAttribute The name of the attribute to use for the layout.  May be null or empty.
+	 * 
+	 * @param name
+	 *            The name of the layout algorithm.
+	 * @param networkView
+	 *            The network view that the layout algorithm will be applied to.
+	 * @param nodesToLayOut
+	 *            The set of nodes to be laid out.
+	 * @param layoutAttribute
+	 *            The name of the attribute to use for the layout. May be null
+	 *            or empty.
 	 */
-	public AbstractLayoutTask(String name, 
-	                          CyNetworkView networkView, 
-	                          Set<View<CyNode>> nodesToLayOut, 
-	                          String layoutAttribute,
-	                          UndoSupport undo) {
+	public AbstractLayoutTask(final String name, final CyNetworkView networkView,
+			final Set<View<CyNode>> nodesToLayOut, final String layoutAttribute, final UndoSupport undo) {
 		super();
 
 		this.networkView = networkView;
@@ -84,10 +87,9 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 
 		if (nodesToLayOut.size() == 0) {
 			this.nodesToLayOut = new HashSet<View<CyNode>>();
-			for (View<CyNode> view : networkView.getNodeViews()) {
-				if (view.getVisualProperty(BasicVisualLexicon.NODE_VISIBLE)) {
+			for (final View<CyNode> view : networkView.getNodeViews()) {
+				if (view.getVisualProperty(BasicVisualLexicon.NODE_VISIBLE))
 					this.nodesToLayOut.add(view);
-				}
 			}
 		} else {
 			this.nodesToLayOut = Collections.unmodifiableSet(nodesToLayOut);
@@ -95,7 +97,7 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 
 		this.layoutAttribute = layoutAttribute;
 	}
- 
+
 	/**
 	 * {@inheritDoc}
 	 */
@@ -109,21 +111,16 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 			return;
 
 		final CyNetwork network = networkView.getModel();
-		
 		if (nodesToLayOut.size() == 0 && networkView.getNodeViews().size() == 0)
 			return;
-		
-		if ( undo != null )
-			undo.postEdit(new LayoutEdit(name,networkView));
-		
-		// Clear Edge Bends.
-		clearEdgeBends();
+
+		if (undo != null)
+			undo.postEdit(new LayoutEdit(name, networkView));
 
 		LayoutPoint centroid = null;
-		if (recenter) {
+		if (recenter)
 			centroid = computeCentroid();
-		}
-		
+
 		// this is overridden by children and does the actual layout
 		doLayout(taskMonitor);
 
@@ -131,20 +128,19 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 			LayoutPoint newCentroid = computeCentroid();
 			translateNodes(new LayoutPoint(centroid.getX() - newCentroid.getX(), centroid.getY() - newCentroid.getY()));
 		}
-		
-		// Fit Content method always redraw the presentation.
-		networkView.fitContent();
 
 		// update the __layoutAlgorithm attribute
-		final CyRow networkAttributes = network.getRow(network,CyNetwork.HIDDEN_ATTRS);
+		final CyRow networkAttributes = network.getRow(network, CyNetwork.HIDDEN_ATTRS);
 		final CyTable netAttrsTable = networkAttributes.getTable();
+
 		if (netAttrsTable.getColumn(LAYOUT_ALGORITHM) == null)
 			netAttrsTable.createColumn(LAYOUT_ALGORITHM, String.class, true);
+
 		networkAttributes.set(LAYOUT_ALGORITHM, name);
 
 		logger.debug("Layout finished in " + (System.currentTimeMillis() - start) + " msec.");
 	}
-	
+
 	private void translateNodes(LayoutPoint translation) {
 		Collection<View<CyNode>> views;
 		if (nodesToLayOut.size() == 0) {
@@ -152,7 +148,7 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 		} else {
 			views = nodesToLayOut;
 		}
-		
+
 		for (View<CyNode> view : views) {
 			double x = view.getVisualProperty(BasicVisualLexicon.NODE_X_LOCATION);
 			double y = view.getVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION);
@@ -168,7 +164,7 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 		} else {
 			views = nodesToLayOut;
 		}
-		
+
 		double x = 0;
 		double y = 0;
 		double total = 0;
@@ -184,24 +180,11 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 	}
 
 	/**
-	 * Clears edge bend values ASSIGNED TO EACH EDGE.
-	 * Default Edge Bend value will not be cleared.
+	 * This method is designed to actually encapsulate the layout algorithm. It
+	 * will be called from within the run() method of the task.
 	 * 
-	 * TODO: should we clear mapping, too?
-	 */
-	private final void clearEdgeBends() {
-		final Collection<View<CyEdge>> edgeViews = networkView.getEdgeViews();
-		
-		for(final View<CyEdge> edgeView: edgeViews) {
-			edgeView.setVisualProperty(BasicVisualLexicon.EDGE_BEND, null);
-			edgeView.clearValueLock(BasicVisualLexicon.EDGE_BEND);
-		}
-	}
-
-	/**
-	 * This method is designed to actually encapsulate the layout algorithm. It will be
-	 * called from within the run() method of the task.  
-	 * @param taskMonitor Provided to allow updates to the task status.
+	 * @param taskMonitor
+	 *            Provided to allow updates to the task status.
 	 */
 	protected abstract void doLayout(final TaskMonitor taskMonitor);
 }
