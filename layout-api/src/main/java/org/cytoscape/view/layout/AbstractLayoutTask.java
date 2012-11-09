@@ -140,6 +140,8 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 
 		networkAttributes.set(LAYOUT_ALGORITHM, displayName);
 
+		networkView.fitContent();
+		
 		logger.debug("Layout finished in " + (System.currentTimeMillis() - start) + " msec.");
 	}
 
