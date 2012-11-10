@@ -36,6 +36,8 @@
 
 package org.cytoscape.model;
 
+import java.util.concurrent.atomic.AtomicLong;
+
 /**
  * This singleton class returns unique, positive SUID (session unique ID) values. 
  * @CyAPI.Static.Class
@@ -44,13 +46,14 @@ public abstract class SUIDFactory {
 
 	private SUIDFactory() { }
 
-	private static long count = 1;
+	// Maintain thread-safety by CAS, not by locking.
+	private static final AtomicLong count = new AtomicLong(1);
 
 	/**
 	 * Returns the next available SUID.
 	 * @return the next available SUID.
 	 */
-	public static synchronized long getNextSUID() {
-		return count++;
+	public static long getNextSUID() {
+		return count.incrementAndGet();
 	}
 }
