@@ -64,6 +64,11 @@ public final class FontVisualProperty extends AbstractVisualProperty<Font> {
 
 	private static final Pattern CY2_FONT_PATTERN = Pattern.compile("(.+)-(\\d+)-(\\d+)");
 
+	private static final Pattern FONT_PATTERN = Pattern.compile("(\\.[bB]old)?,[a-zA-Z]+,\\d+(\\.\\d+)?");
+	private static final Pattern FONT_BOLD_PATTERN = Pattern.compile("(?i).*\\.bold,[a-zA-Z]+,.*");
+	private static final Pattern FONT_SIZE_PATTERN = Pattern.compile(".+,[^,]+,");
+	private static final String EMPTY_STRING = "";
+
 	static {
 		final Set<Font> fontSet = new HashSet<Font>();
 		final Font[] allFonts = GraphicsEnvironment.getLocalGraphicsEnvironment().getAllFonts();
@@ -104,7 +109,7 @@ public final class FontVisualProperty extends AbstractVisualProperty<Font> {
 	@Override
 	public Font parseSerializableString(final String text) {
 		if (text != null && text.trim().length() != 0) {
-			Matcher matcher = CY2_FONT_PATTERN.matcher(text);
+			final Matcher matcher = CY2_FONT_PATTERN.matcher(text);
 			if (matcher.matches())
 				return parseCy2Font(matcher.group(1), matcher.group(2), matcher.group(3));
 			else
@@ -113,18 +118,22 @@ public final class FontVisualProperty extends AbstractVisualProperty<Font> {
 			return DEFAULT_FONT;
 	}
 	
-	private Font parseFont(String text) {
+	
+	private final Font parseFont(final String text) {
 		// e.g. "Monospaced,plain,12"
-		String name = text.replaceAll("(\\.[bB]old)?,[a-zA-Z]+,\\d+(\\.\\d+)?", "");
+		final Matcher m1 = FONT_PATTERN.matcher(text);
+		final String name = m1.replaceAll(EMPTY_STRING);
 
-		boolean bold = text.matches("(?i).*\\.bold,[a-zA-Z]+,.*");
-		int style = bold ? Font.BOLD : Font.PLAIN;
+		final Matcher boldMatcher = FONT_BOLD_PATTERN.matcher(text);
+		final boolean bold = boldMatcher.matches();
+		final int style = bold ? Font.BOLD : Font.PLAIN;
 		int size = DEF_FONT_SIZE;
 
-		String sSize = text.replaceAll(".+,[^,]+,", "");
+		final Matcher sizeMatcher = FONT_SIZE_PATTERN.matcher(text);
+		final String sSize = sizeMatcher.replaceAll(EMPTY_STRING);
 
 		try {
-			size = Integer.parseInt(sSize);
+			size = Integer.valueOf(sSize);
 		} catch (NumberFormatException nfe) {
 			logger.warn("Cannot parse font size in '" + text + "'", nfe);
 		}
