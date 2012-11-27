@@ -236,9 +236,11 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		final String enableFor = configProps.get(ENABLE_FOR);
 		if (enableFor == null)
 			this.enabler = new TaskFactoryEnableSupport(this, factory);
-		else
-			this.enabler = new ActionEnableSupport(this, enableFor, applicationManager, networkViewManager);
-
+		else {
+			TaskFactoryEnableSupport taskFactoryEnabler = new TaskFactoryEnableSupport((CyAction) null, factory);
+			ActionEnableSupport actionEnabler = new ActionEnableSupport((CyAction) null, enableFor, applicationManager, networkViewManager);
+			this.enabler = new ConjunctionEnableSupport(this, actionEnabler, taskFactoryEnabler);
+		}
 		configFromProps(configProps);
 	}
 
@@ -510,6 +512,28 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		} catch (MalformedURLException e) {
 			logger.warn("Incorrectly formatted URL string: '" + s +"'",e);
 			return null;
+		}
+	}
+	
+	private static class ConjunctionEnableSupport extends AbstractEnableSupport {
+		private AbstractEnableSupport[] enableSupports;
+
+		public ConjunctionEnableSupport(CyAction action, AbstractEnableSupport... enableSupports) {
+			super(action);
+			this.enableSupports = enableSupports;
+		}
+		
+		@Override
+		public void updateEnableState() {
+			boolean enabled = true;
+			for (AbstractEnableSupport enableSupport : enableSupports) {
+				enableSupport.updateEnableState();
+				enabled &= enableSupport.isCurrentlyEnabled();
+				if (!enabled) {
+					break;
+				}
+			}
+			setEnabled(enabled);
 		}
 	}
 }
