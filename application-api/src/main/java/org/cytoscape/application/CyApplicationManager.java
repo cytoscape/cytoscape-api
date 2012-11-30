@@ -52,7 +52,10 @@ public interface CyApplicationManager {
 	public CyNetwork getCurrentNetwork();
 
 	/**
-	 * Sets the current network to the specified network. 
+	 * Sets the current network to the specified network.
+	 * If the passed network is different from the current one, a {@link SetCurrentNetworkEvent} is fired.
+	 * If the passed network is not yet selected, any selected networks are unselected before the passed
+	 * one is selected. That means that the {@link SetSelectedNetworksEvent} can also be fired.
 	 * @param net The network that will become the current network. 
 	 */
 	public void setCurrentNetwork(final CyNetwork net);
