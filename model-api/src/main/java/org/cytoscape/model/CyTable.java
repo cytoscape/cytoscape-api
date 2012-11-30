@@ -139,7 +139,11 @@ public interface CyTable extends CyIdentifiable {
 	/**
 	 * Create a column of the specified name and the specified type. The column
 	 * type is limited to Integer, Long, Double, String, and Boolean. The
-	 * default value for the column will be null. If the column already exists, IllegalArgumentException will be thrown.
+	 * default value for the column will be null.
+	 * If the column name has the suffix ".SUID" and the column type is Long, Cytoscape will handle it as a column
+	 * of SUIDs, and automatically update its values when the session file is loaded. However only SUIDs of CyNodes,
+	 * CyEdges and CyNetworks can be updated.
+	 * If the column already exists, IllegalArgumentException will be thrown.
 	 * @param <T> The generic type of the column.
 	 * @param columnName The name identifying the attribute.
 	 * @param type The type of the column.
