@@ -40,7 +40,8 @@ public final class DefaultVisualizableVisualProperty extends
 
 	@Override
 	public String toSerializableString(final Visualizable value) {
-		return value.toString();
+		// return value.toString();
+		return "DefaultVisualizableVisualProperty(id="+getIdString()+", name="+getDisplayName()+")";
 	}
 
 	@Override
