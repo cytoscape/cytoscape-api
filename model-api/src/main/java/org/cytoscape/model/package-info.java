@@ -364,7 +364,7 @@ There are two ways of getting node and edge data from one of the tables listed a
     First, get the table as shown above. Then use {@link org.cytoscape.model.CyTable#getRow} method.
     Here's an example for getting the hidden attribtues of an edge:
     <pre>{@code
-    CyTable hiddenTable = network.getTable(CyNode.class, CyNetwork.HIDDEN_ATTRS);
+    CyTable hiddenTable = network.getTable(CyEdge.class, CyNetwork.HIDDEN_ATTRS);
 CyRow edgeRow = hiddenTable.getRow(edge.getSUID());
     }</pre>
     <p>Here, you pass in the SUID when using {@link org.cytoscape.model.CyTable#getRow} method, not the edge itself.</p>
