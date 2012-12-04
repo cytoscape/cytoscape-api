@@ -92,9 +92,11 @@ public interface View<S> extends CyIdentifiable {
 
 	
 	/**
-	 * Returns true if current VisualProperty value is locked.
+	 * Returns true if the value of the given VisualProperty or one of its
+	 * ancestors is locked.
 	 * @param vp the VisualProperty
-	 * @return true if current VisualProperty value is locked.
+	 * @return true if value of the given VisualProperty value or one of its
+	 * ancestors is locked.
 	 */
 	boolean isValueLocked(VisualProperty<?> vp);
 
@@ -113,5 +115,14 @@ public interface View<S> extends CyIdentifiable {
 	 * @return Data object of this view.
 	 */
 	S getModel();
+
+
+	/**
+	 * Returns true if the given VisualProperty's value has been locked.
+	 * directly.
+	 * @param vp the VisualProperty
+	 * @return true if the given VisualProperty's value has been locked.
+	 */
+	boolean isDirectlyLocked(VisualProperty<?> vp);
 	
 }
