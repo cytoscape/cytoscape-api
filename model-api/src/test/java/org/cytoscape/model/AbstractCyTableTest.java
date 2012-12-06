@@ -571,13 +571,13 @@ public abstract class AbstractCyTableTest {
 		assertEquals(list, table.getRow(1L).getList(NAME.toUpperCase(), String.class));
 	}
 	
-	@Test
+	@Test(expected=IllegalArgumentException.class)
 	public void testAddVirtualColumnIsCaseInsensitive() {
 		table.createColumn("Col_A", Long.class, false);
 		table2.createColumn("Col_B", String.class, false);
 		assertEquals("VirtualCol_A", table.addVirtualColumn("VirtualCol_A", "COL_B", table2, "col_a", false));
 		assertEquals("VirtualCol_A", table.getColumn("VIRTUALCOL_a").getName());
-		assertEquals("virtualcol_a-1", table.addVirtualColumn("virtualcol_a", "col_b", table2, "COL_A", false));
+		table.addVirtualColumn("virtualcol_a", "col_b", table2, "COL_A", false);
 	}
 
 	@Test
@@ -600,7 +600,7 @@ public abstract class AbstractCyTableTest {
 		assertEquals(row.get(primaryKey.getName(), primaryKey.getType()), 107L);
 	}
 
-	@Test
+	@Test(expected=IllegalArgumentException.class)
 	public void testVirtualColumn() {
 		table.createColumn("x", Long.class, false);
 		table2.createColumn("s", String.class, false);
@@ -608,8 +608,6 @@ public abstract class AbstractCyTableTest {
 		assertEquals("Virtual column type should have been String!",
 			     String.class, table.getColumn("s1").getType());
 		assertEquals(table.addVirtualColumn("s1", "s", table2, "x", false), "s1-1");
-		assertEquals("Virtual column type should have been String!",
-			     String.class, table.getColumn("s1-1").getType());
 	}
 
 	@Test
@@ -1023,17 +1021,11 @@ public abstract class AbstractCyTableTest {
 		assertEquals(String.class,xcol.getListElementType());
 	}
 
-	@Test
+	@Test(expected=IllegalArgumentException.class)
 	public void testVirtualColumnWithDupe() {
 		table2.createColumn("s", String.class, false);
 		table.createColumn("s", String.class, false);
 		table.addVirtualColumns( table2, table.getPrimaryKey().getName(), false);
-
-		CyColumn scol = table.getColumn("s");
-		assertFalse( scol.getVirtualColumnInfo().isVirtual() );
-
-		CyColumn s1col = table.getColumn("s-1");
-		assertTrue( s1col.getVirtualColumnInfo().isVirtual() );
 	}
 
 	@Test
