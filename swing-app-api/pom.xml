@@ -115,6 +115,7 @@
           </dependencySourceIncludes>
           <excludePackageNames>*.internal.*</excludePackageNames>
           <overview>${project.build.sourceDirectory}/overview.html</overview>
+          <includeTransitiveDependencySources>true</includeTransitiveDependencySources>
         </configuration>
         <executions>
           <execution>
