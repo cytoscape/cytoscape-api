@@ -6,6 +6,7 @@ import org.cytoscape.event.CyListener;
 /**
  * Listener for {@link GroupAboutToCollapseEvent}
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule group-api
  */
 public interface GroupAboutToCollapseListener extends CyListener {
 	/**

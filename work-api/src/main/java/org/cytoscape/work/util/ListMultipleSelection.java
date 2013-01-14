@@ -47,6 +47,7 @@ import java.util.Arrays;
  *
  * @param <T>  type of items that will be listed.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule work-api
  */
 public final class ListMultipleSelection<T> extends ListSelection<T> {
 	

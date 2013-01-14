@@ -3,6 +3,8 @@ package org.cytoscape.view.presentation.property.values;
 
 /**
  * Factory to create an instance of {@linkplain Bend}.
+ * @CyAPI.Api.Interface
+ * @CyAPI.InModule presentation-api
  */
 public interface BendFactory {
 	

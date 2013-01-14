@@ -36,6 +36,7 @@ import org.cytoscape.work.AbstractTask;
 /** 
  * The base class for all tasks that need to operate on an edge view and possibly its associated network view.
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule core-task-api
  */
 public abstract class AbstractEdgeViewTask extends AbstractTask {
 	/** The edge view that descendant tasks will operate on. */

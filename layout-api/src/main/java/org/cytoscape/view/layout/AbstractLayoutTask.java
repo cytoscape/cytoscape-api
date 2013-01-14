@@ -25,6 +25,7 @@ import org.slf4j.LoggerFactory;
  * constructor (and is available as a protected member variable).
  * 
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule layout-api
  */
 public abstract class AbstractLayoutTask extends AbstractTask {
 

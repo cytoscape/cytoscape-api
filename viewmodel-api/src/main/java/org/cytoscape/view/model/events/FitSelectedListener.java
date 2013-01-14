@@ -6,6 +6,7 @@ import org.cytoscape.event.CyListener;
  * Listener for {@linkplain FitSelectedEvent}.  
  *  
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule viewmodel-api
  */
 public interface FitSelectedListener extends CyListener {
 	

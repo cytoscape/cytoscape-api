@@ -8,6 +8,7 @@ package org.cytoscape.session;
  * for serialization. Likewise, setting a new session will replace
  * the current session with a new one.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule session-api
  */
 public interface CySessionManager {
 

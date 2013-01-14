@@ -6,6 +6,7 @@ import org.cytoscape.event.CyListener;
 /**
  * The listener for handling {@link CytoPanelComponentSelectedEvent}.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule swing-application-api
  */
 public interface CytoPanelComponentSelectedListener extends CyListener {
 

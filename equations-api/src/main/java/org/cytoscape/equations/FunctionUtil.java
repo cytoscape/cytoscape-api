@@ -36,8 +36,9 @@ import java.util.List;
 
 
 /**
- *  A collection of static methods that may be useful for the implementation of built-in functions.
- *  @CyAPI.Static.Class
+ * A collection of static methods that may be useful for the implementation of built-in functions.
+ * @CyAPI.Static.Class
+ * @CyAPI.InModule equations-api
  */
 public final class FunctionUtil {
 	private FunctionUtil() { } // Exists to prevent creating instances of this class!

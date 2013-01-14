@@ -7,6 +7,8 @@ import org.cytoscape.view.model.CyNetworkView;
 /**
  * A base class for task factories that need to add a functionality to the network view 
  * considering a given location (for example adding a node where a mouse was clicked).
+ * @CyAPI.Abstract.Class
+ * @CyAPI.InModule core-task-api
  */
 public abstract class AbstractNetworkViewLocationTaskFactory implements NetworkViewLocationTaskFactory{
 	

@@ -6,6 +6,7 @@ import org.cytoscape.event.CyListener;
 /**
  * A listener for handling {@link CytoPanelStateChangedEvent}s.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule swing-application-api
  */
 public interface CytoPanelStateChangedListener extends CyListener {
 

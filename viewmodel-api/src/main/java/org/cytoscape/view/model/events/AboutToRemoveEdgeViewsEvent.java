@@ -10,6 +10,7 @@ import org.cytoscape.view.model.View;
 /**
  * When edge {@link View}s are about to be removed from a {@linkplain CyNetworkView}, this event will be fired.
  * @CyAPI.Final.Class 
+ * @CyAPI.InModule viewmodel-api
  */
 public final class AboutToRemoveEdgeViewsEvent extends AbstractCyPayloadEvent<CyNetworkView, View<CyEdge>> {
 	/**

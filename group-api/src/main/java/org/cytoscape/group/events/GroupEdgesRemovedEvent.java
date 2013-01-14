@@ -12,6 +12,7 @@ import java.util.List;
  * This event signals that edges have been removed from the network.
  *
  * @CyAPI.Final.Class
+ * @CyAPI.InModule group-api
  */
 public final class GroupEdgesRemovedEvent extends AbstractEdgesEvent {
 

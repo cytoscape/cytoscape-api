@@ -11,6 +11,7 @@ import java.util.List;
  * This event signals that edges have been added to the network.
  *
  * @CyAPI.Final.Class
+ * @CyAPI.InModule group-api
  */
 public final class GroupEdgesAddedEvent extends AbstractEdgesEvent {
 

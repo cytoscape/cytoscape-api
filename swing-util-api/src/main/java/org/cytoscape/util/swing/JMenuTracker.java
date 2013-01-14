@@ -43,6 +43,7 @@ import javax.swing.JPopupMenu;
 /**
  * A class that creates and manages hierarchies of JMenu objects.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule swing-util-api
  */
 public final class JMenuTracker {
 	private final Map<String, MenuGravityTracker> menuMap;

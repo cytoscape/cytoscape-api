@@ -45,6 +45,7 @@ import org.cytoscape.model.CyIdentifiable;
  * 
  * @param <T> the dataType of the VisualProperty, i.e. what kind of objects are the values
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule viewmodel-api
  */
 public interface VisualProperty<T> {
 	

@@ -17,6 +17,7 @@ import org.cytoscape.session.CySessionManager;
  * listeners to provide information to this event object or to update their 
  * state before that state is interrogated by the CySessionManager. 
  * @CyAPI.Final.Class
+ * @CyAPI.InModule session-api
  */
 public final class SessionAboutToBeSavedEvent extends AbstractCyEvent<CySessionManager> {
 	

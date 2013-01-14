@@ -50,6 +50,7 @@ import java.util.Set;
  * nodes.
  *
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule group-api
  */
 public interface CyGroup {
 	/**

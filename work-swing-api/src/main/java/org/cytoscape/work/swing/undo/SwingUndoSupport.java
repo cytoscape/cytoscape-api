@@ -40,7 +40,9 @@ import javax.swing.undo.UndoableEditSupport;
  * it provides access to to post edits and should use {@link UndoSupport} instead. 
  * This interface is really only meant for those handling undo/redo requests 
  * in a swing environment and this interface provides access to the necessary
- * Swing Undo services to do so. 
+ * Swing Undo services to do so.
+ * @CyAPI.Api.Interface 
+ * @CyAPI.InModule work-swing-api
  */
 public interface SwingUndoSupport extends UndoSupport {
 	/** Returns the <code>UndoManager</code> associated with this <code>UndoSupport</code> instance.

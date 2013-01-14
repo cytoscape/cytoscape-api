@@ -3,6 +3,7 @@ package org.cytoscape.io.webservice.events;
 /**
  * Listener for {@link DataImportFinishedEvent}.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule webservice-api
  */
 public interface DataImportFinishedListener {
 	/**

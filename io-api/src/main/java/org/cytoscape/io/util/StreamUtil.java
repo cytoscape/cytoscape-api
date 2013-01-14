@@ -10,6 +10,7 @@ import java.net.URLConnection;
  * InputStreams and URLConnections over the network. If you intend to
  * support the use of proxy servers, you should use this service.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule io-api
  */
 public interface StreamUtil {
 

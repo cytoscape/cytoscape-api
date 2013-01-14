@@ -9,6 +9,7 @@ import org.cytoscape.work.TaskIterator;
 /**
  * This interface provides a task iterator for loading an attribute URL to a table.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule core-task-api
  */
 public interface LoadTableURLTaskFactory extends TaskFactory {
 	

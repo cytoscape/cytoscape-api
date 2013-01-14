@@ -35,6 +35,7 @@ import java.util.List;
 /** 
  * The basic description of a Function.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule equations-api
  */
 public interface Function {
 	/**

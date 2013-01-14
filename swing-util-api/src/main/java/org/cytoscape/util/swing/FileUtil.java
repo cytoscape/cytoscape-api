@@ -41,6 +41,7 @@ import java.util.Collection;
  * because Mac would prefer that you use java.awt.FileDialog
  * instead of the Swing FileChooser.
  * @CyAPI.Api.Interface 
+ * @CyAPI.InModule swing-util-api
  */
 public interface FileUtil {
 	/** The Cytoscape property that stores the last save/load directory. */

@@ -52,6 +52,7 @@ import java.awt.*;
  *
  * @author Joshua Marinacci, Chris Adamson, Keiichiro Ono
  * @CyAPI.Static.Class 
+ * @CyAPI.InModule swing-util-api
  */
 public final class ColumnResizer {
 	

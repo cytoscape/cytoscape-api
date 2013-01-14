@@ -4,6 +4,7 @@ package org.cytoscape.view.presentation.property.values;
 /**
  * Base class for all {@link VisualPropertyValue}.
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule presentation-api
  */
 public abstract class AbstractVisualPropertyValue implements VisualPropertyValue {
 

@@ -9,6 +9,7 @@ import org.cytoscape.view.model.View;
 /**
  * When a {@link CyNetworkView} is about to be destroyed, this event will be fired.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule viewmodel-api
  */
 public final class NetworkViewAboutToBeDestroyedEvent extends AbstractNetworkViewEvent {
 	/**

@@ -12,6 +12,7 @@ import org.cytoscape.model.CyEdge;
 /**
  * When edge {@linkplain View} is added to a {@linkplain CyNetworkView}, this event will be fired.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule viewmodel-api
  */
 public final class AddedEdgeViewsEvent extends AbstractCyPayloadEvent<CyNetworkView,View<CyEdge>> {
 	

@@ -2,6 +2,8 @@ package org.cytoscape.model;
 
 /**
  * The SavePolicy of an object specifies whether or not it will be saved.
+ * @CyAPI.Enum.Class
+ * @CyAPI.InModule model-api
  */
 public enum SavePolicy {
 	/** The object should not be saved. */

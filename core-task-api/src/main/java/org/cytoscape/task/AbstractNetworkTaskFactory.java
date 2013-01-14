@@ -5,6 +5,7 @@ import org.cytoscape.model.CyNetwork;
 /**
  * A NetworkTaskFactory that is always ready to produce a TaskIterator.
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule core-task-api
  */
 public abstract class AbstractNetworkTaskFactory implements NetworkTaskFactory {
 	/**

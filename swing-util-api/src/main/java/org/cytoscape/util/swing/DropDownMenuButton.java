@@ -7,6 +7,7 @@ import java.awt.*;
  * Button with drop down menu.
  * 
  * @CyAPI.Final.Class
+ * @CyAPI.InModule swing-util-api
  */
 public final class DropDownMenuButton extends JButton {
 

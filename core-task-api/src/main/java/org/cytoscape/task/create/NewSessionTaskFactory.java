@@ -6,6 +6,8 @@ import org.cytoscape.work.TaskIterator;
 
 /**
  * This interface provides a task iterator for creating a new session.
+ * @CyAPI.Api.Interface
+ * @CyAPI.InModule core-task-api
  */
 public interface NewSessionTaskFactory extends TaskFactory {
 	

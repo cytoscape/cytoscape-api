@@ -3,6 +3,7 @@ package org.cytoscape.io;
 /**
  * An enum that captures the types of data the IO package can read and write.
  * @CyAPI.Enum.Class
+ * @CyAPI.InModule io-api
  */
 public enum DataCategory {
 	/** 

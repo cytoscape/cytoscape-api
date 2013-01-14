@@ -42,6 +42,7 @@ import org.cytoscape.work.TaskIterator;
  * A task factory specifically for layout algorithms.
  *
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule layout-api
  */
 public interface CyLayoutAlgorithm {
 	

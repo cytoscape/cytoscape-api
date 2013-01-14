@@ -8,6 +8,7 @@ import org.cytoscape.group.CyGroup;
 /**
  * This event signals that a new group has been added.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule group-api
  */
 public final class GroupAddedEvent extends AbstractGroupManagerEvent {
 	/**

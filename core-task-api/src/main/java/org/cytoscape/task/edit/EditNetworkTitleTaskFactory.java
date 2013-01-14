@@ -8,6 +8,7 @@ import org.cytoscape.work.TaskIterator;
 /**
  * This interface provides a task iterator for editing a network's title.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule core-task-api
  */
 public interface EditNetworkTitleTaskFactory extends NetworkTaskFactory{
 	

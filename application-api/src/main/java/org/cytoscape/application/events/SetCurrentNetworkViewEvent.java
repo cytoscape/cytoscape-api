@@ -9,6 +9,7 @@ import org.cytoscape.view.model.CyNetworkView;
 /**
  * An event indicating that a network view has been set to current.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule application-api
  */
 public final class SetCurrentNetworkViewEvent extends AbstractCyEvent<CyApplicationManager> {
 

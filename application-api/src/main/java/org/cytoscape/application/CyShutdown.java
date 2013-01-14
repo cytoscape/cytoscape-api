@@ -42,6 +42,7 @@ package org.cytoscape.application;
  * CytoscapeShutdownEvent such that all CytoscapeShutdownListener will be
  * notified before actually shutting down.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule application-api
  */
 public interface CyShutdown {
 	/**

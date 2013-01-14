@@ -18,6 +18,7 @@ import org.slf4j.LoggerFactory;
  * Only the accepts() methods may be overridden.
  * 
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule io-api
  */
 public class BasicCyFileFilter implements CyFileFilter {
 

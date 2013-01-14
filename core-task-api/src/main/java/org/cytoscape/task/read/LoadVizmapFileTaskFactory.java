@@ -12,6 +12,8 @@ import java.io.InputStream;
 /**
  * An interface for loading styles from files. 
  * This interface also provides a task iterator for loading files into visual styles.
+ * @CyAPI.Api.Interface
+ * @CyAPI.InModule core-task-api
  */
 public interface LoadVizmapFileTaskFactory extends TaskFactory{
 

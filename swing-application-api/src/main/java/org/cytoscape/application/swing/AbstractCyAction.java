@@ -54,6 +54,7 @@ import static org.cytoscape.work.ServiceProperties.*;
  * allow your action to be used outside of a Swing specific application (which
  * the CyAction interface binds you to)!
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule swing-application-api
  */
 public abstract class AbstractCyAction extends AbstractAction implements CyAction {
 	

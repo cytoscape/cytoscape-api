@@ -8,6 +8,7 @@ import org.cytoscape.work.TaskIterator;
 /**
  * This interface provides a task iterator for exporting the vizmap visual style.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule core-task-api
  */
 public interface ExportVizmapTaskFactory extends TaskFactory{
 

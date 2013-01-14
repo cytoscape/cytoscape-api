@@ -58,6 +58,7 @@ import org.cytoscape.work.swing.DynamicSubmenuListener;
  * </ul>
  * 
  * @CyAPI.Final.Class
+ * @CyAPI.InModule swing-application-api
  */
 public final class ActionEnableSupport extends AbstractEnableSupport {
 

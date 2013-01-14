@@ -43,6 +43,7 @@ import org.cytoscape.view.vizmap.VisualStyle;
  * Event fired when a {@link VisualStyle} is set to a network view through 
  * {@linkplain VisualMappingManager#setVisualStyle(VisualStyle, org.cytoscape.view.model.CyNetworkView)}.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule vizmap-api
  */
 public final class VisualStyleSetEvent extends AbstractCyEvent<VisualMappingManager> {
 

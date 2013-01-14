@@ -15,6 +15,7 @@ import org.cytoscape.work.Task;
  * InputStreamTaskFactories based on the {@link org.cytoscape.io.DataCategory} associated with
  * the {@link org.cytoscape.io.CyFileFilter}.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule io-api
  */
 public interface CySessionReader extends Task {
 

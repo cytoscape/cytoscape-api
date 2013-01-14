@@ -36,6 +36,7 @@ import org.cytoscape.work.TaskIterator;
  * A task factory that creates one or more tasks that operate on the specified CyColumn
  * along with primary key.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule core-task-api
  */
 public interface TableCellTaskFactory {
 	/** 

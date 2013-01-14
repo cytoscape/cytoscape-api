@@ -7,6 +7,7 @@ import java.util.Properties;
 /**
  * An event indicating that system preferences have been updated. 
  * @CyAPI.Final.Class
+ * @CyAPI.InModule swing-application-api
  */
 public final class PreferencesUpdatedEvent extends AbstractCyEvent<Object> {
 

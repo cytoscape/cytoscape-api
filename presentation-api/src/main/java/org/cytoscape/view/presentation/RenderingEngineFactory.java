@@ -12,6 +12,7 @@ import org.cytoscape.view.model.VisualLexicon;
  *            parameter is set to {@linkplain org.cytoscape.model.CyNetwork}, the factory creates rendering
  *            engine for {@link org.cytoscape.model.CyNetwork} objects.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule presentation-api
  */
 public interface RenderingEngineFactory<T> {
 

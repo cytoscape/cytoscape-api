@@ -11,6 +11,7 @@ import org.cytoscape.work.TaskManager;
  * object and expects its execution context to be another JPanel.  This
  * TaskManager can be used for embedding JPanels within other GUIs.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule work-swing-api
  */
 public interface PanelTaskManager extends TaskManager<JPanel,JPanel> {
 	/**

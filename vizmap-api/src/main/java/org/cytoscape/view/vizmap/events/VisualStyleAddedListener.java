@@ -39,6 +39,7 @@ import org.cytoscape.event.CyListener;
 /**
  * Listener for {@linkplain VisualStyleAddedEvent}.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule vizmap-api
  */
 public interface VisualStyleAddedListener extends CyListener {
 

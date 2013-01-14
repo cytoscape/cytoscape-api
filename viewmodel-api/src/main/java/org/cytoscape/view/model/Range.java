@@ -5,6 +5,7 @@ package org.cytoscape.view.model;
  *
  * @param <T> The generic type of this Range.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule viewmodel-api
  */
 public interface Range<T> {
 	

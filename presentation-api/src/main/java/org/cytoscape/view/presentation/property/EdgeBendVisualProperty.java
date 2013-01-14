@@ -15,6 +15,7 @@ import org.cytoscape.view.presentation.property.values.Handle;
  * Visual Property for Edge {@link Bend} values.
  * 
  * @CyAPI.Final.Class
+ * @CyAPI.InModule presentation-api
  */
 public class EdgeBendVisualProperty extends AbstractVisualProperty<Bend> {
 

@@ -13,6 +13,7 @@ import java.util.Properties;
  * Provides the standard implementation for most of the methods declared by the 
  * TunableHandler interface.
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule work-api
  */
 public abstract class AbstractTunableHandler implements TunableHandler {
 	private enum ParamsParseState {

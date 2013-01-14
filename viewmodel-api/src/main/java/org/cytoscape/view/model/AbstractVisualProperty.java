@@ -42,6 +42,7 @@ import org.cytoscape.model.CyIdentifiable;
  * with serializing data.
  * @param <T> the generic type for this AbstractVisualProperty.
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule viewmodel-api
  */
 public abstract class AbstractVisualProperty<T> implements VisualProperty<T> {
 

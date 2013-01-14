@@ -40,6 +40,7 @@ import org.cytoscape.view.model.CyNetworkView;
 /**
  * Listener for {@linkplain VisualStyleSetEvent}.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule vizmap-api
  */
 public interface VisualStyleSetListener extends CyListener {
 

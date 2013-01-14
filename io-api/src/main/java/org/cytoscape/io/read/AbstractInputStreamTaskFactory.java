@@ -4,6 +4,11 @@ import java.io.InputStream;
 
 import org.cytoscape.io.CyFileFilter;
 
+/**
+ * TODO: Missing documentation
+ * @CyAPI.Abstract.Class
+ * @CyAPI.InModule io-api
+ */
 public abstract class AbstractInputStreamTaskFactory implements InputStreamTaskFactory {
 	
 	private CyFileFilter fileFilter;

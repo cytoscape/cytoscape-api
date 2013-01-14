@@ -53,6 +53,7 @@ import org.slf4j.Logger;
  * type T.  
  * @param <T> The generic type of this AbstractTunableInterceptor.
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule work-api
  */
 public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 	private boolean throwException;

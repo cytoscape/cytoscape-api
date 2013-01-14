@@ -35,8 +35,9 @@ import java.util.ArrayList;
 
 
 /**
- *  An enum specifying a function argument type.
- *  @CyAPI.Enum.Class
+ * An enum specifying a function argument type.
+ * @CyAPI.Enum.Class
+ * @CyAPI.InModule equations-api
  */
 public enum ArgType {
 	//                 opt.  mult.args.                          compatible arg. types

@@ -11,6 +11,7 @@ import org.osgi.framework.BundleContext;
  * if you need to register services while running based on data not 
  * available at startup. 
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule service-api
  */
 public interface CyServiceRegistrar {
 

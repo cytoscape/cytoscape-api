@@ -3,6 +3,7 @@ package org.cytoscape.view.vizmap.gui.editor;
 /**
  * An enum describing the possible types of continuous editors.
  * @CyAPI.Enum.Class
+ * @CyAPI.InModule vizmap-gui-api
  */
 public enum ContinuousEditorType {
 	/**

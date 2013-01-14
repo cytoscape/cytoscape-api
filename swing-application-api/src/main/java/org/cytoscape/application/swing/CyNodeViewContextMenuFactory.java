@@ -45,6 +45,7 @@ import org.cytoscape.model.CyNode;
  * A factory interface used to produce a CyMenuItem (JMenuItem) that
  * will be added to the context menu for the specified node view. 
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule swing-application-api
  */
 public interface CyNodeViewContextMenuFactory {
 

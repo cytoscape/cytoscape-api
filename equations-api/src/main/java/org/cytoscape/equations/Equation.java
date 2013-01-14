@@ -37,6 +37,7 @@ import java.util.Set;
 /** 
  * The class representing an equation.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule equations-api
  */
 public final class Equation {
 	private final String equation;

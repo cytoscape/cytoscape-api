@@ -39,6 +39,7 @@ import java.util.List;
  * A {@link CyWriterManager} specific to writing property objects. See 
  * {@link org.cytoscape.property.CyProperty} for information on types of object expected.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule io-api
  */
 public interface CyPropertyWriterManager extends CyWriterManager<CyPropertyWriterFactory> {
 	/** 

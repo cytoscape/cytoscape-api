@@ -52,6 +52,7 @@ import org.cytoscape.view.vizmap.mappings.BoundaryRangeValues;
  * @param <V>
  *            The generic type of associated {@link BoundaryRangeValues}.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule vizmap-api
  */
 public final class ContinuousMappingPoint<K, V> {
 	private K value;

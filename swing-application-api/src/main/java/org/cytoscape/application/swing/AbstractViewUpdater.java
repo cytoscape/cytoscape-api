@@ -41,6 +41,7 @@ import org.cytoscape.model.events.RowsSetListener;
  * for a particular column and {@link VisualProperty}.
  * @param <S> The generic type of this ViewUpdater.
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule swing-application-api
  */
 public abstract class AbstractViewUpdater<S> implements RowsSetListener {
 

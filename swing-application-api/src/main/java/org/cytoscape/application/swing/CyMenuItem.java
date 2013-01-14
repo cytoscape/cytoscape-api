@@ -42,6 +42,7 @@ import javax.swing.JMenuItem;
  * A simple wrapper class that allows a JMenuItem to be associated with 
  * a gravity value which defines where in a menu the item should fall.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule swing-application-api
  */
 public final class CyMenuItem {
 

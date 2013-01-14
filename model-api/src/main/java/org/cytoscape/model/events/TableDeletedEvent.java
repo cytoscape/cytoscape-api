@@ -32,8 +32,10 @@ import org.cytoscape.event.AbstractCyEvent;
 import org.cytoscape.model.CyTableManager;
 
 
-/** This event signals that a table has been deleted. 
+/**
+ * This event signals that a table has been deleted. 
  * @CyAPI.Final.Class
+ * @CyAPI.InModule model-api
  */
 public final class TableDeletedEvent extends AbstractCyEvent<CyTableManager> {
 	/**

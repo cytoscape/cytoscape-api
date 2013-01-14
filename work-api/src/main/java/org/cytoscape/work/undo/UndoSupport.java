@@ -32,6 +32,7 @@ package org.cytoscape.work.undo;
 /** 
  * A simple interface that posts edits to the Cytoscape undo stack. 
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule work-api
  */
 public interface UndoSupport {
 

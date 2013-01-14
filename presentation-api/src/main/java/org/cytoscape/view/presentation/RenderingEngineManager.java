@@ -14,6 +14,7 @@ import org.cytoscape.view.model.VisualLexicon;
  * {@linkplain org.cytoscape.view.presentation.events.RenderingEngineAddedEvent}s.
  * 
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule presentation-api
  */
 public interface RenderingEngineManager {
 

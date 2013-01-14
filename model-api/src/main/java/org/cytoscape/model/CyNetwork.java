@@ -38,6 +38,7 @@ import java.util.List;
  * multi-graph as multiple edges may exist between nodes. Edges may
  * be directed, undirected, or both.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule model-api
  */
 public interface CyNetwork extends CyIdentifiable, CyDisposable {
 	/**

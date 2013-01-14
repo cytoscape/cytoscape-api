@@ -6,6 +6,7 @@ package org.cytoscape.work;
  *
  * @author Pasteur
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule work-api
  */
 public interface TaskMonitor {
 	/**

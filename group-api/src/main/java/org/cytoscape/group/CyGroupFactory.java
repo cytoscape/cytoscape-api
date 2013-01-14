@@ -40,6 +40,7 @@ import java.util.List;
  * {@link CyGroup} objects.  This factory will be
  * provided as a service through Spring/OSGi.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule group-api
  */
 public interface CyGroupFactory {
 	/**

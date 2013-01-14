@@ -12,7 +12,8 @@ import org.cytoscape.model.CyNetwork;
  * object is a container for one or more {@link CustomGraphicLayer} objects.  It is
  * the layer objects that will actually create the graphics that are used by the
  * renderer.
- *
+ * @CyAPI.Spi.Interface
+ * @CyAPI.InModule presentation-api
  */
 public interface CyCustomGraphics<T extends CustomGraphicLayer> {
 		

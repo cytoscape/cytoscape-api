@@ -37,8 +37,10 @@ import java.util.Set;
 import java.util.TreeSet;
 
 
-/** Base class for all {@link Function} implementations. 
+/**
+ * Base class for all {@link Function} implementations. 
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule equations-api
  */
 public abstract class AbstractFunction implements Function {
 	private final ArgDescriptor[] argDescriptors;

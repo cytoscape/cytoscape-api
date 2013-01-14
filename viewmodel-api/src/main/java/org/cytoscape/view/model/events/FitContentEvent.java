@@ -10,6 +10,7 @@ import org.cytoscape.view.model.CyNetworkView;
  * be created and fired by the view being updated and not anyone else,
  * instead call the {@link CyNetworkView#fitContent()} method.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule viewmodel-api
  */
 public final class FitContentEvent extends AbstractCyEvent<CyNetworkView> {
 	

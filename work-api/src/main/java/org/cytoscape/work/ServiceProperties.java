@@ -4,6 +4,8 @@ package org.cytoscape.work;
  * Reserved keywords for OSGi service properties (meta data).
  * 
  * These properties will be used for {@link TaskFactory} services.
+ * @CyAPI.Api.Interface
+ * @CyAPI.InModule work-api
  */
 public interface ServiceProperties {
 	

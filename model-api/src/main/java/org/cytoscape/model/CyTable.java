@@ -40,6 +40,7 @@ import java.util.List;
  * String, Integer, Long, Double, Boolean, and Lists of those five
  * types.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule model-api
  */
 public interface CyTable extends CyIdentifiable {
 	/**

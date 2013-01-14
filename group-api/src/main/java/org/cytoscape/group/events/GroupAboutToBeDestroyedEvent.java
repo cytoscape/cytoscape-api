@@ -10,6 +10,7 @@ import org.cytoscape.group.CyGroup;
  * from all networks.  The group's subnetwork and group node will also be destroyed.
  *
  * @CyAPI.Final.Class
+ * @CyAPI.InModule group-api
  */
 public final class  GroupAboutToBeDestroyedEvent extends AbstractGroupManagerEvent {
 	/**

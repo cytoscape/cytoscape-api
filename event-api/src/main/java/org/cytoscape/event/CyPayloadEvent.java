@@ -49,6 +49,7 @@ import java.util.Collection;
  * @param <S> The event source type.
  * @param <P> The payload type.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule event-api
  */
 public interface CyPayloadEvent<S,P> extends CyEvent<S> {
 	

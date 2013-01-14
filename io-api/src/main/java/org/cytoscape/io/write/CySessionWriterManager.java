@@ -42,6 +42,7 @@ import java.io.OutputStream;
 /**
  * A {@link CyWriterManager} specific to writing {@link org.cytoscape.session.CySession} objects. 
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule io-api
  */
 public interface CySessionWriterManager extends CyWriterManager<CySessionWriterFactory> {
 

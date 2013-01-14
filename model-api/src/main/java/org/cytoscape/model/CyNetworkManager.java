@@ -38,6 +38,7 @@ import org.cytoscape.model.CyNetwork;
 /**
  * Basic access to networks and view in an instance of Cytoscape.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule model-api
  */
 public interface CyNetworkManager {
 	/**

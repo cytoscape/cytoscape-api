@@ -65,6 +65,7 @@ import org.slf4j.LoggerFactory;
  * </pre>
  * <br/>
  * @CyAPI.Final.Class
+ * @CyAPI.InModule session-api
  */
 public final class CySession {
 

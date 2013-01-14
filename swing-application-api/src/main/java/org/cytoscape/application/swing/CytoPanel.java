@@ -39,6 +39,7 @@ import java.awt.*;
  *
  * @author Ben Gross.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule swing-application-api
  */
 public interface CytoPanel {
 

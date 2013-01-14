@@ -10,6 +10,7 @@ import org.cytoscape.view.vizmap.VisualMappingFunction;
  * @param <K> Generic type of the attribute mapped.
  * @param <V> Generic type of the VisualProperty used in this mapping.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule vizmap-api
  */
 public interface ContinuousMapping<K, V> extends VisualMappingFunction<K,V>{
 

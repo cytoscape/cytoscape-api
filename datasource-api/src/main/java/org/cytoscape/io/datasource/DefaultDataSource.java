@@ -8,7 +8,8 @@ import org.cytoscape.io.DataCategory;
 /**
  * Basic implementation of {@link DataSource}.
  * In general, most of the data sources can be encoded with this default implementation. 
- *
+ * @CyAPI.Final.Class
+ * @CyAPI.InModule datasource-api
  */
 public final class DefaultDataSource implements DataSource {
 	

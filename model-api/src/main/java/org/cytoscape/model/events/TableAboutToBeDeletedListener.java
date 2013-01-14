@@ -7,6 +7,7 @@ import org.cytoscape.event.CyListener;
 /**
  * Listener for {@link TableAboutToBeDeletedEvent}
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule model-api
  */
 public interface TableAboutToBeDeletedListener extends CyListener {
 	/**

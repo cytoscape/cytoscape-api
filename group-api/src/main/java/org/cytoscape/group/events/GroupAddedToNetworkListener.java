@@ -6,6 +6,7 @@ import org.cytoscape.event.CyListener;
 /**
  * Listener for {@link GroupAddedToNetworkEvent}
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule group-api
  */
 public interface GroupAddedToNetworkListener extends CyListener {
 	/**

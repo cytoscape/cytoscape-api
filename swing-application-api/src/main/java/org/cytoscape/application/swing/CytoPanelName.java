@@ -34,6 +34,7 @@ package org.cytoscape.application.swing;
  * An enum that describes {@link CytoPanel}s uses compass directions
  * to describe their location within the application.
  * @CyAPI.Enum.Class
+ * @CyAPI.InModule swing-application-api
  */
 public enum CytoPanelName {
 	/**

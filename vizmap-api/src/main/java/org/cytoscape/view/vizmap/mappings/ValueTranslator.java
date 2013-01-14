@@ -7,6 +7,8 @@ package org.cytoscape.view.vizmap.mappings;
  *
  * @param <V> Data type of the column used for mapping
  * @param <T> Type of Visual Property range value.  Such as Color, Number, String.
+ * @CyAPI.Spi.Interface
+ * @CyAPI.InModule vizmap-api
  */
 public interface ValueTranslator<V, T> {
 	

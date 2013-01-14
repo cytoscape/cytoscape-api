@@ -6,6 +6,7 @@ import org.cytoscape.event.CyListener;
 /**
  * The listener for the {@link CyStartEvent}.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule application-api
  */
 public interface CyStartListener extends CyListener {
 

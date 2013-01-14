@@ -70,6 +70,7 @@ import javax.swing.border.TitledBorder;
 /**
  * A user-triggered collapsible panel containing the component (trigger) in the
  * titled border
+ * @CyAPI.InModule swing-util-api
  */
 public class BasicCollapsiblePanel extends JPanel {
 	

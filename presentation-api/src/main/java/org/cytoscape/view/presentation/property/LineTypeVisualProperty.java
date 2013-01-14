@@ -15,6 +15,7 @@ import org.cytoscape.view.presentation.property.values.LineType;
  * Others will be provided by rendering engines.
  * 
  * @CyAPI.Final.Class
+ * @CyAPI.InModule presentation-api
  */
 public final class LineTypeVisualProperty extends AbstractVisualProperty<LineType> {
 	

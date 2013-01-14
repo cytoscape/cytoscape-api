@@ -37,6 +37,7 @@ import org.cytoscape.work.TaskIterator;
 /**
  * Produces a task iterator for the specified collection of networks. 
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule core-task-api
  */
 public interface NetworkCollectionTaskFactory {
 	/** 

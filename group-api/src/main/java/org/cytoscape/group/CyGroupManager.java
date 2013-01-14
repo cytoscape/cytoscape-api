@@ -42,6 +42,7 @@ import org.cytoscape.model.CyNode;
  * The CyGroupManager maintains information about all of the groups
  * an instance of Cytoscape.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule group-api
  */
 public interface CyGroupManager {
 	/**

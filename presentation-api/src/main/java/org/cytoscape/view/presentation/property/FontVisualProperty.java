@@ -52,6 +52,7 @@ import org.slf4j.LoggerFactory;
  * Visual Property for {@link Font} values.
  * 
  * @CyAPI.Final.Class
+ * @CyAPI.InModule presentation-api
  */
 public final class FontVisualProperty extends AbstractVisualProperty<Font> {
 	

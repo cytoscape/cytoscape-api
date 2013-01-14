@@ -7,6 +7,7 @@ import java.awt.Window;
  * access to the Swing components used to display the UI.
  * 
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule webservice-swing-api
  */
 public interface WebServiceGUI {
 	/**

@@ -10,7 +10,7 @@ import java.beans.PropertyChangeEvent;
  * handlers will be called and processes the event.
  * 
  * @CyAPI.Spi.Interface
- * 
+ * @CyAPI.InModule vizmap-gui-api
  */
 public interface VizMapEventHandler {
 	

@@ -6,6 +6,7 @@ import org.cytoscape.event.CyListener;
 /**
  * A listener for the {@link PreferencesUpdatedEvent}.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule swing-application-api
  */
 public interface PreferencesUpdatedListener extends CyListener {
 

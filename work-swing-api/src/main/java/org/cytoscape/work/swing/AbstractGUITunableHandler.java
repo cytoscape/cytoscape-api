@@ -17,8 +17,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-/** Base class for the various Swing implementations of <code>TunableHandler</code>. 
+/**
+ * Base class for the various Swing implementations of <code>TunableHandler</code>. 
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule work-swing-api
  */
 public abstract class AbstractGUITunableHandler
 	extends AbstractTunableHandler implements GUITunableHandler 

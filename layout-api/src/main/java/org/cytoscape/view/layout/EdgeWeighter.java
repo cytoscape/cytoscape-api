@@ -39,6 +39,7 @@ import org.cytoscape.work.Tunable;
  * The EdgeWeighter class.  This class is used as a container for information
  * about how to interpret weights in an weighted layout.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule layout-api
  */
 public final class EdgeWeighter {
 

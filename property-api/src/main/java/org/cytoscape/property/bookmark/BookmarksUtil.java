@@ -4,6 +4,7 @@ import java.util.List;
 /**
  * A set of utility methods to manipulate the bookmarks.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule property-api
  */
 public interface BookmarksUtil {
 

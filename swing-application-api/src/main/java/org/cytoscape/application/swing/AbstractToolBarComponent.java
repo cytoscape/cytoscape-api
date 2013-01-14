@@ -4,6 +4,7 @@ package org.cytoscape.application.swing;
 /**
  * An abstract, convenience implementation of ToolBarComponent.  
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule swing-application-api
  */
 public abstract class AbstractToolBarComponent implements ToolBarComponent{
 

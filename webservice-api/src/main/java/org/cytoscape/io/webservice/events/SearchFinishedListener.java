@@ -3,6 +3,7 @@ package org.cytoscape.io.webservice.events;
 /**
  * Listener for {@link SearchFinishedEvent}.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule webservice-api
  */
 public interface SearchFinishedListener {
 	/**

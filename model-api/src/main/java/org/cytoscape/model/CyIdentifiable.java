@@ -33,6 +33,7 @@ package org.cytoscape.model;
  * object can be considered a key into a table. In general, table
  * entries will be things like nodes, edges, and networks..
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule model-api
  */
 public interface CyIdentifiable {
 

@@ -5,7 +5,7 @@ package org.cytoscape.view.vizmap.gui.editor;
  * Generic editor for discrete values, such as Shape, Line Type, etc.
  * 
  * @CyAPI.Spi.Interface
- *
+ * @CyAPI.InModule vizmap-gui-api
  */
 public interface ListEditor {
 	

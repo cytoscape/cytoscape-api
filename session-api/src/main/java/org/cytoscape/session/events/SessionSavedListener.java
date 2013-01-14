@@ -5,6 +5,7 @@ import org.cytoscape.event.CyListener;
 /**
  * A listener for {@link SessionSavedEvent}s.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule session-api
  */
 public interface SessionSavedListener extends CyListener {
 	

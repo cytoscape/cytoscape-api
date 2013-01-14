@@ -39,8 +39,9 @@ package org.cytoscape.application.swing;
 
 
 /**
- *  The different display states available for a {@link CytoPanel}.
- *  @CyAPI.Enum.Class
+ * The different display states available for a {@link CytoPanel}.
+ * @CyAPI.Enum.Class
+ * @CyAPI.InModule swing-application-api
  */
 public enum CytoPanelState {
 	/**

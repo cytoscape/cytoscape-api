@@ -10,7 +10,7 @@ import java.util.Set;
  * @param <V> the type of the Visual Property.
  * 
  * @CyAPI.Spi.Interface
- * 
+ * @CyAPI.InModule vizmap-gui-api
  */
 public interface DiscreteMappingGenerator<V> {
 

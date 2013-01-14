@@ -44,6 +44,7 @@ import org.cytoscape.work.TaskIterator;
  * All web service clients <strong>must</strong> implement this interface.
  * 
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule webservice-api
  */
 public interface WebServiceClient {
 

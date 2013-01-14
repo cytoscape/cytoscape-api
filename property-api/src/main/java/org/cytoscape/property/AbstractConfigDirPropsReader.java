@@ -26,6 +26,9 @@ import org.slf4j.LoggerFactory;
  * 		}
  * 	}
  * </pre>
+ * 
+ * @CyAPI.Abstract.Class
+ * @CyAPI.InModule property-api
  */
 public abstract class AbstractConfigDirPropsReader implements CyProperty<Properties> {
 	private static final Logger logger = LoggerFactory.getLogger(AbstractConfigDirPropsReader.class);

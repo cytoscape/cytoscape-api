@@ -6,7 +6,8 @@ import org.cytoscape.io.DataCategory;
 
 /**
  * Immutable data source object, which represents one data file associated with an URL.
- *
+ * @CyAPI.Api.Interface
+ * @CyAPI.InModule datasource-api
  */
 public interface DataSource {
 	

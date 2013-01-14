@@ -42,6 +42,7 @@ import org.cytoscape.model.CyNetwork;
  * A manager that provides access to the CyRootNetwork
  * objects associated with CyNetwork objects.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule model-api
  */
 public interface CyRootNetworkManager {
 

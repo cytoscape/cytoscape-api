@@ -48,6 +48,7 @@ import org.cytoscape.view.model.VisualProperty;
  * A VisualStyle is a collection of {@linkplain VisualMappingFunction}s and default values
  * that define how a set of attributes is mapped to visual properties of View objects.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule vizmap-api
  */
 public interface VisualStyle {
 	

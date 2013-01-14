@@ -11,6 +11,7 @@ import org.cytoscape.work.TaskIterator;
  * perform their task.  An example would be task that adds a
  * node to a network in a specific location.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule core-task-api
  */
 public interface NetworkViewLocationTaskFactory{
 

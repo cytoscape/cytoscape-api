@@ -47,6 +47,7 @@ import javax.swing.JToolBar;
  * This interface provides basic access to the Swing objects that
  * constitute this application.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule swing-application-api
  */
 public interface CySwingApplication {
 

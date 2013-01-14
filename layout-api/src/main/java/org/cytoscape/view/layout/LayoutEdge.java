@@ -41,6 +41,7 @@ import org.cytoscape.model.CyRow;
  * to information about the weights associated with edges, and pointers to the
  * LayoutNodes that are joined by this edge.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule layout-api
  */
 public final class LayoutEdge implements Comparable<LayoutEdge> {
 	

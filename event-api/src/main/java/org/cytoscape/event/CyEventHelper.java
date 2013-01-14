@@ -33,6 +33,7 @@ package org.cytoscape.event;
  * should be fired using these methods.  All listeners should be registered
  * as CyListener services.
  * @CyAPI.Api.Interface 
+ * @CyAPI.InModule event-api
  */
 public interface CyEventHelper {
 	/**

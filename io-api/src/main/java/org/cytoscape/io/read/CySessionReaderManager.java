@@ -9,6 +9,7 @@ import java.net.URI;
  * use and then returns an instance of the correct {@link org.cytoscape.io.read.CySessionReader} 
  * for the input.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule io-api
  */
 public interface CySessionReaderManager {
     /**

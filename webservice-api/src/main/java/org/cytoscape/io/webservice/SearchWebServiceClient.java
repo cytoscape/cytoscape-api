@@ -5,6 +5,7 @@ package org.cytoscape.io.webservice;
  * and getting arbitrary search result.
  *  
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule webservice-api
  */
 public interface SearchWebServiceClient {
 }

@@ -10,6 +10,7 @@ import org.cytoscape.work.TaskIterator;
  * A super interface that allows the input stream to be set for reader
  * task factories.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule io-api
  */
 public interface InputStreamTaskFactory extends CyFileFilterProvider {
 

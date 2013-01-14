@@ -8,6 +8,7 @@ import org.cytoscape.event.AbstractCyEvent;
  * This event is fired in the app-impl bundle, which depends on many Cytoscape bundles.
  * Warning: There is no guarantee that this event is fired after all bundles are start-up.  
  * @CyAPI.Final.Class
+ * @CyAPI.InModule application-api
  */
 public final class CyStartEvent extends AbstractCyEvent<Object> {
 

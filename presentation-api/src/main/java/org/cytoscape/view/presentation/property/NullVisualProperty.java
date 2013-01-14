@@ -14,6 +14,7 @@ import org.cytoscape.view.model.Range;
  * a marker node in the tree.
  *
  * @CyAPI.Final.Class
+ * @CyAPI.InModule presentation-api
  */
 public final class NullVisualProperty extends AbstractVisualProperty<NullDataType> {
 

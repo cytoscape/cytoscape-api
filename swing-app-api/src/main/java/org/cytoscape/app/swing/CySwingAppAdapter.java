@@ -19,6 +19,7 @@ import org.cytoscape.app.CyAppAdapter;
  * This is a convenience interface intended make app development
  * as simple as possible.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule swing-app-api
  */
 public interface CySwingAppAdapter extends CyAppAdapter {
 

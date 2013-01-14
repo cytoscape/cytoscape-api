@@ -48,6 +48,7 @@ import java.util.List;
  * the methods of this class are wrappers for Node or View<CyNode> methods, and
  * these are often wrapped by LayoutPartition methods.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule layout-api
  */
 public final class LayoutNode implements Comparable<LayoutNode> {
 	// static (class) variables

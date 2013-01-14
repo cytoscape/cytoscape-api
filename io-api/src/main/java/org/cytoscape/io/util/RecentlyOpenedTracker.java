@@ -8,6 +8,7 @@ import java.util.List;
  * Manages list of recently opened files.
  * Currently, this is used for tracking recent sessions.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule io-api
  */
 public interface RecentlyOpenedTracker {
 

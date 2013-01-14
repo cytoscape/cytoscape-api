@@ -8,6 +8,7 @@ import org.cytoscape.model.CyNetwork;
 /**
  * This event signals that a network is about to be destroyed.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule model-api
  */
 public final class  NetworkAboutToBeDestroyedEvent extends AbstractNetworkEvent {
 	/**

@@ -42,6 +42,7 @@ import java.util.Collections;
  * @param <T> the generic type of the source object.
  * @param <P> the generic type of the payloads.
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule event-api
  */
 public abstract class AbstractCyPayloadEvent<T,P> extends AbstractCyEvent<T> implements CyPayloadEvent<T,P> {
 

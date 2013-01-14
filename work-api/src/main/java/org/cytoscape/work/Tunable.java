@@ -59,6 +59,7 @@ import java.lang.annotation.Target;
  * </pre>
  *
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule work-api
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD,ElementType.METHOD})

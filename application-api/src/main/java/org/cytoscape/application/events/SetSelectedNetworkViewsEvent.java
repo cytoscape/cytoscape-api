@@ -11,6 +11,7 @@ import org.cytoscape.view.model.CyNetworkView;
 /**
  * An event that indicates that a collection of network views has been selected.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule application-api
  */
 public final class SetSelectedNetworkViewsEvent extends AbstractCyEvent<CyApplicationManager> {
 	private final List<CyNetworkView> views;

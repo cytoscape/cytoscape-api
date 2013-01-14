@@ -8,6 +8,7 @@ import org.cytoscape.view.model.VisualProperty;
 /**
  * Tell listeners a enabled/disabled visual properties.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule vizmap-gui-api
  */
 public final class LexiconStateChangedEvent extends AbstractCyEvent<Object> {
 

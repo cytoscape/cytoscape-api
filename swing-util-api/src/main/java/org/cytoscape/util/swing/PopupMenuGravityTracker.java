@@ -43,9 +43,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-/** This class inserts menu items and separators in a menu based on their "gravity".
- *  Items with higher gravity appear further down the menu.
- *  @CyAPI.Final.Class
+/**
+ * This class inserts menu items and separators in a menu based on their "gravity".
+ * Items with higher gravity appear further down the menu.
+ * @CyAPI.Final.Class
+ * @CyAPI.InModule swing-util-api
  */
 public final class PopupMenuGravityTracker implements GravityTracker {
 	private final static Logger logger = LoggerFactory.getLogger(PopupMenuGravityTracker.class);

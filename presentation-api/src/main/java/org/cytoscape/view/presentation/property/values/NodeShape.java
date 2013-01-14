@@ -7,5 +7,6 @@ package org.cytoscape.view.presentation.property.values;
  * they should use this interface.
  * 
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule presentation-api
  */
 public interface NodeShape extends VisualPropertyValue {}

@@ -32,6 +32,7 @@ package org.cytoscape.model;
  * their lifecycle.  Users of CyDisposable objects must call dispose() when
  * the instances are no longer required or memory/resource leaks may occur.  
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule model-api
  */
 public interface CyDisposable {
 	/**

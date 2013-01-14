@@ -15,6 +15,7 @@ import org.cytoscape.view.model.Visualizable;
  * leaf, it should render it with default settings.
  * 
  * @CyAPI.Final.Class
+ * @CyAPI.InModule presentation-api
  */
 public final class DefaultVisualizableVisualProperty extends
 		AbstractVisualProperty<Visualizable> {

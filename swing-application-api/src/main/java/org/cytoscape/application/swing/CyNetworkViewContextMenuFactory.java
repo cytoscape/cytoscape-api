@@ -43,6 +43,7 @@ import org.cytoscape.view.model.CyNetworkView;
  * A factory interface used to produce a CyMenuItem (JMenuItem) that
  * will be added to the context menu for the specified network view. 
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule swing-application-api
  */
 public interface CyNetworkViewContextMenuFactory {
 

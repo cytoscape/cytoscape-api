@@ -6,6 +6,7 @@ package org.cytoscape.view.presentation.property.values;
  * If developers want to use custom objects as a Visual Property value, they should implement this.
  * 
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule presentation-api
  */
 public interface VisualPropertyValue {
 	

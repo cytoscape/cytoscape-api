@@ -16,6 +16,7 @@ import org.cytoscape.view.presentation.property.values.ArrowShape;
  * Engines can provide others.
  * 
  * @CyAPI.Final.Class
+ * @CyAPI.InModule presentation-api
  */
 public final class ArrowShapeVisualProperty extends AbstractVisualProperty<ArrowShape> {
 	

@@ -44,6 +44,7 @@ import org.cytoscape.io.webservice.WebServiceClient;
  * class.
  *
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule webservice-api
  */
 public abstract class AbstractWebServiceClient implements WebServiceClient {
 

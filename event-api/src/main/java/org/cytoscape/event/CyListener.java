@@ -54,6 +54,7 @@ package org.cytoscape.event;
  * means users are either must register as different listeners
  * or handle different event types in the handleEvent method. 
  * @CyAPI.Spi.Interface 
+ * @CyAPI.InModule event-api
  */
 public interface CyListener {
 	// implement 

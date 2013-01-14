@@ -42,6 +42,7 @@ import org.cytoscape.view.presentation.RenderingEngine;
  * Basic access to current and/or currently selected networks, 
  * views and rendering engines in an instance of Cytoscape.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule application-api
  */
 public interface CyApplicationManager {
 	

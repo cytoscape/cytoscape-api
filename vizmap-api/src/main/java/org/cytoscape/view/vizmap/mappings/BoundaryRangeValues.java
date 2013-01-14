@@ -54,6 +54,7 @@ package org.cytoscape.view.vizmap.mappings;
  *
  * @param <T> the generic type for this BoundaryRangeValues.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule vizmap-api
  */
 public final class BoundaryRangeValues<T> {
 	/**

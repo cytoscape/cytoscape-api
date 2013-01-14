@@ -10,6 +10,7 @@ import org.cytoscape.view.vizmap.VisualStyle;
 /**
  * A {@link CyWriterManager} specific to writing {@link org.cytoscape.view.vizmap.VisualStyle} objects. 
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule io-api
  */
 public interface VizmapWriterManager extends CyWriterManager<VizmapWriterFactory> {
 

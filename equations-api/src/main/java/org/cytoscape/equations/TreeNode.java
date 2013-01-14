@@ -4,6 +4,8 @@ import java.util.Stack;
 
 /**
  * The interface for a node within the Equation parse tree.
+ * @CyAPI.Api.Interface
+ * @CyAPI.InModule equations-api
  */
 public interface TreeNode {
 

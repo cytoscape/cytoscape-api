@@ -39,6 +39,7 @@ package org.cytoscape.event;
  * A base implementation of {@link CyEvent} that can be used by events.
  * @param <T> the generic type of the AbstractCyEvent.
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule event-api
  */
 public abstract class AbstractCyEvent<T> implements CyEvent<T> {
 

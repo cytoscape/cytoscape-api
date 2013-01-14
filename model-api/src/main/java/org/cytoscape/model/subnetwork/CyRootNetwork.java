@@ -65,6 +65,7 @@ import java.util.List;
  * A {@link CySubNetwork} may be thought of as a projection of 
  * the graph implemented by the <b>CyRootNetwork</b>.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule model-api
  */
 public interface CyRootNetwork extends CyNetwork {
 

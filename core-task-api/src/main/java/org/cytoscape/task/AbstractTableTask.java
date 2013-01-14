@@ -34,6 +34,7 @@ import org.cytoscape.work.AbstractTask;
 
 /** A base class for Tasks that need to operate on an entire {@link CyTable}. 
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule core-task-api
  */
 public abstract class AbstractTableTask extends AbstractTask {
 	

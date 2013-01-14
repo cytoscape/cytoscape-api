@@ -79,7 +79,8 @@ import java.util.Set;
  * </p>
  *
  * @CyAPI.Api.Interface
- */
+  * @CyAPI.InModule model-api
+*/
 public interface CyTableManager {
 
 	/**

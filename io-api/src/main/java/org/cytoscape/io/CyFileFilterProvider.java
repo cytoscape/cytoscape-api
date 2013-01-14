@@ -5,6 +5,7 @@ package org.cytoscape.io;
  * An interface extended by various reader and writer factories.
  * It provides basic information about the types of supported files.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule io-api
  */
 public interface CyFileFilterProvider {
 	/**

@@ -7,6 +7,8 @@ import java.util.List;
  * Definition of Edge Bends.
  * Bend is an ordered {@link List} of {@link Handle}s.
  *
+ * @CyAPI.Api.Interface
+ * @CyAPI.InModule presentation-api
  */
 public interface Bend {
 	

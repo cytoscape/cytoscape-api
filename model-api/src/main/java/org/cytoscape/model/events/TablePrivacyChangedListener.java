@@ -6,8 +6,8 @@ import org.cytoscape.event.CyListener;
  * Listener interface for handling {@link TablePrivacyChangedEvent}.
  * This interface can be implemented by the classes effected by setting
  * a table public or private.
- * @author rozagh
- *
+ * @CyAPI.Spi.Interface
+ * @CyAPI.InModule model-api
  */
 public interface TablePrivacyChangedListener extends CyListener{
 	

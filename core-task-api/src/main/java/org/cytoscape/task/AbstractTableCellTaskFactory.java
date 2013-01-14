@@ -5,6 +5,7 @@ import org.cytoscape.model.CyColumn;
 /**
  * A TableCellTaskFactory that is always ready to produce a TaskIterator.
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule core-task-api
  */
 public abstract class AbstractTableCellTaskFactory implements TableCellTaskFactory {
 	/**

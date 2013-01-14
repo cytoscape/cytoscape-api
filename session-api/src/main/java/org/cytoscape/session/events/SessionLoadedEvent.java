@@ -11,6 +11,7 @@ import org.cytoscape.session.CySessionManager;
  * method and is used to notify interested parties in the change 
  * of state. 
  * @CyAPI.Final.Class
+ * @CyAPI.InModule session-api
  */
 public final class SessionLoadedEvent extends AbstractCyEvent<CySessionManager> {
 

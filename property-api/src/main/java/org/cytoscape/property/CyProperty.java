@@ -12,6 +12,7 @@ package org.cytoscape.property;
  * {@link org.cytoscape.property.bookmark.Bookmarks}, although it is possible for 
  * property objects of other types to be registered in this way as well.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule property-api
  */
 public interface CyProperty<P> {
 

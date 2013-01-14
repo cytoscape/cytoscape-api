@@ -50,6 +50,7 @@ import org.cytoscape.view.model.VisualProperty;
  * Manages all editor objects for the VizMap GUI.
  *
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule vizmap-gui-api
  */
 public interface EditorManager {
 	

@@ -31,8 +31,10 @@ package org.cytoscape.model.events;
 import org.cytoscape.event.CyListener;
 
 
-/** Listener for {@link UnsetNetworkPointerEvent}s. 
+/**
+ * Listener for {@link UnsetNetworkPointerEvent}s. 
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule model-api
  */
 public interface UnsetNetworkPointerListener extends CyListener {
 	/**

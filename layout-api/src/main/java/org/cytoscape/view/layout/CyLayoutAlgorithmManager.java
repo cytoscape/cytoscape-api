@@ -33,8 +33,9 @@ package org.cytoscape.view.layout;
 import java.util.Collection;
 
 /**
- *  This class provides access to the available layout algorithms.
- *  @CyAPI.Api.Interface
+ * This class provides access to the available layout algorithms.
+ * @CyAPI.Api.Interface
+ * @CyAPI.InModule layout-api
  */
 public interface CyLayoutAlgorithmManager {
 

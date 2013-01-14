@@ -24,6 +24,7 @@ import org.cytoscape.service.util.internal.utils.ServiceUtil;
  * Users should extend this class and implement the start(BundleContext bc)
  * method.  
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule service-api
  */
 public abstract class AbstractCyActivator implements BundleActivator {
 

@@ -7,7 +7,8 @@ import org.cytoscape.view.model.View;
 
 /**
  * Factory of the handle object.
- *
+ * @CyAPI.Api.Interface
+ * @CyAPI.InModule presentation-api
  */
 public interface HandleFactory {
 	

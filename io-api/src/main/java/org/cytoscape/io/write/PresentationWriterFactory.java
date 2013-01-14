@@ -10,6 +10,7 @@ import org.cytoscape.view.presentation.RenderingEngine;
  * rendered by the specified {@link RenderingEngine} to
  * be specified and written.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule io-api
  */
 public interface PresentationWriterFactory extends CyWriterFactory {
 

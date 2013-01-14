@@ -48,6 +48,7 @@ import org.slf4j.LoggerFactory;
  *
  * @param <T>  type of items that will be listed.
  * @CyAPI.Final.Class 
+ * @CyAPI.InModule work-api
  */
 public final class ListSingleSelection<T> extends ListSelection<T> {
 
