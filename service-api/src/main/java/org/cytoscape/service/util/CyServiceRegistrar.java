@@ -12,6 +12,14 @@ import org.osgi.framework.BundleContext;
  * if you need to register services outside of {@code AbstractCyActivator}'s
  * {@code start} method.
  *
+ * This class differs in one important way from {@code AbstractCyActivator}.
+ * {@code AbstractCyActivator} maintains a list of requested services. When
+ * the bundle is stopped, {@code AbstractCyActivator} releases
+ * these services. {@code CyServiceRegistrar} also maintains a list
+ * of requested services, but this list is separate from {@code AbstractCyActivator}.
+ * Services requested through this class must be released using one of
+ * the {@code unregisterService} methods when the bundle is stopped.
+ *
  * @CyAPI.Api.Interface
  * @CyAPI.InModule service-api
  */
