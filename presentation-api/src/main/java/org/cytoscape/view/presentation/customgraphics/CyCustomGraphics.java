@@ -4,7 +4,8 @@ import java.awt.Image;
 import java.util.List;
 
 import org.cytoscape.model.CyIdentifiable;
-import org.cytoscape.model.CyNetwork;
+import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.View;
 
 
 /**
@@ -12,8 +13,7 @@ import org.cytoscape.model.CyNetwork;
  * object is a container for one or more {@link CustomGraphicLayer} objects.  It is
  * the layer objects that will actually create the graphics that are used by the
  * renderer.
- * @CyAPI.Spi.Interface
- * @CyAPI.InModule presentation-api
+ *
  */
 public interface CyCustomGraphics<T extends CustomGraphicLayer> {
 		
@@ -67,17 +67,17 @@ public interface CyCustomGraphics<T extends CustomGraphicLayer> {
 	/**
 	 * Get layers that belong to this object.  Get the list of layers to be rendered.  Each
 	 * layer is rendered in list order, which means that the layers at the end of the list are
-	 * rendered last, and are therefore on top.  The {@link CyNetwork} and {@link CyIdentifiable}
-	 * graph object are passed in case there is information about the network that is required
+	 * rendered last, and are therefore on top.  The {@link CyNetworkView} and {@link View}
+	 * graph object view are passed in case there is information about the network that is required
 	 * to render the layer.  For example, a pie chart layer might need to extract data from the
 	 * {@link CyRow} for this graph object.  For other layer types, this can be safely ignored.
 	 * 
-	 * @param network the network the Renderer is rendering
-	 * @param grObject the graph object the Renderer is rendering (currently only nodes are supported)
+	 * @param networkView the network view the Renderer is rendering
+	 * @param grView the graph object view the Renderer is rendering (currently only nodes are supported)
 	 * @return List of layer objects
 	 * 
 	 */
-	public List<T> getLayers(CyNetwork network, CyIdentifiable grObject);
+	public List<T> getLayers(CyNetworkView networkView, View<? extends CyIdentifiable> grView);
 	
 	
 	/**

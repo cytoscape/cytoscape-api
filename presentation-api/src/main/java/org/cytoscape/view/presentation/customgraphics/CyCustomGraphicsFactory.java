@@ -4,6 +4,8 @@ import java.awt.Image;
 import java.net.URL;
 import java.util.List;
 
+import org.cytoscape.model.CyIdentifiable;
+
 
 /**
  * This interface provides the factory to create CyCustomGraphics objects.
@@ -19,8 +21,7 @@ import java.util.List;
   		registerService(bundleContext, myCustomGraphicsFactory, CyCustomGraphicsFactory.class, new Properites());
   </pre>
  *
- * @CyAPI.Spi.Interface
- * @CyAPI.InModule presentation-api
+ *
  */
 public interface CyCustomGraphicsFactory<T extends CustomGraphicLayer> {
 	/**
