@@ -30,9 +30,11 @@ import org.osgi.framework.BundleContext;
 
 /** 
  * An interface to hide the OSGi dependencies needed to register 
- * services dynamically at runtime.  You should only use this interface
- * if you need to register services while running based on data not 
- * available at startup. 
+ * services dynamically at runtime. This provides similar methods to
+ * {@code AbstractCyActivator}, but you should only use {@code CyServiceRegistrar}
+ * if you need to register services outside of {@code AbstractCyActivator}'s
+ * {@code start} method.
+ *
  * @CyAPI.Api.Interface
  */
 public interface CyServiceRegistrar {
