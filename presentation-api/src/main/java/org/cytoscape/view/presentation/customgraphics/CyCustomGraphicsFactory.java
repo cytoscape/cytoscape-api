@@ -23,7 +23,7 @@ import org.cytoscape.model.CyIdentifiable;
  *
  *
  */
-public interface CyCustomGraphicsFactory<T extends CustomGraphicLayer, S extends CyIdentifiable> {
+public interface CyCustomGraphicsFactory<T extends CustomGraphicLayer> {
 	/**
  	 * Return the prefix to identify this custom graphics factory.  This
  	 * is used by the passthrough mapping logic to figure out if a
@@ -51,7 +51,7 @@ public interface CyCustomGraphicsFactory<T extends CustomGraphicLayer, S extends
  	 * @param url the url that points to the CyCustomGraphics data
  	 * @return the new instance, or null if URL references are not supported
  	 */
-	public CyCustomGraphics<T, S> getInstance(URL url); 
+	public CyCustomGraphics<T> getInstance(URL url); 
 
 	/**
  	 * Get a new instance of the CyCustomGraphics.  The string argument may
@@ -66,14 +66,14 @@ public interface CyCustomGraphicsFactory<T extends CustomGraphicLayer, S extends
  	 *              instance.  Not all implementations will use this.
  	 * @return the new instance
  	 */
-	public CyCustomGraphics<T,S> getInstance(String input); 
+	public CyCustomGraphics<T> getInstance(String input); 
 
 	/**
  	 * Create a new CyCustomGraphics object by parsing the string
  	 * resulting from the toSerializableString() method.  This method
  	 * will be used to suport serialization of discrete mappings.
  	 */
-	public CyCustomGraphics<T,S> parseSerializableString(String string);
+	public CyCustomGraphics<T> parseSerializableString(String string);
 
 	/**
  	 * Return the class that this factory creates.  This is used by the deserialization
