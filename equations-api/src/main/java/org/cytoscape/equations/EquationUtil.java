@@ -30,8 +30,10 @@
 package org.cytoscape.equations;
 
 
-/** Various static utility methods relating to equations. 
+/**
+ * Various static utility methods relating to equations. 
  * @CyAPI.Static.Class
+ * @CyAPI.InModule equations-api
  */
 public final class EquationUtil {
 	private EquationUtil() { } // Exists to prevent creating instances of this class!

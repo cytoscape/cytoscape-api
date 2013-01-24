@@ -3,6 +3,11 @@ package org.cytoscape.session.events;
 import org.cytoscape.event.AbstractCyEvent;
 import org.cytoscape.session.CySession;
 
+/**
+ * TODO: Missing documentation
+ * @CyAPI.Final.Class
+ * @CyAPI.InModule session-api
+ */
 public final class SessionSavedEvent extends AbstractCyEvent<Object> {
 	
 	private final CySession session;

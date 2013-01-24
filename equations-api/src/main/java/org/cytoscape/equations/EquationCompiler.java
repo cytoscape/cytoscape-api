@@ -33,8 +33,10 @@ package org.cytoscape.equations;
 import java.util.Map;
 
 
-/** Compiler that compiles equations to byte (non-Java) code. 
+/**
+ * Compiler that compiles equations to byte (non-Java) code. 
  * @CyAPI.Api.Interface 
+ * @CyAPI.InModule equations-api
  */
 public interface EquationCompiler {
 	/** Compiles a string to byte code plus some metadata as encapsulated by the <code>Equation</code> class

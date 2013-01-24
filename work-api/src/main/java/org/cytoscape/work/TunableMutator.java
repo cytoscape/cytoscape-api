@@ -18,6 +18,7 @@ package org.cytoscape.work;
  * @param <S> The type of configuration object returned by this
  * TunableMutator.  
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule work-api
  */
 public interface TunableMutator<T extends TunableHandler, S> {
 

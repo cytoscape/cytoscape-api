@@ -41,6 +41,7 @@ package org.cytoscape.event;
  * relevant to that specific event.
  * @param <T> the generic type of the CyEvent.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule event-api
  */
 public interface CyEvent<T> {
 	

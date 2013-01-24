@@ -31,6 +31,7 @@ import org.slf4j.LoggerFactory;
  * Basic Implementation of VisualLexicon.
  * 
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule presentation-api
  */
 public class BasicVisualLexicon implements VisualLexicon {
 

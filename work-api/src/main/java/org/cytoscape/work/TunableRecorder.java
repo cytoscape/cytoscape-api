@@ -18,6 +18,7 @@ package org.cytoscape.work;
  * use the {@link AbstractTunableInterceptor} class to do so.
  * @param <T> The generic TunableHandler type of this TunableRecorder.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule work-api
  */
 public interface TunableRecorder<T extends TunableHandler> {
 

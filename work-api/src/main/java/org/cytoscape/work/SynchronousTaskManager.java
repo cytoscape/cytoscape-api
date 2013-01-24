@@ -10,6 +10,7 @@ import java.util.Map;
  * asynchronously.
  * @param <T> The generic type of this SynchronousTaskManager.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule work-api
  */
 public interface SynchronousTaskManager<T> extends TaskManager<T,Map<String,Object>> {
 

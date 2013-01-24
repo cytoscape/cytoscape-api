@@ -3,6 +3,7 @@ package org.cytoscape.view.layout;
 /**
  * An enum describing different weighting strategies. 
  * @CyAPI.Enum.Class
+ * @CyAPI.InModule layout-api
  */
 public enum WeightTypes {
 	/** Use a heuristic to guess. */

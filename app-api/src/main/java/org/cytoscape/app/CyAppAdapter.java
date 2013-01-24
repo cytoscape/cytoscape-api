@@ -109,6 +109,7 @@ import org.cytoscape.task.NodeViewTaskFactory;
  * This is a convenience interface intended make app development
  * as simple as possible.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule app-api
  */
 public interface CyAppAdapter {
 

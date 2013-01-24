@@ -39,6 +39,7 @@ package org.cytoscape.work.util;
 /**
  * A Double object which has <i>low</i> and <i>up</i> bounds
  * @CyAPI.Final.Class 
+ * @CyAPI.InModule work-api
  */
 public final class BoundedDouble extends AbstractBounded<Double> {
 

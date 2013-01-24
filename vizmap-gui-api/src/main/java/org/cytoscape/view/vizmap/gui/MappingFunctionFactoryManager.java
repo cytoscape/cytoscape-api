@@ -8,6 +8,7 @@ import org.cytoscape.view.vizmap.VisualMappingFunctionFactory;
  * Manages factories to create actual mappings (discrete/passthrough/continuous).
  * 
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule vizmap-gui-api
  */
 public interface MappingFunctionFactoryManager {
 	

@@ -32,8 +32,10 @@ package org.cytoscape.equations;
 
 import java.util.Map;
 
-/** Executes the code represented by an equation.
+/**
+ * Executes the code represented by an equation.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule equations-api
  */
 public interface Interpreter {
 	/** Executes the code represented by "equation".

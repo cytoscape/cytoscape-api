@@ -8,7 +8,8 @@ import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 
 /**
  * Utility class to provide access to basic set of Visual Properties.
- * 
+ * @CyAPI.Static.Class
+ * @CyAPI.InModule vizmap-gui-api
  */
 public final class PropertySheetUtil {
 

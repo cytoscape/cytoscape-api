@@ -10,7 +10,7 @@ import org.cytoscape.view.vizmap.VisualStyle;
  * This component will be provided as a service.
  * 
  * @CyAPI.Api.Interface
- * 
+ * @CyAPI.InModule vizmap-gui-api
  */
 public interface DefaultViewEditor {
 

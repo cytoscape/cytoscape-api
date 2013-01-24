@@ -8,6 +8,7 @@ import org.cytoscape.view.model.VisualProperty;
  * Utility functions for traversing visual lexicon tree.
  * 
  * @CyAPI.Static.Class
+ * @CyAPI.InModule presentation-api
  */
 public final class VisualPropertyUtil {
 	

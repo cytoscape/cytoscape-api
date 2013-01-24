@@ -32,6 +32,7 @@ package org.cytoscape.equations;
 /**
  * A class describing an error in a function. 
  * @CyAPI.Final.class
+ * @CyAPI.InModule equations-api
  */
 public final class FunctionError extends Exception {
 	private static final long serialVersionUID = 0xDAEDEBECFAEF2134L;

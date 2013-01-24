@@ -7,6 +7,7 @@ import org.cytoscape.view.presentation.RenderingEngine;
  * GUI component to display default appearance of current Visual Style.
  *
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule vizmap-gui-api
  */
 public interface DefaultViewPanel {
 

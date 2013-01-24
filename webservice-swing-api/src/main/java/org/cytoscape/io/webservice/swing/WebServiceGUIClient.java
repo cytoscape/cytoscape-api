@@ -7,6 +7,7 @@ import java.awt.Container;
  * their own GUI component.
  * 
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule webservice-swing-api
  */
 public interface WebServiceGUIClient {
 

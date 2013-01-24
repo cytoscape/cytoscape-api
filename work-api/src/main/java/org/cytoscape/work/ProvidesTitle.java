@@ -12,6 +12,7 @@ import java.lang.annotation.Target;
  * 
  * Please note that the method annotated with this needs to return a String and take no arguments.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule work-api
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD})

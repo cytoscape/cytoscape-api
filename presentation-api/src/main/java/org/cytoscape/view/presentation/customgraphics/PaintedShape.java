@@ -9,6 +9,8 @@ import java.awt.geom.Rectangle2D;
  * This interface defines a the information required to
  * construct a {@link java.awt.Shape} that has an arbitrary
  * fill {@link java.awt.Paint} and {@link java.awt.Stroke}.
+ * @CyAPI.Spi.Interface
+ * @CyAPI.InModule presentation-api
  */
 public interface PaintedShape extends CustomGraphicLayer {
 	/**

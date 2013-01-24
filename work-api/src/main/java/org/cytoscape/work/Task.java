@@ -145,6 +145,7 @@ package org.cytoscape.work;
  * </ul></ul></p>
  *
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule work-api
  */
 public interface Task {
 	/**

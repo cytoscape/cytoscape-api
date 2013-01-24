@@ -6,6 +6,7 @@ package org.cytoscape.view.vizmap.gui.event;
  * Handlers are exported as OSGi services, and this manager keeps all of them.
  *
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule vizmap-gui-api
  */
 public interface VizMapEventHandlerManager {
 

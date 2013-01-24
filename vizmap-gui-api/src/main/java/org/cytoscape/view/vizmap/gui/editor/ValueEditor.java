@@ -10,6 +10,7 @@ import java.awt.Component;
  * @param <V> target data type for this editor.
  * 
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule vizmap-gui-api
  */
 public interface ValueEditor<V> {
 	

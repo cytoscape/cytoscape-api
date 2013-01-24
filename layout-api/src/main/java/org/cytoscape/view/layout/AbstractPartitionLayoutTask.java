@@ -15,13 +15,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 /**
- *  This is a more helpful implementation of a LayoutAlgorithm Task 
- *  that extends AbstractBasicLayoutTask and does the work of partitioning
- *  the CyNetworkView so that partitions may be laid out individually.
- *  Extensions of this class are meant to implement the layoutPartition()
- *  method and operate on the LayoutParition object that is passed to that
- *  method as an argument.
- *  @CyAPI.Abstract.Class
+ * This is a more helpful implementation of a LayoutAlgorithm Task 
+ * that extends AbstractBasicLayoutTask and does the work of partitioning
+ * the CyNetworkView so that partitions may be laid out individually.
+ * Extensions of this class are meant to implement the layoutPartition()
+ * method and operate on the LayoutParition object that is passed to that
+ * method as an argument.
+ * @CyAPI.Abstract.Class
+ * @CyAPI.InModule layout-api
  */
 public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 	

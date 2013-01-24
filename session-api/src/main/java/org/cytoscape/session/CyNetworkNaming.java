@@ -7,6 +7,7 @@ import org.cytoscape.model.CyNetwork;
 /**
  * A utility that helps with the creation of unique network names.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule session-api
  */
 public interface CyNetworkNaming {
 	/**

@@ -16,6 +16,7 @@ import org.cytoscape.view.presentation.property.values.NodeShape;
  * provided by the rendering engine.
  * 
  * @CyAPI.Final.Class
+ * @CyAPI.InModule presentation-api
  */
 public final class NodeShapeVisualProperty extends AbstractVisualProperty<NodeShape> {
 

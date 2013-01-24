@@ -31,6 +31,8 @@ import java.lang.annotation.Target;
  * </code></pre></p>
  * When class B is evaluated for Tunables, it should display a tunable
  * for both the "name" and "value" fields.
+ * @CyAPI.Api.Interface
+ * @CyAPI.InModule work-api
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})

@@ -6,6 +6,7 @@ import org.cytoscape.event.CyListener;
 /**
  * A listener for {@link SessionLoadedEvent}s.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule session-api
  */
 public interface SessionLoadedListener extends CyListener {
 	/**

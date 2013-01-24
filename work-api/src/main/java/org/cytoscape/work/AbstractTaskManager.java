@@ -9,6 +9,7 @@ import java.util.Map;
  * Provides access to a TunableInterceptor to all derived classes and a 
  * utility method to determine if an object has been annotated with Tunables.
  * @CyAPI.Abstract.Class 
+ * @CyAPI.InModule work-api
  */
 public abstract class AbstractTaskManager<T,C> implements TaskManager<T,C> {
 

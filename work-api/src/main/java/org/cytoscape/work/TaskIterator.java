@@ -11,6 +11,7 @@ import java.util.NoSuchElementException;
  * A TaskIterator provides the functionality of sequencing {@link Task}s.  {@link Task}s provided by TaskIterator
  * can be executed by calling a {@link TaskManager}'s execute() method.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule work-api
  */
 public final class TaskIterator implements Iterator<Task> {
 	private final List<Task> tasks;

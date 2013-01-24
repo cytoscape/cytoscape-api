@@ -56,6 +56,7 @@ import org.slf4j.LoggerFactory;
  *  Usually, this will be used for {@link Color}.
  *  
  * @CyAPI.Final.Class
+ * @CyAPI.InModule presentation-api
  */
 public final class PaintVisualProperty extends AbstractVisualProperty<Paint> { 
 

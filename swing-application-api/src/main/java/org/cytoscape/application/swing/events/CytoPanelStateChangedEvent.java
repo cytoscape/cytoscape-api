@@ -8,6 +8,7 @@ import org.cytoscape.event.AbstractCyEvent;
 /**
  * An event to indicate that a CytoPanel has changed state. 
  * @CyAPI.Final.Class
+ * @CyAPI.InModule swing-application-api
  */
 public final class CytoPanelStateChangedEvent extends AbstractCyEvent<Object> {
 

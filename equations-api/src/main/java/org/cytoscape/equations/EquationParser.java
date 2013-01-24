@@ -36,6 +36,7 @@ import java.util.Set;
 /** 
  * Parser for a string representing an equation. 
  * @CyAPI.Api.Interface 
+ * @CyAPI.InModule equations-api
  */
 public interface EquationParser {
 	/**

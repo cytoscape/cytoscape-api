@@ -42,6 +42,7 @@ import org.cytoscape.view.model.Range;
  * Visual Property for {@link Integer} values.
  * 
  * @CyAPI.Final.Class
+ * @CyAPI.InModule presentation-api
  */
 public final class IntegerVisualProperty extends AbstractVisualProperty<Integer> {
 

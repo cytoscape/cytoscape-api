@@ -7,6 +7,7 @@ import org.cytoscape.event.CyListener;
  * {@linkplain org.cytoscape.view.presentation.RenderingEngineManager} implementation should implement this
  * interface, too.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule presentation-api
  */
 public interface RenderingEngineAddedListener extends CyListener {
 

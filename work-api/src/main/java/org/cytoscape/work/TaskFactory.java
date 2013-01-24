@@ -16,6 +16,7 @@ package org.cytoscape.work;
  * The createTaskIterator method should always be able to fully construct a {@link TaskIterator}
  * without relying on any other mutable state within the TaskFactory.
  * @CyAPI.Spi.Interface 
+ * @CyAPI.InModule work-api
  */
 public interface TaskFactory {
 	/** 

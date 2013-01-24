@@ -61,6 +61,7 @@ import org.cytoscape.view.presentation.property.BasicVisualLexicon;
  * @author <a href="mailto:scooter@cgl.ucsf.edu">Scooter Morris</a>
  * 
  * @CyAPI.Final.Class
+ * @CyAPI.InModule layout-api
  */
 public final class LayoutPartition {
 	

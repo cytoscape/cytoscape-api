@@ -33,8 +33,10 @@ package org.cytoscape.equations;
 import java.util.List;
 
 
-/** Used to hold a current value for an equation's variable reference.
+/**
+ * Used to hold a current value for an equation's variable reference.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule equations-api
  */
 public final class IdentDescriptor {
 	private final Class type;

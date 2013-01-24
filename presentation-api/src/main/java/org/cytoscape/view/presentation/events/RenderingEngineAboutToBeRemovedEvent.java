@@ -9,6 +9,7 @@ import org.cytoscape.view.presentation.RenderingEngineManager;
  * fired.
  * 
  * @CyAPI.Final.Class
+ * @CyAPI.InModule presentation-api
  */
 public final class RenderingEngineAboutToBeRemovedEvent extends AbstractCyEvent<RenderingEngineManager> {
 

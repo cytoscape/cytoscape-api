@@ -34,8 +34,9 @@ import java.util.Stack;
 
 
 /**
- *  A node in the parse tree.
- *  @CyAPI.Abstract.Class
+ * A node in the parse tree.
+ * @CyAPI.Abstract.Class
+ * @CyAPI.InModule equations-api
  */
 public abstract class AbstractNode implements TreeNode {
 	private final int sourceLocation; // What location the "source code" is this associated with.

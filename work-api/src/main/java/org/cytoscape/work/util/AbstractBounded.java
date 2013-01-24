@@ -33,6 +33,7 @@ package org.cytoscape.work.util;
  * @param <N>  Any type of Number.
  * @author Pasteur
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule work-api
  */
 abstract public class AbstractBounded<N extends Comparable<N>> {
 	/**

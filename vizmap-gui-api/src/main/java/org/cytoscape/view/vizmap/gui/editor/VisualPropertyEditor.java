@@ -48,7 +48,7 @@ import javax.swing.table.TableCellRenderer;
  * @param <T> Type of object managed in the Visual Prop.
  * 
  * @CyAPI.Spi.Interface
- * 
+ * @CyAPI.InModule vizmap-gui-api
  */
 public interface VisualPropertyEditor<T> {
 

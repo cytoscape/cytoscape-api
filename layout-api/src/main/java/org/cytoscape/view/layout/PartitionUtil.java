@@ -51,6 +51,7 @@ import org.cytoscape.view.model.View;
 /**
  * This class also provides static methods that are used to partition a network. 
  * @CyAPI.Static.Class
+ * @CyAPI.InModule layout-api
  */
 public final class PartitionUtil {
 

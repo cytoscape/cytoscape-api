@@ -9,7 +9,8 @@ import org.cytoscape.model.CyEdge;
 
 /**
  * Defines a handle, an anchor point in the edge. 
- *
+ * @CyAPI.Api.Interface
+ * @CyAPI.InModule presentation-api
  */
 public interface Handle {
 

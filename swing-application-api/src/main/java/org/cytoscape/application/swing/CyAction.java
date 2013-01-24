@@ -46,6 +46,7 @@ import javax.swing.event.PopupMenuListener;
  * An interface that describes how an action should be placed within 
  * the menus and/or toolbars of the Swing application.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule swing-application-api
  */
 public interface CyAction extends Action, MenuListener, PopupMenuListener {
 

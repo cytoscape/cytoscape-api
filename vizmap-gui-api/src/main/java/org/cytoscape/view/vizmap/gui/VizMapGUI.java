@@ -57,8 +57,8 @@ import javax.swing.JPanel;
  * Because of this, Visual Style is editable even if current Network View does not exist.
  * 
  * @CyAPI.Api.Interface
- * 
-  */
+ * @CyAPI.InModule vizmap-gui-api
+ */
 public interface VizMapGUI {
 	
 	/**

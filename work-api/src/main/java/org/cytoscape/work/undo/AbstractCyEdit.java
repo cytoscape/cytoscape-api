@@ -39,6 +39,7 @@ package org.cytoscape.work.undo;
  * class to support more advanced features.  If we do, we 
  * will make sure that the features are fully backwards compatible.
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule work-api
  */
 public abstract class AbstractCyEdit {
 

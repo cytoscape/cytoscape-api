@@ -17,6 +17,7 @@ import org.slf4j.LoggerFactory;
  *
  * @param <T> The specific type of the TunableHandler.
  * @CyAPI.Abstract.Class 
+ * @CyAPI.InModule work-api
  */
 public class BasicTunableHandlerFactory<T extends TunableHandler> implements TunableHandlerFactory<T> {
 	

@@ -15,6 +15,7 @@ import java.lang.reflect.Method;
  *
  * @param <T> The specific type of <code>TunableHandler</code> that will be created by this factory. 
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule work-api
  */
 
 public interface TunableHandlerFactory<T extends TunableHandler> {

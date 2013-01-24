@@ -21,7 +21,8 @@ import org.cytoscape.model.CyIdentifiable;
   		registerService(bundleContext, myCustomGraphicsFactory, CyCustomGraphicsFactory.class, new Properites());
   </pre>
  *
- *
+ * @CyAPI.Spi.Interface
+ * @CyAPI.InModule presentation-api
  */
 public interface CyCustomGraphicsFactory<T extends CustomGraphicLayer> {
 	/**

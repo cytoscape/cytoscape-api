@@ -47,6 +47,7 @@ import org.cytoscape.view.model.Range;
  * Visual Property for {@link Boolean} values.
  * 
  * @CyAPI.Final.Class
+ * @CyAPI.InModule presentation-api
  */
 public final class BooleanVisualProperty extends AbstractVisualProperty<Boolean> { 
 	

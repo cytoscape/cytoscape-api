@@ -37,6 +37,7 @@ package org.cytoscape.work;
  * The String message returned by <code>validate()</code> method is displayed to the user. 
  * 
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule work-api
  */
 public interface TunableValidator {
     /** 

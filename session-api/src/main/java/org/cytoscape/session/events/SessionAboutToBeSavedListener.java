@@ -9,6 +9,7 @@ import org.cytoscape.event.CyListener;
  * a list of files to be saved in the CySession using the
  * appropriate method in the {@link SessionAboutToBeSavedEvent}.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule session-api
  */
 public interface SessionAboutToBeSavedListener extends CyListener {
 	

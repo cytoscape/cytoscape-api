@@ -6,6 +6,8 @@ import java.awt.geom.Rectangle2D;
 /**
  * This interface defines a {@link CustomGraphicLayer} that
  * paints an image on a node. 
+ * @CyAPI.Spi.Interface
+ * @CyAPI.InModule presentation-api
  */
 public interface ImageCustomGraphicLayer extends CustomGraphicLayer {
 	/**

@@ -25,6 +25,8 @@ import org.cytoscape.work.undo.AbstractCyEdit;
 /**
  * An undoable edit that will undo and redo of a layout algorithm applied to a
  * network view.
+ * @CyAPI.Final.Class
+ * @CyAPI.InModule layout-api
  */
 public final class LayoutEdit extends AbstractCyEdit {
 	private final CyNetworkView view;

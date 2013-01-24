@@ -7,6 +7,7 @@ import javax.swing.ImageIcon;
  * @param <K> The numeric type of the attribute.
  * @param <V> The generic type of the visual property the attribute is being mapped to. 
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule vizmap-gui-api
  */
 public interface ContinuousMappingEditor<K extends Number, V> {
 

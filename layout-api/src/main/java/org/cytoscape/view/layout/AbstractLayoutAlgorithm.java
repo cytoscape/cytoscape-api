@@ -43,6 +43,7 @@ import org.cytoscape.work.undo.UndoSupport;
 /**
  * The AbstractLayoutAlgorithm provides a basic implementation of a layout TaskFactory.
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule layout-api
  */
 public abstract class AbstractLayoutAlgorithm implements CyLayoutAlgorithm {
 

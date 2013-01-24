@@ -13,6 +13,7 @@ import java.util.Map;
  * TunableSetters are provided as OSGi services.
  * <br/>
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule work-api
  */
 public interface TunableSetter {
 

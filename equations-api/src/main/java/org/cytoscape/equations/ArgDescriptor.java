@@ -34,8 +34,9 @@ import java.util.List;
 
 
 /** 
- *  A class describing a function argument.
- *  @CyAPI.Final.Class
+ * A class describing a function argument.
+ * @CyAPI.Final.Class
+ * @CyAPI.InModule equations-api
  */
 public final class ArgDescriptor {
 	private ArgType argType;

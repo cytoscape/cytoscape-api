@@ -5,8 +5,8 @@ import org.cytoscape.event.CyListener;
 
 /**
  * Listener interface for {@link PropertyUpdatedEvent}.
- * @author rozagh
- *
+ * @CyAPI.Spi.Interface
+ * @CyAPI.InModule property-api
  */
 public interface PropertyUpdatedListener extends CyListener {
 	/**

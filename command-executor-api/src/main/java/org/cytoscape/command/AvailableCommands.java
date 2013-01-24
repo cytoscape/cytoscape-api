@@ -4,6 +4,11 @@ package org.cytoscape.command;
 
 import java.util.List;
 
+/**
+ * TODO: Missing documentation
+ * @CyAPI.Api.Interface
+ * @CyAPI.InModule command-executor-api
+ */
 public interface AvailableCommands {
 
 	/**

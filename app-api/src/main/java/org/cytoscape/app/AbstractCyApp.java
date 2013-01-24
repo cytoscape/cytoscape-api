@@ -14,6 +14,7 @@ package org.cytoscape.app;
  * To load alternative versions of the same library used by other apps or 
  * Cytoscape itself, it will be necessary to write your app using OSGi.
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule app-api
  */
 public abstract class AbstractCyApp {
 

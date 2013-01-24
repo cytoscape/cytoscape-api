@@ -4,6 +4,7 @@ package org.cytoscape.work;
 /**
  * Executes the {@link Task}s found in the {@link TaskIterator} provided by a {@link TaskFactory}. 
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule work-api
  */
 public interface TaskManager<T,C> {
 

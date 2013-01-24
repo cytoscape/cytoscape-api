@@ -3,6 +3,8 @@ package org.cytoscape.view.layout;
 
 /**
  * Simple immutable object which represents a point (x, y).
+ * @CyAPI.Final.Class
+ * @CyAPI.InModule layout-api
  */
 public final class LayoutPoint {
 	

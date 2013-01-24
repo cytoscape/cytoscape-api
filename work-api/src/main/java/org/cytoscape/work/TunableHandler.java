@@ -17,6 +17,7 @@ import java.util.Properties;
  * fields/methods of that type.
  *
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule work-api
  */
 public interface TunableHandler {
 

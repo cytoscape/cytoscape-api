@@ -4,9 +4,9 @@ import org.cytoscape.event.AbstractCyEvent;
 
 /**
  * This event signals that a CyProperty is updated.
- * @author rozagh
- *
+ * @CyAPI.InModule property-api
  */
+// TODO: This really should be a final class but changing it now would break API
 public class PropertyUpdatedEvent extends AbstractCyEvent<CyProperty<?>> {
 
 	/**

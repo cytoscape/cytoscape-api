@@ -44,6 +44,7 @@ import javax.help.HelpSet;
  * This interface provides access to the Cytoscape Help Broker and 
  * Help Set for managing the JavaHelp system. 
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule swing-application-api
  */
 public interface CyHelpBroker {
 
