@@ -375,23 +375,21 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	}
 
 	/**
-	 * Insert a separator before this menu item.  NOTE: these don't override
-	 * anything in CyAction because these methods were added after the CyAction
-	 * api was finalized.
+	 * Insert a separator before this menu item.  
 	 *
 	 * @return true if this Action should have a separator before it
 	 */
+	@Override
 	public boolean insertSeparatorBefore() {
 		return insertSeparatorBefore;
 	}
 
 	/**
-	 * Insert a separator after this menu item. NOTE: these don't override
-	 * anything in CyAction because these methods were added after the CyAction
-	 * api was finalized.
+	 * Insert a separator after this menu item. 
 	 *
 	 * @return true if this Action should have a separator after it
 	 */
+	@Override
 	public boolean insertSeparatorAfter() {
 		return insertSeparatorAfter;
 	}
@@ -554,8 +552,9 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	}
 
 	/**
- 	 * Return the config props.  This should be part of the API in 4.0.
+ 	 * Return the config props. 
  	 */
+	@Override
 	public Map<String,String> getProperties() {
 		return configurationProperties;
 	}
