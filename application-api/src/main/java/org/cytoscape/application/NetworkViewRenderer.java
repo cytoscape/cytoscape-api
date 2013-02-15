@@ -1,7 +1,8 @@
-package org.cytoscape.view.presentation;
+package org.cytoscape.application;
 
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.view.model.CyNetworkViewFactory;
+import org.cytoscape.view.presentation.RenderingEngineFactory;
 
 public interface NetworkViewRenderer {
 	static final String DEFAULT_CONTEXT = "";
@@ -10,4 +11,6 @@ public interface NetworkViewRenderer {
 	
 	RenderingEngineFactory<CyNetwork> getRenderingEngineFactory(String contextId);
 	CyNetworkViewFactory getNetworkViewFactory();
+	
+	String getId();
 }

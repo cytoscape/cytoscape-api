@@ -122,5 +122,5 @@ public interface CyApplicationManager {
 	 */
 	public void reset();
 	
-	
+	NetworkViewRenderer getCurrentNetworkViewRenderer();
 }
