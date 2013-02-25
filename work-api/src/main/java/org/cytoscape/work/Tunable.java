@@ -121,6 +121,14 @@ public @interface Tunable {
 	 */
 	String[] groups() default {};
 
+	/**
+	 * Returns the gravity used to place the tunable in the panel.
+	 * Gravity is a numeric value associated with each tunable item. <code>Tunable</code>s
+	 * are sorted in descending order based on their gravity values. The first <code>Tunable</code> 
+	 * to show will be the one with lowest value starting at 0.0.
+	 * @return The gravity of the <code>Tunable</code>
+	 */
+	double gravity() default 999.0;
 	
 	/**
 	 * Returns true if this field or method is used to control the display of <i>other</i>

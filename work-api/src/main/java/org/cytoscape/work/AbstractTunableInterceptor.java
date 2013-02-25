@@ -29,11 +29,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 
-import java.util.Collections;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.WeakHashMap;
+import java.util.*;
 
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
@@ -166,6 +162,7 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 					}
 				}
 			}
+			Collections.sort(handlerList, new TunableGravityOrderer());
 		}
 
 		return handlerList;

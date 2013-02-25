@@ -126,6 +126,13 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	public final String[] getGroups() {
 		return tunable.groups();
 	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
+	public final double getGravity() {
+		return tunable.gravity();
+	}
 
 	/**
 	 * {@inheritDoc}
