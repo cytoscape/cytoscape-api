@@ -99,11 +99,26 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 */
 	protected boolean inMenuBar = true;
 
+	/**
+	 * Indicates whether a separator should be inserted before this item
+	 */
+	protected boolean insertSeparatorBefore = false;
+
+	/**
+	 * Indicates whether a separator should be inserted after this item
+	 */
+	protected boolean insertSeparatorAfter = false;
 
 	/**
 	 * The name of the action.
 	 */
 	protected String name;
+
+	/**
+ 	 * The configuration properties.  Adding it here allows extensions of
+ 	 * this class to pass their own properties.
+ 	 */
+	protected Map<String, String> configurationProperties; 
 
 	/**
 	 * A support class for deciding whether the action should be enabled.
@@ -150,6 +165,8 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *            <li>tooltip - (The toolbar or menu tooltip.)</li>
 	 *            <li>inToolBar - (Whether the action should be in the toolbar.)</li>
 	 *            <li>inMenuBar - (Whether the action should be in a menu.)</li>
+	 *            <li>insertSeparatorBefore - (Whether a separator should be inserted before this menu item.)</li>
+	 *            <li>insertSeparatorAfter - (Whether a separator should be inserted after this menu item.)</li>
 	 *            <li>enableFor - (System state that the action should be enabled for. See {@link ActionEnableSupport} for more detail.)</li>
 	 *            <li>accelerator - (Accelerator key bindings.)</li>
 	 *            <li>menuGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the menu.)</li>
@@ -180,6 +197,8 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *            <li>tooltip - (The toolbar or menu tooltip.)</li>
 	 *            <li>inToolBar - (Whether the action should be in the toolbar.)</li>
 	 *            <li>inMenuBar - (Whether the action should be in a menu.)</li>
+	 *            <li>insertSeparatorBefore - (Whether a separator should be inserted before this menu item.)</li>
+	 *            <li>insertSeparatorAfter - (Whether a separator should be inserted after this menu item.)</li>
 	 *            <li>enableFor - (<i>Ingored in this constructor and TaskFactoryPredicate is used instead!</i>)</li>
 	 *            <li>accelerator - (Accelerator key bindings.)</li>
 	 *            <li>menuGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the menu.)</li>
@@ -211,6 +230,8 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *            <li>tooltip - (The toolbar or menu tooltip.)</li>
 	 *            <li>inToolBar - (Whether the action should be in the toolbar.)</li>
 	 *            <li>inMenuBar - (Whether the action should be in a menu.)</li>
+	 *            <li>insertSeparatorBefore - (Whether a separator should be inserted before this menu item.)</li>
+	 *            <li>insertSeparatorAfter - (Whether a separator should be inserted after this menu item.)</li>
 	 *            <li>enableFor - (<i>Will only use this value if the TaskFactory is not a TaskFactoryPredicate!</i> 
 	 *                             See {@link ActionEnableSupport} for more detail.)</li>
 	 *            <li>accelerator - (Accelerator key bindings.)</li>
@@ -244,6 +265,8 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 
 		logger.debug("New CyAction with title: " + configProps.get(TITLE));
 
+		configurationProperties = configProps;
+
 		final String prefMenu = configProps.get(PREFERRED_MENU);
 
 		if (prefMenu != null)
@@ -271,6 +294,16 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 
 		if (foundInMenuBar != null  && Boolean.parseBoolean(foundInMenuBar))
 			inMenuBar = true;
+
+		final String foundInsertSeparatorBefore = configProps.get(INSERT_SEPARATOR_BEFORE);
+
+		if (foundInsertSeparatorBefore != null  && Boolean.parseBoolean(foundInsertSeparatorBefore))
+			insertSeparatorBefore = true;
+
+		final String foundInsertSeparatorAfter = configProps.get(INSERT_SEPARATOR_AFTER);
+
+		if (foundInsertSeparatorAfter != null  && Boolean.parseBoolean(foundInsertSeparatorAfter))
+			insertSeparatorAfter = true;
 
 		final String keyComboString = configProps.get(ACCELERATOR);
 
@@ -339,6 +372,26 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	@Override
 	public boolean isInToolBar() {
 		return inToolBar;
+	}
+
+	/**
+	 * Insert a separator before this menu item.  
+	 *
+	 * @return true if this Action should have a separator before it
+	 */
+	@Override
+	public boolean insertSeparatorBefore() {
+		return insertSeparatorBefore;
+	}
+
+	/**
+	 * Insert a separator after this menu item. 
+	 *
+	 * @return true if this Action should have a separator after it
+	 */
+	@Override
+	public boolean insertSeparatorAfter() {
+		return insertSeparatorAfter;
 	}
 
 	/**
@@ -496,6 +549,14 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	@Override
 	public void updateEnableState() {
 		enabler.updateEnableState();
+	}
+
+	/**
+ 	 * Return the config props. 
+ 	 */
+	@Override
+	public Map<String,String> getProperties() {
+		return configurationProperties;
 	}
 
 	

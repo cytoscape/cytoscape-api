@@ -24,6 +24,7 @@ package org.cytoscape.application.swing;
  * #L%
  */
 
+import java.util.Map;
 import javax.swing.Action;
 import javax.swing.KeyStroke;
 import javax.swing.event.MenuListener;
@@ -54,6 +55,20 @@ public interface CyAction extends Action, MenuListener, PopupMenuListener {
 	 * @return whether the action should be in the tool bar.
 	 */
 	boolean isInToolBar();
+
+	/**
+	 * Insert a separator before this menu item.  
+	 *
+	 * @return true if this Action should have a separator before it
+	 */
+	boolean insertSeparatorBefore();
+
+	/**
+	 * Insert a separator after this menu item. 
+	 *
+	 * @return true if this Action should have a separator after it
+	 */
+	boolean insertSeparatorAfter();
 
 	/**
 	 * Returns the gravity used to place the menu item for this action.
@@ -99,4 +114,11 @@ public interface CyAction extends Action, MenuListener, PopupMenuListener {
 	 * the action.
 	 */
 	void updateEnableState();	
+
+	/**
+ 	 * Returns the configuration properties that were passed to the CyAction
+ 	 * when it was created.
+ 	 * @returns configuration properties as a Map.
+ 	 */
+	Map<String,String> getProperties();
 }
