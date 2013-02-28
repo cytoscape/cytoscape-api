@@ -2,5 +2,5 @@
 -----------
 
 This is a parent project of Cytoscape 3 API bundles.
-These bundles define Cytoscape 3 public API.
+These bundles define the Cytoscape 3 public API.
 
