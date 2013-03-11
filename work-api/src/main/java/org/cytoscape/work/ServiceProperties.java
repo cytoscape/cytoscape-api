@@ -90,6 +90,13 @@ public interface ServiceProperties {
 	public static final String IN_MENU_BAR = "inMenuBar";
 	
 	/**
+	 * Action will be added to context menu if this flag is set to true.
+     * If the service is a {@code NetworkViewTaskFactory}, setting
+     * this property as true will put it in the network context menu.
+	 */
+	public static final String IN_CONTEXT_MENU = "inContextMenu";
+
+	/**
 	 * Shortcut key combination for desktop app.
 	 */
 	public static final String ACCELERATOR = "accelerator";
