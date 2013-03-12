@@ -361,7 +361,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 		addVisualProperty(NODE_WIDTH, NODE_SIZE);
 		addVisualProperty(NODE_HEIGHT, NODE_SIZE);
 		addVisualProperty(NODE_DEPTH, NODE_SIZE);
-		addVisualProperty(NODE_LABEL_WIDTH, NODE_SIZE);
+		addVisualProperty(NODE_LABEL_WIDTH, NODE);
 
 		// Level 3: Edge-related VP
 		addVisualProperty(EDGE_LABEL_COLOR, EDGE_PAINT);
