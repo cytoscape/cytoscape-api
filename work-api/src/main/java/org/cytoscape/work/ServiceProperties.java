@@ -89,12 +89,21 @@ public interface ServiceProperties {
 	 */
 	public static final String IN_MENU_BAR = "inMenuBar";
 	
-	/**
-	 * Action will be added to context menu if this flag is set to true.
-     * If the service is a {@code NetworkViewTaskFactory}, setting
-     * this property as true will put it in the network context menu.
-	 */
-	public static final String IN_CONTEXT_MENU = "inContextMenu";
+    /**
+     * Action will be added to context menu if this flag is set to true.
+     *
+     * <p>
+     *   This service property only affects:
+     *   <ul>
+     *     <li>{@code NodeViewTaskFactory}</li>
+     *     <li>{@code EdgeViewTaskFactory}</li>
+     *     <li>{@code NetworkViewTaskFactory}</li>
+     *   </ul>
+     * </p>
+     *
+     * <p>If no value is defined, the default value is {@code true}.</p>
+     */
+    public static final String IN_CONTEXT_MENU = "inContextMenu";
 
 	/**
 	 * Shortcut key combination for desktop app.
