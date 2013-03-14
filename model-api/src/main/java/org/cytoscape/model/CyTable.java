@@ -215,6 +215,23 @@ public interface CyTable extends CyIdentifiable {
 	
 	/**
 	 * Return a list of all the rows stored in this data table.
+     * <p>
+     * <i>WARNING.</i> If this method is invoked multiple times,
+     * rows may not be returned in the same order.
+     * If you need to iterate through
+     * rows in the same order:
+     * <ol>
+     *  <li>
+     *   create your own ordered list of the table's primary keys
+     *  </li>
+     *  <li>
+     *   loop through your list of primary keys
+     *  </li>
+     *  <li>
+     *   in each loop iteration, obtain the row using {@link #getRow}.
+     *  </li>
+     * </ol>
+     * </p>
 	 * @return a list of all the rows stored in this data table.
 	 */
 	List<CyRow> getAllRows();
