@@ -37,6 +37,7 @@ public interface CyVersion {
 	/**
 	 * The string used to identify the Property containing the version number.
 	 */
+	@Deprecated
 	public static final String VERSION_PROPERTY_NAME = "cytoscape.version.number";
 
 	/**
