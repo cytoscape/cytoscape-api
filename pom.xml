@@ -11,7 +11,7 @@
 	</parent>
 
 	<artifactId>api-parent</artifactId>
-  <version>3.0.1-SNAPSHOT</version>
+	<version>3.0.1-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Cytoscape API Parent Project POM</name>
 
@@ -69,11 +69,11 @@
 	</dependencies>
 
 	<scm>
-		<connection>scm:svn:http://chianti.ucsd.edu/svn/core3/api/branches/3.0.0-release</connection>
-		<developerConnection>scm:svn:svn+ssh://grenache.ucsd.edu/cellar/common/svn/core3/api/branches/3.0.0-release</developerConnection>
-		<url>http://chianti.ucsd.edu/svn/core3/api/branches/3.0.0-release</url>
+		<connection>scm:git:git://github.com/cytoscape/cytoscape-api.git</connection>
+		<developerConnection>scm:git:git@github.com:cytoscape/cytoscape-api.git</developerConnection>
+		<url>https://github.com/cytoscape/cytoscape-api.git</url>
 	</scm>
-	
+
 	<build>
 		<plugins>
 			<plugin>
@@ -90,13 +90,13 @@
 				<artifactId>maven-source-plugin</artifactId>
 				<version>${maven-source-plugin.version}</version>
 				<executions>
-				    <execution>
-                        <id>aggregate-source</id>
-                        <phase>package</phase>
-                        <goals>
-                            <goal>aggregate</goal>
-                        </goals>
-                    </execution>
+					<execution>
+						<id>aggregate-source</id>
+						<phase>package</phase>
+						<goals>
+							<goal>aggregate</goal>
+						</goals>
+					</execution>
 				</executions>
 			</plugin>
 		</plugins>
