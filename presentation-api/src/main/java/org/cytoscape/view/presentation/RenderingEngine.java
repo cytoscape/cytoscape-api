@@ -115,4 +115,5 @@ public interface RenderingEngine<T> extends CyDisposable {
 	 */
 	void printCanvas(final Graphics printCanvas);
 	
+	String getRendererId();
 }

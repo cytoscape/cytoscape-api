@@ -122,5 +122,28 @@ public interface CyApplicationManager {
 	 */
 	public void reset();
 	
+	/**
+	 * Returns the NetworkViewRenderer associated with the current
+	 * RenderingEngine.
+	 * 
+	 * @return the NetworkViewRenderer associated with the current
+	 * RenderingEngine
+	 */
+	NetworkViewRenderer getCurrentNetworkViewRenderer();
 	
+	/**
+	 * Returns the NetworkViewRenderer that should be used to create
+	 * CyNetworkViews.
+	 * @return the NetworkViewRenderer that should be used to create
+	 * CyNetworkViews.
+	 */
+	NetworkViewRenderer getDefaultNetworkViewRenderer();
+	
+	/**
+	 * Sets the NetworkViewRenderer that should be used to create
+	 * CyNetworkViews.
+	 * @param renderer the NetworkViewRenderer that should be used by
+	 *                 default.
+	 */
+	void setDefaultNetworkViewRenderer(NetworkViewRenderer renderer);
 }
