@@ -42,6 +42,13 @@ import org.cytoscape.service.util.CyServiceRegistrar;
 import org.cytoscape.service.util.internal.utils.RegisterUtil;
 import org.cytoscape.service.util.internal.utils.ServiceUtil;
 
+/**
+ * Implementation of {@code CyServiceRegistrar}.
+ *
+ * This is part of {@code service-api} instead of {@code service-impl}. This class uses code from {@code ServiceUtil},
+ * which is also used by {@code AbstractCyActivator}. This class has to be
+ * part of {@code service-api} so that it can use {@code ServiceUtil}.
+ */
 public class CyServiceRegistrarImpl  implements CyServiceRegistrar{
 	
 	//private static final Logger logger = LoggerFactory.getLogger(CyServiceRegistrarImpl.class);
