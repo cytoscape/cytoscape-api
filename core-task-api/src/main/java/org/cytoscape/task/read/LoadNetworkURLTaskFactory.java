@@ -25,9 +25,12 @@ package org.cytoscape.task.read;
  */
 
 import java.net.URL;
+import java.util.Collection;
 
+import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.work.TaskFactory;
 import org.cytoscape.work.TaskIterator;
+import org.cytoscape.work.TaskObserver;
 
 /**
  * This interface provides a task iterator for loading a URL into a network.
@@ -48,4 +51,17 @@ public interface LoadNetworkURLTaskFactory extends TaskFactory {
 	 */
 	TaskIterator loadCyNetworks(final URL url);
 
+	/**
+	 * Returns a TaskIterator that loads networks from a URL.  The
+	 * given observer will be notified when the networks are finished loading.
+	 * If the network's total nodes and edges don't exceed the system's
+	 * limits, a CyNetworkView will be automatically be created for each view.
+	 * Networks that exceed those limits will be wrapped within a
+	 * NullCyNetworkView.
+	 * 
+	 * @param url the URL containing the networks.
+	 * @param observer The observer to notify once loading is complete.
+	 * @return a TaskIterator that loads networks from a URL.
+	 */
+	TaskIterator createTaskIterator(URL url, TaskObserver<Collection<CyNetworkView>> observer);
 }

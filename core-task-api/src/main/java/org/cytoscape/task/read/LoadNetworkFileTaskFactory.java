@@ -25,9 +25,12 @@ package org.cytoscape.task.read;
  */
 
 import java.io.File;
+import java.util.Collection;
 
+import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.work.TaskFactory;
 import org.cytoscape.work.TaskIterator;
+import org.cytoscape.work.TaskObserver;
 
 
 /**
@@ -46,4 +49,17 @@ public interface LoadNetworkFileTaskFactory extends TaskFactory{
 	 */
 	TaskIterator createTaskIterator(final File file);
 
+	/**
+	 * Returns a TaskIterator that loads networks from a file.  The
+	 * given observer will be notified when the networks are finished loading.
+	 * If the network's total nodes and edges don't exceed the system's
+	 * limits, a CyNetworkView will be automatically be created for each view.
+	 * Networks that exceed those limits will be wrapped within a
+	 * NullCyNetworkView.
+	 * 
+	 * @param file the file containing the networks.
+	 * @param observer The observer to notify once loading is complete.
+	 * @return a TaskIterator that loads networks from a file.
+	 */
+	TaskIterator createTaskIterator(File file, TaskObserver<Collection<CyNetworkView>> observer);
 }

@@ -24,12 +24,24 @@ package org.cytoscape.task.create;
  * #L%
  */
 
+import org.cytoscape.model.CyNetwork;
 import org.cytoscape.task.NetworkTaskFactory;
+import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.work.TaskIterator;
+import org.cytoscape.work.TaskObserver;
 /**
  * This interface provides a task iterator for network cloning.
  * @CyAPI.Api.Interface
  * @CyAPI.InModule core-task-api
  */
 public interface CloneNetworkTaskFactory extends NetworkTaskFactory{
-
+	/**
+	 * Returns a TaskIterator that clones the given network.  The given
+	 * TaskObserver will be notified once the cloning is complete.
+	 * 
+	 * @param network The network to clone.
+	 * @param observer The observer to notify once the clone is complete.
+	 * @return a TaskIterator that clones the given network.
+	 */
+	TaskIterator createTaskIterator(CyNetwork network, TaskObserver<CyNetworkView> observer);
 }

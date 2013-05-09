@@ -24,13 +24,14 @@ package org.cytoscape.task.read;
  * #L%
  */
 
+import java.io.File;
+import java.io.InputStream;
+import java.util.Set;
+
 import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.work.TaskFactory;
 import org.cytoscape.work.TaskIterator;
-
-import java.util.Set;
-import java.io.File;
-import java.io.InputStream;
+import org.cytoscape.work.TaskObserver;
 
 /**
  * An interface for loading styles from files. 
@@ -63,4 +64,14 @@ public interface LoadVizmapFileTaskFactory extends TaskFactory{
 	 * @return A task iterator of type {@link TaskIterator}.
 	 */
 	TaskIterator createTaskIterator(File file);
+	
+	/**
+	 * Returns a TaskIterator that loads VisualStyles from a File.  The given
+	 * observer will be notified when the VisualStyles are finished loading.
+	 * 
+	 * @param file the file containing the VisualStyles.
+	 * @param observer The observer to notify once loading is complete.
+	 * @return a TaskIterator that loads VisualStyles from a File.
+	 */
+	TaskIterator createTaskIterator(File file, TaskObserver<Set<VisualStyle>> observer);
 }

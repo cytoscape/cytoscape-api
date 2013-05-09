@@ -24,7 +24,11 @@ package org.cytoscape.task.create;
  * #L%
  */
 
+import org.cytoscape.model.CyNetwork;
 import org.cytoscape.task.NetworkTaskFactory;
+import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.work.TaskIterator;
+import org.cytoscape.work.TaskObserver;
 
 /**
  * This interface provides a task iterator for creating networks
@@ -33,5 +37,17 @@ import org.cytoscape.task.NetworkTaskFactory;
  * @CyAPI.InModule core-task-api
  */
 public interface NewNetworkSelectedNodesAndEdgesTaskFactory extends NetworkTaskFactory {
-
+	/**
+	 * Returns a TaskIterator that creates a new network from the selected
+	 * nodes and edges in the given network.  The given observer will be
+	 * notified once the new network is complete.
+	 * 
+	 * @param network The network whose selected nodes and edges should be
+	 *                used in the new network.
+	 * @param observer The observer to notify once the new network is
+	 *                 complete.
+	 * @return a TaskIterator that creates a new network from the selected
+	 *         nodes and edges in the given network.
+	 */
+	TaskIterator createTaskIterator(CyNetwork network, TaskObserver<CyNetworkView> observer);
 }
