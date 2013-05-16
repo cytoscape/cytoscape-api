@@ -24,11 +24,14 @@ package org.cytoscape.application.swing;
  * #L%
  */
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
 import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
 import javax.swing.event.MenuEvent;
@@ -133,6 +136,22 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	public AbstractCyAction(final String name) {
 		super(name);
 		this.enabler = new AlwaysEnabledEnableSupport(this);
+		addNameChangeListener();
+	}
+
+	private void addNameChangeListener() {
+		name = (String) getValue(Action.NAME);
+		
+		addPropertyChangeListener(new PropertyChangeListener() {
+			@Override
+			public void propertyChange(PropertyChangeEvent event) {
+				if (!Action.NAME.equals(event.getPropertyName())) {
+					return;
+				}
+				
+				name = (String) event.getNewValue();
+			}
+		});
 	}
 
 	/**
@@ -148,6 +167,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 			final CyNetworkViewManager networkViewManager) {
 		super(name);
 		this.enabler = new ActionEnableSupport(this, enableFor, applicationManager, networkViewManager);
+		addNameChangeListener();
 	}
 
 	/**
@@ -180,6 +200,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		this(configProps.get(TITLE), applicationManager, configProps.get(ENABLE_FOR), networkViewManager);
 
 		configFromProps(configProps);
+		addNameChangeListener();
 	}
 
 	/**
@@ -213,6 +234,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		
 		this.enabler = new TaskFactoryEnableSupport(this, predicate);
 		configFromProps(configProps);
+		addNameChangeListener();
 	}
 
 	/**
@@ -259,6 +281,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 			this.enabler = new ConjunctionEnableSupport(this, actionEnabler, taskFactoryEnabler);
 		}
 		configFromProps(configProps);
+		addNameChangeListener();
 	}
 
 	private void configFromProps(final Map<String, String> configProps) {
@@ -342,7 +365,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * @param name The name of the action.
 	 */
 	public void setName(final String name) {
-		this.name = name;
+		putValue(Action.NAME, name);
 	}
 
 	/**
