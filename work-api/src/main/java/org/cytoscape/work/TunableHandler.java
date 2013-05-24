@@ -77,12 +77,6 @@ public interface TunableHandler {
 	String[] getGroups();
 	
 	/**
-	 * Returns the associated <code>Tunable</code>'s gravity value.
-	 * @return the associated <code>Tunable</code>'s gravity value
-	 */
-	double getGravity();
-
-	/**
 	 * Returns true if the associated <code>Tunable</code> allows switching 
 	 * of mutually exclusive nested children, else false.
 	 * @return true if the associated <code>Tunable</code> allows switching 

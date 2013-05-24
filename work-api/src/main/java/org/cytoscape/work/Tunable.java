@@ -94,6 +94,14 @@ public @interface Tunable {
 	String description() default "";
 
 	/**
+ 	 * Optional human-readable description that can provide more complete description of
+ 	 * that the <code>Tunable</code> does and the implication of various settings.  In
+ 	 * general, this might be implemented in a GUI as a tooltip, but might also be used
+ 	 * for other purposes.
+ 	 */
+	String tooltip() default "";
+
+	/**
 	 * Used to define the presentation grouping of the Tunable. By default a Tunable
 	 * belongs to the top level group.
 	 * 
@@ -259,4 +267,13 @@ public @interface Tunable {
 	 * @return a list of Tunable field/method names that will trigger this Tunable to be updated.
 	 */
 	String[] listenForChange() default {};
+
+	/**
+ 	 * Returns the context that this <code>Tunable</code> is meant for.  Must be one of "gui", "nogui", or
+ 	 * "both".  If no value is provided, "both" is assumed.  If the context is set to "gui", then this
+ 	 * <code>Tunable</code> will only be available through GUI implementations, and will not be made available
+ 	 * to command-line or headless implementations.  If the context is set to "nogui", then this
+ 	 * <code>Tunable</code> will not be available through the GUI.
+ 	 */
+	String context() default "both";
 }
