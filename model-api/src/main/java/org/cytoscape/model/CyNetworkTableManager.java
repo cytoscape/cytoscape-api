@@ -80,7 +80,26 @@ public interface CyNetworkTableManager {
 	 * network.
 	 */
 	CyTable getTable(CyNetwork network, Class<? extends CyIdentifiable> type, String namespace);
-	
+
+	/**
+ 	 * Returns the type of this table (either {@link CyNetwork}.class, {@link CyNode}.class, or
+ 	 * {@link CyEdge}.class.  If this table is not registered with the CyNetworkTableManager,
+ 	 * returns null;
+ 	 *
+ 	 * @param table the table we're inquiring about
+ 	 * @return the type of the table or null if the table is not registered
+ 	 */
+	Class<? extends CyIdentifiable> getTableType(CyTable table);
+
+	/**
+ 	 * Returns the namespace of this table.  If this table is not registered with the CyNetworkTableManager,
+ 	 * returns null;
+ 	 *
+ 	 * @param table the table we're inquiring about
+ 	 * @return the namespace of the table or null if the table is not registered
+ 	 */
+	String getTableNamespace(CyTable table);
+
 	/**
 	 * Removes the table with the specified namespace and type from
 	 * the network.
