@@ -40,8 +40,8 @@ import javax.swing.JToolBar;
 public interface CySwingApplication {
 
 	/** 
-	 * Returns the JMenu for the specified name and creates one if
-	 * no menu exists for the name.
+	 * Returns the JMenu for the specified name. Creates a new menu if
+	 * one does not already exist.
 	 * @param menuName the name of the JMenu.
 	 * @return The JMenu for the specified name.
 	 */
