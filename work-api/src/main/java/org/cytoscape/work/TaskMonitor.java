@@ -56,4 +56,12 @@ public interface TaskMonitor {
 	 * @param statusMessage String that describe what a Task is currently doing.
 	 */
 	public void setStatusMessage(String statusMessage);
+
+	public static enum Level {
+		INFO,
+		WARN,
+		ERROR
+	}
+
+	public void showMessage(Level level, String message);
 }
