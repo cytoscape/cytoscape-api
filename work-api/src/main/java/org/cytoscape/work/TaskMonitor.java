@@ -45,7 +45,8 @@ public interface TaskMonitor {
 	/**
 	 * Sets the progress completed by the <code>Task</code>.
 	 *
-	 * @param progress A value between <code>0.0</code> and <code>1.0</code>.
+	 * @param progress A value between <code>0.0</code> and <code>1.0</code>. Any negative value
+     * sets the progress bar to an indefinite state.
 	 */
 	public void setProgress(double progress);
 
