@@ -99,6 +99,16 @@ public interface CyNetworkTableManager {
  	 * @return the namespace of the table or null if the table is not registered
  	 */
 	String getTableNamespace(CyTable table);
+	
+	/**
+	 * Returns the network this table is registered with.  If this table is not
+	 * registered with the CyNetworkTableManager, returns null.  In the current implementation
+	 * this method is iterative and not terribly efficient.
+	 * 
+	 * @param table the table we're inquiring about
+	 * @return the network this table is associated with, or null
+	 */
+	CyNetwork getNetworkForTable(CyTable table);
 
 	/**
 	 * Removes the table with the specified namespace and type from
