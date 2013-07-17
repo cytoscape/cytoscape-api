@@ -40,8 +40,7 @@ public interface CloneNetworkTaskFactory extends NetworkTaskFactory{
 	 * TaskObserver will be notified once the cloning is complete.
 	 * 
 	 * @param network The network to clone.
-	 * @param observer The observer to notify once the clone is complete.
 	 * @return a TaskIterator that clones the given network.
 	 */
-	TaskIterator createTaskIterator(CyNetwork network, TaskObserver<CyNetworkView> observer);
+	TaskIterator createTaskIterator(CyNetwork network);
 }

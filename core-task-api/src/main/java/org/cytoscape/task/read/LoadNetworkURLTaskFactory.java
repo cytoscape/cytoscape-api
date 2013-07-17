@@ -52,16 +52,14 @@ public interface LoadNetworkURLTaskFactory extends TaskFactory {
 	TaskIterator loadCyNetworks(final URL url);
 
 	/**
-	 * Returns a TaskIterator that loads networks from a URL.  The
-	 * given observer will be notified when the networks are finished loading.
-	 * If the network's total nodes and edges don't exceed the system's
-	 * limits, a CyNetworkView will be automatically be created for each view.
-	 * Networks that exceed those limits will be wrapped within a
-	 * NullCyNetworkView.
+	 * Creates a task iterator for loading a URL into a network. The created
+	 * task runs synchronously in the current thread and does not create a task
+	 * monitor.
 	 * 
-	 * @param url the URL containing the networks.
-	 * @param observer The observer to notify once loading is complete.
-	 * @return a TaskIterator that loads networks from a URL.
+	 * @param url
+	 *            the URL for loading into the network.
+	 * @param observer a TaskObserver that wants to know when we're done
+	 * @return a task iterator of type {@link TaskIterator}.
 	 */
-	TaskIterator createTaskIterator(URL url, TaskObserver<Collection<CyNetworkView>> observer);
+	TaskIterator createTaskIterator(final URL url, TaskObserver observer);
 }

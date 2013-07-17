@@ -60,6 +60,9 @@ public class AbstractTaskManagerTest {
 		public void execute(TaskIterator iterator) { }
 
 		@Override
+		public void execute(TaskIterator iterator, TaskObserver observer) { }
+
+		@Override
 		public T getConfiguration(TaskFactory factory, Object tunableContext) { return null; }
 	}
 

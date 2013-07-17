@@ -9,21 +9,15 @@ package org.cytoscape.work;
  * @CyAPI.Spi.Interface
  * @CyAPI.InModule work-api
  */
-public interface ObservableTask<R> extends Task {
+public interface ObservableTask extends Task {
 	/**
-	 * Adds an observer to this <code>Task</code>.  The observer's
-	 * <code>taskFinished()</code> methods is only called if and when
-	 * the <code>Task</code> finishes executing.
-	 * 
-	 * @param observer The observer that should be added.
-	 */
-	void addObserver(TaskObserver<R> observer);
-	
-	/**
-	 * Removes an observer from this <code>Task</code>.  The observer will
-	 * no longer be notified when the <code>Task</code> finishes executing.
-	 * 
-	 * @param observer The observer that should be removed.
-	 */
-	void removeObserver(TaskObserver<R> observer);
+ 	 * Return the results from this task (if any)
+ 	 *
+ 	 * @param type the class type of the returned results.  This
+ 	 * is primarily used to request that the Task format the return
+ 	 * as a String, but other types are possible also.  All ObservableTasks
+ 	 * should be able to handle String requests.
+ 	 * @return the Task results, or null if there are no results
+ 	 */
+	public <R> R getResults(Class <? extends R> type);
 }

@@ -60,4 +60,19 @@ public interface TaskManager<T,C> {
 	 * @param iterator The {@link TaskIterator} whose tasks will be executed.
 	 */
 	void execute(TaskIterator iterator);
+
+	/**
+	 * This method is called to execute the {@link Task}s in a {@link TaskIterator} provided
+	 * by a {@link TaskFactory}.  
+	 * This method returns once the {@link Task}s derived from the {@link TaskIterator}
+	 * returned by the {@link TaskFactory}'s <code>createTaskIterator()</code> method have
+	 * started (but not necessarily completed) execution. 
+	 * It <i>does not wait</i> for the {@link Task}s to finish, however, the {@link TaskObserver}s
+	 * taskFinished method is called with the results of any of the tasks in the {@link TaskIterator}
+	 * that are {@link ObservableTask}s.
+	 *
+	 * @param iterator The {@link TaskIterator} whose tasks will be executed.
+	 * @param observer The {@link TaskObserver} that will be called with the results of the {@link ObservableTask}s.
+	 */
+	void execute(TaskIterator iterator, TaskObserver observer);
 }

@@ -44,10 +44,8 @@ public interface NewNetworkSelectedNodesOnlyTaskFactory extends NetworkTaskFacto
 	 * 
 	 * @param network The network whose selected nodes should be used in the
 	 *                new network.
-	 * @param observer The observer to notify once the new network is
-	 *                 complete.
 	 * @return a TaskIterator that creates a new network from the selected
 	 *         nodes in the given network.
 	 */
-	TaskIterator createTaskIterator(CyNetwork network, TaskObserver<CyNetworkView> observer);
+	TaskIterator createTaskIterator(CyNetwork network);
 }

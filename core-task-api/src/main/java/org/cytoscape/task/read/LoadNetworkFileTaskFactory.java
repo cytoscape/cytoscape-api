@@ -48,18 +48,14 @@ public interface LoadNetworkFileTaskFactory extends TaskFactory{
 	 * @return a task iterator of type {@link TaskIterator}
 	 */
 	TaskIterator createTaskIterator(final File file);
-
+	
 	/**
-	 * Returns a TaskIterator that loads networks from a file.  The
-	 * given observer will be notified when the networks are finished loading.
-	 * If the network's total nodes and edges don't exceed the system's
-	 * limits, a CyNetworkView will be automatically be created for each view.
-	 * Networks that exceed those limits will be wrapped within a
-	 * NullCyNetworkView.
-	 * 
-	 * @param file the file containing the networks.
-	 * @param observer The observer to notify once loading is complete.
-	 * @return a TaskIterator that loads networks from a file.
+	 * Create a task iterator for loading a network from a file.
+	 * The created task runs synchronously in the current thread and does not
+	 * create a task monitor.
+	 * @param file The file for loading into a network
+	 * @param observer A TaskObserver to notify when we're complete
+	 * @return a task iterator of type {@link TaskIterator}
 	 */
-	TaskIterator createTaskIterator(File file, TaskObserver<Collection<CyNetworkView>> observer);
+	TaskIterator createTaskIterator(final File file, TaskObserver observer);
 }

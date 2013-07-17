@@ -51,6 +51,19 @@ public interface TunableSetter {
 	TaskIterator createTaskIterator(TaskIterator taskIterator, Map<String,Object> tunableValues);
 
 	/**
+	 * This version of createTaskIterator adds a TaskObserver argument.  Since the tasks are preconfigured
+	 * the implementation of a TunableSetter acts somewhat like a TaskManager, so it has to handle the
+	 * ObservableTasks.
+	 *
+	 * @param taskIterator The incoming TaskIterator which contains the tasks whose tunables will be set.
+	 * @param tunableValues A map of names to tunable values.  The names must match the field or method
+	 * name of the tunable in question.
+	 * @param observer The TaskObserver that will handle any ObservableTask results
+	 * @return A new TaskIterator that contains Task(s) with tunable values already set. 
+	 */
+	TaskIterator createTaskIterator(TaskIterator taskIterator, Map<String,Object> tunableValues, TaskObserver observer);
+
+	/**
 	 * Applies each value from the key-value pairs in tunableValues to the tunable in the
 	 * given object whose name matches the corresponding key.
 	 * @param object The object whose tunables will be set.

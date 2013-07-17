@@ -64,14 +64,14 @@ public interface LoadVizmapFileTaskFactory extends TaskFactory{
 	 * @return A task iterator of type {@link TaskIterator}.
 	 */
 	TaskIterator createTaskIterator(File file);
-	
+
 	/**
-	 * Returns a TaskIterator that loads VisualStyles from a File.  The given
-	 * observer will be notified when the VisualStyles are finished loading.
-	 * 
-	 * @param file the file containing the VisualStyles.
-	 * @param observer The observer to notify once loading is complete.
-	 * @return a TaskIterator that loads VisualStyles from a File.
+	 * Creates a task iterator for loading files into visual styles.
+	 * The created task runs synchronously in the current thread and does not
+	 * create a task monitor.
+	 * @param file The file containing visual styles to be read.
+	 * @param observer A TaskObserver that wants to know when we're done
+	 * @return A task iterator of type {@link TaskIterator}.
 	 */
-	TaskIterator createTaskIterator(File file, TaskObserver<Set<VisualStyle>> observer);
+	TaskIterator createTaskIterator(File file, TaskObserver observer);
 }

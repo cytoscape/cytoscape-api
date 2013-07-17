@@ -11,12 +11,16 @@ package org.cytoscape.work;
  * @CyAPI.Spi.Interface
  * @CyAPI.InModule work-api
  */
-public interface TaskObserver<R> {
+public interface TaskObserver {
 	/**
 	 * Called by an <code>ObservableTask</code> when it is finished executing.
 	 *
-	 * @param result The result, if any, produced by the
-	 *               <code>ObservableTask</code> being observed.
+	 * @param task The task being observed
 	 */
-	void taskFinished(R result);
+	public void taskFinished(ObservableTask task);
+
+	/**
+ 	 * Called by a <code>TaskManager</code> to tell us that all of the tasks are complete
+ 	 */
+	public void allFinished();
 }
