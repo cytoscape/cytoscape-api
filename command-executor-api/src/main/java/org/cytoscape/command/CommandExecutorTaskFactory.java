@@ -24,7 +24,9 @@ package org.cytoscape.command;
  * #L%
  */
 
+import java.util.Map;
 import org.cytoscape.work.TaskIterator;
+import org.cytoscape.work.TaskObserver;
 import java.io.File; 
 import java.util.List;
 
@@ -39,25 +41,40 @@ public interface CommandExecutorTaskFactory {
 	 * commands.
 	 * @param commandFile A file containing a one command string per line,
 	 * blank lines, or comment lines beginning with the '#' character. 
+	 * @param observer a possible observer for this series of tasks
 	 * @return A task iterator that will execute the specified commands.
 	 */
-	TaskIterator createTaskIterator(File commandFile);	
+	TaskIterator createTaskIterator(File commandFile, TaskObserver observer);	
+
+	/**
+	 * Creates a task iterator that will execute the specified
+	 * commands.
+	 * @param observer a possible observer for this series of tasks
+	 * @param commands One or more strings where each string represents
+	 * one command to execute.
+	 * @return A task iterator that will execute the specified commands.
+	 */
+	TaskIterator createTaskIterator(TaskObserver observer, String ... commands);	
 
 	/**
 	 * Creates a task iterator that will execute the specified
 	 * commands.
 	 * @param commands One or more strings where each string represents
 	 * one command to execute.
+	 * @param observer a possible observer for this series of tasks
 	 * @return A task iterator that will execute the specified commands.
 	 */
-	TaskIterator createTaskIterator(String ... commands);	
-
+	TaskIterator createTaskIterator(List<String> commands, TaskObserver observer);	
+	
 	/**
 	 * Creates a task iterator that will execute the specified
-	 * commands.
-	 * @param commands One or more strings where each string represents
-	 * one command to execute.
+	 * command.  Note that this differs from the other methods in that
+	 * this assumes the command string has already been parsed
+	 * @param namespace the command namespace
+	 * @param command the command
+	 * @param args the map of arguments
+	 * @param observer a possible observer for this series of tasks
 	 * @return A task iterator that will execute the specified commands.
 	 */
-	TaskIterator createTaskIterator(List<String> commands);	
+	TaskIterator createTaskIterator(String namespace, String command, Map<String,Object> args, TaskObserver observer);
 }
