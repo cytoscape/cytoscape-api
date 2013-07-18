@@ -41,6 +41,7 @@
 		<module>group-api</module>
 		<module>webservice-swing-api</module>
 		<module>command-executor-api</module>
+		<module>filter-api</module>
 	</modules>
 
 	<dependencyManagement>

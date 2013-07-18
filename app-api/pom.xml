@@ -189,6 +189,11 @@
 			<artifactId>application-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.cytoscape</groupId>
+			<artifactId>filter-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 
 
 		<!-- For Testing -->
