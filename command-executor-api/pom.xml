@@ -69,6 +69,16 @@
 
 		<dependency>
 			<groupId>org.cytoscape</groupId>
+			<artifactId>model-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.cytoscape</groupId>
+			<artifactId>viewmodel-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.cytoscape</groupId>
 			<artifactId>work-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
