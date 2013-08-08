@@ -29,6 +29,8 @@ import java.util.List;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
+import org.cytoscape.model.CyRow;
+import org.cytoscape.model.CyTable;
 
 import org.cytoscape.view.model.CyNetworkView;
 
@@ -101,4 +103,18 @@ public interface StringToModel {
  	 * @return a list of CyEdges or null if nothing matched
  	 */
 	public List<CyEdge> getEdgeList(CyNetwork net, String edgelist);
+
+	/**
+ 	 * Convert a string request for a rowlist into a list of {@link CyRow}s.  This
+ 	 * method may be used to find all rows, or rows matching a particular column
+ 	 * by using the pattern "column:value".  If no column is specified, it is assumed
+ 	 * that the column is the NAME column.  No wildcarding or regular expression matching
+ 	 * is supported at this time.  The following special keywords are also recognized:
+ 	 * 	all         return all edges in this network
+ 	 *
+ 	 * @param table the CyTable to search through.
+ 	 * @param rowlist the string representing the rowlist
+ 	 * @return a list of CyRows or null if nothing matched
+ 	 */
+	public List<CyRow> getRowList(CyTable table, String rowlist);
 }
