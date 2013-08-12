@@ -35,7 +35,7 @@ import org.cytoscape.model.CyTable;
  * implemented by command tunables so it will be ignored in
  * GUI (Swing) contexts.
  *
- * @CyAPI.Api.Final.Class
+ * @CyAPI.Final.Class
  * @CyAPI.InModule command-executor-api
  */
 public class RowList {

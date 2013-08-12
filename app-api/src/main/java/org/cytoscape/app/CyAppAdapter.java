@@ -27,6 +27,8 @@ package org.cytoscape.app;
 import java.util.Properties;
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.CyVersion;
+import org.cytoscape.command.AvailableCommands;
+import org.cytoscape.command.CommandExecutorTaskFactory;
 import org.cytoscape.io.datasource.DataSourceManager;
 import org.cytoscape.event.CyEventHelper;
 import org.cytoscape.io.read.CyNetworkReaderManager;
@@ -399,6 +401,21 @@ public interface CyAppAdapter {
 	 */
 	DataSourceManager getDataSourceManager();
 
+	//
+	// commands api
+	//
+	/**
+	 * Returns an instance of {@link AvailableCommands}.
+	 * @return an instance of {@link AvailableCommands}.
+	 */
+	AvailableCommands getAvailableCommands();
+
+	/**
+	 * Returns an instance of {@link CommandExecutorTaskFactory} which can be used
+	 * to execute commands.
+	 * @return an instance of {@link CommandExecutorTaskFactory}.
+	 */
+	CommandExecutorTaskFactory getCommandExecutorTaskFactory();
 	
 	//////////////////////////// core-task API ///////////////////////////////////////////////////////////
 

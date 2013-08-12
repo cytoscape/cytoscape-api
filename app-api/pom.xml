@@ -194,6 +194,11 @@
 			<artifactId>filter-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.cytoscape</groupId>
+			<artifactId>command-executor-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 
 
 		<!-- For Testing -->

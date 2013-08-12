@@ -35,35 +35,77 @@ import org.cytoscape.model.CyNetwork;
  * implemented by command tunables so it will be ignored in
  * GUI (Swing) contexts.
  *
- * @CyAPI.Api.Final.Class
+ * A typical use might look like:
+ * <pre>
+ * public EdgeList edgeList = new EdgeList(null);
+ * @Tunable(description="Edges to select", context="nogui")
+ * public EdgeList getedgeList() {
+ * 	edgeList.setNetwork(network); // This assumes the network is 
+ * 	                              // made available via some other mechanism
+ *	return edgeList;
+ * }
+ * public void setedgeList(EdgeList setValue) {}
+ * </pre>
+ *
+ * @CyAPI.Final.Class
  * @CyAPI.InModule command-executor-api
  */
 public class EdgeList {
 	private CyNetwork network;
 	private List<CyEdge> edgelist;
 
+	/**
+ 	 * Empty constructor for an EdgeList.  Use this when the
+ 	 * target network won't be known until the Tunable is used.
+ 	 */
 	public EdgeList() {
 		network = null;
 		edgelist = null;
 	}
 
+	/**
+ 	 * Constructor for EdgeList when the network is known
+ 	 * at time of creation.
+ 	 *
+ 	 * @param targetNetwork the network for the edges to be returned
+ 	 */
 	public EdgeList(CyNetwork targetNetwork) {
 		this.network = targetNetwork;
 		edgelist = null;
 	}
 
+	/**
+ 	 * Set the network to be used by this EdgeList
+ 	 *
+ 	 * @param network the network to use for finding the edges
+ 	 */
 	public synchronized void setNetwork(CyNetwork network) {
 		this.network = network;
 	}
 
+	/**
+ 	 * Return the network used by this EdgeList
+ 	 *
+ 	 * @return the network to use for finding the edges
+ 	 */
 	public CyNetwork getNetwork() {
 		return this.network;
 	}
 
-	public synchronized void setValue(List<CyEdge> nodeList) {
-		this.edgelist = nodeList;
+	/**
+ 	 * Set the edgeList for this tunable
+ 	 *
+ 	 * @param edgeList the list of edges
+ 	 */
+	public synchronized void setValue(List<CyEdge> edgeList) {
+		this.edgelist = edgeList;
 	}
 
+	/**
+ 	 * Return the edgeList for this tunable
+ 	 *
+ 	 * @return the list of edges
+ 	 */
 	public List<CyEdge> getValue() {
 		return edgelist;
 	}

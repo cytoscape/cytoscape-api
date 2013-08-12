@@ -35,7 +35,21 @@ import org.cytoscape.model.CyNode;
  * implemented by command tunables so it will be ignored in
  * GUI (Swing) contexts.
  *
- * @CyAPI.Api.Final.Class
+ * A typical use might look like:
+ * <pre>
+ * @Tunable(description="Network", context="nogui", gravity=1.0)
+ * CyNetwork network;
+ *
+ * public NodeList nodeList = new NodeList(null);
+ * @Tunable(description="Nodes to select", context="nogui", gravity=2.0)
+ * public NodeList getnodeList() {
+ * 	nodeList.setNetwork(network); // Should check for null
+ *	return nodeList;
+ * }
+ * public void setnodeList(NodeList setValue) {}
+ * </pre>
+ *
+ * @CyAPI.Final.Class
  * @CyAPI.InModule command-executor-api
  */
 public class NodeList {
