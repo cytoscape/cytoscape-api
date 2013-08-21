@@ -52,4 +52,24 @@ public final class BoundedDouble extends AbstractBounded<Double> {
 	public void setValue(String s) {
 		setValue( Double.valueOf(s) );
 	}
+
+	/**
+	 * Clamp the value to be within the range.
+	 *
+	 */
+	public Double clamp(Double value) {
+		if (value <= getLowerBound()) {
+			if (!isLowerBoundStrict()) 
+				return getLowerBound();
+			else
+				return Math.nextAfter(value, Double.NEGATIVE_INFINITY);
+		}
+		if (value >= getUpperBound()) {
+			if (!isUpperBoundStrict()) 
+				return getUpperBound();
+			else
+				return Math.nextAfter(value, Double.POSITIVE_INFINITY);
+		}
+		return value;
+	}
 }

@@ -52,7 +52,7 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 	private boolean throwException;
 
 	/**
-	 *  Store the Handlers.
+	 *  Store the Handlers (deprecated: not used).
 	 */
 	protected final Map<Object, List<T>> handlerMap;
 
@@ -91,79 +91,75 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 	 * whose value needs to be set or recorded. 
 	 */
 	private List<T> loadTunables(final Object obj) {
-		List<T> handlerList = handlerMap.get(obj);
-		if (handlerList == null) {
-			handlerList = new ArrayList<T>();
-			handlerMap.put(obj, handlerList);
+		List<T> handlerList = new ArrayList<T>();
 
-			// Find each public field in the class.
-			for (final Field field : obj.getClass().getFields()) {
-				// See if the field is annotated as a Tunable.
-				if (field.isAnnotationPresent(Tunable.class)) {
-					try {
-						// Get the tunable's annotations
-						final Tunable tunable = field.getAnnotation(Tunable.class);
+		// Find each public field in the class.
+		for (final Field field : obj.getClass().getFields()) {
+			// See if the field is annotated as a Tunable.
+			if (field.isAnnotationPresent(Tunable.class)) {
+				try {
+					// Get the tunable's annotations
+					final Tunable tunable = field.getAnnotation(Tunable.class);
 
-						// Get a Handler for this type of Tunable and...
-						T handler = getHandler(field, obj, tunable);
+					// Get a Handler for this type of Tunable and...
+					T handler = getHandler(field, obj, tunable);
 
-						// ...add it to the list of Handlers
-						if (handler != null)
-							handlerList.add(handler);
-						else
-							logOrThrowException("No handler for type: " + field.getType().getName(), null);
-					} catch (final Throwable ex) {
-						logOrThrowException("tunable field intercept failed for " + field.toString(), ex);
-					}
+					// ...add it to the list of Handlers
+					if (handler != null)
+						handlerList.add(handler);
+					else
+						logOrThrowException("No handler for type: " + field.getType().getName(), null);
+				} catch (final Throwable ex) {
+					logOrThrowException("tunable field intercept failed for " + field.toString(), ex);
+				}
 
-				// Evaluate fields for ContainsTunables annotation. If the field
-				// is annotated, then get the object from the field and evaluate
-				// *it* for tunables.
-				} else if (field.isAnnotationPresent(ContainsTunables.class)) {
-					try { 
-						Object tunableContainer = field.get(obj);
-						if ( !handlerMap.containsKey(tunableContainer) )
-							handlerList.addAll( loadTunables(tunableContainer) );
-					} catch (final Throwable ex) {
-						logOrThrowException("ContainsTunables field intercept failed for " + field.toString(), ex);
-					}
+			// Evaluate fields for ContainsTunables annotation. If the field
+			// is annotated, then get the object from the field and evaluate
+			// *it* for tunables.
+			} else if (field.isAnnotationPresent(ContainsTunables.class)) {
+				try { 
+					Object tunableContainer = field.get(obj);
+					if ( !handlerMap.containsKey(tunableContainer) )
+						handlerList.addAll( loadTunables(tunableContainer) );
+				} catch (final Throwable ex) {
+					logOrThrowException("ContainsTunables field intercept failed for " + field.toString(), ex);
 				}
 			}
-
-			// Find each public method in the class.
-			for (final Method method : obj.getClass().getMethods()) {
-				// See if the method is annotated as a Tunable.
-				if (method.isAnnotationPresent(Tunable.class)) {
-					try {
-						final Tunable tunable = method.getAnnotation(Tunable.class);
-						final String rootName = validateAndExtractRootName(method); 
-						final Method setter = findCompatibleSetter(obj, rootName, method.getReturnType());
-						
-						// Get a handler with for get and set methods:
-						final T handler = getHandler(method, setter, obj, tunable);
-						if (handler == null) {
-							logOrThrowException("Failed to create a handler for " + setter.getName() + "().",null);
-						} else {
-							handlerList.add(handler);
-						}
-					} catch (Throwable t) {
-						logOrThrowException("tunable method intercept failed for " + method.toString(), t);
-					}
-				} else if (method.isAnnotationPresent(ProvidesTitle.class)) {
-					if (!String.class.isAssignableFrom(method.getReturnType())) {
-						throw new IllegalArgumentException(method.getName() + " annotated with @ProvidesTitle must return String.");
-					} else if (method.getParameterTypes().length != 0) {
-						throw new IllegalArgumentException(method.getName() + " annotated with @ProvidesTitle must take 0 arguments.");
-					} else {
-						if (titleProviderMap.containsKey(obj)) {
-							throw new IllegalArgumentException("Classes must have at most one @ProvidesTitle annotated method but " + method.getDeclaringClass().getName() + " has more than one.");
-						}
-						titleProviderMap.put(obj, method);
-					}
-				}
-			}
-			Collections.sort(handlerList, new TunableGravityOrderer());
 		}
+
+		// Find each public method in the class.
+		for (final Method method : obj.getClass().getMethods()) {
+			// See if the method is annotated as a Tunable.
+			if (method.isAnnotationPresent(Tunable.class)) {
+				try {
+					final Tunable tunable = method.getAnnotation(Tunable.class);
+					final String rootName = validateAndExtractRootName(method); 
+					final Method setter = findCompatibleSetter(obj, rootName, method.getReturnType());
+					
+					// Get a handler with for get and set methods:
+					final T handler = getHandler(method, setter, obj, tunable);
+					if (handler == null) {
+						logOrThrowException("Failed to create a handler for " + setter.getName() + "().",null);
+					} else {
+						handlerList.add(handler);
+					}
+				} catch (Throwable t) {
+					logOrThrowException("tunable method intercept failed for " + method.toString(), t);
+				}
+			} else if (method.isAnnotationPresent(ProvidesTitle.class)) {
+				if (!String.class.isAssignableFrom(method.getReturnType())) {
+					throw new IllegalArgumentException(method.getName() + " annotated with @ProvidesTitle must return String.");
+				} else if (method.getParameterTypes().length != 0) {
+					throw new IllegalArgumentException(method.getName() + " annotated with @ProvidesTitle must take 0 arguments.");
+				} else {
+					if (titleProviderMap.containsKey(obj)) {
+						throw new IllegalArgumentException("Classes must have at most one @ProvidesTitle annotated method but " + method.getDeclaringClass().getName() + " has more than one.");
+					}
+					titleProviderMap.put(obj, method);
+				}
+			}
+		}
+		Collections.sort(handlerList, new TunableGravityOrderer());
 
 		return handlerList;
 	}

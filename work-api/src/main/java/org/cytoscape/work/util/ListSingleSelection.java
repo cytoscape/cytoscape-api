@@ -109,5 +109,6 @@ public final class ListSingleSelection<T> extends ListSelection<T> {
 					+ Arrays.toString(getPossibleValues().toArray()));
 
 		selected = val;
+		selectionChanged(selected);
 	}
 }

@@ -51,4 +51,24 @@ public final class BoundedInteger extends AbstractBounded<Integer> {
 	public void setValue(String s) {
 		setValue( Integer.valueOf(s) );
 	}
+
+	/**
+	 * Clamp the value to be within the range.
+	 *
+	 */
+	public Integer clamp(Integer value) {
+		if (value <= getLowerBound()) {
+			if (!isLowerBoundStrict()) 
+				return getLowerBound();
+			else
+				return value+1;
+		}
+		if (value >= getUpperBound()) {
+			if (!isUpperBoundStrict()) 
+				return getUpperBound();
+			else
+				return value-1;
+		}
+		return value;
+	}
 }

@@ -51,4 +51,24 @@ public final class BoundedFloat extends AbstractBounded<Float> {
 	public void setValue(String s) {
 		setValue( Float.valueOf(s) );
 	}
+
+	/**
+	 * Clamp the value to be within the range.
+	 *
+	 */
+	public Float clamp(Float value) {
+		if (value <= getLowerBound()) {
+			if (!isLowerBoundStrict()) 
+				return getLowerBound();
+			else
+				return Math.nextAfter(value, Float.NEGATIVE_INFINITY);
+		}
+		if (value >= getUpperBound()) {
+			if (!isUpperBoundStrict()) 
+				return getUpperBound();
+			else
+				return Math.nextAfter(value, Float.POSITIVE_INFINITY);
+		}
+		return value;
+	}
 }

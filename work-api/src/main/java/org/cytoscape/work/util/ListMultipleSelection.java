@@ -108,5 +108,6 @@ public final class ListMultipleSelection<T> extends ListSelection<T> {
 				throw new IllegalArgumentException("value not contained in list of possible values\n possible items = "+this.getPossibleValues());
 
 		selected = new ArrayList<T>(vals);
+		selectionChanged((T[])selected.toArray());
 	}
 }

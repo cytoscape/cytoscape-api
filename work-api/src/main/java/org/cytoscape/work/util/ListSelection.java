@@ -33,15 +33,20 @@ import java.util.List;
  * 
  * @param <T>  type of item that will be listed.
  */
-class ListSelection<T> {
+public class ListSelection<T> {
 
 	
 	/**
 	 * Declares a List of items of type <code>T</code>.
 	 */
-	protected final List<T> values;
+	protected List<T> values;
 
-	
+	/**
+ 	 * The list of listeners to inform if something changes
+ 	 */
+	private List<ListChangeListener<T>> listeners = null;
+
+
 	/**
 	 * Creates a new ListSelection object.
 	 *
@@ -55,6 +60,19 @@ class ListSelection<T> {
 		this.values = values;
 	}
 
+	/**
+	 * Changes the set of possible values in the list
+	 *
+	 * @param values List of items of type <code>T</code> that contains the one(s) that is(are) going to be selected.
+	 * The list of values my be empty.
+	 */
+	public void setPossibleValues(final List<T> values) {
+		if (values == null)
+			throw new NullPointerException("values is null.");
+
+		this.values = values;
+		listChanged();
+	}
 	
 	/**
 	 * To get all the items of the <code>List<T> values</code>.
@@ -63,5 +81,55 @@ class ListSelection<T> {
 	 */
 	public List<T> getPossibleValues() {
 		return new ArrayList<T>(values);
+	}
+
+	/**
+ 	 * Adds a listener that will listen for changes to this object
+ 	 *
+ 	 *  @param changeListener listener object
+ 	 */
+	public void addListener(ListChangeListener<T> changeListener) {
+		if (listeners == null)
+			listeners = new ArrayList<ListChangeListener<T>>();
+
+		synchronized (listeners) {
+			listeners.add(changeListener);
+		}
+	}
+
+	/**
+ 	 * Removes a listener from the list that will listen for changes to this object
+ 	 *
+ 	 *  @param changeListener listener object
+ 	 */
+	public void removeListener(ListChangeListener<T> changeListener) {
+		if (listeners != null && listeners.contains(changeListener))
+			synchronized (listeners) {
+				listeners.remove(changeListener);
+			}
+	}
+
+	/**
+ 	 * Alert all listeners that the list has changed
+ 	 */
+	protected void listChanged() {
+		if (listeners == null) return;
+		synchronized (listeners) {
+			for (ListChangeListener<T> listener: listeners) {
+				listener.listChanged(this);
+			}
+		}
+	}
+
+	/**
+ 	 * Alert all listeners that the selection has changed
+ 	 */
+	protected void selectionChanged(T... newValues) {
+		if (listeners == null) return;
+		synchronized (listeners) {
+			for (ListChangeListener<T> listener: listeners) {
+				listener.selectionChanged(this, newValues);
+			}
+		}
 	}
 }
