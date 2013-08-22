@@ -33,6 +33,6 @@ package org.cytoscape.work.util;
  * @CyAPI.InModule work-api
  */
 public interface ListChangeListener<T> {
-	public void selectionChanged(ListSelection<T> source, T... newValue);
+	public void selectionChanged(ListSelection<T> source);
 	public void listChanged(ListSelection<T> source);
 }

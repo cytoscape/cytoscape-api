@@ -124,11 +124,11 @@ public class ListSelection<T> {
 	/**
  	 * Alert all listeners that the selection has changed
  	 */
-	protected void selectionChanged(T... newValues) {
+	protected void selectionChanged() {
 		if (listeners == null) return;
 		synchronized (listeners) {
 			for (ListChangeListener<T> listener: listeners) {
-				listener.selectionChanged(this, newValues);
+				listener.selectionChanged(this);
 			}
 		}
 	}

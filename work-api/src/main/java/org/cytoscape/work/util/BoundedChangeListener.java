@@ -33,7 +33,6 @@ package org.cytoscape.work.util;
  * @CyAPI.InModule work-api
  */
 public interface BoundedChangeListener<N> {
-	public void valueChanged(AbstractBounded source, N newValue);
-	public void boundsChanged(AbstractBounded source, N lowerBound, N upperBound, 
-	                          boolean lowerStrict, boolean upperStrict);
+	public void valueChanged(AbstractBounded source);
+	public void boundsChanged(AbstractBounded source);
 }
