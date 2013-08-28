@@ -32,6 +32,12 @@ import org.cytoscape.view.model.VisualProperty;
  * 
  * To support new data type, this should be implemented.
  *
+ * This interface is an exact copy of {@link ValueEditor}, but with
+ * the additional parameter for {@code showEditor} that informs the
+ * {@code VisualPropertyValueEditor} instance of the visual property
+ * that is being edited. This is useful for editors that need to know
+ * the boundaries of the visual property.
+ *
  * @param <V> target data type for this editor.
  * 
  * @CyAPI.Spi.Interface
@@ -43,6 +49,7 @@ public interface VisualPropertyValueEditor<V> {
 	 * Display the editor and get a new value.
 	 * @param parent the parent Component of this editor.
 	 * @param initialValue the initial value for the value editor dialogue.
+     * @param vizPropBeingEdited The visual property whose value is being edited--useful for determining the visual property's boundaries.
 	 * 
 	 * @return the value generated from the value editor dialogue or null.
 	 */

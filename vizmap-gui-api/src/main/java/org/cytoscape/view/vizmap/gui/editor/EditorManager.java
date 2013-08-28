@@ -92,6 +92,9 @@ public interface EditorManager {
 
 	/**
 	 * Display value editor to get a new value.
+     *
+     * This should first search for {@code VisualPropertyValueEditor}s with matching value types.
+     * If none are found, resort to searching for {@code ValueEditor}s.
 	 * 
 	 * @param parentComponent parent GUI component
 	 * @param type Visual Property type to be edited
