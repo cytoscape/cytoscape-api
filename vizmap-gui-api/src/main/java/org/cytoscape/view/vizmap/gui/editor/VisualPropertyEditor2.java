@@ -32,11 +32,14 @@ import javax.swing.table.TableCellRenderer;
 import org.cytoscape.view.model.VisualProperty;
 
 /**
- * Facade of all editor-related objects for a Visual Property.
- * 
- * If an app developer adds a custom visual property, they should implement this
- * in the presentation layer.
- * 
+ * If you are writing a {@code VisualPropertyEditor} but need to know
+ * the visual property you are editing (eg to check if the user
+ * inputted a value in the visual property's range), implement this interface
+ * in addition to {@code VisualPropertyEditor}. Only export
+ * your implementation in OSGi as {@code VisualPropertyEditor}, <em>not</em>
+ * as {@code VisualPropertyEditor2}. The {@code EditorManager} should detect
+ * if your {@code VisualPropertyEditor} implementation implements this interface
+ * and call {@code getPropertyEditor} with the visual property.
  * @param <T> Type of object managed in the Visual Prop.
  * 
  * @CyAPI.Spi.Interface
