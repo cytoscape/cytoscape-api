@@ -42,51 +42,10 @@ import org.cytoscape.view.model.VisualProperty;
  * @CyAPI.Spi.Interface
  * @CyAPI.InModule vizmap-gui-api
  */
-public interface VisualPropertyEditor2<T> {
-
-	/**
-	 * Returns the type of object managed in the Visual property.
-	 *
-	 * @return the type of object managed in the Visual property.
-	 */
-	Class<T> getType();
-
-
-	/**
-	 * Returns type of Continuous Editor.
-	 * 
-	 * @return type of {@link ContinuousMappingEditor}
-	 */
-	ContinuousEditorType getContinuousEditorType();
-
+public interface VisualPropertyEditor2<T> extends VisualPropertyEditor {
 	/**
 	 * Returns {@link PropertyEditor} object for this data type.
 	 * @return {@link PropertyEditor} object for this data type.
 	 */
 	<T> PropertyEditor getPropertyEditor(VisualProperty<T> vizProp);
-
-
-	/**
-	 * A custom cell renderer for Discrete table cells. 
-	 * 
-	 * @return a TableCellRenderer Discrete table cells. 
-	 */
-	TableCellRenderer getDiscreteTableCellRenderer();
-	
-	/**
-	 * A custom cell renderer for Continuous table cells. 
-	 * 
-	 * @return a TableCellRenderer Continuous table cells. 
-	 */
-	TableCellRenderer getContinuousTableCellRenderer(ContinuousMappingEditor<? extends Number, T> continuousMappingEditor);
-
-	/**
-	 * This is for default view editor.
-	 * 
-	 * @param width The width of the desired Icon.
-	 * @param height The height of the desired Icon.
-	 * 
-	 * @return An icon of the specified width and height. 
-	 */
-	Icon getDefaultIcon(int width, int height);
 }
