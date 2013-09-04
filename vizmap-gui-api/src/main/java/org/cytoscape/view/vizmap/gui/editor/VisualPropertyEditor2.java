@@ -42,10 +42,10 @@ import org.cytoscape.view.model.VisualProperty;
  * @CyAPI.Spi.Interface
  * @CyAPI.InModule vizmap-gui-api
  */
-public interface VisualPropertyEditor2<T> extends VisualPropertyEditor {
+public interface VisualPropertyEditor2<T> {
 	/**
 	 * Returns {@link PropertyEditor} object for this data type.
 	 * @return {@link PropertyEditor} object for this data type.
 	 */
-	<T> PropertyEditor getPropertyEditor(VisualProperty<T> vizProp);
+	PropertyEditor getPropertyEditor(VisualProperty<T> vizProp);
 }
