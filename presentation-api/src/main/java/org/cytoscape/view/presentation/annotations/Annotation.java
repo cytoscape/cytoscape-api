@@ -26,7 +26,10 @@ package org.cytoscape.view.presentation.annotations;
 
 import java.awt.geom.Point2D;
 
+import java.util.Map;
 import java.util.Set;
+
+import org.cytoscape.view.model.CyNetworkView;
 
 /**
  * This is the base interface for all Annotations.  An annotation is a graphical object that
@@ -71,6 +74,13 @@ public interface Annotation {
 	 * Arg map key to initialize the y location for this annotation
 	 */
 	public static final String Y = "y";
+
+	/**
+	 * Return the view that this Annotation is for
+	 *
+	 * @return the network view this annotation is for
+	 */
+	public CyNetworkView getNetworkView();
 
 	/**
 	 * Return the canvas that this Annotation is on
@@ -158,4 +168,12 @@ public interface Annotation {
 	 * @return the set of arrows linked to this annotation
 	 */
 	public Set<ArrowAnnotation> getArrows();
+
+	/**
+	 * Get the argument map that is used to serialize this annotation.  This
+	 * is essentially the inverse of the argMap used in {@link AnnotationFactory#createAnnotation()}.
+	 *
+	 * @return the argMap
+	 */
+	public Map<String, String> getArgMap();
 }

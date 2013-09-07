@@ -2,6 +2,8 @@ package org.cytoscape.view.presentation.annotations;
 
 import java.util.Map;
 
+import org.cytoscape.view.model.CyNetworkView;
+
 /**
  * An interface describing a factory used to create {@link Annotation}s.  This factory will be provided
  * as a service through OSGi.
@@ -9,7 +11,7 @@ import java.util.Map;
  * @CyAPI.Api.Interface
  * @CyAPI.InModule presentation-api
  */
-public interface AnnotationFactory {
+public interface AnnotationFactory <T extends Annotation> {
 
 	/**
 	 * Create an annotation.  This method takes the type of annotation to create and a list
@@ -23,5 +25,5 @@ public interface AnnotationFactory {
 	 * each annotation type to see the list of keys for the arg map.
 	 * @return the new annotation
 	 */
-	public <T extends Annotation> T createAnnotation(Class <T> type, Map<String,String> argMap);
+	public T createAnnotation(Class<? extends T> type, CyNetworkView view, Map<String,String> argMap);
 }

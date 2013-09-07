@@ -20,7 +20,7 @@ public interface AnnotationManager {
 	 * @param annotation the annotation to add
 	 * @param networkView the network view to add this annotation to
 	 */
-	public void addAnnotation(Annotation annotation, CyNetworkView networkView);
+	public void addAnnotation(Annotation annotation);
 
 	/**
 	 * Remove an annotation from its network view.  If there are
