@@ -4,14 +4,8 @@ package org.cytoscape.work;
  * An observer that gets notified when an <code>ObservableTask</code> finishes
  * executing.  If the task finishes, <code>taskFinished()</code> is
  * called with whatever result the task produces, if any. When a task iterator finishes,
- * the task manager will invoke {@code allFinished}, {@code cancelled}, or {@code failed}, depending
- * on the situation.
- *
- * <p>
- * When a task iterator invoked with a {@code TaskObserver} finishes,
- * {@code TaskManager}s are required to call one and only one of these methods:
- * {@code allFinished}, {@code cancelled}, or {@code failed}.
- * </p>
+ * the task manager will invoke {@code allFinished} with the appropriate {@code FinishStatus}
+ * object depending on the scenario in which the task iterator finished.
  *
  * @param <R> The type of the result this observer is expected to receive.
  * 
@@ -28,6 +22,7 @@ public interface TaskObserver {
 
 	/**
  	 * Called by a <code>TaskManager</code> to tell us that the task iterator has completed.
+     * @param finishStatus Indicates how the task iterator completed.
  	 */
 	public void allFinished(FinishStatus finishStatus);
 }
