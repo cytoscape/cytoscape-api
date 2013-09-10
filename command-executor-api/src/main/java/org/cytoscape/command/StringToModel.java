@@ -71,6 +71,16 @@ public interface StringToModel {
  	 * @return the returned CyNetwork or null if the name doesn't exist
  	 */
 	public CyNetwork getNetwork(String strNet);
+	
+	/**
+ 	 * Convert a string request for a table into a {@link CyTable}.  This method
+ 	 * may be used to find a table with a given name or the current table.
+ 	 * Future implementations might accept other columns to search on.
+ 	 *
+ 	 * @param strTable the name of the table to return or "current"
+ 	 * @return the returned CyTable or null if the name doesn't exist
+ 	 */
+	public CyTable getTable(String strTable);
 
 	/**
  	 * Convert a string request for a nodelist into a list of {@link CyNode}s.  This
