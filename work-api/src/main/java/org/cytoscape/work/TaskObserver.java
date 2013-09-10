@@ -27,17 +27,7 @@ public interface TaskObserver {
 	public void taskFinished(ObservableTask task);
 
 	/**
- 	 * Called by a <code>TaskManager</code> to tell us that all of the tasks in an iterator had completed successfully.
+ 	 * Called by a <code>TaskManager</code> to tell us that the task iterator has completed.
  	 */
-	public void allFinished();
-
-	/**
- 	 * Called by a <code>TaskManager</code> to tell us that the task iterator has prematurely ended because the given task was cancelled by the user.
- 	 */
-    public void cancelled(Task cancelledTask);
-
-	/**
- 	 * Called by a <code>TaskManager</code> to tell us that the task iterator has prematurely ended because the given task failed to complete because it threw an exception.
- 	 */
-    public void failed(Task failedTask, Exception e);
+	public void allFinished(FinishStatus finishStatus);
 }
