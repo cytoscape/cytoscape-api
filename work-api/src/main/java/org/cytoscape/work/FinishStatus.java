@@ -28,11 +28,13 @@ public final class FinishStatus {
   final Task task;
   final Exception exception;
 
+  private static final FinishStatus SUCCEEDED = new FinishStatus(Type.SUCCEEDED, null, null);
+
   /**
-   * Construct a new {@code FinishStatus} object that indicates success.
+   * Get a {@code FinishStatus} instance that indicates success.
    */
-  public static FinishStatus newSucceeded() {
-    return new FinishStatus(Type.SUCCEEDED, null, null);
+  public static FinishStatus getSucceeded() {
+    return SUCCEEDED;
   }
 
   /**
