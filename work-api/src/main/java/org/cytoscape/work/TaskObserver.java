@@ -20,7 +20,17 @@ public interface TaskObserver {
 	public void taskFinished(ObservableTask task);
 
 	/**
- 	 * Called by a <code>TaskManager</code> to tell us that all of the tasks are complete
+ 	 * Called by a <code>TaskManager</code> to tell us that all of the tasks in an iterator had completed.
  	 */
 	public void allFinished();
+
+	/**
+ 	 * Called by a <code>TaskManager</code> to tell us that the given task was cancelled by the user.
+ 	 */
+    public void cancelled(Task cancelledTask);
+
+	/**
+ 	 * Called by a <code>TaskManager</code> to tell us that the given task failed to complete because it threw an exception.
+ 	 */
+    public void failed(Task failedTask, Exception e);
 }
