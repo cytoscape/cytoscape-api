@@ -158,6 +158,7 @@ public interface ServiceProperties {
 	public static final String NETWORK_PREFERENCES_MENU = "Preferences[1000]";
 
 	// Node context menus
+	public static final String NODE_ADD_MENU = "Add[-1110]";
 	public static final String NODE_EDIT_MENU = "Edit[-1100]";
 	public static final String NODE_SELECT_MENU = "Select[-1090]";
 	public static final String NODE_GROUP_MENU = "Group[-1080]";
