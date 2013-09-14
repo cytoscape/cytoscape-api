@@ -8,8 +8,13 @@ images {@link org.cytoscape.view.presentation.annotations.ImageAnnotation}.  In 
 to the standard annotations the pacakge also supports connectors 
 {@link org.cytoscape.view.presentation.annotations.ArrowAnnotation} that can connect
 an annotation to a point, another annotation, or to a {@link org.cytoscape.model.CyNode}.
-<p>Annotations are created by calls to
+<p>Annotations are created by calls to the appropriate
 {@link org.cytoscape.view.presentation.annotations.AnnotationFactory#createAnnotation()}.
+In general, each annotation type has it's own {@link AnnotationFactory}.  To get the correct
+factory, in your CyActivator, you will need do a filtered {@link org.cytoscape.service.util.AbstractCyActiviator#getService}:
+<code>
+	AnnotationFactory&lt;ShapeAnnotation&rt; shapeFactory = getService(bc, AnnotationFactory.class, "(type=ShapeAnnotation.class)");
+</code>
 Once an annotation is created, it must be added to the
 {@link org.cytoscape.view.presentation.annotations.AnnotationManager}, which will actually
 draw the annotation on the canvas.  
