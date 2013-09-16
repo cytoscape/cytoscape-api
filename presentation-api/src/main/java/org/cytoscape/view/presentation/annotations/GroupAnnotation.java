@@ -31,7 +31,7 @@ import java.util.List;
  * @CyAPI.Api.Interface
  * @CyAPI.InModule presentation-api
  */
-public interface GroupAnnotation extends ShapeAnnotation {
+public interface GroupAnnotation extends Annotation {
 	public void addMember(Annotation member);
 	public void removeMember(Annotation member);
 	public List<Annotation> getMembers();
