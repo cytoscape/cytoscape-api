@@ -14,4 +14,7 @@ public interface Transformer<C, E> {
 
 	Class<C> getContextType();
 	Class<E> getElementType();
+	
+	void addListener(TransformerListener listener);
+	void removeListener(TransformerListener listener);
 }
