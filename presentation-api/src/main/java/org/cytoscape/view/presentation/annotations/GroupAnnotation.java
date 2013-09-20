@@ -28,11 +28,32 @@ import java.util.List;
 
 /**
  *
+ * The Group annotation is a container for a collextion of
+ * annotations that should be grouped together.
+ *
  * @CyAPI.Api.Interface
  * @CyAPI.InModule presentation-api
  */
 public interface GroupAnnotation extends Annotation {
+
+	/**
+	 * Add a new annotation to the group
+	 *
+	 * @param member the annotation to add to the group
+	 */
 	public void addMember(Annotation member);
+
+	/**
+	 * Remove an annotation from the group
+	 *
+	 * @param member the annotation to be removed
+	 */
 	public void removeMember(Annotation member);
+
+	/**
+	 * Return the list of members for this group
+	 *
+	 * @return the list of group members
+	 */
 	public List<Annotation> getMembers();
 }

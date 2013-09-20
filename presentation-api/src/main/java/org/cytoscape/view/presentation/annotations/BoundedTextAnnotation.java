@@ -30,27 +30,103 @@ import java.awt.Font;
 // NOTE: all implementations should implement TextAnnotation also
 /**
  *
+ * The BoundedText annotation is a ShapeAnnotation that also implements
+ * Text. The provided text is positioned in the center of the shape
+ * provided by the shape annotation.
+ *
  * @CyAPI.Api.Interface
  * @CyAPI.InModule presentation-api
  */
 public interface BoundedTextAnnotation extends ShapeAnnotation {
+
+	/**
+	 * This method causes the shape to be resized to fit the
+	 * provided text.
+	 */
 	public void fitShapeToText();
 
+	/**
+	 * Set the text to be displayed as part of the annotation
+	 *
+	 * @param text the text annotation
+	 */
 	public void setText(String text);
+
+	/**
+	 * Get the text to be displayed as part of the annotation
+	 *
+	 * @return the text annotation
+	 */
 	public String getText();
 
+	/**
+	 * Set the color of the text to be displayed
+	 *
+	 * @param color the text color
+	 */
 	public void setTextColor(Color color);
+
+	/**
+	 * Get the color of the text to be displayed
+	 *
+	 * @return the text annotation
+	 */
 	public Color getTextColor();
 
+	/**
+	 * Set the size of the font used to display the text
+	 *
+	 * @param size the size of the font 
+	 */
 	public void setFontSize(double size);
+
+	/**
+	 * Get the size of the font used to display the text
+	 *
+	 * @return the font size
+	 */
 	public double getFontSize();
 
+	/**
+	 * Set the font style
+	 *
+	 * @param style the font style
+	 */
 	public void setFontStyle(int style);
+
+	/**
+	 * Get the font style
+	 *
+	 * @return the font style
+	 */
 	public int getFontStyle();
 
+	/**
+	 * Set the font family to be used for the text display
+	 *
+	 * @param family the font family to use
+	 */
 	public void setFontFamily(String family);
+
+	/**
+	 * Get the font family to be used for the text display
+	 *
+	 * @return the font family to use
+	 */
 	public String getFontFamily();
 
+	/**
+	 * Get the font being used
+	 *
+	 * @return the font being used
+	 */
 	public Font getFont();
+
+	/**
+	 * Set the font to be used.  Note that this will override the existing settings
+	 * for font style, size, and family
+	 *
+	 * @param font the text font to use
+	 */
 	public void setFont(Font font);
 }
