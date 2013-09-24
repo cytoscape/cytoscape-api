@@ -46,6 +46,8 @@ public final class RowsDeletedEvent extends AbstractCyEvent<CyTable>  {
 	 */
 	public RowsDeletedEvent(CyTable source, Collection<Object> primaryKeys) {
 		super(source, RowsDeletedListener.class);
+		if ( primaryKeys == null )
+			throw new NullPointerException("Keys is null");
 		keys = primaryKeys;
 	}
 	
