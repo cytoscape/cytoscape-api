@@ -26,6 +26,7 @@ package org.cytoscape.task.edit;
 
 import java.util.List;
 
+import org.cytoscape.io.read.CyTableReader;
 import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyNetwork;
@@ -53,4 +54,12 @@ public interface ImportDataTableTaskFactory extends TableTaskFactory{
 	 */
 
 	TaskIterator createTaskIterator(final CyTable globalTable, boolean selectedNetworksOnly,  List<CyNetwork> networkList, CyRootNetwork rootNetwork, CyColumn targetJoinColumn, Class<? extends CyIdentifiable> tableType);
+
+	/**
+	 * Creates a task iterator for importing a table data in a network data table.
+	 * @param reader The table reader where the data to be imported is stored
+	 * @return a task iterator of type {@link TaskIterator}.
+	 */
+
+	TaskIterator createTaskIterator(CyTableReader reader);
 }
