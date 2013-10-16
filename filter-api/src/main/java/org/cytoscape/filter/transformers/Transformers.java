@@ -6,4 +6,5 @@ package org.cytoscape.filter.transformers;
 public interface Transformers {
 	static final String ATTRIBUTE_FILTER = "org.cytoscape.AttributeFilter";
 	static final String DEGREE_FILTER = "org.cytoscape.DegreeFilter";
+	static final String TOPOLOGY_FILTER = "org.cytoscape.TopologyFilter";
 }
