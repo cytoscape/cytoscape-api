@@ -25,7 +25,6 @@ package org.cytoscape.application.swing;
  */
 
 
-import javax.swing.*;
 import java.awt.*;
 
 
@@ -66,7 +65,7 @@ public interface CytoPanel {
 	 * @return component at the given index.
 	 */
 	public Component getComponentAt(int index);
-
+	
 	/**
 	 * Gets the state of the CytoPanel.
 	 *
@@ -82,6 +81,13 @@ public interface CytoPanel {
 	 */
 	public int indexOfComponent(Component component);
 
+	/**
+	 * Returns the index for a specified component by its {@link CytoPanelComponentName}.
+	 * @param name The {@link CytoPanelComponentName} that identifies one of the core Cytoscape components.
+	 * @return int Index of the Component or -1 if not found.
+	 */
+	public int indexOfComponent(CytoPanelComponentName name);
+	
 	/**
 	 * Sets the selected index on the CytoPanel.
 	 *
