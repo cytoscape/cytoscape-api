@@ -24,15 +24,23 @@ package org.cytoscape.application.swing;
  * #L%
  */
 
-/** 
- * An enum that lists the unique names of some core {@link CytoPanelComponent}s.
- * App components are not supposed to be registered with a CytoPanelComponentName. That's reserved for 
- * Cytoscape components only.
- * @CyAPI.Enum.Class
+
+/**
+ * Implement this interface rather than {@link CytoPanelComponent}, if you want to allow your component to be retrieved
+ * from the {@link CytoPanel} by its identifier. See {@link CytoPanel#indexOfComponent(String)}.
+ * @CyAPI.Spi.Interface
  * @CyAPI.InModule swing-application-api
  */
-public enum CytoPanelComponentName {
-	NETWORK,
-	STYLE,
-	FILTER
+public interface CytoPanelComponent2 extends CytoPanelComponent {
+
+	/**
+	 * Returns this component's identifier, which should be unique. To minimize the risk of returning an identifier that
+	 * is also used by another app, you should add a prefix/namespace.
+	 * As a suggestion, the prefix can be your app's name or your organization reverse domain.
+	 * For example, return "com.myorganizationname.MyPanel" instead of just "MyPanel".
+	 * The prefix "org.cytoscape." is reserved for modules and apps provided by the Cytoscape Consortium only
+	 * and must not be used by third-party apps.
+	 * @return The identifier of this component.
+	 */
+	String getIdentifier();
 }

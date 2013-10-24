@@ -32,6 +32,7 @@ import javax.swing.Icon;
 /**
  * An interface that allows a component to be registered as a service
  * that will then be added to the appropriate {@link CytoPanel}.
+ * To make your component discoverable by other apps, implement {@link CytoPanelComponent2} instead.
  * @CyAPI.Spi.Interface
  * @CyAPI.InModule swing-application-api
  */

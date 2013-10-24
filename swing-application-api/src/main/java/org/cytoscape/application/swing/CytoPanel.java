@@ -82,11 +82,13 @@ public interface CytoPanel {
 	public int indexOfComponent(Component component);
 
 	/**
-	 * Returns the index for a specified component by its {@link CytoPanelComponentName}.
-	 * @param name The {@link CytoPanelComponentName} that identifies one of the core Cytoscape components.
+	 * Returns the index for the component that has the specified identifier.
+	 * The identifier must be the same one provided by {@link CytoPanelComponent2#getIdentifier()}.
+	 * 
+	 * @param identifier The String that identifies the component.
 	 * @return int Index of the Component or -1 if not found.
 	 */
-	public int indexOfComponent(CytoPanelComponentName name);
+	public int indexOfComponent(String identifier);
 	
 	/**
 	 * Sets the selected index on the CytoPanel.
