@@ -84,6 +84,13 @@ public interface CytoPanel {
 	/**
 	 * Returns the index for the component that has the specified identifier.
 	 * The identifier must be the same one provided by {@link CytoPanelComponent2#getIdentifier()}.
+	 * <br>
+	 * These are the identifiers of the core Cytoscape components that implement {@link CytoPanelComponent2}:
+	 * <ul>
+	 *   <li><code>"org.cytoscape.Network"</code></li>
+	 *   <li><code>"org.cytoscape.Style"</code></li>
+	 *   <li><code>"org.cytoscape.Filter"</code></li>
+	 * </ul>
 	 * 
 	 * @param identifier The String that identifies the component.
 	 * @return int Index of the Component or -1 if not found.
