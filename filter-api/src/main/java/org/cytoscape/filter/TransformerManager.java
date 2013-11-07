@@ -14,7 +14,5 @@ public interface TransformerManager {
 
 	<C, E> void execute(C context, Transformer<C, E> transformer, TransformerSink<E> sink);
 	<C, E> void execute(C context, List<Transformer<C, E>> transformers, TransformerSink<E> sink);
-	
-	boolean getInteractiveModeEnabled();
-	void setInteractiveModeEnabled(boolean enabled);
+	<C, E> void execute(C context, TransformerSource<C, E> source, List<Transformer<C, E>> transformers, TransformerSink<E> sink);
 }
