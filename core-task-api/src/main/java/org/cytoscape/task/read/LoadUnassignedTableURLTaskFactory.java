@@ -31,16 +31,16 @@ import org.cytoscape.work.TaskIterator;
 
 
 /**
- * This interface provides a task iterator for importing the attribute URL to a network data table.
+ * This interface provides a task iterator for loading an attribute URL to a global table.
  * @CyAPI.Api.Interface
  * @CyAPI.InModule core-task-api
  */
-public interface ImportTableURLTaskFactory extends TaskFactory {
+public interface LoadUnassignedTableURLTaskFactory extends TaskFactory {
 	
 	/**
-	 * Creates a task iterator for importing the attribute URL to a network data table. The created task
+	 * Creates a task iterator for loading an attribute URL to the global table. The created task
 	 * runs synchronously in the current thread and does not create a task monitor.
-	 * @param url The attribute URL to be imported into a network data table.
+	 * @param url The attribute URL to load into the global table.
 	 * @return a task iterator of type {@link TaskIterator}.
 	 */
 	TaskIterator createTaskIterator(final URL url);
