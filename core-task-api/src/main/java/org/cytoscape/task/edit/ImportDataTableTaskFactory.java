@@ -46,6 +46,7 @@ public interface ImportDataTableTaskFactory extends TableTaskFactory{
 	 * Creates a task iterator for importing a table data in a network data table.
 	 * @param globalTable The table where the data to be imported is stored
 	 * @param selectedNetworksOnly Tells if the import is going to be on selected networks(true) or to a network collection (false)
+	 * @param loadToUnassignedTable Tells if the import is going to be for loading an unassigned table(true) or to load data to one of network tables(Node, Edge or Network Tables) (false)
 	 * @param networkList The list of networks to import the data if the selectedNetworksOnly flag is true
 	 * @param rootNetwork The root network of the chosen network collection to import the data 
 	 * @param targetJoinColumn The key column in the network collection table data to import the data
@@ -53,7 +54,7 @@ public interface ImportDataTableTaskFactory extends TableTaskFactory{
 	 * @return a task iterator of type {@link TaskIterator}.
 	 */
 
-	TaskIterator createTaskIterator(final CyTable globalTable, boolean selectedNetworksOnly,  List<CyNetwork> networkList, CyRootNetwork rootNetwork, CyColumn targetJoinColumn, Class<? extends CyIdentifiable> tableType);
+	TaskIterator createTaskIterator(final CyTable globalTable, boolean selectedNetworksOnly, boolean loadToUnassignedTable, List<CyNetwork> networkList, CyRootNetwork rootNetwork, CyColumn targetJoinColumn, Class<? extends CyIdentifiable> tableType);
 
 	/**
 	 * Creates a task iterator for importing a table data in a network data table.
