@@ -36,7 +36,6 @@ import org.osgi.framework.ServiceReference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.cytoscape.service.util.internal.utils.CyServiceListener;
-import org.cytoscape.service.util.internal.utils.RegisterUtil;
 import org.cytoscape.service.util.internal.utils.ServiceUtil;
 
 /**
@@ -84,6 +83,8 @@ public abstract class AbstractCyActivator implements BundleActivator {
 	 * yourself!
 	 */
 	public final void stop(BundleContext bc) {
+		shutDown();
+		
 		// unregister and clear all services registered 
 		for ( Map<Object,ServiceRegistration> registrations : serviceRegistrations.values() )  {
 			for ( ServiceRegistration reg : registrations.values() ) 
@@ -103,6 +104,15 @@ public abstract class AbstractCyActivator implements BundleActivator {
 		gottenServices.clear();
 	}
 
+	/**
+	 * Cleans up resources used by the app.  If the app creates threads, adds
+	 * menu items via Swing, or performs any other operation that modifies the
+	 * environment, this method this method should be overridden to
+	 * perform any necessary clean up.
+	 */
+	public void shutDown() {
+	}
+	
 	/**
 	 * A method that attempts to get a service of the specified type. If an 
 	 * appropriate service is not found, an exception will be thrown.
