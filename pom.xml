@@ -43,7 +43,6 @@
 		<module>webservice-swing-api</module>
 		<module>command-executor-api</module>
 		<module>filter-api</module>
-		<module>rest-api</module>
 	</modules>
 
 	<dependencyManagement>
