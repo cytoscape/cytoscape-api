@@ -67,15 +67,17 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 
 	/**
 	 * The float value placing the action within the menu.
-	 * Value of 0.0 is the beginning and 100.0 means end of menu.
+	 * Value of 0.0 is the beginning and 100.0 means end of menu,
+	 * and -1.0 means to sort alphabetically.
 	 */
-	protected float menuGravity = 100.0f;
+	protected float menuGravity = -1.0f;
 
 	/**
 	 * The float value placing the action within the toolbar.
-	 * Value of 0.0 is the beginning and 100.0 means end of menu.
+	 * Value of 0.0 is the beginning and 100.0 means end of menu,
+	 * and -1.0 means to sort alphabetically.
 	 */
-	protected float toolbarGravity = 100.0f;
+	protected float toolbarGravity = -1.0f;
 
 	/**
 	 * Indicates whether accelerator keys have been set for the action.
