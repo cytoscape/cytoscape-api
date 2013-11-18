@@ -39,7 +39,7 @@ import org.cytoscape.work.TaskFactory;
  * @CyAPI.Api.Interface
  * @CyAPI.InModule core-task-api
  */
-public interface MergeDataTableTaskFactory extends TaskFactory {
+public interface MergeTablesTaskFactory extends TaskFactory {
 
 	/**
 	 * Creates a task iterator for merging two data tables.
