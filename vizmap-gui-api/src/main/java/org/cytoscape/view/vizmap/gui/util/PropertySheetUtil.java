@@ -78,6 +78,7 @@ public final class PropertySheetUtil {
 	 * 
 	 * @return true if it is a part of preset basic visual properties.
 	 */
+	@Deprecated
 	public static final boolean isBasic(final VisualProperty<?> vp) {
 		if (BASIC_PROPS.contains(vp))
 			return true;
@@ -90,6 +91,7 @@ public final class PropertySheetUtil {
 	 * 
 	 * @return true if it is in advanced mode.
 	 */
+	@Deprecated
 	public static final boolean isAdvancedMode() {
 		return mode;
 	}
@@ -100,6 +102,7 @@ public final class PropertySheetUtil {
 	 * @param advanced
 	 *            If true, it is in advanced mode.
 	 */
+	@Deprecated
 	public static final void setMode(boolean advanced) {
 		mode = advanced;
 	}
@@ -111,6 +114,7 @@ public final class PropertySheetUtil {
 	 * @param vp
 	 *            New Visual Property to be set as basic set.
 	 */
+	@Deprecated
 	public static final void addBasicVisualProperty(final VisualProperty<?> vp) {
 		// Ignore null values.
 		if (vp == null)

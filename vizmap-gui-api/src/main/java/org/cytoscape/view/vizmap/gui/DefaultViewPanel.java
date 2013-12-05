@@ -33,6 +33,7 @@ import org.cytoscape.view.presentation.RenderingEngine;
  * @CyAPI.Api.Interface
  * @CyAPI.InModule vizmap-gui-api
  */
+@Deprecated
 public interface DefaultViewPanel {
 
 	/**
@@ -42,6 +43,7 @@ public interface DefaultViewPanel {
 	 * 
 	 * @return rendering engine object for the default view.
 	 */
+	@Deprecated
 	RenderingEngine<CyNetwork> getRenderingEngine();
 
 }

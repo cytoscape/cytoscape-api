@@ -47,6 +47,7 @@ import javax.swing.JPanel;
  * @CyAPI.Api.Interface
  * @CyAPI.InModule vizmap-gui-api
  */
+@Deprecated
 public interface VizMapGUI {
 	
 	/**
@@ -55,6 +56,7 @@ public interface VizMapGUI {
 	 * 
 	 * @return default view editor
 	 */
+	@Deprecated
 	DefaultViewEditor getDefaultViewEditor();
 	
 	
@@ -64,5 +66,6 @@ public interface VizMapGUI {
 	 * 
 	 * @return Default view on {@link JPanel}.
 	 */
+	@Deprecated
 	JPanel getDefaultViewPanel();
 }
