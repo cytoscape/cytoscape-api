@@ -36,6 +36,7 @@ import org.cytoscape.view.vizmap.VisualStyle;
  * @CyAPI.Api.Interface
  * @CyAPI.InModule vizmap-gui-api
  */
+@Deprecated
 public interface DefaultViewEditor {
 
 	/**
@@ -45,6 +46,7 @@ public interface DefaultViewEditor {
 	 * @param vs The {@link VisualStyle} to get the default view of. 
 	 * @return a component containing a graphical view of the specified visual style.
 	 */
+	@Deprecated
 	Component getDefaultView(VisualStyle vs);
 
 	/**
@@ -52,5 +54,6 @@ public interface DefaultViewEditor {
 	 * 
 	 * @param parent The component in which the default view should be shown.
 	 */
+	@Deprecated
 	void showEditor(Component parent);
 }

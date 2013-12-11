@@ -7,8 +7,11 @@ import java.util.concurrent.CopyOnWriteArrayList;
  * A convenience base class for Transformers.  This class provides a thread-safe
  * implementation of listener registration, removal and notification.
  * 
- * @param <C> The context type of the elements this transformer operates on.
- * @param <E> The element type this transformer operates on.
+ * @param <C> The context type of the elements this {@link Transformer} operates on.
+ * @param <E> The element type this {@link Transformer} operates on.
+ * 
+ * @CyAPI.Abstract.Class
+ * @CyAPI.InModule filter-api
  */
 public abstract class AbstractTransformer<C, E> implements Transformer<C, E> {
 	private List<TransformerListener> listeners;
