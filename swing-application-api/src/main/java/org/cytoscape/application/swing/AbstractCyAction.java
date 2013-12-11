@@ -67,15 +67,17 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 
 	/**
 	 * The float value placing the action within the menu.
-	 * Value of 0.0 is the beginning and 100.0 means end of menu,
-	 * and -1.0 means to sort alphabetically.
+	 * Value of 0.0 is the beginning and -1.0 means to sort alphabetically.
+	 * App developers are strongly encouraged to set specific gravities
+	 * within your own menus.
 	 */
-	protected float menuGravity = -1.0f;
+	protected float menuGravity = 100.0f;
 
 	/**
 	 * The float value placing the action within the toolbar.
-	 * Value of 0.0 is the beginning and 100.0 means end of menu,
-	 * and -1.0 means to sort alphabetically.
+	 * Value of 0.0 is the beginning and -1.0 means to sort alphabetically.
+	 * App developers are strongly encouraged to set specific gravities
+	 * within your own menus.
 	 */
 	protected float toolbarGravity = -1.0f;
 
@@ -191,8 +193,8 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *            <li>insertSeparatorAfter - (Whether a separator should be inserted after this menu item.)</li>
 	 *            <li>enableFor - (System state that the action should be enabled for. See {@link ActionEnableSupport} for more detail.)</li>
 	 *            <li>accelerator - (Accelerator key bindings.)</li>
-	 *            <li>menuGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the menu.)</li>
-	 *            <li>toolBarGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the toolbar.)</li>
+	 *            <li>menuGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the menu.)</li>
+	 *            <li>toolBarGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the toolbar.)</li>
 	 *            </ul>
 	 * @param applicationManager
 	 *            The application manager providing context for this action.
@@ -224,8 +226,8 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *            <li>insertSeparatorAfter - (Whether a separator should be inserted after this menu item.)</li>
 	 *            <li>enableFor - (<i>Ingored in this constructor and TaskFactoryPredicate is used instead!</i>)</li>
 	 *            <li>accelerator - (Accelerator key bindings.)</li>
-	 *            <li>menuGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the menu.)</li>
-	 *            <li>toolBarGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the toolbar.)</li>
+	 *            <li>menuGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the menu.)</li>
+	 *            <li>toolBarGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the toolbar.)</li>
 	 *            </ul>
 	 * @param predicate
 	 *            The task factory predicate that indicates whether or not this 
@@ -259,8 +261,8 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *            <li>enableFor - (<i>Will only use this value if the TaskFactory is not a TaskFactoryPredicate!</i> 
 	 *                             See {@link ActionEnableSupport} for more detail.)</li>
 	 *            <li>accelerator - (Accelerator key bindings.)</li>
-	 *            <li>menuGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the menu.)</li>
-	 *            <li>toolBarGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the toolbar.)</li>
+	 *            <li>menuGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the menu.)</li>
+	 *            <li>toolBarGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the toolbar.)</li>
 	 *            </ul>
 	 * @param applicationManager
 	 *            The application manager providing context for this action.
