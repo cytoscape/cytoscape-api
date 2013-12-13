@@ -66,7 +66,7 @@ public interface CyTableFactory {
 	 * Creates a CyTable object with the specified name, primary key, visibility, and mutability.
 	 * @param title The name of the CyTable.
 	 * @param primaryKey The name primaryKey column for this table. 
-	 * @param primaryKeyType The type of the primaryKey column for this table. 
+	 * @param primaryKeyType The type of the primaryKey column for this table; this must be {@code Long.class} if the table's keys are to refer to network objects, i.e. nodes, edges, networks.
 	 * @param pub Whether or not the CyTable should be public.
 	 * @param isMutable if true, the table can be deleted later on, otherwise it can't
 	 * @param initialSize a rough guess as to the expected size of the table 
@@ -79,7 +79,7 @@ public interface CyTableFactory {
 	 * Creates a CyTable object with the specified name, primary key, visibility, and mutability.
 	 * @param title The name of the CyTable.
 	 * @param primaryKey The name primaryKey column for this table. 
-	 * @param primaryKeyType The type of the primaryKey column for this table. 
+	 * @param primaryKeyType The type of the primaryKey column for this table; this must be {@code Long.class} if the table's keys are to refer to network objects, i.e. nodes, edges, networks.
 	 * @param pub Whether or not the CyTable should be public.
 	 * @param isMutable if true, the table can be deleted later on, otherwise it can't
 	 * @return A new {@link CyTable} with the specified name that is either public or not (see
