@@ -25,6 +25,7 @@ package org.cytoscape.io;
  */
 
 
+import org.apache.commons.io.FilenameUtils;
 import org.cytoscape.io.util.StreamUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -137,8 +138,9 @@ public class BasicCyFileFilter implements CyFileFilter {
 	}
 
 	private boolean extensionsMatch(URI uri) {
-		final String extension = getExtension(uri.toString());
-		if (extension != null && extensions.contains(extension))
+		final String extension = FilenameUtils.getExtension(uri.toString());
+		//extension is never null, but can be empty string, which works ok
+		if (extensions.contains(extension))
 			return true;
 		else
 			return false;
@@ -208,27 +210,6 @@ public class BasicCyFileFilter implements CyFileFilter {
 		s += "]";
 
 		return s;
-	}
-
-	/**
-	 * Returns a string of the characters following the last '.' in the input
-	 * string, which is to say the file extension assuming that the input string
-	 * represents a file name. Will return null if no '.' is found.
-	 *
-	 * @param filename
-	 *            the file name as a string.
-	 * @return a string representing the file extension of the input string.
-	 */
-	protected final String getExtension(String filename) {
-		if (filename != null) {
-			int i = filename.lastIndexOf('.');
-
-			if ((i > 0) && (i < (filename.length() - 1))) {
-				return filename.substring(i + 1).toLowerCase();
-			}
-		}
-
-		return null;
 	}
 
 	/**
