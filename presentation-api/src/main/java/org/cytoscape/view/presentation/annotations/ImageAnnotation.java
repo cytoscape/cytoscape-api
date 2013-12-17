@@ -2,7 +2,7 @@ package org.cytoscape.view.presentation.annotations;
 
 /*
  * #%L
- * Cytoscape Ding View/Presentation Impl (ding-presentation-impl)
+ * Cytoscape Presentation API (presentation-api)
  * $Id:$
  * $HeadURL:$
  * %%

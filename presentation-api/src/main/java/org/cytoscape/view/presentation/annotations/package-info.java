@@ -11,10 +11,12 @@ an annotation to a point, another annotation, or to a {@link org.cytoscape.model
 <p>Annotations are created by calls to the appropriate
 {@link org.cytoscape.view.presentation.annotations.AnnotationFactory#createAnnotation()}.
 In general, each annotation type has it's own {@link AnnotationFactory}.  To get the correct
-factory, in your CyActivator, you will need do a filtered {@link org.cytoscape.service.util.AbstractCyActiviator#getService}:
+factory, in your CyActivator, you will need do a filtered {@link org.cytoscape.service.util.AbstractCyActivator#getService()}:
+<br/>
 <code>
-	AnnotationFactory&lt;ShapeAnnotation&rt; shapeFactory = getService(bc, AnnotationFactory.class, "(type=ShapeAnnotation.class)");
+	AnnotationFactory&lt;ShapeAnnotation&gt; shapeFactory = getService(bc, AnnotationFactory.class, "(type=ShapeAnnotation.class)");
 </code>
+<br/>
 Once an annotation is created, it must be added to the
 {@link org.cytoscape.view.presentation.annotations.AnnotationManager}, which will actually
 draw the annotation on the canvas.  
