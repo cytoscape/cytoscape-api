@@ -9,9 +9,9 @@ package org.cytoscape.filter.transformers;
  */
 public interface Transformers {
 	/**
-	 * The id of the core Attribute Filter. 
+	 * The id of the core Column Filter. 
 	 */
-	static final String ATTRIBUTE_FILTER = "org.cytoscape.AttributeFilter";
+	static final String COLUMN_FILTER = "org.cytoscape.ColumnFilter";
 	
 	/**
 	 * The id of the core Degree Filter. 
