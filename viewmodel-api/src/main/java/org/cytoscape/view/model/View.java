@@ -115,5 +115,11 @@ public interface View<S> extends CyIdentifiable {
 	 * @return true if the given VisualProperty's value has been locked.
 	 */
 	boolean isDirectlyLocked(VisualProperty<?> vp);
+
+
+	/**
+	 * Clear all VisualProperty values previously set to this view.
+	 */
+	void clearVisualProperties();
 	
 }
