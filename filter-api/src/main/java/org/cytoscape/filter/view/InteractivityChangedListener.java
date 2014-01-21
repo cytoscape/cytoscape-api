@@ -3,7 +3,8 @@ package org.cytoscape.filter.view;
 /**
  * Listens for changes in the system-level state of interactivity.  Cytoscape
  * automatically switches the transformation subsystem to non-interactive mode
- * when it detects it cannot process transformations in real time.
+ * when it detects it cannot process transformations in real time.  The initial
+ * state is non-interactive.
  * 
  * @CyAPI.Spi.Interface
  * @CyAPI.InModule filter-api

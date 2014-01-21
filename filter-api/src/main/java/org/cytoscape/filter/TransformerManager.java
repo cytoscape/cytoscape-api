@@ -58,7 +58,7 @@ public interface TransformerManager {
 	 * The results of the transformation are collected by {@code sink}.
 	 * 
 	 * @param context the object whose elements should be transformed.
-	 * @param transformer the {@code Transformer}s that should be applied.
+	 * @param transformers the {@code Transformer}s that should be applied.
 	 * @param sink collects the results of the transformation.
 	 */
 	<C, E> void execute(C context, List<Transformer<C, E>> transformers, TransformerSink<E> sink);
@@ -70,7 +70,7 @@ public interface TransformerManager {
 	 * 
 	 * @param context the object whose elements should be transformed.
 	 * @param source determines which elements are taken from the context.
-	 * @param transformer the {@code Transformer}s that should be applied.
+	 * @param transformers the {@code Transformer}s that should be applied.
 	 * @param sink collects the results of the transformation.
 	 */
 	<C, E> void execute(C context, TransformerSource<C, E> source, List<Transformer<C, E>> transformers, TransformerSink<E> sink);

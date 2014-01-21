@@ -1,8 +1,8 @@
 package org.cytoscape.filter.model;
 
 /**
- * A {link Filter} that computes the set-union or set-intersection of the
- * {link Filter}s it contains.  The ordering of the child filters does not
+ * A {@link Filter} that computes the set-union or set-intersection of the
+ * {@link Filter}s it contains.  The ordering of the child filters does not
  * affect the final output of this filter, but may impact performance.
  * 
  * @param <C> The context type of the elements this {@link Filter} operates on.
@@ -15,7 +15,7 @@ public interface CompositeFilter<C, E> extends Filter<C, E> {
 	
 	/**
 	 * Determines how a {@code CompositeFilter} combines the results of its
-	 * contained {link Filter}s.
+	 * contained {@link Filter}s.
 	 */
 	enum Type {
 		/**
