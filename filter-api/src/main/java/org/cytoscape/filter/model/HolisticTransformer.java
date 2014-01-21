@@ -27,7 +27,7 @@ public interface HolisticTransformer<C, E> extends Transformer<C, E> {
 	 * results of the transformation are collected by {@code sink}.
 	 * 
 	 * @param context the context object of the transformed element.
-	 * @param element the element to transform.
+	 * @param source provides the elements to transform.
 	 * @param sink collects the results of the transformation.
 	 */
 	void apply(C context, TransformerSource<C, E> source, TransformerSink<E> sink);
