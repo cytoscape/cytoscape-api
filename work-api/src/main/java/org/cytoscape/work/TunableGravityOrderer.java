@@ -45,6 +45,8 @@ public class TunableGravityOrderer implements Comparator<TunableHandler> {
 		 String g2 = t2.getParams().getProperty(AbstractTunableHandler.GRAVITY, "999.0");
 		 if(Double.valueOf(g1) > Double.valueOf(g2))
 			 return 1;
+		 else if(Double.valueOf(g1).equals(Double.valueOf(g2)))
+			 return 0;
 		 else
 			 return -1;
 	 }
