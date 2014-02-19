@@ -35,6 +35,7 @@ import org.cytoscape.model.CyNode;
 /**
  * When node {@linkplain View} is added to a {@linkplain CyNetworkView}, this event will be fired.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule viewmodel-api
  */
 public final class AddedNodeViewsEvent extends AbstractCyPayloadEvent<CyNetworkView,View<CyNode>> {
 

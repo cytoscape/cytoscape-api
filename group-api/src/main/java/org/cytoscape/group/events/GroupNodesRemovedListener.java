@@ -30,6 +30,7 @@ import org.cytoscape.event.CyListener;
 /**
  * Listener for {@link GroupNodesRemovedEvent}
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule group-api
  */
 public interface GroupNodesRemovedListener extends CyListener {
 	/**

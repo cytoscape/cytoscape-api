@@ -32,7 +32,8 @@ import org.cytoscape.io.DataCategory;
  * 
  * Once someone export {@link DataSource} as an OSGi service, this object 
  * automatically add the source and it is accessible by users.
- *
+ * @CyAPI.Api.Interface
+ * @CyAPI.InModule datasource-api
  */
 public interface DataSourceManager {
 	

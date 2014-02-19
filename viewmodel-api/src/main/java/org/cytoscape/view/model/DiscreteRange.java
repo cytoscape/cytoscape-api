@@ -32,6 +32,7 @@ import java.util.Set;
  *
  * @param <T> The generic type of this DiscreteRange.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule viewmodel-api
  */
 public class DiscreteRange<T> implements Range<T> {
 

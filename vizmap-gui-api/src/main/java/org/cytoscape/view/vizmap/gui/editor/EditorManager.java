@@ -71,9 +71,30 @@ public interface EditorManager {
 	@SuppressWarnings("unchecked")
 	public void removeValueEditor(ValueEditor<?> va, Map properties);
 
+	/**
+	 * Add value editor--invoked by OSGi when a new bundle exports an instance.
+	 * 
+	 * @param va New value editor to be added.
+	 * @param properties OSGi service metadata.
+	 */
+	@SuppressWarnings("unchecked")
+	public void addVisualPropertyValueEditor(VisualPropertyValueEditor<?> va, Map properties);
+
+
+	/**
+	 * Remove an editor from manager--invoked by OSGi when a bundle that exports an instance is being unloaded.
+	 * 
+	 * @param va editor to be removed.
+	 * @param properties OSGi metadata
+	 */
+	@SuppressWarnings("unchecked")
+	public void removeVisualPropertyValueEditor(VisualPropertyValueEditor<?> va, Map properties);
 
 	/**
 	 * Display value editor to get a new value.
+     *
+     * This should first search for {@code VisualPropertyValueEditor}s with matching value types.
+     * If none are found, resort to searching for {@code ValueEditor}s.
 	 * 
 	 * @param parentComponent parent GUI component
 	 * @param type Visual Property type to be edited

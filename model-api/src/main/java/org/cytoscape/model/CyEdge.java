@@ -28,6 +28,7 @@ package org.cytoscape.model;
  * An object that represents an edge within a network of nodes (vertices)
  * and edges.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule model-api
  */
 public interface CyEdge extends CyIdentifiable {
 

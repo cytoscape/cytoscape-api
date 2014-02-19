@@ -39,6 +39,7 @@ import org.cytoscape.view.vizmap.VisualMappingFunction;
  * @param <V>
  *            Generic type of the {@link VisualProperty} used in this mapping.
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule vizmap-api
  */
 public abstract class AbstractVisualMappingFunction<K, V> implements VisualMappingFunction<K, V> {
 

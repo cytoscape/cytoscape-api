@@ -30,6 +30,7 @@ import org.cytoscape.view.model.VisualProperty;
 /**
  * A utility class used to describe one change to a {@link View}. 
  * @CyAPI.Final.Class
+ * @CyAPI.InModule viewmodel-api
  */
 public final class ViewChangeRecord<T> {
 	private final View<T> view;

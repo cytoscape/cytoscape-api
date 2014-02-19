@@ -75,7 +75,7 @@ public interface TunableHandler {
 	 * @return the associated <code>Tunable</code>'s groups or nesting hierarchy
 	 */
 	String[] getGroups();
-
+	
 	/**
 	 * Returns true if the associated <code>Tunable</code> allows switching 
 	 * of mutually exclusive nested children, else false.

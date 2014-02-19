@@ -35,6 +35,7 @@ import java.awt.event.ActionListener;
  * recently used colors between invocations of the chooser dialog.
  *
  * @CyAPI.Static.Class 
+ * @CyAPI.InModule swing-util-api
  */
 public final class CyColorChooser {
 	

@@ -36,6 +36,7 @@ import org.cytoscape.model.CyNetwork;
  * network.
  *
  * @CyAPI.Final.Class
+ * @CyAPI.InModule group-api
  */
 public final class GroupAboutToBeRemovedEvent extends AbstractGroupEvent {
 	/**

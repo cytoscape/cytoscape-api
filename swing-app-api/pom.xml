@@ -4,7 +4,7 @@
   <parent>
     <artifactId>api-parent</artifactId>
     <groupId>org.cytoscape</groupId>
-    <version>3.0.2</version>
+    <version>3.1.0</version>
   </parent>
 
   <properties>
@@ -100,7 +100,7 @@
           <skip>false</skip>
           <encoding>UTF-8</encoding>
           <locale>en</locale>
-          <javadocVersion>1.6</javadocVersion>
+          <javadocVersion>1.7</javadocVersion>
           <links>
             <link>http://download.oracle.com/javase/6/docs/api/</link>
           </links>
@@ -162,7 +162,6 @@
 			<artifactId>webservice-swing-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-
 		
 		<!-- For Testing -->
 		<dependency>

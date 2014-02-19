@@ -30,6 +30,7 @@ import org.cytoscape.event.CyListener;
 /**
  * Listener for AboutToRemoveNodeEvents. 
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule model-api
  */
 public interface AboutToRemoveNodesListener extends CyListener {
 	/**

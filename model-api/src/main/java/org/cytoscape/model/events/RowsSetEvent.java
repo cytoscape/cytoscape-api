@@ -36,6 +36,7 @@ import org.cytoscape.model.CyTable;
 /**
  * This event signals that rows have been set.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule model-api
  */
 public final class RowsSetEvent extends AbstractCyPayloadEvent<CyTable, RowSetRecord> {
 

@@ -29,6 +29,7 @@ import org.cytoscape.event.CyListener;
 /**
  * Listener for {@linkplain AddedNodeViewsEvent}.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule viewmodel-api
  */
 public interface AddedNodeViewsListener extends CyListener {
 	

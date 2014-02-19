@@ -34,6 +34,7 @@ import org.cytoscape.view.vizmap.VisualStyle;
  * {@linkplain VisualStyle} is modified, this event should be fired.
  * 
  * @CyAPI.Final.Class
+ * @CyAPI.InModule vizmap-api
  */
 public final class VisualStyleChangedEvent extends AbstractCyPayloadEvent<VisualStyle, VisualStyleChangeRecord> {
 

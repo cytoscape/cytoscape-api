@@ -37,6 +37,7 @@ import org.cytoscape.view.presentation.RenderingEngine;
  * Basic access to current and/or currently selected networks, 
  * views and rendering engines in an instance of Cytoscape.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule application-api
  */
 public interface CyApplicationManager {
 	
@@ -121,5 +122,28 @@ public interface CyApplicationManager {
 	 */
 	public void reset();
 	
+	/**
+	 * Returns the NetworkViewRenderer associated with the current
+	 * RenderingEngine.
+	 * 
+	 * @return the NetworkViewRenderer associated with the current
+	 * RenderingEngine
+	 */
+	NetworkViewRenderer getCurrentNetworkViewRenderer();
 	
+	/**
+	 * Returns the NetworkViewRenderer that should be used to create
+	 * CyNetworkViews.
+	 * @return the NetworkViewRenderer that should be used to create
+	 * CyNetworkViews.
+	 */
+	NetworkViewRenderer getDefaultNetworkViewRenderer();
+	
+	/**
+	 * Sets the NetworkViewRenderer that should be used to create
+	 * CyNetworkViews.
+	 * @param renderer the NetworkViewRenderer that should be used by
+	 *                 default.
+	 */
+	void setDefaultNetworkViewRenderer(NetworkViewRenderer renderer);
 }

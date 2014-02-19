@@ -33,6 +33,7 @@ import javax.swing.event.PopupMenuListener;
  * dynamic menu to be set and allows the menu to be enabled or
  * disabled based on the state of the system.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule work-swing-api
  */
 public interface DynamicSubmenuListener extends MenuListener, PopupMenuListener {
 

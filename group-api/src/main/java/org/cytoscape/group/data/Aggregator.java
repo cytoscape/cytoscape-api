@@ -33,7 +33,9 @@ import org.cytoscape.model.CyTable;
  * different methods of aggregating attribute data for the
  * nodes in a {@link CyGroup}. Aggregators are used to combine
  * the attribute values of the nodes contained within a Group
- * into a representative attribute value for the Group itself. 
+ * into a representative attribute value for the Group itself.
+ * @CyAPI.Spi.Interface
+ * @CyAPI.InModule group-api
  */
 public interface Aggregator<T> {
 	/**

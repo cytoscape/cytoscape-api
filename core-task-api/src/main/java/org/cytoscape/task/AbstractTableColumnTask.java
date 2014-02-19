@@ -30,6 +30,7 @@ import org.cytoscape.work.AbstractTask;
 
 /** A base class for Tasks that need to operate on an entire CyTable column. 
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule core-task-api
  */
 public abstract class AbstractTableColumnTask extends AbstractTask {
 	

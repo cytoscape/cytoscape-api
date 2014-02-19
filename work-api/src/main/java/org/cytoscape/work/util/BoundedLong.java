@@ -51,4 +51,25 @@ public final class BoundedLong extends AbstractBounded<Long> {
 	public void setValue(String s) {
 		setValue( Long.valueOf(s) );
 	}
+
+	/**
+	 * Clamp the value to be within the range.
+	 *
+	 */
+	public Long clamp(Long value) {
+		if (value <= getLowerBound()) {
+			if (!isLowerBoundStrict()) 
+				return getLowerBound();
+			else
+				return value+1;
+		}
+		if (value >= getUpperBound()) {
+			if (!isUpperBoundStrict()) 
+				return getUpperBound();
+			else
+				return value-1;
+		}
+		return value;
+	}
+			
 }

@@ -34,6 +34,7 @@ import org.cytoscape.io.webservice.WebServiceClient;
  *            the generic type of the object associated with this
  *            DataImportFinishedEvent.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule webservice-api
  */
 public final class DataImportFinishedEvent<T> extends AbstractCyEvent<WebServiceClient> {
 

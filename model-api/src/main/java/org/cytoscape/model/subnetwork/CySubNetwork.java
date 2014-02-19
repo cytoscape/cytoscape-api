@@ -35,6 +35,7 @@ import org.cytoscape.model.CyEdge;
  * {@link CyNetwork}.  See the description in {@link CyRootNetwork} for
  * a more complete description of Cytoscape's meta-network model.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule model-api
  */
 public interface CySubNetwork extends CyNetwork {
 	/**

@@ -29,6 +29,7 @@ package org.cytoscape.model;
  * if applicable. See {@link CyTable#addVirtualColumn} for details on
  * what virtual columns are.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule model-api
  */
 public interface VirtualColumnInfo {
 	/**

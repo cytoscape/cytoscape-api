@@ -24,6 +24,8 @@ package org.cytoscape.work.util;
  * #L%
  */
 
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A bounded number object whose bounds values cannot be modified
@@ -41,12 +43,12 @@ abstract public class AbstractBounded<N extends Comparable<N>> {
 	/**
 	 *  Value of the lower bound of the Bounded Object.
 	 */
-	private final N lower;
+	private N lower;
 
 	/**
 	 *  Value of the upper bound of the Bounded Object.
 	 */
-	private final N upper;
+	private N upper;
 
 	/**
 	 *  Whether or not the <code>value</code> could be set to the <code>upper</code> value.
@@ -55,7 +57,7 @@ abstract public class AbstractBounded<N extends Comparable<N>> {
 	 *    <code> if (upperStrict)</code> , then the <code>value</code> cannot be set to <code>upper</code>
 	 *  </pre></p>
 	 */
-	private final boolean upperStrict;
+	private boolean upperStrict;
 
 	/**
 	 *  Whether or not the <code>value</code> could be set to the <code>lower</code> value.
@@ -64,7 +66,12 @@ abstract public class AbstractBounded<N extends Comparable<N>> {
 	 *    <code> if (lowerStrict)</code> , then the <code>value</code> cannot be set to <code>lower</code>
 	 *  </pre></p>
 	 */
-	private final boolean lowerStrict;
+	private boolean lowerStrict;
+
+	/**
+ 	 * The list of listeners to inform if something changes
+ 	 */
+	private List<BoundedChangeListener<N>> listeners = null;
 
 	/**
 	 *  Creates a new Bounded object.
@@ -138,6 +145,48 @@ abstract public class AbstractBounded<N extends Comparable<N>> {
 	}
 
 	/**
+	 *  Set the upper bound strict policy to <code>upperStrict</code>.
+	 *
+	 *  @param upperStrict the upper bound strict policy to be set
+	 */
+	public void setUpperBoundStrict(final boolean upperStrict) {
+		this.upperStrict = upperStrict;
+		value = clamp(value);
+		boundsChanged();
+	}
+
+	/**
+	 *  Set the lower bound strict policy to <code>lowerStrict</code>.
+	 *
+	 *  @param lowerStrict the lower bound strict policy to be set
+	 */
+	public void setLowerBoundStrict(final boolean lowerStrict) {
+		this.lowerStrict = lowerStrict;
+		value = clamp(value);
+		boundsChanged();
+	}
+
+	/**
+	 *  Set the upper bound (<code>upper</code>) and 
+	 *  lower bound (<code>lower</code>) of the Bounded Object.
+	 *
+	 *  @param lower the lower bound to be set.
+	 *  @param upper the upper bound to be set.
+	 */
+	public void setBounds(final N lower, final N upper) {
+		if (upper == null)
+			throw new NullPointerException("upper bound is null.");
+		if (upper.compareTo(lower) <= 0)
+			throw new IllegalArgumentException("upper value is less than or equal to lower value");
+		if (lower.compareTo(upper) >= 0)
+			throw new IllegalArgumentException("lower value is greater than or equal to upper value");
+		this.upper = upper;
+		this.lower = lower;
+		value = clamp(value);
+		boundsChanged();
+	}
+
+	/**
 	 *  Set the value <code>v</code> as the value of the Bounded Object.
 	 *
 	 *  @param v the value to be set.
@@ -169,6 +218,7 @@ abstract public class AbstractBounded<N extends Comparable<N>> {
 
 			value = v;
 		}
+		valueChanged();
 	}
 
 	/** Sets the value of the <code>Bounded</code> object.
@@ -176,4 +226,60 @@ abstract public class AbstractBounded<N extends Comparable<N>> {
 	 *  @param s  will be converted to the value type of the <code>Bounded</code> object.
 	 */
 	public abstract void setValue(String s);
+
+	/** 
+ 	 * Clamps the value of the <code>Bounded</code> object.
+	 */
+	public abstract N clamp(N value);
+
+
+	/**
+ 	 * Adds a listener that will listen for changes to this object
+ 	 *
+ 	 *  @param changeListener listener object
+ 	 */
+	public void addListener(BoundedChangeListener<N> changeListener) {
+		if (listeners == null)
+			listeners = new ArrayList<BoundedChangeListener<N>>();
+
+		synchronized (listeners) {
+			listeners.add(changeListener);
+		}
+	}
+
+	/**
+ 	 * Removes a listener from the list that will listen for changes to this object
+ 	 *
+ 	 *  @param changeListener listener object
+ 	 */
+	public void removeListener(BoundedChangeListener<N> changeListener) {
+		if (listeners != null && listeners.contains(changeListener))
+			synchronized (listeners) {
+				listeners.remove(changeListener);
+			}
+	}
+
+	/**
+ 	 * Alert all listeners that the bounds have changed
+ 	 */
+	private void boundsChanged() {
+		if (listeners == null) return;
+		synchronized (listeners) {
+			for (BoundedChangeListener<N> listener: listeners) {
+				listener.boundsChanged(this);
+			}
+		}
+	}
+
+	/**
+ 	 * Alert all listeners that the value has changed
+ 	 */
+	private void valueChanged() {
+		if (listeners == null) return;
+		synchronized (listeners) {
+			for (BoundedChangeListener<N> listener: listeners) {
+				listener.valueChanged(this);
+			}
+		}
+	}
 }

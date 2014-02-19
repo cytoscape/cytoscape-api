@@ -30,6 +30,7 @@ package org.cytoscape.application;
  * the <a href="http://semver.org">Semantic Versioning</a> standard
  * to ensure comprehensible backwards compatibility versioning. 
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule application-api
  */
 public interface CyVersion {
 

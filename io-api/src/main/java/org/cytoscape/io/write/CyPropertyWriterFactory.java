@@ -31,6 +31,7 @@ import java.io.OutputStream;
  * A specialization of {@link CyWriterFactory} that allows a property Object to
  * be specified and written. See {@link org.cytoscape.property.CyProperty} for details on the type of Object.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule io-api
  */
 public interface CyPropertyWriterFactory extends CyWriterFactory {
 

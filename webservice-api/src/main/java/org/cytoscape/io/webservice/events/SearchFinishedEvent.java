@@ -33,6 +33,7 @@ import org.cytoscape.io.webservice.WebServiceClient;
  * @param <T>
  *            The type of the search result.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule webservice-api
  */
 public final class SearchFinishedEvent<T> extends AbstractCyEvent<WebServiceClient> {
 

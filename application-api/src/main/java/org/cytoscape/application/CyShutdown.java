@@ -29,6 +29,7 @@ package org.cytoscape.application;
  * CytoscapeShutdownEvent such that all CytoscapeShutdownListener will be
  * notified before actually shutting down.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule application-api
  */
 public interface CyShutdown {
 	/**
@@ -37,4 +38,12 @@ public interface CyShutdown {
 	 * call {@link System#exit} with.
 	 */
 	void exit(int retVal);
+
+	/**
+	 * Calling this method indicates that the application should shutdown.
+	 * @param retVal The return value with which to (eventually)
+	 * @param force If true, force shutdown without prompting user
+	 * call {@link System#exit} with.
+	 */
+	void exit(int retVal, boolean force);
 }

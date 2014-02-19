@@ -35,6 +35,7 @@ import javax.swing.LayoutStyle;
  * Simple status bar with 3 fields.
  * 
  * @CyAPI.Final.Class 
+ * @CyAPI.InModule swing-util-api
  */
 public final class JStatusBar extends JPanel {
 	

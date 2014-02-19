@@ -32,6 +32,7 @@ import org.cytoscape.event.AbstractCyEvent;
 /**
  * This event signals that a Network has been destroyed.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule model-api
  */
 public final class NetworkDestroyedEvent extends AbstractCyEvent<CyNetworkManager> {
 	/**

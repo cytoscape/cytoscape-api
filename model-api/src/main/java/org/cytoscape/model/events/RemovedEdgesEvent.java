@@ -33,6 +33,7 @@ import org.cytoscape.model.CyNetwork;
  * Just a signal in case anyone wants to 
  * resync after an edge has been removed.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule model-api
  */
 public final class RemovedEdgesEvent extends AbstractCyEvent<CyNetwork> {
 	/**

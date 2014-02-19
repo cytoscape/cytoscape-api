@@ -32,9 +32,10 @@ import org.cytoscape.view.vizmap.VisualMappingFunction;
 /**
  * VisualMappingFunctions should fire this event when the contents of the mapping
  * modified.
- *
+ * @CyAPI.InModule vizmap-api
  */
 @SuppressWarnings("rawtypes")
+// TODO: This really should be a final class but changing it now would break API
 public class VisualMappingFunctionChangedEvent extends
 		AbstractCyPayloadEvent<VisualMappingFunction, VisualMappingFunctionChangeRecord> {
 

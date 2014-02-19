@@ -6,7 +6,7 @@ package org.cytoscape.view.vizmap;
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2013 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -24,6 +24,11 @@ package org.cytoscape.view.vizmap;
  * #L%
  */
 
+/**
+ * TODO: Missing documentation
+ * @CyAPI.Spi.Interface
+ * @CyAPI.InModule vizmap-api
+ */
 public interface VisualPropertyDependencyFactory<T> {
 	
 	VisualPropertyDependency<T> createVisualPropertyDependency();

@@ -56,6 +56,8 @@ import javax.swing.event.ListSelectionListener;
  * <p>
  *     Customized by Keiichiro Ono
  * </p>
+ * 
+ * @CyAPI.InModule swing-util-api
  */
 public class CheckBoxJList extends JList implements ListSelectionListener	 {
 	

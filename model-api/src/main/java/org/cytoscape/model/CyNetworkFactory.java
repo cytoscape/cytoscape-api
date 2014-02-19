@@ -30,6 +30,7 @@ package org.cytoscape.model;
  * objects. The CyNetworkFactory should be available as an
  * OSGi service.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule model-api
  */
 public interface CyNetworkFactory {
 	/**

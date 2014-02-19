@@ -28,8 +28,8 @@ import java.util.Map;
 
 /**
  * A marker interface that indicates that the TaskManager in question will
- * execute the tasks found in the TaskFactory synchronously, rather than
- * asynchronously.
+ * execute the tasks found in the TaskFactory synchronously with the current thread,
+ * blocking code execution until all tasks finish.
  * @param <T> The generic type of this SynchronousTaskManager.
  * @CyAPI.Api.Interface
  * @CyAPI.InModule work-api

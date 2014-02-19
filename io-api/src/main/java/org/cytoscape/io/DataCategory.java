@@ -27,45 +27,57 @@ package org.cytoscape.io;
 /**
  * An enum that captures the types of data the IO package can read and write.
  * @CyAPI.Enum.Class
+ * @CyAPI.InModule io-api
  */
 public enum DataCategory {
 	/** 
 	* Data to be import/export is NETWORK
 	*/ 
-	NETWORK, 
+	NETWORK("Network"), 
 	
 	/** 
 	* Data to be import/export is Table
 	*/ 
-	TABLE, 
+	TABLE("Table"), 
 	
 	/** 
 	* Data to be import/export is Image
 	*/ 
-	IMAGE, 
+	IMAGE("Image"), 
 	
 	/** 
 	* Data to be import/export is Properties
 	*/ 
-	PROPERTIES, 
+	PROPERTIES("Properties"), 
 	
 	/** 
 	* Data to be import/export is CySession
 	*/ 
-	SESSION, 
+	SESSION("Session"), 
 	
 	/** 
 	 * Data to be import/export is VizMap
 	 */ 
-	VIZMAP, 
+	VIZMAP("Style"), 
 	
 	/**
 	 * Data to be imported is Script file
 	 */
-	SCRIPT,
+	SCRIPT("Script"),
 	
 	/** 
 	* Data to be import/export is not specified (unknown)
 	*/ 
-	UNSPECIFIED;
+	UNSPECIFIED("Unspecified");
+	
+	
+	private final String displayName;
+
+	private DataCategory(final String displayName) {
+		this.displayName = displayName;
+	}
+	
+	public String getDisplayName() {
+		return displayName;
+	}
 }

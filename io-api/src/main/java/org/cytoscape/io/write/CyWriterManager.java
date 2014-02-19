@@ -34,6 +34,7 @@ import org.cytoscape.io.CyFileFilter;
  * and provides a mechanism for choosing the {@link CyWriterFactory} given a particular
  * file type.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule io-api
  */
 public interface CyWriterManager<W extends CyWriterFactory> {
 

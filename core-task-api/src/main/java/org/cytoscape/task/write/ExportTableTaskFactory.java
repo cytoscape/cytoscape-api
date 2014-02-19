@@ -33,6 +33,8 @@ import org.cytoscape.work.TaskIterator;
 /**
  * This task factory provides a task iterator for writing a specified
  * table to a specified file.
+ * @CyAPI.Api.Interface
+ * @CyAPI.InModule core-task-api
  */
 public interface ExportTableTaskFactory extends TableTaskFactory {
 	

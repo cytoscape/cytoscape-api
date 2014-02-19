@@ -35,6 +35,7 @@ import org.cytoscape.model.CyNetwork;
 /**
  * An event fired when an edge is added to a network. 
  * @CyAPI.Final.Class
+ * @CyAPI.InModule model-api
  */
 public final class AddedEdgesEvent extends AbstractCyPayloadEvent<CyNetwork, CyEdge> {
 

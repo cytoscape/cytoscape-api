@@ -33,6 +33,7 @@ import org.cytoscape.work.TaskIterator;
  * This interface provides a task iterator for saving a session in a
  * specified file.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule core-task-api
  */
 public interface SaveSessionAsTaskFactory extends TaskFactory{
 	

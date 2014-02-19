@@ -25,14 +25,18 @@ package org.cytoscape.task.read;
  */
 
 import java.net.URL;
+import java.util.Collection;
 
+import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.work.TaskFactory;
 import org.cytoscape.work.TaskIterator;
+import org.cytoscape.work.TaskObserver;
 
 /**
  * This interface provides a task iterator for loading a URL into a network.
  * 
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule core-task-api
  */
 public interface LoadNetworkURLTaskFactory extends TaskFactory {
 
@@ -47,4 +51,15 @@ public interface LoadNetworkURLTaskFactory extends TaskFactory {
 	 */
 	TaskIterator loadCyNetworks(final URL url);
 
+	/**
+	 * Creates a task iterator for loading a URL into a network. The created
+	 * task runs synchronously in the current thread and does not create a task
+	 * monitor.
+	 * 
+	 * @param url
+	 *            the URL for loading into the network.
+	 * @param observer a TaskObserver that wants to know when we're done
+	 * @return a task iterator of type {@link TaskIterator}.
+	 */
+	TaskIterator createTaskIterator(final URL url, TaskObserver observer);
 }

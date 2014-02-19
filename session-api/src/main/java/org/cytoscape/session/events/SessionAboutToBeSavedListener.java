@@ -28,7 +28,7 @@ import org.cytoscape.event.CyListener;
 
 /**
  * Any object that needs to know that a {@link org.cytoscape.session.CySession} is about to be
- * created listen to this event.  Additionally, apps can set
+ * created should listen to this event.  Additionally, apps can set
  * a list of files to be saved in the CySession using the
  * appropriate method in the {@link SessionAboutToBeSavedEvent}.
  * @CyAPI.Spi.Interface

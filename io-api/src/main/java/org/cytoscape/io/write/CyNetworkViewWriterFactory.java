@@ -34,6 +34,7 @@ import org.cytoscape.view.model.CyNetworkView;
  * {@link CyNetworkView} or {@link CyNetwork} to be specified 
  * and written to an OutputStream.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule io-api
  */
 public interface CyNetworkViewWriterFactory extends CyWriterFactory {
 

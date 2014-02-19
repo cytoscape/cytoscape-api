@@ -30,6 +30,8 @@ import org.cytoscape.view.model.View;
 
 /**
  * An EdgeViewTaskFactory that is always ready to produce a TaskIterator.
+ * @CyAPI.Abstract.Class
+ * @CyAPI.InModule core-task-api
  */
 public abstract class AbstractEdgeViewTaskFactory implements EdgeViewTaskFactory {
 	/**

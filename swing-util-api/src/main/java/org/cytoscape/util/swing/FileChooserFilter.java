@@ -34,6 +34,7 @@ import javax.swing.filechooser.FileFilter;
  * them.
  * 
  * @CyAPI.Final.Class
+ * @CyAPI.InModule swing-util-api
  */
 public final class FileChooserFilter extends FileFilter {
 

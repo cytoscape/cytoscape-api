@@ -29,6 +29,7 @@ import java.util.EventObject;
  * really only adds event listener support.  All other methods
  * should be probably be overridden.
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule swing-util-api
  */
 public abstract class AbstractCellEditor implements CellEditor {
 	

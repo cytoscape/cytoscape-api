@@ -44,6 +44,7 @@ import org.osgi.framework.BundleContext;
  * the {@code unregisterService} methods when the bundle is stopped.
  *
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule service-api
  */
 public interface CyServiceRegistrar {
 

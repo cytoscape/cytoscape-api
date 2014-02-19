@@ -29,6 +29,7 @@ package org.cytoscape.view.model;
  *
  * @param <T> The generic type of this ContinuousRange.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule viewmodel-api
  */
 public class ContinuousRange<T> implements Range<T> {
 

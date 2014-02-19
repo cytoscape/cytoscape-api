@@ -31,6 +31,7 @@ import org.cytoscape.model.CyNetwork;
  * Factory for {@link CyNetworkView} objects.
  * Modules which need to create view models should import this as a service.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule viewmodel-api
  */
 public interface CyNetworkViewFactory {
 	

@@ -37,6 +37,7 @@ import java.util.List;
  * String, Integer, Long, Double, Boolean, and Lists of those five
  * types.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule model-api
  */
 public interface CyTable extends CyIdentifiable {
 	/**
@@ -213,24 +214,9 @@ public interface CyTable extends CyIdentifiable {
 	boolean deleteRows(Collection<?> primaryKeys);
 	
 	/**
-	 * Return a list of all the rows stored in this data table.
-     * <p>
-     * <i>WARNING.</i> If this method is invoked multiple times,
-     * rows may not be returned in the same order.
-     * If you need to iterate through
-     * rows in the same order:
-     * <ol>
-     *  <li>
-     *   create your own ordered list of the table's primary keys
-     *  </li>
-     *  <li>
-     *   loop through your list of primary keys
-     *  </li>
-     *  <li>
-     *   in each loop iteration, obtain the row using {@link #getRow}.
-     *  </li>
-     * </ol>
-     * </p>
+	 * Return a list of all the rows stored in this data table. The order of the rows
+	 * in the list corresponds to the order in which the rows have been inserted in the table.
+     * 
 	 * @return a list of all the rows stored in this data table.
 	 */
 	List<CyRow> getAllRows();

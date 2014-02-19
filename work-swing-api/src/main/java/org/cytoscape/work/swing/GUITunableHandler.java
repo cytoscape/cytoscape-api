@@ -37,6 +37,7 @@ import org.cytoscape.work.TunableHandler;
  * Any implementation of this interface should extend {@link AbstractGUITunableHandler}
  * to avoid the difficult handling of dependencies!
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule work-swing-api
  */
 public interface GUITunableHandler extends TunableHandler {
 

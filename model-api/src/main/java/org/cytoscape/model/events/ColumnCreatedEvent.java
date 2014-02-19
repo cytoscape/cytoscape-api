@@ -32,6 +32,7 @@ import org.cytoscape.model.CyTable;
  *<p>
  * This should probably return the type parameter as well. 
  * @CyAPI.Final.Class
+ * @CyAPI.InModule model-api
  */
 public final class ColumnCreatedEvent extends AbstractColumnEvent {
 	/**

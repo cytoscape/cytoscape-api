@@ -36,6 +36,7 @@ import java.util.Set;
  * A collection of state-less, static utility methods provided to
  * simplify querying of table objects.
  * @CyAPI.Static.Class
+ * @CyAPI.InModule model-api
  */
 public class CyTableUtil {
 	private CyTableUtil() { }

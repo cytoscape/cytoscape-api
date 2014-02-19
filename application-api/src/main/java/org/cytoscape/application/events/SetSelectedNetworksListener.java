@@ -29,6 +29,7 @@ import org.cytoscape.event.CyListener;
 /**
  * A listener for {@link SetSelectedNetworksEvent}s.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule application-api
  */
 public interface SetSelectedNetworksListener extends CyListener {
 	/**

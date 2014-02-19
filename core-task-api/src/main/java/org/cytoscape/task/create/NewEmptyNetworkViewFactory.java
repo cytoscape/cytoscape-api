@@ -30,6 +30,7 @@ import org.cytoscape.work.TaskFactory;
 /**
  * An interface for creating new, empty network views.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule core-task-api
  */
 public interface NewEmptyNetworkViewFactory{
 

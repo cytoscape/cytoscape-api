@@ -51,6 +51,7 @@ import org.cytoscape.model.CyIdentifiable;
  * </p>
  * 
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule viewmodel-api
  */
 public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 

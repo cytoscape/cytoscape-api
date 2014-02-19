@@ -31,6 +31,7 @@ import java.util.Set;
  * A RenderingEngine should provide <strong>one, immutable</strong> lexicon implementing this interface.
  * This is a pre-defined tree of VisualProperties designed by the RenderingEngine developer.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule viewmodel-api
  */
 public interface VisualLexicon {
 	

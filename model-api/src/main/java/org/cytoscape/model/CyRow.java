@@ -32,6 +32,7 @@ import java.util.Map;
 /**
  * This interface represents one row in a CyTable.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule model-api
  */
 public interface CyRow {
 	/**

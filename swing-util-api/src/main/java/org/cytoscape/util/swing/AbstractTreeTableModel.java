@@ -42,6 +42,7 @@ import javax.swing.tree.TreePath;
  * of listeners.
  * @author Philip Milne
  * @CyAPI.Abstract.Class 
+ * @CyAPI.InModule swing-util-api
  */
 public abstract class AbstractTreeTableModel implements TreeTableModel {
 	/**

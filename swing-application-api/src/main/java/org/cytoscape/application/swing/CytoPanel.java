@@ -25,7 +25,6 @@ package org.cytoscape.application.swing;
  */
 
 
-import javax.swing.*;
 import java.awt.*;
 
 
@@ -34,6 +33,7 @@ import java.awt.*;
  *
  * @author Ben Gross.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule swing-application-api
  */
 public interface CytoPanel {
 
@@ -65,7 +65,7 @@ public interface CytoPanel {
 	 * @return component at the given index.
 	 */
 	public Component getComponentAt(int index);
-
+	
 	/**
 	 * Gets the state of the CytoPanel.
 	 *
@@ -81,6 +81,22 @@ public interface CytoPanel {
 	 */
 	public int indexOfComponent(Component component);
 
+	/**
+	 * Returns the index for the component that has the specified identifier.
+	 * The identifier must be the same one provided by {@link CytoPanelComponent2#getIdentifier()}.
+	 * <br>
+	 * These are the identifiers of the core Cytoscape components that implement {@link CytoPanelComponent2}:
+	 * <ul>
+	 *   <li><code>"org.cytoscape.Network"</code></li>
+	 *   <li><code>"org.cytoscape.Style"</code></li>
+	 *   <li><code>"org.cytoscape.Filter"</code></li>
+	 * </ul>
+	 * 
+	 * @param identifier The String that identifies the component.
+	 * @return int Index of the Component or -1 if not found.
+	 */
+	public int indexOfComponent(String identifier);
+	
 	/**
 	 * Sets the selected index on the CytoPanel.
 	 *

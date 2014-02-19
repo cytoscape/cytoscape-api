@@ -30,6 +30,7 @@ import org.cytoscape.event.CyListener;
  * Listener for {@linkplain FitContentEvent}.
  * 
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule viewmodel-api
  */
 public interface FitContentListener extends CyListener {
 	

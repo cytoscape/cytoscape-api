@@ -29,6 +29,7 @@ import org.cytoscape.model.CyRow;
 /**
  * Holds a record of a {@link CyRow} that was set and what it was set to.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule model-api
  */
 public final class RowSetRecord {
 	private final CyRow row;

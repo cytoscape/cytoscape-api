@@ -31,6 +31,7 @@ import org.cytoscape.view.model.View;
 /**
  * A NodeViewTaskFactory that is always ready to produce a TaskIterator.
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule core-task-api
  */
 public abstract class AbstractNodeViewTaskFactory implements NodeViewTaskFactory {
 	/**

@@ -54,6 +54,7 @@ import org.slf4j.LoggerFactory;
  * @author Philip Milne
  * @author Scott Violet
  * @CyAPI.Final.Class 
+ * @CyAPI.InModule swing-util-api
  */
 public final class JTreeTable extends JTable {
 	

@@ -27,6 +27,11 @@ package org.cytoscape.view.vizmap.events;
 import org.cytoscape.event.AbstractCyEvent;
 import org.cytoscape.view.vizmap.VisualStyle;
 
+/**
+ * TODO: Missing documentation
+ * @CyAPI.Final.Class
+ * @CyAPI.InModule vizmap-api
+ */
 public final class SetCurrentVisualStyleEvent extends AbstractCyEvent<Object> {
 
 	private final VisualStyle style;

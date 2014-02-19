@@ -35,6 +35,8 @@ import java.util.List;
  * Aggregators to the group aggregation mechanism.  It is
  * meant to be used by apps that want to extend the aggregation
  * mechanism for types not supported by the built-in aggregators.
+ * @CyAPI.Api.Class
+ * @CyAPI.InModule group-api
  */
 public interface CyGroupAggregationManager {
 	/**

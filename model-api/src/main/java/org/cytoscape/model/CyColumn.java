@@ -30,6 +30,7 @@ import java.util.List;
 
 /** This class describes a column in a CyTable. 
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule model-api
  */
 public interface CyColumn {
 	/** 

@@ -24,17 +24,20 @@ package org.cytoscape.task.read;
  * #L%
  */
 
+import java.io.File;
+import java.io.InputStream;
+import java.util.Set;
+
 import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.work.TaskFactory;
 import org.cytoscape.work.TaskIterator;
-
-import java.util.Set;
-import java.io.File;
-import java.io.InputStream;
+import org.cytoscape.work.TaskObserver;
 
 /**
  * An interface for loading styles from files. 
  * This interface also provides a task iterator for loading files into visual styles.
+ * @CyAPI.Api.Interface
+ * @CyAPI.InModule core-task-api
  */
 public interface LoadVizmapFileTaskFactory extends TaskFactory{
 
@@ -61,4 +64,14 @@ public interface LoadVizmapFileTaskFactory extends TaskFactory{
 	 * @return A task iterator of type {@link TaskIterator}.
 	 */
 	TaskIterator createTaskIterator(File file);
+
+	/**
+	 * Creates a task iterator for loading files into visual styles.
+	 * The created task runs synchronously in the current thread and does not
+	 * create a task monitor.
+	 * @param file The file containing visual styles to be read.
+	 * @param observer A TaskObserver that wants to know when we're done
+	 * @return A task iterator of type {@link TaskIterator}.
+	 */
+	TaskIterator createTaskIterator(File file, TaskObserver observer);
 }

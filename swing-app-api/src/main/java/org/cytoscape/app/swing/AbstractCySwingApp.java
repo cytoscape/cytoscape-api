@@ -33,6 +33,7 @@ import org.cytoscape.app.AbstractCyApp;
  * which provides access to Swing specific services.  All other
  * services from CyAppAdapter will still be available.
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule swing-app-api
  */
 public abstract class AbstractCySwingApp extends AbstractCyApp {
 

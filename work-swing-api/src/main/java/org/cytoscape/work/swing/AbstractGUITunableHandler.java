@@ -27,6 +27,7 @@ package org.cytoscape.work.swing;
 
 import java.awt.Component;
 import java.awt.Container;
+import java.awt.Font;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -41,14 +42,22 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-/** Base class for the various Swing implementations of <code>TunableHandler</code>. 
+/**
+ * Base class for the various Swing implementations of <code>TunableHandler</code>. 
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule work-swing-api
  */
 public abstract class AbstractGUITunableHandler
 	extends AbstractTunableHandler implements GUITunableHandler 
 {
 
 	private static final Logger logger = LoggerFactory.getLogger(AbstractGUITunableHandler.class);
+
+	/**
+ 	 * The default label font.  We have it here for consistency.
+ 	 */
+	protected static final Font LABEL_FONT = new Font("SansSerif", Font.BOLD, 12);
+
 
 	/**
 	 *  If true, the associated GUI element should be laid out next to others in the same group,

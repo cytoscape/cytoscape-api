@@ -33,6 +33,7 @@ import org.cytoscape.model.CyTable;
 /**
  * This event signals that a column has been deleted.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule model-api
  */
 public final class ColumnDeletedEvent extends AbstractColumnEvent {
 	/**

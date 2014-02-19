@@ -35,6 +35,7 @@ import org.cytoscape.model.CyNetwork;
  * allow them to appropriately visualize the group.
  *
  * @CyAPI.Final.Class
+ * @CyAPI.InModule group-api
  */
 public final class GroupAddedToNetworkEvent extends AbstractGroupEvent {
 	/**

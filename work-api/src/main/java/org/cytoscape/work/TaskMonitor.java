@@ -45,8 +45,8 @@ public interface TaskMonitor {
 	/**
 	 * Sets the progress completed by the <code>Task</code>.
 	 *
-	 * @param progress Usually a value between <code>0.0</code> and <code>1.0</code>.
-	 * A negative value is used to specify an indefinite progress bar.
+	 * @param progress A value between <code>0.0</code> and <code>1.0</code>. Any negative value
+     * sets the progress bar to an indefinite state.
 	 */
 	public void setProgress(double progress);
 
@@ -56,4 +56,35 @@ public interface TaskMonitor {
 	 * @param statusMessage String that describe what a Task is currently doing.
 	 */
 	public void setStatusMessage(String statusMessage);
+
+	/**
+	 * Used by the {@code showMessage} method to indicate the severity of the message.
+	 */
+	public static enum Level {
+		/**
+		 * A message that is informational to the user.
+		 */
+		INFO,
+
+		/**
+		 * A message that warns the user about recoverable errors the task has experienced.
+		 */
+		WARN,
+
+		/**
+		 * A message that informs the user that a non-recoverable error has occured.
+		 * Typically after an error message has been shown, the task should stop
+		 * execution.
+		 */
+		ERROR
+	}
+
+	/**
+	 * Shows a message to the user. This method can be called throughout
+	 * the course of the <code>run</code> method.
+	 * This method should <i>not</i> be used for debugging purposes.
+	 * Either use {@code System.out.println} or a logger to issue
+	 * debug messages.
+	 */
+	public void showMessage(Level level, String message);
 }

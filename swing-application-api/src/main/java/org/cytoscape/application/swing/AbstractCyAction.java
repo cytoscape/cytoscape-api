@@ -24,11 +24,14 @@ package org.cytoscape.application.swing;
  * #L%
  */
 
+import java.beans.PropertyChangeEvent;
+import java.beans.PropertyChangeListener;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.Map;
 
 import javax.swing.AbstractAction;
+import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.KeyStroke;
 import javax.swing.event.MenuEvent;
@@ -64,15 +67,19 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 
 	/**
 	 * The float value placing the action within the menu.
-	 * Value of 0.0 is the beginning and 100.0 means end of menu.
+	 * Value of 0.0 is the beginning and -1.0 means to sort alphabetically.
+	 * App developers are strongly encouraged to set specific gravities
+	 * within your own menus.
 	 */
 	protected float menuGravity = 100.0f;
 
 	/**
 	 * The float value placing the action within the toolbar.
-	 * Value of 0.0 is the beginning and 100.0 means end of menu.
+	 * Value of 0.0 is the beginning and -1.0 means to sort alphabetically.
+	 * App developers are strongly encouraged to set specific gravities
+	 * within your own menus.
 	 */
-	protected float toolbarGravity = 100.0f;
+	protected float toolbarGravity = -1.0f;
 
 	/**
 	 * Indicates whether accelerator keys have been set for the action.
@@ -99,11 +106,26 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 */
 	protected boolean inMenuBar = true;
 
+	/**
+	 * Indicates whether a separator should be inserted before this item
+	 */
+	protected boolean insertSeparatorBefore = false;
+
+	/**
+	 * Indicates whether a separator should be inserted after this item
+	 */
+	protected boolean insertSeparatorAfter = false;
 
 	/**
 	 * The name of the action.
 	 */
 	protected String name;
+
+	/**
+ 	 * The configuration properties.  Adding it here allows extensions of
+ 	 * this class to pass their own properties.
+ 	 */
+	protected Map<String, String> configurationProperties; 
 
 	/**
 	 * A support class for deciding whether the action should be enabled.
@@ -118,6 +140,22 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	public AbstractCyAction(final String name) {
 		super(name);
 		this.enabler = new AlwaysEnabledEnableSupport(this);
+		addNameChangeListener();
+	}
+
+	private void addNameChangeListener() {
+		name = (String) getValue(Action.NAME);
+		
+		addPropertyChangeListener(new PropertyChangeListener() {
+			@Override
+			public void propertyChange(PropertyChangeEvent event) {
+				if (!Action.NAME.equals(event.getPropertyName())) {
+					return;
+				}
+				
+				name = (String) event.getNewValue();
+			}
+		});
 	}
 
 	/**
@@ -133,6 +171,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 			final CyNetworkViewManager networkViewManager) {
 		super(name);
 		this.enabler = new ActionEnableSupport(this, enableFor, applicationManager, networkViewManager);
+		addNameChangeListener();
 	}
 
 	/**
@@ -150,10 +189,12 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *            <li>tooltip - (The toolbar or menu tooltip.)</li>
 	 *            <li>inToolBar - (Whether the action should be in the toolbar.)</li>
 	 *            <li>inMenuBar - (Whether the action should be in a menu.)</li>
+	 *            <li>insertSeparatorBefore - (Whether a separator should be inserted before this menu item.)</li>
+	 *            <li>insertSeparatorAfter - (Whether a separator should be inserted after this menu item.)</li>
 	 *            <li>enableFor - (System state that the action should be enabled for. See {@link ActionEnableSupport} for more detail.)</li>
 	 *            <li>accelerator - (Accelerator key bindings.)</li>
-	 *            <li>menuGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the menu.)</li>
-	 *            <li>toolBarGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the toolbar.)</li>
+	 *            <li>menuGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the menu.)</li>
+	 *            <li>toolBarGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the toolbar.)</li>
 	 *            </ul>
 	 * @param applicationManager
 	 *            The application manager providing context for this action.
@@ -163,6 +204,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		this(configProps.get(TITLE), applicationManager, configProps.get(ENABLE_FOR), networkViewManager);
 
 		configFromProps(configProps);
+		addNameChangeListener();
 	}
 
 	/**
@@ -180,10 +222,12 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *            <li>tooltip - (The toolbar or menu tooltip.)</li>
 	 *            <li>inToolBar - (Whether the action should be in the toolbar.)</li>
 	 *            <li>inMenuBar - (Whether the action should be in a menu.)</li>
+	 *            <li>insertSeparatorBefore - (Whether a separator should be inserted before this menu item.)</li>
+	 *            <li>insertSeparatorAfter - (Whether a separator should be inserted after this menu item.)</li>
 	 *            <li>enableFor - (<i>Ingored in this constructor and TaskFactoryPredicate is used instead!</i>)</li>
 	 *            <li>accelerator - (Accelerator key bindings.)</li>
-	 *            <li>menuGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the menu.)</li>
-	 *            <li>toolBarGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the toolbar.)</li>
+	 *            <li>menuGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the menu.)</li>
+	 *            <li>toolBarGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the toolbar.)</li>
 	 *            </ul>
 	 * @param predicate
 	 *            The task factory predicate that indicates whether or not this 
@@ -194,6 +238,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		
 		this.enabler = new TaskFactoryEnableSupport(this, predicate);
 		configFromProps(configProps);
+		addNameChangeListener();
 	}
 
 	/**
@@ -211,11 +256,13 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *            <li>tooltip - (The toolbar or menu tooltip.)</li>
 	 *            <li>inToolBar - (Whether the action should be in the toolbar.)</li>
 	 *            <li>inMenuBar - (Whether the action should be in a menu.)</li>
+	 *            <li>insertSeparatorBefore - (Whether a separator should be inserted before this menu item.)</li>
+	 *            <li>insertSeparatorAfter - (Whether a separator should be inserted after this menu item.)</li>
 	 *            <li>enableFor - (<i>Will only use this value if the TaskFactory is not a TaskFactoryPredicate!</i> 
 	 *                             See {@link ActionEnableSupport} for more detail.)</li>
 	 *            <li>accelerator - (Accelerator key bindings.)</li>
-	 *            <li>menuGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the menu.)</li>
-	 *            <li>toolBarGravity - (Float value between 0.0 [top] and 100.0 [bottom] placing the action in the toolbar.)</li>
+	 *            <li>menuGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the menu.)</li>
+	 *            <li>toolBarGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the toolbar.)</li>
 	 *            </ul>
 	 * @param applicationManager
 	 *            The application manager providing context for this action.
@@ -238,11 +285,14 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 			this.enabler = new ConjunctionEnableSupport(this, actionEnabler, taskFactoryEnabler);
 		}
 		configFromProps(configProps);
+		addNameChangeListener();
 	}
 
 	private void configFromProps(final Map<String, String> configProps) {
 
 		logger.debug("New CyAction with title: " + configProps.get(TITLE));
+
+		configurationProperties = configProps;
 
 		final String prefMenu = configProps.get(PREFERRED_MENU);
 
@@ -271,6 +321,16 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 
 		if (foundInMenuBar != null  && Boolean.parseBoolean(foundInMenuBar))
 			inMenuBar = true;
+
+		final String foundInsertSeparatorBefore = configProps.get(INSERT_SEPARATOR_BEFORE);
+
+		if (foundInsertSeparatorBefore != null  && Boolean.parseBoolean(foundInsertSeparatorBefore))
+			insertSeparatorBefore = true;
+
+		final String foundInsertSeparatorAfter = configProps.get(INSERT_SEPARATOR_AFTER);
+
+		if (foundInsertSeparatorAfter != null  && Boolean.parseBoolean(foundInsertSeparatorAfter))
+			insertSeparatorAfter = true;
 
 		final String keyComboString = configProps.get(ACCELERATOR);
 
@@ -309,7 +369,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * @param name The name of the action.
 	 */
 	public void setName(final String name) {
-		this.name = name;
+		putValue(Action.NAME, name);
 	}
 
 	/**
@@ -339,6 +399,26 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	@Override
 	public boolean isInToolBar() {
 		return inToolBar;
+	}
+
+	/**
+	 * Insert a separator before this menu item.  
+	 *
+	 * @return true if this Action should have a separator before it
+	 */
+	@Override
+	public boolean insertSeparatorBefore() {
+		return insertSeparatorBefore;
+	}
+
+	/**
+	 * Insert a separator after this menu item. 
+	 *
+	 * @return true if this Action should have a separator after it
+	 */
+	@Override
+	public boolean insertSeparatorAfter() {
+		return insertSeparatorAfter;
 	}
 
 	/**
@@ -496,6 +576,14 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	@Override
 	public void updateEnableState() {
 		enabler.updateEnableState();
+	}
+
+	/**
+ 	 * Return the config props. 
+ 	 */
+	@Override
+	public Map<String,String> getProperties() {
+		return configurationProperties;
 	}
 
 	

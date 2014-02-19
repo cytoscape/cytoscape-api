@@ -30,6 +30,7 @@ package org.cytoscape.model;
  * {@link CyTable} objects.  This factory will be
  * provided as a service through Spring/OSGi.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule model-api
  */
 public interface CyTableFactory {
 	/** 

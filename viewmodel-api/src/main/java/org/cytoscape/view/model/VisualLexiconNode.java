@@ -35,6 +35,7 @@ import java.util.HashSet;
  * All data fields are immutable. 
  * 
  * @CyAPI.Final.Class
+ * @CyAPI.InModule viewmodel-api
  */
 public final class VisualLexiconNode implements Comparable<VisualLexiconNode> {
 	

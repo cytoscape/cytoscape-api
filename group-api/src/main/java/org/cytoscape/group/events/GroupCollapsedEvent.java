@@ -35,6 +35,7 @@ import org.cytoscape.model.CyNetwork;
  * a particular network.
  *
  * @CyAPI.Final.Class
+ * @CyAPI.InModule group-api
  */
 public final class GroupCollapsedEvent extends AbstractGroupEvent {
 	private boolean collapsed;

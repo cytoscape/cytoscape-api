@@ -134,7 +134,6 @@ public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 			// Calculate the percent done overall
 			double pDone = (nodesDone+current_start)/total_nodes;
 			taskMonitor.setProgress(pDone);
-			taskMonitor.setStatusMessage("Completed " + (int)(pDone*100) + "%");
 		}
 	}
 

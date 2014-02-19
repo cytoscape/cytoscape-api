@@ -32,6 +32,7 @@ import org.cytoscape.model.CyNetwork;
 /**
  * An event signaling that the a network has been set to current.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule application-api
  */
 public final class SetCurrentNetworkEvent extends AbstractCyEvent<CyApplicationManager> {
 

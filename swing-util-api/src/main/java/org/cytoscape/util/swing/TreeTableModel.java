@@ -51,6 +51,7 @@ import javax.swing.tree.TreeModel;
  * @author Philip Milne
  * @author Scott Violet
  * @CyAPI.Spi.Interface 
+ * @CyAPI.InModule swing-util-api
  */
 public interface TreeTableModel extends TreeModel {
 	/**

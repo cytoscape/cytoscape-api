@@ -49,6 +49,9 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	private final Method setter;
 	private final Reference<?> instance;
 	private final Tunable tunable;
+	public static final String TOOLTIP = "tooltip";
+	public static final String GRAVITY = "gravity";
+	public static final String CONTEXT = "context";
 
 	/** 
 	 * Standard base class constructor for <code>TunableHandler</code>s that deal with
@@ -126,7 +129,7 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	public final String[] getGroups() {
 		return tunable.groups();
 	}
-
+	
 	/**
 	 * {@inheritDoc}
 	 */
@@ -181,6 +184,9 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	public final Properties getParams() throws IllegalArgumentException {
 		final String rawString = tunable.params();
 		final Properties keyValuesPairs = new Properties();
+		keyValuesPairs.put(GRAVITY, Double.toString(tunable.gravity()));
+		keyValuesPairs.put(TOOLTIP, tunable.tooltip());
+		keyValuesPairs.put(CONTEXT, tunable.context());
 
 		StringBuilder key = null;
 		StringBuilder value = null;
@@ -245,5 +251,26 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 		}
 
 		return keyValuesPairs;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public final String getContext() {
+		return tunable.context();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public final String getTooltip() {
+		return tunable.tooltip();
+	}
+
+	/**
+	 * {@inheritDoc}
+	 */
+	public final double getGravity() {
+		return tunable.gravity();
 	}
 }

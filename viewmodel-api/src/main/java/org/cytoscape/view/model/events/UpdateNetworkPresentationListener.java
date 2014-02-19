@@ -31,6 +31,7 @@ import org.cytoscape.event.CyListener;
  * presentation layer objects implements this event handler and redraw the
  * presentation (visualization) once it catches this event.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule viewmodel-api
  */
 public interface UpdateNetworkPresentationListener extends CyListener {
 

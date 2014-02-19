@@ -34,6 +34,7 @@ import org.cytoscape.work.TaskIterator;
  * This interface provides a task iterator for selecting items based on a file.
  * The file should be a simple text file with one identifier per line.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule core-task-api
  */
 public interface SelectFromFileListTaskFactory extends NetworkTaskFactory {
 	

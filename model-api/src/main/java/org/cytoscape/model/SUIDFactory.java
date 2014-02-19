@@ -29,6 +29,7 @@ import java.util.concurrent.atomic.AtomicLong;
 /**
  * This singleton class returns unique, positive SUID (session unique ID) values. 
  * @CyAPI.Static.Class
+ * @CyAPI.InModule model-api
  */
 public abstract class SUIDFactory {
 

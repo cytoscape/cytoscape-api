@@ -37,6 +37,7 @@ import org.cytoscape.view.model.VisualProperty;
  *
  * @param <T> type of {@linkplain VisualProperty} value in this group.
  * @CyAPI.Api.Interface 
+ * @CyAPI.InModule vizmap-api
  */
 public final class VisualPropertyDependency<T> {
 	

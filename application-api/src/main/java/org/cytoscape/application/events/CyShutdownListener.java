@@ -29,6 +29,7 @@ import org.cytoscape.event.CyListener;
 /**
  * The listener for the {@link CyShutdownEvent}.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule application-api
  */
 public interface CyShutdownListener extends CyListener {
 

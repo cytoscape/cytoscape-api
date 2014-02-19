@@ -30,6 +30,7 @@ package org.cytoscape.model;
  * table information for serialization and shouldn't be needed for most
  * normal use of tables.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule model-api
  */
 public interface CyTableMetadata {
 	/**

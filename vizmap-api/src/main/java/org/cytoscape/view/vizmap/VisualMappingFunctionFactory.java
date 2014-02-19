@@ -31,6 +31,7 @@ import org.cytoscape.view.model.VisualProperty;
  * be provided as an service. One mapping type should have one factory.
  * 
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule vizmap-api
  */
 public interface VisualMappingFunctionFactory {
 

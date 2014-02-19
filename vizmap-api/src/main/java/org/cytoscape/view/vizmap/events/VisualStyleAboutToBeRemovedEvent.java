@@ -32,6 +32,7 @@ import org.cytoscape.view.vizmap.VisualStyle;
  * This event will be fired when {@linkplain VisualStyle} object is removed from
  * {@linkplain VisualMappingManager}.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule vizmap-api
  */
 public final class VisualStyleAboutToBeRemovedEvent extends AbstractCyEvent<VisualMappingManager> {
 

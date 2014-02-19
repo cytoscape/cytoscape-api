@@ -33,6 +33,7 @@ import java.util.Set;
  * so that files of the specified type can be handled correctly by the
  * application and the user interface.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule io-api
  */
 public interface CyFileFilter {
 

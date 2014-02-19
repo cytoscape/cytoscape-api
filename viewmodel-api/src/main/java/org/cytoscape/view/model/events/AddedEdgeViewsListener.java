@@ -29,6 +29,7 @@ import org.cytoscape.event.CyListener;
 /**
  * Listener for {@linkplain AddedEdgeViewsEvent}.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule viewmodel-api
  */
 public interface AddedEdgeViewsListener extends CyListener {
 	

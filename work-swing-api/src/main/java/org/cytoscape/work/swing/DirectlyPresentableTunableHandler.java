@@ -26,6 +26,11 @@ package org.cytoscape.work.swing;
 
 import java.awt.Window;
 
+/**
+ * TODO: Missing documentation
+ * @CyAPI.Spi.Interface
+ * @CyAPI.InModule work-swing-api
+ */
 public interface DirectlyPresentableTunableHandler {
 
 	/**

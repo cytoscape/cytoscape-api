@@ -36,6 +36,7 @@ import org.cytoscape.model.CyIdentifiable;
  * @param <S> the base (model-level) object for which this is a View. For example, CyNode or CyEdge.
  * In the future versions, Attributes can be this parameter.
  * @CyAPI.Api.Interface 
+ * @CyAPI.InModule viewmodel-api
  */
 public interface View<S> extends CyIdentifiable {
 	
@@ -114,5 +115,11 @@ public interface View<S> extends CyIdentifiable {
 	 * @return true if the given VisualProperty's value has been locked.
 	 */
 	boolean isDirectlyLocked(VisualProperty<?> vp);
+
+
+	/**
+	 * Clear all VisualProperty values previously set to this view.
+	 */
+	void clearVisualProperties();
 	
 }

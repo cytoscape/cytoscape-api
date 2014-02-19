@@ -39,6 +39,8 @@ package org.cytoscape.group.data;
  * is no explicit mapping from attribute type to allowable attribute
  * aggregation type.  That mapping is contained within the various
  * AttributeHandlingType arrays defined below.
+ * @CyAPI.Enum.Class
+ * @CyAPI.InModule group-api
  */
 public enum AttributeHandlingType {
 	/** No aggregation. */

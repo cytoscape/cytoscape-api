@@ -31,6 +31,7 @@ import org.cytoscape.event.CyListener;
 /**
  * Listener for {@link NetworkDestroyedEvent}
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule model-api
  */
 public interface NetworkDestroyedListener extends CyListener {
 	/**

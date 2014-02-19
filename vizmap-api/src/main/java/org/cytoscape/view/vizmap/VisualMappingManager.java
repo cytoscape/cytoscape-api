@@ -42,6 +42,7 @@ import org.cytoscape.view.vizmap.events.VisualStyleAddedEvent;
  * {@linkplain VisualStyleAboutToBeRemovedEvent}.
  * </p>
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule vizmap-api
  */
 public interface VisualMappingManager {
 

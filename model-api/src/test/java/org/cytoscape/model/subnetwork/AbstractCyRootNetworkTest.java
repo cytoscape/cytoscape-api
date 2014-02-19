@@ -318,13 +318,33 @@ public abstract class AbstractCyRootNetworkTest {
 
 	@Test
 	public void testRemoveBaseNetwork() {
-		CySubNetwork base = root.getBaseNetwork();
+		// Fails if the root network has only the base subnetwork
+		final CySubNetwork base = root.getBaseNetwork();
+		
+		// Just to make sure there is only one subnetwork--the base one
+		for (CySubNetwork sn : root.getSubNetworkList()) {
+			if (!sn.equals(base))
+				root.removeSubNetwork(sn);
+		}
+		
+		boolean exceptionThrown = false;
+		
 		try {
 			root.removeSubNetwork(base);
 		} catch (IllegalArgumentException e) {
-			return;
+			exceptionThrown = true;
+		} catch (Exception e) {
+			fail("Should have thrown an IllegalArgumentException when removing a base network, not " + e.getClass());
 		}
-		fail("can't remove the base network from a root network");
+		
+		assertTrue("Should have thrown an IllegalArgumentException when removing a base network", exceptionThrown);
+		
+		// OK if the root network has more than one subnetwork
+		final CySubNetwork sn = root.addSubNetwork();
+		root.removeSubNetwork(base);
+		
+		assertEquals(1, root.getSubNetworkList().size());
+		assertTrue(sn.equals(root.getBaseNetwork()));
 	}
 
 	@Test

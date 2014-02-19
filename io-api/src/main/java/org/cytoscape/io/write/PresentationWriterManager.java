@@ -34,6 +34,7 @@ import java.io.OutputStream;
 /**
  * A {@link CyWriterManager} specific to writing View objects. 
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule io-api
  */
 public interface PresentationWriterManager extends CyWriterManager<PresentationWriterFactory> {
 

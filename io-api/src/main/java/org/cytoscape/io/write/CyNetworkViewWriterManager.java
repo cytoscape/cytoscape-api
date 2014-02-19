@@ -35,6 +35,7 @@ import org.cytoscape.view.model.CyNetworkView;
  * A {@link org.cytoscape.io.write.CyWriterManager} specific to writing 
  * {@link org.cytoscape.view.model.CyNetworkView} objects. 
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule io-api
  */
 public interface CyNetworkViewWriterManager extends CyWriterManager<CyNetworkViewWriterFactory> {
 

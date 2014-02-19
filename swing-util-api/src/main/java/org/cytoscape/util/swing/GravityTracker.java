@@ -30,10 +30,12 @@ import javax.swing.JMenu;
 import javax.swing.JMenuItem;
 
 
-/** This interface sepecifies a tracker that will be used to insert items (submenus, menu items
- *  and separators) into a menu based on their "gravity" or "weight".  Items with higher gravity
- *  will appear further down the menu.
- *  @CyAPI.Api.Interface 
+/**
+ * This interface sepecifies a tracker that will be used to insert items (submenus, menu items
+ * and separators) into a menu based on their "gravity" or "weight".  Items with higher gravity
+ * will appear further down the menu.
+ * @CyAPI.Api.Interface 
+ * @CyAPI.InModule swing-util-api
  */
 public interface GravityTracker {
 	final static double USE_ALPHABETIC_ORDER = -1.0;

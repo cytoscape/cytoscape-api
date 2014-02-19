@@ -31,6 +31,7 @@ package org.cytoscape.util.swing;
  * may be set with an alternative command for opening
  * a different web browser than default.
  * @CyAPI.Api.Interface 
+ * @CyAPI.InModule swing-util-api
  */
 public interface OpenBrowser {
 

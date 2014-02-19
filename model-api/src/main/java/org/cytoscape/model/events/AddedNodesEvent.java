@@ -35,6 +35,7 @@ import org.cytoscape.model.CyNode;
  * Event for upper layers.  In general, network view models listen to this event
  * and creates view model for the node.  This will be fired to ALL network view models.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule model-api
  */
 public final class AddedNodesEvent extends AbstractCyPayloadEvent<CyNetwork,CyNode> {
 

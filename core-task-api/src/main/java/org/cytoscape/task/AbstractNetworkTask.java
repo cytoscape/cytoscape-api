@@ -31,6 +31,7 @@ import org.cytoscape.work.AbstractTask;
  * Base class for all tasks that need to operate on a {@link CyNetwork}.
  * 
  * @CyAPI.Abstract.Class
+ * @CyAPI.InModule core-task-api
  */
 public abstract class AbstractNetworkTask extends AbstractTask {
 

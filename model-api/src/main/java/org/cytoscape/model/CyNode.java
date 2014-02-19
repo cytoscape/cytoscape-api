@@ -33,6 +33,7 @@ import org.cytoscape.model.events.UnsetNetworkPointerEvent;
  * An object that represents a node (vertex) within a network 
  * of nodes and edges.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule model-api
  */
 public interface CyNode extends CyIdentifiable {
 	/**

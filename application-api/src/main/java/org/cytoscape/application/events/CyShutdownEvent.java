@@ -32,10 +32,23 @@ import org.cytoscape.event.AbstractCyEvent;
  * abort the shutdown. This event should only be fired synchronously
  * to allow all listeners time to clean up.
  * @CyAPI.Final.Class
+ * @CyAPI.InModule application-api
  */
 public final class CyShutdownEvent extends AbstractCyEvent<Object> {
 
 	private String reason;
+	private boolean force;
+
+	/**
+	 * Constructor.
+	 * @param source The object firing this event.
+	 * @param force If true, force the shutdown (no user prompt)
+	 */
+	public CyShutdownEvent(final Object source, boolean force) {
+		super(source, CyShutdownListener.class);
+		reason = null;
+		this.force = force;
+	}
 
 	/**
 	 * Constructor.
@@ -44,6 +57,7 @@ public final class CyShutdownEvent extends AbstractCyEvent<Object> {
 	public CyShutdownEvent(final Object source) {
 		super(source, CyShutdownListener.class);
 		reason = null;
+		this.force = false;
 	}
 
 	/**
@@ -75,5 +89,12 @@ public final class CyShutdownEvent extends AbstractCyEvent<Object> {
 	 */
 	public boolean actuallyShutdown() {
 		return (reason == null || reason.length() <= 0);
+	}
+
+	/**
+	 * Returns true if we want to force the shutdown without any user prompt
+	 */
+	public boolean forceShutdown() {
+		return force;
 	}
 }

@@ -29,6 +29,7 @@ import java.io.File;
 /**
  * Application-wide setting will be accessible through this interface.
  * @CyAPI.Api.Interface
+ * @CyAPI.InModule application-api
  */
 public interface CyApplicationConfiguration {
 	

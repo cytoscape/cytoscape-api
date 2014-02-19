@@ -89,6 +89,22 @@ public interface ServiceProperties {
 	 */
 	public static final String IN_MENU_BAR = "inMenuBar";
 	
+    /**
+     * Action will be added to context menu if this flag is set to true.
+     *
+     * <p>
+     *   This service property only affects:
+     *   <ul>
+     *     <li>{@code NodeViewTaskFactory}</li>
+     *     <li>{@code EdgeViewTaskFactory}</li>
+     *     <li>{@code NetworkViewTaskFactory}</li>
+     *   </ul>
+     * </p>
+     *
+     * <p>If no value is defined, the default value is {@code true}.</p>
+     */
+    public static final String IN_CONTEXT_MENU = "inContextMenu";
+
 	/**
 	 * Shortcut key combination for desktop app.
 	 */
@@ -142,6 +158,7 @@ public interface ServiceProperties {
 	public static final String NETWORK_PREFERENCES_MENU = "Preferences[1000]";
 
 	// Node context menus
+	public static final String NODE_ADD_MENU = "Add[-1110]";
 	public static final String NODE_EDIT_MENU = "Edit[-1100]";
 	public static final String NODE_SELECT_MENU = "Select[-1090]";
 	public static final String NODE_GROUP_MENU = "Group[-1080]";

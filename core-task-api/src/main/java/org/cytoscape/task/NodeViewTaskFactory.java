@@ -34,6 +34,7 @@ import org.cytoscape.work.TaskIterator;
  * A task factory that creates a task that operates on the specified View&lt;CyNode&gt; within
  * the specified CyNetworkView.
  * @CyAPI.Spi.Interface
+ * @CyAPI.InModule core-task-api
  */
 public interface NodeViewTaskFactory {
 	/** 
