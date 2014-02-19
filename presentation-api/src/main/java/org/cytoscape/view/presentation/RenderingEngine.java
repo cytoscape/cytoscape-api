@@ -115,5 +115,10 @@ public interface RenderingEngine<T> extends CyDisposable {
 	 */
 	void printCanvas(final Graphics printCanvas);
 	
+	/**
+	 * This method must return the same ID which is returned by the associated
+	 * implementation of NetworkViewRenderer.
+	 * @return Must return the same value as NetworkViewRenderer.getId.
+	 */
 	String getRendererId();
 }
