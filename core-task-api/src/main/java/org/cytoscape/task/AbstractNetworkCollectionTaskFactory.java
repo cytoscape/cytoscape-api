@@ -41,6 +41,6 @@ public abstract class AbstractNetworkCollectionTaskFactory implements NetworkCol
 	 */
 	@Override
 	public boolean isReady(Collection<CyNetwork> networks) {
-		return networks != null;
+		return networks != null && !networks.isEmpty();
 	}
 }
