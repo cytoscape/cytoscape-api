@@ -39,6 +39,50 @@ import java.util.List;
  * @CyAPI.InModule presentation-api
  */
 public interface ShapeAnnotation extends Annotation {
+	/**
+	 * The width of the shape
+	 */
+	public static final String WIDTH="width";
+
+	/**
+	 * The height of the shape
+	 */
+  public static final String HEIGHT="height";
+
+	/**
+	 * The color of the border
+	 */
+  public static final String EDGECOLOR = "edgeColor";
+
+	/**
+	 * The thickness of the border
+	 */
+  public static final String EDGETHICKNESS = "edgeThickness";
+
+	/**
+	 * The opacity of the border
+	 */
+  public static final String EDGEOPACITY = "edgeOpacity";
+
+	/**
+	 * The fill color of the shape
+	 */
+  public static final String FILLCOLOR = "fillColor";
+
+	/**
+	 * The opacity of the shape fill
+	 */
+  public static final String FILLOPACITY = "fillOpacity";
+
+	/**
+	 * The shape type
+	 */
+  public static final String SHAPETYPE = "shapeType";
+
+	/**
+	 * A flag that this is a "custom" shape
+	 */
+  public static final String CUSTOMSHAPE = "customShape";
 
 	/**
 	 * Get the list of supported shapes.  If a shape is not

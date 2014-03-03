@@ -35,6 +35,12 @@ import java.util.List;
  * @CyAPI.InModule presentation-api
  */
 public interface GroupAnnotation extends Annotation {
+	/**
+	 * A comma-separate list of the UUIDs of the annotations
+	 * that are part of this group
+	 */
+	public static final String MEMBERS = "memberUUIDs";
+
 
 	/**
 	 * Add a new annotation to the group

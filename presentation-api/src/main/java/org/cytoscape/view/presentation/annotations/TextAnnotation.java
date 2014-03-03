@@ -38,6 +38,32 @@ import java.awt.Font;
  */
 public interface TextAnnotation extends Annotation {
 	/**
+	 * Arg string to set the text to display
+	 */
+	public static final String TEXT="text";
+
+	/**
+	 * Arg string to set the text color
+	 */
+	public static final String COLOR="color";
+
+	/**
+	 * Arg string to set the font family
+	 */
+	public static final String FONTFAMILY="fontFamily";
+
+	/**
+	 * Arg string to set the font size
+	 */
+	public static final String FONTSIZE="fontSize";
+
+	/**
+	 * Arg string to set the font style
+	 */
+	public static final String FONTSTYLE="fontStyle";
+
+
+	/**
 	 * Set the text to be displayed as part of the annotation
 	 *
 	 * @param text the text annotation
