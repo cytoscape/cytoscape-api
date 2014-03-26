@@ -99,6 +99,7 @@ public final class PartitionUtil {
 		final Map<CyNode,Integer> nodesSeenMap = new HashMap<CyNode,Integer>(); 
 		final Map<CyEdge,Integer> edgesSeenMap = new HashMap<CyEdge,Integer>(); 
 		final Map<CyNode,View<CyNode>> nodesToViews = new HashMap<CyNode,View<CyNode>>(); 
+		int partitionNumber = 1;
 
 		// Initialize the maps
 		for(final View<CyNode> nv: networkView.getNodeViews()){
@@ -118,6 +119,8 @@ public final class PartitionUtil {
 			// Nope, first time
 			final LayoutPartition part = new LayoutPartition(network.getNodeCount(),
 			                                           network.getEdgeCount());
+			part.setPartitionNumber(partitionNumber++);
+
 			// Set the edge weighter
 			part.setEdgeWeighter(edgeWeighter);
 
