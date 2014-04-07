@@ -91,7 +91,7 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 	 */
 	protected boolean recenter = true;
 
-	private Lock lock;
+	private static final Lock lock = new ReentrantLock();
 	
 	/**
 	 * Constructor.
@@ -114,8 +114,6 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 		this.displayName = displayName;
 		this.undo = undo;
 
-		lock = new ReentrantLock();
-		
 		if (nodesToLayOut.size() == 0) {
 			this.nodesToLayOut = new HashSet<View<CyNode>>();
 			for (final View<CyNode> view : networkView.getNodeViews()) {
