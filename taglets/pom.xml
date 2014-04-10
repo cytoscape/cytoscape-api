@@ -98,39 +98,6 @@
 				</configuration>
 			</plugin>
 			<plugin>
-				<!-- Plugin for generating Javadoc. -->
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-javadoc-plugin</artifactId>
-				<version>${maven-javadoc-plugin.version}</version>
-				<configuration>
-					<encoding>UTF-8</encoding>
-					<locale>en</locale>
-					<javadocVersion>1.6</javadocVersion>
-					<links>
-						<link>http://java.sun.com/javase/6/docs/api/</link>
-						<link>http://code.cytoscape.org/javadoc/</link>
-					</links>
-					<footer>Cytoscape 3 Core API</footer>
-					<header>Cytoscape 3 Core API</header>
-					<bottom>Copyright 2010 Cytoscape Consortium. All rights reserved.</bottom>
-					<tagletArtifacts>
-						<tagletArtifact>
-							<groupId>org.cytoscape</groupId>
-							<artifactId>taglets</artifactId>
-							<version>3.2.0-SNAPSHOT</version>
-						</tagletArtifact>
-					</tagletArtifacts>
-				</configuration>
-				<executions>
-					<execution>
-						<id>attach-javadocs</id>
-						<goals>
-							<goal>jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
 				<version>${maven-source-plugin.version}</version>
