@@ -55,7 +55,6 @@ public abstract class AbstractCyNetworkReader extends AbstractTask implements
 	private final Map<Object, CyNode> nodeMap;
 
 	private ListSingleSelection<String> rootNetworkList;
-	private ListSingleSelection<String> sourceColumnList;
 	private ListSingleSelection<String> targetColumnList;
 
 	/**
@@ -82,15 +81,6 @@ public abstract class AbstractCyNetworkReader extends AbstractTask implements
 	@ProvidesTitle
 	public String getTitle() {
 		return "Import Network";
-	}
-
-	@Tunable(description = "Mapping Column for New Network:", groups = " ")
-	public ListSingleSelection<String> getSourceColumnList() {
-		return sourceColumnList;
-	}
-
-	public void setSourceColumnList(ListSingleSelection<String> colList) {
-		this.sourceColumnList = colList;
 	}
 
 	@Tunable(description = "Mapping Column for Existing Network:", groups = " ", listenForChange = { "RootNetworkList" })
@@ -197,11 +187,6 @@ public abstract class AbstractCyNetworkReader extends AbstractTask implements
 		final List<String> colNames_target = new ArrayList<String>();
 		colNames_target.add(CyRootNetwork.SHARED_NAME);
 		this.targetColumnList = new ListSingleSelection<String>(colNames_target);
-
-		// initialize source attribute list
-		final List<String> colNames_source = new ArrayList<String>();
-		colNames_source.add(CyRootNetwork.SHARED_NAME);
-		this.sourceColumnList = new ListSingleSelection<String>(colNames_source);
 	}
 
 	@Override
