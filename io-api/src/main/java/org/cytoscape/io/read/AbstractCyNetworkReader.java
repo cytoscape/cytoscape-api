@@ -83,7 +83,7 @@ public abstract class AbstractCyNetworkReader extends AbstractTask implements
 		return "Import Network";
 	}
 
-	@Tunable(description = "Mapping Column for Existing Network:", groups = " ", listenForChange = { "RootNetworkList" })
+	@Tunable(description = "Node Identifier Mapping Column:", groups = " ", listenForChange = { "RootNetworkList" })
 	public ListSingleSelection<String> getTargetColumnList() {
 		return targetColumnList;
 	}
