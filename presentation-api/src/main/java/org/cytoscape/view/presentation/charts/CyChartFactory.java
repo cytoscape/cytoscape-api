@@ -1,5 +1,7 @@
 package org.cytoscape.view.presentation.charts;
 
+import java.util.Map;
+
 import javax.swing.Icon;
 
 import org.cytoscape.view.presentation.customgraphics.CustomGraphicLayer;
@@ -52,17 +54,12 @@ public interface CyChartFactory<T extends CustomGraphicLayer> {
 	CyChart<T> getInstance(CyChart<T> chart);
 	
 	/**
-	 * Get a new instance of a {@link CyChart} that has empty or default options.
+	 * Get a new instance of a {@link CyChart} with the passed properties.
 	 * 
+	 * @param properties optional properties to initialize the new chart.
 	 * @return the new instance
 	 */
-	CyChart<T> getInstance();
-	
-//	/**
-// 	 * Create a new {@link CyChart} object by parsing the string
-// 	 * resulting from the {@link CyChart#toSerializableString()} method.
-// 	 */
-//	CyChart<T> parseSerializableString(String string); // TODO why both this and getInstance(String) ?
+	CyChart<T> getInstance(Map<String, Object> properties);
 	
 	/**
  	 * Return the class that this factory creates.  This is used by the deserialization
