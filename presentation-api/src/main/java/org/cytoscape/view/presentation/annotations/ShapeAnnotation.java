@@ -39,6 +39,31 @@ import java.util.List;
  * @CyAPI.InModule presentation-api
  */
 public interface ShapeAnnotation extends Annotation {
+	public static enum ShapeType {
+		RECTANGLE ("Rectangle"),
+		ROUNDEDRECTANGLE ("Rounded Rectangle"),
+		ELLIPSE ("Ellipse"),
+		TRIANGLE ("Triangle"),
+		PENTAGON ("Pentagon"),
+		STAR5 ("5-Pointed Star"),
+		HEXAGON ("Hexagon"),
+		STAR6 ("6-Pointed Star"),
+		CUSTOM ("Custom");
+	
+		private final String name;
+		ShapeType (String name) { 
+			this.name = name; 
+		}
+	
+		public String shapeName() {
+			return this.name;
+		}
+
+		public String toString() {
+			return this.name;
+		}
+	} 
+	
 	/**
 	 * The width of the shape
 	 */
