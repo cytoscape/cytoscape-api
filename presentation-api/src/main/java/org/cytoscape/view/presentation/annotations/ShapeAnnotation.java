@@ -170,6 +170,11 @@ public interface ShapeAnnotation extends Annotation {
 	public Paint getFillColor();
 
 	/**
+	 * Return the fill opacity, a value between 0.0 (fully transparent) and 100.0 (fully opaque).
+	 */
+	public double getFillOpacity();
+
+	/**
 	 * Set the border (stroke) color.
 	 *
 	 * @param border the border color
@@ -182,6 +187,11 @@ public interface ShapeAnnotation extends Annotation {
 	 * @param fill the fill color
 	 */
 	public void setFillColor(Paint fill);
+
+	/**
+	 * Set the fill opacity, a value between 0.0 (fully transparent) and 100.0 (fully opaque).
+	 */
+	public void setFillOpacity(final double opacity);
 
 	/**
 	 * Set a custom shape to be drawn.  This is 
