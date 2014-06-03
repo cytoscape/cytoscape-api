@@ -28,6 +28,8 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
@@ -89,6 +91,8 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 	 */
 	protected boolean recenter = true;
 
+	private static final Lock lock = new ReentrantLock();
+	
 	/**
 	 * Constructor.
 	 * 
@@ -160,11 +164,16 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 		final CyRow networkAttributes = network.getRow(network, CyNetwork.HIDDEN_ATTRS);
 		final CyTable netAttrsTable = networkAttributes.getTable();
 
-		if (netAttrsTable.getColumn(LAYOUT_ALGORITHM) == null)
-			netAttrsTable.createColumn(LAYOUT_ALGORITHM, String.class, true);
-
-		networkAttributes.set(LAYOUT_ALGORITHM, displayName);
-
+		lock.lock();
+		try {
+			if (netAttrsTable.getColumn(LAYOUT_ALGORITHM) == null)
+				netAttrsTable.createColumn(LAYOUT_ALGORITHM, String.class, true);
+	
+			networkAttributes.set(LAYOUT_ALGORITHM, displayName);
+		} finally {
+			lock.unlock();
+		}
+		
 		networkView.fitContent();
 		
 		logger.debug("Layout finished in " + (System.currentTimeMillis() - start) + " msec.");

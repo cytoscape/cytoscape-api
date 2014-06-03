@@ -4,7 +4,7 @@
   <parent>
     <artifactId>api-parent</artifactId>
     <groupId>org.cytoscape</groupId>
-    <version>3.1.0</version>
+    <version>3.1.1</version>
   </parent>
 
   <properties>
@@ -122,7 +122,7 @@
             <id>javadoc-jar</id>
             <phase>package</phase>
             <goals>
-              <goal>aggregate-jar</goal>
+              <goal>jar</goal>
             </goals>
           </execution>
         </executions>

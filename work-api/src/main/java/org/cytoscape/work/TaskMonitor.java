@@ -26,18 +26,44 @@ package org.cytoscape.work;
 
 
 /**
- * Used by <code>Task</code>s to modify its user interface.
+ * Used by a {@code Task}'s implementation {@code run} method
+ * to inform users of the status of its execution. 
  *
- * @author Pasteur
+ * @author Samad Lotia
  * @CyAPI.Api.Interface
  * @CyAPI.InModule work-api
  */
 public interface TaskMonitor {
 	/**
 	 * Sets the title of the <code>Task</code>.
-	 * The title is a succinct description of the <code>Task</code>'s
-	 * purpose. This method should only be called once and at the beginning
-	 * of the <code>run</code> method.
+	 * The title is a succinct, user-friendly description of the task's
+	 * purpose.
+   *
+   * <p>
+   * Titles should be user-friendly descriptions. Implementation-specific
+   * details and debugging information should be avoided in titles.
+   * </p>
+   *
+   * <p>
+   * Each task implementation should call this method
+   * and should typically be called once at the beginning
+   * of the {@code run} method.
+   * </p>
+   * 
+   * <p>
+   * In the Swing task dialog, the appearance of the task's title
+   * depends on the task's position in the task iterator.
+   * If the task is the first in the task iterator, its title
+   * will be shown during the course of the entire task iterator's
+   * execution at the top of the dialog in large text.
+   * The title of a subsequent task will be shown only during the
+   * course of its execution as the secondary title.
+   * The secondary title is smaller text underneath
+   * the primary title. The behavior of primary and secondary titles
+   * does not change the semantics of task titles.
+   * The behavior of primary and secondary
+   * task titles are subject to change in future Cytoscape releases.
+   * </p>
 	 * @param title Succinct description of the Task's purpose.
 	 */
 	public void setTitle(String title);
@@ -51,9 +77,27 @@ public interface TaskMonitor {
 	public void setProgress(double progress);
 
 	/**
-	 * Sets the status message that describes what a <code>Task</code> is currently doing.
+	 * Sets the status message that describes what the task is currently doing.
+   * Status messages are succint, user-friendly descriptions
+   * of a stage of the task's execution. Status messages should not
+   * contain implementation details or debugging information.
+   *
+   * <p>
+   * This method is a shorthand for {@code showMessage(Level.INFO, statusMessage)}.
+   * </p>
+   *
+   * <p>
 	 * This method can be called throughout the course of the <code>run</code> method.
-	 * @param statusMessage String that describe what a Task is currently doing.
+   * </p>
+   *
+   * <p>
+   * In the Swing task dialog, status messages are shown temporarily
+   * at the bottom until another invocation of {@code setStatusMessage}
+   * or {@code showMessage}
+   * or until the end of the task's execution. All status messages
+   * can be recalled by the user by opening the task history window.
+   * </p>
+	 * @param statusMessage Describes what the task is currently doing.
 	 */
 	public void setStatusMessage(String statusMessage);
 
@@ -80,11 +124,24 @@ public interface TaskMonitor {
 	}
 
 	/**
-	 * Shows a message to the user. This method can be called throughout
-	 * the course of the <code>run</code> method.
-	 * This method should <i>not</i> be used for debugging purposes.
-	 * Either use {@code System.out.println} or a logger to issue
-	 * debug messages.
+	 * Shows a message that describes what the task is currently doing.
+   * Messages are succint, user-friendly descriptions
+   * of a stage of the task's execution. Messages should not
+   * contain implementation details or debugging information.
+   *
+   * <p>
+	 * This method can be called throughout the course of the <code>run</code> method.
+   * </p>
+   *
+   * <p>
+   * In the Swing task dialog, messages are shown temporarily
+   * at the bottom until another invocation of {@code setStatusMessage}
+   * or {@code showMessage}
+   * or until the end of the task's execution. All messages
+   * can be recalled by the user by opening the task history window.
+   * </p>
+   * @param level The severity of the message
+	 * @param message Describes what the task is currently doing.
 	 */
 	public void showMessage(Level level, String message);
 }

@@ -12,11 +12,12 @@
 	</parent>
 
 	<artifactId>api-parent</artifactId>
-	<version>3.1.0</version>
+	<version>3.1.1</version>
 	<packaging>pom</packaging>
 	<name>Cytoscape API Parent Project POM</name>
 
 	<modules>
+		<module>taglets</module>
 		<module>event-api</module>
 		<module>model-api</module>
 		<module>viewmodel-api</module>
