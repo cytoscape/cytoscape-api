@@ -88,6 +88,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD,ElementType.METHOD})
 public @interface Tunable {
+	final static String GUI_CONTEXT = "gui";
+	final static String NOGUI_CONTEXT = "nogui";
+	final static String BOTH_CONTEXT = "both";
+
 	/**
 	 * Mandatory, human-readable label identifying the Tunable as displayed to a user.
 	 */
@@ -276,4 +280,12 @@ public @interface Tunable {
  	 * <code>Tunable</code> will not be available through the GUI.
  	 */
 	String context() default "both";
+
+	/**
+	 * If this parameter is required, return true, otherwise it is assumed that a null (or empty) value
+	 * is properly handled by the Task.
+	 *
+	 * @return true if required
+	 */
+	boolean required() default false;
 }

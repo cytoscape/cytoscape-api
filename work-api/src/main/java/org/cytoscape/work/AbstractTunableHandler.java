@@ -254,23 +254,43 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * This returns the context of the Tunable.  The context must be one of:
+	 * <ul><li><b>gui</b>: used only when a graphical user interface is available</li>
+	 * <li><b>nogui</b>: used only when a graphical user interface is not available</li>
+	 * <li><b>both</b>: always used</li>
+	 * </ul>
+	 *
+	 * @return the context
 	 */
 	public final String getContext() {
 		return tunable.context();
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Returns the tooltip annotation for this Tunable if there is one.
+	 *
+	 * @return tooltip string, if any
 	 */
 	public final String getTooltip() {
 		return tunable.tooltip();
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Returns the gravity value for the annotation.
+	 *
+	 * @return Tunable gravity as a double
 	 */
 	public final double getGravity() {
 		return tunable.gravity();
+	}
+
+	/**
+	 * Returns true if this Tunable must be set (i.e. is required), otherwise
+	 * returns false.
+	 *
+	 * @return true if it is required.
+	 */
+	public final boolean getRequired() {
+		return tunable.required();
 	}
 }
