@@ -184,4 +184,16 @@ public interface Annotation {
 	 * @return the annotation UUID
 	 */
 	public UUID getUUID();
+
+	/**
+	 * Remove the annotation.  This will remove the annotation from the canvas
+	 * and the annotation manager.
+	 */
+	public void removeAnnotation();
+
+	/**
+	 * Update the annotation.  This will cause the annotation to redraw on
+	 * the canvas.
+	 */
+	public void update();
 }
