@@ -49,6 +49,14 @@ public interface AvailableCommands {
 	List<String> getCommands(String namespace);
 
 	/**
+	 * Returns the description of the specified command in the specified namespace.
+	 * @param namespace The namespace for the command whose description we want to know about.
+	 * @param command The command within the specified namespace whose description we want to know about.
+	 * @return The description of the specified namespace and command.
+	 */
+	String getDescription(String namespace, String command);
+
+	/**
 	 * Returns a list of arguments for the specified namespace and command in alphabetical order.
 	 * @param namespace The namespace for the command whose arguments we want to know about.
 	 * @param command The command within the specified namespace whose arguments we want to know about.
