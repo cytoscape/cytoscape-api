@@ -24,11 +24,7 @@ package org.cytoscape.view.presentation.customgraphics;
  * #L%
  */
 
-import java.awt.Image;
 import java.net.URL;
-import java.util.List;
-
-import org.cytoscape.model.CyIdentifiable;
 
 
 /**
