@@ -52,6 +52,7 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	public static final String TOOLTIP = "tooltip";
 	public static final String GRAVITY = "gravity";
 	public static final String CONTEXT = "context";
+	public static final String FORMAT = "format";
 
 	/** 
 	 * Standard base class constructor for <code>TunableHandler</code>s that deal with
@@ -187,6 +188,8 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 		keyValuesPairs.put(GRAVITY, Double.toString(tunable.gravity()));
 		keyValuesPairs.put(TOOLTIP, tunable.tooltip());
 		keyValuesPairs.put(CONTEXT, tunable.context());
+		if (tunable.format() != null && tunable.format().length() > 0)
+			keyValuesPairs.put(FORMAT, tunable.format());
 
 		StringBuilder key = null;
 		StringBuilder value = null;
@@ -292,5 +295,17 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	 */
 	public final boolean getRequired() {
 		return tunable.required();
+	}
+
+	/**
+	 * Provides a format string suitable for passing to String.format.  This allows default values to be rationally
+	 * presented to users.  Note that this is only for presentation purposes and does not effect the underlying
+	 * values.  Also, not all Tunables will respect format -- for example formatting boolean, checkboxes, or
+	 * List selections don't make sense.
+	 *
+	 * @return the string to use for the format
+	 */
+	public final String getFormat() {
+		return tunable.format();
 	}
 }

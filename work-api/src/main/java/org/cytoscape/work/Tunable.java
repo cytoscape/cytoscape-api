@@ -288,4 +288,14 @@ public @interface Tunable {
 	 * @return true if required
 	 */
 	boolean required() default false;
+
+	/**
+	 * Provides a decimal format string suitable for {@link java.text.DecimalFormat}.  This allows default 
+	 * values and ranges to be rationally presented to users.  Note that this is only for presentation 
+	 * purposes and does not effect the underlying values.  Also, not all Tunables will respect format.
+	 * At this point, only numeric and bounded numeric tunables respect format.
+	 *
+	 * @return the string to use for the format
+	 */
+	String format() default "";
 }
