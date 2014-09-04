@@ -24,15 +24,16 @@ package org.cytoscape.view.model.events;
  * #L%
  */
 
-import java.util.Collection;
+import org.cytoscape.event.CyListener;
 
-import org.cytoscape.event.AbstractCyPayloadEvent;
-import org.cytoscape.view.model.CyNetworkView;
+/**
+ * Listener for {@linkplain ViewChangedEvent}.
+ * 
+ * @CyAPI.Spi.Interface
+ * @CyAPI.InModule viewmodel-api
+ */
+public interface ViewChangedListener extends CyListener {
+	
+	void handleEvent(ViewChangedEvent<?> e);
 
-public final class LockedValuesSetEvent extends
-		AbstractCyPayloadEvent<CyNetworkView, LockedValueSetRecord> {
-
-	public LockedValuesSetEvent(final CyNetworkView source, final Collection<LockedValueSetRecord> payload) {
-		super(source, LockedValuesSetListener.class, payload);
-	}
 }

@@ -24,7 +24,25 @@ package org.cytoscape.view.model.events;
  * #L%
  */
 
-public interface LockedValuesSetListener {
+import java.util.Collection;
 
-	public void handleEvent(LockedValuesSetEvent e);
+import org.cytoscape.event.AbstractCyPayloadEvent;
+import org.cytoscape.view.model.CyNetworkView;
+
+/**
+ * This event is fired when a {@link org.cytoscape.view.model.VisualProperty} value
+ * is set or removed from a {@link org.cytoscape.view.model.View}. 
+ * <p>
+ * This event should be created and fired by the view being updated and not anyone else.
+ * @param <T>
+ * 
+ * @CyAPI.Final.Class 
+ * @CyAPI.InModule viewmodel-api
+ */
+public final class ViewChangedEvent<T> extends AbstractCyPayloadEvent<CyNetworkView, ViewChangeRecord<T>> {
+
+	
+	public ViewChangedEvent(final CyNetworkView source, final Collection<ViewChangeRecord<T>> payload) {
+		super(source, ViewChangedListener.class, payload);
+	}
 }
