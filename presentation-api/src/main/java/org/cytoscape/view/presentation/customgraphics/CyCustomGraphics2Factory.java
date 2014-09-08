@@ -47,10 +47,9 @@ public interface CyCustomGraphics2Factory<T extends CustomGraphicLayer> {
 	String getDisplayName();
 	
 	/**
-	 * 
 	 * @param width
 	 * @param height
-	 * @return
+	 * @return an optional icon that represents a custom graphics type.
 	 */
 	Icon getIcon(int width, int height);
 	
@@ -77,6 +76,8 @@ public interface CyCustomGraphics2Factory<T extends CustomGraphicLayer> {
 	
 	/**
 	 * Get a new instance of a {@link CyCustomGraphics2} with the passed properties.
+	 * The properties object should contain the same keys that are returned by the corresponding
+	 * {@link CyCustomGraphics2#getProperties()} implementation.
 	 * 
 	 * @param properties optional properties to initialize the new custom graphics.
 	 * @return the new instance
@@ -84,7 +85,7 @@ public interface CyCustomGraphics2Factory<T extends CustomGraphicLayer> {
 	CyCustomGraphics2<T> getInstance(Map<String, Object> properties);
 	
 	/**
- 	 * Return the class that this factory creates.  This is used by the deserialization
+ 	 * @return the class that this factory creates.  This is used by the deserialization
  	 * mechanism to find the factory method that can deserialize a given string.
  	 */
 	Class<? extends CyCustomGraphics2<T>> getSupportedClass();
