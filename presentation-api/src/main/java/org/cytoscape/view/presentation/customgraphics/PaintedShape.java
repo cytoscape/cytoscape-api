@@ -27,7 +27,6 @@ package org.cytoscape.view.presentation.customgraphics;
 import java.awt.Paint;
 import java.awt.Shape;
 import java.awt.Stroke;
-import java.awt.geom.Rectangle2D;
 
 /**
  * This interface defines a the information required to

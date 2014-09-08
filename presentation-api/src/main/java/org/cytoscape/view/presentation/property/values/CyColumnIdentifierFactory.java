@@ -24,8 +24,22 @@ package org.cytoscape.view.presentation.property.values;
  * #L%
  */
 
+/**
+ * A factory for creating {@link CyColumnIdentifier} objects.
+ * @CyAPI.Api.Interface
+ * @CyAPI.InModule presentation-api
+ */
 public interface CyColumnIdentifierFactory {
 
+	/**
+	 * Returns a {@link CyColumnIdentifier} that represents a {@link org.cytoscape.model.CyColumn}
+	 * from a default network {@link org.cytoscape.model.CyTable}
+	 * (a table associated with a CyNetwork, CyNode or CyEdge).
+	 * 
+	 * @param columnName The name of a {@link org.cytoscape.model.CyColumn}.
+	 * @return a new {@link CyColumnIdentifier} that represents a {@link org.cytoscape.model.CyColumn} from a
+	 * {@link org.cytoscape.model.CyTable} with namespace {@link org.cytoscape.model.CyNetwork#DEFAULT_ATTRS}.
+	 */
 	CyColumnIdentifier createColumnIdentifier(String columnName);
 	
 //	CyColumnIdentifier createColumnIdentifier(String namespace, String columnName); // TODO

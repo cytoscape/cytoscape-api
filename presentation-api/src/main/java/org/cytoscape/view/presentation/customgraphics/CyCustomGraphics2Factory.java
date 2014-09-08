@@ -5,6 +5,23 @@ import java.util.Map;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 
+/**
+ * This interface provides the factory to create {@link CyCustomGraphics2} objects. 
+ * CyCustomGraphics2Factory objects should be registered as services in
+ * OSGi and will be used by Renderers to create the actual custom graphics
+ * implementations.  Note that the type of a CyCustomGraphics2Factory is
+ * the type of the underlying {@link CustomGraphicLayer} not the type
+ * of the resulting {@link CyCustomGraphics2} object this creates. In general,
+ * the pattern is to add to your CyActivator class:
+ *
+ * <pre>	
+  		CyCustomGraphics2Factory myCustomGraphics2Factory = new MyCustomGraphics2Factory();
+  		registerService(bundleContext, myCustomGraphics2Factory, CyCustomGraphics2Factory.class, new Properties());
+  </pre>
+ *
+ * @CyAPI.Spi.Interface
+ * @CyAPI.InModule presentation-api
+ */
 public interface CyCustomGraphics2Factory<T extends CustomGraphicLayer> {
 	
 	/**

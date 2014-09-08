@@ -29,7 +29,7 @@ import java.awt.geom.AffineTransform;
 import java.awt.geom.Rectangle2D;
 
 /**
- * This interface defines a the mimimum interface to
+ * This interface defines the minimum interface to
  * add a custom graphics to a {@link org.cytoscape.model.CyNode}.
  * @CyAPI.Spi.Interface
  * @CyAPI.InModule presentation-api

@@ -27,11 +27,18 @@ package org.cytoscape.view.presentation.property.values;
 import java.util.Set;
 
 /**
- * 
- * @CyAPI.Api.Interface
+ * This is a special {@link VisualPropertyValue} that allows a {@link org.cytoscape.view.model.VisualProperty} value
+ * to be specified as depending on one or more {@link CyColumn}s.
+ * That way, if the columns or column values change, Cytoscape can also update the {@link org.cytoscape.view.model.View}s
+ * that have the corresponding visual property values.
+ * @CyAPI.Spi.Interface
  * @CyAPI.InModule presentation-api
  */
 public interface MappableVisualPropertyValue extends VisualPropertyValue {
 
+	/**
+	 * @return A set of {@link CyColumnIdentifier} objects that contain the information about all the
+	 * {@link org.cytoscape.model.CyColumn}s this visual property value depends on.
+	 */
 	Set<CyColumnIdentifier> getMappedColumnNames();
 }

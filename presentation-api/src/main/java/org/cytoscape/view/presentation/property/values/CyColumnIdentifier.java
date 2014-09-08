@@ -24,6 +24,12 @@ package org.cytoscape.view.presentation.property.values;
  * #L%
  */
 
+/**
+ * Interface used to carry and save information that represents a {@link org.cytoscape.model.CyColumn}
+ * (usually from a network {@link org.cytoscape.model.CyTable}).
+ * @CyAPI.Api.Interface
+ * @CyAPI.InModule presentation-api
+ */
 public interface CyColumnIdentifier {
 
 	String getColumnName();
