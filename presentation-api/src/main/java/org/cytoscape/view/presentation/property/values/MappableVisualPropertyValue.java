@@ -40,5 +40,5 @@ public interface MappableVisualPropertyValue extends VisualPropertyValue {
 	 * @return A set of {@link CyColumnIdentifier} objects that contain the information about all the
 	 * {@link org.cytoscape.model.CyColumn}s this visual property value depends on.
 	 */
-	Set<CyColumnIdentifier> getMappedColumnNames();
+	Set<CyColumnIdentifier> getMappedColumns();
 }
