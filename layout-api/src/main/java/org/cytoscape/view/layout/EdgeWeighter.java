@@ -35,6 +35,7 @@ package org.cytoscape.view.layout;
 
 import org.cytoscape.model.CyRow;
 import org.cytoscape.work.Tunable;
+import org.cytoscape.work.util.ListSingleSelection;
 
 /**
  * The EdgeWeighter class.  This class is used as a container for information
@@ -44,8 +45,19 @@ import org.cytoscape.work.Tunable;
  */
 public final class EdgeWeighter {
 
-	@Tunable(description="How to interpret weight values", groups={"Edge Weight Settings"})
-	public WeightTypes type = WeightTypes.GUESS;
+  public WeightTypes type = WeightTypes.GUESS;
+  @Tunable(description="How to interpret weight values", groups={"Edge Weight Settings"}, gravity=2.0)
+	public ListSingleSelection<WeightTypes> getType() {
+		ListSingleSelection<WeightTypes> t = 
+			new ListSingleSelection<WeightTypes>(WeightTypes.GUESS, WeightTypes.LOG, 
+																					 WeightTypes.DISTANCE, WeightTypes.WEIGHT);
+		t.setSelectedValue(type);
+		return t;
+	}
+
+	public void setType(ListSingleSelection<WeightTypes> t) {
+		type = t.getSelectedValue();
+	}
 
 	@Tunable(description="The minimum edge weight to consider", groups={"Edge Weight Settings"})
 	public double minWeightCutoff = 0;
