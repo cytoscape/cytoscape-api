@@ -27,6 +27,8 @@ package org.cytoscape.view.presentation.property.values;
 /**
  * Interface used to carry and save information that represents a {@link org.cytoscape.model.CyColumn}
  * (usually from a network {@link org.cytoscape.model.CyTable}).
+ * It is particularly useful for cases where a column info needs to be saved or used, but the CyColumn itself
+ * may not exist yet, or at all.
  * @CyAPI.Api.Interface
  * @CyAPI.InModule presentation-api
  */

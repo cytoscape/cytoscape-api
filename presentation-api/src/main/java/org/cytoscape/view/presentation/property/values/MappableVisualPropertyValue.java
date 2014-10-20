@@ -41,4 +41,10 @@ public interface MappableVisualPropertyValue extends VisualPropertyValue {
 	 * {@link org.cytoscape.model.CyColumn}s this visual property value depends on.
 	 */
 	Set<CyColumnIdentifier> getMappedColumns();
+	
+	/**
+	 * Cytoscape will call this method every time the columns corresponding to the CyColumnIdentifiers returned by
+	 * {@link #getMappedColumns()} change.
+	 */
+	void update();
 }
