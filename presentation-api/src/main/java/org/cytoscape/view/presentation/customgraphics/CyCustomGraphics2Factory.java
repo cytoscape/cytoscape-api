@@ -5,22 +5,184 @@ import java.util.Map;
 import javax.swing.Icon;
 import javax.swing.JComponent;
 
+
 /**
- * This interface provides the factory to create {@link CyCustomGraphics2} objects. 
- * CyCustomGraphics2Factory objects should be registered as services in
- * OSGi and will be used by Renderers to create the actual custom graphics
- * implementations.  Note that the type of a CyCustomGraphics2Factory is
+ * <p>
+ * Factory to create {@link CyCustomGraphics2} objects. 
+ * CyCustomGraphics2Factory objects are registered as OSGi services and 
+ * will be used by Renderers to create the actual custom graphics
+ * implementations. 
+ * Note that the type parameter T of CyCustomGraphics2Factory is
  * the type of the underlying {@link CustomGraphicLayer} not the type
- * of the resulting {@link CyCustomGraphics2} object this creates. In general,
- * the pattern is to add to your CyActivator class:
+ * of the resulting {@link CyCustomGraphics2} object this factory creates.
+ * </p>
+ * <p>
+ * The pattern is to register CyCustomGraphics2Factory 
+ * implementations as OSGi services in your CyActivator class.
+ * </p>
+ * 
+ * 
+ * <pre>
+ * CyCustomGraphics2Factory myCustomGraphics2Factory = new MyCustomGraphics2Factory();
+ * registerService(bundleContext, myCustomGraphics2Factory, CyCustomGraphics2Factory.class, new Properties());
+ * </pre>
+ * 
+ * <h2>Charts</h2>
+ * 
+ * <p>
+ * Cytoscape provides some predefined custom graphics factories for creating charts.
+ * These factories can be retreived as OSGi services by using their IDs.
+ * </p>
+ * 
+ * <table border="1">
+ * <tr><td>Bar Chart</td><td><code>org.cytoscape.BarChart</code></td>
+ * <tr><td>Box Chart</td><td><code>org.cytoscape.BoxChart</code></td>
+ * <tr><td>Heat Map Chart</td><td><code>org.cytoscape.HeatMapChart</code></td>
+ * <tr><td>Line Chart</td><td><code>org.cytoscape.LineChart</code></td>
+ * <tr><td>Pie Chart</td><td><code>org.cytoscape.PieChart</code></td>
+ * <tr><td>Ring Chart</td><td><code>org.cytoscape.RingChart</code></td>
+ * <tr><td>Linear Gradient</td><td><code>org.cytoscape.LinearGradient</code></td>
+ * <tr><td>Radial Gradient</td><td><code>org.cytoscape.RadialGradient</code></td>
+ * </table>
+ * 
+ * <p>
+ * To retrieve a reference to a predefined chart factory you must use an OSGi service listener.
+ * For example:
+ * </p>
+ * 
+ * <pre>
+ * public class CustomChartListener {
+ *	private static final String FACTORY_ID = "org.cytoscape.PieChart";
+ *	private CyCustomGraphics2Factory&lt;?&gt; factory;
+ *	
+ *	public void addCustomGraphicsFactory(CyCustomGraphics2Factory&lt;?&gt; factory, Map&lt;Object,Object&gt; serviceProps) {
+ *		if(FACTORY_ID.equals(factory.getId())) {
+ *			this.factory = factory;
+ *		}
+ *	}
+ *	
+ *	public void removeCustomGraphicsFactory(CyCustomGraphics2Factory&lt;?&gt; factory, Map&lt;Object,Object&gt; serviceProps) {
+ *		this.factory = null;
+ *	}
+ *	
+ *	public CyCustomGraphics2Factory&lt;?&gt; getFactory() {
+ *		return factory;
+ *	}
+ * }
+ * </pre>
+ * 
+ * <p>Register the listener in your CyActivator class.</p>
+ * 
+ * <pre>
+ *   CustomChartListener customChartListener = new CustomChartListener();
+ *   registerServiceListener(context, customChartListener, "addCustomGraphicsFactory", "removeCustomGraphicsFactory", CyCustomGraphics2Factory.class);
+ * </pre>
+ * 
+ * <p>
+ * Use the factory to create an instance of CyCustomGraphics2 for your charts.
+ * The data and appearance of the charts are controlled by a Map of properties
+ * that are passed to the getInstance() method.
+ * </p>
+ * 
+ * <pre>
+ * CyCustomGraphics2Factory&lt;?&gt; customGraphicsFactory = customChartListener.getFactory();
+ * CyColumnIdentifierFactory columnIdFactory = ... get OSGi service
+ * 
+ * CyColumnIdentifier columnId = columnIdFactory.createColumnIdentifier(chartColumn);
+ * Map&lt;String,Object&gt; chartProps = new HashMap&lt;String,Object&gt;();
+ * chartProps.put("cy_dataColumns", Arrays.asList(columnId)); 
+ * chartProps.put("cy_colorScheme", "CONTRASTING");
+ *		
+ * CyCustomGraphics2&lt;?&gt; customGraphics = customGraphicsFactory.getInstance(chartProps);
  *
- * <pre>	
-  		CyCustomGraphics2Factory myCustomGraphics2Factory = new MyCustomGraphics2Factory();
-  		registerService(bundleContext, myCustomGraphics2Factory, CyCustomGraphics2Factory.class, new Properties());
-  </pre>
- *
+ * // Set the custom graphics on the visual style
+ * VisualStyle visualStyle = visualMappingManager.getCurrentVisualStyle();
+ * visualStyle.setDefaultValue(visualProperty, customGraphics);
+ * </pre>
+ * 
+ * <h3>Chart Properties</h3>
+ * 
+ * All built-in properties start with the "cy_" prefix. If you are writing an App that provides
+ * additional properties please specify your own prefix in order to prevent name collisions.
+ * 
+ * <h4>All Charts</h4>
+ * <table border="1">
+ * <tr><th>Property Name</th><th>Type</th><th>Description</th><tr>
+ * <tr><td>{@code cy_dataColumns}</td><td>{@code List<CyColumnIdentifier>}</td><td>Names of data columns from the default node table. Columns of type List become separate groups in the chart (for example a ring chart will have a separate ring for each group).</td></tr>
+ * <tr><td>{@code cy_values}</td><td>{@code List<Double>}</td><td>Specific values to use for each segment of the chart.</td></tr> 
+ * <tr><td>{@code cy_colors}</td><td>{@code List<java.awt.Color>}</td><td>List of specific colors to use with each data column. The color list should have one entry for every corresponding entry in the cy_dataColumns property list.</td></tr>
+ * <tr><td>{@code cy_colorScheme}</td><td>{@code String}</td><td>Name of a predefined color scheme. Use this property instead of cy_colors to have the colors chosen automatically. Values: CONTRASTING, MODULATED, RAINBOW, RANDOM</td></tr> 
+ * <tr><td>{@code cy_itemLabels}</td><td>{@code List<String>}</td><td>Labels to use for each segment of the chart (for example each slice of a pie chart.) The label list should have one entry for every corresponding entry in the cy_dataColumns property list.</td></tr>
+ * <tr><td>{@code cy_itemLabelsColumn}</td><td>{@code CyColumnIdentifier}</td><td>Name of a data column to use for item labels. The column should be of type List, each element in the list will be used as a label.</td></tr>
+ * <tr><td>{@code cy_showItemLabels}</td><td>{@code Boolean}</td><td>Set to false to hide item labels</td></tr>
+ * <tr><td>{@code cy_borderWidth}</td><td>{@code Float}</td><td>Border width</td></tr>
+ * <tr><td>{@code cy_borderColor}</td><td>{@code java.awt.Color}</td><td>Border color</td></tr>
+ * </table>
+ * 
+ * <h4>Bar/Box/Line/Heat Charts</h4>
+ * <table border="1">
+ * <tr><th>Property Name</th><th>Type</th><th>Description</th><tr>
+ * <tr><td>{@code cy_orientation}</td><td>{@code String}</td><td>Values: HORIZONTAL, VERTICAL</td></tr>
+ * <tr><td>{@code cy_domainLabelsColumn}</td><td>{@code CyColumnIdentifier}</td><td>Name of a data column to use for domain labels. The column should be of type List.</td></tr>
+ * <tr><td>{@code cy_rangeLabelsColumn}</td><td>{@code CyColumnIdentifier}</td><td>Name of a data column to use for range labels. The column should be of type List.</td></tr>
+ * <tr><td>{@code cy_domainLabelPosition}</td><td>{@code String}</td><td>Values: STANDARD, DOWN_45, DOWN_90, UP_45, UP_90</td></tr>
+ * <tr><td>{@code cy_globalRange}</td><td>{@code Boolean}</td><td>Set to true in order to use the cy_range property.</td></tr>
+ * <tr><td>{@code cy_range}</td><td>{@code List<Double>}</td><td>Must be a list with exactly two elements. Specifies the lower and upper bound for the range axis.</td></tr>
+ * <tr><td>{@code cy_showDomainAxis}</td><td>{@code Boolean}</td><td>Set to false to hide the domain axis.</td></tr>
+ * <tr><td>{@code cy_showRangeAxis}</td><td>{@code Boolean}</td><td>Set to false to hide the range axis.</td></tr>
+ * <tr><td>{@code cy_axisWidth}</td><td>{@code Float}</td><td>Axis stroke width.</td></tr>
+ * <tr><td>{@code cy_axisColor}</td><td>{@code java.awt.Color}</td><td>Axis color.</td></tr>
+ * </table>
+ * 
+ * <h4>Bar Charts</h4>
+ * <table border="1">
+ * <tr><th>Property Name</th><th>Type</th><th>Description</th><tr>
+ * <tr><td>{@code cy_type}</td><td>{@code String}</td><td>Values: GROUPED, STACKED, HEAT_STRIPS, UP_DOWN</td></tr>
+ * <tr><td>{@code cy_separation}</td><td>{@code Double}</td><td>Separation between bars. Value must be between 0.0 and 0.5</td></tr>
+ * </table>
+ * 
+ * <h4>Line Charts</h4>
+ * <table border="1">
+ * <tr><th>Property Name</th><th>Type</th><th>Description</th><tr>
+ * <tr><td>{@code cy_lineWidth}</td><td>{@code Float}</td><td>Line width</td></tr>
+ * </table>
+ * 
+ * <h4>Pie Charts</h4>
+ * <table border="1">
+ * <tr><th>Property Name</th><th>Type</th><th>Description</th><tr>
+ * <tr><td>{@code cy_startAngle}</td><td>{@code Double}</td><td>Start angle for the first pie section.</td></tr>
+ * </table>
+ * 
+ * <h4>Ring Charts</h4>
+ * <table border="1">
+ * <tr><th>Property Name</th><th>Type</th><th>Description</th><tr>
+ * <tr><td>{@code cy_startAngle}</td><td>{@code Double}</td><td>Start angle for the first section.</td></tr>
+ * <tr><td>{@code cy_holeSize}</td><td>{@code Double}</td><td>Width of the hole in the center of the ring.</td></tr>
+ * </table>
+ * 
+ * <h4>Gradients</h4>
+ * <table border="1">
+ * <tr><th>Property Name</th><th>Type</th><th>Description</th><tr>
+ * <tr><td>{@code cy_gradientFractions}</td><td>{@code List<Float>}</td><td>Numbers ranging from 0.0 to 1.0 specifying the distribution of colors along the gradient. See javadocs for java.awt.MultipleGradientPaint for more detail.</td></tr>
+ * <tr><td>{@code cy_gradientColors}</td><td>{@code List<java.awt.Color>}</td><td>List of colors corresponding to each fraction value.</td></tr>
+ * </table>
+ * 
+ * <h4>Linear Gradient</h4>
+ * <table border="1">
+ * <tr><th>Property Name</th><th>Type</th><th>Description</th><tr>
+ * <tr><td>{@code cy_angle}</td><td>{@code Double}</td><td>Slope (rotation) of the gradient, in degrees.</td></tr>
+ * </table>
+ * 
+ * <h4>Radial Gradient</h4>
+ * <table border="1">
+ * <tr><th>Property Name</th><th>Type</th><th>Description</th><tr>
+ * <tr><td>{@code cy_center}</td><td>{@code java.awt.geom.Point2D}</td><td>Center of the gradient. Each coordinate must be between 0.0 and 1.0.</td></tr>
+ * </table>
+ * 
+ * <br><br>
  * @CyAPI.Spi.Interface
  * @CyAPI.InModule presentation-api
+ * 
  */
 public interface CyCustomGraphics2Factory<T extends CustomGraphicLayer> {
 	
