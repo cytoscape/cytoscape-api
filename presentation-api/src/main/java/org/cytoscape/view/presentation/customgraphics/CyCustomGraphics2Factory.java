@@ -86,7 +86,7 @@ import javax.swing.JComponent;
  * 
  * <pre>
  * CyCustomGraphics2Factory&lt;?&gt; customGraphicsFactory = customChartListener.getFactory();
- * CyColumnIdentifierFactory columnIdFactory = ... get OSGi service
+ * CyColumnIdentifierFactory columnIdFactory; // Get OSGi service
  * 
  * CyColumnIdentifier columnId = columnIdFactory.createColumnIdentifier(chartColumn);
  * Map&lt;String,Object&gt; chartProps = new HashMap&lt;String,Object&gt;();
@@ -97,7 +97,13 @@ import javax.swing.JComponent;
  *
  * // Set the custom graphics on the visual style
  * VisualStyle visualStyle = visualMappingManager.getCurrentVisualStyle();
- * visualStyle.setDefaultValue(visualProperty, customGraphics);
+ * CyApplicationManager appManager; // Get OSGi service
+ * RenderingEngine<?> engine = appManager.getCurrentRenderingEngine();
+ * VisualLexicon lexicon = engine.getVisualLexicon();
+ * VisualProperty&lt;CyCustomGraphics&gt; visualProperty = lexicon.lookup(CyNode.class, "NODE_CUSTOMGRAPHICS_1");
+ * 
+ * if (visualProperty != null)
+ *     visualStyle.setDefaultValue(visualProperty, customGraphics);
  * </pre>
  * 
  * <h3>Chart Properties</h3>
@@ -108,13 +114,13 @@ import javax.swing.JComponent;
  * <h4>All Charts</h4>
  * <table border="1">
  * <tr><th>Property Name</th><th>Type</th><th>Description</th><tr>
- * <tr><td>{@code cy_dataColumns}</td><td>{@code List<CyColumnIdentifier>}</td><td>Names of data columns from the default node table. Columns of type List become separate groups in the chart (for example a ring chart will have a separate ring for each group).</td></tr>
- * <tr><td>{@code cy_values}</td><td>{@code List<Double>}</td><td>Specific values to use for each segment of the chart.</td></tr> 
- * <tr><td>{@code cy_colors}</td><td>{@code List<java.awt.Color>}</td><td>List of specific colors to use with each data column. The color list should have one entry for every corresponding entry in the cy_dataColumns property list.</td></tr>
- * <tr><td>{@code cy_colorScheme}</td><td>{@code String}</td><td>Name of a predefined color scheme. Use this property instead of cy_colors to have the colors chosen automatically. Values: CONTRASTING, MODULATED, RAINBOW, RANDOM</td></tr> 
- * <tr><td>{@code cy_itemLabels}</td><td>{@code List<String>}</td><td>Labels to use for each segment of the chart (for example each slice of a pie chart.) The label list should have one entry for every corresponding entry in the cy_dataColumns property list.</td></tr>
- * <tr><td>{@code cy_itemLabelsColumn}</td><td>{@code CyColumnIdentifier}</td><td>Name of a data column to use for item labels. The column should be of type List, each element in the list will be used as a label.</td></tr>
- * <tr><td>{@code cy_showItemLabels}</td><td>{@code Boolean}</td><td>Set to false to hide item labels</td></tr>
+ * <tr><td>{@code cy_dataColumns}</td><td>{@code List<CyColumnIdentifier>}</td><td>Names of data columns from the default node table. Columns of type List become separate groups (or data series) in the chart (for example a ring chart will have a separate ring for each group). The column type must be numerical.</td></tr>
+ * <tr><td>{@code cy_values}</td><td>{@code List<Double>}</td><td>Specific values to use for each segment of the chart. If {@code cy_dataColumns} is specified, this property does not need to be set.</td></tr> 
+ * <tr><td>{@code cy_colors}</td><td>{@code List<java.awt.Color>}</td><td>List of specific colors to use with each data column (if the column contains single numbers) or value. The color list should have one entry for every corresponding entry in the {@code cy_dataColumns} property list, if the list contains only columns of simple numerical types (no List types). If {@code cy_dataColumns} contains List-typed columns, it must contain as many colors as elements in the list values.</td></tr>
+ * <tr><td>{@code cy_colorScheme}</td><td>{@code String}</td><td>Name of a predefined color scheme. Use this property instead of {@code cy_colors} to have the colors chosen automatically. Values: CONTRASTING, MODULATED, RAINBOW, RANDOM</td></tr> 
+ * <tr><td>{@code cy_itemLabels}</td><td>{@code List<String>}</td><td>Labels to use for each segment of the chart (for example each slice of a pie chart.) The label list should have one entry for every corresponding entry in the {@code cy_dataColumns} property list.</td></tr>
+ * <tr><td>{@code cy_itemLabelsColumn}</td><td>{@code CyColumnIdentifier}</td><td>Name of a data column to use for value labels. The column should be of type List, each element in the list will be used as a label.</td></tr>
+ * <tr><td>{@code cy_showItemLabels}</td><td>{@code Boolean}</td><td>Set to true to show value labels</td></tr>
  * <tr><td>{@code cy_borderWidth}</td><td>{@code Float}</td><td>Border width</td></tr>
  * <tr><td>{@code cy_borderColor}</td><td>{@code java.awt.Color}</td><td>Border color</td></tr>
  * </table>
@@ -126,12 +132,12 @@ import javax.swing.JComponent;
  * <tr><td>{@code cy_domainLabelsColumn}</td><td>{@code CyColumnIdentifier}</td><td>Name of a data column to use for domain labels. The column should be of type List.</td></tr>
  * <tr><td>{@code cy_rangeLabelsColumn}</td><td>{@code CyColumnIdentifier}</td><td>Name of a data column to use for range labels. The column should be of type List.</td></tr>
  * <tr><td>{@code cy_domainLabelPosition}</td><td>{@code String}</td><td>Values: STANDARD, DOWN_45, DOWN_90, UP_45, UP_90</td></tr>
- * <tr><td>{@code cy_globalRange}</td><td>{@code Boolean}</td><td>Set to true in order to use the cy_range property.</td></tr>
- * <tr><td>{@code cy_range}</td><td>{@code List<Double>}</td><td>Must be a list with exactly two elements. Specifies the lower and upper bound for the range axis.</td></tr>
- * <tr><td>{@code cy_showDomainAxis}</td><td>{@code Boolean}</td><td>Set to false to hide the domain axis.</td></tr>
- * <tr><td>{@code cy_showRangeAxis}</td><td>{@code Boolean}</td><td>Set to false to hide the range axis.</td></tr>
+ * <tr><td>{@code cy_globalRange}</td><td>{@code Boolean}</td><td>If true, all charts' range (min and max bounds) will be automatically set to the network-wide range.</td></tr>
+ * <tr><td>{@code cy_range}</td><td>{@code List<Double>}</td><td>Allows the global range to be set manually. Must be a list with exactly two elements. Specifies the lower (first element) and upper bound for the range axis. The property {@code cy_range} must be set to true.</td></tr>
+ * <tr><td>{@code cy_showDomainAxis}</td><td>{@code Boolean}</td><td>Set to true to show the domain axis.</td></tr>
+ * <tr><td>{@code cy_showRangeAxis}</td><td>{@code Boolean}</td><td>Set to true to show the range axis.</td></tr>
  * <tr><td>{@code cy_axisWidth}</td><td>{@code Float}</td><td>Axis stroke width.</td></tr>
- * <tr><td>{@code cy_axisColor}</td><td>{@code java.awt.Color}</td><td>Axis color.</td></tr>
+ * <tr><td>{@code cy_axisColor}</td><td>{@code java.awt.Color}</td><td>Axis line color.</td></tr>
  * </table>
  * 
  * <h4>Bar Charts</h4>
@@ -163,7 +169,7 @@ import javax.swing.JComponent;
  * <h4>Gradients</h4>
  * <table border="1">
  * <tr><th>Property Name</th><th>Type</th><th>Description</th><tr>
- * <tr><td>{@code cy_gradientFractions}</td><td>{@code List<Float>}</td><td>Numbers ranging from 0.0 to 1.0 specifying the distribution of colors along the gradient. See javadocs for java.awt.MultipleGradientPaint for more detail.</td></tr>
+ * <tr><td>{@code cy_gradientFractions}</td><td>{@code List<Float>}</td><td>Numbers ranging from 0.0 to 1.0 specifying the distribution of colors along the gradient. See javadocs for {@code java.awt.MultipleGradientPaint} for more detail.</td></tr>
  * <tr><td>{@code cy_gradientColors}</td><td>{@code List<java.awt.Color>}</td><td>List of colors corresponding to each fraction value.</td></tr>
  * </table>
  * 
