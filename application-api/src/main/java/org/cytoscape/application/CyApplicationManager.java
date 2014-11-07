@@ -140,10 +140,18 @@ public interface CyApplicationManager {
 	NetworkViewRenderer getDefaultNetworkViewRenderer();
 	
 	/**
-	 * Sets the NetworkViewRenderer that should be used to create
+	 * Sets the {@link NetworkViewRenderer} that should be used to create
 	 * CyNetworkViews.
 	 * @param renderer the NetworkViewRenderer that should be used by
 	 *                 default.
 	 */
 	void setDefaultNetworkViewRenderer(NetworkViewRenderer renderer);
+
+	/**
+	 * Returns the {@link NetworkViewRenderer} that has the passed id or null if it doesn't exist.
+	 * @param rendererId
+	 * @return the NetworkViewRenderer that should be used to create
+	 * CyNetworkViews
+	 */
+	NetworkViewRenderer getNetworkViewRenderer(String rendererId);
 }

@@ -28,6 +28,7 @@ import java.awt.geom.Point2D;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.UUID;
 
 import org.cytoscape.view.model.CyNetworkView;
 
@@ -176,4 +177,23 @@ public interface Annotation {
 	 * @return the argMap
 	 */
 	public Map<String, String> getArgMap();
+
+	/**
+	 * Get the UUID of this annotation
+	 *
+	 * @return the annotation UUID
+	 */
+	public UUID getUUID();
+
+	/**
+	 * Remove the annotation.  This will remove the annotation from the canvas
+	 * and the annotation manager.
+	 */
+	public void removeAnnotation();
+
+	/**
+	 * Update the annotation.  This will cause the annotation to redraw on
+	 * the canvas.
+	 */
+	public void update();
 }

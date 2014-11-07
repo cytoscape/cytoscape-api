@@ -52,6 +52,7 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	public static final String TOOLTIP = "tooltip";
 	public static final String GRAVITY = "gravity";
 	public static final String CONTEXT = "context";
+	public static final String FORMAT = "format";
 
 	/** 
 	 * Standard base class constructor for <code>TunableHandler</code>s that deal with
@@ -187,6 +188,8 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 		keyValuesPairs.put(GRAVITY, Double.toString(tunable.gravity()));
 		keyValuesPairs.put(TOOLTIP, tunable.tooltip());
 		keyValuesPairs.put(CONTEXT, tunable.context());
+		if (tunable.format() != null && tunable.format().length() > 0)
+			keyValuesPairs.put(FORMAT, tunable.format());
 
 		StringBuilder key = null;
 		StringBuilder value = null;
@@ -254,23 +257,55 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * This returns the context of the Tunable.  The context must be one of:
+	 * <ul><li><b>gui</b>: used only when a graphical user interface is available</li>
+	 * <li><b>nogui</b>: used only when a graphical user interface is not available</li>
+	 * <li><b>both</b>: always used</li>
+	 * </ul>
+	 *
+	 * @return the context
 	 */
 	public final String getContext() {
 		return tunable.context();
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Returns the tooltip annotation for this Tunable if there is one.
+	 *
+	 * @return tooltip string, if any
 	 */
 	public final String getTooltip() {
 		return tunable.tooltip();
 	}
 
 	/**
-	 * {@inheritDoc}
+	 * Returns the gravity value for the annotation.
+	 *
+	 * @return Tunable gravity as a double
 	 */
 	public final double getGravity() {
 		return tunable.gravity();
+	}
+
+	/**
+	 * Returns true if this Tunable must be set (i.e. is required), otherwise
+	 * returns false.
+	 *
+	 * @return true if it is required.
+	 */
+	public final boolean getRequired() {
+		return tunable.required();
+	}
+
+	/**
+	 * Provides a format string suitable for passing to String.format.  This allows default values to be rationally
+	 * presented to users.  Note that this is only for presentation purposes and does not effect the underlying
+	 * values.  Also, not all Tunables will respect format -- for example formatting boolean, checkboxes, or
+	 * List selections don't make sense.
+	 *
+	 * @return the string to use for the format
+	 */
+	public final String getFormat() {
+		return tunable.format();
 	}
 }

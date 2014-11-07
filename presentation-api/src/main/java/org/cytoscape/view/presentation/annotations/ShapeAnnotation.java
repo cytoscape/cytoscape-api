@@ -39,6 +39,75 @@ import java.util.List;
  * @CyAPI.InModule presentation-api
  */
 public interface ShapeAnnotation extends Annotation {
+	public static enum ShapeType {
+		RECTANGLE ("Rectangle"),
+		ROUNDEDRECTANGLE ("Rounded Rectangle"),
+		ELLIPSE ("Ellipse"),
+		TRIANGLE ("Triangle"),
+		PENTAGON ("Pentagon"),
+		STAR5 ("5-Pointed Star"),
+		HEXAGON ("Hexagon"),
+		STAR6 ("6-Pointed Star"),
+		CUSTOM ("Custom");
+	
+		private final String name;
+		ShapeType (String name) { 
+			this.name = name; 
+		}
+	
+		public String shapeName() {
+			return this.name;
+		}
+
+		public String toString() {
+			return this.name;
+		}
+	} 
+	
+	/**
+	 * The width of the shape
+	 */
+	public static final String WIDTH="width";
+
+	/**
+	 * The height of the shape
+	 */
+  public static final String HEIGHT="height";
+
+	/**
+	 * The color of the border
+	 */
+  public static final String EDGECOLOR = "edgeColor";
+
+	/**
+	 * The thickness of the border
+	 */
+  public static final String EDGETHICKNESS = "edgeThickness";
+
+	/**
+	 * The opacity of the border
+	 */
+  public static final String EDGEOPACITY = "edgeOpacity";
+
+	/**
+	 * The fill color of the shape
+	 */
+  public static final String FILLCOLOR = "fillColor";
+
+	/**
+	 * The opacity of the shape fill
+	 */
+  public static final String FILLOPACITY = "fillOpacity";
+
+	/**
+	 * The shape type
+	 */
+  public static final String SHAPETYPE = "shapeType";
+
+	/**
+	 * A flag that this is a "custom" shape
+	 */
+  public static final String CUSTOMSHAPE = "customShape";
 
 	/**
 	 * Get the list of supported shapes.  If a shape is not
@@ -101,6 +170,11 @@ public interface ShapeAnnotation extends Annotation {
 	public Paint getFillColor();
 
 	/**
+	 * Return the fill opacity, a value between 0.0 (fully transparent) and 100.0 (fully opaque).
+	 */
+	public double getFillOpacity();
+
+	/**
 	 * Set the border (stroke) color.
 	 *
 	 * @param border the border color
@@ -113,6 +187,11 @@ public interface ShapeAnnotation extends Annotation {
 	 * @param fill the fill color
 	 */
 	public void setFillColor(Paint fill);
+
+	/**
+	 * Set the fill opacity, a value between 0.0 (fully transparent) and 100.0 (fully opaque).
+	 */
+	public void setFillOpacity(final double opacity);
 
 	/**
 	 * Set a custom shape to be drawn.  This is 

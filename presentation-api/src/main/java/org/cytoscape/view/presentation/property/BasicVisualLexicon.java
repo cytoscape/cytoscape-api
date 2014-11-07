@@ -384,6 +384,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 		addIdentifierMapping(CyNode.class, "fill", NODE_FILL_COLOR);
 		addIdentifierMapping(CyNode.class, "x", NODE_X_LOCATION);
 		addIdentifierMapping(CyNode.class, "y", NODE_Y_LOCATION);
+		addIdentifierMapping(CyNode.class, "z", NODE_Z_LOCATION);
 		addIdentifierMapping(CyNode.class, "w", NODE_WIDTH);
 		addIdentifierMapping(CyNode.class, "h", NODE_HEIGHT);
 		addIdentifierMapping(CyNode.class, "size", NODE_SIZE);

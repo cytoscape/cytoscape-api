@@ -1,8 +1,8 @@
-package org.cytoscape.task;
+package org.cytoscape.view.presentation.property.values;
 
 /*
  * #%L
- * Cytoscape Core Task API (core-task-api)
+ * Cytoscape Presentation API (presentation-api)
  * $Id:$
  * $HeadURL:$
  * %%
@@ -24,23 +24,17 @@ package org.cytoscape.task;
  * #L%
  */
 
-import java.util.Collection;
-
-import org.cytoscape.model.CyNetwork;
-
 /**
- * An NetworkCollectionTaskFactory that is always ready to produce a TaskIterator.
- * @CyAPI.Abstract.Class
- * @CyAPI.InModule core-task-api
+ * Interface used to carry and save information that represents a {@link org.cytoscape.model.CyColumn}
+ * (usually from a network {@link org.cytoscape.model.CyTable}).
+ * It is particularly useful for cases where a column info needs to be saved or used, but the CyColumn itself
+ * may not exist yet, or at all.
+ * @CyAPI.Api.Interface
+ * @CyAPI.InModule presentation-api
  */
-public abstract class AbstractNetworkCollectionTaskFactory implements NetworkCollectionTaskFactory {
-	/**
-	 * Returns true if the supplied collection is not null.
-	 * @param networks The collection of networks.
-	 * @return true if the supplied collection is not null.
-	 */
-	@Override
-	public boolean isReady(Collection<CyNetwork> networks) {
-		return networks != null && !networks.isEmpty();
-	}
+public interface CyColumnIdentifier {
+
+	String getColumnName();
+	
+//	String getNamespace(); // TODO
 }

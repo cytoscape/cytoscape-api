@@ -83,13 +83,6 @@ public abstract class AbstractCyTableManagerTest {
 
 	@Test
 	public void testGetLocalTables() {
-
-		// At this point, one network is added to the manager.
-		// Root Network has 3 private facade shared tables and 3 private shared tables, 
-		// and Sub Network has 3 hidden private tables, 3 private local tables and 3 public facade tables.
-		assertEquals(15, mgr.getAllTables(true).size());
-		assertEquals(0, mgr.getAllTables(false).size());
-
 		Set<CyTable> nodeTables = mgr.getLocalTables(CyNode.class);
 		Set<CyTable> edgeTables = mgr.getLocalTables(CyEdge.class);
 		Set<CyTable> networkTables = mgr.getLocalTables(CyNetwork.class);

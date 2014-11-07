@@ -163,7 +163,8 @@ public class BasicCyFileFilter implements CyFileFilter {
 
 	private boolean extensionsMatch(URI uri) {
 		final String extension = getExtension(uri.toString());
-		if (extension != null && extensions.contains(extension))
+		//extension is never null anymore, but can be empty string, which works ok
+		if (extensions.contains(extension))
 			return true;
 		else
 			return false;

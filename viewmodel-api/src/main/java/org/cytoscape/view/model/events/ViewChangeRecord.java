@@ -33,9 +33,11 @@ import org.cytoscape.view.model.VisualProperty;
  * @CyAPI.InModule viewmodel-api
  */
 public final class ViewChangeRecord<T> {
+	
 	private final View<T> view;
 	private final VisualProperty<?> vp;
 	private final Object value;
+	private final boolean lockedValue;
 
 	/**
 	 * Constructor.
@@ -44,11 +46,16 @@ public final class ViewChangeRecord<T> {
 	 * @param value The value to which the visual property has been set.
 	 */
 	public ViewChangeRecord(View<T> view, VisualProperty<?> vp, Object value) {
+		this(view, vp, value, false);
+	}
+	
+	public ViewChangeRecord(View<T> view, VisualProperty<?> vp, Object value, boolean lockedValue) {
 		if ( view == null || vp == null )
 			throw new NullPointerException("View and/or VisualProperty may not be null");
 		this.view = view;
 		this.vp = vp;
 		this.value = value;
+		this.lockedValue = lockedValue;
 	}
 
 	/**
@@ -73,5 +80,9 @@ public final class ViewChangeRecord<T> {
 	 */
 	public Object getValue() {
 		return value;
+	}
+	
+	public boolean isLockedValue() {
+		return lockedValue;
 	}
 }

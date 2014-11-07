@@ -2,13 +2,13 @@
 	<parent>
 		<artifactId>api-parent</artifactId>
 		<groupId>org.cytoscape</groupId>
-		<version>3.1.1</version>
+		<version>3.2.0</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>taglets</artifactId>
-  <version>3.1.0</version>
+  <version>3.2.0</version>
 	<packaging>jar</packaging>
 
 	<name>Cytoscape Documentation Taglets</name>
@@ -86,8 +86,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>${maven-compiler-plugin.version}</version>
 				<configuration>
-					<source>1.6</source>
-					<target>1.6</target>
+					<source>1.7</source>
+					<target>1.7</target>
 					<optimize>true</optimize>
 					<showWarnings>true</showWarnings>
 					<showDeprecation>true</showDeprecation>

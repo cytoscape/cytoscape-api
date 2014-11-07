@@ -38,6 +38,25 @@ import java.net.URL;
  * @CyAPI.InModule presentation-api
  */
 public interface ImageAnnotation extends ShapeAnnotation {
+	/**
+	 * The URL that points to the image.  This is pretty much mandatory
+	 */
+  public static final String URL="URL";
+
+	/**
+	 * The opacity of the image.
+	 */
+  public static final String OPACITY="opacity";
+
+	/**
+	 * This value allows the image contrast to be adjusted
+	 */
+  public static final String CONTRAST="contrast";
+
+	/**
+	 * This value allows the image brighteness to be adjusted
+	 */
+  public static final String LIGHTNESS="brightness";
 
 	/**
 	 * Return the image currently assigned to this annotation

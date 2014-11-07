@@ -24,25 +24,21 @@ package org.cytoscape.view.presentation.customgraphics;
  * #L%
  */
 
-import java.awt.Image;
 import java.net.URL;
-import java.util.List;
-
-import org.cytoscape.model.CyIdentifiable;
 
 
 /**
- * This interface provides the factory to create CyCustomGraphics objects.
+ * This interface provides the factory to create {@link CyCustomGraphics} objects.
  * CyCustomGraphicsFactory objects should be registered as services in
  * OSGi and will be used by Renderers to create the actual custom graphics
  * implementations.  Note that the type of a CyCustomGraphicsFactory is
  * the type of the underlying {@link CustomGraphicLayer} not the type
- * of the resulting {@link CyCustomGraphic} object this creates. In general,
+ * of the resulting {@link CyCustomGraphics} object this creates. In general,
  * the pattern is to add to your CyActivator class:
  *
  * <pre>	
   		CyCustomGraphicsFactory myCustomGraphicsFactory = new MyCustomGraphicsFactory();
-  		registerService(bundleContext, myCustomGraphicsFactory, CyCustomGraphicsFactory.class, new Properites());
+  		registerService(bundleContext, myCustomGraphicsFactory, CyCustomGraphicsFactory.class, new Properties());
   </pre>
  *
  * @CyAPI.Spi.Interface

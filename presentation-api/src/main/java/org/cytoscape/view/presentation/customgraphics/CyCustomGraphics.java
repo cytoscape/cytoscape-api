@@ -36,10 +36,9 @@ import org.cytoscape.view.model.View;
  * Base interface for all Custom Graphics.  Fundamentally, a {@link CyCustomGraphics}
  * object is a container for one or more {@link CustomGraphicLayer} objects.  It is
  * the layer objects that will actually create the graphics that are used by the
- * renderer.  Implementations should identify the type of layer ({@link CustomGraphicLayer})
- * supported as well as the type of graphical view object (currently, only {@link CyNode} is
- * supported).  
- *
+ * renderer.
+ * @CyAPI.Spi.Interface
+ * @CyAPI.InModule presentation-api
  */
 public interface CyCustomGraphics<T extends CustomGraphicLayer> {
 		

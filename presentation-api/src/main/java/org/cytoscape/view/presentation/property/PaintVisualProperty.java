@@ -70,25 +70,23 @@ public final class PaintVisualProperty extends AbstractVisualProperty<Paint> {
 		super(def, range, id, displayName, modelDataType);
 	}
 	
-	
 	@Override 
 	public String toSerializableString(final Paint paint) {
-		
 		final Color color;
+		
 		if (paint instanceof Color == false) {
 			logger.warn("None-Color object found.  Currently, this implementation supports only Color object.");
-			color = Color.white;
+			color = Color.WHITE;
 		} else {
 			color = (Color) paint;
 		}
 		
-		String hex = Integer.toHexString(color.getRGB());
-		hex = hex.substring(2, hex.length()); // remove alpha bits
-
-		return "#" + hex;
+		final int rgb = color.getRGB();
+		final String hex = String.format("#%06X", (0xFFFFFF & rgb));
+		
+		return hex;
 	}
 
-	
 	@Override 
 	public Paint parseSerializableString(String text) {
 		if (text == null) 

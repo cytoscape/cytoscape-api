@@ -324,6 +324,7 @@
   <tt><pre>
       class MyPiTask implements Task {
           final int iterations = 1000;
+          <b>volatile boolean cancelled = false;</b>
           public void run(TaskMonitor monitor) {
               monitor.setTitle("Calculating Pi");
               double pi = 2.0;
@@ -369,7 +370,7 @@
    in an I/O operation will sometimes stop it. Here's how this would look:
    <tt><pre>
      class MyTask implements Task {
-         Thread runThread = null;
+         volatile Thread runThread = null;
          public void run(TaskMonitor monitor) {
              runThread = Thread.currentThread();
 
@@ -384,9 +385,15 @@
    </li>
    <li>
    If your {@code run} method is reading from an {@link java.io.InputStream},
-   a {@link java.io.Reader}, a {@link java.net.Socket}, or a {@link java.net.URLConnection},
-   call its {@code close} method from the {@code cancel} method.
-   This will stop the I/O operation in the {@code run} method.
+   a {@link java.io.Reader}, or a {@link java.net.Socket},
+   call {@code close} from the {@code cancel} method.
+   This will stop the I/O operation immediately in the {@code run} method.
+
+   <p>
+   It is discouraged to use {@link java.net.URLConnection}, because
+   it is not possible to cancel a pending connection. Consider
+   using Apache HttpClient library instead.
+   </p>
    </li>
    <li>
    Use Java's non-blocking I/O package: {@link java.nio}. Since non-blocking I/O operations

@@ -61,7 +61,7 @@ public final class PropertySheetUtil {
 
 		// These VPs are not compatible with current rendering engine (ding).
 		INCOMPATIBLE_VP_SET.add(BasicVisualLexicon.NODE_DEPTH);
-		INCOMPATIBLE_VP_SET.add(BasicVisualLexicon.NODE_Z_LOCATION);
+		// INCOMPATIBLE_VP_SET.add(BasicVisualLexicon.NODE_Z_LOCATION);
 		INCOMPATIBLE_VP_SET.add(BasicVisualLexicon.NODE_SELECTED);
 		
 		INCOMPATIBLE_VP_SET.add(BasicVisualLexicon.EDGE_SELECTED);

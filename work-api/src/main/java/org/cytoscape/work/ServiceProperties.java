@@ -65,6 +65,11 @@ public interface ServiceProperties {
 	public static final String COMMAND_NAMESPACE = "commandNamespace";
 	
 	/**
+	 * Description for a command
+	 */
+	public static final String COMMAND_DESCRIPTION = "commandDescription";
+	
+	/**
 	 * Location of large icon data for desktop application
 	 */
 	public static final String LARGE_ICON_URL = "largeIconURL";

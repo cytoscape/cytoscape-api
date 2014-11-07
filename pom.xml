@@ -7,12 +7,12 @@
 	<parent>
 		<artifactId>parent</artifactId>
 		<groupId>org.cytoscape</groupId>
-		<version>3.1.0</version>
+		<version>3.2.0</version>
 		<relativePath>../parent</relativePath>
 	</parent>
 
 	<artifactId>api-parent</artifactId>
-	<version>3.1.1</version>
+	<version>3.2.0</version>
 	<packaging>pom</packaging>
 	<name>Cytoscape API Parent Project POM</name>
 
@@ -44,6 +44,7 @@
 		<module>webservice-swing-api</module>
 		<module>command-executor-api</module>
 		<module>filter-api</module>
+		<module>api-bundle</module>
 	</modules>
 
 	<dependencyManagement>

@@ -1,4 +1,4 @@
-package org.cytoscape.view.presentation.annotations;
+package org.cytoscape.view.presentation.property.values;
 
 /*
  * #%L
@@ -24,42 +24,23 @@ package org.cytoscape.view.presentation.annotations;
  * #L%
  */
 
-import java.util.List;
-
 /**
- *
- * The Group annotation is a container for a collextion of
- * annotations that should be grouped together.
- *
+ * A factory for creating {@link CyColumnIdentifier} objects.
  * @CyAPI.Api.Interface
  * @CyAPI.InModule presentation-api
  */
-public interface GroupAnnotation extends Annotation {
-	/**
-	 * A comma-separate list of the UUIDs of the annotations
-	 * that are part of this group
-	 */
-	public static final String MEMBERS = "memberUUIDs";
-
+public interface CyColumnIdentifierFactory {
 
 	/**
-	 * Add a new annotation to the group
-	 *
-	 * @param member the annotation to add to the group
+	 * Returns a {@link CyColumnIdentifier} that represents a {@link org.cytoscape.model.CyColumn}
+	 * from a default network {@link org.cytoscape.model.CyTable}
+	 * (a table associated with a CyNetwork, CyNode or CyEdge).
+	 * 
+	 * @param columnName The name of a {@link org.cytoscape.model.CyColumn}.
+	 * @return a new {@link CyColumnIdentifier} that represents a {@link org.cytoscape.model.CyColumn} from a
+	 * {@link org.cytoscape.model.CyTable} with namespace {@link org.cytoscape.model.CyNetwork#DEFAULT_ATTRS}.
 	 */
-	public void addMember(Annotation member);
-
-	/**
-	 * Remove an annotation from the group
-	 *
-	 * @param member the annotation to be removed
-	 */
-	public void removeMember(Annotation member);
-
-	/**
-	 * Return the list of members for this group
-	 *
-	 * @return the list of group members
-	 */
-	public List<Annotation> getMembers();
+	CyColumnIdentifier createColumnIdentifier(String columnName);
+	
+//	CyColumnIdentifier createColumnIdentifier(String namespace, String columnName); // TODO
 }

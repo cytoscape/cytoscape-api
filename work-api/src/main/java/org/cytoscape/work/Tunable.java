@@ -88,6 +88,10 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD,ElementType.METHOD})
 public @interface Tunable {
+	final static String GUI_CONTEXT = "gui";
+	final static String NOGUI_CONTEXT = "nogui";
+	final static String BOTH_CONTEXT = "both";
+
 	/**
 	 * Mandatory, human-readable label identifying the Tunable as displayed to a user.
 	 */
@@ -276,4 +280,22 @@ public @interface Tunable {
  	 * <code>Tunable</code> will not be available through the GUI.
  	 */
 	String context() default "both";
+
+	/**
+	 * If this parameter is required, return true, otherwise it is assumed that a null (or empty) value
+	 * is properly handled by the Task.
+	 *
+	 * @return true if required
+	 */
+	boolean required() default false;
+
+	/**
+	 * Provides a decimal format string suitable for {@link java.text.DecimalFormat}.  This allows default 
+	 * values and ranges to be rationally presented to users.  Note that this is only for presentation 
+	 * purposes and does not effect the underlying values.  Also, not all Tunables will respect format.
+	 * At this point, only numeric and bounded numeric tunables respect format.
+	 *
+	 * @return the string to use for the format
+	 */
+	String format() default "";
 }

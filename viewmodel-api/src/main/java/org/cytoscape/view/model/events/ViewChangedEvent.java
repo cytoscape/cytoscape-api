@@ -1,8 +1,8 @@
-package org.cytoscape.task;
+package org.cytoscape.view.model.events;
 
 /*
  * #%L
- * Cytoscape Core Task API (core-task-api)
+ * Cytoscape View Model API (viewmodel-api)
  * $Id:$
  * $HeadURL:$
  * %%
@@ -26,21 +26,23 @@ package org.cytoscape.task;
 
 import java.util.Collection;
 
-import org.cytoscape.model.CyNetwork;
+import org.cytoscape.event.AbstractCyPayloadEvent;
+import org.cytoscape.view.model.CyNetworkView;
 
 /**
- * An NetworkCollectionTaskFactory that is always ready to produce a TaskIterator.
- * @CyAPI.Abstract.Class
- * @CyAPI.InModule core-task-api
+ * This event is fired when a {@link org.cytoscape.view.model.VisualProperty} value
+ * is set or removed from a {@link org.cytoscape.view.model.View}. 
+ * <p>
+ * This event should be created and fired by the view being updated and not anyone else.
+ * @param <T>
+ * 
+ * @CyAPI.Final.Class 
+ * @CyAPI.InModule viewmodel-api
  */
-public abstract class AbstractNetworkCollectionTaskFactory implements NetworkCollectionTaskFactory {
-	/**
-	 * Returns true if the supplied collection is not null.
-	 * @param networks The collection of networks.
-	 * @return true if the supplied collection is not null.
-	 */
-	@Override
-	public boolean isReady(Collection<CyNetwork> networks) {
-		return networks != null && !networks.isEmpty();
+public final class ViewChangedEvent<T> extends AbstractCyPayloadEvent<CyNetworkView, ViewChangeRecord<T>> {
+
+	
+	public ViewChangedEvent(final CyNetworkView source, final Collection<ViewChangeRecord<T>> payload) {
+		super(source, ViewChangedListener.class, payload);
 	}
 }
