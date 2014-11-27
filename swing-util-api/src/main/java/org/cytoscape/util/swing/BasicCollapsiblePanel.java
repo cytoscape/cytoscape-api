@@ -27,14 +27,13 @@ package org.cytoscape.util.swing;
  */
 
 
+import static org.cytoscape.util.swing.LookAndFeelUtil.*;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Component;
-import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics;
 import java.awt.Insets;
-import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -47,11 +46,10 @@ import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JComponent;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.UIManager;
 import javax.swing.border.Border;
-import javax.swing.border.TitledBorder;
 
 /*
  * User: Vuk Pavlovic
@@ -72,16 +70,8 @@ import javax.swing.border.TitledBorder;
 public class BasicCollapsiblePanel extends JPanel {
 	
 	private static final long serialVersionUID = 2010434345567315524L;
-	// Border
-	// includes upper left component and line type
-	private CollapsableTitledBorder border; 
 
-	// no border
-	private Border collapsedBorderLine = BorderFactory.createEmptyBorder(2, 2, 2, 2); 
-
-	// because this is null, default is used,
-	// etched lowered border on MAC
-	private Border expandedBorderLine = null; 
+	private Border border; 
 
 	// Title displayed in the titled border
 	// protected scope for unit testing
@@ -90,10 +80,10 @@ public class BasicCollapsiblePanel extends JPanel {
 	// Expand/Collapse button
 	private final static int COLLAPSED = 0, EXPANDED = 1; // image States
 	private ImageIcon[] iconArrow = createExpandAndCollapseIcon();
-	private JButton arrow = createArrowButton();
+	private JButton arrowBtn;
 
 	// Content Pane
-	private JPanel panel;
+	private JPanel contentPane;
 
 	// Container State
 	private boolean collapsed; // stores curent state of the collapsable panel
@@ -112,10 +102,10 @@ public class BasicCollapsiblePanel extends JPanel {
 	 *            it is selected or not
 	 */
 	public BasicCollapsiblePanel(JRadioButton component) {
-		component.addItemListener(new BasicCollapsiblePanel.ExpandAndCollapseAction());
-		titleComponent = component;
-		collapsed = !component.isSelected();
-		commonConstructor();
+		this(component, !component.isSelected());
+		component.addItemListener(new ExpandAndCollapseAction());
+		
+		setCollapsed(collapsed);
 	}
 
 	/**
@@ -129,10 +119,10 @@ public class BasicCollapsiblePanel extends JPanel {
 	 *            create a button with text and an arrow icon
 	 */
 	public BasicCollapsiblePanel(String text) {
-		arrow.setText(text);
-		titleComponent = arrow;
-		collapsed = true;
-		commonConstructor();
+		this(null, true);
+		getArrowBtn().setText(text);
+		
+		setCollapsed(collapsed);
 	}
 
 	/**
@@ -140,29 +130,16 @@ public class BasicCollapsiblePanel extends JPanel {
 	 * component to the container, all constructors have this procedure in
 	 * common.
 	 */
-	private void commonConstructor() {
+	private BasicCollapsiblePanel(final AbstractButton titleComponent, final boolean collapsed) {
+		border = createPanelBorder();
+		iconArrow = createExpandAndCollapseIcon();
+		this.titleComponent = titleComponent != null ? titleComponent : getArrowBtn();
+		this.collapsed = collapsed;
+
 		setLayout(new BorderLayout());
 
-		panel = new JPanel();
-		//panel.setLayout(new BorderLayout());
-		panel.setLayout(new BoxLayout(panel, BoxLayout.PAGE_AXIS));
-
-		super.add(titleComponent, BorderLayout.CENTER);
-		super.add(panel, BorderLayout.CENTER);
-		setCollapsed(collapsed);
-
-		placeTitleComponent();
-	}
-
-	/**
-	 * Sets the bounds of the border title component so that it is properly
-	 * positioned.
-	 */
-	private void placeTitleComponent() {
-		Insets insets = this.getInsets();
-		Rectangle containerRectangle = this.getBounds();
-		Rectangle componentRectangle = border.getComponentRect(containerRectangle, insets);
-		titleComponent.setBounds(componentRectangle);
+		super.add(this.titleComponent, BorderLayout.NORTH);
+		super.add(getContentPane(), BorderLayout.CENTER);
 	}
 
 	/**
@@ -175,7 +152,6 @@ public class BasicCollapsiblePanel extends JPanel {
 		if (titleComponent instanceof JButton) {
 			titleComponent.setText(text);
 		}
-		placeTitleComponent();
 	}
 
 	/**
@@ -185,7 +161,13 @@ public class BasicCollapsiblePanel extends JPanel {
 	 * @return panel The content panel.
 	 */
 	public JPanel getContentPane() {
-		return panel;
+		if (contentPane == null) {
+			contentPane = new JPanel();
+			contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.PAGE_AXIS));
+			contentPane.setBorder(border);
+		}
+		
+		return contentPane;
 	}
 
 	/**
@@ -194,7 +176,7 @@ public class BasicCollapsiblePanel extends JPanel {
 	 */
 	@Override
 	public Component add(Component comp) {
-		return panel.add(comp);
+		return contentPane.add(comp);
 	}
 
 	/**
@@ -204,7 +186,7 @@ public class BasicCollapsiblePanel extends JPanel {
 	 */
 	@Override
 	public Component add(Component comp, int index) {
-		return panel.add(comp,index);
+		return contentPane.add(comp,index);
 	}
 
 	/**
@@ -214,7 +196,7 @@ public class BasicCollapsiblePanel extends JPanel {
 	 */
 	@Override
 	public void add(Component comp, Object constraints) {
-		panel.add(comp,constraints);
+		contentPane.add(comp,constraints);
 	}
 
 	/**
@@ -225,7 +207,7 @@ public class BasicCollapsiblePanel extends JPanel {
 	 */
 	@Override
 	public void add(Component comp, Object constraints, int index) {
-		panel.add(comp,constraints,index);
+		contentPane.add(comp,constraints,index);
 	}
 
 	/**
@@ -235,7 +217,7 @@ public class BasicCollapsiblePanel extends JPanel {
 	 */
 	@Override
 	public Component add(String name, Component comp) {
-		return panel.add(name,comp);
+		return contentPane.add(name,comp);
 	}
 
 	/**
@@ -249,17 +231,15 @@ public class BasicCollapsiblePanel extends JPanel {
 	 */
 	public void setCollapsed(boolean collapse) {
 		if (collapse) {
-			// collapse the panel, remove content and set border to empty border
-			remove(panel);
-			arrow.setIcon(iconArrow[COLLAPSED]);
-			border = new CollapsableTitledBorder(collapsedBorderLine, titleComponent);
+			// Hide content
+			getContentPane().setVisible(false);
+			getArrowBtn().setIcon(iconArrow[COLLAPSED]);
 		} else {
-			// expand the panel, add content and set border to titled border
-			super.add(panel, BorderLayout.NORTH);
-			arrow.setIcon(iconArrow[EXPANDED]);
-			border = new CollapsableTitledBorder(expandedBorderLine, titleComponent);
+			// Show content
+			getContentPane().setVisible(true);
+			getArrowBtn().setIcon(iconArrow[EXPANDED]);
 		}
-		setBorder(border);
+		
 		collapsed = collapse;
 		updateUI();
 	}
@@ -299,30 +279,38 @@ public class BasicCollapsiblePanel extends JPanel {
 		return iconArrow;
 	}
 
-	/**
-	 * Returns a button with an arrow icon and a collapse/expand action
-	 * listener.
-	 * 
-	 * @return button Button which is used in the titled border component
-	 */
-	private JButton createArrowButton() {
-		JButton button = new JButton("arrow", iconArrow[COLLAPSED]);
-		button.setBorder(BorderFactory.createEmptyBorder(0, 1, 5, 1));
-		button.setVerticalTextPosition(AbstractButton.CENTER);
-		button.setHorizontalTextPosition(AbstractButton.LEFT);
-		button.setMargin(new Insets(0, 0, 3, 0));
+	private JButton getArrowBtn() {
+		if (arrowBtn == null) {
+			arrowBtn = new JButton("", iconArrow[COLLAPSED]);
+			
+			if (isWinLAF()) {
+				arrowBtn.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
+			} else {
+				arrowBtn.setBorder(BorderFactory.createEmptyBorder(0, 4, 0, 4));
+			}
+			
+			arrowBtn.setMargin(new Insets(0, 0, 3, 0));
+			arrowBtn.setContentAreaFilled(false);
+			arrowBtn.setFocusable(false);
+			arrowBtn.setHorizontalAlignment(JButton.LEFT);
+			arrowBtn.setHorizontalTextPosition(JButton.RIGHT);
+			arrowBtn.setVerticalAlignment(JButton.CENTER);
+			arrowBtn.setVerticalTextPosition(JButton.CENTER);
 
-		// We want to use the same font as those in the titled border font
-		Font font = BorderFactory.createTitledBorder("Sample").getTitleFont();
-		Color color = BorderFactory.createTitledBorder("Sample").getTitleColor();
-		button.setFont(font);
-		button.setForeground(color);
-		button.setFocusable(false);
-		button.setContentAreaFilled(false);
+			// We want to use the same font as those in the titled border font
+			Font font = BorderFactory.createTitledBorder(border, "Sample").getTitleFont();
+			if (font == null) font = UIManager.getFont("Label.font");
+			Color color = BorderFactory.createTitledBorder(border, "Sample").getTitleColor();
+			if (color == null) color = UIManager.getColor("Label.foreground");
+			
+			if (font != null) arrowBtn.setFont(font);
+			if (isNimbusLAF()) arrowBtn.setFont(arrowBtn.getFont().deriveFont(Font.BOLD));
+			if (color != null) arrowBtn.setForeground(color);
 
-		button.addActionListener(new BasicCollapsiblePanel.ExpandAndCollapseAction());
-
-		return button;
+			arrowBtn.addActionListener(new ExpandAndCollapseAction());
+		}
+		
+		return arrowBtn;
 	}
 
 	/**
@@ -330,169 +318,17 @@ public class BasicCollapsiblePanel extends JPanel {
 	 * the titledBorder component.
 	 */
 	private final class ExpandAndCollapseAction extends AbstractAction implements ActionListener, ItemListener {
+		
 		private static final long serialVersionUID = 2010434345567315525L;
 
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			setCollapsed(!isCollapsed());
 		}
 
+		@Override
 		public void itemStateChanged(ItemEvent e) {
 			setCollapsed(!isCollapsed());
-		}
-	}
-
-	/**
-	 * Special titled border that includes a component in the title area
-	 */
-	private final class CollapsableTitledBorder extends TitledBorder {
-		private static final long serialVersionUID = 2010434345567315526L;
-		JComponent component;
-
-
-		public CollapsableTitledBorder(Border border, JComponent component) {
-			this(border, component, LEFT, TOP);
-		}
-
-		public CollapsableTitledBorder(Border border, JComponent component, int titleJustification, int titlePosition) {
-			// TitledBorder needs border, title, justification, position, font,
-			// and color
-			super(border, null, titleJustification, titlePosition, null, null);
-			this.component = component;
-			if (border == null) {
-				this.border = super.getBorder();
-			}
-		}
-
-		public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-			Rectangle borderR = new Rectangle(x + EDGE_SPACING, y + EDGE_SPACING, width - (EDGE_SPACING * 2), height
-					- (EDGE_SPACING * 2));
-			Insets borderInsets;
-			if (border != null) {
-				borderInsets = border.getBorderInsets(c);
-			} else {
-				borderInsets = new Insets(0, 0, 0, 0);
-			}
-
-			Rectangle rect = new Rectangle(x, y, width, height);
-			Insets insets = getBorderInsets(c);
-			Rectangle compR = getComponentRect(rect, insets);
-			int diff;
-			switch (titlePosition) {
-			case ABOVE_TOP:
-				diff = compR.height + TEXT_SPACING;
-				borderR.y += diff;
-				borderR.height -= diff;
-				break;
-			case TOP:
-			case DEFAULT_POSITION:
-				diff = insets.top / 2 - borderInsets.top - EDGE_SPACING;
-				borderR.y += diff;
-				borderR.height -= diff;
-				break;
-			case BELOW_TOP:
-			case ABOVE_BOTTOM:
-				break;
-			case BOTTOM:
-				diff = insets.bottom / 2 - borderInsets.bottom - EDGE_SPACING;
-				borderR.height -= diff;
-				break;
-			case BELOW_BOTTOM:
-				diff = compR.height + TEXT_SPACING;
-				borderR.height -= diff;
-				break;
-			}
-			border.paintBorder(c, g, borderR.x, borderR.y, borderR.width, borderR.height);
-			Color col = g.getColor();
-			g.setColor(c.getBackground());
-			g.fillRect(compR.x, compR.y, compR.width, compR.height);
-			g.setColor(col);
-		}
-
-		public Insets getBorderInsets(Component c, Insets insets) {
-			Insets borderInsets;
-			if (border != null) {
-				borderInsets = border.getBorderInsets(c);
-			} else {
-				borderInsets = new Insets(0, 0, 0, 0);
-			}
-			insets.top = EDGE_SPACING + TEXT_SPACING + borderInsets.top;
-			insets.right = EDGE_SPACING + TEXT_SPACING + borderInsets.right;
-			insets.bottom = EDGE_SPACING + TEXT_SPACING + borderInsets.bottom;
-			insets.left = EDGE_SPACING + TEXT_SPACING + borderInsets.left;
-
-			if (c == null || component == null) {
-				return insets;
-			}
-
-			int compHeight = component.getPreferredSize().height;
-
-			switch (titlePosition) {
-			case ABOVE_TOP:
-				insets.top += compHeight + TEXT_SPACING;
-				break;
-			case TOP:
-			case DEFAULT_POSITION:
-				insets.top += Math.max(compHeight, borderInsets.top) - borderInsets.top;
-				break;
-			case BELOW_TOP:
-				insets.top += compHeight + TEXT_SPACING;
-				break;
-			case ABOVE_BOTTOM:
-				insets.bottom += compHeight + TEXT_SPACING;
-				break;
-			case BOTTOM:
-				insets.bottom += Math.max(compHeight, borderInsets.bottom) - borderInsets.bottom;
-				break;
-			case BELOW_BOTTOM:
-				insets.bottom += compHeight + TEXT_SPACING;
-				break;
-			}
-			return insets;
-		}
-
-		public Rectangle getComponentRect(Rectangle rect, Insets borderInsets) {
-			Dimension compD = component.getPreferredSize();
-			Rectangle compR = new Rectangle(0, 0, compD.width, compD.height);
-			switch (titlePosition) {
-			case ABOVE_TOP:
-				compR.y = EDGE_SPACING;
-				break;
-			case TOP:
-			case DEFAULT_POSITION:
-				if (titleComponent instanceof JButton) {
-					compR.y = EDGE_SPACING + (borderInsets.top - EDGE_SPACING - TEXT_SPACING - compD.height) / 2;
-				} else if (titleComponent instanceof JRadioButton) {
-					compR.y = (borderInsets.top - EDGE_SPACING - TEXT_SPACING - compD.height) / 2;
-				}
-				break;
-			case BELOW_TOP:
-				compR.y = borderInsets.top - compD.height - TEXT_SPACING;
-				break;
-			case ABOVE_BOTTOM:
-				compR.y = rect.height - borderInsets.bottom + TEXT_SPACING;
-				break;
-			case BOTTOM:
-				compR.y = rect.height - borderInsets.bottom + TEXT_SPACING
-						+ (borderInsets.bottom - EDGE_SPACING - TEXT_SPACING - compD.height) / 2;
-				break;
-			case BELOW_BOTTOM:
-				compR.y = rect.height - compD.height - EDGE_SPACING;
-				break;
-			}
-			switch (titleJustification) {
-			case LEFT:
-			case DEFAULT_JUSTIFICATION:
-				// compR.x = TEXT_INSET_H + borderInsets.left;
-				compR.x = TEXT_INSET_H + borderInsets.left - EDGE_SPACING;
-				break;
-			case RIGHT:
-				compR.x = rect.width - borderInsets.right - TEXT_INSET_H - compR.width;
-				break;
-			case CENTER:
-				compR.x = (rect.width - compR.width) / 2;
-				break;
-			}
-			return compR;
 		}
 	}
 
