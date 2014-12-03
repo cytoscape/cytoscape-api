@@ -2,6 +2,10 @@ package org.cytoscape.util.swing;
 
 
 import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JPanel;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
@@ -35,6 +39,29 @@ public final class LookAndFeelUtil {
 			border = BorderFactory.createLineBorder(UIManager.getColor("Separator.foreground"));
 		
 		return border;
+	}
+	
+	public static JPanel createOkCancelPanel(final JButton okBtn, final JButton cancelBtn) {
+		JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
+		panel.setBorder(BorderFactory.createEmptyBorder(6, 0, 6, 0));
+		
+		panel.add(Box.createHorizontalGlue());
+		
+		if (isMac()) {
+			panel.add(cancelBtn);
+			panel.add(okBtn);
+		} else {
+			panel.add(okBtn);
+			if (LookAndFeelUtil.isWinLAF()) panel.add(Box.createHorizontalStrut(5));
+			panel.add(cancelBtn);
+		}
+		
+		return panel;
+	}
+	
+	public static boolean isMac() {
+		return System.getProperty("os.name").startsWith("Mac OS X");
 	}
 	
 	private LookAndFeelUtil() {
