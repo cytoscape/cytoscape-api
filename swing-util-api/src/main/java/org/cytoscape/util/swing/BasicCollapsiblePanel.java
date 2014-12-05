@@ -165,6 +165,9 @@ public class BasicCollapsiblePanel extends JPanel {
 			contentPane = new JPanel();
 			contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.PAGE_AXIS));
 			contentPane.setBorder(border);
+			
+			if (isAquaLAF())
+				contentPane.setOpaque(false);
 		}
 		
 		return contentPane;
@@ -176,6 +179,7 @@ public class BasicCollapsiblePanel extends JPanel {
 	 */
 	@Override
 	public Component add(Component comp) {
+		adjust(comp);
 		return contentPane.add(comp);
 	}
 
@@ -186,6 +190,7 @@ public class BasicCollapsiblePanel extends JPanel {
 	 */
 	@Override
 	public Component add(Component comp, int index) {
+		adjust(comp);
 		return contentPane.add(comp,index);
 	}
 
@@ -196,6 +201,7 @@ public class BasicCollapsiblePanel extends JPanel {
 	 */
 	@Override
 	public void add(Component comp, Object constraints) {
+		adjust(comp);
 		contentPane.add(comp,constraints);
 	}
 
@@ -207,6 +213,7 @@ public class BasicCollapsiblePanel extends JPanel {
 	 */
 	@Override
 	public void add(Component comp, Object constraints, int index) {
+		adjust(comp);
 		contentPane.add(comp,constraints,index);
 	}
 
@@ -217,6 +224,7 @@ public class BasicCollapsiblePanel extends JPanel {
 	 */
 	@Override
 	public Component add(String name, Component comp) {
+		adjust(comp);
 		return contentPane.add(name,comp);
 	}
 
@@ -253,6 +261,17 @@ public class BasicCollapsiblePanel extends JPanel {
 	 */
 	public boolean isCollapsed() {
 		return collapsed;
+	}
+	
+	/**
+	 * Sets the tooltip text of this BasicCollapsiblePanel.
+	 * 
+	 * @param text The string to set as the tooltip.
+	 */
+	@Override
+	public void setToolTipText(final String text) {
+		super.setToolTipText(text);
+		titleComponent.setToolTipText(text);
 	}
 
 	/**
@@ -312,6 +331,11 @@ public class BasicCollapsiblePanel extends JPanel {
 		
 		return arrowBtn;
 	}
+	
+	private void adjust(final Component c) {
+		if (isAquaLAF() && c instanceof JPanel)
+			((JPanel) c).setOpaque(false);
+	}
 
 	/**
 	 * Handles expanding and collapsing of extra content on the user's click of
@@ -330,17 +354,5 @@ public class BasicCollapsiblePanel extends JPanel {
 		public void itemStateChanged(ItemEvent e) {
 			setCollapsed(!isCollapsed());
 		}
-	}
-
-	/**
-	 * Sets the tooltip text of this BasicCollapsiblePanel.
-	 * 
-	 * @param text
-	 *            The string to set as the tooltip.
-	 */
-	@Override
-	public void setToolTipText(final String text) {
-		super.setToolTipText(text);
-		titleComponent.setToolTipText(text);
 	}
 }
