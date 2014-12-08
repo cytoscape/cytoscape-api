@@ -41,6 +41,22 @@ public final class LookAndFeelUtil {
 		return border;
 	}
 	
+	public static Border createTitledBorder(final String title) {
+		final Border border;
+		
+		if (title == null || title.trim().isEmpty()) {
+			final Border aquaBorder = isAquaLAF() ? UIManager.getBorder("InsetBorder.aquaVariant") : null;
+			border = aquaBorder != null ? aquaBorder : BorderFactory.createTitledBorder("SAMPLE").getBorder();
+		} else {
+			final Border aquaBorder = isAquaLAF() ? UIManager.getBorder("TitledBorder.aquaVariant") : null;
+			final TitledBorder tb = aquaBorder != null ?
+					BorderFactory.createTitledBorder(aquaBorder, title) : BorderFactory.createTitledBorder(title);
+			border = tb;
+		}
+		
+		return border;
+	}
+	
 	public static JPanel createOkCancelPanel(final JButton okBtn, final JButton cancelBtn) {
 		JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
