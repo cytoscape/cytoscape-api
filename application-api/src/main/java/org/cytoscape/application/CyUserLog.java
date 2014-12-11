@@ -18,19 +18,33 @@ package org.cytoscape.application;
  * </p>
  *
  * <p>
- * Example using {@link java.util.logging.Logger} log system:
+ * Example using the Log4J system:
  * <pre>
  * {@code
  * import org.cytoscape.applcation.CyUserLog;
- * import java.util.logging.Logger;
- * import java.util.logging.LogManager;
+ * import org.apache.log4j.Logger;
  * ...
- * final Logger logger = LogManager.getLogManager().getLogger(CyUserLog.NAME);
+ * final Logger logger = Logger.getLogger(CyUserLog.NAME);
  * logger.info("Filing TPS report with new cover sheet...");
- * logger.warning("Did you see the memo about this?");
- * logger.severe("I'm going to need you to go ahead and come in on Sunday too.");
+ * logger.warn("Did you see the memo about this?");
+ * logger.error("I'm going to need you to go ahead and come in on Sunday too.");
  * }
  * </pre>
+ * </p>
+ * <p>
+ * Note that you will need to add the <em>Pax Logging</em> dependency to your pom file to use Log4J:
+ * <pre>
+ * {@code
+ * <dependency>
+ *   <groupId>org.ops4j.pax.logging</groupId>
+ *   <artifactId>pax-logging-api</artifactId>
+ *   <version>1.5.2</version>
+ *   <scope>provided</scope>
+ * </dependency>
+ * }
+ * </pre>
+ * (This dependency doesn't explicitly reference Log4J but does contain necessary packages for you to use
+ * Log4J.)
  * </p>
  */
 public interface CyUserLog {
