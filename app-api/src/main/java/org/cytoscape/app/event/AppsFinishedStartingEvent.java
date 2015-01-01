@@ -3,9 +3,8 @@ package org.cytoscape.app.event;
 import org.cytoscape.event.AbstractCyEvent;
 
 /**
- * An event that occurs when apps that are installed prior to launch have all
- * successfully finished starting up.  This event will not be fired if at
- * least one app does not start properly.
+ * An event that occurs when the Cytoscape core has started, and any
+ * installed apps have either finished starting or failed to start.
  * 
  * @CyAPI.Final.Class
  * @CyAPI.InModule app-api
