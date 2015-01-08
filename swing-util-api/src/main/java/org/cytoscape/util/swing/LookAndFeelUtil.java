@@ -58,10 +58,36 @@ public final class LookAndFeelUtil {
 	}
 	
 	public static JPanel createOkCancelPanel(final JButton okBtn, final JButton cancelBtn) {
-		JPanel panel = new JPanel();
+		final JPanel panel = new JPanel();
 		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
 		panel.setBorder(BorderFactory.createEmptyBorder(6, 0, 6, 0));
 		
+		addOkCancelPanel(panel, okBtn, cancelBtn);
+		
+		return panel;
+	}
+	
+	public static JPanel createOkCancelPanel(final JButton okBtn, final JButton cancelBtn, JButton... otherBtns) {
+		final JPanel panel = new JPanel();
+		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
+		panel.setBorder(BorderFactory.createEmptyBorder(6, 0, 6, 0));
+		
+		if (otherBtns != null) {
+			for (int i = 0; i < otherBtns.length; i++) {
+				final JButton btn = otherBtns[i];
+				panel.add(btn);
+				
+				if (i < otherBtns.length-1 && LookAndFeelUtil.isWinLAF())
+					panel.add(Box.createHorizontalStrut(5));
+			}
+		}
+		
+		addOkCancelPanel(panel, okBtn, cancelBtn);
+		
+		return panel;
+	}
+	
+	private static void addOkCancelPanel(final JPanel panel, final JButton okBtn, final JButton cancelBtn) {
 		panel.add(Box.createHorizontalGlue());
 		
 		if (isMac()) {
@@ -72,8 +98,6 @@ public final class LookAndFeelUtil {
 			if (LookAndFeelUtil.isWinLAF()) panel.add(Box.createHorizontalStrut(5));
 			panel.add(cancelBtn);
 		}
-		
-		return panel;
 	}
 	
 	public static boolean isMac() {
