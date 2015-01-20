@@ -65,6 +65,11 @@ public enum DataCategory {
 	 */
 	SCRIPT("Script"),
 	
+	/**
+	 * Data to be exported is an archive file
+	 */
+	ARCHIVE("Archive"),
+	
 	/** 
 	* Data to be import/export is not specified (unknown)
 	*/ 

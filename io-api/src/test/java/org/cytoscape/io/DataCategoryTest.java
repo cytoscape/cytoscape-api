@@ -34,7 +34,7 @@ public class DataCategoryTest {
 
 	@Test
 	public void testDataCategory() {
-		assertEquals(8, DataCategory.values().length);
+		assertEquals(9, DataCategory.values().length);
 		assertEquals(DataCategory.IMAGE, DataCategory.valueOf("IMAGE"));
 		assertEquals(DataCategory.NETWORK, DataCategory.valueOf("NETWORK"));
 		assertEquals(DataCategory.PROPERTIES, DataCategory.valueOf("PROPERTIES"));
@@ -43,6 +43,7 @@ public class DataCategoryTest {
 		assertEquals(DataCategory.TABLE, DataCategory.valueOf("TABLE"));
 		assertEquals(DataCategory.UNSPECIFIED, DataCategory.valueOf("UNSPECIFIED"));
 		assertEquals(DataCategory.VIZMAP, DataCategory.valueOf("VIZMAP"));
+		assertEquals(DataCategory.ARCHIVE, DataCategory.valueOf("ARCHIVE"));
 	}
 
 }
