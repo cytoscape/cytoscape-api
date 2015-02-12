@@ -24,12 +24,12 @@ package org.cytoscape.util.swing;
  * #L%
  */
 
-import java.awt.Dimension;
-import java.awt.Font;
+import static javax.swing.GroupLayout.DEFAULT_SIZE;
+import static javax.swing.GroupLayout.Alignment.LEADING;
 
 import javax.swing.GroupLayout;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.LayoutStyle;
 
 /**
  * Simple status bar with 3 fields.
@@ -40,7 +40,16 @@ import javax.swing.LayoutStyle;
 public final class JStatusBar extends JPanel {
 	
 	private final static long serialVersionUID = 1202339875133611L;
+	
+	private static final float FONT_SIZE = 11.0f;
 
+	private JLabel leftLabel;
+	private JLabel centerLabel;
+	private JLabel rightLabel;
+	private JPanel leftPanel;
+	private JPanel centerPanel;
+	private JPanel rightPanel;
+	
 	/**
 	 * Creates a new JStatusBar object.
 	 */
@@ -76,94 +85,64 @@ public final class JStatusBar extends JPanel {
 	}
 
 	private void initComponents() {
-		leftPanel = new javax.swing.JPanel();
-		leftLabel = new javax.swing.JLabel();
-		centerPanel = new javax.swing.JPanel();
-		centerLabel = new javax.swing.JLabel();
-		rightPanel = new javax.swing.JPanel();
-		rightLabel = new javax.swing.JLabel();
+		leftPanel = new JPanel();
+		leftLabel = new JLabel();
+		centerPanel = new JPanel();
+		centerLabel = new JLabel();
+		rightPanel = new JPanel();
+		rightLabel = new JLabel();
 
-		leftPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-		leftPanel.setPreferredSize(new Dimension(40, 40));
-		leftLabel.setFont(new Font("Sans-Serif", Font.PLAIN, 10));
-		leftLabel.setPreferredSize(new Dimension(20, 20));
+		leftPanel.setBorder(LookAndFeelUtil.createPanelBorder());
+		leftLabel.setFont(leftLabel.getFont().deriveFont(FONT_SIZE));
+		
+		centerPanel.setBorder(LookAndFeelUtil.createPanelBorder());
+		centerLabel.setFont(centerLabel.getFont().deriveFont(FONT_SIZE));
+		
+		rightPanel.setBorder(LookAndFeelUtil.createPanelBorder());
+		rightLabel.setFont(rightLabel.getFont().deriveFont(FONT_SIZE));
 
-		GroupLayout jPanel1Layout = new GroupLayout(leftPanel);
-		leftPanel.setLayout(jPanel1Layout);
-		jPanel1Layout.setHorizontalGroup(jPanel1Layout.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addGroup(
-				GroupLayout.Alignment.TRAILING,
-				jPanel1Layout.createSequentialGroup().addContainerGap()
-						.addComponent(leftLabel, GroupLayout.DEFAULT_SIZE, 300,
-								Short.MAX_VALUE).addContainerGap()));
-		jPanel1Layout.setVerticalGroup(jPanel1Layout.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addGroup(
-				jPanel1Layout.createSequentialGroup().addComponent(leftLabel)
-						.addContainerGap(2, Short.MAX_VALUE)));
+		final GroupLayout layout1 = new GroupLayout(leftPanel);
+		leftPanel.setLayout(layout1);
+		
+		layout1.setHorizontalGroup(layout1.createSequentialGroup()
+				.addComponent(leftLabel, DEFAULT_SIZE, DEFAULT_SIZE, Short.MAX_VALUE)
+		);
+		layout1.setVerticalGroup(layout1.createSequentialGroup()
+				.addComponent(leftLabel)
+		);
 
-		centerPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-		centerLabel.setText("jLabel2");
+		final GroupLayout layout2 = new GroupLayout(centerPanel);
+		centerPanel.setLayout(layout2);
+		
+		layout2.setHorizontalGroup(layout2.createSequentialGroup()
+				.addComponent(centerLabel, DEFAULT_SIZE, DEFAULT_SIZE, Short.MAX_VALUE)
+		);
+		layout2.setVerticalGroup(layout2.createSequentialGroup()
+				.addComponent(centerLabel)
+		);
 
-		GroupLayout jPanel2Layout = new GroupLayout(centerPanel);
-		centerPanel.setLayout(jPanel2Layout);
-		jPanel2Layout.setHorizontalGroup(jPanel2Layout.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addGroup(
-				jPanel2Layout.createSequentialGroup().addContainerGap()
-						.addComponent(centerLabel, GroupLayout.DEFAULT_SIZE,
-								100, Short.MAX_VALUE).addContainerGap()));
-		jPanel2Layout.setVerticalGroup(jPanel2Layout.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addComponent(centerLabel,
-				GroupLayout.DEFAULT_SIZE, 17, Short.MAX_VALUE));
+		final GroupLayout layout3 = new GroupLayout(rightPanel);
+		rightPanel.setLayout(layout3);
+		
+		layout3.setHorizontalGroup(layout3.createSequentialGroup()
+				.addComponent(rightLabel, DEFAULT_SIZE, DEFAULT_SIZE, Short.MAX_VALUE)
+		);
+		layout3.setVerticalGroup(layout3.createSequentialGroup()
+				.addComponent(rightLabel)
+		);
 
-		rightPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-		rightLabel.setText("jLabel3");
-
-		GroupLayout jPanel3Layout = new GroupLayout(rightPanel);
-		rightPanel.setLayout(jPanel3Layout);
-		jPanel3Layout.setHorizontalGroup(jPanel3Layout.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addGroup(
-				jPanel3Layout.createSequentialGroup().addContainerGap()
-						.addComponent(rightLabel, GroupLayout.DEFAULT_SIZE,
-								130, Short.MAX_VALUE).addContainerGap()));
-		jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addGroup(
-				jPanel3Layout.createSequentialGroup().addComponent(rightLabel)
-						.addContainerGap(2, Short.MAX_VALUE)));
-
-		GroupLayout layout = new GroupLayout(this);
+		final GroupLayout layout = new GroupLayout(this);
 		this.setLayout(layout);
-		layout.setHorizontalGroup(layout.createParallelGroup(
-				GroupLayout.Alignment.LEADING)
-				.addGroup(
-						layout.createSequentialGroup().addComponent(leftPanel,
-								GroupLayout.DEFAULT_SIZE,
-								GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addPreferredGap(
-										LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(centerPanel,
-										GroupLayout.DEFAULT_SIZE,
-										GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE).addPreferredGap(
-										LayoutStyle.ComponentPlacement.RELATED)
-								.addComponent(rightPanel,
-										GroupLayout.DEFAULT_SIZE,
-										GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)));
-		layout.setVerticalGroup(layout.createParallelGroup(
-				GroupLayout.Alignment.LEADING).addComponent(leftPanel, 0, 21,
-				Short.MAX_VALUE).addComponent(centerPanel,
-				GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-				Short.MAX_VALUE).addComponent(rightPanel, 0, 21,
-				Short.MAX_VALUE));
-	} // </editor-fold>
-
-	// Variables declaration - do not modify
-	private javax.swing.JLabel leftLabel;
-	private javax.swing.JLabel centerLabel;
-	private javax.swing.JLabel rightLabel;
-	private javax.swing.JPanel leftPanel;
-	private javax.swing.JPanel centerPanel;
-	private javax.swing.JPanel rightPanel;
-
-	// End of variables declaration
+		
+		layout.setHorizontalGroup(layout.createSequentialGroup()
+				.addComponent(leftPanel, DEFAULT_SIZE, DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(centerPanel, DEFAULT_SIZE, DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(rightPanel, DEFAULT_SIZE, DEFAULT_SIZE, Short.MAX_VALUE)
+		);
+		layout.setVerticalGroup(layout.createParallelGroup(LEADING)
+				.addComponent(leftPanel, DEFAULT_SIZE, DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(centerPanel, DEFAULT_SIZE, DEFAULT_SIZE, Short.MAX_VALUE)
+				.addComponent(rightPanel, DEFAULT_SIZE, DEFAULT_SIZE, Short.MAX_VALUE)
+		);
+	}
 }

@@ -27,7 +27,10 @@ package org.cytoscape.util.swing;
  */
 
 
-import static org.cytoscape.util.swing.LookAndFeelUtil.*;
+import static org.cytoscape.util.swing.LookAndFeelUtil.createPanelBorder;
+import static org.cytoscape.util.swing.LookAndFeelUtil.isAquaLAF;
+import static org.cytoscape.util.swing.LookAndFeelUtil.isNimbusLAF;
+import static org.cytoscape.util.swing.LookAndFeelUtil.isWinLAF;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -39,6 +42,8 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.net.URL;
+import java.util.EventListener;
+import java.util.Vector;
 
 import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
@@ -71,6 +76,14 @@ public class BasicCollapsiblePanel extends JPanel {
 	
 	private static final long serialVersionUID = 2010434345567315524L;
 
+	public interface CollapseListener extends EventListener {
+		
+		public void collapsed();
+		public void expanded();
+	}
+
+	private final Vector<CollapseListener> collapseListeners = new Vector<CollapseListener>();
+	
 	private Border border; 
 
 	// Title displayed in the titled border
@@ -250,6 +263,15 @@ public class BasicCollapsiblePanel extends JPanel {
 		
 		collapsed = collapse;
 		updateUI();
+		
+		if (collapseListeners != null) {
+	        for (CollapseListener listener : collapseListeners) {
+	        	if (collapse)
+	        		listener.collapsed();
+	        	else
+	        		listener.expanded();
+	        }
+    	}
 	}
 
 	/**
@@ -272,6 +294,14 @@ public class BasicCollapsiblePanel extends JPanel {
 	public void setToolTipText(final String text) {
 		super.setToolTipText(text);
 		titleComponent.setToolTipText(text);
+	}
+	
+	public void addCollapseListener(CollapseListener listener) {
+		collapseListeners.add(listener);
+	}
+
+	public boolean removeCollapeListener(CollapseListener listener) {
+		return collapseListeners.remove(listener);
 	}
 
 	/**
