@@ -270,6 +270,9 @@ public class BasicVisualLexicon implements VisualLexicon {
 	
 	public static final EdgeBendVisualProperty EDGE_BEND = new EdgeBendVisualProperty(
 			EdgeBendVisualProperty.DEFAULT_EDGE_BEND, "EDGE_BEND", "Edge Bend");
+	
+	public static final VisualProperty<Double> EDGE_LABEL_WIDTH = new DoubleVisualProperty(200d, NONE_ZERO_POSITIVE_DOUBLE_RANGE,
+			"EDGE_LABEL_WIDTH", "Edge Label Width", CyEdge.class);
 
 	/**
 	 * Constructor for VisualLexicon. The parameters are required for all
@@ -335,6 +338,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 		addVisualProperty(NODE_LABEL_FONT_FACE, NODE);
 		addVisualProperty(NODE_LABEL_TRANSPARENCY, NODE);
 		addVisualProperty(NODE_TOOLTIP, NODE);
+		addVisualProperty(NODE_LABEL_WIDTH, NODE);
 
 		// Level 2: Children of edge VP
 		addVisualProperty(EDGE_PAINT, EDGE);
@@ -351,6 +355,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 		addVisualProperty(EDGE_SOURCE_ARROW_SHAPE, EDGE);
 		addVisualProperty(EDGE_TARGET_ARROW_SHAPE, EDGE);
 		addVisualProperty(EDGE_BEND, EDGE);
+		addVisualProperty(EDGE_LABEL_WIDTH, EDGE);
 
 		// Level 3 - 4: Node-related VP
 		addVisualProperty(NODE_FILL_COLOR, NODE_PAINT);
@@ -361,7 +366,6 @@ public class BasicVisualLexicon implements VisualLexicon {
 		addVisualProperty(NODE_WIDTH, NODE_SIZE);
 		addVisualProperty(NODE_HEIGHT, NODE_SIZE);
 		addVisualProperty(NODE_DEPTH, NODE_SIZE);
-		addVisualProperty(NODE_LABEL_WIDTH, NODE);
 
 		// Level 3: Edge-related VP
 		addVisualProperty(EDGE_LABEL_COLOR, EDGE_PAINT);
@@ -441,7 +445,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 		addIdentifierMapping(CyEdge.class, "edgeLabelColor", EDGE_LABEL_COLOR);
 		addIdentifierMapping(CyEdge.class, "edgeLabelOpacity", EDGE_LABEL_TRANSPARENCY);
 		addIdentifierMapping(CyEdge.class, "edgeFontSize", EDGE_LABEL_FONT_SIZE);
-		// TODO: missing edge property: addIdentifierMapping(CyEdge.class, "edgeLabelWidth", EDGE_LABEL_WIDTH);
+		addIdentifierMapping(CyEdge.class, "edgeLabelWidth", EDGE_LABEL_WIDTH);
 		addIdentifierMapping(CyEdge.class, "edgeToolTip", EDGE_TOOLTIP);
 		addIdentifierMapping(CyEdge.class, "edgeHandleList", EDGE_BEND);
 	}
