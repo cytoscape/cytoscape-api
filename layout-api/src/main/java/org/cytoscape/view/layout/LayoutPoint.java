@@ -26,7 +26,7 @@ package org.cytoscape.view.layout;
 
 
 /**
- * Simple immutable object which represents a point (x, y).
+ * Simple immutable object which represents a point (x, y, z).
  * @CyAPI.Final.Class
  * @CyAPI.InModule layout-api
  */
@@ -34,15 +34,29 @@ public final class LayoutPoint {
 	
 	private final double x;
 	private final double y;
+	private final double z;
 
 	/**
-	 * Constructor.
+	 * 2D Constructor, the Z coordinate is set to 0.
 	 * @param x The X location of the point.
 	 * @param y The Y location of the point.
 	 */
 	public LayoutPoint(final double x, final double y) {
 		this.x = x;
 		this.y = y;
+		this.z = 0;
+	}
+	
+	/**
+	 * 3D Constructor.
+	 * @param x The X location of the point.
+	 * @param y The Y location of the point.
+	 * @param z The Z location of the point.
+	 */
+	public LayoutPoint(final double x, final double y, final double z) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
 	}
 	
 	/**
@@ -59,5 +73,18 @@ public final class LayoutPoint {
 	 */
 	public double getY() {
 		return y;
+	}
+	
+	/**
+	 * Returns the Z location of the point.
+	 * @return the Z location of the point.
+	 */
+	public double getZ() {
+		return z;
+	}
+	
+	
+	public String toString() {
+		return String.format("(%f,%f,%f)", x,y,z);
 	}
 }

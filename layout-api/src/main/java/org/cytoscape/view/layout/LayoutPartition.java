@@ -36,7 +36,6 @@ package org.cytoscape.view.layout;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
@@ -76,14 +75,18 @@ public final class LayoutPartition {
 	// Keep track of the node min and max values
 	private double maxX = -100000;
 	private double maxY = -100000;
+	private double maxZ = -100000;
 	private double minX = 100000;
 	private double minY = 100000;
+	private double minZ = 100000;
 	private double width = 0;
 	private double height = 0;
+	private double depth = 0;
 
 	// Keep track of average location
 	private double averageX = 0;
 	private double averageY = 0;
+	private double averageZ = 0;
 
 	// Keep track of the number of locked nodes we have in this partition
 	private int lockedNodes = 0;
@@ -157,9 +160,11 @@ public final class LayoutPartition {
 			lockedNodes++;
 		} else {
 			updateMinMax(nv.getVisualProperty(BasicVisualLexicon.NODE_X_LOCATION),
-						 nv.getVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION));
-			this.width += nv.getVisualProperty(BasicVisualLexicon.NODE_WIDTH).doubleValue(); 
+						 nv.getVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION),
+						 nv.getVisualProperty(BasicVisualLexicon.NODE_Z_LOCATION));
+			this.width  += nv.getVisualProperty(BasicVisualLexicon.NODE_WIDTH).doubleValue(); 
 			this.height += nv.getVisualProperty(BasicVisualLexicon.NODE_HEIGHT).doubleValue();
+			this.depth  += nv.getVisualProperty(BasicVisualLexicon.NODE_DEPTH).doubleValue();
 		}
 	}
 
@@ -191,8 +196,9 @@ public final class LayoutPartition {
 
 	/**
 	 * Randomize the graph locations.
+	 * @param is3D ignores Z values if false
 	 */
-	public void randomizeLocations() {
+	public void randomizeLocations(boolean is3D) {
 		// Get a seeded pseudo random-number generator
 		Date today = new Date();
 		Random random = new Random(today.getTime());
@@ -204,12 +210,20 @@ public final class LayoutPartition {
 			if (!node.isLocked()) {
 				double x = random.nextDouble() * width;
 				double y = random.nextDouble() * height;
-				node.setLocation(x, y);
-				updateMinMax(x, y);
+				double z = is3D ? random.nextDouble() * depth : node.getZ();
+				node.setLocation(x, y, z);
+				updateMinMax(x, y, z);
 			} else {
-				updateMinMax(node.getX(), node.getY());
+				updateMinMax(node.getX(), node.getY(), node.getZ());
 			}
 		}
+	}
+	
+	/**
+	 * Randomize the graph locations (ignoring Z values).
+	 */
+	public void randomizeLocations() {
+		randomizeLocations(false);
 	}
 
 	/**
@@ -217,6 +231,8 @@ public final class LayoutPartition {
 	 * to LayoutNode's moveToLocation, but has the property of updating
 	 * the current min and max values for this partition.
 	 *
+	 * Note, updates the Z min and max to 0.
+	 * 
 	 * @param node the LayoutNode to move
 	 */
 	public void moveNodeToLocation(LayoutNode node) {
@@ -226,7 +242,24 @@ public final class LayoutPartition {
 			return;
 
 		node.moveToLocation();
-		updateMinMax(node.getX(), node.getY());
+		updateMinMax(node.getX(), node.getY(), 0);
+	}
+	
+	/**
+	 * Move the node to its current X, Y and Z values.  This is a wrapper
+	 * to LayoutNode's moveToLocation3D, but has the property of updating
+	 * the current min and max values for this partition.
+	 *
+	 * @param node the LayoutNode to move
+	 */
+	public void moveNodeToLocation3D(LayoutNode node) {
+		
+		// We provide this routine so that we can keep our min/max values updated
+		if (node.isLocked())
+			return;
+
+		node.moveToLocation3D();
+		updateMinMax(node.getX(), node.getY(), node.getZ());
 	}
 
 	/**
@@ -358,6 +391,15 @@ public final class LayoutPartition {
 	public double getMaxY() {
 		return maxY;
 	}
+	
+	/**
+	 * Return the maximum Z location of all of the LayoutNodes
+	 *
+	 * @return maximum Z location
+	 */
+	public double getMaxZ() {
+		return maxZ;
+	}
 
 	/**
 	 * Return the minimum X location of all of the LayoutNodes
@@ -378,6 +420,15 @@ public final class LayoutPartition {
 	}
 
 	/**
+	 * Return the minimum Z location of all of the LayoutNodes
+	 *
+	 * @return minimum Z location
+	 */
+	public double getMinZ() {
+		return minZ;
+	}
+	
+	/**
 	 * Return the total width of all of the LayoutNodes
 	 *
 	 * @return total width of all of the LayoutNodes
@@ -393,6 +444,15 @@ public final class LayoutPartition {
 	 */
 	public double getHeight() {
 		return height;
+	}
+	
+	/**
+	 * Return the total depth of all of the LayoutNodes
+	 *
+	 * @return total depth of all of the LayoutNodes
+	 */
+	public double getDepth() {
+		return depth;
 	}
 
 	/**
@@ -430,7 +490,7 @@ public final class LayoutPartition {
 	 */
 	public LayoutPoint getAverageLocation() {
 		int nodes = nodeCount() - lockedNodes;
-		return new LayoutPoint(averageX / nodes, averageY / nodes);
+		return new LayoutPoint(averageX / nodes, averageY / nodes, averageZ / nodes);
 	}
 
 	/**
@@ -442,12 +502,25 @@ public final class LayoutPartition {
 	 * @param yoffset the amount to offset in the Y direction
 	 */
 	public void offset(double xoffset, double yoffset) {
+		offset(xoffset, yoffset, 0);
+	}
+	
+	/**
+	 * Offset all of the nodes in the partition by a fixed
+	 * amount.  This is used by algorithms of offset each
+	 * partition after laying it out.
+	 *
+	 * @param xoffset the amount to offset in the X direction
+	 * @param yoffset the amount to offset in the Y direction
+	 */
+	public void offset(double xoffset, double yoffset, double zoffset) {
 		double myMinX = this.minX;
 		double myMinY = this.minY;
+		double myMinZ = this.minZ;
 		resetNodes();
 
 		for (LayoutNode node: nodeList) {
-			node.increment(xoffset - myMinX, yoffset - myMinY);
+			node.increment(xoffset - myMinX, yoffset - myMinY, zoffset - myMinZ);
 			moveNodeToLocation(node);
 		}
 	}
@@ -461,10 +534,13 @@ public final class LayoutPartition {
 	public void resetNodes() {
 		maxX = -100000;
 		maxY = -100000;
+		maxZ = -100000;
 		minX = 100000;
 		minY = 100000;
+		minZ = 100000;
 		averageX = 0;
 		averageY = 0;
+		averageZ = 0;
 	}
 
 	
@@ -510,14 +586,16 @@ public final class LayoutPartition {
 		edgeList.trimToSize();
 	}
 
-	private void updateMinMax(final double x, final double y) {		
-		
+	private void updateMinMax(final double x, final double y, final double z) {		
 		minX = Math.min(minX, x);
 		minY = Math.min(minY, y);
+		minZ = Math.min(minZ, z);
 		maxX = Math.max(maxX, x);
 		maxY = Math.max(maxY, y);
+		maxZ = Math.max(maxZ, z);
 		averageX += x;
 		averageY += y;
+		averageZ += z;
 	}
 
 	private void updateWeights(final LayoutEdge newEdge) {

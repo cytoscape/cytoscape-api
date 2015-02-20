@@ -190,11 +190,14 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 		for (View<CyNode> view : views) {
 			double x = view.getVisualProperty(BasicVisualLexicon.NODE_X_LOCATION);
 			double y = view.getVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION);
+			double z = view.getVisualProperty(BasicVisualLexicon.NODE_Z_LOCATION);
 			view.setVisualProperty(BasicVisualLexicon.NODE_X_LOCATION, x + translation.getX());
 			view.setVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION, y + translation.getY());
+			view.setVisualProperty(BasicVisualLexicon.NODE_Z_LOCATION, z + translation.getZ());
 		}
 	}
 
+	// MKTODO I may need a 3D version of this method so that it doesn't touch the Z coord.
 	private LayoutPoint computeCentroid() {
 		Collection<View<CyNode>> views;
 		if (nodesToLayOut.size() == 0) {
@@ -203,18 +206,18 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 			views = nodesToLayOut;
 		}
 
-		double x = 0;
-		double y = 0;
+		double x = 0, y = 0, z = 0;
 		double total = 0;
 		for (View<CyNode> view : views) {
 			x += view.getVisualProperty(BasicVisualLexicon.NODE_X_LOCATION);
 			y += view.getVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION);
+			z += view.getVisualProperty(BasicVisualLexicon.NODE_Z_LOCATION);
 			total++;
 		}
 		if (total == 0) {
 			return null;
 		}
-		return new LayoutPoint(x / total, y / total);
+		return new LayoutPoint(x / total, y / total, z / total);
 	}
 
 	/**

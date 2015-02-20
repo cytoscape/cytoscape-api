@@ -33,13 +33,13 @@
  */
 package org.cytoscape.view.layout;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyRow;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
-
-import java.util.ArrayList;
-import java.util.List;
 
 
 /**
@@ -58,8 +58,10 @@ public final class LayoutNode implements Comparable<LayoutNode> {
 	// instance variables
 	private double x;
 	private double y;
+	private double z;
 	private double dispX;
 	private double dispY;
+	private double dispZ;
 	private CyNode node;
 	private CyRow row;
 	private View<CyNode> nodeView;
@@ -81,6 +83,7 @@ public final class LayoutNode implements Comparable<LayoutNode> {
 		this.index = index;
 		this.x = nodeView.getVisualProperty(BasicVisualLexicon.NODE_X_LOCATION);
 		this.y = nodeView.getVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION);
+		this.z = nodeView.getVisualProperty(BasicVisualLexicon.NODE_Z_LOCATION);
 		this.neighbors = new ArrayList<LayoutNode>();
 	}
 
@@ -115,7 +118,7 @@ public final class LayoutNode implements Comparable<LayoutNode> {
 	}
 
 	/**
-	 * Set the location of this LayoutNode.  Note that this only
+	 * Set the 2D location of this LayoutNode.  Note that this only
 	 * sets the location -- it does not actually move the node to
 	 * that location.  Users should call moveToLocation to actually
 	 * accomplish the move.
@@ -128,6 +131,22 @@ public final class LayoutNode implements Comparable<LayoutNode> {
 		this.y = y;
 	}
 
+	/**
+	 * Set the 3D location of this LayoutNode.  Note that this only
+	 * sets the location -- it does not actually move the node to
+	 * that location.  Users should call moveToLocation to actually
+	 * accomplish the move.
+	 *
+	 * @param    x    Double representing the new X coordinate of this node
+	 * @param    y    Double representing the new Y coordinate of this node
+	 * @param    z    Double representing the new Z coordinate of this node
+	 */
+	public void setLocation(double x, double y, double z) {
+		this.x = x;
+		this.y = y;
+		this.z = z;
+	}
+	
 	/**
 	 * Set the X location of this LayoutNode.  Note that this only
 	 * sets the location -- it does not actually move the node to
@@ -151,9 +170,21 @@ public final class LayoutNode implements Comparable<LayoutNode> {
 	public void setY(double y) {
 		this.y = y;
 	}
+	
+	/**
+	 * Set the Z location of this LayoutNode.  Note that this only
+	 * sets the location -- it does not actually move the node to
+	 * that location.  Users should call moveToLocation to actually
+	 * accomplish the move.
+	 *
+	 * @param    z    Double representing the new Z coordinate of this node
+	 */
+	public void setZ(double z) {
+		this.z = z;
+	}
 
 	/**
-	 * Set the displacement of this LayoutNode.  The displacement is a
+	 * Set the 2D displacement of this LayoutNode.  The displacement is a
 	 * little different than the location in that it records an offset from
 	 * the current location.  This is useful for algorithms such as Kamada Kawai
 	 * and Fructerman Rheingold, which update positions iteratively.
@@ -164,6 +195,22 @@ public final class LayoutNode implements Comparable<LayoutNode> {
 	public void setDisp(double x, double y) {
 		this.dispX = x;
 		this.dispY = y;
+	}
+	
+	/**
+	 * Set the 3D displacement of this LayoutNode.  The displacement is a
+	 * little different than the location in that it records an offset from
+	 * the current location.  This is useful for algorithms such as Kamada Kawai
+	 * and Fructerman Rheingold, which update positions iteratively.
+	 *
+	 * @param    x    Double representing the amount to offset in the x direction
+	 * @param    y    Double representing the amount to offset in the y direction
+	 * @param    z    Double representing the amount to offset in the y direction
+	 */
+	public void setDisp(double x, double y, double z) {
+		this.dispX = x;
+		this.dispY = y;
+		this.dispZ = z;
 	}
 
 	/**
@@ -235,6 +282,19 @@ public final class LayoutNode implements Comparable<LayoutNode> {
 		this.dispX += x;
 		this.dispY += y;
 	}
+	
+	/**
+	 * Increment the displacement recorded for this node by (x,y,z).
+	 *
+	 * @param    x    the additional amount to displace in the x direction
+	 * @param    y    the additional amount to displace in the y direction
+	 * @param    z    the additional amount to displace in the z direction
+	 */
+	public void incrementDisp(double x, double y, double z) {
+		this.dispX += x;
+		this.dispY += y;
+		this.dispZ += z;
+	}
 
 	/**
 	 * Increment the location of this node by (x,y).  Note that location
@@ -247,6 +307,20 @@ public final class LayoutNode implements Comparable<LayoutNode> {
 		this.x += x;
 		this.y += y;
 	}
+	
+	/**
+	 * Increment the location of this node by (x,y,z).  Note that location
+	 * values are merely recorded until moveToLocation is called.
+	 *
+	 * @param    x    the amount to move in the x direction
+	 * @param    y    the amount to move in the y direction
+	 * @param    z    the amount to move in the z direction
+	 */
+	public void increment(double x, double y, double z) {
+		this.x += x;
+		this.y += y;
+		this.z += z;
+	}
 
 	/**
 	 * Decrement the displacement recorded for this node by (x,y).
@@ -257,6 +331,19 @@ public final class LayoutNode implements Comparable<LayoutNode> {
 	public void decrementDisp(double x, double y) {
 		this.dispX -= x;
 		this.dispY -= y;
+	}
+	
+	/**
+	 * Decrement the displacement recorded for this node by (x,y,z).
+	 *
+	 * @param    x    the additional amount to displace in the -x direction
+	 * @param    y    the additional amount to displace in the -y direction
+	 * @param    z    the additional amount to displace in the -z direction
+	 */
+	public void decrementDisp(double x, double y, double z) {
+		this.dispX -= x;
+		this.dispY -= y;
+		this.dispZ -= z;
 	}
 
 	/**
@@ -269,6 +356,20 @@ public final class LayoutNode implements Comparable<LayoutNode> {
 	public void decrement(double x, double y) {
 		this.x -= x;
 		this.y -= y;
+	}
+	
+	/**
+	 * Decrement the location of this node by (x,y,z).  Note that location
+	 * values are merely recorded until moveToLocation is called.
+	 *
+	 * @param    x    the amount to move in the -x direction
+	 * @param    y    the amount to move in the -y direction
+	 * @param    z    the amount to move in the -z direction
+	 */
+	public void decrement(double x, double y, double z) {
+		this.x -= x;
+		this.y -= y;
+		this.z -= z;
 	}
 
 	/**
@@ -287,6 +388,15 @@ public final class LayoutNode implements Comparable<LayoutNode> {
 	 */
 	public double getY() {
 		return this.y;
+	}
+	
+	/**
+	 * Return the current Z value for this LayoutNode.
+	 *
+	 * @return        current Z value
+	 */
+	public double getZ() {
+		return this.z;
 	}
 
 	/**
@@ -308,6 +418,15 @@ public final class LayoutNode implements Comparable<LayoutNode> {
 	}
 
 	/**
+	 * Return the current Z displacement value for this LayoutNode.
+	 *
+	 * @return        current Z displacement value
+	 */
+	public double getZDisp() {
+		return this.dispZ;
+	}
+	
+	/**
 	 * Return the width of this node
 	 *
 	 * @return        width of this node
@@ -326,7 +445,17 @@ public final class LayoutNode implements Comparable<LayoutNode> {
 	}
 
 	/**
-	 * Return the Euclidean distance between this node and another node
+	 * Return the height of this node
+	 *
+	 * @return        height of this node
+	 */
+	public double getDepth() {
+		return this.nodeView.getVisualProperty(BasicVisualLexicon.NODE_DEPTH);
+	}
+	
+	/**
+	 * Return the Euclidean distance (in 2D) between this node and another node.
+	 * This method only considers the X and Y coordinates of the nodes.
 	 *
 	 * @param    otherNode    the node to measure the distance to
 	 * @return        the Euclidean distance from this node to otherNode
@@ -337,9 +466,25 @@ public final class LayoutNode implements Comparable<LayoutNode> {
 
 		return Math.max(EPSILON, Math.sqrt((deltaX * deltaX) + (deltaY * deltaY)));
 	}
+	
+	/**
+	 * Return the Euclidean distance (in 3D) between this node and another node.
+	 * This method considers the X, Y and Z coordinates of the nodes.
+	 *
+	 * @param    otherNode    the node to measure the distance to
+	 * @return        the Euclidean distance from this node to otherNode
+	 */
+	public double distance3D(LayoutNode otherNode) {
+		double deltaX = this.x - otherNode.getX();
+		double deltaY = this.y - otherNode.getY();
+		double deltaZ = this.z - otherNode.getZ();
+
+		return Math.max(EPSILON, Math.sqrt((deltaX * deltaX) + (deltaY * deltaY) + (deltaZ * deltaZ)));
+	}
 
 	/**
-	 * Return the Euclidean distance between this node and a location
+	 * Return the Euclidean distance (in 2D) between this node and a location.
+	 * This method only considers the X and Y coordinates of the nodes.
 	 *
 	 * @param    uX    the X location to measure the distance to
 	 * @param    uY    the Y location to measure the distance to
@@ -351,9 +496,26 @@ public final class LayoutNode implements Comparable<LayoutNode> {
 
 		return Math.max(EPSILON, Math.sqrt((deltaX * deltaX) + (deltaY * deltaY)));
 	}
+	
+	/**
+	 * Return the Euclidean distance (in 3D) between this node and a location.
+	 * This method considers the X, Y and Z coordinates of the nodes.
+	 *
+	 * @param    uX    the X location to measure the distance to
+	 * @param    uY    the Y location to measure the distance to
+	 * @param    uZ    the Z location to measure the distance to
+	 * @return        the Euclidean distance from this node to (uX,uY,uZ)
+	 */
+	public double distance3D(double uX, double uY, double uZ) {
+		double deltaX = this.x - uX;
+		double deltaY = this.y - uY;
+		double deltaZ = this.z - uZ;
+
+		return Math.max(EPSILON, Math.sqrt((deltaX * deltaX) + (deltaY * deltaY) + (deltaZ * deltaZ)));
+	}
 
 	/**
-	 * Move the node to its current x,y coordinate.
+	 * Move the node to its current x,y coordinate (ignores the value of the z coordinate).
 	 */
 	public void moveToLocation() {
 		if (isLocked) {
@@ -362,6 +524,21 @@ public final class LayoutNode implements Comparable<LayoutNode> {
 		} else {
 			nodeView.setVisualProperty(BasicVisualLexicon.NODE_X_LOCATION, this.x);
 			nodeView.setVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION, this.y);
+		}
+	}
+	
+	/**
+	 * Move the node to its current x,y,z coordinate.
+	 */
+	public void moveToLocation3D() {
+		if (isLocked) {
+			this.x = nodeView.getVisualProperty(BasicVisualLexicon.NODE_X_LOCATION);
+			this.y = nodeView.getVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION);
+			this.z = nodeView.getVisualProperty(BasicVisualLexicon.NODE_Z_LOCATION);
+		} else {
+			nodeView.setVisualProperty(BasicVisualLexicon.NODE_X_LOCATION, this.x);
+			nodeView.setVisualProperty(BasicVisualLexicon.NODE_Y_LOCATION, this.y);
+			nodeView.setVisualProperty(BasicVisualLexicon.NODE_Z_LOCATION, this.z);
 		}
 	}
 
