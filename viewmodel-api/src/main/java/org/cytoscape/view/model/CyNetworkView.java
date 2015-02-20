@@ -28,9 +28,9 @@ import java.util.Collection;
 
 import org.cytoscape.model.CyDisposable;
 import org.cytoscape.model.CyEdge;
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
-import org.cytoscape.model.CyIdentifiable;
 
 /**
  * 
@@ -124,4 +124,12 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	 */
 	 <T, V extends T> void setViewDefault(final VisualProperty<? extends T> vp, final V defaultValue);
 
+	 
+	 /**
+	  * Returns the ID of the renderer that must be used to render this view.
+	  * 
+	  * @see org.cytoscape.application.NetworkViewRenderer#getId()
+	  * @see org.cytoscape.application.CyApplicationManager#getNetworkViewRenderer(rendererId)
+	  */
+	 String getRendererId();
 }
