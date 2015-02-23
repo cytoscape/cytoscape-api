@@ -533,7 +533,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 	}
 
 	@Override
-	public final boolean isSupported(VisualProperty<?> vp) {
+	public boolean isSupported(VisualProperty<?> vp) {
 		return visualPropertyMap.containsKey(vp);
 	}
 
