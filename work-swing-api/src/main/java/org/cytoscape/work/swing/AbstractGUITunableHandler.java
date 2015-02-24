@@ -35,6 +35,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.JPanel;
+import javax.swing.UIManager;
 
 import org.cytoscape.work.AbstractTunableHandler;
 import org.cytoscape.work.Tunable;
@@ -56,7 +57,7 @@ public abstract class AbstractGUITunableHandler
 	/**
  	 * The default label font.  We have it here for consistency.
  	 */
-	protected static final Font LABEL_FONT = new Font("SansSerif", Font.BOLD, 12);
+	protected static final Font LABEL_FONT = UIManager.getFont("Label.font");
 
 
 	/**
