@@ -26,6 +26,7 @@ package org.cytoscape.application;
 
 
 import java.util.List;
+import java.util.Set;
 
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyTable;
@@ -154,4 +155,10 @@ public interface CyApplicationManager {
 	 * CyNetworkViews
 	 */
 	NetworkViewRenderer getNetworkViewRenderer(String rendererId);
+	
+	/**
+	 * Returns a set with all the {@link NetworkViewRenderer} objects that have been registered.
+	 * @return the complete set of all the currently known renderers
+	 */
+	Set<NetworkViewRenderer> getNetworkViewRendererSet();
 }
