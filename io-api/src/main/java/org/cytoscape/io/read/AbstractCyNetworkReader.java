@@ -26,10 +26,15 @@ package org.cytoscape.io.read;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
+import org.cytoscape.application.CyApplicationManager;
+import org.cytoscape.application.NetworkViewRenderer;
 import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyNetwork;
@@ -46,8 +51,7 @@ import org.cytoscape.work.ProvidesTitle;
 import org.cytoscape.work.Tunable;
 import org.cytoscape.work.util.ListSingleSelection;
 
-public abstract class AbstractCyNetworkReader extends AbstractTask implements
-		CyNetworkReader {
+public abstract class AbstractCyNetworkReader extends AbstractTask implements CyNetworkReader {
 
 	private static final String CREATE_NEW_COLLECTION_STRING = "Create new network collection";
 
@@ -56,6 +60,7 @@ public abstract class AbstractCyNetworkReader extends AbstractTask implements
 
 	private ListSingleSelection<String> rootNetworkList;
 	private ListSingleSelection<String> targetColumnList;
+	private ListSingleSelection<NetworkViewRenderer> rendererList;
 
 	/**
 	 * Data stream for the networks to be created.
@@ -73,50 +78,31 @@ public abstract class AbstractCyNetworkReader extends AbstractTask implements
 	protected final CyNetworkViewFactory cyNetworkViewFactory;
 
 	/**
-	 * Will be used to create new CySubNetwork if this reader needs to create
-	 * new CyRootNetwork.
+	 * Will be used to create new CySubNetwork if this reader needs to create new CyRootNetwork.
 	 */
 	protected final CyNetworkFactory cyNetworkFactory;
+	
+	protected CyApplicationManager cyApplicationManager;
+
 
 	@ProvidesTitle
 	public String getTitle() {
 		return "Import Network";
 	}
-
-	@Tunable(description = "Node Identifier Mapping Column:", groups = " ", listenForChange = { "RootNetworkList" })
-	public ListSingleSelection<String> getTargetColumnList() {
-		return targetColumnList;
+	
+	@Tunable(description = "Network View Renderer:", gravity = 3.0)
+	public ListSingleSelection<NetworkViewRenderer> getNetworkViewRendererList() {
+		return rendererList;
+	}
+	
+	public void setNetworkViewRendererList(final ListSingleSelection<NetworkViewRenderer> rendererList) {
+		this.rendererList = rendererList;
 	}
 
-	public void setTargetColumnList(ListSingleSelection<String> colList) {
-		this.targetColumnList = colList;
-		// looks like this does not have any effect, is this a bug?
-		this.targetColumnList.setSelectedValue(CyRootNetwork.SHARED_NAME);
-	}
-
-	@Tunable(description = "Network Collection:", groups = " ")
-	public ListSingleSelection<String> getRootNetworkList() {
-		return rootNetworkList;
-	}
-
-	public void setRootNetworkList(final ListSingleSelection<String> roots) {
-		if (rootNetworkList.getSelectedValue().equalsIgnoreCase(
-				CREATE_NEW_COLLECTION_STRING)) {
-			// set default
-			List<String> colNames = new ArrayList<String>();
-			colNames.add(CyRootNetwork.SHARED_NAME);
-			targetColumnList = new ListSingleSelection<String>(colNames);
-			return;
-		}
-		targetColumnList = getTargetColumns(name2RootMap.get(rootNetworkList
-				.getSelectedValue()));
-	}
-
-	private final ListSingleSelection<String> getTargetColumns(
-			final CyNetwork network) {
+	private final ListSingleSelection<String> getTargetColumns(final CyNetwork network) {
 		final CyTable selectedTable = network.getTable(CyNode.class,
 				CyRootNetwork.SHARED_ATTRS);
-		final List<String> colNames = new ArrayList<String>();
+		final List<String> colNames = new ArrayList<>();
 
 		// Work-around to make the "shared name" the first in the list
 		boolean containSharedName = false;
@@ -141,9 +127,58 @@ public abstract class AbstractCyNetworkReader extends AbstractTask implements
 			colNames.add(col.getName());
 		}
 
-		return new ListSingleSelection<String>(colNames);
+		return new ListSingleSelection<>(colNames);
 	}
 
+	@Tunable(description = "Node Identifier Mapping Column:", gravity = 2.0, listenForChange = { "RootNetworkList" })
+	public ListSingleSelection<String> getTargetColumnList() {
+		return targetColumnList;
+	}
+
+	public void setTargetColumnList(ListSingleSelection<String> colList) {
+		this.targetColumnList = colList;
+		// looks like this does not have any effect, is this a bug?
+		this.targetColumnList.setSelectedValue(CyRootNetwork.SHARED_NAME);
+	}
+
+	@Tunable(description = "Network Collection:", gravity = 1.0)
+	public ListSingleSelection<String> getRootNetworkList() {
+		return rootNetworkList;
+	}
+
+	public void setRootNetworkList(final ListSingleSelection<String> roots) {
+		if (rootNetworkList.getSelectedValue().equalsIgnoreCase(CREATE_NEW_COLLECTION_STRING)) {
+			// set default
+			List<String> colNames = new ArrayList<>();
+			colNames.add(CyRootNetwork.SHARED_NAME);
+			targetColumnList = new ListSingleSelection<>(colNames);
+			
+			return;
+		}
+		
+		targetColumnList = getTargetColumns(name2RootMap.get(rootNetworkList.getSelectedValue()));
+	}
+	
+	/**
+	 * 
+	 * @param inputStream
+	 * @param cyApplicationManager
+	 * @param cyNetworkFactory
+	 * @param cyNetworkManager
+	 * @param cyRootNetworkManager
+	 */
+	public AbstractCyNetworkReader(final InputStream inputStream,
+								   final CyApplicationManager cyApplicationManager,
+								   final CyNetworkFactory cyNetworkFactory,
+								   final CyNetworkManager cyNetworkManager,
+								   final CyRootNetworkManager cyRootNetworkManager) {
+		this(inputStream, cyApplicationManager.getDefaultNetworkViewRenderer().getNetworkViewFactory(),
+				cyNetworkFactory, cyNetworkManager, cyRootNetworkManager);
+		this.cyApplicationManager = cyApplicationManager;
+		
+		init();
+	}
+	
 	/**
 	 * 
 	 * 
@@ -152,68 +187,87 @@ public abstract class AbstractCyNetworkReader extends AbstractTask implements
 	 * @param cyNetworkFactory
 	 * @param cyNetworkManager
 	 * @param cyRootNetworkManager
-	 * @param cyApplicationManager
 	 */
 	public AbstractCyNetworkReader(final InputStream inputStream,
-			final CyNetworkViewFactory cyNetworkViewFactory,
-			final CyNetworkFactory cyNetworkFactory,
-			final CyNetworkManager cyNetworkManager,
-			final CyRootNetworkManager cyRootNetworkManager) {
-
+								   final CyNetworkViewFactory cyNetworkViewFactory,
+								   final CyNetworkFactory cyNetworkFactory,
+								   final CyNetworkManager cyNetworkManager,
+								   final CyRootNetworkManager cyRootNetworkManager) {
 		if (inputStream == null)
 			throw new NullPointerException("Input stream is null");
 		if (cyNetworkViewFactory == null)
 			throw new NullPointerException("CyNetworkViewFactory is null");
 		if (cyNetworkFactory == null)
 			throw new NullPointerException("CyNetworkFactory is null");
+		if (cyNetworkManager == null)
+			throw new NullPointerException("CyNetworkManager is null");
 		if (cyRootNetworkManager == null)
 			throw new NullPointerException("CyRootNetworkManager is null");
 
 		this.inputStream = inputStream;
 		this.cyNetworkViewFactory = cyNetworkViewFactory;
 		this.cyNetworkFactory = cyNetworkFactory;
-
-		// initialize the network Collection
 		this.name2RootMap = getRootNetworkMap(cyNetworkManager, cyRootNetworkManager);
-		this.nodeMap = new HashMap<Object, CyNode>(10000);
-
-		final List<String> rootNames = new ArrayList<String>();
+		this.nodeMap = new HashMap<>(10000);
+		
+		init();
+	}
+	
+	private void init() {
+		// initialize the network Collection
+		final List<String> rootNames = new ArrayList<>();
 		rootNames.add(CREATE_NEW_COLLECTION_STRING);
 		rootNames.addAll(name2RootMap.keySet());
-		rootNetworkList = new ListSingleSelection<String>(rootNames);
+		rootNetworkList = new ListSingleSelection<>(rootNames);
 		rootNetworkList.setSelectedValue(rootNames.get(0));
 
 		// initialize target attribute list
-		final List<String> colNames_target = new ArrayList<String>();
-		colNames_target.add(CyRootNetwork.SHARED_NAME);
-		this.targetColumnList = new ListSingleSelection<String>(colNames_target);
+		final List<String> colNames = new ArrayList<>();
+		colNames.add(CyRootNetwork.SHARED_NAME);
+		targetColumnList = new ListSingleSelection<>(colNames);
+		
+		// initialize renderer list
+		final List<NetworkViewRenderer> renderers = new ArrayList<>();
+		
+		if (cyApplicationManager != null) {
+			final Set<NetworkViewRenderer> rendererSet = cyApplicationManager.getNetworkViewRendererSet();
+			
+			// If there is only one registered renderer, we don't want to add it to the List Selection,
+			// so the combo-box does not appear to the user, since there is nothing to select anyway.
+			if (rendererSet.size() > 1) {
+				renderers.addAll(rendererSet);
+				Collections.sort(renderers, new Comparator<NetworkViewRenderer>() {
+					@Override
+					public int compare(NetworkViewRenderer r1, NetworkViewRenderer r2) {
+						return r1.toString().compareToIgnoreCase(r2.toString());
+					}
+				});
+			}
+		}
+		
+		rendererList = new ListSingleSelection<>(renderers);
 	}
-
+	
 	@Override
 	public CyNetwork[] getNetworks() {
 		return networks;
 	}
 
 	/**
-	 * 
 	 * Get target network collection, i.e., parent root network for all networks
 	 * to be loaded.
 	 * 
-	 * @return Root network for this network collection. If there is no such
-	 *         root, returns null.
-	 * 
+	 * @return Root network for this network collection. If there is no such root, returns null.
 	 */
 	protected final CyRootNetwork getRootNetwork() {
-		final String networkCollectionName = this.rootNetworkList
-				.getSelectedValue();
-		final CyRootNetwork rootNetwork = this.name2RootMap
-				.get(networkCollectionName);
+		final String networkCollectionName = this.rootNetworkList.getSelectedValue();
+		final CyRootNetwork rootNetwork = this.name2RootMap.get(networkCollectionName);
 
 		if (rootNetwork != null) {
-			// Initialize the map of nodes only when we add network to existing
-			// collection.
+			// Initialize the map of nodes only when we add network to existing collection.
 			this.initNodeMap(rootNetwork);
 		}
+		
 		return rootNetwork;
 	}
 
@@ -225,33 +279,35 @@ public abstract class AbstractCyNetworkReader extends AbstractTask implements
 	protected Map<Object, CyNode> getNodeMap() {
 		return this.nodeMap;
 	}
+	
+	protected CyNetworkViewFactory getNetworkViewFactory() {
+		if (rendererList != null && rendererList.getSelectedValue() != null)
+			return rendererList.getSelectedValue().getNetworkViewFactory();
+		
+		return cyNetworkViewFactory;
+	}
 
 	private final void initNodeMap(final CyRootNetwork rootNetwork) {
-		final String keyColumnName = this.getTargetColumnList()
-				.getSelectedValue();
-
+		final String keyColumnName = this.getTargetColumnList().getSelectedValue();
 		final List<CyNode> nodes = rootNetwork.getNodeList();
+		
 		for (final CyNode node : nodes) {
-			final Object keyValue = rootNetwork.getRow(node).getRaw(
-					keyColumnName);
-			if (keyValue != null) {
+			final Object keyValue = rootNetwork.getRow(node).getRaw(keyColumnName);
+			
+			if (keyValue != null)
 				this.nodeMap.put(keyValue, node);
-			}
 		}
 	}
 
-	private final Map<String, CyRootNetwork> getRootNetworkMap(
-			CyNetworkManager cyNetworkManager,
+	private final Map<String, CyRootNetwork> getRootNetworkMap(CyNetworkManager cyNetworkManager,
 			CyRootNetworkManager cyRootNetworkManager) {
-
-		final Map<String, CyRootNetwork> name2RootMap = new HashMap<String, CyRootNetwork>();
+		final Map<String, CyRootNetwork> name2RootMap = new HashMap<>();
 
 		for (CyNetwork net : cyNetworkManager.getNetworkSet()) {
 			final CyRootNetwork rootNet = cyRootNetworkManager.getRootNetwork(net);
+			
 			if (!name2RootMap.containsValue(rootNet))
-				name2RootMap.put(
-						rootNet.getRow(rootNet).get(CyRootNetwork.NAME,
-								String.class), rootNet);
+				name2RootMap.put(rootNet.getRow(rootNet).get(CyRootNetwork.NAME, String.class), rootNet);
 		}
 
 		return name2RootMap;
