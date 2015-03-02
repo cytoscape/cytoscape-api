@@ -24,6 +24,7 @@ package org.cytoscape.view.presentation;
  * #L%
  */
 
+import static org.junit.Assert.assertArrayEquals;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
@@ -31,13 +32,14 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.Collection;
 
+import org.cytoscape.view.model.DiscreteRange;
 import org.cytoscape.view.model.NullDataType;
-import org.cytoscape.view.model.VisualLexicon;
 import org.cytoscape.view.model.VisualLexiconNode;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.presentation.property.AbstractVisualLexiconTest;
 import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.view.presentation.property.NullVisualProperty;
+import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mock;
@@ -45,7 +47,7 @@ import org.mockito.MockitoAnnotations;
 
 public class BasicVisualLexiconTest extends AbstractVisualLexiconTest {
 
-	private VisualLexicon richLex;
+	private BasicVisualLexicon richLex;
 	private VisualProperty<NullDataType> richRoot;
 
 	// Fake VPs
@@ -112,5 +114,11 @@ public class BasicVisualLexiconTest extends AbstractVisualLexiconTest {
 		assertTrue(richLex.isSupported(BasicVisualLexicon.NETWORK_CENTER_Y_LOCATION));
 		assertTrue(richLex.isSupported(BasicVisualLexicon.EDGE_LINE_TYPE));
 		assertFalse(richLex.isSupported(this.textVP));
+	}
+	
+	@Test
+	public void testGetSupportedValueRange() {
+		DiscreteRange<NodeShape> range = (DiscreteRange<NodeShape>) BasicVisualLexicon.NODE_SHAPE.getRange();
+		assertArrayEquals(range.values().toArray(), richLex.getSupportedValueRange(BasicVisualLexicon.NODE_SHAPE).toArray());
 	}
 }

@@ -28,6 +28,7 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Paint;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
@@ -75,7 +76,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 	// TODO move these!
 	protected static final Color MIN_COLOR = new Color(0, 0, 0);
 	protected static final Color MAX_COLOR = new Color(0xFF, 0xFF, 0xFF);
-	protected static final Range<Paint> PAINT_RANGE = new ContinuousRange<Paint>(Paint.class, MIN_COLOR, MAX_COLOR,
+	protected static final Range<Paint> PAINT_RANGE = new ContinuousRange<>(Paint.class, MIN_COLOR, MAX_COLOR,
 			true, true);
 
 	protected static final Set<String> STRING_SET = new HashSet<String>();
@@ -88,9 +89,9 @@ public class BasicVisualLexicon implements VisualLexicon {
 		}
 	};
 
-	protected static final Range<Double> ARBITRARY_DOUBLE_RANGE = new ContinuousRange<Double>(Double.class,
+	protected static final Range<Double> ARBITRARY_DOUBLE_RANGE = new ContinuousRange<>(Double.class,
 			Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, true, true);
-	protected static final Range<Double> NONE_ZERO_POSITIVE_DOUBLE_RANGE = new ContinuousRange<Double>(Double.class,
+	protected static final Range<Double> NONE_ZERO_POSITIVE_DOUBLE_RANGE = new ContinuousRange<>(Double.class,
 			0d, Double.POSITIVE_INFINITY, false, true);
 
 	// Top level nodes has null as parent, and will be pointed by parent node.
@@ -283,13 +284,13 @@ public class BasicVisualLexicon implements VisualLexicon {
 	 */
 	public BasicVisualLexicon(final VisualProperty<NullDataType> rootVisualProperty) {
 
-		this.visualPropertyMap = new HashMap<VisualProperty<?>, VisualLexiconNode>();
+		this.visualPropertyMap = new HashMap<>();
 		this.rootVisualProperty = rootVisualProperty;
 		final VisualLexiconNode rootNode = new VisualLexiconNode(rootVisualProperty, null);
 
 		visualPropertyMap.put(rootVisualProperty, rootNode);
 
-		this.identifierLookup = new HashMap<Class<?>, Map<String, VisualProperty<?>>>();
+		this.identifierLookup = new HashMap<>();
 		this.identifierLookup.put(CyNode.class, new HashMap<String, VisualProperty<?>>());
 		this.identifierLookup.put(CyEdge.class, new HashMap<String, VisualProperty<?>>());
 		this.identifierLookup.put(CyNetwork.class, new HashMap<String, VisualProperty<?>>());
@@ -473,7 +474,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 
 	private Set<VisualProperty<?>> getChildNodes(VisualProperty<?> prop) {
 		final VisualLexiconNode node = visualPropertyMap.get(prop);
-		final Set<VisualProperty<?>> children = new HashSet<VisualProperty<?>>();
+		final Set<VisualProperty<?>> children = new HashSet<>();
 
 		// if this is a leaf node, return empty set
 		if (node.getChildren().size() == 0)
@@ -536,10 +537,18 @@ public class BasicVisualLexicon implements VisualLexicon {
 	public boolean isSupported(VisualProperty<?> vp) {
 		return visualPropertyMap.containsKey(vp);
 	}
+	
+	@Override
+	public <T> Set<T> getSupportedValueRange(VisualProperty<T> vp) {
+	    final Range<T> range = vp.getRange();
+	    
+	    if (range.isDiscrete())
+	        return ((DiscreteRange<T>)range).values();
+	    
+	    return Collections.emptySet();
+	}
 
 	/**
-	 * #ASKMIKE
-	 * 
 	 * @param type
 	 * @param id
 	 * @param vp
