@@ -1,11 +1,18 @@
 package org.cytoscape.util.swing;
 
 
+import java.awt.event.KeyEvent;
+
+import javax.swing.Action;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.InputMap;
 import javax.swing.JButton;
+import javax.swing.JComponent;
 import javax.swing.JPanel;
+import javax.swing.JRootPane;
+import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
@@ -85,6 +92,22 @@ public final class LookAndFeelUtil {
 		addOkCancelPanel(panel, okBtn, cancelBtn);
 		
 		return panel;
+	}
+	
+	public static void setDefaultOkCancelKeyStrokes(final JRootPane rootPane, final Action okAction,
+			final Action cancelAction) {
+		final String CANCEL_ACTION_KEY = "CANCEL_ACTION_KEY";
+		final String OK_ACTION_KEY = "OK_ACTION_KEY";
+		
+		final KeyStroke escapeKey = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
+		final KeyStroke enterKey = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false);
+		
+		final InputMap inputMap = rootPane.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
+		inputMap.put(escapeKey, CANCEL_ACTION_KEY);
+		inputMap.put(enterKey, OK_ACTION_KEY);
+		
+		rootPane.getActionMap().put(CANCEL_ACTION_KEY, cancelAction);
+		rootPane.getActionMap().put(OK_ACTION_KEY, okAction);
 	}
 	
 	private static void addOkCancelPanel(final JPanel panel, final JButton okBtn, final JButton cancelBtn) {
