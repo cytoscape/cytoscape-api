@@ -5,8 +5,10 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.Action;
 import javax.swing.BorderFactory;
-import javax.swing.Box;
-import javax.swing.BoxLayout;
+import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
+import javax.swing.GroupLayout.ParallelGroup;
+import javax.swing.GroupLayout.SequentialGroup;
 import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComponent;
@@ -65,31 +67,37 @@ public final class LookAndFeelUtil {
 	}
 	
 	public static JPanel createOkCancelPanel(final JButton okBtn, final JButton cancelBtn) {
-		final JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
-		panel.setBorder(BorderFactory.createEmptyBorder(6, 0, 6, 0));
-		
-		addOkCancelPanel(panel, okBtn, cancelBtn);
-		
-		return panel;
+		return createOkCancelPanel(okBtn, cancelBtn, new JButton[0]);
 	}
 	
 	public static JPanel createOkCancelPanel(final JButton okBtn, final JButton cancelBtn, JButton... otherBtns) {
 		final JPanel panel = new JPanel();
-		panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
-		panel.setBorder(BorderFactory.createEmptyBorder(6, 0, 6, 0));
+		
+		final GroupLayout layout = new GroupLayout(panel);
+		panel.setLayout(layout);
+		layout.setAutoCreateContainerGaps(false);
+		layout.setAutoCreateGaps(true);
+		
+		final SequentialGroup hg = layout.createSequentialGroup();
+		final ParallelGroup vg = layout.createParallelGroup(Alignment.CENTER, false);
 		
 		if (otherBtns != null) {
 			for (int i = 0; i < otherBtns.length; i++) {
 				final JButton btn = otherBtns[i];
-				panel.add(btn);
-				
-				if (i < otherBtns.length-1 && LookAndFeelUtil.isWinLAF())
-					panel.add(Box.createHorizontalStrut(5));
+				hg.addComponent(btn);
+				vg.addComponent(btn);
 			}
 		}
 		
-		addOkCancelPanel(panel, okBtn, cancelBtn);
+		hg.addGap(0, 0, Short.MAX_VALUE);
+		hg.addComponent(isMac() ? cancelBtn : okBtn);
+		hg.addComponent(isMac() ? okBtn : cancelBtn);
+		
+		vg.addComponent(okBtn);
+		vg.addComponent(cancelBtn);
+		
+		layout.setHorizontalGroup(hg);
+		layout.setVerticalGroup(vg);
 		
 		return panel;
 	}
@@ -108,19 +116,6 @@ public final class LookAndFeelUtil {
 		
 		rootPane.getActionMap().put(CANCEL_ACTION_KEY, cancelAction);
 		rootPane.getActionMap().put(OK_ACTION_KEY, okAction);
-	}
-	
-	private static void addOkCancelPanel(final JPanel panel, final JButton okBtn, final JButton cancelBtn) {
-		panel.add(Box.createHorizontalGlue());
-		
-		if (isMac()) {
-			panel.add(cancelBtn);
-			panel.add(okBtn);
-		} else {
-			panel.add(okBtn);
-			if (LookAndFeelUtil.isWinLAF()) panel.add(Box.createHorizontalStrut(5));
-			panel.add(cancelBtn);
-		}
 	}
 	
 	public static boolean isMac() {
