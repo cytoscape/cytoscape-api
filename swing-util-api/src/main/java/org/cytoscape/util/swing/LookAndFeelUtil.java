@@ -104,18 +104,21 @@ public final class LookAndFeelUtil {
 	
 	public static void setDefaultOkCancelKeyStrokes(final JRootPane rootPane, final Action okAction,
 			final Action cancelAction) {
-		final String CANCEL_ACTION_KEY = "CANCEL_ACTION_KEY";
-		final String OK_ACTION_KEY = "OK_ACTION_KEY";
+		final InputMap inputMap = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
 		
-		final KeyStroke escapeKey = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
-		final KeyStroke enterKey = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false);
+		if (okAction != null) {
+			final String OK_ACTION_KEY = "OK_ACTION_KEY";
+			final KeyStroke enterKey = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0, false);
+			inputMap.put(enterKey, OK_ACTION_KEY);
+			rootPane.getActionMap().put(OK_ACTION_KEY, okAction);
+		}
 		
-		final InputMap inputMap = rootPane.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT);
-		inputMap.put(escapeKey, CANCEL_ACTION_KEY);
-		inputMap.put(enterKey, OK_ACTION_KEY);
-		
-		rootPane.getActionMap().put(CANCEL_ACTION_KEY, cancelAction);
-		rootPane.getActionMap().put(OK_ACTION_KEY, okAction);
+		if (cancelAction != null) {
+			final String CANCEL_ACTION_KEY = "CANCEL_ACTION_KEY";
+			final KeyStroke escapeKey = KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, false);
+			inputMap.put(escapeKey, CANCEL_ACTION_KEY);
+			rootPane.getActionMap().put(CANCEL_ACTION_KEY, cancelAction);
+		}
 	}
 	
 	public static boolean isMac() {
