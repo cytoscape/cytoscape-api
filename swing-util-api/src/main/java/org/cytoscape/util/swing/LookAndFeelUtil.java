@@ -90,11 +90,18 @@ public final class LookAndFeelUtil {
 		}
 		
 		hg.addGap(0, 0, Short.MAX_VALUE);
-		hg.addComponent(isMac() ? cancelBtn : okBtn);
-		hg.addComponent(isMac() ? okBtn : cancelBtn);
 		
-		vg.addComponent(okBtn);
-		vg.addComponent(cancelBtn);
+		final JButton btn1 = isMac() ? cancelBtn : okBtn;
+		final JButton btn2 = isMac() ? okBtn : cancelBtn;
+		
+		if (btn1 != null) {
+			hg.addComponent(btn1);
+			vg.addComponent(btn1);
+		}
+		if (btn2 != null) {
+			hg.addComponent(btn2);
+			vg.addComponent(btn2);
+		}
 		
 		layout.setHorizontalGroup(hg);
 		layout.setVerticalGroup(vg);
