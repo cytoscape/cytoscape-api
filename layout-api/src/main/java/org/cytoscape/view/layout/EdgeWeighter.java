@@ -46,7 +46,7 @@ import org.cytoscape.work.util.ListSingleSelection;
 public final class EdgeWeighter {
 
   public WeightTypes type = WeightTypes.GUESS;
-  @Tunable(description="How to interpret weight values", groups={"Edge Weight Settings"}, gravity=2.0)
+  @Tunable(description="How to interpret weight values:", groups={"Edge Weight Settings"}, gravity=2.0)
 	public ListSingleSelection<WeightTypes> getType() {
 		ListSingleSelection<WeightTypes> t = 
 			new ListSingleSelection<WeightTypes>(WeightTypes.GUESS, WeightTypes.LOG, 
@@ -59,13 +59,13 @@ public final class EdgeWeighter {
 		type = t.getSelectedValue();
 	}
 
-	@Tunable(description="The minimum edge weight to consider", groups={"Edge Weight Settings"})
+	@Tunable(description="The minimum edge weight to consider:", groups={"Edge Weight Settings"})
 	public double minWeightCutoff = 0;
 
-	@Tunable(description="The maximum edge weight to consider", groups={"Edge Weight Settings"})
+	@Tunable(description="The maximum edge weight to consider:", groups={"Edge Weight Settings"})
 	public double maxWeightCutoff = Double.MAX_VALUE;
 	
-	@Tunable(description="The default edge weight to consider", groups={"Edge Weight Settings"})
+	@Tunable(description="The default edge weight to consider:", groups={"Edge Weight Settings"})
 	public double defaultEdgeWeight = 0.5;
 	
 	private String weightAttribute = "";
