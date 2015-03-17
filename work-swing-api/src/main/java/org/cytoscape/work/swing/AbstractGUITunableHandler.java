@@ -149,7 +149,7 @@ public abstract class AbstractGUITunableHandler
 		panel = new JPanel();
 	}
 
-
+	@Override
 	public void setValue(final Object newValue) throws IllegalAccessException, InvocationTargetException{
 		super.setValue(newValue);
 		notifyDependents();
@@ -160,6 +160,7 @@ public abstract class AbstractGUITunableHandler
 	/**
 	 *  Notifies all dependents that this object has changed.
 	 */
+	@Override
 	public void notifyDependents() {
 		String state = getState();
 		String name = getName();
@@ -170,20 +171,21 @@ public abstract class AbstractGUITunableHandler
 	/**
 	 *  Notifies all dependents that this object has changed.
 	 */
+	@Override
 	public void notifyChangeListeners() {
 		String state = getState();
 		String name = getName();
 
 		for (GUITunableHandler gh : listeners)
 			gh.changeOccurred(name, state);
-		
 	}
 
 	/**
 	 *  Adds the argument as a new dependency to this <code>GUITunableHandler</code>.
-
+	 *
 	 *  @param gh <code>Handler</code> on which this one will depend on
 	 */
+	@Override
 	public void addChangeListener(GUITunableHandler gh) {
 		if (!listeners.contains(gh))
 			listeners.add(gh);
@@ -193,27 +195,28 @@ public abstract class AbstractGUITunableHandler
 	 *  Adds the argument as a new dependency to this <code>GUITunableHandler</code>.
 	 *  @param gh <code>Handler</code> on which this one will depend on
 	 */
+	@Override
 	public void addDependent(GUITunableHandler gh) {
 		if (!dependents.contains(gh))
 			dependents.add(gh);
 	}
 
-	/** {@inheritDoc} */
+	@Override
 	public String getDependency() {
 		return dependencyName;
 	}
 
-	/** {@inheritDoc} */
+	@Override
 	public String[] getChangeSources() {
 		return listenForChange();
 	}
 
-	/** {@inheritDoc} */
+	@Override
 	public final void changeOccurred(final String name, final String state) {
 			update();
 	}
 
-	/** {@inheritDoc} */
+	@Override
 	public final void checkDependency(final String depName, final String depState) {
 		// if we don't depend on anything, then we should be enabled
 		if (dependencyName == null || mustMatch == null) {
@@ -260,17 +263,19 @@ public abstract class AbstractGUITunableHandler
 	 * Returns the panel associated with this <code>GUITunableHandler</code>.
 	 * @return the <code>JPanel</code> container of this <code>GUITunableHandler</code>
 	 */
+	@Override
 	public JPanel getJPanel() {
 		return panel;
 	}
 
-	/** {@inheritDoc} */
+	@Override
 	public abstract void handle();
 
 	/** 
 	 * The default implementation is a no-op. You should override this method if 
 	 * you want your tunable to update.
 	 */
+	@Override
 	public void update() { }
 
 	/** Returns a string representation of the value of the <code>Tunable</code> associated with
@@ -278,6 +283,7 @@ public abstract class AbstractGUITunableHandler
 	 *
 	 *  @return the current value of the associated <code>Tunable</code> represented as a string
 	 */
+	@Override
 	public String getState() {
 		try {
 			final Object value = getValue();

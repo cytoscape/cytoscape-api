@@ -25,9 +25,9 @@ package org.cytoscape.view.vizmap;
  */
 
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-import org.cytoscape.view.model.VisualLexicon;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -59,5 +59,4 @@ public abstract class AbstractVisualStyleFactoryTest {
 
 		assertEquals(title, copyStyle.getTitle());
 	}
-
 }
