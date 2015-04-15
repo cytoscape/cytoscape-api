@@ -25,6 +25,9 @@ package org.cytoscape.work.swing;
  */
 
 
+import static javax.swing.GroupLayout.DEFAULT_SIZE;
+import static javax.swing.GroupLayout.PREFERRED_SIZE;
+
 import java.awt.Component;
 import java.awt.Container;
 import java.awt.Font;
@@ -34,8 +37,15 @@ import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.swing.BorderFactory;
+import javax.swing.GroupLayout;
+import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.UIManager;
+import javax.swing.GroupLayout.Alignment;
 
 import org.cytoscape.work.AbstractTunableHandler;
 import org.cytoscape.work.Tunable;
@@ -99,11 +109,11 @@ public abstract class AbstractGUITunableHandler
 
 
 	/** Standard base class constructor for <code>TunableHandler</code>s that deal with
-	 *  <code>Tunable</code>s that annotate a field.
+	 *  <code>Tunable</code>s that annotate a control.
 	 *
-	 *  @param field    An instance of <code>Field</code> that represents a field annotated with <code>@Tunable</code>
-	 *  @param instance An object instance that contains a field corresponding to the <i>field</i> parameter
-	 *  @param tunable  The <code>Tunable</code> that annotates <i>field</i>
+	 *  @param control    An instance of <code>Field</code> that represents a control annotated with <code>@Tunable</code>
+	 *  @param instance An object instance that contains a control corresponding to the <i>control</i> parameter
+	 *  @param tunable  The <code>Tunable</code> that annotates <i>control</i>
 	 */
 	protected AbstractGUITunableHandler(final Field field, final Object instance, final Tunable tunable) {
 		super(field, instance, tunable);
@@ -146,7 +156,7 @@ public abstract class AbstractGUITunableHandler
 
 		dependents = new LinkedList<GUITunableHandler>();
 		listeners = new LinkedList<GUITunableHandler>();
-		panel = new JPanel();
+		panel = new TunableFieldPanel();
 	}
 
 	@Override
@@ -291,6 +301,125 @@ public abstract class AbstractGUITunableHandler
 		} catch (final Exception e) {
 			logger.warn("Could not get state.", e);
 			return "";
+		}
+	}
+	
+	public boolean isHorizontal() {
+		return horizontal;
+	}
+	
+	/**
+	 * The main goal of this panel is to store the handler's label and control, in order to make it 
+	 * possible to consistently align labels and controls created by different AbstractGUITunableHandler
+	 * subclasses when creating the Tunable form.
+	 */
+	public final class TunableFieldPanel extends JPanel {
+
+		private static final long serialVersionUID = 7445323343174359197L;
+		
+		private JLabel label;
+		private JTextArea multiLineLabel;
+		private Component control;
+		
+		public TunableFieldPanel() {
+		}
+		
+		public TunableFieldPanel(final JLabel label, final Component control) {
+			this.label = label;
+			this.control = control;
+			this.update();
+		}
+		
+		public TunableFieldPanel(final JTextArea multiLineLabel, final Component control) {
+			this.multiLineLabel = multiLineLabel;
+			this.control = control;
+			this.update();
+		}
+
+		public JLabel getLabel() {
+			return label;
+		}
+
+		public void setLabel(final JLabel label) {
+			this.label = label;
+			this.update();
+		}
+
+		public JTextArea getMultiLineLabel() {
+			return multiLineLabel;
+		}
+
+		public void setMultiLineLabel(final JTextArea multiLineLabel) {
+			this.multiLineLabel = multiLineLabel;
+			this.update();
+		}
+
+		public Component getControl() {
+			return control;
+		}
+
+		public void setControl(final Component control) {
+			this.control = control;
+			this.update();
+		}
+
+		private void update() {
+			this.removeAll();
+			
+			final Component c = control != null ? control : new JLabel(" ");
+			final JComponent lbl;
+			
+			if (label != null) {
+				label.setHorizontalAlignment(horizontal ? JLabel.LEFT : JLabel.RIGHT);
+				lbl = label;
+			} else if (multiLineLabel != null) {
+				multiLineLabel.setLineWrap(true);
+				multiLineLabel.setWrapStyleWord(true);
+				multiLineLabel.setOpaque(false);
+				multiLineLabel.setBorder(null);
+				multiLineLabel.setEditable(false);
+				lbl = multiLineLabel;
+			} else {
+				lbl = new JLabel(" ");
+			}
+			
+			final GroupLayout layout = new GroupLayout(this);
+			this.setLayout(layout);
+			layout.setAutoCreateContainerGaps(false);
+			layout.setAutoCreateGaps(true);
+			
+			if (horizontal) {
+				this.setBorder(BorderFactory.createEmptyBorder(0, 1, 0, 1));
+				
+				layout.setHorizontalGroup(layout.createParallelGroup(Alignment.LEADING, true)
+						.addComponent(lbl, DEFAULT_SIZE, DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(c, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
+				);
+				layout.setVerticalGroup(layout.createSequentialGroup()
+						.addComponent(lbl, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
+						.addComponent(c, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
+				);
+			} else {
+				this.setBorder(BorderFactory.createEmptyBorder(1, 0, 1, 0));
+				
+				final Alignment vAlign = c instanceof JPanel || c instanceof JScrollPane ? 
+						Alignment.LEADING : Alignment.CENTER;
+				
+				layout.setHorizontalGroup(layout.createSequentialGroup()
+						.addGroup(layout.createParallelGroup(Alignment.TRAILING, false)
+								.addComponent(lbl)
+						)
+						.addGroup(layout.createParallelGroup(Alignment.LEADING, false)
+								.addGroup(layout.createSequentialGroup()
+										.addComponent(c, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
+								)
+						)
+				);
+				layout.setVerticalGroup(layout.createParallelGroup(vAlign, false)
+						.addComponent(lbl)
+						.addComponent(control)
+				);
+			}
 		}
 	}
 }

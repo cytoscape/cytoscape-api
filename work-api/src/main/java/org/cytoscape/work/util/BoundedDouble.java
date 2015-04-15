@@ -49,6 +49,7 @@ public final class BoundedDouble extends AbstractBounded<Double> {
 	 * Set a new value to the BoundedDouble object
 	 * @param s String converted into Double
 	 */
+	@Override
 	public void setValue(String s) {
 		setValue( Double.valueOf(s) );
 	}
@@ -57,6 +58,7 @@ public final class BoundedDouble extends AbstractBounded<Double> {
 	 * Clamp the value to be within the range.
 	 *
 	 */
+	@Override
 	public Double clamp(Double value) {
 		if (value <= getLowerBound()) {
 			if (!isLowerBoundStrict()) 
