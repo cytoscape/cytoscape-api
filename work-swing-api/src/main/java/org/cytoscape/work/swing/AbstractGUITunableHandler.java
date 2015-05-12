@@ -389,7 +389,7 @@ public abstract class AbstractGUITunableHandler
 			layout.setAutoCreateGaps(true);
 			
 			if (horizontal) {
-				this.setBorder(BorderFactory.createEmptyBorder(0, 1, 0, 1));
+				this.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 2));
 				
 				layout.setHorizontalGroup(layout.createParallelGroup(Alignment.LEADING, true)
 						.addComponent(lbl, DEFAULT_SIZE, DEFAULT_SIZE, Short.MAX_VALUE)
@@ -400,7 +400,7 @@ public abstract class AbstractGUITunableHandler
 						.addComponent(c, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
 				);
 			} else {
-				this.setBorder(BorderFactory.createEmptyBorder(1, 0, 1, 0));
+				this.setBorder(BorderFactory.createEmptyBorder(2, 0, 2, 0));
 				
 				final Alignment vAlign = c instanceof JPanel || c instanceof JScrollPane ? 
 						Alignment.LEADING : Alignment.CENTER;
