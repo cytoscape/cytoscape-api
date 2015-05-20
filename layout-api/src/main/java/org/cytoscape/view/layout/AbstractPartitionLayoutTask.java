@@ -100,12 +100,14 @@ public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 	 * @param layoutAttribute the name of the attribute to use for this layout.
 	 * Allowed to be empty or null.
 	 */
-	public AbstractPartitionLayoutTask(final String displayName, 
-	                                   final boolean singlePartition, 
-	                                   CyNetworkView networkView, 
-	                                   Set<View<CyNode>> nodesToLayOut,
-	                                   String layoutAttribute,
-	                                   UndoSupport undo) {
+	public AbstractPartitionLayoutTask(
+			final String displayName,
+			final boolean singlePartition,
+			final CyNetworkView networkView,
+			final Set<View<CyNode>> nodesToLayOut,
+			final String layoutAttribute,
+			final UndoSupport undo
+	) {
 		super(displayName, networkView, nodesToLayOut, layoutAttribute, undo);
 		this.singlePartition = singlePartition;
 	}
@@ -144,6 +146,7 @@ public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 	 * @param taskMonitor the TaskMonitor provided by the run() method
 	 * of the Task.
 	 */
+	@Override
 	public void doLayout(final TaskMonitor taskMonitor) {
 		final CyNetwork network = networkView.getModel();
 		if (edgeWeighter != null)

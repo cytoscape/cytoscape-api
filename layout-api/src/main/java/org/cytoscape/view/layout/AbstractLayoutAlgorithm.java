@@ -67,6 +67,7 @@ public abstract class AbstractLayoutAlgorithm implements CyLayoutAlgorithm {
 		return new Object();
 	}
 	
+	@Override
 	public final Object getDefaultLayoutContext() {
 		if (defaultContext == null)
 				defaultContext = createLayoutContext();
@@ -78,30 +79,25 @@ public abstract class AbstractLayoutAlgorithm implements CyLayoutAlgorithm {
 		return computerName;
 	}
 
-
 	@Override
 	public String toString() {
 		return humanName;
 	}
-
 
 	@Override
 	public Set<Class<?>> getSupportedNodeAttributeTypes() {
 		return new HashSet<Class<?>>();
 	}
 
-
 	@Override
 	public Set<Class<?>> getSupportedEdgeAttributeTypes() {
 		return new HashSet<Class<?>>();
 	}
 	
-
 	@Override
 	public boolean getSupportsSelectedOnly() {
 		return false;
 	}
-
 
 	@Override
 	public boolean isReady(CyNetworkView view, Object tunableContext, Set<View<CyNode>> nodesToLayout, String attributeName) {
@@ -115,6 +111,7 @@ public abstract class AbstractLayoutAlgorithm implements CyLayoutAlgorithm {
 			StringBuilder errors = new StringBuilder();
 			return ((TunableValidator) tunableContext).getValidationState(errors) == ValidationState.OK;
 		}
+		
 		return true;
 	}
 }
