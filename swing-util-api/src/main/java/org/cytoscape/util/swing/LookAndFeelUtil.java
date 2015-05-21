@@ -21,6 +21,10 @@ import javax.swing.border.TitledBorder;
 
 public final class LookAndFeelUtil {
 
+	public static final float INFO_FONT_SIZE = 11.0f;
+	
+	static final float AQUA_TITLED_BORDER_FONT_SIZE = 11.0f;
+	
 	public static boolean isAquaLAF() {
 		return UIManager.getLookAndFeel() != null && "Mac OS X".equals(UIManager.getLookAndFeel().getName());
 	}
@@ -60,6 +64,10 @@ public final class LookAndFeelUtil {
 			final Border aquaBorder = isAquaLAF() ? UIManager.getBorder("TitledBorder.aquaVariant") : null;
 			final TitledBorder tb = aquaBorder != null ?
 					BorderFactory.createTitledBorder(aquaBorder, title) : BorderFactory.createTitledBorder(title);
+			
+			if (isAquaLAF())
+				tb.setTitleFont(UIManager.getFont("Label.font").deriveFont(AQUA_TITLED_BORDER_FONT_SIZE));
+			
 			border = tb;
 		}
 		

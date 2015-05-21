@@ -352,7 +352,13 @@ public class BasicCollapsiblePanel extends JPanel {
 			Color color = BorderFactory.createTitledBorder(border, "Sample").getTitleColor();
 			if (color == null) color = UIManager.getColor("Label.foreground");
 			
-			if (font != null) arrowBtn.setFont(font);
+			if (font != null) {
+				if (isAquaLAF())
+					font = font.deriveFont(LookAndFeelUtil.AQUA_TITLED_BORDER_FONT_SIZE);
+				
+				arrowBtn.setFont(font);
+			}
+			
 			if (isNimbusLAF()) arrowBtn.setFont(arrowBtn.getFont().deriveFont(Font.BOLD));
 			if (color != null) arrowBtn.setForeground(color);
 
