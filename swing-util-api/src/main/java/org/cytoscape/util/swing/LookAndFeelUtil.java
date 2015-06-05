@@ -1,6 +1,7 @@
 package org.cytoscape.util.swing;
 
 
+import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 
 import javax.swing.Action;
@@ -114,6 +115,9 @@ public final class LookAndFeelUtil {
 		layout.setHorizontalGroup(hg);
 		layout.setVerticalGroup(vg);
 		
+		if (okBtn != null && cancelBtn != null)
+			equalizeSize(okBtn, cancelBtn);
+		
 		return panel;
 	}
 	
@@ -136,8 +140,47 @@ public final class LookAndFeelUtil {
 		}
 	}
 	
+	/**
+	 * Resizes the given components making them equal in size.
+	 */
+	public static void equalizeSize(final JComponent... components) {
+		if (components == null || components.length == 0)
+			return;
+		
+		final Dimension prefSize = components[0].getPreferredSize();
+		final Dimension maxSize = components[0].getMaximumSize();
+		
+		for (JComponent c : components) {
+			ensureSize(prefSize, c.getPreferredSize());
+			ensureSize(maxSize, c.getMaximumSize());
+		}
+		
+		for (JComponent c : components) {
+			c.setPreferredSize(prefSize);
+			c.setMaximumSize(maxSize);
+		}
+	}
+	
 	public static boolean isMac() {
 		return System.getProperty("os.name").startsWith("Mac OS X");
+	}
+	
+	/**
+	 * Enlarges, if necessary, the given current size to cover the given other size.
+	 * <p>
+	 * If both the width and height of <code>currentSize</code> are larger than the width and height of
+	 * <code>minSize</code>, respectively, calling this method has no effect.
+	 * </p>
+	 * 
+	 * @param currentSize Size to be enlarged if necessary.
+	 * @param minSize Minimal required size of <code>currentSize</code>.
+	 */
+	private static void ensureSize(final Dimension currentSize, final Dimension minSize) {
+		if (currentSize.height < minSize.height)
+			currentSize.height = minSize.height;
+		
+		if (currentSize.width < minSize.width)
+			currentSize.width = minSize.width;
 	}
 	
 	private LookAndFeelUtil() {
