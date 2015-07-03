@@ -39,13 +39,13 @@ import java.util.List;
 
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
+import javax.swing.GroupLayout.Alignment;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.UIManager;
-import javax.swing.GroupLayout.Alignment;
 
 import org.cytoscape.work.AbstractTunableHandler;
 import org.cytoscape.work.Tunable;
@@ -134,25 +134,29 @@ public abstract class AbstractGUITunableHandler
 	}
 
 	private void init() {
-		final String alignment = getParams().getProperty("alignments", "vertical");
-                horizontal = false;
-                if (alignment.equalsIgnoreCase("horizontal"))
-                        horizontal = true;
-                else if (!alignment.equalsIgnoreCase("vertical"))
-                        logger.warn("\"alignments\" was specified but is neither \"horizontal\" nor \"vertical\".");
+		final String rawAlignments = getParams().getProperty("alignments", "vertical");
+		horizontal = false;
+		
+		final String[] alignments = rawAlignments.split(",");
+
+		if (alignments[0].trim().equalsIgnoreCase("horizontal"))
+			horizontal = true;
+		else if (!alignments[0].trim().equalsIgnoreCase("vertical"))
+			logger.warn("\"alignments\" was specified but is neither \"horizontal\" nor \"vertical\".");
 
 		String s = dependsOn();
+
 		if (!s.isEmpty()) {
-	        	if (!s.contains("!=")) {
-	        		dependencyName = s.substring(0, s.indexOf("="));
-	        		mustMatch = s.substring(s.indexOf("=") + 1);
-	        		mustNotMatch = "";
-	        	} else {
-	        		dependencyName = s.substring(0, s.indexOf("!"));
-	        		mustNotMatch = s.substring(s.indexOf("=") + 1);
-	        		mustMatch = "";
-	        	}
-	        }
+			if (!s.contains("!=")) {
+				dependencyName = s.substring(0, s.indexOf("="));
+				mustMatch = s.substring(s.indexOf("=") + 1);
+				mustNotMatch = "";
+			} else {
+				dependencyName = s.substring(0, s.indexOf("!"));
+				mustNotMatch = s.substring(s.indexOf("=") + 1);
+				mustMatch = "";
+			}
+		}
 
 		dependents = new LinkedList<GUITunableHandler>();
 		listeners = new LinkedList<GUITunableHandler>();
@@ -388,22 +392,22 @@ public abstract class AbstractGUITunableHandler
 			layout.setAutoCreateContainerGaps(false);
 			layout.setAutoCreateGaps(true);
 			
+			final Alignment vAlign = c instanceof JPanel || c instanceof JScrollPane ? 
+					Alignment.LEADING : Alignment.CENTER;
+			
 			if (horizontal) {
-				this.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 2));
+				this.setBorder(BorderFactory.createEmptyBorder(0, 4, 0, 4));
 				
-				layout.setHorizontalGroup(layout.createParallelGroup(Alignment.LEADING, true)
-						.addComponent(lbl, DEFAULT_SIZE, DEFAULT_SIZE, Short.MAX_VALUE)
-						.addComponent(c, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
-				);
-				layout.setVerticalGroup(layout.createSequentialGroup()
+				layout.setHorizontalGroup(layout.createSequentialGroup()
 						.addComponent(lbl, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
 						.addComponent(c, PREFERRED_SIZE, DEFAULT_SIZE, PREFERRED_SIZE)
 				);
+				layout.setVerticalGroup(layout.createParallelGroup(vAlign, false)
+						.addComponent(lbl)
+						.addComponent(c)
+				);
 			} else {
 				this.setBorder(BorderFactory.createEmptyBorder(2, 0, 2, 0));
-				
-				final Alignment vAlign = c instanceof JPanel || c instanceof JScrollPane ? 
-						Alignment.LEADING : Alignment.CENTER;
 				
 				layout.setHorizontalGroup(layout.createSequentialGroup()
 						.addGroup(layout.createParallelGroup(Alignment.TRAILING, false)
@@ -417,7 +421,7 @@ public abstract class AbstractGUITunableHandler
 				);
 				layout.setVerticalGroup(layout.createParallelGroup(vAlign, false)
 						.addComponent(lbl)
-						.addComponent(control)
+						.addComponent(c)
 				);
 			}
 		}
