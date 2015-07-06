@@ -248,19 +248,15 @@ public abstract class AbstractCyNetworkReader extends AbstractTask implements Cy
 	 * @return Root network for this network collection. If there is no such root, returns null.
 	 */
 	protected final CyRootNetwork getRootNetwork() {
-		final CyRootNetwork rootNetwork;
+		CyRootNetwork rootNetwork = null;
 		final String rootNetName = rootNetworkList.getSelectedValue();
 		
-		if (rootNetName == null || rootNetName.equalsIgnoreCase(CREATE_NEW_COLLECTION_STRING)) {
-			final CyNetwork newNet = cyNetworkFactory.createNetwork();
-			rootNetwork = cyRootNetworkManager.getRootNetwork(newNet);
-		} else {
+		if (rootNetName != null)
 			rootNetwork = name2RootMap.get(rootNetName);
-		}
 		
 		// Initialize the map of nodes only when we add network to existing collection.
 		if (rootNetwork != null)
-			this.initNodeMap(rootNetwork);
+			initNodeMap(rootNetwork);
 		
 		return rootNetwork;
 	}
