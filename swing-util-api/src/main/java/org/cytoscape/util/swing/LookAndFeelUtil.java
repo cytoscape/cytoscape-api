@@ -1,6 +1,7 @@
 package org.cytoscape.util.swing;
 
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 
@@ -22,6 +23,10 @@ import javax.swing.border.TitledBorder;
 
 public final class LookAndFeelUtil {
 
+	public static final Color INFO_COLOR = new Color(39, 67, 167);
+	public static final Color WARN_COLOR = new Color(204, 144, 7);
+	public static final Color ERROR_COLOR = new Color(161, 19, 0);
+	
 	public static final float INFO_FONT_SIZE = 11.0f;
 	
 	static final float AQUA_TITLED_BORDER_FONT_SIZE = 11.0f;
