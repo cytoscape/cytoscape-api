@@ -142,8 +142,6 @@ public abstract class AbstractCyNetworkReader extends AbstractTask implements Cy
 			throw new NullPointerException("CyApplicationManager is null");
 		if (cyNetworkFactory == null)
 			throw new NullPointerException("CyNetworkFactory is null");
-		if (cyNetworkManager == null)
-			throw new NullPointerException("CyNetworkManager is null");
 		if (cyRootNetworkManager == null)
 			throw new NullPointerException("CyRootNetworkManager is null");
 		
@@ -169,8 +167,6 @@ public abstract class AbstractCyNetworkReader extends AbstractTask implements Cy
 			throw new NullPointerException("CyNetworkViewFactory is null");
 		if (cyNetworkFactory == null)
 			throw new NullPointerException("CyNetworkFactory is null");
-		if (cyNetworkManager == null)
-			throw new NullPointerException("CyNetworkManager is null");
 		if (cyRootNetworkManager == null)
 			throw new NullPointerException("CyRootNetworkManager is null");
 
@@ -319,11 +315,13 @@ public abstract class AbstractCyNetworkReader extends AbstractTask implements Cy
 	private final Map<String, CyRootNetwork> getRootNetworkMap() {
 		final Map<String, CyRootNetwork> name2RootMap = new HashMap<>();
 
-		for (CyNetwork net : cyNetworkManager.getNetworkSet()) {
-			final CyRootNetwork rootNet = cyRootNetworkManager.getRootNetwork(net);
-			
-			if (!name2RootMap.containsValue(rootNet))
-				name2RootMap.put(rootNet.getRow(rootNet).get(CyRootNetwork.NAME, String.class), rootNet);
+		if (cyNetworkManager != null) { // We don't want to get the existing (old) networks when loading a new session
+			for (CyNetwork net : cyNetworkManager.getNetworkSet()) {
+				final CyRootNetwork rootNet = cyRootNetworkManager.getRootNetwork(net);
+				
+				if (!name2RootMap.containsValue(rootNet))
+					name2RootMap.put(rootNet.getRow(rootNet).get(CyRootNetwork.NAME, String.class), rootNet);
+			}
 		}
 
 		return name2RootMap;
