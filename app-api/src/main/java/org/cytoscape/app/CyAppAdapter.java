@@ -65,6 +65,7 @@ import org.cytoscape.view.vizmap.VisualMappingFunctionFactory;
 import org.cytoscape.view.vizmap.VisualMappingManager;
 import org.cytoscape.view.vizmap.VisualStyleFactory;
 import org.cytoscape.work.TaskManager;
+import org.cytoscape.work.properties.TunablePropertySerializerFactory;
 import org.cytoscape.work.undo.UndoSupport;
 
 import java.util.Properties;
@@ -196,6 +197,12 @@ public interface CyAppAdapter {
 	 * @return an instance of {@link UndoSupport}.
 	 */
 	UndoSupport getUndoSupport();
+	
+	/**
+	 * Returns an instance of {@link TunablePropertySerializerFactory}.
+	 * @return an instance of {@link TunablePropertySerializerFactory}.
+	 */
+	TunablePropertySerializerFactory getTunablePropertySerializerFactory();
 	
 	//
 	// presentation api
