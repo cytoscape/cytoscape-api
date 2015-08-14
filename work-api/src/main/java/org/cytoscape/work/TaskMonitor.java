@@ -52,13 +52,13 @@ public interface TaskMonitor {
    * 
    * <p>
    * In the Swing task dialog, the appearance of the task's title
-   * depends on the task's position in the task iterator.
-   * If the task is the first in the task iterator, its title
-   * will be shown during the course of the entire task iterator's
-   * execution at the top of the dialog in large text.
-   * The title of a subsequent task will be shown only during the
-   * course of its execution as the secondary title.
-   * The secondary title is smaller text underneath
+   * depends on the task's position in the task iterator and the order
+	 * of calls to setTitle().  If the task is the first in the task iterator, 
+	 * its title (as set by setTitle()) will be shown during the course of the 
+	 * entire task iterator's execution at the top of the dialog in large text.
+   * The title of a subsequent task (or a subsequent call to setTitle() in the 
+	 * first task) will be shown only during the course of its execution as the 
+	 * secondary title.  The secondary title is smaller text underneath
    * the primary title. The behavior of primary and secondary titles
    * does not change the semantics of task titles.
    * The behavior of primary and secondary
