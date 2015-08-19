@@ -170,6 +170,10 @@ public final class LookAndFeelUtil {
 		return System.getProperty("os.name").startsWith("Mac OS X");
 	}
 	
+	public static boolean isWindows() {
+		return System.getProperty("os.name").startsWith("Windows");
+	}
+	
 	/**
 	 * Enlarges, if necessary, the given current size to cover the given other size.
 	 * <p>
