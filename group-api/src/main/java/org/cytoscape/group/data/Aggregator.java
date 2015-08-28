@@ -46,6 +46,16 @@ public interface Aggregator<T> {
 	public Class getSupportedType();
 
 	/**
+	 * Return the base Class of the List, if this
+	 * is a list type.
+ 	 *
+ 	 * @return the {@link Class} supported by this List
+ 	 */
+	default Class getSupportedListType() {
+		return String.class;
+	}
+
+	/**
  	 * This gets the name of the handling type supported
  	 * by this aggregator, suitable for use in a menu.  
  	 *

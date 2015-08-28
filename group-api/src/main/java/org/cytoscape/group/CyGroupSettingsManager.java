@@ -228,7 +228,7 @@ public interface CyGroupSettingsManager {
 	 * @param column the {@link CyColumn} to get the {@link Aggregator} for
 	 * @return the {@link Aggregator} for the specific group and column
 	 */
-  public Aggregator getAggregator(CyGroup group, CyColumn column);
+  public Aggregator<?> getAggregator(CyGroup group, CyColumn column);
 
 	/**
 	 * Get the default {@link Aggregator} for a specific column type
@@ -237,7 +237,16 @@ public interface CyGroupSettingsManager {
 	 * @param ovClass the {@link Class} to get the default {@link Aggregator} for
 	 * @return the default {@link Aggregator} for the specific {@link Class}
 	 */
-	public Aggregator getDefaultAggregation(Class ovClass);
+	public Aggregator<?> getDefaultAggregation(Class<?> ovClass);
+
+	/**
+	 * Get the default {@link Aggregator} for a specific List column type
+	 * as expressed as a java {@link Class}.
+	 *
+	 * @param ovClass the List {@link Class} to get the default {@link Aggregator} for
+	 * @return the default {@link Aggregator} for the specific {@link Class}
+	 */
+	public Aggregator<?> getDefaultListAggregation(Class<?> ovClass);
 
 	/**
 	 * Set the default {@link Aggregator} for a specific column type
@@ -246,7 +255,16 @@ public interface CyGroupSettingsManager {
 	 * @param ovClass the {@link Class} to get the default {@link Aggregator} for
 	 * @param agg the {@link Aggregator} to set as the default for the specified {@link Class}
 	 */
-  public void setDefaultAggregation(Class ovClass, Aggregator agg);
+  public void setDefaultAggregation(Class<?> ovClass, Aggregator<?> agg);
+
+	/**
+	 * Set the default {@link Aggregator} for a specific List column type
+	 * as expressed as a java {@link Class}.
+	 *
+	 * @param ovClass the List {@link Class} to set the default {@link Aggregator} for
+	 * @param agg the {@link Aggregator} to set as the default for the specified {@link Class}
+	 */
+  public void setDefaultListAggregation(Class<?> ovClass, Aggregator<?> agg);
 
 	/**
 	 * Get the {@link Aggregator} for a specific column type
@@ -257,7 +275,18 @@ public interface CyGroupSettingsManager {
 	 * @param ovClass the {@link Class} to get the {@link Aggregator} for
 	 * @return the {@link Aggregator} for the specific {@link Class} in this {@link CyGroup}
 	 */
-	public Aggregator getDefaultAggregation(CyGroup group, Class ovClass);
+	public Aggregator<?> getDefaultAggregation(CyGroup group, Class<?> ovClass);
+
+	/**
+	 * Get the {@link Aggregator} for a specific List column type
+	 * as expressed as a java {@link Class} that will be used in
+	 * the specified {@link CyGroup}.
+	 *
+	 * @param group the {@link CyGroup} to get the {@link Aggregator} for
+	 * @param ovClass the {@link Class} to get the {@link Aggregator} for
+	 * @return the {@link Aggregator} for the specific {@link Class} in this {@link CyGroup}
+	 */
+	public Aggregator<?> getDefaultListAggregation(CyGroup group, Class<?> ovClass);
 
 	/**
 	 * Set the {@link Aggregator} for a specific column type
@@ -268,18 +297,40 @@ public interface CyGroupSettingsManager {
 	 * @param ovClass the {@link Class} to get the {@link Aggregator} for
 	 * @param agg the {@link Aggregator} to use for the specified {@link Class} in this {@link CyGroup}
 	 */
-  public void setDefaultAggregation(CyGroup group, Class ovClass, Aggregator agg);
+  public void setDefaultAggregation(CyGroup group, Class<?> ovClass, Aggregator<?> agg);
+
+	/**
+	 * Set the {@link Aggregator} for a specific List column type
+	 * as expressed as a java {@link Class} that will be used in
+	 * the specified {@link CyGroup}.
+	 *
+	 * @param group the {@link CyGroup} to set the {@link Aggregator} to
+	 * @param ovClass the {@link Class} to set the {@link Aggregator} to
+	 * @param agg the {@link Aggregator} to use for the specified {@link Class} in this {@link CyGroup}
+	 */
+  public void setDefaultListAggregation(CyGroup group, Class<?> ovClass, Aggregator<?> agg);
 
 	/**
 	 * Set the {@link Aggregator} for a specific column type
 	 * as expressed as a java {@link Class} that will be used in
 	 * the specified {@link CyGroup}.
 	 *
-	 * @param group the {@link CyGroup} to get the {@link Aggregator} for
-	 * @param ovClass the {@link Class} to get the {@link Aggregator} for
+	 * @param group the {@link CyGroup} to set the {@link Aggregator} to
+	 * @param ovClass the {@link Class} to et the {@link Aggregator} to
 	 * @param aggName the name of the {@link Aggregator} to use for the specified {@link Class} in this {@link CyGroup}
 	 */
-  public void setDefaultAggregation(CyGroup group, Class ovClass, String aggName);
+  public void setDefaultAggregation(CyGroup group, Class<?> ovClass, String aggName);
+
+	/**
+	 * Set the {@link Aggregator} for a specific List column type
+	 * as expressed as a java {@link Class} that will be used in
+	 * the specified {@link CyGroup}.
+	 *
+	 * @param group the {@link CyGroup} to set the {@link Aggregator} to
+	 * @param ovClass the List {@link Class} to set the {@link Aggregator} to
+	 * @param aggName the name of the {@link Aggregator} to use for the specified {@link Class} in this {@link CyGroup}
+	 */
+  public void setDefaultListAggregation(CyGroup group, Class<?> ovClass, String aggName);
 
   /**
    * Get the override aggregation setting for a column (if any).  Override aggregation provides
@@ -289,7 +340,7 @@ public interface CyGroupSettingsManager {
 	 * @param column the {@link CyColumn} to get the default override for
 	 * @return the {@link Aggregator} for this column, or null if no override was set
    */
-  public Aggregator getOverrideAggregation(CyColumn column);
+  public Aggregator<?> getOverrideAggregation(CyColumn column);
 
   /**
    * set the override aggregation setting for a column (if any).  Override aggregation provides
@@ -299,7 +350,7 @@ public interface CyGroupSettingsManager {
 	 * @param column the {@link CyColumn} to set the default override for
 	 * @param agg the {@link Aggregator} for this column
    */
-  public void setOverrideAggregation(CyColumn column, Aggregator agg);
+  public void setOverrideAggregation(CyColumn column, Aggregator<?> agg);
 
   /**
    * Get the override aggregation setting for a column (if any) in a specific group.  
@@ -311,7 +362,7 @@ public interface CyGroupSettingsManager {
 	 * @param column the {@link CyColumn} to get the override for
 	 * @return the {@link Aggregator} for this column in this group, or null if no override was set
 	 */
-  public Aggregator getOverrideAggregation(CyGroup group, CyColumn column);
+  public Aggregator<?> getOverrideAggregation(CyGroup group, CyColumn column);
 
   /**
    * set the override aggregation setting for a column in a group (if any).  Override aggregation provides
@@ -322,6 +373,6 @@ public interface CyGroupSettingsManager {
 	 * @param column the {@link CyColumn} to set the default override for
 	 * @param agg the {@link Aggregator} for this column in this group
    */
-  public void setOverrideAggregation(CyGroup group, CyColumn column, Aggregator agg);
+  public void setOverrideAggregation(CyGroup group, CyColumn column, Aggregator<?> agg);
 
 }
