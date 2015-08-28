@@ -156,6 +156,7 @@ public interface VisualStyle {
 
 	/**
 	 * Add a new {@linkplain VisualPropertyDependency}.
+	 * If the VisualStyle already contains a dependency with the same id, the passed dependency is not added.
 	 * 
 	 * @param dependency new dependency to be added 
 	 */
