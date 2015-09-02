@@ -53,7 +53,7 @@ public class ArgDescriptorTest {
 
 	@Test
 	public void testIsCompatibleWithWithAnIncompatibleType() {
-		assertFalse("isCompatibleWith() is broken.", argDesc.isCompatibleWith(Integer.class));
+		assertFalse("isCompatibleWith() is broken.", argDesc.isCompatibleWith(List.class));
 	}
 
 	@Test
