@@ -23,9 +23,10 @@ import javax.swing.border.TitledBorder;
 
 public final class LookAndFeelUtil {
 
-	public static final Color INFO_COLOR = new Color(39, 67, 167);
-	public static final Color WARN_COLOR = new Color(204, 144, 7);
-	public static final Color ERROR_COLOR = new Color(161, 19, 0);
+	public static final Color INFO_COLOR = new Color(42, 79, 161);
+	public static final Color WARN_COLOR = new Color(250, 158, 14);
+	public static final Color ERROR_COLOR = new Color(148, 55, 2);
+	public static final Color GO_COLOR = new Color(17, 131, 130);
 	
 	public static final float INFO_FONT_SIZE = 11.0f;
 	
@@ -81,10 +82,11 @@ public final class LookAndFeelUtil {
 	}
 	
 	public static JPanel createOkCancelPanel(final JButton okBtn, final JButton cancelBtn) {
-		return createOkCancelPanel(okBtn, cancelBtn, new JButton[0]);
+		return createOkCancelPanel(okBtn, cancelBtn, new JComponent[0]);
 	}
 	
-	public static JPanel createOkCancelPanel(final JButton okBtn, final JButton cancelBtn, JButton... otherBtns) {
+	public static JPanel createOkCancelPanel(final JButton okBtn, final JButton cancelBtn,
+			JComponent... otherComponents) {
 		final JPanel panel = new JPanel();
 		
 		final GroupLayout layout = new GroupLayout(panel);
@@ -95,11 +97,11 @@ public final class LookAndFeelUtil {
 		final SequentialGroup hg = layout.createSequentialGroup();
 		final ParallelGroup vg = layout.createParallelGroup(Alignment.CENTER, false);
 		
-		if (otherBtns != null) {
-			for (int i = 0; i < otherBtns.length; i++) {
-				final JButton btn = otherBtns[i];
-				hg.addComponent(btn);
-				vg.addComponent(btn);
+		if (otherComponents != null) {
+			for (int i = 0; i < otherComponents.length; i++) {
+				final JComponent c = otherComponents[i];
+				hg.addComponent(c);
+				vg.addComponent(c);
 			}
 		}
 		
