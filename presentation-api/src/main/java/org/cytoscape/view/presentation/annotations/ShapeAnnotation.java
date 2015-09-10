@@ -163,6 +163,13 @@ public interface ShapeAnnotation extends Annotation {
 	public Paint getBorderColor();
 
 	/**
+	 * Get the border (stroke) opacity.
+	 *
+	 * @return the border opacity
+	 */
+	public double getBorderOpacity();
+
+	/**
 	 * Get the fill color.
 	 *
 	 * @return the fill color
@@ -180,6 +187,13 @@ public interface ShapeAnnotation extends Annotation {
 	 * @param border the border color
 	 */
 	public void setBorderColor(Paint border);
+
+	/**
+	 * Set the border (stroke) opacity.
+	 *
+	 * @param opacity the border opacity
+	 */
+	public void setBorderOpacity(double opacity);
 
 	/**
 	 * Set the fill color.
