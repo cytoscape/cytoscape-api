@@ -208,6 +208,7 @@ public abstract class AbstractCyNetworkReader extends AbstractTask implements Cy
 		
 		// initialize renderer list
 		final List<NetworkViewRenderer> renderers = new ArrayList<>();
+		NetworkViewRenderer defViewRenderer = null;
 		
 		if (cyApplicationManager != null) {
 			final Set<NetworkViewRenderer> rendererSet = cyApplicationManager.getNetworkViewRendererSet();
@@ -223,10 +224,10 @@ public abstract class AbstractCyNetworkReader extends AbstractTask implements Cy
 					}
 				});
 			}
+			defViewRenderer = cyApplicationManager.getDefaultNetworkViewRenderer();
 		}
 		
 		rendererList = new ListSingleSelection<>(renderers);
-		final NetworkViewRenderer defViewRenderer = cyApplicationManager.getDefaultNetworkViewRenderer();
 		
 		if (defViewRenderer != null && renderers.contains(defViewRenderer))
 			rendererList.setSelectedValue(defViewRenderer);
