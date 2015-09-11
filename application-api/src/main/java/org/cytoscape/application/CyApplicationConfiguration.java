@@ -34,10 +34,18 @@ import java.io.File;
 public interface CyApplicationConfiguration {
 	
 	/**
-	 * Returns absolute path to .cytoscape location.
-	 * By default, this is user's home directory.
+	 * Returns absolute path to Cytoscape installation directory location.
 	 * 
-	 * @return location of .cytoscape setting directory.
+	 * @return location of Cytoscape installation directory.
+	 * 
+	 */
+	File getInstallationDirectoryLocation();
+	
+	/**
+	 * Returns absolute path to CytoscapeConfiguration location.
+	 * By default, this is in the user's home directory.
+	 * 
+	 * @return location of CytoscapeConfiguration directory.
 	 * 
 	 * TODO: How can we set this location?
 	 */
