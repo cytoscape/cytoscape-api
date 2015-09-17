@@ -32,16 +32,60 @@ public final class LookAndFeelUtil {
 	
 	static final float AQUA_TITLED_BORDER_FONT_SIZE = 11.0f;
 	
+	/**
+	 * @return true if the current Look and Feel is "Aqua", usually available on Mac OS only.
+	 */
 	public static boolean isAquaLAF() {
 		return UIManager.getLookAndFeel() != null && "Mac OS X".equals(UIManager.getLookAndFeel().getName());
 	}
 	
+	/**
+	 * @return true if the current Look and Feel is "Nimbus".
+	 */
 	public static boolean isNimbusLAF() {
 		return UIManager.getLookAndFeel() != null && "Nimbus".equals(UIManager.getLookAndFeel().getName());
 	}
 	
+	/**
+	 * @return true if the current Look and Feel is the Windows system one.
+	 */
 	public static boolean isWinLAF() {
 		return UIManager.getLookAndFeel() != null && "Windows".equals(UIManager.getLookAndFeel().getName());
+	}
+	
+	/**
+	 * @return The color that should be used on information icons or labels, for example.
+	 */
+	public static Color getInfoColor() {
+		return UIManager.getColor("CyColor.secondary2");
+	}
+	
+	/**
+	 * @return The color that should be used on warning icons or labels, for example.
+	 */
+	public static Color getWarnColor() {
+		return UIManager.getColor("CyColor.secondary1");
+	}
+	
+	/**
+	 * @return The color that should be used on error icons or labels, for example.
+	 */
+	public static Color getErrorColor() {
+		return UIManager.getColor("CyColor.primary(-2)");
+	}
+	
+	/**
+	 * @return The color that should be used on success related icons or labels.
+	 */
+	public static Color getSuccessColor() {
+		return UIManager.getColor("CyColor.complement(-1)");
+	}
+	
+	/**
+	 * @return The standard small font size for the current Look and feel.
+	 */
+	public static float getSmallFontSize() {
+		return 11.0f; // TODO Maybe different values for different LAF
 	}
 	
 	public static Border createPanelBorder() {
