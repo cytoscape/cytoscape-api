@@ -57,7 +57,7 @@ public final class LookAndFeelUtil {
 	 * @return The color that should be used on information icons or labels, for example.
 	 */
 	public static Color getInfoColor() {
-		return UIManager.getColor("CyColor.secondary2");
+		return UIManager.getColor("CyColor.secondary2(+2)");
 	}
 	
 	/**
@@ -71,7 +71,7 @@ public final class LookAndFeelUtil {
 	 * @return The color that should be used on error icons or labels, for example.
 	 */
 	public static Color getErrorColor() {
-		return UIManager.getColor("CyColor.primary(-2)");
+		return UIManager.getColor("CyColor.primary(-1)");
 	}
 	
 	/**
