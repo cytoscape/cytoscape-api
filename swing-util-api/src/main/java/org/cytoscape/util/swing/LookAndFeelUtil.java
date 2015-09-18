@@ -23,13 +23,6 @@ import javax.swing.border.TitledBorder;
 
 public final class LookAndFeelUtil {
 
-	public static final Color INFO_COLOR = new Color(42, 79, 161);
-	public static final Color WARN_COLOR = new Color(250, 158, 14);
-	public static final Color ERROR_COLOR = new Color(148, 55, 2);
-	public static final Color GO_COLOR = new Color(17, 131, 130);
-	
-	public static final float INFO_FONT_SIZE = 11.0f;
-	
 	static final float AQUA_TITLED_BORDER_FONT_SIZE = 11.0f;
 	
 	/**
