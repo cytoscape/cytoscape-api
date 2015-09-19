@@ -36,6 +36,8 @@ import java.io.InputStreamReader;
 import java.net.URI;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 /**
  * This is meant to be an basic implementation of {@link CyFileFilter} that can
@@ -71,18 +73,22 @@ public class BasicCyFileFilter implements CyFileFilter {
 	 * @param streamUtil
 	 *            An instance of the StreamUtil service.
 	 */
-	public BasicCyFileFilter(final Set<String> extensions, final Set<String> contentTypes, final String description,
-			final DataCategory category, StreamUtil streamUtil) {
+	public BasicCyFileFilter(final Set<String> extensions,
+			                 final Set<String> contentTypes,
+			                 final String description,
+			                 final DataCategory category,
+			                 StreamUtil streamUtil) {
 
-		this.extensions = extensions;
+		this.extensions = cleanStringSet(extensions);
 		this.contentTypes = contentTypes;
 		this.category = category;
 
 		final StringBuilder builder = new StringBuilder();
 		builder.append(description == null ? "(" : description + " (");
 
-		for (String ex : extensions)
+		for (String ex : this.extensions) {
 			builder.append("*." + ex + ", ");
+		}
 
 		String d = builder.toString();
 		d = d.substring(0, d.length() - 2);
@@ -113,6 +119,24 @@ public class BasicCyFileFilter implements CyFileFilter {
 		this(createSet(extensions), createSet(contentTypes), description, category, streamUtil);
 	}
 
+   /**
+	* This removes null and empty (white space only) Strings from Set strings
+	*
+	* @param strings a Set of Strings to be cleaned
+	* @return a SorteSet of Strings containing only non-empty Strings 
+	*/
+	private final static SortedSet<String> cleanStringSet( final Set<String> strings) {
+		final SortedSet<String> cleaned_strings = new TreeSet<String>();
+		if (strings != null) {
+			for (final String string : strings) {
+				if (string != null && string.trim().length() > 0) {
+					cleaned_strings.add(string.trim());
+				}
+			}
+		}
+		return cleaned_strings;
+	}
+	
 	private static Set<String> createSet(String[] values) {
 		Set<String> set = new HashSet<String>();
 		for (String v : values)
@@ -123,6 +147,7 @@ public class BasicCyFileFilter implements CyFileFilter {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public boolean accepts(URI uri, DataCategory category) {
 
 		// Check data category
@@ -157,6 +182,7 @@ public class BasicCyFileFilter implements CyFileFilter {
 	 *            The type of input that we're considering.
 	 * @return Always returns false in this particular implementation.
 	 */
+	@Override
 	public boolean accepts(InputStream stream, DataCategory category) {
 		return false;
 	}
@@ -164,6 +190,7 @@ public class BasicCyFileFilter implements CyFileFilter {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public final Set<String> getExtensions() {
 		return extensions;
 	}
@@ -171,6 +198,7 @@ public class BasicCyFileFilter implements CyFileFilter {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public final Set<String> getContentTypes() {
 		return contentTypes;
 	}
@@ -178,6 +206,7 @@ public class BasicCyFileFilter implements CyFileFilter {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public final String getDescription() {
 		return description;
 	}
@@ -185,6 +214,7 @@ public class BasicCyFileFilter implements CyFileFilter {
 	/**
 	 * {@inheritDoc}
 	 */
+	@Override
 	public final DataCategory getDataCategory() {
 		return category;
 	}
