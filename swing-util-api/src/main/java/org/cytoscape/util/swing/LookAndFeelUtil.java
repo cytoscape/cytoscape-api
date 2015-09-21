@@ -50,28 +50,28 @@ public final class LookAndFeelUtil {
 	 * @return The color that should be used on information icons or labels, for example.
 	 */
 	public static Color getInfoColor() {
-		return UIManager.getColor("CyColor.secondary2(+2)");
+		return UIManager.getColor("CyColor.complement(+2)");
 	}
 	
 	/**
 	 * @return The color that should be used on warning icons or labels, for example.
 	 */
 	public static Color getWarnColor() {
-		return UIManager.getColor("CyColor.secondary1");
+		return UIManager.getColor("CyColor.primary");
 	}
 	
 	/**
 	 * @return The color that should be used on error icons or labels, for example.
 	 */
 	public static Color getErrorColor() {
-		return UIManager.getColor("CyColor.primary(-1)");
+		return UIManager.getColor("CyColor.secondary2(-1)");
 	}
 	
 	/**
 	 * @return The color that should be used on success related icons or labels.
 	 */
 	public static Color getSuccessColor() {
-		return UIManager.getColor("CyColor.complement(-1)");
+		return UIManager.getColor("CyColor.secondary1(-1)");
 	}
 	
 	/**
