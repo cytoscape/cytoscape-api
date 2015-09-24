@@ -66,6 +66,8 @@ public final class CyColorChooser {
 	}
 
 	private static final class ColorListener implements ActionListener {
+		
+		@Override
 		public void actionPerformed(ActionEvent e) {
 			color = chooser.getColor();
 		}
