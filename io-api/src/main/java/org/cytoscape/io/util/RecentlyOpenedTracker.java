@@ -57,6 +57,11 @@ public interface RecentlyOpenedTracker {
 	 * @param newURL the URL to add to the list of recently opened file names.
 	 */
 	void add(final URL newURL);
+	
+	/**
+	 * Clears the list of recently opened file names.
+	 */
+	void clear();
 
 
 	/**
