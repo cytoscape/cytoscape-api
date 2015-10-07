@@ -59,6 +59,12 @@ public interface RecentlyOpenedTracker {
 	void add(final URL newURL);
 	
 	/**
+	 * Removes the passed URL from the list of recently opened file names.
+	 * @param url the URL to be removed.
+	 */
+	void remove(final URL url);
+	
+	/**
 	 * Clears the list of recently opened file names.
 	 */
 	void clear();
