@@ -32,8 +32,10 @@ import java.util.Map;
 
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
+import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
-
+import javax.swing.event.MenuEvent;
+import javax.swing.event.MenuListener;
 
 /**
  * A class that creates and manages hierarchies of JMenu objects.
@@ -41,6 +43,7 @@ import javax.swing.JPopupMenu;
  * @CyAPI.InModule swing-util-api
  */
 public final class JMenuTracker {
+	
 	private final Map<String, MenuGravityTracker> menuMap;
 	private final JMenuBar rootMenuBar;
 	private final PopupMenuGravityTracker rootPopupGravityTracker;
@@ -112,10 +115,33 @@ public final class JMenuTracker {
 		for (final MenuNameAndGravity nameAndGravity : namesAndGravities) {
 			final String menu_token = nameAndGravity.getMenuName();
 			menu_key = menu_key == null ? menu_token : menu_key + "." + menu_token;
-
 			gravityTracker = menuMap.get(menu_key);
+			
 			if (gravityTracker == null) {
 				final JMenu menu = new JMenu(menu_token);
+				
+				menu.addMenuListener(new MenuListener() {
+					@Override
+					public void menuSelected(MenuEvent e) {
+						// Force update of enabled state of all of its direct menu items
+						final int itemCount = menu.getItemCount();
+						
+						for (int i = 0; i < itemCount; i++) {
+							final JMenuItem item = menu.getItem(i);
+							
+							if (item != null && item.getAction() != null)
+								item.setEnabled(item.getAction().isEnabled());
+						}
+					}
+					
+					@Override
+					public void menuDeselected(MenuEvent e) {
+					}
+					
+					@Override
+					public void menuCanceled(MenuEvent e) {
+					}
+				});
 
 				// if there is a JMenu parent, use that
 				if (parentGravityTracker != null)
