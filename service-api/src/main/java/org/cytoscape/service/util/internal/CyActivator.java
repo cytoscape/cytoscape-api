@@ -37,8 +37,8 @@ public class CyActivator extends AbstractCyActivator {
 	}
 
 	public void start(BundleContext bc) {
-		CyServiceRegistrarImpl cyServiceRegistrar = new CyServiceRegistrarImpl(bc);
-		registerService(bc,cyServiceRegistrar,CyServiceRegistrar.class, new Properties());
+		CyServiceRegistrarFactory cyServiceRegistrarFactory = new CyServiceRegistrarFactory();
+		registerService(bc,cyServiceRegistrarFactory,CyServiceRegistrar.class, new Properties());
 	}
 }
 
