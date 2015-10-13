@@ -67,7 +67,7 @@ public final class ListMultipleSelection<T> extends ListSelection<T> {
 	 *<b>example</b> :
 	 *
 	 *<code>
-	 *	java.util.List<String> list = new jave.util.ArrayList<String>();
+	 *	java.util.List<String> list = new java.util.ArrayList<String>();
 	 *	list.add("1");
 	 *	list.add("2");
 	 *	list.add("3");
