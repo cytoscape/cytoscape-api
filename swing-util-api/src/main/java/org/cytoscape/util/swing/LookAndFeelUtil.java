@@ -46,6 +46,9 @@ import javax.swing.border.TitledBorder;
 
 /**
  * Class that provides useful methods to help create standard and consistent UI on the current Look and Feel and OS.
+ * 
+ * @CyAPI.Final.Class 
+ * @CyAPI.InModule swing-util-api
  */
 public final class LookAndFeelUtil {
 

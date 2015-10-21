@@ -15,6 +15,9 @@ import java.awt.Font;
  * <br />
  * <code>JButton button = new JButton(IconManager.ICON_CAMERA);
  * button.setFont(cyServiceRegistrar.getService(IconManager.class).getIconFont(14.0f));</code>
+ * 
+ * @CyAPI.Api.Interface 
+ * @CyAPI.InModule swing-util-api
  */
 public interface IconManager {
 	
