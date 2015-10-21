@@ -35,6 +35,8 @@ import javax.swing.JButton;
 
 /**
  * JButton that opens a Color Chooser when clicked and shows the previously set color as an icon.
+ * You can use the <code>addPropertyChangeListener</code> method to listen for a {@link java.beans.PropertyChangeEvent}
+ * (for the property "color") whenever a new color is selected by the user.
  *
  * @CyAPI.Final.Class 
  * @CyAPI.InModule swing-util-api
@@ -65,6 +67,10 @@ public final class ColorButton extends JButton {
 		});
 	}
 
+	/**
+	 * Sets a new color and fires a {@link java.beans.PropertyChangeEvent} for the property "color".
+	 * @param color
+	 */
 	public void setColor(final Color color) {
 		final Color oldColor = this.color;
 		this.color = color;
@@ -72,6 +78,9 @@ public final class ColorButton extends JButton {
 		firePropertyChange("color", oldColor, color);
 	}
 	
+	/**
+	 * @return The currently selected color.
+	 */
 	public Color getColor() {
 		return color;
 	}

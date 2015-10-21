@@ -2,8 +2,28 @@ package org.cytoscape.util.swing;
 
 import java.awt.Font;
 
+/**
+ * Interface that provides constants for simple icons that can be used by Cytoscape and third party apps in order to
+ * create a more consistent GUI.
+ * <br />
+ * The icons are provided by <a href="http://fortawesome.github.io/Font-Awesome/">Font Awesome</a>
+ * <br />
+ * These icons are set as text (not images) to buttons, labels, etc. So always set the ICON constant as text and
+ * the font provided by {@link #getIconFont(float)} to the UI component.
+ * <br />
+ * Example:
+ * <br />
+ * <code>JButton button = new JButton(IconManager.ICON_CAMERA);
+ * button.setFont(cyServiceRegistrar.getService(IconManager.class).getIconFont(14.0f));</code>
+ */
 public interface IconManager {
 	
+	/**
+	 * Returns the font that renders the text as an icon.
+	 * @see <a href="http://fortawesome.github.io/Font-Awesome/icons/">Font Awesome Icons</a>
+	 * @param size The font size.
+	 * @return
+	 */
 	Font getIconFont(float size);
 	
 	static final String ICON_ADJUST = "\uf042";
