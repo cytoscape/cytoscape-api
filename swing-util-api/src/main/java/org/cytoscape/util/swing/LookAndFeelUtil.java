@@ -44,29 +44,33 @@ import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
 
+/**
+ * Class that provides useful methods to help create standard and consistent UI on the current Look and Feel and OS.
+ */
 public final class LookAndFeelUtil {
 
 	static final float AQUA_TITLED_BORDER_FONT_SIZE = 11.0f;
 	
 	/**
-	 * @return true if the current Look and Feel is "Aqua", usually available on Mac OS only.
+	 * @return true if the current Look and Feel is "Aqua", usually available on Mac OS X only.
 	 */
 	public static boolean isAquaLAF() {
-		return UIManager.getLookAndFeel() != null && "Mac OS X".equals(UIManager.getLookAndFeel().getName());
+		return UIManager.getLookAndFeel() != null && 
+				("Mac".equals(UIManager.getLookAndFeel().getID()) || "Aqua".equals(UIManager.getLookAndFeel().getID()));
 	}
 	
 	/**
 	 * @return true if the current Look and Feel is "Nimbus".
 	 */
 	public static boolean isNimbusLAF() {
-		return UIManager.getLookAndFeel() != null && "Nimbus".equals(UIManager.getLookAndFeel().getName());
+		return UIManager.getLookAndFeel() != null && "Nimbus".equals(UIManager.getLookAndFeel().getID());
 	}
 	
 	/**
 	 * @return true if the current Look and Feel is the Windows system one.
 	 */
 	public static boolean isWinLAF() {
-		return UIManager.getLookAndFeel() != null && "Windows".equals(UIManager.getLookAndFeel().getName());
+		return UIManager.getLookAndFeel() != null && "Windows".equals(UIManager.getLookAndFeel().getID());
 	}
 	
 	/**
@@ -104,6 +108,10 @@ public final class LookAndFeelUtil {
 		return 11.0f; // TODO Maybe different values for different LAF
 	}
 	
+	/**
+	 * Use this method to create a simple panel {@link Border} which looks native on the current Look and Feel.
+	 * @return The proper {@link Border} for the current Look and Feel.
+	 */
 	public static Border createPanelBorder() {
 		// Try to create Aqua recessed borders on Mac OS
 		Border border = isAquaLAF() ? UIManager.getBorder("InsetBorder.aquaVariant") : null;
@@ -121,6 +129,12 @@ public final class LookAndFeelUtil {
 		return border;
 	}
 	
+	/**
+	 * Use this method to create a Titled Border which looks native on the current Look and Feel.
+	 * The major problem is that the default border created by {@link BorderFactory#createTitledBorder(String)}
+	 * does not look good on the "Aqua" Look and Feel (Mac OS X).
+	 * @return The proper {@link Border} for the current Look and Feel.
+	 */
 	public static Border createTitledBorder(final String title) {
 		final Border border;
 		
@@ -141,10 +155,28 @@ public final class LookAndFeelUtil {
 		return border;
 	}
 	
+	/**
+	 * Use this method to create a standard Cytoscape panel (usually added to the bottom of a dialog)
+	 * that contains an "OK" and/or a "Cancel" button.
+	 * The buttons will be correctly positioned and aligned according to the current Look and Feel and OS.
+	 * @param okBtn The button that executes the main action. It can be null.
+	 * @param cancelBtn The button that cancels the action (or simply closes a dialog). It can be null.
+	 * @return A {@link JPanel} which contains the passed buttons.
+	 */
 	public static JPanel createOkCancelPanel(final JButton okBtn, final JButton cancelBtn) {
 		return createOkCancelPanel(okBtn, cancelBtn, new JComponent[0]);
 	}
 	
+	/**
+	 * Use this method to create a standard Cytoscape panel (usually added to the bottom of a dialog)
+	 * that contains an "OK" and/or a "Cancel" button, as well as other extra components.
+	 * The default OK/Cancel buttons and the extra components will be correctly positioned and aligned according to
+	 * the current Look and Feel and OS.
+	 * @param okBtn The button that executes the main action. It can be null.
+	 * @param cancelBtn The button that cancels the action (or simply closes a dialog). It can be null.
+	 * @param otherComponents Any other components to be included in the panel, such as check-boxes or other buttons.
+	 * @return A {@link JPanel} which contains the passed components.
+	 */
 	public static JPanel createOkCancelPanel(final JButton okBtn, final JButton cancelBtn,
 			JComponent... otherComponents) {
 		final JPanel panel = new JPanel();
@@ -188,6 +220,13 @@ public final class LookAndFeelUtil {
 		return panel;
 	}
 	
+	/**
+	 * Maps the standard key strokes (usually ENTER and ESCAPE) to the passed OK and/or Cancel actions.
+	 * @param rootPane A {@link javax.swing.JDialog}'s root pane, for instance.
+	 * @param okAction The main {@link Action} of a {@link javax.swing.JDialog}, for instance. It can be null.
+	 * @param cancelAction The {@link Action} that cancels or closes a {@link javax.swing.JDialog}, for instance.
+	 *                     It can be null.
+	 */
 	public static void setDefaultOkCancelKeyStrokes(final JRootPane rootPane, final Action okAction,
 			final Action cancelAction) {
 		final InputMap inputMap = rootPane.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW);
@@ -228,10 +267,18 @@ public final class LookAndFeelUtil {
 		}
 	}
 	
+	/**
+	 * Returns true if the current operating system is Mac OS X.
+	 * @return true if the current OS is Mac OS X and false otherwise.
+	 */
 	public static boolean isMac() {
 		return System.getProperty("os.name").startsWith("Mac OS X");
 	}
 	
+	/**
+	 * Returns true if the current operating system is any modern Windows distribution.
+	 * @return true if the current OS is Windows and false otherwise.
+	 */
 	public static boolean isWindows() {
 		return System.getProperty("os.name").startsWith("Windows");
 	}
