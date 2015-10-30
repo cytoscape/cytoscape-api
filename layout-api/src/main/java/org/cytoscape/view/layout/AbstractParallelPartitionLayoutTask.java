@@ -128,7 +128,7 @@ public abstract class AbstractParallelPartitionLayoutTask extends AbstractPartit
 		max_dimensions *= incr;
 		max_dimensions += xStart;
 
-		final int numThreads = Runtime.getRuntime().availableProcessors() * 4;	// Overthread to account for inefficiencies.
+		final int numThreads = 1;// Runtime.getRuntime().availableProcessors() * 4;	// Overthread to account for inefficiencies.
 		
 		// Parallelized run through partitionList that executes 
 		// the layoutPartition method on each partition.
