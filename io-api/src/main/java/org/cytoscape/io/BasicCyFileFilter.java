@@ -120,16 +120,16 @@ public class BasicCyFileFilter implements CyFileFilter {
 	}
 
    /**
-	* This removes null and empty (white space only) Strings from Set strings
+	* This removes null Strings from a Set
 	*
 	* @param strings a Set of Strings to be cleaned
-	* @return a SorteSet of Strings containing only non-empty Strings 
+	* @return a SorteSet of Strings containing only non-null Strings 
 	*/
 	private final static SortedSet<String> cleanStringSet( final Set<String> strings) {
 		final SortedSet<String> cleaned_strings = new TreeSet<String>();
 		if (strings != null) {
 			for (final String string : strings) {
-				if (string != null && string.trim().length() > 0) {
+				if (string != null) {
 					cleaned_strings.add(string.trim());
 				}
 			}
