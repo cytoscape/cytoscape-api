@@ -59,15 +59,9 @@ public final class PropertySheetUtil {
 
 		BASIC_PROPS.add(BasicVisualLexicon.NETWORK_BACKGROUND_PAINT);
 
-		// These VPs are not compatible with current rendering engine (ding).
-		INCOMPATIBLE_VP_SET.add(BasicVisualLexicon.NODE_DEPTH);
-		// INCOMPATIBLE_VP_SET.add(BasicVisualLexicon.NODE_Z_LOCATION);
+		// We probably don't want to expose these selection properties to the end user:
 		INCOMPATIBLE_VP_SET.add(BasicVisualLexicon.NODE_SELECTED);
-		
 		INCOMPATIBLE_VP_SET.add(BasicVisualLexicon.EDGE_SELECTED);
-
-		INCOMPATIBLE_VP_SET.add(BasicVisualLexicon.NETWORK_CENTER_Z_LOCATION);
-		INCOMPATIBLE_VP_SET.add(BasicVisualLexicon.NETWORK_DEPTH);
 	}
 
 	/**

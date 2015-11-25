@@ -53,6 +53,12 @@ public enum Predicate {
 	BETWEEN,
 	
 	/**
+	 * A ternary predicate that tests whether the first parameter is less than
+	 * the second parameter, and greater than the third parameter.
+	 */
+	IS_NOT_BETWEEN,
+	
+	/**
 	 * A binary predicate that tests whether the first parameter is contained within
 	 * the second parameter.
 	 */

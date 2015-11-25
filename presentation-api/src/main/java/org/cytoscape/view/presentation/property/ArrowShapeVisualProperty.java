@@ -61,6 +61,16 @@ public final class ArrowShapeVisualProperty extends AbstractVisualProperty<Arrow
 	public static final ArrowShape HALF_TOP = new ArrowShapeImpl("Half Top", "HALF_TOP");
 	/** Bottom Half of a triangle shaped arrow */
 	public static final ArrowShape HALF_BOTTOM = new ArrowShapeImpl("Half Bottom", "HALF_BOTTOM");
+	/** Shorter triangle shaped arrow */
+	public static final ArrowShape DELTA_SHORT_1 = new ArrowShapeImpl("Delta Short 1", "DELTA_SHORT_1");
+	/** Even shorter triangle shaped arrow */
+	public static final ArrowShape DELTA_SHORT_2 = new ArrowShapeImpl("Delta Short 2", "DELTA_SHORT_2");
+	 /** Shorter pointy triangle shaped arrow */
+	public static final ArrowShape ARROW_SHORT = new ArrowShapeImpl("Arrow Short", "ARROW_SHORT");
+	/** Sorter diamond shaped arrow */
+	public static final ArrowShape DIAMOND_SHORT_1 = new ArrowShapeImpl("Diamond Short 1", "DIAMOND_SHORT_1");
+	/** Even shorter diamond shaped arrow */
+	public static final ArrowShape DIAMOND_SHORT_2 = new ArrowShapeImpl("Diamond Short 2", "DIAMOND_SHORT_2");
 
 	private static final DiscreteRange<ArrowShape> ARROW_SHAPE_RANGE;
 	private static final Map<String, ArrowShape> DEFAULT_SHAPES;
@@ -75,6 +85,11 @@ public final class ArrowShapeVisualProperty extends AbstractVisualProperty<Arrow
 		DEFAULT_SHAPES.put(CIRCLE.getSerializableString().toUpperCase(), CIRCLE);
 		DEFAULT_SHAPES.put(HALF_TOP.getSerializableString().toUpperCase(), HALF_TOP);
 		DEFAULT_SHAPES.put(HALF_BOTTOM.getSerializableString().toUpperCase(), HALF_BOTTOM);
+		DEFAULT_SHAPES.put(DELTA_SHORT_1.getSerializableString().toUpperCase(), DELTA_SHORT_1);
+		DEFAULT_SHAPES.put(DELTA_SHORT_2.getSerializableString().toUpperCase(), DELTA_SHORT_2);
+		DEFAULT_SHAPES.put(ARROW_SHORT.getSerializableString().toUpperCase(), ARROW_SHORT);
+		DEFAULT_SHAPES.put(DIAMOND_SHORT_1.getSerializableString().toUpperCase(), DIAMOND_SHORT_1);
+		DEFAULT_SHAPES.put(DIAMOND_SHORT_2.getSerializableString().toUpperCase(), DIAMOND_SHORT_2);
 		
 		ARROW_SHAPE_RANGE = new DiscreteRange<ArrowShape>(ArrowShape.class, new HashSet<ArrowShape>(DEFAULT_SHAPES.values()));
 	}

@@ -63,7 +63,6 @@ public final class VisualPropertyDependency<T> {
 		this.enabled = false;
 		
 		this.parentVisualProperty = getParent(lexicon);
-		
 	}
 	
 	@SuppressWarnings("unchecked")
@@ -86,7 +85,6 @@ public final class VisualPropertyDependency<T> {
 		return (VisualProperty<T>) parent;
 	}
 
-
 	/**
 	 * Provides human-readable name of this dependency. For example,
 	 * "Synchronize edge color to arrow head color," or
@@ -108,7 +106,6 @@ public final class VisualPropertyDependency<T> {
 	public String getIdString() {
 		return id;
 	}
-
 
 	/**
 	 * A set of Visual Properties to be set by the parent if locked.
@@ -146,5 +143,27 @@ public final class VisualPropertyDependency<T> {
 	@Override
 	public String toString() {
 		return displayName;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 37;
+		int result = 23;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj) return true;
+		if (obj == null) return false;
+		if (!(obj instanceof VisualPropertyDependency)) return false;
+		VisualPropertyDependency<?> other = (VisualPropertyDependency<?>) obj;
+		if (id == null) {
+			if (other.id != null) return false;
+		} else if (!id.equals(other.id)) {
+			return false;
+		}
+		return true;
 	}
 }

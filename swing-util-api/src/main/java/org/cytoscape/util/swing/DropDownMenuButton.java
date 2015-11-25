@@ -25,6 +25,7 @@ package org.cytoscape.util.swing;
  */
 
 import javax.swing.*;
+
 import java.awt.*;
 
 /**
@@ -52,9 +53,6 @@ public final class DropDownMenuButton extends JButton {
 		this.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4 + buttonIcon.getIconWidth()));
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -74,7 +72,7 @@ public final class DropDownMenuButton extends JButton {
 			// Turn AA on
 			g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-			g2.setColor(Color.black);
+			g2.setColor(UIManager.getColor("Label.foreground"));
 			g2.translate(x, y);
 			g2.drawLine(2, 3, 6, 3);
 			g2.drawLine(3, 4, 5, 4);

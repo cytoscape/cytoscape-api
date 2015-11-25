@@ -25,7 +25,6 @@ package org.cytoscape.util.swing;
  */
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
@@ -40,8 +39,6 @@ import javax.swing.JComponent;
 import javax.swing.JList;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListSelectionModel;
-import javax.swing.UIDefaults;
-import javax.swing.UIManager;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
@@ -59,36 +56,26 @@ import javax.swing.event.ListSelectionListener;
  * 
  * @CyAPI.InModule swing-util-api
  */
+@SuppressWarnings("rawtypes")
 public class CheckBoxJList extends JList implements ListSelectionListener	 {
 	
 	private final static long serialVersionUID = 120233987581935L;
 	
-	private static final Color SELECTED_COLOR = new Color(0, 100, 250, 250);
-	private static final Color NORMAL_COLOR = new Color(100, 100, 100, 170);
-	
-	private static final Color listBackground;
-	private static final Font NORMAL_FONT = new Font("SansSerif", Font.PLAIN, 12);
-	private static final Font SELECTED_FONT = new Font("SansSerif", Font.BOLD, 12);
-
 	/**
 	 * The name of the property change that indicates that the list 
 	 * has been updated.
 	 */
 	public static final String LIST_UPDATED = "LIST_UPDATED";
 	
-	private int lastIndex = 0;
-	private int firstIndex = 0;
-
-	static {
-		UIDefaults uid = UIManager.getLookAndFeel().getDefaults();
-		listBackground = uid.getColor("List.background");
-	}
+	private int lastIndex;
+	private int firstIndex;
 
 	private final Set<Integer> selectionCache;
 
 	/**
 	 * Creates a new CheckBoxJList object.
 	 */
+	@SuppressWarnings("unchecked")
 	public CheckBoxJList() {
 		super();
 		selectionCache = new HashSet<Integer>();
@@ -103,7 +90,7 @@ public class CheckBoxJList extends JList implements ListSelectionListener	 {
 	}
 
 	protected void processClick() {
-		if(selectionCache.size() == 1 && (this.getSelectedIndex() == firstIndex || this.getSelectedIndex() == lastIndex))
+		if (selectionCache.size() == 1 && (this.getSelectedIndex() == firstIndex || this.getSelectedIndex() == lastIndex))
 			fireSelectionValueChanged(0, 0, false);
 	}
 
@@ -131,12 +118,8 @@ public class CheckBoxJList extends JList implements ListSelectionListener	 {
 			addListSelectionListener(l);
 	}
 
-	/**
-	 * {@inheritDoc} 
-	 */
 	@Override
 	public void valueChanged(ListSelectionEvent lse) {
-		
 		if (!lse.getValueIsAdjusting()) {
 			firstIndex = lse.getFirstIndex();
 			lastIndex = lse.getLastIndex();
@@ -203,21 +186,23 @@ public class CheckBoxJList extends JList implements ListSelectionListener	 {
 			checkbox.setSelected(isSelected);
 
 			if (isSelected) {
-				checkbox.setFont(SELECTED_FONT);
-				defaultComp.setFont(SELECTED_FONT);
-				checkbox.setForeground(SELECTED_COLOR);
-				defaultComp.setForeground(SELECTED_COLOR);
+				final Font font = list.getFont().deriveFont(Font.BOLD);
+				checkbox.setFont(font);
+				defaultComp.setFont(font);
 			} else {
-				checkbox.setFont(NORMAL_FONT);
-				defaultComp.setFont(NORMAL_FONT);
-				checkbox.setForeground(NORMAL_COLOR);
-				defaultComp.setForeground(NORMAL_COLOR);
+				final Font font = list.getFont().deriveFont(Font.PLAIN);
+				checkbox.setFont(font);
+				defaultComp.setFont(font);
 			}
+			
+			checkbox.setForeground(list.getForeground());
+			defaultComp.setForeground(list.getForeground());
 
 			final Component[] comps = getComponents();
 			final int length = comps.length;
+			
 			for (int i = 0; i < length; i++)
-				comps[i].setBackground(listBackground);
+				comps[i].setBackground(list.getBackground());
 
 			return this;
 		}

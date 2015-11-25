@@ -44,7 +44,8 @@ import org.cytoscape.service.util.internal.utils.ServiceUtil;
  * registering interest in all services of a specified type.  
  *
  * Users should extend this class and implement the start(BundleContext bc)
- * method.  
+ * method. Methods in an AbstractCyActivator implementation should return quickly
+ * and should not block for user input.
  * @CyAPI.Abstract.Class
  * @CyAPI.InModule service-api
  */

@@ -46,14 +46,14 @@ public interface CyGroupAggregationManager {
  	 *
  	 * @param aggregator the {@link Aggregator} 
  	 */
-	void addAggregator(Aggregator aggregator);
+	void addAggregator(Aggregator<?> aggregator);
 
 	/**
  	 * Remove an aggregator from the available aggregators.
  	 *
  	 * @param aggregator the {@link Aggregator} to remove
  	 */
-	void removeAggregator(Aggregator aggregator);
+	void removeAggregator(Aggregator<?> aggregator);
 
 	/**
  	 * Get the list of aggregators for a particular Class.
@@ -61,19 +61,41 @@ public interface CyGroupAggregationManager {
  	 * @param type the {@link Class} to get aggregators for
  	 * @return the list of aggregators
  	 */
-	List<Aggregator> getAggregators(Class type);
+	List<Aggregator<?>> getAggregators(Class<?> type);
+
+	/**
+ 	 * Get the list of List aggregators for a particular Class.
+ 	 *
+ 	 * @param type the {@link Class} to get aggregators for
+ 	 * @return the list of aggregators
+ 	 */
+	List<Aggregator<?>> getListAggregators(Class<?> type);
 
 	/**
  	 * Get the list of aggregators. 
  	 *
  	 * @return the list of aggregators
  	 */
-	List<Aggregator> getAggregators();
+	List<Aggregator<?>> getAggregators();
+
+	/**
+ 	 * Get the list of aggregators for List columns. 
+ 	 *
+ 	 * @return the list of aggregators
+ 	 */
+	List<Aggregator<?>> getListAggregators();
 
 	/**
  	 * Get the list of classes for which have aggregators.
  	 *
  	 * @return the list of classes we're aggregating
  	 */
-	List<Class> getSupportedClasses();
+	List<Class<?>> getSupportedClasses();
+
+	/**
+ 	 * Get the list of classes of List for which have aggregators.
+ 	 *
+ 	 * @return the list of classes of List we're aggregating
+ 	 */
+	List<Class<?>> getSupportedListClasses();
 } 

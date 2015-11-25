@@ -74,7 +74,7 @@ public interface VisualLexicon {
 	 * 
 	 * @throws IllegalArgumentException If vp does not exist in the lexicon.
 	 */
-	VisualLexiconNode getVisualLexiconNode(final VisualProperty<?> vp);
+	VisualLexiconNode getVisualLexiconNode(VisualProperty<?> vp);
 	
 	
 	/**
@@ -84,7 +84,7 @@ public interface VisualLexicon {
 	 * 
 	 * @return Collection of visual properties for the type.
 	 */
-	Collection<VisualProperty<?>> getAllDescendants(final VisualProperty<?> prop);
+	Collection<VisualProperty<?>> getAllDescendants(VisualProperty<?> prop);
 	
 	
 	/**
@@ -93,6 +93,14 @@ public interface VisualLexicon {
 	 * @param vp visual property to be tested.
 	 * @return true if this lexicon supports the given vp.
 	 */
-	boolean isSupported(final VisualProperty<?> vp);
-		
+	boolean isSupported(VisualProperty<?> vp);
+	
+	/**
+	 * Returns a filtered value range for a {@link VisualProperty} that uses a {@link DiscreteRange}.
+	 * VisualLexicons may override this method to remove or add values to
+	 * a {@link DiscreteRange} for a built-in {@link VisualProperty} from BasicVisualLexicon.
+	 *
+	 * @param vp VisualProperty where vp.getRange().isDiscrete() == true
+	 */
+	<T> Set<T> getSupportedValueRange(VisualProperty<T> vp);
 }

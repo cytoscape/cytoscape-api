@@ -35,7 +35,7 @@ import java.util.Collection;
 public interface CyLayoutAlgorithmManager {
 
 	/** The name of the default layout. */
-	String DEFAULT_LAYOUT_NAME = "grid";
+	String DEFAULT_LAYOUT_NAME = "force-directed";
 	
 	/** The name of the default layout property. */
 	String DEFAULT_LAYOUT_PROPERTY_NAME = "layout.default";
@@ -53,14 +53,18 @@ public interface CyLayoutAlgorithmManager {
 	 * Returns a collection of all available layouts.
 	 * @return a collection of all available layouts.
 	 */
-	Collection<CyLayoutAlgorithm> getAllLayouts(); 
+	Collection<CyLayoutAlgorithm> getAllLayouts();
 
 	/**
-	 * Returns the default layout. The default layout name
-	 * can be specified using the DEFAULT_LAYOUT_PROPERTY_NAME 
-	 * property.
+	 * Returns Cytoscape's default layout.
 	 * @return the default layout.
 	 */
-	CyLayoutAlgorithm getDefaultLayout(); 
+	CyLayoutAlgorithm getDefaultLayout();
+	
+	/**
+	 * Changes Cytoscape's default layout.
+	 * @param layout The new default algorithm
+	 */
+	CyLayoutAlgorithm setDefaultLayout(CyLayoutAlgorithm layout);
 
 }

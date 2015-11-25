@@ -128,4 +128,38 @@ public interface Transformers {
 	 * </dl>
 	 */
 	static final String INTERACTION_TRANSFORMER = "org.cytoscape.InteractionTransformer";
+	
+	/**
+	 * The id of the core Adjacency Transformer, which finds adjacent nodes and edges
+	 * based on how they are connected to the input nodes. 
+	 * 
+	 * <dl>
+	 * <dt><b>Tunable parameters:</b></dt>
+	 * <dd>
+	 * <dl>
+	 * 
+	 * <dt><code>action</code></dt>
+	 * <dd>ADD - Output adjacent nodes/edges (as determined by the 'output' parameter) and also output all the nodes/edges that are in the input.</dd>
+	 * <dd>REPLACE - Only output adjacent nodes/edges (as determined by the 'output' parameter).</dd>
+	 * 
+	 * <dt><code>output</code></dt>
+	 * <dd>NODES - Only output adjacent nodes.</dd>
+	 * <dd>EDGES - Only output adjacent edges.</dd>
+	 * <dd>NODES_AND_EDGES - Output adjacent nodes/edges.</dd>
+	 * 
+	 * <dt><code>edgesAre</code></dt>
+	 * <dd>INCOMING - Only consider adjacent nodes/edges when the adjacent edges are incoming.</dd>
+	 * <dd>OUTGOING - Only consider adjacent nodes/edges when the adjacent edges are outgoing.</dd>
+	 * <dd>INCOMING_AND_OUTGOING - Consider all adjacent nodes/edges.</dd>
+     *
+     * <dt><code>filterTarget</code></dt>
+	 * <dd>NODES - Only apply nested sub-filter to adjacent nodes.</dd>
+	 * <dd>EDGES - Only apply nested sub-filter to adjacent nodes.</dd>
+	 * <dd>NODES_AND_EDGES - Apply nested sub-filter to the adjacent node and edge. Note, the filter will only pass if it is an OR filter that has separate column filters for nodes and edges.</dd>
+	 * 
+	 * </dl>
+	 * </dd>
+	 * </dl>
+	 */
+	static final String ADJACENCY_TRANSFORMER = "org.cytoscape.AdjacencyTransformer";
 }
