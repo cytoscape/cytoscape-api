@@ -44,6 +44,7 @@
 		<module>webservice-swing-api</module>
 		<module>command-executor-api</module>
 		<module>filter-api</module>
+		<module>jobs-api</module>
 		<module>api-bundle</module>
 	</modules>
 
