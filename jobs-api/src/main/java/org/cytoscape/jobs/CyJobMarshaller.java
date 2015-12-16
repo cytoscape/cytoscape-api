@@ -40,8 +40,48 @@ import org.cytoscape.model.CyRow;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.view.model.CyNetworkView;
 
+/**
+ * CyJobMarshallers are responsible for converting Cytoscape input data into the
+ * format appropriate to send to the external job.  The resulting {@link CyJobData}
+ * objects returned from the marshaller are assumed to have the correct symantics
+ * for the backend service.
+ */
 public interface CyJobMarshaller {
+	
+	/**
+	 * Create a {@link CyJobData} object for the list of networks, nodes, and edges
+	 * provided in the arguments.  Note that it is assumed that the networks, nodes,
+	 * and edges are all in the same {@link CyRootNetwork} as the network argument.
+	 *
+	 * @param network The network that contains the nodes and edges passed in data.
+	 * If data contains any networks, they are assumed to be in the {@link CyRootNetwork}
+	 * as this.
+	 * @param data The list of nodes, edges, and networks to be included
+	 * @return a {@link CyJobData} object with all of the data ready for serialization
+	 * and transmission to the external execution environment.
+	 */
 	public CyJobData marshalModel(CyNetwork network, List<? extends CyIdentifiable> data);
+
+	/**
+	 * Create a {@link CyJobData} object for the list of node and edge views
+	 * provided in the arguments.
+	 *
+	 * @param view The {@link CyNetworkView} that contains the node and edge views passed in data.
+	 * @param data The list of node and edge views.
+	 * @return a {@link CyJobData} object with all of the data ready for serialization
+	 * and transmission to the external execution environment.
+	 */
 	public CyJobData marshalView(CyNetworkView view, List<? extends CyIdentifiable> data);
+
+	/**
+	 * Create a {@link CyJobData} object for the table or slice of the table (as specified
+	 * by the list of rows and columns) specified in the arguments.
+	 *
+	 * @param table The {@link CyTable} to marshal into the {@link CyJobData} object.
+	 * @param rows The list of {@link CyRow}s to include.  If this is empty or null, include all rows
+	 * @param columns The list of columns to include.  If this is empty or null, include all columns
+	 * @return a {@link CyJobData} object with all of the data ready for serialization
+	 * and transmission to the external execution environment.
+	 */
 	public CyJobData marshalSubTable(CyTable table, List<CyRow> rows, List<String> columns);
 }

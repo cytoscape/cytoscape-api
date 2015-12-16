@@ -25,54 +25,12 @@ package org.cytoscape.jobs;
  */
 
 /**
- * An object that represents an external job.
+ * Classes are expected to implement this interface to receive notifications
+ * about job completions.
  *
  * @CyAPI.Spi.Interface
  * @CyAPI.InModule jobs-api
  */
-public interface CyJob {
-	/**
-	 * Return the ID for this job
-	 *
-	 * @return the job id
-	 */
-	public String getJobId();
-
-	/**
-	 * Return the class ID of the job handler associated with this
-	 * {@link CyJob}.  This is used when an App attempts to associate
-	 * it's job handler with this job.
-	 *
-	 * @return the class id of the {@link CyJobHandler}
-	 */
-	public String getJobHandler();
-
-	/**
-	 * Return the polling interval for checking on the job status
-	 * in seconds.
-	 *
-	 * @return the number of seconds between polls
-	 */
-	public int pollInterval();
-
-	/**
-	 * Get the current status of this job
-	 *
-	 * @return the job status
-	 */
-	public CyJobStatus getJobStatus();
-
-	/**
-	 * Get the results from a job
-	 *
-	 * @return the job results
-	 */
-	public CyJobData getJobResults();
-
-	/**
-	 * Cancel this job.
-	 *
-	 * @return the job status
-	 */
-	public CyJobStatus cancelJob();
+public interface CyJobHandler {
+	public void handleJob(CyJob job, CyJobStatus status);
 }

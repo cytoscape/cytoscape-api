@@ -24,6 +24,8 @@ package org.cytoscape.jobs;
  * #L%
  */
 
+import java.util.List;
+
 /**
  * CyJobManager is responsible for managing all currently running CyJobs.
  *
@@ -31,7 +33,41 @@ package org.cytoscape.jobs;
  * @CyAPI.InModule jobs-api
  */
 public interface CyJobManager {
+	/**
+	 * Return the list of {@link CyJob}s currently managed by the CyJobManager.
+	 *
+	 * @return the list of CyJobs
+	 */
 	public List<CyJob> getJobs();
+
+	/**
+	 * Cancel the specified job
+	 *
+	 * @param job the job to be canceled
+	 * @return the job status of the canceled job
+	 */
 	public CyJobStatus cancelJob(CyJob job);
-	public void addJob(CyJob job);
+
+	/**
+	 * Add a job to be managed by the job manager.  If the jobHandler
+	 * is specified, then that jobHandler will be called if the job
+	 * completes or fails
+	 *
+	 * @param job the {@link CyJob} to add to the list of managed jobs
+	 * @param jobHandler the {@link CyJobHandler} to be called if this
+	 * job completes or fails
+	 * @param pollInterval the number of seconds between poll attempts
+	 */
+	public void addJob(CyJob job, CyJobHandler jobHandler, int pollInterval);
+
+	/**
+	 * Associate a handler with a job.  This method is used primarily by apps to
+	 * reassociate with jobs after session loading.
+	 *
+	 * @param job the job to associate to
+	 * @param jobHandler the job handler that should be called when the job completes
+	 * @param pollInterval the polling interval.  If this is -1, the polling interval
+	 * from the CyJob will be used.
+	 */
+	public void associateHandler(CyJob job, CyJobHandler jobHandler, int pollInterval);
 }

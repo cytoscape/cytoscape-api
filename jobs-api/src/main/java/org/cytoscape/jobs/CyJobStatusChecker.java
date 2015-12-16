@@ -32,5 +32,11 @@ package org.cytoscape.jobs;
  * @CyAPI.InModule jobs-api
  */
 public interface CyJobStatusChecker {
+	/**
+	 * Get the status of a remote job
+	 *
+	 * @param job the job to get the status for
+	 * @return the job status
+	 */
 	public CyJobStatus getStatus(CyJob job);
 }

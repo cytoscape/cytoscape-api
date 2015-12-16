@@ -9,7 +9,7 @@
 
 	<properties>
 		<bundle.symbolicName>org.cytoscape.jobs-api</bundle.symbolicName>
-		<bundle.namespace>org.cytoscape.group</bundle.namespace>
+		<bundle.namespace>org.cytoscape.jobs</bundle.namespace>
 	</properties>
 
 	<modelVersion>4.0.0</modelVersion>
