@@ -28,11 +28,13 @@ package org.cytoscape.view.layout;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
+import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.work.TaskMonitor;
 import org.cytoscape.work.undo.UndoSupport;
 import org.slf4j.Logger;
@@ -154,7 +156,12 @@ public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 
 		this.taskMonitor = taskMonitor;
 		
-		boolean useAllNodes = nodesToLayOut.size() == networkView.getNodeViews().size();
+		long visibleNodeCount =
+			networkView.getNodeViews().stream()
+			.filter(view -> view.getVisualProperty(BasicVisualLexicon.NODE_VISIBLE))
+			.count();
+		
+		boolean useAllNodes = nodesToLayOut.size() == visibleNodeCount;
 		
 		// Depending on whether we are partitioned or not,
 		// we use different initialization.  Note that if the user only wants
@@ -167,7 +174,8 @@ public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 			partitionList = new ArrayList<LayoutPartition>(1);
 			partitionList.add(partition);
 		} else {
-			partitionList = PartitionUtil.partition(networkView, false, edgeWeighter);
+			Set<CyNode> nodes = nodesToLayOut.stream().map(nv->nv.getModel()).collect(Collectors.toSet());
+			partitionList = PartitionUtil.partition(networkView, nodes, edgeWeighter);
 		}
 
 		total_nodes = network.getNodeCount();
