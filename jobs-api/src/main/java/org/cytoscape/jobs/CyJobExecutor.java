@@ -30,6 +30,7 @@ package org.cytoscape.jobs;
  * @CyAPI.Spi.Interface
  * @CyAPI.InModule jobs-api
  */
+import java.util.Map;
 import java.net.URI;
 
 /**
@@ -47,8 +48,9 @@ public interface CyJobExecutor {
 	 *
 	 * @param path The full or partial path to the execution environment.  This might or might not
 	 * include the query string portion.
-	 * @param	credentials 	The credentials for secure connections.  This may be null if no authentication
-	 * or authorization is necessary.
+	 * @param	configuration This map passes any configuration information to the execution implementation.
+	 *                      Configuration might include credentials, arguments for the execution, or any
+	 *                      other arbitrary data required for the execution.
 	 * @param jobData	The data to be sent or POSTed to the execution environment.  This might be used, for
 	 * example, to send and existing network to be analyzed.
 	 * @param	jobHandler	The method to call when the job has terminated (either successfully or after a
@@ -57,7 +59,7 @@ public interface CyJobExecutor {
 	 */
 
 	// XXX How do we serialize the jobHandler information?????
-	public CyJob executeJob(URI path, Object credentials, CyJobData jobData, CyJobHandler jobHandler);
+	public CyJob executeJob(URI path, Map<String, Object> configuration, CyJobData jobData, CyJobHandler jobHandler);
 
 	/**
 	 * Return the {@link CyJobMarshaller} to be used for this external job environment.

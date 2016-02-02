@@ -24,6 +24,8 @@ package org.cytoscape.jobs;
  * #L%
  */
 
+import java.util.Map;
+
 /**
  * Implementations of CyJobStatusChecker will check for the status of a job
  * and return the status.
@@ -36,7 +38,8 @@ public interface CyJobStatusChecker {
 	 * Get the status of a remote job
 	 *
 	 * @param job the job to get the status for
+	 * @param arguments any extra arguments that might be required (e.g. authentication)
 	 * @return the job status
 	 */
-	public CyJobStatus getStatus(CyJob job);
+	public CyJobStatus getStatus(CyJob job, Map<String, Object> arguments);
 }

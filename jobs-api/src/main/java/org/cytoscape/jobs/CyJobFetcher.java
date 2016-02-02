@@ -24,6 +24,8 @@ package org.cytoscape.jobs;
  * #L%
  */
 
+import java.util.Map;
+
 /**
  * Implementations of CyJobFetcher will return the results of a job execution.
  *
@@ -31,5 +33,12 @@ package org.cytoscape.jobs;
  * @CyAPI.InModule jobs-api
  */
 public interface CyJobFetcher {
-	public CyJobData getData(CyJob job);
+	/**
+	 * Returns the data associated with a complete job
+	 *
+	 * @param job the job that has completed
+	 * @param arguments any extra arguments that might be required (e.g. authentication)
+	 * @return the returned data, packed as a CyJobData object
+	 */
+	public CyJobData getData(CyJob job, Map<String, Object> arguments);
 }
