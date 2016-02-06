@@ -26,7 +26,9 @@ package org.cytoscape.jobs;
 
 /**
  * Classes are expected to implement this interface to receive notifications
- * about job completions.
+ * about job completions.  To be informed about the status of a particular
+ * job, CyJobHandlers should be registered as services so that jobs can be
+ * reassociated with their handlers on session restore.
  *
  * @CyAPI.Spi.Interface
  * @CyAPI.InModule jobs-api

@@ -46,4 +46,19 @@ public enum CyJobStatus {
 		this.name = n;
 	}
 	public String toString() {return name;}
+
+	/**
+	 * Static method to determine if a job is "done", where
+	 * done means that it is no longer processing for any reason.
+	 *
+	 * @param status the status to check
+	 * @return true if the status indicates the job is done
+	 */
+	public static boolean isDone(CyJobStatus status) {
+		if (status.equals(CANCELED) || status.equals(ERROR) ||
+		    status.equals(FAILED) || status.equals(FINISHED) ||
+				status.equals(TERMINATED))
+			return true;
+		return false;
+	}
 }

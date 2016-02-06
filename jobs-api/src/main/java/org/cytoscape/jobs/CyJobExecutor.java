@@ -62,6 +62,15 @@ public interface CyJobExecutor {
 	public CyJob executeJob(URI path, Map<String, Object> configuration, CyJobData jobData, CyJobHandler jobHandler);
 
 	/**
+	 * Cancel a running job.  It's assumed that the job executor has enough information
+	 * to perform the cancel.
+	 *
+	 * @param job the job to cancel
+	 * @param cancelArgs if needed, the necessary args to cancel the job
+	 */
+	public void cancelJob(CyJob job, Map<String, Object> cancelArgs);
+
+	/**
 	 * Return the {@link CyJobMarshaller} to be used for this external job environment.
 	 *
 	 * @return the appropriate job marshaller

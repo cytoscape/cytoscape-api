@@ -55,10 +55,19 @@ public interface CyJobManager {
 	 *
 	 * @param job the {@link CyJob} to add to the list of managed jobs
 	 * @param jobHandler the {@link CyJobHandler} to be called if this
-	 * job completes or fails
-	 * @param pollInterval the number of seconds between poll attempts
+	 * job completes or fails.  If this is null, the name of the job 
+	 * handler defined in the job is used (through OSGi services)
+	 * @param pollInterval the number of seconds between poll attempts.  If
+	 * 0 or -1 the pollInterval defined in the job is used.
 	 */
 	public void addJob(CyJob job, CyJobHandler jobHandler, int pollInterval);
+
+	/**
+	 * Remove a job from being managed by the job manager.
+	 *
+	 * @param job the {@link CyJob} to remove from the list of managed jobs
+	 */
+	public void removeJob(CyJob job);
 
 	/**
 	 * Associate a handler with a job.  This method is used primarily by apps to
