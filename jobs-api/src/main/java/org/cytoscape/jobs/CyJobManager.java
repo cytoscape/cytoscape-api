@@ -79,4 +79,15 @@ public interface CyJobManager {
 	 * from the CyJob will be used.
 	 */
 	public void associateHandler(CyJob job, CyJobHandler jobHandler, int pollInterval);
+
+	/**
+	 * Associate a handler with a job.  This method is used primarily by CyJobExecutionServices
+	 * to reassociate with jobs after session loading.
+	 *
+	 * @param job the job to associate to
+	 * @param jobHandlerName the name of the job handler that should be called when the job completes
+	 * @param pollInterval the polling interval.  If this is -1, the polling interval
+	 * from the CyJob will be used.
+	 */
+	public void associateHandler(CyJob job, String jobHandlerName, int pollInterval);
 }
