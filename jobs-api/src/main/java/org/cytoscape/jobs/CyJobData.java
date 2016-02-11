@@ -47,9 +47,9 @@ public interface CyJobData {
 	 * if that key doesn't exist.
 	 *
 	 * @param key the key to access the requested data
-	 * @return the raw data, if that key exists or null
+	 * @return the data, if that key exists or null
 	 */
-	public Object getRaw(String key);
+	public Object get(String key);
 
 	/**
 	 * Return the enumerated set of keys in this CyJobData.
@@ -64,7 +64,7 @@ public interface CyJobData {
 	 * @param key the key to test
 	 * @return true if that key exists, false otherwise
 	 */
-	public boolean isSet(String key);
+	public boolean containsKey(String key);
 
 	/**
 	 * Return all of the values in this CyJobData
@@ -74,47 +74,23 @@ public interface CyJobData {
 	public Map<String, Object> getAllValues();
 
 	/**
-	 * Get the data for a particular key.  Note that if the type of the data
-	 * isn't assignable from type, this will throw an exception.
-	 *
-	 * @param key the key to use to access the data
-	 * @param type the class of the data
-	 * @return the data
-	 * @throws IllegalArgumentException if the type of the data isn't assignable to type
-	 */
-	public <R> R getData(String key, Class<? extends R> type) throws IllegalArgumentException;
-
-	/**
-	 * Get List data for a particular key.  Note that if the type of the list
-	 * element data isn't assignable from listElementType, this will throw an exception.
-	 *
-	 * @param key the key to use to access the data
-	 * @param listElementType the class of the data elements in the list
-	 * @return a list with all of the data elements
-	 * @throws IllegalArgumentException if the type of the list elements isn't assignable to listElementType
-	 */
-	public <R> List<R> getListData(String key, 
-	                               Class<? extends R> listElementType) throws IllegalArgumentException;
-
-	/**
 	 * Set the value for a particular key.
 	 *
 	 * @param key the key to set the value for
 	 * @param value the value to set
 	 */
-	public <R> void setData(String key, R value);
+	public void put(String key, Object value);
 
 	/**
 	 * Remove the data for a key
 	 *
 	 * @param key the key to remove the data for
+	 * @return the removed object or null if the key doesn't exit
 	 */
-	public void removeData(String key);
+	public Object remove(String key);
 
 	/**
-	 * Return the serialized object for transmission to the remote execution.
-	 *
-	 * @return serialized object
+	 * Clear all of the data
 	 */
-	public Object getSerializedObject();
+	public void clear();
 }

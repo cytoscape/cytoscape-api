@@ -27,25 +27,46 @@ package org.cytoscape.jobs;
 /**
  * An enum used for the status of a CyJob
  *
- * @CyAPI.Api.Interface
+ * @CyAPI.Api.Class
  * @CyAPI.InModule jobs-api
  */
-public enum CyJobStatus {
-	CANCELED("Canceled by the user or operator"),
-	ERROR("Finished with errors or warnings"),
-	FAILED("Failed"),
-	FINISHED("Successfully finished"),
-	PURGED("Job purged (no longer exists)"),
-	RUNNING("Running"),
-	QUEUED("In queue"),
-	SUBMITTED("Submitted"),
-	TERMINATED("Terminated");
+public class CyJobStatus {
+	public Status status;
+	public String message;
 
-	private final String name;
-	CyJobStatus(String n) {
-		this.name = n;
+	public enum Status {
+		CANCELED("Canceled by the user or operator"),
+		ERROR("Finished with errors or warnings"),
+		FAILED("Failed"),
+		FINISHED("Successfully finished"),
+		PURGED("Job purged (no longer exists)"),
+		RUNNING("Running"),
+		QUEUED("In queue"),
+		SUBMITTED("Submitted"),
+		TERMINATED("Terminated"),
+		UNKNOWN("Status unknown due to communications failure");
+	
+		private final String name;
+		Status(String n) {
+			this.name = n;
+		}
+		public String toString() {return name;}
 	}
-	public String toString() {return name;}
+
+	public CyJobStatus(Status status, String message) {
+		this.status = status;
+		this.message = message;
+	}
+
+	public Status getStatus() { return status; }
+
+	public String toString() {
+		String str = status.toString();
+		if (message != null) {
+			str += ": "+message;
+		}
+		return str;
+	}
 
 	/**
 	 * Static method to determine if a job is "done", where
@@ -54,10 +75,10 @@ public enum CyJobStatus {
 	 * @param status the status to check
 	 * @return true if the status indicates the job is done
 	 */
-	public static boolean isDone(CyJobStatus status) {
-		if (status.equals(CANCELED) || status.equals(ERROR) ||
-		    status.equals(FAILED) || status.equals(FINISHED) ||
-				status.equals(TERMINATED))
+	public boolean isDone() {
+		if (status.equals(Status.CANCELED) || status.equals(Status.ERROR) ||
+		    status.equals(Status.FAILED) || status.equals(Status.FINISHED) ||
+				status.equals(Status.TERMINATED))
 			return true;
 		return false;
 	}

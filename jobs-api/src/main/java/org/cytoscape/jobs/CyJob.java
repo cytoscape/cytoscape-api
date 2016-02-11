@@ -32,47 +32,79 @@ package org.cytoscape.jobs;
  */
 public interface CyJob {
 	/**
-	 * Return the ID for this job
+	 * Return the name for this job
+	 *
+	 * @return the job name
+	 */
+	public String getJobName();
+
+	/**
+	 * Return the ID for this job.  The job ID is most often used
+	 * to uniquely identify this job to a remote execution environment.
 	 *
 	 * @return the job id
 	 */
 	public String getJobId();
 
 	/**
-	 * Return the class ID of the job handler associated with this
-	 * {@link CyJob}.  This is used when an App attempts to associate
-	 * it's job handler with this job.
+	 * Set the ID for this job.  The job ID is most often used
+	 * to uniquely identify this job to a remote execution environment.
 	 *
-	 * @return the class id of the {@link CyJobHandler}
+	 * @param jobId the job id
 	 */
-	public String getJobHandler();
+	public void setJobId(String jobId);
 
 	/**
-	 * Return the polling interval for checking on the job status
-	 * in seconds.
+	 * Return the base path for communicating with the
+	 * remote service for this job
 	 *
-	 * @return the number of seconds between polls
+	 * @return the path
 	 */
-	public int pollInterval();
+	public String getPath();
 
 	/**
-	 * Get the current status of this job
+	 * Return the service that handles status changes for this job.
 	 *
-	 * @return the job status
+	 * @return the status change handler for this job
 	 */
-	public CyJobStatus getJobStatus();
+	public CyJobHandler getJobHandler();
 
 	/**
-	 * Get the results from a job
+	 * Set the service that handles status changes for this job.
 	 *
-	 * @return the job results
+	 * @param jobHandler the status change handler for this job
 	 */
-	public CyJobData getJobResults();
+	public void setJobHandler(CyJobHandler jobHandler);
 
 	/**
-	 * Cancel this job.
+	 * Return the time in seconds between calls to checkJobStatus.
 	 *
-	 * @return the job status
+	 * @return the poll interval for this job
 	 */
-	public CyJobStatus cancelJob();
+	public int getPollInterval();
+
+	/**
+	 * Set the time in seconds between calls to checkJobStatus.
+	 *
+	 * @param pollInterval the poll interval for this job
+	 */
+	public void setPollInterval(int pollInterval);
+
+	/**
+	 * Return the {@link CyJobExecutionService} that created this
+	 * job.  Most of the methods for interacting with the backend
+	 * service are through the {@link CyJobExecutionService}
+	 *
+	 * @param the CyJobExecutionService that created this job
+	 */ 
+	public CyJobExecutionService getJobExecutionService();
+
+	/**
+	 * Return the {@link CyJobDataService} that was used to
+	 * create this job.
+	 *
+	 * @param the CyJobDataService that handles data for this job
+	 */ 
+	public CyJobDataService getJobDataService();
+
 }
