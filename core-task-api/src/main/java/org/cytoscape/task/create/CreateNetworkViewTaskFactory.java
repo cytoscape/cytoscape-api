@@ -24,7 +24,12 @@ package org.cytoscape.task.create;
  * #L%
  */
 
+import java.util.Collection;
+
+import org.cytoscape.model.CyNetwork;
 import org.cytoscape.task.NetworkCollectionTaskFactory;
+import org.cytoscape.view.model.CyNetworkViewFactory;
+import org.cytoscape.work.TaskIterator;
 
 /**
  * This interface provides a task iterator for creating network views.
@@ -33,4 +38,13 @@ import org.cytoscape.task.NetworkCollectionTaskFactory;
  */
 public interface CreateNetworkViewTaskFactory extends NetworkCollectionTaskFactory {
 	
+	/** 
+	 * Use this method to create a network view for each of the passed networks.
+	 * The {@link org.cytoscape.view.model.CyNetworkView} objects will actually be created by the passed
+	 * {@link CyNetworkViewFactory}.
+	 * @param networks a non-null collection of {@link CyNetwork}s
+	 * @param factory the network view factory which will be used to create the views.
+	 * @return A TaskIterator object containing one or more {@link org.cytoscape.work.Task} objects to execute.
+	 */
+	TaskIterator createTaskIterator(Collection<CyNetwork> networks, CyNetworkViewFactory factory);
 }
