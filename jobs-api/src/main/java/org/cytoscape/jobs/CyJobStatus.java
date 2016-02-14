@@ -25,15 +25,20 @@ package org.cytoscape.jobs;
  */
 
 /**
- * An enum used for the status of a CyJob
+ * This object stores information about the status of a {@link CyJob}, including
+ * the actual job status ({@link CyJobStatus.Status}) and any message returned
+ * from the remote execution.
  *
  * @CyAPI.Api.Class
  * @CyAPI.InModule jobs-api
  */
 public class CyJobStatus {
-	public Status status;
-	public String message;
+	protected Status status;
+	protected String message;
 
+	/**
+	 * This enum contains the primary status returned from the remote execution.
+	 */
 	public enum Status {
 		CANCELED("Canceled by the user or operator"),
 		ERROR("Finished with errors or warnings"),
@@ -58,8 +63,25 @@ public class CyJobStatus {
 		this.message = message;
 	}
 
+	/**
+	 * Return the {@link Status} of the remote job
+	 *
+	 * @return the {@link Status}
+	 */
 	public Status getStatus() { return status; }
 
+	/**
+	 * Return any message associated with the job status.
+	 *
+	 * @return a message, or null if no message was included
+	 */
+	public String getMessage() { return message; }
+
+	/**
+	 * Return a string including the status and the message, if any.
+	 *
+	 * @return a string describing the status
+	 */
 	public String toString() {
 		String str = status.toString();
 		if (message != null) {

@@ -33,17 +33,33 @@ public class AbstractCyJob implements CyJob {
 		this.jobHandler = jobHandler;
 	}
 
+	@Override
 	public CyJobDataService getJobDataService() { return dataService; }
+
+	@Override
 	public CyJobExecutionService getJobExecutionService() { return execService; }
+
+	@Override
 	public String getJobName() { return jobName; }
+
+	@Override
 	public String getPath() { return path; }
 
+	@Override
 	public CyJobHandler getJobHandler() { return jobHandler; }
+
+	@Override
 	public void setJobHandler(CyJobHandler handler) { this.jobHandler = handler; }
 
+	@Override
 	public int getPollInterval() { return pollInterval; }
+
+	@Override
 	public void setPollInterval(int pollInterval) { this.pollInterval = pollInterval; }
 
+	@Override
 	public String getJobId() { return jobId; }
+
+	@Override
 	public void setJobId(String id) { jobId = id; }
 }

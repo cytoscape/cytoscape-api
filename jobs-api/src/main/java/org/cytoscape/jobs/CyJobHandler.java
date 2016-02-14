@@ -24,15 +24,44 @@ package org.cytoscape.jobs;
  * #L%
  */
 
+import org.cytoscape.work.TaskMonitor;
+
 /**
- * Classes are expected to implement this interface to receive notifications
+ * Apps are expected to implement this interface to receive notifications
  * about job completions.  To be informed about the status of a particular
  * job, CyJobHandlers should be registered as services so that jobs can be
- * reassociated with their handlers on session restore.
+ * reassociated with their handlers on session restore.  Note that classes
+ * <b>should</b> implement the <i>loadData</i> method.  This method will
+ * be called by the {@link CyJobManager} when a job transitions to status
+ * of {@link CyJobStatus.Status.FINISHED} and the user has indicated that they
+ * are ready to load the data.  This will be done as part of a {@link Task}
+ * to avoid potential synchronization issues. 
  *
  * @CyAPI.Spi.Interface
  * @CyAPI.InModule jobs-api
  */
 public interface CyJobHandler {
-	public void handleJob(CyJob job, CyJobStatus status);
+	/**
+	 * This method is called whenever the status of a job changes.
+	 *
+	 * @param job the {@link CyJob} who's status has changed
+	 * @param status the new job {@link CyJobStatus}
+	 */
+	default public void handleJob(CyJob job, CyJobStatus status) { };
+
+	/**
+	 * This method is called when when the job status transitions
+	 * to {@link CyJobStatus.Status.FINISHED} and the user has indicated
+	 * that they are ready to load the data from the task.  Typically, this
+	 * will result in the {@link CyJobExecutionService.fetchData()} method
+	 * being called, but if the data package is large, implementers might
+	 * want to call {@link CyJobExecutionService.fetchData()} in a separate
+	 * thread spawned from {@link handleJob()}, then when the user indicates
+	 * they are ready to process the data, the call to loadData can merge the
+	 * resulting data into Cytoscape.
+	 *
+	 * @param job the finished {@link CyJob} to fetch the data for
+	 * @param taskMonitor the {@link TaskMonitor} from the calling {@link Task}.
+	 */
+	public void loadData(CyJob job, TaskMonitor taskMonitor);
 }

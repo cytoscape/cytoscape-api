@@ -44,20 +44,102 @@ import org.cytoscape.session.CySession;
  * implementations of {@link CyJob}
  */
 public interface CyJobExecutionService {
+	/**
+	 * The name of the service.  This is usually the classname and is the name that should
+	 * be registered with OSGi.
+	 *
+	 * @return the service name
+	 */
 	public String getServiceName();
 
+	/**
+	 * Return the {@link CyJobDataService} that is used by service to marshall and unmarshall
+	 * data for the remote service.
+	 *
+	 * @return the data service used
+	 */
 	public CyJobDataService getDataService();
 
+	/**
+	 * Create an empty (unsubmitted) {@link CyJob} 
+	 *
+	 * @param name the name of the job
+	 * @param basePath the base URI for interacting with the remote service
+	 * @return the empty (not yet submitted) {@link CyJob}
+	 */
 	public CyJob getCyJob(String name, String basePath);
 
-	public CyJobStatus executeJob(CyJob job, String basePath, Map<String, Object> configuration, CyJobData inputData);
+	/**
+	 * Submit a {@link CyJob} for remote execution.  If provided, <i>basePath</i> will
+	 * override the path defined by the {@link CyJob}.  The <i>configuration</i> {@link Map}
+	 * provides any arguments necessary to successfully submit the job with the appropriate
+	 * <i>inputData</i>.
+	 *
+	 * @param job the job to be submitted
+	 * @param basePath if provided, this will override the path defined by the {@link CyJob}.
+	 * @param configuration a {@link Map} with all of the configuration parameters necessary to
+	 * submit the job
+	 * @param inputData the data to be sent to the remote service.
+	 * @return the {@link CyJobStatus} that results from the submission.  If everything is successful,
+	 * this should return {@link CyJobStatus.Status.SUBMITTED}.  If an error occured, the return status
+	 * should be {@link CyJobStatus.Status.ERROR} and {@link CyJobStatus.getMessage()} will return the
+	 * error message.
+	 */
+	public CyJobStatus executeJob(CyJob job, String basePath, Map<String, Object> configuration, 
+	                              CyJobData inputData);
 
+	/**
+	 * Check on the status of a running job.
+	 *
+	 * @param job the submitted job to be checked
+	 * @return the {@link CyJobStatus} of the running job.
+	 */
 	public CyJobStatus checkJobStatus(CyJob job);
 
+	/**
+	 * Cancel a running job.
+	 *
+	 * @param job the submitted job to be cancelled
+	 * @return the {@link CyJobStatus} of the job after being cancelled.
+	 * If everything is successful,
+	 * this should return {@link CyJobStatus.Status.CANCELLED}.  If an error occured, the return status
+	 * should be {@link CyJobStatus.Status.ERROR} and {@link CyJobStatus.getMessage()} will return the
+	 * error message.
+	 */
 	public CyJobStatus cancelJob(CyJob job);
 
+	/**
+	 * After a {@link CyJob} status returns {@link CyJobStatus.Status.FINISHED}, this method is
+	 * used to fetch the results from the job execution.
+	 *
+	 * @param job the completed job
+	 * @param data an empty {@link CyJobData} object that will be filled with the
+	 * results of the job execution.
+	 * @return the status after pulling the data back.  If an error occured, the return status
+	 * should be {@link CyJobStatus.Status.ERROR} and {@link CyJobStatus.getMessage()} will return the
+	 * error message.
+	 */
 	public CyJobStatus fetchResults(CyJob job, CyJobData data);
 
+	/**
+	 * This is method is called by the {@link CyJobManager} to save sufficient information
+	 * as part of the session to be able to restore and reestablish the job with the 
+	 * remote service.
+	 *
+	 * @param job the job to be saved in the sesion file
+	 * @param sessionFile
+	 */
 	public void saveJobInSession(CyJob job, File sessionFile);
+
+	/**
+	 * This is method is called by the {@link CyJobManager} to restore 
+	 * the job and reestablish the job with the 
+	 * remote service.
+	 *
+	 * @param session the session that is being restored
+	 * @param sessionFile the {@link File} that was written by the {@link saveJobInSession()}
+	 * method.
+	 * @return the restored job
+	 */
 	public CyJob restoreJobFromSession(CySession session, File sessionFile);
 }
