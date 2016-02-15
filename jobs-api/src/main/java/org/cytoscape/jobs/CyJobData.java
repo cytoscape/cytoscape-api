@@ -31,12 +31,15 @@ import java.util.Set;
 /**
  * CyJobData presents a general interface to sending data to and receiving
  * data from a job.  The api is meant to be very similar to that of a 
- * {@link CyRow},
- * with a couple of extra semantics, including the addition of support for
- * CyJobData as a potential type.  Since CyJobData supports a {@link Map}-like 
- * framework, the additional of CyJobData as a supported type allows for easy
- * serialization of Maps, Lists, and data, which aligns very well with JSON,
- * for example.
+ * {@link Map}, with {@link String} keys and arbirary {@link Object Objects}
+ * as values.  Note that no type checking is done -- the values might
+ * contain other {@link Map Maps}, {@link List Lists} or a variety of
+ * other objects (notably Cytoscape model and view model objects).  The
+ * detailed implementation for this object is managed by a {@link CyJobDataService}
+ * which should be able to use the information contains within the object to
+ * create the appropriate data structure to send to a remote job 
+ * ({@see CyJobDataService#getSerializedData(CyJobData)}) and retrieve the
+ * information from the remote job ({@see CyJobDataService#unSerialize(Object)}).
  *
  * @CyAPI.Spi.Interface
  * @CyAPI.InModule jobs-api

@@ -24,15 +24,6 @@ package org.cytoscape.jobs;
  * #L%
  */
 
-/**
- * The main interface for the handling of data exchanged with remote services.  Implementations of
- * this interface will often be independent of the remote service (e.g. a JSON implementation of
- * CyJobDataService may be used for multiple backend services).  Not all of the methods will be
- * provided by every implementation (see the default methods below).
- *
- * @CyAPI.Spi.Interface
- * @CyAPI.InModule jobs-api
- */
 import java.io.Reader;
 import java.io.InputStream;
 
@@ -46,6 +37,16 @@ import org.cytoscape.model.CyTable;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.VisualProperty;
 
+/**
+ * The main interface for the marshalling and unmarshalling
+ * of data to be exchanged with remote services.  Implementations of
+ * this interface will often be independent of the remote service (e.g. a JSON implementation of
+ * {@link CyJobDataService} may be used for multiple backend services).  Not all of the methods will be
+ * provided by every implementation (see the default methods below).
+ *
+ * @CyAPI.Spi.Interface
+ * @CyAPI.InModule jobs-api
+ */
 public interface CyJobDataService {
 	/**
 	 * The name of the service.  This is usually the classname and is the name that should
@@ -97,17 +98,19 @@ public interface CyJobDataService {
 	 * of <i>nodeColumns</i> and <i>edgeColumns</i> will restrict the attributes
 	 * to those columns.  For implementations that intent to use a column other
 	 * than the SUID to map the data back, by convention the key column should be
-	 * the first column in the list and the list should not be empty.
+	 * the first column in the list and the list should not be empty.<br/>
 	 *
 	 * <b>NOTE: it is important that implementations of this method deal with
 	 * the mapping of network, node, and edge SUIDs, which will change
 	 * across sessions.  Typically, this will be done by adding a new column
-	 * in the appropriate HIDDEN_ATTRS table with the name or id of the job</b>
+	 * in the appropriate HIDDEN_ATTRS table with the name or id of the job.  A
+	 * utility class {@link SUIDUtil} is provided to support one possible
+	 * mechanism to do this</b>
 	 *
 	 * @param data if not null, add the model data to this data object.
 	 * @param key a key string used to retrieve the data
 	 * @param network the {@link CyNetwork} to extract the data from.
-	 * @param nodesAndEdges the list of {@link CyNode}s and {@link CyEdge}s
+	 * @param nodesAndEdges the list of {@link org.cytoscape.modelCyNode}s and {@link org.cytoscape.modelCyEdge}s
 	 * to encode.  If null or empty, the entire network will be added
 	 * @param nodeColumns the list of columns to include for node data
 	 * @param edgeColumns the list of columns to include for edge data
@@ -128,12 +131,14 @@ public interface CyJobDataService {
 	 * of <i>columns</i> will restrict the data
 	 * to those columns.  For implementations that intent to use a column other
 	 * than the SUID to map the data back, by convention the key column should be
-	 * the first column in the list and the list should not be empty.
+	 * the first column in the list and the list should not be empty.<br/>
 	 *
 	 * <b>NOTE: it is important that implementations of this method deal with
 	 * the mapping of SUIDs, which will change
 	 * across sessions.  Typically, this will be done by adding a new column
-	 * in the appropriate HIDDEN_ATTRS table with the name or id of the job</b>
+	 * in the appropriate HIDDEN_ATTRS table with the name or id of the job.  A
+	 * utility class {@link SUIDUtil} is provided to support one possible
+	 * mechanism to do this</b>
 	 *
 	 * @param data if not null, add the model data to this data object.
 	 * @param key a key string used to retrieve the data
@@ -160,11 +165,13 @@ public interface CyJobDataService {
 	 * <b>NOTE: it is important that implementations of this method deal with
 	 * the mapping of network, node, and edge SUIDs, which will change
 	 * across sessions.  Typically, this will be done by adding a new column
-	 * in the appropriate HIDDEN_ATTRS table with the name or id of the job</b>
+	 * in the appropriate HIDDEN_ATTRS table with the name or id of the job.  A
+	 * utility class {@link SUIDUtil} is provided to support one possible
+	 * mechanism to do this</b>
 	 *
 	 * @param data if not null, add the model data to this data object.
 	 * @param key a key string used to retrieve the data
-	 * @param networkView the {@link CyNetworkVIew} to extract the data from.
+	 * @param networkView the {@link CyNetworkView} to extract the data from.
 	 * @param nodesAndEdges the list of {@link CyNode}s and {@link CyEdge}s
 	 * to encode.  If null or empty, the entire network view will be added
 	 * @param properties the list of visual properties to include
@@ -243,7 +250,11 @@ public interface CyJobDataService {
 
 	/**
 	 * This method is used to extract the data from the {@link CyJobData} object
-	 * in a form that is appropriate for use by the job execution service.
+	 * in a form that is appropriate for use by the job execution service.  This
+	 * method will be called by 
+	 * {@link CyJobExecutionService#executeJob(CyJob, String, Map, CyJobData)} method
+	 * to serialize all of the data in the {@link CyJobData} object for submission
+	 * to the remote service.
 	 *
 	 * @param data the input data
 	 * @return the serialized data
@@ -252,7 +263,10 @@ public interface CyJobDataService {
 
 	/**
 	 * This method is used to create a new {@link CyJobData} object from a serialized
-	 * data object retrieved from a remote execution.
+	 * data object retrieved from a remote execution.  
+	 * This method will be called from the
+	 * {@link CyJobExecutionService#fetchResults(CyJob, CyJobData)}
+	 * to unmarshal the data sent by the finished job.
 	 *
 	 * @param object the serialized data object
 	 * @return a the {@link CyJobData} object containing the unserialized data
@@ -260,8 +274,11 @@ public interface CyJobDataService {
 	public CyJobData unSerialize(Object object);
 
 	/**
-	 * This optional method is used to create a new {@link CyJobData} object from a serialized
+	 * This method is used to create a new {@link CyJobData} object from a serialized
 	 * data stream retrieved from a remote execution.
+	 * This method will be called from the
+	 * {@link CyJobExecutionService#fetchResults(CyJob, CyJobData)}
+	 * to unmarshal the data sent by the finished job.
 	 *
 	 * @param object the serialized data stream
 	 * @return a the {@link CyJobData} object containing the unserialized data
@@ -269,8 +286,11 @@ public interface CyJobDataService {
 	public CyJobData unSerialize(Reader reader);
 
 	/**
-	 * This optional method is used to create a new {@link CyJobData} object from a serialized
+	 * This method is used to create a new {@link CyJobData} object from a serialized
 	 * data stream retrieved from a remote execution.
+	 * This method will be called from the
+	 * {@link CyJobExecutionService#fetchResults(CyJob, CyJobData)}
+	 * to unmarshal the data sent by the finished job.
 	 *
 	 * @param object the serialized data stream
 	 * @return a the {@link CyJobData} object containing the unserialized data

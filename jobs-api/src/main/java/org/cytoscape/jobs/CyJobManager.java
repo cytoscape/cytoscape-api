@@ -27,7 +27,15 @@ package org.cytoscape.jobs;
 import java.util.List;
 
 /**
- * CyJobManager is responsible for managing all currently running CyJobs.
+ * {@link CyJobManager} is responsible for managing all currently running 
+ * {@link CyJob CyJobs}, including polling for changes in the
+ * {@link CyJobStatus.Status Status} of the job and notifying the 
+ * {@link CyJobHandler} provided by the App of the change in status.
+ * The {@link CyJobManager} also is responsible for calling 
+ * {@link CyJobExecutionService#saveJobInSession(CyJob, java.io.File)} as part
+ * of session saving and 
+ * {@link CyJobExecutionService#restoreJobFromSession(org.cytoscape.session.CySession, java.io.File)}
+ * when a session is loaded.
  *
  * @CyAPI.Api.Interface
  * @CyAPI.InModule jobs-api

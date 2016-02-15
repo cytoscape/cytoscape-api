@@ -25,7 +25,17 @@ package org.cytoscape.jobs;
  */
 
 /**
- * An object that represents an external job.
+ * A {@link CyJob} represents all of the state information necessary to 
+ * marshal and unmarshal data, submit jobs, query job status, and fetch
+ * results.  As such it is the main state object for the CyJob mechanism.
+ * This is also the object that gets saved and restored from sessions by
+ * the {@link CyJobManager}.  Typically, {@link CyJob CyJobs} are implemented
+ * by the appropriate {@link CyJobExecutionService}, which may have
+ * different state that needs to be stored in the object or serialized/deserialized
+ * from sessions.  Typically, once an App has created a {@link CyJob} 
+ * (using {@link CyJobExecutionService#getCyJob(String, String)}) it
+ * shouldn't require any other references to jobs objects since it should
+ * contain all necessary state.
  *
  * @CyAPI.Spi.Interface
  * @CyAPI.InModule jobs-api

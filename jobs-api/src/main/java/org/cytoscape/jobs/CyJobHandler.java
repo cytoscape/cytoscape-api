@@ -31,10 +31,12 @@ import org.cytoscape.work.TaskMonitor;
  * about job completions.  To be informed about the status of a particular
  * job, CyJobHandlers should be registered as services so that jobs can be
  * reassociated with their handlers on session restore.  Note that classes
- * <b>should</b> implement the <i>loadData</i> method.  This method will
+ * <b>should</b> implement the {@link #loadData(CyJob, TaskMonitor) loadData} 
+ * method.  This method will
  * be called by the {@link CyJobManager} when a job transitions to status
- * of {@link CyJobStatus.Status.FINISHED} and the user has indicated that they
- * are ready to load the data.  This will be done as part of a {@link Task}
+ * of {@link CyJobStatus.Status#FINISHED FINISHED} and the user has indicated that they
+ * are ready to load the data.  This will be done as part of a 
+ * {@link org.cytoscape.work.Task}
  * to avoid potential synchronization issues. 
  *
  * @CyAPI.Spi.Interface
@@ -51,17 +53,18 @@ public interface CyJobHandler {
 
 	/**
 	 * This method is called when when the job status transitions
-	 * to {@link CyJobStatus.Status.FINISHED} and the user has indicated
+	 * to {@link CyJobStatus.Status#FINISHED FINISHED} and the user has indicated
 	 * that they are ready to load the data from the task.  Typically, this
-	 * will result in the {@link CyJobExecutionService.fetchData()} method
+	 * will result in the {@link CyJobExecutionService#fetchResults(CyJob, CyJobData) fetchResults} 
+	 * method
 	 * being called, but if the data package is large, implementers might
-	 * want to call {@link CyJobExecutionService.fetchData()} in a separate
-	 * thread spawned from {@link handleJob()}, then when the user indicates
+	 * want to call {@link CyJobExecutionService#fetchResults(CyJob, CyJobData) fetchResults} in a separate
+	 * thread spawned from {@link #handleJob(CyJob, CyJobStatus) handleJob}, then when the user indicates
 	 * they are ready to process the data, the call to loadData can merge the
 	 * resulting data into Cytoscape.
 	 *
 	 * @param job the finished {@link CyJob} to fetch the data for
-	 * @param taskMonitor the {@link TaskMonitor} from the calling {@link Task}.
+	 * @param taskMonitor the {@link TaskMonitor} from the calling {@link org.cytoscape.work.Task}.
 	 */
 	public void loadData(CyJob job, TaskMonitor taskMonitor);
 }

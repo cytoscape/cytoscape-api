@@ -81,8 +81,8 @@ public interface CyJobExecutionService {
 	 * submit the job
 	 * @param inputData the data to be sent to the remote service.
 	 * @return the {@link CyJobStatus} that results from the submission.  If everything is successful,
-	 * this should return {@link CyJobStatus.Status.SUBMITTED}.  If an error occured, the return status
-	 * should be {@link CyJobStatus.Status.ERROR} and {@link CyJobStatus.getMessage()} will return the
+	 * this should return {@link CyJobStatus.Status#SUBMITTED}.  If an error occured, the return status
+	 * should be {@link CyJobStatus.Status#ERROR} and {@link CyJobStatus#getMessage()} method will return the
 	 * error message.
 	 */
 	public CyJobStatus executeJob(CyJob job, String basePath, Map<String, Object> configuration, 
@@ -102,21 +102,22 @@ public interface CyJobExecutionService {
 	 * @param job the submitted job to be cancelled
 	 * @return the {@link CyJobStatus} of the job after being cancelled.
 	 * If everything is successful,
-	 * this should return {@link CyJobStatus.Status.CANCELLED}.  If an error occured, the return status
-	 * should be {@link CyJobStatus.Status.ERROR} and {@link CyJobStatus.getMessage()} will return the
+	 * this should return {@link CyJobStatus.Status#CANCELLED}.  If an error occured, the return status
+	 * should be {@link CyJobStatus.Status#ERROR} and {@link CyJobStatus#getMessage()} 
+	 * method will return the
 	 * error message.
 	 */
 	public CyJobStatus cancelJob(CyJob job);
 
 	/**
-	 * After a {@link CyJob} status returns {@link CyJobStatus.Status.FINISHED}, this method is
+	 * After a {@link CyJob} status returns {@link CyJobStatus.Status#FINISHED}, this method is
 	 * used to fetch the results from the job execution.
 	 *
 	 * @param job the completed job
 	 * @param data an empty {@link CyJobData} object that will be filled with the
 	 * results of the job execution.
 	 * @return the status after pulling the data back.  If an error occured, the return status
-	 * should be {@link CyJobStatus.Status.ERROR} and {@link CyJobStatus.getMessage()} will return the
+	 * should be {@link CyJobStatus.Status#ERROR} and {@link CyJobStatus#getMessage()} will return the
 	 * error message.
 	 */
 	public CyJobStatus fetchResults(CyJob job, CyJobData data);
@@ -137,8 +138,8 @@ public interface CyJobExecutionService {
 	 * remote service.
 	 *
 	 * @param session the session that is being restored
-	 * @param sessionFile the {@link File} that was written by the {@link saveJobInSession()}
-	 * method.
+	 * @param sessionFile the {@link File} that was written by the 
+	 * {@link #saveJobInSession(CyJob, File)} method described above.
 	 * @return the restored job
 	 */
 	public CyJob restoreJobFromSession(CySession session, File sessionFile);
