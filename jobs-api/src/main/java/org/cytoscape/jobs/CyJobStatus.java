@@ -55,7 +55,7 @@ public class CyJobStatus {
 		Status(String n) {
 			this.name = n;
 		}
-		public String toString() {return name;}
+		public String getName() {return name;}
 	}
 
 	public CyJobStatus(Status status, String message) {
@@ -83,7 +83,7 @@ public class CyJobStatus {
 	 * @return a string describing the status
 	 */
 	public String toString() {
-		String str = status.toString();
+		String str = status.getName();
 		if (message != null) {
 			str += ": "+message;
 		}
