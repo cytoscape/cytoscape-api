@@ -57,7 +57,7 @@ public class SUIDUtil {
 	 * @param network the network that the SUIDs are part of
 	 * @param objs the Cytoscape objects whose SUIDs we want to save
 	 */
-	static public void saveSUIDs(CyJob job, CyNetwork network, List<CyIdentifiable> objs) {
+	static public void saveSUIDs(CyJob job, CyNetwork network, List<? extends CyIdentifiable> objs) {
 		Map<Identifiable, CyTable> suidMap = new HashMap<>();
 		// Add the network table to the map, we depend on having the network
 		// available to us for the restore
