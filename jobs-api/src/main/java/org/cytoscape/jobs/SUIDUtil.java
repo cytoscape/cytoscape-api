@@ -61,9 +61,14 @@ public class SUIDUtil {
 		Map<Identifiable, CyTable> suidMap = new HashMap<>();
 		// Add the network table to the map, we depend on having the network
 		// available to us for the restore
-		String columnName = job.getJobName()+"("+job.getJobId()+")_SUID";
+		String columnName = getColumnName(job);
+
+		// First, make sure we've saved the network SUID
 		CyTable hiddenTable = createColumn(network, Identifiable.NETWORK, columnName);
-		suidMap.put(Identifiable.NETWORK, hiddenTable);
+		CyRow netRow = hiddenTable.getRow(network.getSUID());
+		if (netRow != null)
+			netRow.set(columnName, network.getSUID());
+
 		for (CyIdentifiable cyId: objs) {
 			Identifiable type = getType(cyId);
 			if (!suidMap.containsKey(type)) {
@@ -90,7 +95,7 @@ public class SUIDUtil {
 	 * @return the restored network or null if we can't find it
 	 */
 	static public CyNetwork restoreNetwork(CyJob job, CyNetworkManager netManager, Long networkSUID) {
-		String columnName = job.getJobName()+"("+job.getJobId()+")_SUID";
+		String columnName = getColumnName(job);
 		for (CyNetwork network: netManager.getNetworkSet()) {
 			CyTable table = network.getTable(CyNetwork.class, CyNetwork.HIDDEN_ATTRS);
 			if (table.getColumn(columnName) == null)
@@ -117,16 +122,17 @@ public class SUIDUtil {
 		Map<Long,CyIdentifiable> objMap = new HashMap<>();
 		Set<Long> suidSet = new HashSet<Long>(oldIds);
 
-		String columnName = job.getJobName()+"("+job.getJobId()+")_SUID";
+		String columnName = getColumnName(job);
+
 		// First, determine which types have our column
 		CyTable networkTable = network.getTable(CyNetwork.class, CyNetwork.HIDDEN_ATTRS);
-		CyTable nodeTable = network.getTable(CyNode.class, CyNetwork.HIDDEN_ATTRS);
-		CyTable edgeTable = network.getTable(CyEdge.class, CyNetwork.HIDDEN_ATTRS);
 		if (networkTable.getColumn(columnName) != null) {
 			Long id = network.getRow(network).get(columnName, Long.class);
 			if (suidSet.contains(id))
 				objMap.put(id,network);
 		}
+
+		CyTable nodeTable = network.getTable(CyNode.class, CyNetwork.HIDDEN_ATTRS);
 		if (nodeTable.getColumn(columnName) != null) {
 			for (CyNode node: network.getNodeList()) {
 				Long id = network.getRow(node).get(columnName, Long.class);
@@ -135,6 +141,8 @@ public class SUIDUtil {
 					objMap.put(id,node);
 			}
 		}
+
+		CyTable edgeTable = network.getTable(CyEdge.class, CyNetwork.HIDDEN_ATTRS);
 		if (edgeTable.getColumn(columnName) != null) {
 			for (CyEdge edge: network.getEdgeList()) {
 				Long id = network.getRow(edge).get(columnName, Long.class);
@@ -155,6 +163,11 @@ public class SUIDUtil {
 			return Identifiable.EDGE;
 		}
 		return Identifiable.UNKNOWN;
+	}
+
+	static private String getColumnName(CyJob job) {
+		String columnName = job.getJobName()+"("+job.getJobId()+")_SUID";
+		return columnName;
 	}
 
 	static private CyTable createColumn(CyNetwork network, Identifiable type,
