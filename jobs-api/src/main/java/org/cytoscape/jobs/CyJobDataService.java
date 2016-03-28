@@ -271,7 +271,7 @@ public interface CyJobDataService {
 	 * @param object the serialized data object
 	 * @return a the {@link CyJobData} object containing the unserialized data
 	 */
-	public CyJobData unSerialize(Object object);
+	public CyJobData deserialize(Object object);
 
 	/**
 	 * This method is used to create a new {@link CyJobData} object from a serialized
@@ -283,7 +283,7 @@ public interface CyJobDataService {
 	 * @param object the serialized data stream
 	 * @return a the {@link CyJobData} object containing the unserialized data
 	 */
-	public CyJobData unSerialize(Reader reader);
+	public CyJobData deserialize(Reader reader);
 
 	/**
 	 * This method is used to create a new {@link CyJobData} object from a serialized
@@ -295,5 +295,5 @@ public interface CyJobDataService {
 	 * @param object the serialized data stream
 	 * @return a the {@link CyJobData} object containing the unserialized data
 	 */
-	public CyJobData unSerialize(InputStream inputStream);
+	public CyJobData deserialize(InputStream inputStream);
 }

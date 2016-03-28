@@ -5,7 +5,7 @@ import java.util.Map;
 import org.cytoscape.jobs.CyJob;
 import org.cytoscape.jobs.CyJobDataService;
 import org.cytoscape.jobs.CyJobExecutionService;
-import org.cytoscape.jobs.CyJobHandler;
+import org.cytoscape.jobs.CyJobMonitor;
 
 /**
  * This can be used as a base class for custom implementations of
@@ -15,22 +15,22 @@ import org.cytoscape.jobs.CyJobHandler;
  * @CyAPI.InModule jobs-api
  */
 public class AbstractCyJob implements CyJob {
-	protected CyJobHandler jobHandler;
+	protected CyJobMonitor jobMonitor;
 	protected int pollInterval = -1;
 	protected final CyJobDataService dataService;
 	protected final CyJobExecutionService execService;
 	protected final String jobName;
-	protected final String path;
+	protected String path;
 	protected String jobId;
 
 	public AbstractCyJob(String name, String basePath, 
 	                     CyJobExecutionService executionService, 
-								    	 CyJobDataService dataService, CyJobHandler jobHandler) {
+								    	 CyJobDataService dataService, CyJobMonitor jobMonitor) {
 		jobName = name;
 		path = basePath;
 		execService = executionService;
 		this.dataService = dataService;
-		this.jobHandler = jobHandler;
+		this.jobMonitor = jobMonitor;
 	}
 
 	@Override
@@ -46,10 +46,10 @@ public class AbstractCyJob implements CyJob {
 	public String getPath() { return path; }
 
 	@Override
-	public CyJobHandler getJobHandler() { return jobHandler; }
+	public CyJobMonitor getJobMonitor() { return jobMonitor; }
 
 	@Override
-	public void setJobHandler(CyJobHandler handler) { this.jobHandler = handler; }
+	public void setJobMonitor(CyJobMonitor monitor) { this.jobMonitor = monitor; }
 
 	@Override
 	public int getPollInterval() { return pollInterval; }
@@ -59,7 +59,4 @@ public class AbstractCyJob implements CyJob {
 
 	@Override
 	public String getJobId() { return jobId; }
-
-	@Override
-	public void setJobId(String id) { jobId = id; }
 }

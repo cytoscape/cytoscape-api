@@ -64,10 +64,9 @@ public interface CyJobExecutionService {
 	 * Create an empty (unsubmitted) {@link CyJob} 
 	 *
 	 * @param name the name of the job
-	 * @param basePath the base URI for interacting with the remote service
 	 * @return the empty (not yet submitted) {@link CyJob}
 	 */
-	public CyJob getCyJob(String name, String basePath);
+	public CyJob createCyJob(String name);
 
 	/**
 	 * Submit a {@link CyJob} for remote execution.  If provided, <i>basePath</i> will
@@ -125,7 +124,7 @@ public interface CyJobExecutionService {
 	/**
 	 * This is method is called by the {@link CyJobManager} to save sufficient information
 	 * as part of the session to be able to restore and reestablish the job with the 
-	 * remote service.
+	 * remote service.  It should not be called directly by client apps.
 	 *
 	 * @param job the job to be saved in the sesion file
 	 * @param sessionFile
@@ -135,7 +134,7 @@ public interface CyJobExecutionService {
 	/**
 	 * This is method is called by the {@link CyJobManager} to restore 
 	 * the job and reestablish the job with the 
-	 * remote service.
+	 * remote service.  It should not be called directly by client apps.
 	 *
 	 * @param session the session that is being restored
 	 * @param sessionFile the {@link File} that was written by the 

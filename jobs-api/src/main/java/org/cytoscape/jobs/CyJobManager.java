@@ -30,7 +30,7 @@ import java.util.List;
  * {@link CyJobManager} is responsible for managing all currently running 
  * {@link CyJob CyJobs}, including polling for changes in the
  * {@link CyJobStatus.Status Status} of the job and notifying the 
- * {@link CyJobHandler} provided by the App of the change in status.
+ * {@link CyJobMonitor} provided by the App of the change in status.
  * The {@link CyJobManager} also is responsible for calling 
  * {@link CyJobExecutionService#saveJobInSession(CyJob, java.io.File)} as part
  * of session saving and 
@@ -57,18 +57,18 @@ public interface CyJobManager {
 	public CyJobStatus cancelJob(CyJob job);
 
 	/**
-	 * Add a job to be managed by the job manager.  If the jobHandler
-	 * is specified, then that jobHandler will be called if the job
+	 * Add a job to be managed by the job manager.  If the jobMonitor
+	 * is specified, then that jobMonitor will be called if the job
 	 * completes or fails
 	 *
 	 * @param job the {@link CyJob} to add to the list of managed jobs
-	 * @param jobHandler the {@link CyJobHandler} to be called if this
+	 * @param jobMonitor the {@link CyJobMonitor} to be called if this
 	 * job completes or fails.  If this is null, the name of the job 
 	 * handler defined in the job is used (through OSGi services)
 	 * @param pollInterval the number of seconds between poll attempts.  If
 	 * 0 or -1 the pollInterval defined in the job is used.
 	 */
-	public void addJob(CyJob job, CyJobHandler jobHandler, int pollInterval);
+	public void addJob(CyJob job, CyJobMonitor jobMonitor, int pollInterval);
 
 	/**
 	 * Remove a job from being managed by the job manager.
@@ -78,24 +78,24 @@ public interface CyJobManager {
 	public void removeJob(CyJob job);
 
 	/**
-	 * Associate a handler with a job.  This method is used primarily by apps to
+	 * Associate a monitor with a job.  This method is used primarily by apps to
 	 * reassociate with jobs after session loading.
 	 *
 	 * @param job the job to associate to
-	 * @param jobHandler the job handler that should be called when the job completes
+	 * @param jobMonitor the job monitor that should be called when the job completes
 	 * @param pollInterval the polling interval.  If this is -1, the polling interval
 	 * from the CyJob will be used.
 	 */
-	public void associateHandler(CyJob job, CyJobHandler jobHandler, int pollInterval);
+	public void associateMonitor(CyJob job, CyJobMonitor jobMonitor, int pollInterval);
 
 	/**
 	 * Associate a handler with a job.  This method is used primarily by CyJobExecutionServices
 	 * to reassociate with jobs after session loading.
 	 *
 	 * @param job the job to associate to
-	 * @param jobHandlerName the name of the job handler that should be called when the job completes
+	 * @param jobMonitorName the name of the job handler that should be called when the job completes
 	 * @param pollInterval the polling interval.  If this is -1, the polling interval
 	 * from the CyJob will be used.
 	 */
-	public void associateHandler(CyJob job, String jobHandlerName, int pollInterval);
+	public void associateMonitor(CyJob job, String jobMonitorName, int pollInterval);
 }

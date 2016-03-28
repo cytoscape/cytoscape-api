@@ -57,14 +57,6 @@ public interface CyJob {
 	public String getJobId();
 
 	/**
-	 * Set the ID for this job.  The job ID is most often used
-	 * to uniquely identify this job to a remote execution environment.
-	 *
-	 * @param jobId the job id
-	 */
-	public void setJobId(String jobId);
-
-	/**
 	 * Return the base path for communicating with the
 	 * remote service for this job
 	 *
@@ -75,16 +67,16 @@ public interface CyJob {
 	/**
 	 * Return the service that handles status changes for this job.
 	 *
-	 * @return the status change handler for this job
+	 * @return the status change monitor for this job
 	 */
-	public CyJobHandler getJobHandler();
+	public CyJobMonitor getJobMonitor();
 
 	/**
 	 * Set the service that handles status changes for this job.
 	 *
-	 * @param jobHandler the status change handler for this job
+	 * @param jobMonitor the status change handler for this job
 	 */
-	public void setJobHandler(CyJobHandler jobHandler);
+	public void setJobMonitor(CyJobMonitor jobMonitor);
 
 	/**
 	 * Return the time in seconds between calls to checkJobStatus.

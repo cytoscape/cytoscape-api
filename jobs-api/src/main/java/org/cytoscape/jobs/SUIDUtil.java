@@ -95,8 +95,9 @@ public class SUIDUtil {
 			CyTable table = network.getTable(CyNetwork.class, CyNetwork.HIDDEN_ATTRS);
 			if (table.getColumn(columnName) == null)
 				continue;
-			if (table.getRow(network.getSUID()).get(columnName, Long.class).equals(networkSUID))
+			if (table.getRow(network.getSUID()).get(columnName, Long.class).equals(networkSUID)) {
 				return network;
+			}
 		}
 		return null;
 	}
