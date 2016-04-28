@@ -29,22 +29,28 @@ import javax.help.HelpSet;
 
 
 /**
+ * @deprecated JavaHelp no longer used in Cytoscape as of 3.4.
  * This interface provides access to the Cytoscape Help Broker and 
  * Help Set for managing the JavaHelp system. 
  * @CyAPI.Api.Interface
  * @CyAPI.InModule swing-application-api
  */
+@Deprecated
 public interface CyHelpBroker {
 
 	/**
+	 * @deprecated JavaHelp no longer used in Cytoscape as of 3.4.
 	 * Returns the HelpBroker. 
 	 * @return the HelpBroker. 
 	 */
+	@Deprecated
 	public HelpBroker getHelpBroker();
 
 	/**
+	 * @deprecated JavaHelp no longer used in Cytoscape as of 3.4.
 	 * Returns the HelpSet. 
 	 * @return the HelpSet. 
 	 */
+	@Deprecated
 	public HelpSet getHelpSet();
 }
