@@ -2,13 +2,13 @@
 	<parent>
 		<artifactId>api-parent</artifactId>
 		<groupId>org.cytoscape</groupId>
-		<version>3.4.0-SNAPSHOT</version>
+		<version>3.4.0</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
 
 	<artifactId>taglets</artifactId>
-  <version>3.4.0-SNAPSHOT</version>
+  <version>3.4.0</version>
 	<packaging>jar</packaging>
 
 	<name>Cytoscape Documentation Taglets</name>
