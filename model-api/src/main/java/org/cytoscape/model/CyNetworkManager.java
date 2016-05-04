@@ -27,8 +27,6 @@ package org.cytoscape.model;
 
 import java.util.Set;
 
-import org.cytoscape.model.CyNetwork;
-
 
 /**
  * Basic access to networks and view in an instance of Cytoscape.
@@ -70,12 +68,22 @@ public interface CyNetworkManager {
 	public void destroyNetwork(CyNetwork network);
 
 	/**
-	 * Registers a network with the network manager.  Does nothing if the network is already
-	 * known to the network manager.
+	 * Registers a network with the network manager and sets the network as current.
+	 * Does nothing if the network is already known to the network manager.
+	 * This has the same effect as {@code addNetwork(network, true)};
 	 * 
 	 * @param network  a non-null {@link CyNetwork}
 	 */
 	public void addNetwork(final CyNetwork network);
+	
+	/**
+	 * Registers a network with the network manager.
+	 * Does nothing if the network is already known to the network manager.
+	 * 
+	 * @param network  a non-null {@link CyNetwork}
+	 * @param setCurrent if true, also sets the new network as current
+	 */
+	public void addNetwork(final CyNetwork network, final boolean setCurrent);
 
 	/** Releases all currently held references and resources. */
 	public void reset();

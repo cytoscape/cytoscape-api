@@ -72,19 +72,26 @@ public interface CyNetworkViewManager {
 	/**
 	 * Destroys a network view.
 	 * 
-	 * @param view
-	 *            a non-null network view
+	 * @param view a non-null network view
 	 */
 	void destroyNetworkView(final CyNetworkView view);
 
 
 	/**
-	 * Registers a network view with the network view manager.
+	 * Registers a network view with the network view manager and sets the new view as current.
+	 * This has the same effect as {@code addNetworkView(view, true)};
 	 * 
-	 * @param view
-	 *            a non-null network view
+	 * @param view a non-null network view
 	 */
 	void addNetworkView(final CyNetworkView view);
+	
+	/**
+	 * Registers a network view with the network view manager.
+	 * 
+	 * @param view a non-null network view
+	 * @param setCurrent if true, also sets the new view as current
+	 */
+	void addNetworkView(final CyNetworkView view, final boolean setCurrent);
 
 
 	/**
@@ -92,7 +99,6 @@ public interface CyNetworkViewManager {
 	 * 
 	 * Note: make sure all references are released after this method call.
 	 * Otherwise, it can be a potential memory leak problem.
-	 * 
-	 * */
+	 */
 	void reset();
 }

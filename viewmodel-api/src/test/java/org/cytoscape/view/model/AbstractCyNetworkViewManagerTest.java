@@ -23,8 +23,10 @@ package org.cytoscape.view.model;
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
  */
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -33,11 +35,13 @@ import java.util.Collection;
 import org.cytoscape.event.CyEventHelper;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNetworkManager;
+import org.cytoscape.service.util.CyServiceRegistrar;
 import org.junit.Before;
 import org.junit.Test;
 
 public abstract class AbstractCyNetworkViewManagerTest {
 	
+	protected CyServiceRegistrar serviceRegistrar;
 	protected CyEventHelper eventHelper;
 	protected CyNetworkManager netManager;
 	
@@ -64,6 +68,10 @@ public abstract class AbstractCyNetworkViewManagerTest {
 	public void setUp() throws Exception {
 		eventHelper = mock(CyEventHelper.class);
 		netManager = mock(CyNetworkManager.class);
+		
+		serviceRegistrar = mock(CyServiceRegistrar.class);
+		when(serviceRegistrar.getService(CyEventHelper.class)).thenReturn(eventHelper);
+		when(serviceRegistrar.getService(CyNetworkManager.class)).thenReturn(netManager);
 		
 		this.network1 = newNetwork(true);
 		this.network2 = newNetwork(true);
