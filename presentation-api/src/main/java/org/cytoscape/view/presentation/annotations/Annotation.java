@@ -77,6 +77,11 @@ public interface Annotation {
 	public static final String Y = "y";
 
 	/**
+	 * Arg map key to initialize the z location for this annotation
+	 */
+	public static final String Z = "z";
+
+	/**
 	 * Return the view that this Annotation is for
 	 *
 	 * @return the network view this annotation is for

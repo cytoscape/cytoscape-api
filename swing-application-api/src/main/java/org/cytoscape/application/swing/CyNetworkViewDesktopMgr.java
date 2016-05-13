@@ -6,7 +6,7 @@ package org.cytoscape.application.swing;
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2016 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -30,43 +30,44 @@ import java.awt.Rectangle;
 import org.cytoscape.view.model.CyNetworkView;
 
 /**
- * Interface for managing CyNetworkViews within the desktop where they
- * reside.
+ * Interface for managing CyNetworkViews within the desktop where they reside.
  */
 public interface CyNetworkViewDesktopMgr {
-	public static enum ArrangeType {CASCADE, HORIZONTAL, VERTICAL, GRID};
+	
+	public static enum ArrangeType { CASCADE, HORIZONTAL, VERTICAL, GRID };
+
 	/**
-	 * Return the size of the desktop view area where all CyNetworkViews
-	 * reside.
-	 * @return Dimension of the width x height (pixels) of the desktop view
-	 *                  area.
+	 * Return the size of the desktop view area where all CyNetworkViews reside.
+	 * 
+	 * @return Dimension of the width x height (pixels) of the desktop view area.
+	 * @deprecated This method has been deprecated in version 3.4.
 	 */
+	@Deprecated
 	public Dimension getDesktopViewAreaSize();
 
 	/**
-	 * Get the existing bounds of a given CyNetworkView within the desktop
-	 * view area.
+	 * Get the existing bounds of a given CyNetworkView within the desktop view area.
 	 * @param view the CyNetworkView for which to obtain the bounds.
 	 * @return a Rectangle whose x,y position is the upper left corner of
-	 *         view and whose width and height are the dimensions of 
-	 *         view.
+	 *         view and whose width and height are the dimensions of view.
+	 * @deprecated This method has been deprecated in version 3.4.
 	 */
-	public Rectangle getBounds (CyNetworkView view);
+	@Deprecated
+	public Rectangle getBounds(CyNetworkView view);
 
 	/**
-	 * Set the bounds of a given CyNetworkView within the desktop
-	 * view area.
+	 * Set the bounds of a given CyNetworkView within the desktop view area.
 	 * @param view the CyNetworkView for which to set the bounds.
 	 * @param bounds a Rectangle whose x,y position is the desired
 	 *        upper left corner of view and whose width and height are
-	 *        the desired dimensions of view. 
+	 *        the desired dimensions of view.
+	 * @deprecated This method has been deprecated in version 3.4 and does not do anything anymore.
 	 */
-	public void setBounds (CyNetworkView view, Rectangle bounds);
+	@Deprecated
+	public void setBounds(CyNetworkView view, Rectangle bounds);
 
 	/**
-	 * Request the desktop view manager to tile (or untile) the current
-	 * network windows.
-	 *
+	 * Request the desktop view manager to tile (or untile) the current network windows.
 	 * @param arrangeType the type of tiling to use.  A ArrangeTYpe of CASCADE
 	 *        will revert to cascade (i.e. non-tiled) windows
 	 */

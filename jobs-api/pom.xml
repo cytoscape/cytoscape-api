@@ -8,63 +8,47 @@
 	</parent>
 
 	<properties>
-		<bundle.symbolicName>org.cytoscape.io.webservice-api</bundle.symbolicName>
-		<bundle.namespace>org.cytoscape.io.webservice</bundle.namespace>
+		<bundle.symbolicName>org.cytoscape.jobs-api</bundle.symbolicName>
+		<bundle.namespace>org.cytoscape.jobs</bundle.namespace>
 	</properties>
 
 	<modelVersion>4.0.0</modelVersion>
-	<artifactId>webservice-api</artifactId>
+	<groupId>org.cytoscape</groupId>
+	<artifactId>jobs-api</artifactId>
 
-	<name>Cytoscape Webservice API (${project.artifactId})</name>
+	<name>Cytoscape Groups API (${project.artifactId})</name>
 
 	<packaging>bundle</packaging>
 
-    <repositories>
-        <!-- bootstrap for cytoscape dependencies, namely the parent POM snapshots -->
-        <repository>
-            <id>cytoscape_snapshots</id>
-            <snapshots>
-                <enabled>true</enabled>
-            </snapshots>
-            <releases>
-                <enabled>false</enabled>
-            </releases>
-            <name>Cytoscape Snapshots</name>
-            <url>http://code.cytoscape.org/nexus/content/repositories/snapshots/</url>
-        </repository>
-        <!-- bootstrap for cytoscape dependencies, namely the parent POM releases -->
-        <repository>
-            <id>cytoscape_releases</id>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <name>Cytoscape Releases</name>
-            <url>http://code.cytoscape.org/nexus/content/repositories/releases/</url>
-        </repository>
-    </repositories>
+	<repositories>
+		<!-- bootstrap for cytoscape dependencies, namely the parent POM snapshots -->
+		<repository>
+			<id>cytoscape_snapshots</id>
+			<snapshots>
+				<enabled>true</enabled>
+			</snapshots>
+			<releases>
+				<enabled>false</enabled>
+			</releases>
+			<name>Cytoscape Snapshots</name>
+			<url>http://code.cytoscape.org/nexus/content/repositories/snapshots/</url>
+		</repository>
+		<!-- bootstrap for cytoscape dependencies, namely the parent POM releases -->
+		<repository>
+			<id>cytoscape_releases</id>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+			<releases>
+				<enabled>true</enabled>
+			</releases>
+			<name>Cytoscape Releases</name>
+			<url>http://code.cytoscape.org/nexus/content/repositories/releases/</url>
+		</repository>
+	</repositories>
 
 	<build>
-		<resources>
-			<resource>
-				<directory>src/main/resources</directory>
-			</resource>
-		</resources>
 		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>${maven-jar-plugin.version}</version>
-				<executions>
-					<execution>
-						<goals>
-							<goal>test-jar</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
 			<plugin>
 				<groupId>org.apache.felix</groupId>
 				<artifactId>maven-bundle-plugin</artifactId>
@@ -79,12 +63,22 @@
 					</instructions>
 				</configuration>
 			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<version>${maven-jar-plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>test-jar</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
 		</plugins>
 	</build>
 
 	<dependencies>
-
-		<!-- Cytoscape modules -->
 		<dependency>
 			<groupId>org.cytoscape</groupId>
 			<artifactId>model-api</artifactId>
@@ -92,7 +86,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.cytoscape</groupId>
-			<artifactId>io-api</artifactId>
+			<artifactId>viewmodel-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
@@ -100,9 +94,12 @@
 			<artifactId>work-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.cytoscape</groupId>
+			<artifactId>session-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 
-
-		<!-- Testing -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
@@ -111,6 +108,13 @@
 		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.cytoscape</groupId>
+			<artifactId>event-api</artifactId>
+			<version>${project.version}</version>
+			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
 

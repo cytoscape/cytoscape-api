@@ -305,6 +305,14 @@ public interface IconManager {
 	static final String ICON_HOME = "\uf015";
 	static final String ICON_HOSPITAL_O = "\uf0f8";
 	static final String ICON_HOTEL = "\uf236";
+	static final String ICON_HOURGLASS = "\uf254";
+	static final String ICON_HOURGLASS_1 = "\uf251";
+	static final String ICON_HOURGLASS_2 = "\uf252";
+	static final String ICON_HOURGLASS_3 = "\uf253";
+	static final String ICON_HOURGLASS_END = "\uf253";
+	static final String ICON_HOURGLASS_HALF = "\uf252";
+	static final String ICON_HOURGLASS_O = "\uf250";
+	static final String ICON_HOURGLASS_START = "\uf251";
 	static final String ICON_HTML5 = "\uf13b";
 	static final String ICON_ILS = "\uf20b";
 	static final String ICON_IMAGE = "\uf03e";

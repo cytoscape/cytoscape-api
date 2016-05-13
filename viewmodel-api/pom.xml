@@ -4,7 +4,7 @@
 	<parent>
 		<artifactId>api-parent</artifactId>
 		<groupId>org.cytoscape</groupId>
-		<version>3.3.0</version>
+		<version>3.4.0</version>
 	</parent>
 
 	<properties>
@@ -13,7 +13,6 @@
 	</properties>
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.cytoscape</groupId>
 	<artifactId>viewmodel-api</artifactId>
 
 	<name>Cytoscape View Model API (${project.artifactId})</name>
@@ -48,8 +47,7 @@
 					<instructions>
 						<Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
 						<Bundle-Version>${project.version}</Bundle-Version>
-						<Export-Package>!${bundle.namespace}.internal.*,${bundle.namespace}.*;version="${project.version}"</Export-Package>
-						<Private-Package>${bundle.namespace}.internal.*</Private-Package>
+						<Export-Package>${bundle.namespace}.*;version="${project.version}"</Export-Package>
 					</instructions>
 				</configuration>
 			</plugin>
@@ -95,6 +93,12 @@
 
 		<!-- unit tests -->
 		<dependency>
+			<groupId>org.cytoscape</groupId>
+			<artifactId>service-api</artifactId>
+			<version>${project.version}</version>
+			<scope>test</scope>
+		</dependency>
+		<dependency>
 			<groupId>org.mockito</groupId>
 			<artifactId>mockito-all</artifactId>
 			<scope>test</scope>
@@ -103,7 +107,7 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<scope>test</scope>
-		</dependency> 
+		</dependency>
 
 	</dependencies>
 </project>
