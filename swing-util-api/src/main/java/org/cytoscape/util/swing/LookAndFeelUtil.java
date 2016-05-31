@@ -20,15 +20,20 @@ package org.cytoscape.util.swing;
  * 
  * You should have received a copy of the GNU General Lesser Public 
  * License along with this program.  If not, see
- * <http://www.gnu.org/licenses/lgpl-2.1.html>.
+ * <http://www.gnu.org/licensses/lgpl-2.1.html>.
  * #L%
  */
 
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Desktop;
 import java.awt.event.KeyEvent;
 
 import javax.swing.Action;
+import java.awt.event.ActionEvent;
+import java.net.URI;
+import java.net.URL;
+import javax.swing.AbstractAction;
 import javax.swing.BorderFactory;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -43,6 +48,11 @@ import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
+import javax.swing.BoxLayout;
+import javax.swing.Box;
+import org.cytoscape.util.swing.IconManager;
+import org.cytoscape.util.swing.OpenBrowser;
+
 
 /**
  * Class that provides useful methods to help create standard and consistent UI on the current Look and Feel and OS.
@@ -170,6 +180,86 @@ public final class LookAndFeelUtil {
 		return createOkCancelPanel(okBtn, cancelBtn, new JComponent[0]);
 	}
 	
+	//-----------------------------------------------------------------
+	/**
+	 * Use this method to create OK, Cancel and Help
+	 	 * @param helpStr can be a full url, a lookup, or a help page name
+**/
+	public static JPanel createOkCancelPanel(final JButton okBtn, final JButton cancelBtn, String helpStr) {
+		return createOkCancelPanel(okBtn, cancelBtn, helpStr, new JComponent[0]);
+	}
+	
+	//FIXME         don't hardcode version tag!
+	private static String HELP_PREFIX = "http://manual.cytoscape.org/en/3.4.0/";
+	private static    String HELP_SUFFIX = ".html";
+
+	private static URI helpStrToURI(String helpStr)
+	{
+	  	try
+	  	{
+	        return new URL(helpStrToURL(helpStr)).toURI();
+	  	} catch (Exception e) {  System.out.println(" helpStrToURI  Exception: " + e.getMessage());}
+         
+        return null; 
+        
+	}
+	
+	private static String helpStrToURL(String rawString)
+	{
+
+	    if (rawString.startsWith("http")) return rawString;
+	    return HELP_PREFIX + rawString + HELP_SUFFIX;
+
+	}
+
+	
+	private static void launch(String helpStr)       
+	{
+//        System.out.println("launch: " + helpStr);
+        try{
+//           System.out.println("try: " + helpStrToURL(helpStr));
+            URI uri = helpStrToURI(helpStr);
+            if (uri != null)            	
+                Desktop.getDesktop().browse(uri);
+//             else    System.out.println("no uri " );
+       }
+        catch(Exception ex){
+               System.out.println("Exception: " + ex.getMessage());
+        }   
+     }  
+	
+
+	public static JButton makeHelpButton(String helpStr)
+	{
+
+        JButton helpButton = new JButton(new AbstractAction("?") {
+            @Override
+            public void actionPerformed(ActionEvent e) {    launch(helpStr);    }});
+        helpButton.setPreferredSize(new Dimension(24,24));  
+//         helpButton.setText(IconManager.ICON_QUESTION_CIRCLE);
+//         helpButton.setFont(IconManager.getIconFont(14.0f)); 
+        if (isMac()) 
+        	helpButton.putClientProperty("JButton.buttonType", "help");
+        return helpButton;
+	}
+	
+	/**
+	 * Use this method to include a help button in the bottom left corner.
+	 	 * @param helpStr can be a full url, a lookup, or a help page name
+
+**/
+	public static JPanel createOkCancelPanel(final JButton okBtn, final JButton cancelBtn,
+			String helpStr,         //new #3534   http://code.cytoscape.org/redmine/issues/3534
+			JComponent... otherComponents) {
+ 
+        JPanel parentPanel = new JPanel();
+        parentPanel.setLayout(new BoxLayout(parentPanel, BoxLayout.LINE_AXIS));
+        parentPanel.add(makeHelpButton(helpStr));
+        parentPanel.add(Box.createHorizontalGlue());
+        parentPanel.add(createOkCancelPanel( okBtn, cancelBtn, otherComponents));
+        return parentPanel; 
+    }
+
 	/**
 	 * Use this method to create a standard Cytoscape panel (usually added to the bottom of a dialog)
 	 * that contains an "OK" and/or a "Cancel" button, as well as other extra components.
