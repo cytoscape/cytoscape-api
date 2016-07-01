@@ -146,4 +146,20 @@ public interface FileUtil {
 	File[] getFiles(Component parent, String title, int loadSaveCustom,
 			String startDir, String customApproveText, boolean multiselect,
 			Collection<FileChooserFilter> filters);
+	
+	/**
+	 * Returns a file name, appending extension if necessary based on the file filters provided
+	 *
+	 * @return file name with extension
+	 * @param filters the file filters to be used
+	 * @param fileName the original file name
+	 */
+	String addFileExt(final Collection<FileChooserFilter> filters, String fileName);
+	
+	/**
+	 * Returns the current working directory.
+	 *
+	 * @return current working directory as a String
+	 */
+	String getCurrentDirectory();
 }
