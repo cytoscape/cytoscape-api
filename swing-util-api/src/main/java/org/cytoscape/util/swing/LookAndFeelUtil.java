@@ -20,6 +20,7 @@ import javax.swing.GroupLayout.SequentialGroup;
 import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComponent;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.KeyStroke;
@@ -59,11 +60,19 @@ import javax.swing.border.TitledBorder;
  */
 public final class LookAndFeelUtil {
 
-	static final float AQUA_TITLED_BORDER_FONT_SIZE = 11.0f;
+	private static final float AQUA_SMALL_FONT_SIZE;
 	
 	private static Font iconFont;
 
 	static {
+		if (isAquaLAF()) {
+			final JLabel lbl = new JLabel();
+			lbl.putClientProperty("JComponent.sizeVariant", "small");
+			AQUA_SMALL_FONT_SIZE = lbl.getFont().getSize2D();
+		} else {
+			AQUA_SMALL_FONT_SIZE = 11.0f;
+		}
+		
 		try {
 			iconFont = Font.createFont(Font.TRUETYPE_FONT,
 					LookAndFeelUtil.class.getResourceAsStream("/fonts/fontawesome-webfont.ttf"));
@@ -128,7 +137,18 @@ public final class LookAndFeelUtil {
 	 * @return The standard small font size for the current Look and feel.
 	 */
 	public static float getSmallFontSize() {
-		return 11.0f; // TODO Maybe different values for different LAF
+		// Aqua (Mac OS X):
+		if (isAquaLAF())
+			return AQUA_SMALL_FONT_SIZE;
+		
+		// Windows or Nimbus:
+		final Font font = UIManager.getFont("Label.font");
+		final float regular = font == null ? 13.0f : font.getSize2D();
+		float small = Math.round(regular * .84f);
+		small = Math.max(11.0f, small); // Must not be smaller than 11
+		small = Math.min(regular, small); // Must not  be larger than the regular font size
+		
+		return small;
 	}
 	
 	/**
@@ -170,7 +190,7 @@ public final class LookAndFeelUtil {
 					BorderFactory.createTitledBorder(aquaBorder, title) : BorderFactory.createTitledBorder(title);
 			
 			if (isAquaLAF())
-				tb.setTitleFont(UIManager.getFont("Label.font").deriveFont(AQUA_TITLED_BORDER_FONT_SIZE));
+				tb.setTitleFont(UIManager.getFont("Label.font").deriveFont(getSmallFontSize()));
 			
 			border = tb;
 		}

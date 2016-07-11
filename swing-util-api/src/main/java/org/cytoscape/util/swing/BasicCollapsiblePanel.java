@@ -354,7 +354,7 @@ public class BasicCollapsiblePanel extends JPanel {
 			
 			if (font != null) {
 				if (isAquaLAF())
-					font = font.deriveFont(LookAndFeelUtil.AQUA_TITLED_BORDER_FONT_SIZE);
+					font = font.deriveFont(LookAndFeelUtil.getSmallFontSize());
 				
 				arrowBtn.setFont(font);
 			}
