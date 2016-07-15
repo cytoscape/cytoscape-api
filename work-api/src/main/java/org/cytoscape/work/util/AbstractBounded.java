@@ -175,11 +175,11 @@ abstract public class AbstractBounded<N extends Comparable<N>> {
 	 */
 	public void setBounds(final N lower, final N upper) {
 		if (upper == null)
-			throw new NullPointerException("upper bound is null.");
+			throw new NullPointerException("Upper bound is null.");
 		if (upper.compareTo(lower) <= 0)
-			throw new IllegalArgumentException("upper value is less than or equal to lower value");
+			throw new IllegalArgumentException("Upper value is less than or equal to lower value");
 		if (lower.compareTo(upper) >= 0)
-			throw new IllegalArgumentException("lower value is greater than or equal to upper value");
+			throw new IllegalArgumentException("Lower value is greater than or equal to upper value");
 		this.upper = upper;
 		this.lower = lower;
 		value = clamp(value);
@@ -193,27 +193,27 @@ abstract public class AbstractBounded<N extends Comparable<N>> {
 	 */
 	public void setValue(final N v) {
 		if (v == null)
-			throw new NullPointerException("value is null.");
+			throw new NullPointerException("Value is null.");
 
 		synchronized (this) {
 			final int up = v.compareTo(upper);
 
 			if (upperStrict) {
 				if (up >= 0)
-					throw new IllegalArgumentException("value is greater than or equal to upper limit");
+					throw new IllegalArgumentException("Value is greater than or equal to upper limit");
 			} else {
 				if (up > 0)
-					throw new IllegalArgumentException("value is greater than upper limit");
+					throw new IllegalArgumentException("Value is greater than upper limit");
 			}
 
 			final int low = v.compareTo(lower);
 
 			if (lowerStrict) {
 				if (low <= 0)
-					throw new IllegalArgumentException("value is less than or equal to lower limit");
+					throw new IllegalArgumentException("Value is less than or equal to lower limit");
 			} else {
 				if (low < 0)
-					throw new IllegalArgumentException("value is less than lower limit");
+					throw new IllegalArgumentException("Value is less than lower limit");
 			}
 
 			value = v;
