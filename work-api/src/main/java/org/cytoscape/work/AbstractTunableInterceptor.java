@@ -122,8 +122,17 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 				} else if (field.isAnnotationPresent(ContainsTunables.class)) {
 					try { 
 						Object tunableContainer = field.get(obj);
-						if ( !handlerMap.containsKey(tunableContainer) )
-							handlerList.addAll( loadTunables(tunableContainer) );
+						// If the ContainsTunables is also a task, remember the values
+						// we set
+						if (tunableContainer instanceof Task) {
+							List<T>subTaskHandlers = loadTunables(tunableContainer);
+							// Add these to our current handler list
+							handlerList.addAll( subTaskHandlers );
+							handlerMap.put(tunableContainer, new ArrayList<T>());
+						} else {
+							if ( !handlerMap.containsKey(tunableContainer) )
+								handlerList.addAll( loadTunables(tunableContainer) );
+						}
 					} catch (final Throwable ex) {
 						logOrThrowException("ContainsTunables field intercept failed for " + field.toString(), ex);
 					}
