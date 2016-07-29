@@ -158,6 +158,8 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 						
 						// Get a handler with for get and set methods:
 						final T handler = getHandler(method, setter, obj, tunable);
+						if (handler instanceof AbstractTunableHandler)
+							((AbstractTunableHandler)handler).setOffset(initialOffset);
 						if (handler == null) {
 							logOrThrowException("Failed to create a handler for " + setter.getName() + "().",null);
 						} else {
