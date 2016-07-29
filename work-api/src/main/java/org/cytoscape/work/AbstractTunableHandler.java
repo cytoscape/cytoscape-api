@@ -49,6 +49,7 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	private final Method setter;
 	private final Reference<?> instance;
 	private final Tunable tunable;
+	private double offset = 0.0; // For @ContainsTunables, maintain the gravity offset
 	public static final String TOOLTIP = "tooltip";
 	public static final String GRAVITY = "gravity";
 	public static final String CONTEXT = "context";
@@ -185,7 +186,7 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	public final Properties getParams() throws IllegalArgumentException {
 		final String rawString = tunable.params();
 		final Properties keyValuesPairs = new Properties();
-		keyValuesPairs.put(GRAVITY, Double.toString(tunable.gravity()));
+		keyValuesPairs.put(GRAVITY, Double.toString(tunable.gravity()+offset));
 		keyValuesPairs.put(TOOLTIP, tunable.tooltip());
 		keyValuesPairs.put(CONTEXT, tunable.context());
 		if (tunable.format() != null && tunable.format().length() > 0)
@@ -284,7 +285,7 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	 * @return Tunable gravity as a double
 	 */
 	public final double getGravity() {
-		return tunable.gravity();
+		return tunable.gravity()+offset;
 	}
 
 	/**
@@ -307,5 +308,9 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	 */
 	public final String getFormat() {
 		return tunable.format();
+	}
+
+	public void setOffset(double offset) {
+		this.offset = offset;
 	}
 }
