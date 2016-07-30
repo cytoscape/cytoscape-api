@@ -130,6 +130,7 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 						double offset = containsT.offset();
 						if (offset == 999.0)
 							offset = 0.0;
+
 						// If the ContainsTunables is also a task, remember the values
 						// we set
 						if (tunableContainer instanceof Task) {
@@ -155,7 +156,7 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 						final Tunable tunable = method.getAnnotation(Tunable.class);
 						final String rootName = validateAndExtractRootName(method); 
 						final Method setter = findCompatibleSetter(obj, rootName, method.getReturnType());
-						
+
 						// Get a handler with for get and set methods:
 						final T handler = getHandler(method, setter, obj, tunable);
 						if (handler instanceof AbstractTunableHandler)
@@ -174,7 +175,9 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 					} else if (method.getParameterTypes().length != 0) {
 						throw new IllegalArgumentException(method.getName() + " annotated with @ProvidesTitle must take 0 arguments.");
 					} else {
-						if (titleProviderMap.containsKey(obj)) {
+						// If we're processing a ContainsTunable, we might seem to have more then one
+						// We can't just remove it or we'll wind up with no title
+						if (titleProviderMap.containsKey(obj) && initialOffset == 0.0) {
 							throw new IllegalArgumentException("Classes must have at most one @ProvidesTitle annotated method but " + method.getDeclaringClass().getName() + " has more than one.");
 						}
 						titleProviderMap.put(obj, method);

@@ -110,6 +110,17 @@ public class ListSelection<T> {
 	}
 
 	/**
+ 	 * Returns the list of listeners that will listen for changes to this object
+ 	 *
+ 	 *  @return the list of listeners
+ 	 */
+	public List<ListChangeListener<T>> getListeners() {
+		if (listeners == null)
+			listeners = new ArrayList<ListChangeListener<T>>();
+		return listeners;
+	}
+
+	/**
  	 * Alert all listeners that the list has changed
  	 */
 	protected void listChanged() {

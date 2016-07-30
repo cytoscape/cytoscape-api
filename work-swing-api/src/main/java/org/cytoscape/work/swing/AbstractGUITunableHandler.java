@@ -212,8 +212,14 @@ public abstract class AbstractGUITunableHandler
 	public void addChangeListener(GUITunableHandler gh) {
 		if (!listeners.contains(gh)) {
 			if (notifyingListeners) {
-				// Protect against concurrent modification issues!
-				listeners = new LinkedList<GUITunableHandler>(listeners);
+				// First, see if we already have a listener listening to
+				// this Tunable
+				GUITunableHandler old = getListenerFor(gh.getQualifiedName());
+				if (old != null) {
+					// Protect against concurrent modification issues!
+					listeners = new LinkedList<GUITunableHandler>(listeners);
+					listeners.remove(old);
+				}
 			}
 			listeners.add(gh);
 		}
@@ -324,6 +330,14 @@ public abstract class AbstractGUITunableHandler
 	
 	public boolean isHorizontal() {
 		return horizontal;
+	}
+
+	private GUITunableHandler getListenerFor(String tunable) {
+		for (GUITunableHandler gh: listeners) {
+			if (gh.getQualifiedName().equals(tunable))
+				return gh;
+		}
+		return null;
 	}
 	
 	/**

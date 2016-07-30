@@ -260,6 +260,17 @@ abstract public class AbstractBounded<N extends Comparable<N>> {
 	}
 
 	/**
+ 	 * Returns the list of listeners that will listen for changes to this object
+ 	 *
+ 	 *  @return the list of listeners
+ 	 */
+	public List<BoundedChangeListener<N>> getListeners() {
+		if (listeners == null)
+			listeners = new ArrayList<BoundedChangeListener<N>>();
+		return listeners;
+	}
+
+	/**
  	 * Alert all listeners that the bounds have changed
  	 */
 	private void boundsChanged() {
