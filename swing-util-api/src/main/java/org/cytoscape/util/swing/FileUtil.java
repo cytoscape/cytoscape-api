@@ -40,6 +40,7 @@ import java.util.Collection;
  */
 public interface FileUtil {
 	/** The Cytoscape property that stores the last save/load directory. */
+	@Deprecated
 	final String LAST_DIRECTORY = "directory.last";
 
 	/**
@@ -146,11 +147,4 @@ public interface FileUtil {
 	File[] getFiles(Component parent, String title, int loadSaveCustom,
 			String startDir, String customApproveText, boolean multiselect,
 			Collection<FileChooserFilter> filters);
-	
-	/**
-	 * Returns the current working directory.
-	 *
-	 * @return current working directory as a String
-	 */
-	String getCurrentDirectory();
 }

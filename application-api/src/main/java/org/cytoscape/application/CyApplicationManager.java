@@ -25,6 +25,7 @@ package org.cytoscape.application;
  */
 
 
+import java.io.File;
 import java.util.List;
 import java.util.Set;
 
@@ -161,4 +162,18 @@ public interface CyApplicationManager {
 	 * @return the complete set of all the currently known renderers
 	 */
 	Set<NetworkViewRenderer> getNetworkViewRendererSet();
+	
+	/**
+	 * Get the current working directory.
+	 * @return a File pointing to the current working directory as set in Properties,
+	 * or user.dir if a value is not set (or if the set value is not a valid directory)
+	 */
+	File getCurrentDirectory();
+	
+	/**
+	 * Set the current working directory.
+	 * @param dir a File object pointing to an existing directory
+	 * @return true if successful, false if the specified File is not a directory or does not exist
+	 */
+	boolean setCurrentDirectory(File dir);
 }
