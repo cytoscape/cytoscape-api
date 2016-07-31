@@ -276,7 +276,8 @@ abstract public class AbstractBounded<N extends Comparable<N>> {
 	private void boundsChanged() {
 		if (listeners == null) return;
 		synchronized (listeners) {
-			for (BoundedChangeListener<N> listener: listeners) {
+			List<BoundedChangeListener<N>> l = new ArrayList<BoundedChangeListener<N>>(listeners);
+			for (BoundedChangeListener<N> listener: l) {
 				listener.boundsChanged(this);
 			}
 		}
@@ -288,7 +289,8 @@ abstract public class AbstractBounded<N extends Comparable<N>> {
 	private void valueChanged() {
 		if (listeners == null) return;
 		synchronized (listeners) {
-			for (BoundedChangeListener<N> listener: listeners) {
+			List<BoundedChangeListener<N>> l = new ArrayList<BoundedChangeListener<N>>(listeners);
+			for (BoundedChangeListener<N> listener: l) {
 				listener.valueChanged(this);
 			}
 		}

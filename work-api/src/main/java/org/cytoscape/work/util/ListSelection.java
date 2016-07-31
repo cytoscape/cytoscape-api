@@ -126,7 +126,8 @@ public class ListSelection<T> {
 	protected void listChanged() {
 		if (listeners == null) return;
 		synchronized (listeners) {
-			for (ListChangeListener<T> listener: listeners) {
+			List<ListChangeListener<T>> l = new ArrayList<ListChangeListener<T>>(listeners);
+			for (ListChangeListener<T> listener: l) {
 				listener.listChanged(this);
 			}
 		}
@@ -138,7 +139,8 @@ public class ListSelection<T> {
 	protected void selectionChanged() {
 		if (listeners == null) return;
 		synchronized (listeners) {
-			for (ListChangeListener<T> listener: listeners) {
+			List<ListChangeListener<T>> l = new ArrayList<ListChangeListener<T>>(listeners);
+			for (ListChangeListener<T> listener: l) {
 				listener.selectionChanged(this);
 			}
 		}
