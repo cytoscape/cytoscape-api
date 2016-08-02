@@ -1,5 +1,7 @@
 package org.cytoscape.model.subnetwork;
 
+import java.util.List;
+
 /*
  * #%L
  * Cytoscape Model API (model-api)
@@ -29,8 +31,6 @@ import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.model.SavePolicy;
-
-import java.util.List;
 
 
 /**
@@ -185,4 +185,23 @@ public interface CyRootNetwork extends CyNetwork {
 	 * @return the network table shared by all subnetworks.
 	 */
 	CyTable getSharedEdgeTable();
+	
+	/**
+	 * Causes the given node to remain in the root network even if it has already been removed from all subnetworks.
+	 * <br><br>
+	 * The root network will automatically remove nodes/edges from itself that have been removed
+	 * from all subnetworks. Calling this method <b>after</b> removing the node from all sub-networks
+	 * will cause it to remain part of the root-network.
+	 */
+	void restoreNode(CyNode node);
+	
+	/**
+	 * Causes the given edge to remain in the root network even if it has already been removed from all subnetworks.
+	 * <br><br>
+	 * The root network will automatically remove nodes/edges from itself that have been removed
+	 * from all subnetworks. Calling this method <b>after</b> removing the edge from all sub-networks
+	 * will cause it to remain part of the root-network.
+	 * @throws IllegalArgumentException If the source and target nodes of the edge are not contained in this root network.
+	 */
+	void restoreEdge(CyEdge edge);
 }
