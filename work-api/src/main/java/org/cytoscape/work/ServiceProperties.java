@@ -145,6 +145,16 @@ public interface ServiceProperties {
 	 * Insert separator after this menu item
 	 */
 	public static final String INSERT_SEPARATOR_AFTER = "insertSeparatorAfter";
+	
+	/**
+	 * Insert separator before this toolbar item
+	 */
+	public static final String INSERT_TOOLBAR_SEPARATOR_BEFORE = "insertToolbarSeparatorBefore";
+
+	/**
+	 * Insert separator after this toolbar item
+	 */
+	public static final String INSERT_TOOLBAR_SEPARATOR_AFTER = "insertToolbarSeparatorAfter";
 
 	/**
  	 * Define standard context menus.  This is done here so that they will
