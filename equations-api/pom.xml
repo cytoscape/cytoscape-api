@@ -91,6 +91,11 @@
     </plugins>
   </build>
   <dependencies>
+  	<dependency>
+	  <groupId>org.cytoscape</groupId>
+	  <artifactId>model-api</artifactId>
+	  <version>${project.version}</version>
+	</dependency>
     <dependency>
       <groupId>junit</groupId>
       <artifactId>junit</artifactId>

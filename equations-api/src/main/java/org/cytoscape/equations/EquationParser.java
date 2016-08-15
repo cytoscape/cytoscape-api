@@ -34,10 +34,13 @@ import java.util.Set;
  */
 public interface EquationParser {
 	/**
-	 *  After registering an attribute function "func" it can be used in attribute equations.
+	 *  @deprecated Functions registered using this method will work, but will not update properly 
+	 *  if the containing bundle is updated. To register a Function, please use CyActivator or CyServiceRegistrar's
+	 *  registerService method to register as a service so updates can be handled properly.
 	 *  @param func  the function that will be registered
 	 *  @throws IllegalArgumentException will be thrown if "func" is null or the function has previously been registered
 	 */
+	@Deprecated
 	void registerFunction(final Function func) throws IllegalArgumentException;
 
 	/**

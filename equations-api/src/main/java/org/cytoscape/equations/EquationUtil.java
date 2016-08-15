@@ -1,5 +1,15 @@
 package org.cytoscape.equations;
 
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.cytoscape.model.CyColumn;
+import org.cytoscape.model.CyRow;
+import org.cytoscape.model.CyTable;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /*
  * #%L
  * Cytoscape Equations API (equations-api)
@@ -31,6 +41,8 @@ package org.cytoscape.equations;
  */
 public final class EquationUtil {
 	private EquationUtil() { } // Exists to prevent creating instances of this class!
+	
+	private static final Logger logger = LoggerFactory.getLogger(EquationUtil.class);
 
 	/** Converts a bare name to a variable reference.
 	 *  @param attribName  the bare name that will be converted
@@ -105,5 +117,98 @@ public final class EquationUtil {
 		}
 
 		return escapedAttribName.toString();
+	}
+	
+	/** Refreshes all the equations in the given CyTable
+	 *  @param table the CyTable
+	 *  @param compiler an EquationCompiler
+	 */
+	public static void refreshEquations(CyTable table, EquationCompiler compiler) {
+		Map<String, Class<?>> variableNameToTypeMap = new HashMap<String, Class<?>>();
+		for (CyColumn column : table.getColumns()) {
+			variableNameToTypeMap.put(column.getName(), column.getType() == Integer.class ? Long.class : column.getType());
+		}
+
+		for (CyRow row : table.getAllRows()) {
+			for (CyColumn column : table.getColumns()) {
+				String name = column.getName();
+				Object value = row.getRaw(name);
+				if (!(value instanceof Equation)) {
+					continue;
+				}
+				Equation equation = (Equation) value;
+				final Class<?> columnType = column.getType();
+				final Class<?> listElementType = column.getListElementType();
+				final Class<?> expectedType = variableNameToTypeMap.remove(name);
+				try {
+					if (compiler.compile(equation.toString(), variableNameToTypeMap)) {
+						final Class<?> eqnType = compiler.getEquation().getType();
+						if(eqnTypeIsCompatible(columnType, listElementType, eqnType))
+							equation = compiler.getEquation();
+						else {
+							final String errorMsg = "Equation result type is "
+									+ getUnqualifiedName(eqnType) + ", column type is "
+									+ getUnqualifiedName(columnType) + ".";
+							equation = compiler.getErrorEquation(equation.toString(), expectedType, errorMsg);
+						}
+						row.set(name, compiler.getEquation());
+					}
+				} catch (Exception e) {
+					logger.error("Unexpected error while restoring equation: " + equation.toString(), e);
+				}
+				variableNameToTypeMap.put(name, expectedType);
+			}
+		}
+	}
+	
+	/** Returns whether the given column type is compatible with an equation type
+	 *  @param columnType the column type
+	 *  @param listElementType the list element type, if columnType is List
+	 *  @param eqnType the equation type
+	 *  @return true if the types are compatible, false if incompatible
+	 */
+	public static boolean eqnTypeIsCompatible(final Class<?> columnType, final Class<?> listElementType,
+			final Class<?> eqnType) {
+		if (columnType == eqnType)
+			return true;
+		if (columnType == String.class) // Anything can be trivially converted to a string.
+			return true;
+		if (columnType == Integer.class && (eqnType == Long.class || eqnType == Double.class))
+			return true;
+		if (columnType == Double.class && eqnType == Long.class)
+			return true;
+		if (columnType == Boolean.class && (eqnType == Long.class || eqnType == Double.class))
+			return true;
+
+		if (columnType != List.class || !columnType.isAssignableFrom(eqnType))
+			return false;
+
+		// HACK!!!!!!  We don't know the type of the List, but we can do some type checking
+		// for our own builtins.  We need to do this as a negative evaluation in case
+		// an App wants to add a new List function
+		if (eqnType.getSimpleName().equals("DoubleList") && listElementType != Double.class)
+			return false;
+
+		if (eqnType.getSimpleName().equals("LongList") && 
+				(listElementType != Integer.class && listElementType != Long.class))
+			return false;
+
+		if (eqnType.getSimpleName().equals("BooleanList") && listElementType != Boolean.class)
+			return false;
+
+		if (eqnType.getSimpleName().equals("StringList") && listElementType != String.class)
+			return false;
+
+		return true;
+	}
+	
+	/** Returns the unqualified name of the given class
+	 *  @param type a Class object
+	 *  @return the unqualified name of the class as a String
+	 */
+	public static String getUnqualifiedName(final Class<?> type) {
+		final String typeName = type.getName();
+		final int lastDotPos = typeName.lastIndexOf('.');
+		return lastDotPos == -1 ? typeName : typeName.substring(lastDotPos + 1);
 	}
 }
