@@ -1,12 +1,16 @@
 package org.cytoscape.model;
 
+import static org.junit.Assert.assertEquals;
+
+import org.junit.Test;
+
 /*
  * #%L
  * Cytoscape Model API (model-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2008 - 2016 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -24,92 +28,51 @@ package org.cytoscape.model;
  * #L%
  */
 
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
-import org.cytoscape.event.DummyCyEventHelper;
-import org.cytoscape.model.CyTable.Mutability;
-import org.cytoscape.model.events.ColumnCreatedEvent;
-import org.cytoscape.model.events.RowSetRecord;
-import org.junit.Test;
-
-
 public abstract class AbstractCyColumnTest {
+	
+	private static final String COLUMN_1 = "test";
+	private static final String COLUMN_2 = "test1";
+	
 	protected CyTable table;
 	
-	@Test (expected=NullPointerException.class)
-	public void testSetNameNull(){
-		table.createColumn("test", String.class, false);
-		table.getColumn("test").setName(null);
-		
+	@Test (expected = NullPointerException.class)
+	public void testSetNameNull() {
+		createInitialColumns();
+		table.getColumn(COLUMN_1).setName(null);
 	}
 	
-
-	@Test (expected=IllegalArgumentException.class)
-	public void testSetNameCaseMatchAll(){
-		
-		table.createColumn("test", String.class, false);
-		table.getColumn("test").setName("TEST1");
-		
-		
+	public void testSetName() {
+		createInitialColumns();
+		table.getColumn(COLUMN_1).setName("New Test"); // Must not throw any exception
+		assertEquals("New Test", table.getColumn("new test").getName());
 	}
 	
-	@Test (expected=IllegalArgumentException.class)
-	public void testSetNameCaseMatchAll2(){
-		
-		table.createColumn("TEST", String.class, false);
-		table.getColumn("TEST").setName("test1");
-		
-		
+	public void testSetNameTrimNewName() {
+		createInitialColumns();
+		table.getColumn(COLUMN_1).setName("   New Test   "); // Must not throw any exception
+		assertEquals("New Test", table.getColumn("NEW TEST").getName());
 	}
 	
-	
-	@Test (expected=IllegalArgumentException.class)
-	public void testSetNameCaseMatchFirst(){
-		
-		table.createColumn("test", String.class, false);
-		table.getColumn("test").setName("Test1");
-		
-		
-	}
-	
-	@Test (expected=IllegalArgumentException.class)
-	public void testSetNameCaseMatchLast(){
-		
-		table.createColumn("test", String.class, false);
-		table.getColumn("test").setName("tesT1");
-		
-		
+	public void testSetNameChangeCaseOnly() {
+		createInitialColumns();
+		table.getColumn(COLUMN_1).setName("TEST"); // Must not throw any exception
+		assertEquals("TEST", table.getColumn(COLUMN_1).getName());
 	}
 
-	
-	@Test (expected=IllegalArgumentException.class)
-	public void testSetNameCaseMatchMiddle(){
-		
-		table.createColumn("test", String.class, false);
-		table.getColumn("test").setName("tEst1");
-		
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetExistingName() {
+		createInitialColumns();
+		table.getColumn("TEST").setName(COLUMN_2);
 	}
 	
-	
-	@Test (expected=IllegalArgumentException.class)
-	public void testSetNameCaseMatchMultiple(){
-		
-		table.createColumn("test", String.class, false);
-		table.getColumn("test").setName("tESt1");
-		
+	@Test(expected = IllegalArgumentException.class)
+	public void testSetExistingNameIgnoreCase() {
+		createInitialColumns();
+		table.getColumn(COLUMN_1).setName(COLUMN_2.toUpperCase());
 	}
 	
+	private void createInitialColumns() {
+		table.createColumn(COLUMN_1, String.class, false);
+		table.createColumn(COLUMN_2, String.class, false);
+	}
 }
