@@ -43,12 +43,22 @@ public final class UserAction {
 	private boolean enabled = false;
 	
 	/**
-	 * Creates a new UserAction object.
+	 * Creates a new UserAction object.  This object is meant to be used by the
+	 * Cytoscape {@link org.cytoscape.work.Tunable} mechanism.  The Tunable mechanism
+	 * will display this as a button on the GUI;
 	 * 
 	 * <p><pre>
 	 * <b>example</b> :
 	 * 
-	 * <code>UserAction act = new UserAction(actionListener)</code>
+	 * <code>
+	 * class MyClass implements ActionListener {
+	 * 	@Tunable(description="Open Dialog")
+	 * 	public UserAction open = null;
+	 *
+	 * 	public MyClass() {
+	 * 		open = new UserAction(this);
+	 * 	}
+	 * }</code>
 	 * </pre></p>
 	 *
 	 * @param actionListener the ActionListener that will be invoked when the user 
