@@ -269,6 +269,11 @@ public class BasicVisualLexicon implements VisualLexicon {
 	public static final VisualProperty<ArrowShape> EDGE_TARGET_ARROW_SHAPE = new ArrowShapeVisualProperty(
 			ArrowShapeVisualProperty.NONE, "EDGE_TARGET_ARROW_SHAPE", "Edge Target Arrow Shape", CyEdge.class);
 	
+	public static final VisualProperty<Double> EDGE_SOURCE_ARROW_SIZE = new DoubleVisualProperty(6d, NONE_ZERO_POSITIVE_DOUBLE_RANGE,
+			"EDGE_SOURCE_ARROW_SIZE", "Edge Source Arrow Size", CyEdge.class);
+	public static final VisualProperty<Double> EDGE_TARGET_ARROW_SIZE = new DoubleVisualProperty(6d, NONE_ZERO_POSITIVE_DOUBLE_RANGE,
+			"EDGE_TARGET_ARROW_SIZE", "Edge Target Arrow Size", CyEdge.class);
+	
 	public static final EdgeBendVisualProperty EDGE_BEND = new EdgeBendVisualProperty(
 			EdgeBendVisualProperty.DEFAULT_EDGE_BEND, "EDGE_BEND", "Edge Bend");
 	
@@ -283,7 +288,6 @@ public class BasicVisualLexicon implements VisualLexicon {
 	 *            Root of the visual property tree.
 	 */
 	public BasicVisualLexicon(final VisualProperty<NullDataType> rootVisualProperty) {
-
 		this.visualPropertyMap = new HashMap<>();
 		this.rootVisualProperty = rootVisualProperty;
 		final VisualLexiconNode rootNode = new VisualLexiconNode(rootVisualProperty, null);
@@ -355,6 +359,8 @@ public class BasicVisualLexicon implements VisualLexicon {
 		addVisualProperty(EDGE_TRANSPARENCY, EDGE);
 		addVisualProperty(EDGE_SOURCE_ARROW_SHAPE, EDGE);
 		addVisualProperty(EDGE_TARGET_ARROW_SHAPE, EDGE);
+		addVisualProperty(EDGE_SOURCE_ARROW_SIZE, EDGE);
+		addVisualProperty(EDGE_TARGET_ARROW_SIZE, EDGE);
 		addVisualProperty(EDGE_BEND, EDGE);
 		addVisualProperty(EDGE_LABEL_WIDTH, EDGE);
 
