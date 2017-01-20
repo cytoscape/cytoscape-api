@@ -35,9 +35,8 @@ import java.util.List;
  * contain the data for a specific primary key. Tables are limited in the
  * types of data that may be stored.  The allowable types are:
  * String, Integer, Long, Double, Boolean, and Lists of those five
- * types.
- *
- * For column naming conventions: {@link org.cytoscape.model org.cytoscape.model document}
+ * types. For column naming conventions: 
+ * {@link org.cytoscape.model org.cytoscape.model} document
  *
  * @CyAPI.Api.Interface
  * @CyAPI.InModule model-api
