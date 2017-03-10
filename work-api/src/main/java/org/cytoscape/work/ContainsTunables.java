@@ -61,4 +61,12 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.FIELD})
 public @interface ContainsTunables {
+	/**
+	 * Returns the offset to the gravity used to place the tunable in the panel.
+	 * Gravity is a numeric value associated with each tunable item. <code>Tunable</code>s
+	 * are sorted in ascending order based on their gravity values. The first <code>Tunable</code> 
+	 * to show will be the one with lowest value.
+	 * @return The gravity of the <code>Tunable</code>
+	 */
+	double offset() default 999.0;
 }

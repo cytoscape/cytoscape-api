@@ -175,11 +175,11 @@ abstract public class AbstractBounded<N extends Comparable<N>> {
 	 */
 	public void setBounds(final N lower, final N upper) {
 		if (upper == null)
-			throw new NullPointerException("upper bound is null.");
+			throw new NullPointerException("Upper bound is null.");
 		if (upper.compareTo(lower) <= 0)
-			throw new IllegalArgumentException("upper value is less than or equal to lower value");
+			throw new IllegalArgumentException("Upper value is less than or equal to lower value");
 		if (lower.compareTo(upper) >= 0)
-			throw new IllegalArgumentException("lower value is greater than or equal to upper value");
+			throw new IllegalArgumentException("Lower value is greater than or equal to upper value");
 		this.upper = upper;
 		this.lower = lower;
 		value = clamp(value);
@@ -193,27 +193,27 @@ abstract public class AbstractBounded<N extends Comparable<N>> {
 	 */
 	public void setValue(final N v) {
 		if (v == null)
-			throw new NullPointerException("value is null.");
+			throw new NullPointerException("Value is null.");
 
 		synchronized (this) {
 			final int up = v.compareTo(upper);
 
 			if (upperStrict) {
 				if (up >= 0)
-					throw new IllegalArgumentException("value is greater than or equal to upper limit");
+					throw new IllegalArgumentException("Value is greater than or equal to upper limit");
 			} else {
 				if (up > 0)
-					throw new IllegalArgumentException("value is greater than upper limit");
+					throw new IllegalArgumentException("Value is greater than upper limit");
 			}
 
 			final int low = v.compareTo(lower);
 
 			if (lowerStrict) {
 				if (low <= 0)
-					throw new IllegalArgumentException("value is less than or equal to lower limit");
+					throw new IllegalArgumentException("Value is less than or equal to lower limit");
 			} else {
 				if (low < 0)
-					throw new IllegalArgumentException("value is less than lower limit");
+					throw new IllegalArgumentException("Value is less than lower limit");
 			}
 
 			value = v;
@@ -260,12 +260,24 @@ abstract public class AbstractBounded<N extends Comparable<N>> {
 	}
 
 	/**
+ 	 * Returns the list of listeners that will listen for changes to this object
+ 	 *
+ 	 *  @return the list of listeners
+ 	 */
+	public List<BoundedChangeListener<N>> getListeners() {
+		if (listeners == null)
+			listeners = new ArrayList<BoundedChangeListener<N>>();
+		return listeners;
+	}
+
+	/**
  	 * Alert all listeners that the bounds have changed
  	 */
 	private void boundsChanged() {
 		if (listeners == null) return;
 		synchronized (listeners) {
-			for (BoundedChangeListener<N> listener: listeners) {
+			List<BoundedChangeListener<N>> l = new ArrayList<BoundedChangeListener<N>>(listeners);
+			for (BoundedChangeListener<N> listener: l) {
 				listener.boundsChanged(this);
 			}
 		}
@@ -277,7 +289,8 @@ abstract public class AbstractBounded<N extends Comparable<N>> {
 	private void valueChanged() {
 		if (listeners == null) return;
 		synchronized (listeners) {
-			for (BoundedChangeListener<N> listener: listeners) {
+			List<BoundedChangeListener<N>> l = new ArrayList<BoundedChangeListener<N>>(listeners);
+			for (BoundedChangeListener<N> listener: l) {
 				listener.valueChanged(this);
 			}
 		}

@@ -110,12 +110,24 @@ public class ListSelection<T> {
 	}
 
 	/**
+ 	 * Returns the list of listeners that will listen for changes to this object
+ 	 *
+ 	 *  @return the list of listeners
+ 	 */
+	public List<ListChangeListener<T>> getListeners() {
+		if (listeners == null)
+			listeners = new ArrayList<ListChangeListener<T>>();
+		return listeners;
+	}
+
+	/**
  	 * Alert all listeners that the list has changed
  	 */
 	protected void listChanged() {
 		if (listeners == null) return;
 		synchronized (listeners) {
-			for (ListChangeListener<T> listener: listeners) {
+			List<ListChangeListener<T>> l = new ArrayList<ListChangeListener<T>>(listeners);
+			for (ListChangeListener<T> listener: l) {
 				listener.listChanged(this);
 			}
 		}
@@ -127,7 +139,8 @@ public class ListSelection<T> {
 	protected void selectionChanged() {
 		if (listeners == null) return;
 		synchronized (listeners) {
-			for (ListChangeListener<T> listener: listeners) {
+			List<ListChangeListener<T>> l = new ArrayList<ListChangeListener<T>>(listeners);
+			for (ListChangeListener<T> listener: l) {
 				listener.selectionChanged(this);
 			}
 		}

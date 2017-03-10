@@ -108,7 +108,9 @@ public final class ListSingleSelection<T> extends ListSelection<T> {
 			logger.warn("value not contained in list of possible values possible items = "
 					+ Arrays.toString(getPossibleValues().toArray()));
 
-		selected = val;
-		selectionChanged();
+		if ((val == null && selected != null) || (val != null && !val.equals(selected))) {
+			selected = val;
+			selectionChanged();
+		}
 	}
 }

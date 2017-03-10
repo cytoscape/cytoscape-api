@@ -40,6 +40,7 @@ import java.util.Collection;
  */
 public interface FileUtil {
 	/** The Cytoscape property that stores the last save/load directory. */
+	@Deprecated
 	final String LAST_DIRECTORY = "directory.last";
 
 	/**

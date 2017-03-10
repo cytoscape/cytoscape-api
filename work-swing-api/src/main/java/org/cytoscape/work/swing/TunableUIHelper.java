@@ -55,4 +55,23 @@ public interface TunableUIHelper {
  	 * @param modality the new modality for the dialog
  	 */
 	public void setModality(ModalityType modality);
+
+	/**
+	 * Update all of the tunable values.  This results in all of the
+	 * update methods of each of the Tunables being called.  The Object
+	 * provided is usually the Task itself.
+	 * 
+	 * @param objectWithTunables the object containing the tunables
+	 */
+	public void update(Object objectWithTunables);
+
+	/**
+	 * Recreate the Tunable UI.  This might be used, for example, when
+	 * a @ContainsTunable field is changed in response to a user input.
+	 * As with update, the Object provided is usually the Task object
+	 * itself.
+	 *
+	 * @param objectWithTunables the object containing the tunables
+	 */
+	public void refresh(Object objectWithTunables);
 }

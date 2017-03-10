@@ -107,6 +107,12 @@ public abstract class AbstractGUITunableHandler
 	 */
 	private List<GUITunableHandler> listeners;
 
+	/**
+	 * A flag that tells us when we're notifying our listeners.  This allows
+	 * us to potentially guard against a concurrency issue
+	 */
+	private boolean notifyingListeners = false;
+
 
 	/** Standard base class constructor for <code>TunableHandler</code>s that deal with
 	 *  <code>Tunable</code>s that annotate a control.
@@ -190,8 +196,11 @@ public abstract class AbstractGUITunableHandler
 		String state = getState();
 		String name = getName();
 
-		for (GUITunableHandler gh : listeners)
+		for (GUITunableHandler gh : listeners) {
+			notifyingListeners = true;
 			gh.changeOccurred(name, state);
+			notifyingListeners = false;
+		}
 	}
 
 	/**
@@ -201,8 +210,19 @@ public abstract class AbstractGUITunableHandler
 	 */
 	@Override
 	public void addChangeListener(GUITunableHandler gh) {
-		if (!listeners.contains(gh))
+		if (!listeners.contains(gh)) {
+			if (notifyingListeners) {
+				// First, see if we already have a listener listening to
+				// this Tunable
+				GUITunableHandler old = getListenerFor(gh.getQualifiedName());
+				if (old != null) {
+					// Protect against concurrent modification issues!
+					listeners = new LinkedList<GUITunableHandler>(listeners);
+					listeners.remove(old);
+				}
+			}
 			listeners.add(gh);
+		}
 	}
 
 	/**
@@ -310,6 +330,14 @@ public abstract class AbstractGUITunableHandler
 	
 	public boolean isHorizontal() {
 		return horizontal;
+	}
+
+	private GUITunableHandler getListenerFor(String tunable) {
+		for (GUITunableHandler gh: listeners) {
+			if (gh.getQualifiedName().equals(tunable))
+				return gh;
+		}
+		return null;
 	}
 	
 	/**

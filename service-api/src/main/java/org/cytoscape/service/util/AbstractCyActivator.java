@@ -223,6 +223,13 @@ public abstract class AbstractCyActivator implements BundleActivator {
 		
 		ServiceUtil.registerAllServices(bc, service, props, serviceRegistrations);
 	}
+	/*
+	 * A special case when no properties are defined.
+	 */
+	protected final void registerAllServices(final BundleContext bc, final Object service) {
+		
+		ServiceUtil.registerAllServices(bc, service, new Properties(), serviceRegistrations);
+	}
 
 	/**
 	 * A utility method that registers the specified service object as an OSGi service of
@@ -235,6 +242,13 @@ public abstract class AbstractCyActivator implements BundleActivator {
 	protected final void registerService(final BundleContext bc, final Object service, final Class<?> serviceClass, final Properties props) {
 		
 		ServiceUtil.registerService(bc, service, serviceClass, props, serviceRegistrations); 
+	}
+	/*
+	 * A special case when no properties are defined.
+	 */
+	protected final void registerService(final BundleContext bc, final Object service, final Class<?> serviceClass) {
+		
+		ServiceUtil.registerService(bc, service, serviceClass, new Properties(), serviceRegistrations); 
 	}
 	
 }
