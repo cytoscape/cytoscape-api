@@ -12,6 +12,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JComponent;
 
 import org.cytoscape.work.AbstractTaskFactory;
+import org.cytoscape.work.TaskObserver;
 
 
 public abstract class AbstractNetworkSearchTaskFactory extends AbstractTaskFactory implements NetworkSearchTaskFactory {
@@ -78,6 +79,11 @@ public abstract class AbstractNetworkSearchTaskFactory extends AbstractTaskFacto
 	
 	public void setQuery(String query) {
 		this.query = query;
+	}
+	
+	@Override
+	public TaskObserver getTaskObserver() {
+		return null;
 	}
 	
 	@Override
