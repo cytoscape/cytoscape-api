@@ -28,14 +28,11 @@ package org.cytoscape.work;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.WeakHashMap;
 
-import org.slf4j.Logger;
+import java.util.*;
+
 import org.slf4j.LoggerFactory;
+import org.slf4j.Logger;
 
 
 /**
@@ -94,100 +91,101 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 	 * whose value needs to be set or recorded. 
 	 */
 	private List<T> loadTunables(final Object obj, final double initialOffset) {
-		handlerMap.remove(obj);
-		titleProviderMap.remove(obj);
-		List<T> handlerList = new ArrayList<T>();
-		handlerMap.put(obj, handlerList);
-		
-		// Find each public field in the class.
-		for (final Field field : obj.getClass().getFields()) {
-			// See if the field is annotated as a Tunable.
-			if (field.isAnnotationPresent(Tunable.class)) {
-				try {
-					// Get the tunable's annotations
-					final Tunable tunable = field.getAnnotation(Tunable.class);
+		List<T> handlerList = handlerMap.get(obj);
+		if (handlerList == null) {
+			handlerList = new ArrayList<T>();
+			handlerMap.put(obj, handlerList);
 
-					// Get a Handler for this type of Tunable and...
-					T handler = getHandler(field, obj, tunable);
-					if (handler instanceof AbstractTunableHandler)
-						((AbstractTunableHandler)handler).setOffset(initialOffset);
+			// Find each public field in the class.
+			for (final Field field : obj.getClass().getFields()) {
+				// See if the field is annotated as a Tunable.
+				if (field.isAnnotationPresent(Tunable.class)) {
+					try {
+						// Get the tunable's annotations
+						final Tunable tunable = field.getAnnotation(Tunable.class);
 
-					// ...add it to the list of Handlers
-					if (handler != null) {
-						handlerList.add(handler);
-					} else
-						logOrThrowException("No handler for type: " + field.getType().getName(), null);
-				} catch (final Throwable ex) {
-					logOrThrowException("tunable field intercept failed for " + field.toString(), ex);
-				}
+						// Get a Handler for this type of Tunable and...
+						T handler = getHandler(field, obj, tunable);
+						if (handler instanceof AbstractTunableHandler)
+							((AbstractTunableHandler)handler).setOffset(initialOffset);
 
-			// Evaluate fields for ContainsTunables annotation. If the field
-			// is annotated, then get the object from the field and evaluate
-			// *it* for tunables.
-			} else if (field.isAnnotationPresent(ContainsTunables.class)) {
-				try { 
-					Object tunableContainer = field.get(obj);
-					handlerMap.remove(tunableContainer);
-
-					// We do this so we can get the gravity offset, if there is one
-					final ContainsTunables containsT = field.getAnnotation(ContainsTunables.class);
-					double offset = containsT.offset();
-					if (offset == 999.0)
-						offset = 0.0;
-
-					// If the ContainsTunables is also a task, remember the values
-					// we set
-					if (tunableContainer instanceof Task) {
-						List<T>subTaskHandlers = loadTunables(tunableContainer, initialOffset+offset);
-						// Add these to our current handler list
-						handlerList.addAll( subTaskHandlers );
-						handlerMap.put(tunableContainer, new ArrayList<T>());
-					} else {
-						handlerList.addAll( loadTunables(tunableContainer, initialOffset) );
+						// ...add it to the list of Handlers
+						if (handler != null) {
+							handlerList.add(handler);
+						} else
+							logOrThrowException("No handler for type: " + field.getType().getName(), null);
+					} catch (final Throwable ex) {
+						logOrThrowException("tunable field intercept failed for " + field.toString(), ex);
 					}
-				} catch (final Throwable ex) {
-					logOrThrowException("ContainsTunables field intercept failed for " + field.toString(), ex);
+
+				// Evaluate fields for ContainsTunables annotation. If the field
+				// is annotated, then get the object from the field and evaluate
+				// *it* for tunables.
+				} else if (field.isAnnotationPresent(ContainsTunables.class)) {
+					try { 
+						Object tunableContainer = field.get(obj);
+
+						// We do this so we can get the gravity offset, if there is one
+						final ContainsTunables containsT = field.getAnnotation(ContainsTunables.class);
+						double offset = containsT.offset();
+						if (offset == 999.0)
+							offset = 0.0;
+
+						// If the ContainsTunables is also a task, remember the values
+						// we set
+						if (tunableContainer instanceof Task) {
+							List<T>subTaskHandlers = loadTunables(tunableContainer, initialOffset+offset);
+							// Add these to our current handler list
+							handlerList.addAll( subTaskHandlers );
+							handlerMap.put(tunableContainer, new ArrayList<T>());
+						} else {
+							if ( !handlerMap.containsKey(tunableContainer) )
+								handlerList.addAll( loadTunables(tunableContainer, initialOffset) );
+						}
+					} catch (final Throwable ex) {
+						logOrThrowException("ContainsTunables field intercept failed for " + field.toString(), ex);
+					}
 				}
 			}
-		}
 
-		// Find each public method in the class.
-		for (final Method method : obj.getClass().getMethods()) {
-			// See if the method is annotated as a Tunable.
-			if (method.isAnnotationPresent(Tunable.class)) {
-				try {
-					final Tunable tunable = method.getAnnotation(Tunable.class);
-					final String rootName = validateAndExtractRootName(method); 
-					final Method setter = findCompatibleSetter(obj, rootName, method.getReturnType());
+			// Find each public method in the class.
+			for (final Method method : obj.getClass().getMethods()) {
+				// See if the method is annotated as a Tunable.
+				if (method.isAnnotationPresent(Tunable.class)) {
+					try {
+						final Tunable tunable = method.getAnnotation(Tunable.class);
+						final String rootName = validateAndExtractRootName(method); 
+						final Method setter = findCompatibleSetter(obj, rootName, method.getReturnType());
 
-					// Get a handler with for get and set methods:
-					final T handler = getHandler(method, setter, obj, tunable);
-					if (handler instanceof AbstractTunableHandler)
-						((AbstractTunableHandler)handler).setOffset(initialOffset);
-					if (handler == null) {
-						logOrThrowException("Failed to create a handler for " + setter.getName() + "().",null);
+						// Get a handler with for get and set methods:
+						final T handler = getHandler(method, setter, obj, tunable);
+						if (handler instanceof AbstractTunableHandler)
+							((AbstractTunableHandler)handler).setOffset(initialOffset);
+						if (handler == null) {
+							logOrThrowException("Failed to create a handler for " + setter.getName() + "().",null);
+						} else {
+							handlerList.add(handler);
+						}
+					} catch (Throwable t) {
+						logOrThrowException("tunable method intercept failed for " + method.toString(), t);
+					}
+				} else if (method.isAnnotationPresent(ProvidesTitle.class)) {
+					if (!String.class.isAssignableFrom(method.getReturnType())) {
+						throw new IllegalArgumentException(method.getName() + " annotated with @ProvidesTitle must return String.");
+					} else if (method.getParameterTypes().length != 0) {
+						throw new IllegalArgumentException(method.getName() + " annotated with @ProvidesTitle must take 0 arguments.");
 					} else {
-						handlerList.add(handler);
+						// If we're processing a ContainsTunable, we might seem to have more then one
+						// We can't just remove it or we'll wind up with no title
+						if (titleProviderMap.containsKey(obj) && initialOffset == 0.0) {
+							throw new IllegalArgumentException("Classes must have at most one @ProvidesTitle annotated method but " + method.getDeclaringClass().getName() + " has more than one.");
+						}
+						titleProviderMap.put(obj, method);
 					}
-				} catch (Throwable t) {
-					logOrThrowException("tunable method intercept failed for " + method.toString(), t);
-				}
-			} else if (method.isAnnotationPresent(ProvidesTitle.class)) {
-				if (!String.class.isAssignableFrom(method.getReturnType())) {
-					throw new IllegalArgumentException(method.getName() + " annotated with @ProvidesTitle must return String.");
-				} else if (method.getParameterTypes().length != 0) {
-					throw new IllegalArgumentException(method.getName() + " annotated with @ProvidesTitle must take 0 arguments.");
-				} else {
-					// If we're processing a ContainsTunable, we might seem to have more then one
-					// We can't just remove it or we'll wind up with no title
-					if (titleProviderMap.containsKey(obj) && initialOffset == 0.0) {
-						throw new IllegalArgumentException("Classes must have at most one @ProvidesTitle annotated method but " + method.getDeclaringClass().getName() + " has more than one.");
-					}
-					titleProviderMap.put(obj, method);
 				}
 			}
+			Collections.sort(handlerList, new TunableGravityOrderer());
 		}
-		Collections.sort(handlerList, new TunableGravityOrderer());
 
 		return handlerList;
 	}
