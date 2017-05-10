@@ -14,7 +14,12 @@ import javax.swing.JComponent;
 import org.cytoscape.work.AbstractTaskFactory;
 import org.cytoscape.work.TaskObserver;
 
-
+/**
+ * This abstract implementation of {@link NetworkSearchTaskFactory} makes the method {@link #getQueryComponent()}
+ * optional. If your Network Search provider extends this class and don't overwrite the {@link #getQueryComponent()}
+ * method, Cytoscape will use a default text field instead. It will also pass the new query text to the
+ * {@link #setQuery(String)} method every time the content of the default text field changes.
+ */
 public abstract class AbstractNetworkSearchTaskFactory extends AbstractTaskFactory implements NetworkSearchTaskFactory {
 	
 	private static final int ICON_SIZE = 32;
@@ -77,6 +82,10 @@ public abstract class AbstractNetworkSearchTaskFactory extends AbstractTaskFacto
 		return query;
 	}
 	
+	/**
+	 * This method is called by Cytoscape whenever the user changes the query text.
+	 * @param query
+	 */
 	public void setQuery(String query) {
 		this.query = query;
 	}
@@ -86,19 +95,32 @@ public abstract class AbstractNetworkSearchTaskFactory extends AbstractTaskFacto
 		return null;
 	}
 	
+	/**
+	 * This implementation simply returns null, which means Cytoscape will provide a default query component,
+	 * unless the subclass overwrites this method to return a custom component.
+	 */
 	@Override
 	public JComponent getQueryComponent() {
 		return null;
 	}
 	
+	/**
+	 * This implementation simply returns null, which means that no options component will be displayed,
+	 * unless the subclass overwrites this method to return a custom component.
+	 */
 	@Override
 	public JComponent getOptionsComponent() {
 		return null;
 	}
 	
+	/**
+	 * A default implementation that simply checks whether or not the String returned by {@link #getQuery()} is empty.
+	 */
 	@Override
 	public boolean isReady() {
-		return query != null && !query.trim().isEmpty();
+		String s = getQuery();
+		
+		return s != null && !s.trim().isEmpty();
 	}
 	
 	@Override
