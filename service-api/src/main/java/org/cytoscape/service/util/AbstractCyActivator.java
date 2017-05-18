@@ -1,5 +1,9 @@
 package org.cytoscape.service.util;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+
 /*
  * #%L
  * Cytoscape Service API (service-api)
@@ -25,18 +29,17 @@ package org.cytoscape.service.util;
  */
 
 import java.util.Map;
-import java.util.HashMap;
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Properties;
-import org.osgi.framework.BundleContext; 
-import org.osgi.framework.BundleActivator; 
-import org.osgi.framework.ServiceRegistration; 
-import org.osgi.framework.ServiceReference; 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import java.util.function.BiConsumer;
+
 import org.cytoscape.service.util.internal.utils.CyServiceListener;
 import org.cytoscape.service.util.internal.utils.ServiceUtil;
+import org.osgi.framework.BundleActivator;
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+import org.osgi.framework.ServiceRegistration;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /**
  * A simple BundleActivator with convenience methods for registering
@@ -160,7 +163,6 @@ public abstract class AbstractCyActivator implements BundleActivator {
 	 * @param additionalFilter An additional filter to be applied to the OSGi services 
 	 */
 	protected final void registerServiceListener(final BundleContext bc, final Object listener, final String registerMethodName, final String unregisterMethodName, final Class<?> serviceClass, final Class<?> methodClass, final String additionalFilter) {
-	
 		ServiceUtil.registerServiceListener(bc, listener, registerMethodName, unregisterMethodName, serviceClass, methodClass, additionalFilter, serviceListeners);
 	}
 
@@ -193,6 +195,51 @@ public abstract class AbstractCyActivator implements BundleActivator {
 		registerServiceListener(bc,listener,registerMethodName,unregisterMethodName,serviceClass,serviceClass, additionalFilter);
 	}
 
+	/**
+	 * A method that will cause the specified register/unregister methods on the listener
+	 * object to be called any time that a service of the specified type is registered or unregistered. 
+	 * 
+	 * <pre>
+	 * public class MyServiceListener {
+	 *    public void addService(MyService s, Map<String,String> props) { ... }
+	 *    public void removeService(MyService s, Map<String,String> props { ... }
+	 * }
+	 * 
+	 * registerServiceListener(bc, myServiceListener::addService, myServiceListener::removeService, MyService.class);
+	 * </pre>
+	 * 
+	 * @param bc The BundleContext used to find services.
+	 * @param registerConsumer A reference to the method to be called when a service is registered.
+	 * @param unregisterConsumer A reference to the method to be called when a service is unregistered.
+	 * @param serviceClass The class defining the type of service desired.
+	 */
+	protected <S> void registerServiceListener(BundleContext bc, BiConsumer<S,Map<String,String>> registerConsumer, BiConsumer<S,Map<String,String>> unregisterConsumer, Class<S> serviceClass) {
+		ServiceUtil.registerServiceListener(bc, registerConsumer, unregisterConsumer, serviceClass, null, serviceListeners);
+	}
+	
+	/**
+	 * A method that will cause the specified register/unregister methods on the listener
+	 * object to be called any time that a service of the specified type is registered or unregistered. 
+	 * 
+	 * <pre>
+	 * public class MyServiceListener {
+	 *    public void addService(MyService s, Map<String,String> props) { ... }
+	 *    public void removeService(MyService s, Map<String,String> props { ... }
+	 * }
+	 * 
+	 * registerServiceListener(bc, myServiceListener::addService, myServiceListener::removeService, MyService.class);
+	 * </pre>
+	 * 
+	 * @param bc The BundleContext used to find services.
+	 * @param registerConsumer A reference to the method to be called when a service is registered.
+	 * @param unregisterConsumer A reference to the method to be called when a service is unregistered.
+	 * @param serviceClass The class defining the type of service desired.
+	 * @param additionalFilter An additional filter to be applied to the OSGi services 
+	 */
+	protected <S> void registerServiceListener(BundleContext bc, BiConsumer<S,Map<String,String>> registerConsumer, BiConsumer<S,Map<String,String>> unregisterConsumer, Class<S> serviceClass, String additionalFilter) {
+		ServiceUtil.registerServiceListener(bc, registerConsumer, unregisterConsumer, serviceClass, additionalFilter, serviceListeners);
+	}
+	
 	/**
 	 * A method that will cause the specified register/unregister methods on the listener
 	 * object to be called any time that a service of the specified type is registered or
