@@ -128,6 +128,13 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	/**
 	 * {@inheritDoc}
 	 */
+	public final String getLongDescription() {
+		return tunable.longDescription();
+	}
+	
+	/**
+	 * {@inheritDoc}
+	 */
 	public final String[] getGroups() {
 		return tunable.groups();
 	}

@@ -98,6 +98,11 @@ public @interface Tunable {
 	String description() default "";
 
 	/**
+	 * 
+	 */
+	String longDescription() default "";
+	
+	/**
  	 * Optional human-readable description that can provide more complete description of
  	 * that the <code>Tunable</code> does and the implication of various settings.  In
  	 * general, this might be implemented in a GUI as a tooltip, but might also be used

@@ -70,6 +70,11 @@ public interface ServiceProperties {
 	public static final String COMMAND_DESCRIPTION = "commandDescription";
 	
 	/**
+	 * Description for a command
+	 */
+	public static final String COMMAND_LONG_DESCRIPTION = "commandLongDescription";
+	
+	/**
 	 * Location of large icon data for desktop application
 	 */
 	public static final String LARGE_ICON_URL = "largeIconURL";
