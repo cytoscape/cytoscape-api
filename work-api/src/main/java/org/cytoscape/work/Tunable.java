@@ -98,7 +98,9 @@ public @interface Tunable {
 	String description() default "";
 
 	/**
-	 * 
+	 * Optional human-readable description that can provide more complete description of
+ 	 * that the <code>Tunable</code> does and the implication of various settings. This 
+ 	 * is intended for scripting use.
 	 */
 	String longDescription() default "";
 	
@@ -110,6 +112,13 @@ public @interface Tunable {
  	 */
 	String tooltip() default "";
 
+	/**
+	 * Optional example string for use in scripting environments. This string should be valid
+	 * according to any formatting rules for this <code>Tunable</code>, and ideally should 
+	 * represent a usable value at execution time, though the latter is not a requirement.
+	 */
+	String defaultStringValue() default "";
+	
 	/**
 	 * Used to define the presentation grouping of the Tunable. By default a Tunable
 	 * belongs to the top level group.

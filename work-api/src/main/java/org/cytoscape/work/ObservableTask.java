@@ -20,4 +20,6 @@ public interface ObservableTask extends Task {
  	 * @return the Task results, or null if there are no results
  	 */
 	public <R> R getResults(Class <? extends R> type);
+	
+	default ResultDescriptor getResultDescriptor() { return null; };
 }
