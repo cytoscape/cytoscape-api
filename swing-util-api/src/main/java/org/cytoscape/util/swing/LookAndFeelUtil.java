@@ -1,6 +1,7 @@
 package org.cytoscape.util.swing;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -13,6 +14,7 @@ import java.net.URL;
 
 import javax.swing.Action;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout.ParallelGroup;
@@ -21,6 +23,8 @@ import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.KeyStroke;
@@ -353,6 +357,36 @@ public final class LookAndFeelUtil {
 		for (JComponent c : components) {
 			c.setPreferredSize(prefSize);
 			c.setMaximumSize(maxSize);
+		}
+	}
+	
+	@SuppressWarnings("serial")
+	public static void makeSmall(final JComponent... components) {
+		if (components == null || components.length == 0)
+			return;
+
+		for (JComponent c : components) {
+			if (isAquaLAF()) {
+				c.putClientProperty("JComponent.sizeVariant", "small");
+			} else {
+				if (c.getFont() != null)
+					c.setFont(c.getFont().deriveFont(getSmallFontSize()));
+			}
+
+			if (c instanceof JList) {
+				((JList<?>) c).setCellRenderer(new DefaultListCellRenderer() {
+					@Override
+					public Component getListCellRendererComponent(JList<?> list, Object value, int index,
+							boolean isSelected, boolean cellHasFocus) {
+						super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+						setFont(getFont().deriveFont(getSmallFontSize()));
+
+						return this;
+					}
+				});
+			} else if (c instanceof JMenuItem) {
+				c.setFont(c.getFont().deriveFont(getSmallFontSize()));
+			}
 		}
 	}
 	
