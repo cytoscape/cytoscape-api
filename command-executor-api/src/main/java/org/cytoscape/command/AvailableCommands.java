@@ -26,7 +26,7 @@ package org.cytoscape.command;
 
 import java.util.List;
 
-import org.cytoscape.work.ResultDescriptor;
+import org.cytoscape.work.AbstractTunableHandler;
 
 /**
  * TODO: Missing documentation
@@ -110,15 +110,6 @@ public interface AvailableCommands {
 	String getArgLongDescription(String namespace, String command, String argument);
 
 	/**
-	 * Returns the value of the <b>defaultStringValue</b> field for this argument. 
-	 * @param namespace The namespace for the command whose argument we want to know about.
-	 * @param command The command within the specified namespace whose argument we want to know about.
-	 * @param argument The argument we want to know about
-	 * @return the defaultStringValue if one is provided, null otherwise
-	 */
-	String getArgDefaultStringValue(String namespace, String command, String argument);
-	
-	/**
 	 * Returns the type of the argument. 
 	 * @param namespace The namespace for the command whose argument we want to know about.
 	 * @param command The command within the specified namespace whose argument we want to know about.
@@ -145,7 +136,4 @@ public interface AvailableCommands {
 	 * @return the formatted string
 	 */
 	String getArgTypeString(String namespace, String command, String argument);
-	
-	List<ResultDescriptor> getResultDescriptors(String namespace, String command);
-	
 }

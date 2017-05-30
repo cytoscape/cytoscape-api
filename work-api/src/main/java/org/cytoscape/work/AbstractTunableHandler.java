@@ -135,13 +135,6 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	/**
 	 * {@inheritDoc}
 	 */
-	public final String getDefaultStringValue() {
-		return tunable.defaultStringValue();
-	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
 	public final String[] getGroups() {
 		return tunable.groups();
 	}
