@@ -71,13 +71,6 @@ public interface TunableHandler {
 	String getDescription();
 
 	/**
-	 * Returns the associated <code>Tunable</code>'s longDescription
-	 * @return the associated <code>Tunable</code>'s longDescription
-	 */
-	
-	default String getLongDescription() { return null; }
-	
-	/**
 	 * Returns the associated <code>Tunable</code>'s groups or nesting hierarchy.
 	 * @return the associated <code>Tunable</code>'s groups or nesting hierarchy
 	 */
