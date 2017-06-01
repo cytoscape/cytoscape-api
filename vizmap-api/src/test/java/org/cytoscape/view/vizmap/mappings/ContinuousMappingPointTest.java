@@ -26,11 +26,18 @@ package org.cytoscape.view.vizmap.mappings;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Mockito.reset;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import java.awt.Color;
 import java.awt.Paint;
 
 import org.cytoscape.event.CyEventHelper;
+import org.cytoscape.view.vizmap.events.VisualMappingFunctionChangeRecord;
+import org.cytoscape.view.vizmap.events.VisualMappingFunctionChangedEvent;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -58,9 +65,10 @@ public class ContinuousMappingPointTest {
 	@Before
 	public void setUp() throws Exception {
 		MockitoAnnotations.initMocks(this);
-		this.brv1 = new BoundaryRangeValues<Paint>(Color.RED, Color.white, Color.GREEN);
-		this.brv2 = new BoundaryRangeValues<Paint>(Color.BLACK, Color.YELLOW, Color.PINK);
-		point = new ContinuousMappingPoint<Double, Paint>(val1, brv1, continuousMapping, eventHelper);
+		this.brv1 = new BoundaryRangeValues<>(Color.RED, Color.WHITE, Color.GREEN);
+		this.brv2 = new BoundaryRangeValues<>(Color.BLACK, Color.YELLOW, Color.PINK);
+		point = new ContinuousMappingPoint<>(val1, brv1, continuousMapping, eventHelper);
+		reset(eventHelper);
 	}
 
 	@After
@@ -71,8 +79,7 @@ public class ContinuousMappingPointTest {
 	public void testContinuousMappingPoint() {
 		assertNotNull(point);
 		// This throws exception
-		final ContinuousMappingPoint<String, Paint> badPoint = new ContinuousMappingPoint<String, Paint>("Test", brv1,
-				continuousMapping2, eventHelper);
+		new ContinuousMappingPoint<>("Test", brv1, continuousMapping2, eventHelper);
 	}
 
 	@Test
@@ -85,6 +92,22 @@ public class ContinuousMappingPointTest {
 	public void testSetValue() {
 		point.setValue(val2);
 		assertEquals(val2, point.getValue());
+		verify(eventHelper, times(1))
+			.addEventPayload(
+				eq(continuousMapping),
+				any(VisualMappingFunctionChangeRecord.class),
+				eq(VisualMappingFunctionChangedEvent.class));
+	}
+	
+	@Test
+	public void testSetSameValueDoesNotFireEvent() { // When equal value set again...
+		point.setValue(new Double(val1));
+		assertEquals(val1, point.getValue());
+		verify(eventHelper, times(0)) // No event payload is added!
+			.addEventPayload(
+				eq(continuousMapping),
+				any(VisualMappingFunctionChangeRecord.class),
+				eq(VisualMappingFunctionChangedEvent.class));
 	}
 
 	@Test
@@ -96,6 +119,21 @@ public class ContinuousMappingPointTest {
 	public void testSetRange() {
 		point.setRange(brv2);
 		assertEquals(brv2, point.getRange());
+		verify(eventHelper, times(1))
+			.addEventPayload(
+				eq(continuousMapping),
+				any(VisualMappingFunctionChangeRecord.class),
+				eq(VisualMappingFunctionChangedEvent.class));
 	}
-
+	
+	@Test
+	public void testSetSameRangeDoesNotFireEvent() { // When equal range set again...
+		point.setRange(new BoundaryRangeValues<>(Color.RED, Color.WHITE, Color.GREEN));
+		assertEquals(brv1, point.getRange());
+		verify(eventHelper, times(0)) // No event payload is added!
+			.addEventPayload(
+				eq(continuousMapping),
+				any(VisualMappingFunctionChangeRecord.class),
+				eq(VisualMappingFunctionChangedEvent.class));
+	}
 }

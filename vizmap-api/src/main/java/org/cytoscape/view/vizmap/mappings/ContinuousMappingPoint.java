@@ -1,12 +1,16 @@
 package org.cytoscape.view.vizmap.mappings;
 
+import org.cytoscape.event.CyEventHelper;
+import org.cytoscape.view.vizmap.events.VisualMappingFunctionChangeRecord;
+import org.cytoscape.view.vizmap.events.VisualMappingFunctionChangedEvent;
+
 /*
  * #%L
  * Cytoscape VizMap API (vizmap-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2017 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -24,12 +28,6 @@ package org.cytoscape.view.vizmap.mappings;
  * #L%
  */
 
-import org.cytoscape.event.CyEventHelper;
-import org.cytoscape.view.vizmap.VisualMappingFunction;
-import org.cytoscape.view.vizmap.events.VisualMappingFunctionChangeRecord;
-import org.cytoscape.view.vizmap.events.VisualMappingFunctionChangedEvent;
-import org.cytoscape.view.vizmap.mappings.BoundaryRangeValues;
-
 /**
  * Encapsulates a ContinuousMapping Point with a single point value and
  * associated {@link BoundaryRangeValues}.
@@ -42,6 +40,7 @@ import org.cytoscape.view.vizmap.mappings.BoundaryRangeValues;
  * @CyAPI.InModule vizmap-api
  */
 public final class ContinuousMappingPoint<K, V> {
+	
 	private K value;
 	private BoundaryRangeValues<V> range;
 
@@ -83,9 +82,13 @@ public final class ContinuousMappingPoint<K, V> {
 	 *            double value.
 	 */
 	public void setValue(K value) {
-		this.value = value;
-		eventHelper.addEventPayload((VisualMappingFunction) parentMapping, new VisualMappingFunctionChangeRecord(),
-				VisualMappingFunctionChangedEvent.class);
+		K oldValue = this.value;
+		
+		if ((value == null && oldValue != null) || (value != null && !value.equals(oldValue))) {
+			this.value = value;
+			eventHelper.addEventPayload(parentMapping, new VisualMappingFunctionChangeRecord(),
+					VisualMappingFunctionChangedEvent.class);
+		}
 	}
 
 	/**
@@ -104,9 +107,12 @@ public final class ContinuousMappingPoint<K, V> {
 	 *            BoundaryRangeValues Object.
 	 */
 	public void setRange(BoundaryRangeValues<V> range) {
-		this.range = range;
-		eventHelper.addEventPayload((VisualMappingFunction) parentMapping, new VisualMappingFunctionChangeRecord(),
-				VisualMappingFunctionChangedEvent.class);
+		BoundaryRangeValues<V> oldRange = this.range;
+		
+		if ((range == null && oldRange != null) || (range != null && !range.equals(oldRange))) {
+			this.range = range;
+			eventHelper.addEventPayload(parentMapping, new VisualMappingFunctionChangeRecord(),
+					VisualMappingFunctionChangedEvent.class);
+		}
 	}
-
 }
