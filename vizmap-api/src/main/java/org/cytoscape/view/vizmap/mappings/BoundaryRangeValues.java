@@ -84,8 +84,48 @@ public final class BoundaryRangeValues<T> {
 	}
 
 	@Override
+	public int hashCode() {
+		final int prime = 29;
+		int result = 7;
+		result = prime * result + ((equalValue == null) ? 0 : equalValue.hashCode());
+		result = prime * result + ((greaterValue == null) ? 0 : greaterValue.hashCode());
+		result = prime * result + ((lesserValue == null) ? 0 : lesserValue.hashCode());
+		return result;
+	}
+
+	@Override
+	@SuppressWarnings("rawtypes")
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		BoundaryRangeValues other = (BoundaryRangeValues) obj;
+		if (equalValue == null) {
+			if (other.equalValue != null)
+				return false;
+		} else if (!equalValue.equals(other.equalValue)) {
+			return false;
+		}
+		if (greaterValue == null) {
+			if (other.greaterValue != null)
+				return false;
+		} else if (!greaterValue.equals(other.greaterValue)) {
+			return false;
+		}
+		if (lesserValue == null) {
+			if (other.lesserValue != null)
+				return false;
+		} else if (!lesserValue.equals(other.lesserValue)) {
+			return false;
+		}
+		return true;
+	}
+
+	@Override
 	public String toString() {
-		return "{" + lesserValue.toString() + "," + equalValue.toString() + 
-				"," + greaterValue.toString() + "}";
+		return "{" + lesserValue + "," + equalValue + "," + greaterValue + "}";
 	}
 }
