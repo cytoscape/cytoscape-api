@@ -72,7 +72,7 @@ public final class UserAction {
 	public ActionListener getActionListener() { return actionListener; }
 	public void setActionListener(final ActionListener actionListener) {
 		this.actionListener = actionListener;
-		if (this.actionListener == null) enabled = false;
+		enabled = actionListener != null;
 	}
 
 	public boolean getEnabled() { return enabled; }
