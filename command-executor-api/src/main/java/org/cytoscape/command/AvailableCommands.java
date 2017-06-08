@@ -129,11 +129,16 @@ public interface AvailableCommands {
 
 	/**
 	 * Returns the value of the argument. 
+	 * NOTE: This method has been deprecated since it rarely, if ever, returns the current
+	 * value of an argument due to cacheing in both the AvailableCommands 
+	 * and TunableInterceptor implementations.  
+	 *
 	 * @param namespace The namespace for the command whose argument we want to know about.
 	 * @param command The command within the specified namespace whose argument we want to know about.
 	 * @param argument The argument we want to know about
 	 * @return the current value of the argument or null if the argument doesn't exist
 	 */
+	@Deprecated
 	Object getArgValue(String namespace, String command, String argument);
 
 	/**
