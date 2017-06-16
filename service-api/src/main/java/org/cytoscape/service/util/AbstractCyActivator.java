@@ -201,8 +201,8 @@ public abstract class AbstractCyActivator implements BundleActivator {
 	 * 
 	 * <pre>
 	 * public class MyServiceListener {
-	 *    public void addService(MyService s, Map<String,String> props) { ... }
-	 *    public void removeService(MyService s, Map<String,String> props { ... }
+	 *    public void addService(MyService s, Map&lt;String,String&gt; props) { ... }
+	 *    public void removeService(MyService s, Map&lt;String,String&gt; props { ... }
 	 * }
 	 * 
 	 * registerServiceListener(bc, myServiceListener::addService, myServiceListener::removeService, MyService.class);
@@ -223,8 +223,8 @@ public abstract class AbstractCyActivator implements BundleActivator {
 	 * 
 	 * <pre>
 	 * public class MyServiceListener {
-	 *    public void addService(MyService s, Map<String,String> props) { ... }
-	 *    public void removeService(MyService s, Map<String,String> props { ... }
+	 *    public void addService(MyService s, Map&lt;String,String&lt; props) { ... }
+	 *    public void removeService(MyService s, Map&lt;String,String&gt; props { ... }
 	 * }
 	 * 
 	 * registerServiceListener(bc, myServiceListener::addService, myServiceListener::removeService, MyService.class);

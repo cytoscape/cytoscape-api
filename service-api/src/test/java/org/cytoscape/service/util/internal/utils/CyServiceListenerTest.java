@@ -27,6 +27,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
+import java.util.Dictionary;
 import java.util.Map;
 import java.util.Properties;
 
@@ -40,7 +41,7 @@ import org.osgi.framework.ServiceReference;
 public class CyServiceListenerTest {
 
 	
-	private class DummyListener{
+	private class DummyListenerMap {
 		int counter  = 0;
 
 		public void add (DummyServiceInterface factory, Map props){
@@ -52,17 +53,33 @@ public class CyServiceListenerTest {
 		
 	}
 	
+	private class DummyListenerDictionary {
+		int counter  = 0;
+
+		public void add (DummyServiceInterface factory, Dictionary props){
+			counter = 1;
+		}
+		public void remove (DummyServiceInterface factory, Dictionary props){
+			counter = -1;
+		}
+		
+	}
+	
 	private interface DummyServiceInterface {
 	}
 	private class DummyServiceClass implements DummyServiceInterface{
 		
 	}
 
-	private CyServiceListener<DummyServiceInterface> sl ;
+	private CyServiceListener<DummyServiceInterface> slMap;
+	private CyServiceListener<DummyServiceInterface> slDictionary;
+	
 	BundleContext bc;
-	DummyListener target;
+	DummyListenerMap targetMap;
+	DummyListenerDictionary targetDictionary;
 	DummyServiceInterface service;
 	ServiceReference ref;
+	
 	@Before
 	public void testCyServiceListenerTest() throws Exception{
 		String additionalFilter = "dummy filter";
@@ -76,31 +93,28 @@ public class CyServiceListenerTest {
 		when(ref.getPropertyKeys()).thenReturn(new String[]{""});
 		when(ref.getProperty("")).thenReturn(new Properties());
 		when(bc.getService(ref)).thenReturn((Object) service);
-		target = new DummyListener();
 		
-		sl = new CyServiceListener<>(bc, target, "add", "remove", DummyServiceInterface.class,  DummyServiceInterface.class, additionalFilter);
+		targetMap = new DummyListenerMap();
+		slMap = new CyServiceListener<>(bc, targetMap, "add", "remove", DummyServiceInterface.class,  DummyServiceInterface.class, additionalFilter);
 		
+		targetDictionary = new DummyListenerDictionary();
+		slDictionary = new CyServiceListener<>(bc, targetDictionary, "add", "remove", DummyServiceInterface.class,  DummyServiceInterface.class, additionalFilter);
 	}
 	
-//	@Test 
-//	public void testConstructor(){
-//		assertTrue(sl.getRegisMethod()!= null);
-//		assertEquals("add",	 sl.getRegisMethod().getName());
-//	}
 
 	@Test
 	public void testAddingService(){
-		
-		assertEquals(service, sl.addingService(ref));
-		assertEquals(1, target.counter);
-		
+		assertEquals(service, slMap.addingService(ref));
+		assertEquals(1, targetMap.counter);
+		assertEquals(service, slDictionary.addingService(ref));
+		assertEquals(1, targetDictionary.counter);
 	}
 	
 	@Test
 	public void testRemovingService(){
-		
-		sl.removedService(ref, service);
-		assertEquals(-1, target.counter);
-		
+		slMap.removedService(ref, service);
+		assertEquals(-1, targetMap.counter);
+		slDictionary.removedService(ref, service);
+		assertEquals(-1, targetDictionary.counter);
 	}
 }

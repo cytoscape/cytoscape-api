@@ -2,7 +2,7 @@ package org.cytoscape.service.util.internal.utils;
 
 import java.lang.reflect.Method;
 import java.util.Dictionary;
-import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.Map;
 import java.util.Objects;
 import java.util.function.BiConsumer;
@@ -48,17 +48,20 @@ public class CyServiceListener<S> extends ServiceTracker {
 	
 	private final BiConsumer<S,Map<String,String>> registerConsumer;
 	private final BiConsumer<S,Map<String,String>> unregisterConsumer;
+	private final Class<S> serviceClass;
 	
 	public CyServiceListener(BundleContext bc, Object target, String registerMethodName, String unregisterMethodName, Class<S> serviceClass, Class<?> methodClass, String additionalFilter) throws NoSuchMethodException {
 		super(bc, genFilter(bc, serviceClass, additionalFilter), null);
 		this.registerConsumer   = new MethodRefectionConsumer<>(target, registerMethodName, serviceClass, methodClass, true);
 		this.unregisterConsumer = new MethodRefectionConsumer<>(target, unregisterMethodName, serviceClass, methodClass, false);
+		this.serviceClass = serviceClass;
 	}
 	
 	public CyServiceListener(BundleContext bc, BiConsumer<S,Map<String,String>> registerConsumer, BiConsumer<S,Map<String,String>> unregisterConsumer, Class<S> serviceClass, String additionalFilter) {
 		super(bc, genFilter(bc, serviceClass, additionalFilter), null);
 		this.registerConsumer   = Objects.requireNonNull(registerConsumer);
 		this.unregisterConsumer = Objects.requireNonNull(unregisterConsumer);
+		this.serviceClass = serviceClass;
 	}
 	
 
@@ -128,7 +131,7 @@ public class CyServiceListener<S> extends ServiceTracker {
 	@Override
 	public Object addingService(ServiceReference ref) {
 		Object service = super.addingService(ref);
-		registerConsumer.accept((S)service, getProperties(ref));
+		registerConsumer.accept(serviceClass.cast(service), getProperties(ref));
 		return service;
 	}
 
@@ -138,14 +141,16 @@ public class CyServiceListener<S> extends ServiceTracker {
 	@Override
 	public void removedService(ServiceReference ref, Object service) {
 		super.removedService(ref, service);
-		unregisterConsumer.accept((S)service, getProperties(ref));
+		unregisterConsumer.accept(serviceClass.cast(service), getProperties(ref));
 	}
 
 	/**
 	 * Converts the service properties contained in a ServiceReference to a Properties object.
 	 */
 	private Map<String,String> getProperties(ServiceReference ref) {
-		Map<String,String> props = new HashMap<>();
+		// The old style service listeners supported both Dictionary and Map for the second argument. 
+		// So we must use Hashtable because it extends Dictionary and implements Map.
+		Hashtable<String,String> props = new Hashtable<>();
 		for(String key : ref.getPropertyKeys()) 
 			props.put(key, ref.getProperty(key).toString());
 		return props;
