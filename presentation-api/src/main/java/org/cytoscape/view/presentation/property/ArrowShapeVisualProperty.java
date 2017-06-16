@@ -49,18 +49,38 @@ public final class ArrowShapeVisualProperty extends AbstractVisualProperty<Arrow
 	public static final ArrowShape NONE = new ArrowShapeImpl("None", "NONE");
 	/** Diamond shaped arrow */
 	public static final ArrowShape DIAMOND = new ArrowShapeImpl("Diamond", "DIAMOND");
+	/** Unfilled Diamond shaped arrow */
+	public static final ArrowShape OPEN_DIAMOND = new ArrowShapeImpl("Open Diamond", "OPEN_DIAMOND");
 	/** Triangle shaped arrow */
 	public static final ArrowShape DELTA = new ArrowShapeImpl("Delta", "DELTA");
+	/** Unfilled triangle shaped arrow */
+	public static final ArrowShape OPEN_DELTA = new ArrowShapeImpl("Open Delta", "OPEN_DELTA");
+	/** Triangle shaped arrow with a cross hatch*/
+	public static final ArrowShape CROSS_DELTA = new ArrowShapeImpl("Cross Delta", "CROSS_DELTA");
+	/** Unfilled triangle shaped arrow with a cross hatch */
+	public static final ArrowShape CROSS_OPEN_DELTA = new ArrowShapeImpl("Cross Open Delta", "CROSS_OPEN_DELTA");
 	/** Pointy triangle shaped arrow */
 	public static final ArrowShape ARROW = new ArrowShapeImpl("Arrow", "ARROW");
 	/** T shaped arrow */
 	public static final ArrowShape T = new ArrowShapeImpl("T", "T");
 	/** Circle shaped arrow */
 	public static final ArrowShape CIRCLE = new ArrowShapeImpl("Circle", "CIRCLE");
+	/** Unfilled Circle shaped arrow */
+	public static final ArrowShape OPEN_CIRCLE = new ArrowShapeImpl("Open Circle", "OPEN_CIRCLE");
+	/** Half-Circle shaped arrow */
+	public static final ArrowShape HALF_CIRCLE = new ArrowShapeImpl("Half Circle", "HALF_CIRCLE");
+	/** Unfilled Half-Circle shaped arrow */
+	public static final ArrowShape OPEN_HALF_CIRCLE = new ArrowShapeImpl("Open Half Circle", "OPEN_HALF_CIRCLE");
+	/** Square shaped arrow */
+	public static final ArrowShape SQUARE = new ArrowShapeImpl("Square", "SQUARE");
+	/** Unfilled square shaped arrow */
+	public static final ArrowShape OPEN_SQUARE = new ArrowShapeImpl("Open Square", "OPEN_SQUARE");
+	
 	/** Top Half of a triangle shaped arrow */
 	public static final ArrowShape HALF_TOP = new ArrowShapeImpl("Half Top", "HALF_TOP");
 	/** Bottom Half of a triangle shaped arrow */
 	public static final ArrowShape HALF_BOTTOM = new ArrowShapeImpl("Half Bottom", "HALF_BOTTOM");
+
 	/** Shorter triangle shaped arrow */
 	public static final ArrowShape DELTA_SHORT_1 = new ArrowShapeImpl("Delta Short 1", "DELTA_SHORT_1");
 	/** Even shorter triangle shaped arrow */
@@ -72,6 +92,7 @@ public final class ArrowShapeVisualProperty extends AbstractVisualProperty<Arrow
 	/** Even shorter diamond shaped arrow */
 	public static final ArrowShape DIAMOND_SHORT_2 = new ArrowShapeImpl("Diamond Short 2", "DIAMOND_SHORT_2");
 
+	
 	private static final DiscreteRange<ArrowShape> ARROW_SHAPE_RANGE;
 	private static final Map<String, ArrowShape> DEFAULT_SHAPES;
 	
@@ -79,10 +100,19 @@ public final class ArrowShapeVisualProperty extends AbstractVisualProperty<Arrow
 		DEFAULT_SHAPES = new HashMap<String, ArrowShape>();
 		DEFAULT_SHAPES.put(NONE.getSerializableString().toUpperCase(), NONE);
 		DEFAULT_SHAPES.put(DIAMOND.getSerializableString().toUpperCase(), DIAMOND);
+		DEFAULT_SHAPES.put(OPEN_DIAMOND.getSerializableString().toUpperCase(), OPEN_DIAMOND);
 		DEFAULT_SHAPES.put(DELTA.getSerializableString().toUpperCase(), DELTA);
+		DEFAULT_SHAPES.put(OPEN_DELTA.getSerializableString().toUpperCase(), OPEN_DELTA);
+		DEFAULT_SHAPES.put(CROSS_DELTA.getSerializableString().toUpperCase(), CROSS_DELTA);
+		DEFAULT_SHAPES.put(CROSS_OPEN_DELTA.getSerializableString().toUpperCase(), CROSS_OPEN_DELTA);
 		DEFAULT_SHAPES.put(ARROW.getSerializableString().toUpperCase(), ARROW);
 		DEFAULT_SHAPES.put(T.getSerializableString().toUpperCase(), T);
 		DEFAULT_SHAPES.put(CIRCLE.getSerializableString().toUpperCase(), CIRCLE);
+		DEFAULT_SHAPES.put(OPEN_CIRCLE.getSerializableString().toUpperCase(), OPEN_CIRCLE);
+		DEFAULT_SHAPES.put(HALF_CIRCLE.getSerializableString().toUpperCase(), HALF_CIRCLE);
+		DEFAULT_SHAPES.put(OPEN_HALF_CIRCLE.getSerializableString().toUpperCase(), OPEN_HALF_CIRCLE);
+		DEFAULT_SHAPES.put(SQUARE.getSerializableString().toUpperCase(), SQUARE);
+		DEFAULT_SHAPES.put(OPEN_SQUARE.getSerializableString().toUpperCase(), OPEN_SQUARE);
 		DEFAULT_SHAPES.put(HALF_TOP.getSerializableString().toUpperCase(), HALF_TOP);
 		DEFAULT_SHAPES.put(HALF_BOTTOM.getSerializableString().toUpperCase(), HALF_BOTTOM);
 		DEFAULT_SHAPES.put(DELTA_SHORT_1.getSerializableString().toUpperCase(), DELTA_SHORT_1);
@@ -90,7 +120,7 @@ public final class ArrowShapeVisualProperty extends AbstractVisualProperty<Arrow
 		DEFAULT_SHAPES.put(ARROW_SHORT.getSerializableString().toUpperCase(), ARROW_SHORT);
 		DEFAULT_SHAPES.put(DIAMOND_SHORT_1.getSerializableString().toUpperCase(), DIAMOND_SHORT_1);
 		DEFAULT_SHAPES.put(DIAMOND_SHORT_2.getSerializableString().toUpperCase(), DIAMOND_SHORT_2);
-		
+
 		ARROW_SHAPE_RANGE = new DiscreteRange<ArrowShape>(ArrowShape.class, new HashSet<ArrowShape>(DEFAULT_SHAPES.values()));
 	}
 
@@ -138,6 +168,11 @@ public final class ArrowShapeVisualProperty extends AbstractVisualProperty<Arrow
 	private static final class ArrowShapeImpl extends AbstractVisualPropertyValue implements ArrowShape {
 		public ArrowShapeImpl(final String displayName, final String serializableString) {
 			super(displayName, serializableString);
+		}
+		public boolean isFilled() 
+		{ 
+			String str = getSerializableString();  
+			return str != null && !str.contains("OPEN");	
 		}
 	}
 }
