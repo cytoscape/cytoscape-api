@@ -1,29 +1,5 @@
 package org.cytoscape.io.read;
 
-/*
- * #%L
- * Cytoscape IO Impl (io-impl)
- * $Id:$
- * $HeadURL:$
- * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
- * %%
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as 
- * published by the Free Software Foundation, either version 2.1 of the 
- * License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Lesser Public License for more details.
- * 
- * You should have received a copy of the GNU General Lesser Public 
- * License along with this program.  If not, see
- * <http://www.gnu.org/licenses/lgpl-2.1.html>.
- * #L%
- */
-
 import java.io.InputStream;
 import java.text.Collator;
 import java.util.ArrayList;
@@ -53,6 +29,34 @@ import org.cytoscape.work.ProvidesTitle;
 import org.cytoscape.work.Tunable;
 import org.cytoscape.work.util.ListSingleSelection;
 
+/*
+ * #%L
+ * Cytoscape IO API (io-api)
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2006 - 2017 The Cytoscape Consortium
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as 
+ * published by the Free Software Foundation, either version 2.1 of the 
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Lesser Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Lesser Public 
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/lgpl-2.1.html>.
+ * #L%
+ */
+
+/** 
+ * @CyAPI.Spi.Interface
+ * @CyAPI.InModule io-api
+ */
 public abstract class AbstractCyNetworkReader extends AbstractTask implements CyNetworkReader {
 
 	private static final String CREATE_NEW_COLLECTION_STRING = "-- Create new network collection --";
@@ -107,7 +111,7 @@ public abstract class AbstractCyNetworkReader extends AbstractTask implements Cy
 		if (rootNetName != null && !rootNetName.equalsIgnoreCase(CREATE_NEW_COLLECTION_STRING))
 			setTargetColumnList(getTargetColumns(name2RootMap.get(rootNetName)));
 		else
-			setTargetColumnList(new ListSingleSelection<String>());
+			setTargetColumnList(new ListSingleSelection<>());
 	}
 	
 	@Tunable(description = "Node Identifier Mapping Column:", gravity = 2.0, listenForChange = { "RootNetworkList" })

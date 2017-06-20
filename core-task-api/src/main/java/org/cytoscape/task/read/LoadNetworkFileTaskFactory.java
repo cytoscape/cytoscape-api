@@ -1,12 +1,18 @@
 package org.cytoscape.task.read;
 
+import java.io.File;
+
+import org.cytoscape.work.TaskFactory;
+import org.cytoscape.work.TaskIterator;
+import org.cytoscape.work.TaskObserver;
+
 /*
  * #%L
  * Cytoscape Core Task API (core-task-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2017 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -24,17 +30,8 @@ package org.cytoscape.task.read;
  * #L%
  */
 
-import java.io.File;
-import java.util.Collection;
-
-import org.cytoscape.view.model.CyNetworkView;
-import org.cytoscape.work.TaskFactory;
-import org.cytoscape.work.TaskIterator;
-import org.cytoscape.work.TaskObserver;
-
-
 /**
- * This interface provides a task iterator for loading networks from files.
+ * This interface provides a task iterator for loading networks from a file.
  * @CyAPI.Api.Interface
  * @CyAPI.InModule core-task-api
  */
