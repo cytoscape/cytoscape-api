@@ -99,7 +99,7 @@ public abstract class AbstractCyNetworkReader extends AbstractTask implements Cy
 		return "Import Network";
 	}
 	
-	@Tunable(description = "Network Collection:", gravity = 1.0)
+	@Tunable(description = "Network Collection:", groups = "_Network", gravity = 1.0)
 	public ListSingleSelection<String> getRootNetworkList() {
 		return rootNetworkList;
 	}
@@ -114,7 +114,7 @@ public abstract class AbstractCyNetworkReader extends AbstractTask implements Cy
 			setTargetColumnList(new ListSingleSelection<>());
 	}
 	
-	@Tunable(description = "Node Identifier Mapping Column:", gravity = 2.0, listenForChange = { "RootNetworkList" })
+	@Tunable(description = "Node Identifier Mapping Column:", groups = "_Network", gravity = 2.0, listenForChange = { "RootNetworkList" })
 	public ListSingleSelection<String> getTargetColumnList() {
 		return targetColumnList;
 	}
@@ -126,7 +126,7 @@ public abstract class AbstractCyNetworkReader extends AbstractTask implements Cy
 			targetColumnList.setSelectedValue(CyRootNetwork.SHARED_NAME);
 	}
 	
-	@Tunable(description = "Network View Renderer:", gravity = 3.0)
+	@Tunable(description = "Network View Renderer:", groups = "_Network", gravity = 3.0)
 	public ListSingleSelection<NetworkViewRenderer> getNetworkViewRendererList() {
 		return rendererList;
 	}
