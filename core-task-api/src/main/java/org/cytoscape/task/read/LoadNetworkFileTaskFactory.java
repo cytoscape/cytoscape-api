@@ -38,7 +38,7 @@ import org.cytoscape.work.TaskObserver;
 public interface LoadNetworkFileTaskFactory extends TaskFactory{
 	
 	/**
-	 * Create a task iterator for loading a network from a file.
+	 * Creates a task iterator for loading a network from a file.
 	 * The created task runs synchronously in the current thread and does not
 	 * create a task monitor.
 	 * @param file The file for loading into a network
@@ -47,7 +47,7 @@ public interface LoadNetworkFileTaskFactory extends TaskFactory{
 	TaskIterator createTaskIterator(final File file);
 	
 	/**
-	 * Create a task iterator for loading a network from a file.
+	 * Creates a task iterator for loading a network from a file.
 	 * The created task runs synchronously in the current thread and does not
 	 * create a task monitor.
 	 * @param file The file for loading into a network
