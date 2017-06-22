@@ -21,6 +21,7 @@
 		<module>event-api</module>
 		<module>model-api</module>
 		<module>viewmodel-api</module>
+		<module>ci-api</module>
 		<module>core-task-api</module>
 		<module>equations-api</module>
 		<module>io-api</module>
