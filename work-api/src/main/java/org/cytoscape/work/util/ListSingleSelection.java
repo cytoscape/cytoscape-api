@@ -60,8 +60,7 @@ public final class ListSingleSelection<T> extends ListSelection<T> {
 	 */
 	public ListSingleSelection(final T ... values) {
 		super(Arrays.asList(values));
-		if(!this.values.isEmpty())
-			selected = this.values.get(0);
+		selected = this.values.isEmpty() ? null : this.values.get(0);
 	}
 
 	/**
@@ -85,8 +84,7 @@ public final class ListSingleSelection<T> extends ListSelection<T> {
 	 */
 	public ListSingleSelection(final List<T> values) {
 		super(values);
-		if(!this.values.isEmpty())
-			selected = this.values.get(0);
+		selected = this.values.isEmpty() ? null : this.values.get(0);
 	}
 
 	/**
