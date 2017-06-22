@@ -120,10 +120,12 @@ public abstract class AbstractCyNetworkReader extends AbstractTask implements Cy
 	}
 
 	public void setTargetColumnList(ListSingleSelection<String> colList) {
-		targetColumnList = colList;
-		
-		if (targetColumnList.getPossibleValues().contains(CyRootNetwork.SHARED_NAME))
-			targetColumnList.setSelectedValue(CyRootNetwork.SHARED_NAME);
+		if (colList != targetColumnList) {
+			targetColumnList = colList;
+			
+			if (targetColumnList.getPossibleValues().contains(CyRootNetwork.SHARED_NAME))
+				targetColumnList.setSelectedValue(CyRootNetwork.SHARED_NAME);
+		}
 	}
 	
 	@Tunable(description = "Network View Renderer:", groups = "_Network", gravity = 3.0)
