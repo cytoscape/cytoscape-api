@@ -82,6 +82,11 @@ public interface Annotation {
 	public static final String Z = "z";
 
 	/**
+	 * Arg map key to initialize the name of this annotation
+	 */
+	public static final String NAME = "name";
+
+	/**
 	 * Return the view that this Annotation is for
 	 *
 	 * @return the network view this annotation is for
@@ -102,6 +107,20 @@ public interface Annotation {
 	 * @param canvas the canvas to move the annotation to
 	 */
 	public void setCanvas(String canvas);
+
+	/**
+	 * Get the name for this annotation.  This is useful for applications
+	 * that want to allow the user to associate a particular annotation
+	 * with an aspect of an algorithm.
+	 */
+	public default String getName() { return null; }
+
+	/**
+	 * Set the name for this annotation.  This is useful for applications
+	 * that want to allow the user to associate a particular annotation
+	 * with an aspect of an algorithm.
+	 */
+	public default void setName(String name) { }
 
 	/**
 	 * Move an annotation to the specified location
