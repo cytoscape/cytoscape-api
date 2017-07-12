@@ -25,8 +25,10 @@ package org.cytoscape.command;
  */
 
 import java.util.List;
+import java.util.Map;
 
-import org.cytoscape.work.ResultDescriptor;
+import org.cytoscape.work.ObservableTask;
+import org.cytoscape.work.Task;
 
 /**
  * TODO: Missing documentation
@@ -151,6 +153,6 @@ public interface AvailableCommands {
 	 */
 	String getArgTypeString(String namespace, String command, String argument);
 	
-	List<ResultDescriptor> getResultDescriptors(String namespace, String command);
+	Map<Class<? extends ObservableTask>, List<Class<?>>> getResultClasses(String namespace, String command);
 	
 }
