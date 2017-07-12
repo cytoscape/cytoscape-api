@@ -119,8 +119,8 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 		return tunable.longDescription();
 	}
 
-	public final String getDefaultStringValue() {
-		return tunable.defaultStringValue();
+	public final String getExampleStringValue() {
+		return tunable.exampleStringValue();
 	}
 
 	@Override

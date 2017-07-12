@@ -1,5 +1,8 @@
 package org.cytoscape.work;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * A <code>Task</code> that notifies its observers when it is finished
  * executing.
@@ -21,5 +24,5 @@ public interface ObservableTask extends Task {
  	 */
 	public <R> R getResults(Class <? extends R> type);
 	
-	default ResultDescriptor getResultDescriptor() { return null; };
+	default List<Class<?>> getResultClasses() {return Arrays.asList(String.class); };
 }

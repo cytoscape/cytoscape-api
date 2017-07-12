@@ -117,7 +117,7 @@ public @interface Tunable {
 	 * according to any formatting rules for this <code>Tunable</code>, and ideally should 
 	 * represent a usable value at execution time, though the latter is not a requirement.
 	 */
-	String defaultStringValue() default "";
+	String exampleStringValue() default "";
 	
 	/**
 	 * Used to define the presentation grouping of the Tunable. By default a Tunable
