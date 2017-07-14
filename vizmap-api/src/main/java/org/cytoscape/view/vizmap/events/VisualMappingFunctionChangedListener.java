@@ -1,12 +1,15 @@
 package org.cytoscape.view.vizmap.events;
 
+import org.cytoscape.event.CyListener;
+import org.cytoscape.view.vizmap.VisualStyle;
+
 /*
  * #%L
  * Cytoscape VizMap API (vizmap-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2017 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -24,10 +27,9 @@ package org.cytoscape.view.vizmap.events;
  * #L%
  */
 
-import org.cytoscape.event.CyListener;
-
 /**
- * TODO: Missing documentation
+ * This listener is used by the {@link VisualStyle} implementation, so a style can be
+ * notified when its visual mappings are changed.
  * @CyAPI.Spi.Interface
  * @CyAPI.InModule vizmap-api
  */

@@ -1,12 +1,17 @@
 package org.cytoscape.view.vizmap.events;
 
+import java.util.Collection;
+
+import org.cytoscape.event.AbstractCyPayloadEvent;
+import org.cytoscape.view.vizmap.VisualMappingFunction;
+
 /*
  * #%L
  * Cytoscape VizMap API (vizmap-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2017 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -24,14 +29,8 @@ package org.cytoscape.view.vizmap.events;
  * #L%
  */
 
-import java.util.Collection;
-
-import org.cytoscape.event.AbstractCyPayloadEvent;
-import org.cytoscape.view.vizmap.VisualMappingFunction;
-
 /**
- * VisualMappingFunctions should fire this event when the contents of the mapping
- * modified.
+ * VisualMappingFunctions should fire this event when the contents of the mapping are modified.
  * @CyAPI.InModule vizmap-api
  */
 @SuppressWarnings("rawtypes")
