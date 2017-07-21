@@ -147,4 +147,16 @@ public interface FileUtil {
 	File[] getFiles(Component parent, String title, int loadSaveCustom,
 			String startDir, String customApproveText, boolean multiselect,
 			Collection<FileChooserFilter> filters);
+	
+	
+	/**
+	 * Returns a File object representing a folder, this method should be used instead
+	 * of rolling your own JFileChooser.
+	 *
+	 * @return the location of the selected folder
+	 * @param parent the parent of the JFileChooser or FileDialog
+	 * @param title the title of the dialog box
+	 * @param startDir an alternate start dir, if null the default Cytoscape MUD will be used
+	 */
+	File getFolder(Component parent, String title, String startDir);
 }
