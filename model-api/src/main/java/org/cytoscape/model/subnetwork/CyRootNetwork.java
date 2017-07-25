@@ -187,21 +187,33 @@ public interface CyRootNetwork extends CyNetwork {
 	CyTable getSharedEdgeTable();
 	
 	/**
-	 * Causes the given node to remain in the root network even if it has already been removed from all subnetworks.
+	 * Causes the given node to (temporarily) remain in the root network even if it has already been removed from all subnetworks.
 	 * <br><br>
 	 * The root network will automatically remove nodes/edges from itself that have been removed
 	 * from all subnetworks. Calling this method <b>after</b> removing the node from all sub-networks
 	 * will cause it to remain part of the root-network.
+	 * <br><br>
+	 * <b>Note:</b> No effort is made to track nodes/edges in the root network have been restored.
+	 * Certain actions may cause them to be auto-deleted again. If a node is deleted from a subnetwork that is attached 
+	 * to a restored edge then the edge may be auto-deleted from the root again. If an entire subnetwork is deleted then 
+	 * all restored nodes/edges are considered for auto-deletion again. To force nodes/edges to never be deleted from the
+	 * root network put them in a hidden subnetwork using {@link CyRootNetwork#addSubNetwork(Iterable, Iterable)}.
 	 */
 	void restoreNode(CyNode node);
 	
 	/**
-	 * Causes the given edge to remain in the root network even if it has already been removed from all subnetworks.
+	 * Causes the given edge to (temporarily) remain in the root network even if it has already been removed from all subnetworks.
 	 * <br><br>
 	 * The root network will automatically remove nodes/edges from itself that have been removed
 	 * from all subnetworks. Calling this method <b>after</b> removing the edge from all sub-networks
 	 * will cause it to remain part of the root-network.
-	 * @throws IllegalArgumentException If the source and target nodes of the edge are not contained in this root network.
+	 * <br><br>
+	 * <b>Note:</b> No effort is made to track nodes/edges in the root network have been restored.
+	 * Certain actions may cause them to be auto-deleted again. If a node is deleted from a subnetwork that is attached 
+	 * to a restored edge then the edge may be auto-deleted from the root again. If an entire subnetwork is deleted then 
+	 * all restored nodes/edges are considered for auto-deletion again. To force nodes/edges to never be deleted from the
+	 * root network put them in a hidden subnetwork using {@link CyRootNetwork#addSubNetwork(Iterable, Iterable)}.
 	 */
 	void restoreEdge(CyEdge edge);
+	
 }
