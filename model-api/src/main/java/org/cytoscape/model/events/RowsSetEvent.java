@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Map;
+import java.util.Set;
 import java.util.HashMap;
 
 import org.cytoscape.event.AbstractCyPayloadEvent;
@@ -73,7 +74,14 @@ public final class RowsSetEvent extends AbstractCyPayloadEvent<CyTable, RowSetRe
             return col;
     }
     
-
+    /**
+     * Returns a unmodifiable Set of the names of the columns that are contained in this event.
+     */
+    public Set<String> getColumns() {
+    		return Collections.unmodifiableSet(getMap().keySet());
+    }
+    
+    
     /**
      * Creates a map based on the columns of the {@link RowSetRecord}s in the event payload.
      * This map is not created in the initialization to prevent performance penalties.
