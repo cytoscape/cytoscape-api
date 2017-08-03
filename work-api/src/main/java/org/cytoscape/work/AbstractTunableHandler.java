@@ -119,6 +119,7 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 		return tunable.longDescription();
 	}
 
+	@Override
 	public final String getExampleStringValue() {
 		return tunable.exampleStringValue();
 	}

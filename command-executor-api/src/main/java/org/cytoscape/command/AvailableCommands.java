@@ -118,7 +118,7 @@ public interface AvailableCommands {
 	 * @param argument The argument we want to know about
 	 * @return the defaultStringValue if one is provided, null otherwise
 	 */
-	String getArgDefaultStringValue(String namespace, String command, String argument);
+	String getArgExampleStringValue(String namespace, String command, String argument);
 	
 	/**
 	 * Returns the type of the argument. 

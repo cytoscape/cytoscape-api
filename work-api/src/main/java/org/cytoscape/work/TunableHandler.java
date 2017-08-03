@@ -145,4 +145,10 @@ public interface TunableHandler {
 	 *  @return the class type of the field or method annotated by <code>Tunable</code>.
 	 */
 	Class<?> getType();
+
+	/**
+	 * Returns the exampleStringValue property of the associated <code>Tunable</code>.
+	 * @return the exampleStringValue property of the associated <code>Tunable</code>.
+	 */
+	String getExampleStringValue();
 }
