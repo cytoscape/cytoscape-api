@@ -10,7 +10,7 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyRow;
 import org.cytoscape.model.CyTable;
 
-public interface CyModelJSONUtil {
+public interface CyJSONUtil {
 	
 	public String toJson(CyIdentifiable cyIdentifiable);
 
