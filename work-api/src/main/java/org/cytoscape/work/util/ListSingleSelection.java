@@ -40,7 +40,7 @@ import org.slf4j.LoggerFactory;
  */
 public final class ListSingleSelection<T> extends ListSelection<T> {
 
-	private static final Logger logger = LoggerFactory.getLogger(ListSingleSelection.class);
+	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 	
 	/**
 	 * The item that will be selected.

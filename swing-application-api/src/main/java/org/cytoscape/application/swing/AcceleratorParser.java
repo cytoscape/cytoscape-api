@@ -64,7 +64,7 @@ import org.slf4j.LoggerFactory;
  */
 final class AcceleratorParser {
 
-	private static final Logger logger = LoggerFactory.getLogger(AcceleratorParser.class);
+	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 
 	private static final String PREFIX = "VK_";
 	private static final String FUNCTION_KEY = "fn";

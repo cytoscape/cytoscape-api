@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
 
 public abstract class AbstractStringTunableHandler extends AbstractTunableHandler implements StringTunableHandler {
 
-	private static final Logger logger = LoggerFactory.getLogger(AbstractTunableHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 	private static final String SPACE = " ";
 	private static final String EQUALS = "=";
 	private static final String QUOTE = "\"";

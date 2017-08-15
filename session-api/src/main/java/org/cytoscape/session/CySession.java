@@ -75,7 +75,7 @@ public final class CySession {
 	private final Map<String, List<File>> appFiles;
 	private final Map<Class<? extends CyIdentifiable>, Map<Object, ? extends CyIdentifiable>> objectMap;
 
-	private static final Logger logger = LoggerFactory.getLogger(CySession.class);
+	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 
 	private CySession(Builder b) {
 		// Make defensive copies of objects

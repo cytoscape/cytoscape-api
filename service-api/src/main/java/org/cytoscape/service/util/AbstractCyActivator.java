@@ -54,7 +54,7 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class AbstractCyActivator implements BundleActivator {
 
-	private static final Logger logger = LoggerFactory.getLogger(AbstractCyActivator.class);
+	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 	
 	private final Map<Class,Map<Object,ServiceRegistration>> serviceRegistrations;
 	private final List<CyServiceListener> serviceListeners;

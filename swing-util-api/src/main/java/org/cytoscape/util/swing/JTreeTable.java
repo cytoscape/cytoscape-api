@@ -60,7 +60,7 @@ import org.slf4j.LoggerFactory;
 public final class JTreeTable extends JTable {
 	
 	private final static long serialVersionUID = 1202339868625600L;
-	private final static Logger logger = LoggerFactory.getLogger( JTreeTable.class );
+	private final static Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 
 	private TreeTableCellRenderer tree;
 

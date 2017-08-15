@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class AbstractLayoutTask extends AbstractTask {
 
-	private static final Logger logger = LoggerFactory.getLogger(AbstractLayoutTask.class);
+	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 
 	// Short name of this algorithm
 	private final String displayName;
