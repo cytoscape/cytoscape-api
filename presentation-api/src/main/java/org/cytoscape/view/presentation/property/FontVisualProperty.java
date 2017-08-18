@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
  */
 public final class FontVisualProperty extends AbstractVisualProperty<Font> {
 	
-	private static final Logger logger = LoggerFactory.getLogger(FontVisualProperty.class);
+	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 
 	private static final Range<Font> FONT_RANGE;
 	private static final int DEF_FONT_SIZE = 12;

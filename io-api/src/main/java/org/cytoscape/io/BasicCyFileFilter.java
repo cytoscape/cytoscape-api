@@ -56,7 +56,7 @@ public class BasicCyFileFilter implements CyFileFilter {
 	protected final StreamUtil streamUtil;
 	/** Type of data that this filter applies to. */
 	protected final DataCategory category;
-	private static final Logger logger = LoggerFactory.getLogger(BasicCyFileFilter.class);
+	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 
 	/**
 	 * Creates a file filter from the specified arguments. Note that a "."

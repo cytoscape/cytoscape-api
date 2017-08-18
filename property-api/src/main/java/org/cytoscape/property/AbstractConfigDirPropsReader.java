@@ -55,7 +55,7 @@ import org.slf4j.LoggerFactory;
  * @CyAPI.InModule property-api
  */
 public abstract class AbstractConfigDirPropsReader implements CyProperty<Properties> {
-	private static final Logger logger = LoggerFactory.getLogger(AbstractConfigDirPropsReader.class);
+	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 
 	/** The name of this CyProperty. */
 	protected final String name;

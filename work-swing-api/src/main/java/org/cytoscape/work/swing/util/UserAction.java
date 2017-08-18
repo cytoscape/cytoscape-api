@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
  */
 public final class UserAction {
 
-	private static final Logger logger = LoggerFactory.getLogger(UserAction.class);
+	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 	private ActionListener actionListener = null;
 	private boolean enabled = false;
 	

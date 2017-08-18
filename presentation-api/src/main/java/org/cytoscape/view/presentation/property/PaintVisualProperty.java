@@ -53,7 +53,7 @@ public final class PaintVisualProperty extends AbstractVisualProperty<Paint> {
 	private static final Map<String, String> COLOR_MAP = new HashMap<String, String>();
 	private static final String COLOR_CODE_RESOURCE = "cross_browser_color_code.txt";
 	
-	private static final Logger logger = LoggerFactory.getLogger(PaintVisualProperty.class);
+	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 
 	static {
 		buildColorCodeTable(PaintVisualProperty.class.getClassLoader().getResource(COLOR_CODE_RESOURCE));

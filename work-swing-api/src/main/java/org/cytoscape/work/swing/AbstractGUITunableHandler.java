@@ -58,7 +58,7 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class AbstractGUITunableHandler extends AbstractTunableHandler implements GUITunableHandler {
 
-	private static final Logger logger = LoggerFactory.getLogger(AbstractGUITunableHandler.class);
+	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 
 	/**
  	 * The default label font.  We have it here for consistency.

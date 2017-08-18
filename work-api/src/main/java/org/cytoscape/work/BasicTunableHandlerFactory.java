@@ -47,7 +47,7 @@ public class BasicTunableHandlerFactory<T extends TunableHandler> implements Tun
 	
 	private final Class<T> tunableHandlerClass;
 	private final Class<?>[] allowedTypes;
-	private final static Logger logger = LoggerFactory.getLogger(BasicTunableHandlerFactory.class);
+	private final static Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 	
 	/**
 	 * Constructor.

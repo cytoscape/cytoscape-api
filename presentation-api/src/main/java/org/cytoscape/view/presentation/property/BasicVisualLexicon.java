@@ -60,7 +60,7 @@ import org.slf4j.LoggerFactory;
  */
 public class BasicVisualLexicon implements VisualLexicon {
 
-	private static final Logger logger = LoggerFactory.getLogger(BasicVisualLexicon.class);
+	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 
 	private static final double DEF_BORDER_WIDTH = 2.0d;
 	private static final int DEF_FONT_SIZE = 12;

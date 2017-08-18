@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
  */
 public class RegisterUtil {
 
-	private static final Logger logger = LoggerFactory.getLogger(RegisterUtil.class);
+	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 
 	public static List<Class<?>> getAllInterfaces(Class<?> clazz) {
 		Set<Class<?>> interfaces = new HashSet<Class<?>>();

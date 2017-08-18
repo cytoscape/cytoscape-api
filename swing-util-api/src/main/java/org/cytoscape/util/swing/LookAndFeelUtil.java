@@ -93,7 +93,7 @@ public final class LookAndFeelUtil {
 		}
 	}
 	
-	private static final Logger logger = LoggerFactory.getLogger(LookAndFeelUtil.class);
+	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 	
 	/**
 	 * @return true if the current Look and Feel is "Aqua", usually available on Mac OS X only.

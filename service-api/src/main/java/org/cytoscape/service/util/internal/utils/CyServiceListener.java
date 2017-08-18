@@ -44,7 +44,7 @@ import org.slf4j.LoggerFactory;
 
 public class CyServiceListener<S> extends ServiceTracker {
 
-	private static final Logger logger = LoggerFactory.getLogger(CyServiceListener.class);
+	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 	
 	private final BiConsumer<S,Map<String,String>> registerConsumer;
 	private final BiConsumer<S,Map<String,String>> unregisterConsumer;
