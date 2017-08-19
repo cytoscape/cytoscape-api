@@ -69,7 +69,8 @@ import java.lang.annotation.Target;
  * and return a value and be named with the prefix "get".  The setter method does not need a 
  * {@link Tunable} annotation, however the method must take a single argument of the same type as
  * the getter method, it must return void, it must be named with the prefix "set", and the
- * rest of the name must match that of the getter method.
+ * rest of the name must match that of the getter method. If the group name begins with underscore (_)
+ * then the display of the group name will be suppressed. 
  * <pre>
  * 	&#64;Tunable(description="your last name", group={"Human","pupil"}, params="displayState=collapsed")
  * 	public String getLastName() {
