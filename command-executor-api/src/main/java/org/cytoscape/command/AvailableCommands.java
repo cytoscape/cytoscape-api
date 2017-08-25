@@ -155,6 +155,15 @@ public interface AvailableCommands {
 	 */
 	String getArgTypeString(String namespace, String command, String argument);
 	
+	/**
+	 * Returns a list of ObservableTaskResultClasses. Each entry in the list specifies a class that extends 
+	 * ObservableTask, as well as the classes that were returned via 
+	 * {@link org.cytoscape.work.ObservableTask#getResultClasses()}
+	 * 
+     * @param namespace The namespace for the command whose argument we want to know about.
+	 * @param command The command within the specified namespace whose argument we want to know about.
+	 * @return A list of ObservableTask classes and the classes of results they can produce.
+	 */
 	List<ObservableTaskResultClasses> getResultClasses(String namespace, String command);
 	
 	public static final class ObservableTaskResultClasses {
