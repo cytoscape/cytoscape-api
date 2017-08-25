@@ -58,5 +58,11 @@ public interface CySessionManager {
 	 * @return The name of the current session file.
 	 */
 	String getCurrentSessionFileName();
+	
+	/**
+	 * Disposes the current session.
+	 * This method is meant to be called by Cytoscape right before loading a new session.
+	 */
+	void disposeCurrentSession();
 }
 
