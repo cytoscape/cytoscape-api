@@ -122,11 +122,12 @@ public final class FontVisualProperty extends AbstractVisualProperty<Font> {
 
 		final Matcher sizeMatcher = FONT_SIZE_PATTERN.matcher(text);
 		final String sSize = sizeMatcher.replaceAll(EMPTY_STRING);
-
+//		System.out.println(sSize);
+		if (sSize != null && !sSize.isEmpty())
 		try {
 			size = Integer.valueOf(sSize);
 		} catch (NumberFormatException nfe) {
-			logger.warn("Cannot parse font size in '" + text + "'", nfe);
+//			logger.warn("Cannot parse font size in '" + text + "'", nfe);
 		}
 
 		return new Font(name, style, size);
