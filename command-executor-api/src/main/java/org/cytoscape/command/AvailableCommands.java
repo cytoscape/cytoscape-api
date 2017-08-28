@@ -1,5 +1,7 @@
 package org.cytoscape.command;
 
+import java.util.Collections;
+
 /*
  * #%L
  * Cytoscape Command Executor API (command-executor-api)
@@ -153,6 +155,32 @@ public interface AvailableCommands {
 	 */
 	String getArgTypeString(String namespace, String command, String argument);
 	
-	Map<Class<? extends ObservableTask>, List<Class<?>>> getResultClasses(String namespace, String command);
+	/**
+	 * Returns a list of ObservableTaskResultClasses. Each entry in the list specifies a class that extends 
+	 * ObservableTask, as well as the classes that were returned via 
+	 * {@link org.cytoscape.work.ObservableTask#getResultClasses()}
+	 * 
+     * @param namespace The namespace for the command whose argument we want to know about.
+	 * @param command The command within the specified namespace whose argument we want to know about.
+	 * @return A list of ObservableTask classes and the classes of results they can produce.
+	 */
+	List<ObservableTaskResultClasses> getResultClasses(String namespace, String command);
 	
+	public static final class ObservableTaskResultClasses {
+		private final Class<? extends ObservableTask> observableTask;
+		public Class<? extends ObservableTask> getObservableTask() {
+			return observableTask;
+		}
+
+		public List<Class<?>> getResultClasses() {
+			return resultClasses;
+		}
+
+		private final List<Class<?>> resultClasses;
+		
+		public ObservableTaskResultClasses (final Class<? extends ObservableTask> observableTask, final List<Class<?>> resultClasses) {
+			this.observableTask = observableTask;
+			this.resultClasses = Collections.unmodifiableList(resultClasses);
+		}
+	}
 }

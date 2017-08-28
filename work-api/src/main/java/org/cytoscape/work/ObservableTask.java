@@ -24,5 +24,9 @@ public interface ObservableTask extends Task {
  	 */
 	public <R> R getResults(Class <? extends R> type);
 	
+	/**
+	 * Return the classes that can be used to query {@link org.cytoscape.work.ObservableTask#getResults(Class)
+	 * @return the classes that can be used to query {@link org.cytoscape.work.ObservableTask#getResults(Class)
+	 */
 	default List<Class<?>> getResultClasses() {return Arrays.asList(String.class); };
 }
