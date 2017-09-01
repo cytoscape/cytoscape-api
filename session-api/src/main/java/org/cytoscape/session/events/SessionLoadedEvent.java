@@ -1,12 +1,16 @@
 package org.cytoscape.session.events;
 
+import org.cytoscape.event.AbstractCyEvent;
+import org.cytoscape.session.CySession;
+import org.cytoscape.session.CySessionManager;
+
 /*
  * #%L
  * Cytoscape Session API (session-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2017 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -24,15 +28,10 @@ package org.cytoscape.session.events;
  * #L%
  */
 
-import org.cytoscape.event.AbstractCyEvent;
-import org.cytoscape.session.CySession;
-import org.cytoscape.session.CySessionManager;
-
 /**
  * This event is fired after a new session has been set in the 
  * {@link CySessionManager#setCurrentSession(CySession, String)} 
- * method and is used to notify interested parties in the change 
- * of state. 
+ * method and is used to notify interested parties in the change of state. 
  * @CyAPI.Final.Class
  * @CyAPI.InModule session-api
  */
@@ -42,17 +41,16 @@ public final class SessionLoadedEvent extends AbstractCyEvent<CySessionManager> 
 	private final String fileName;
 
 	/**
-	 * Constructor.
 	 * @param source The {@link CySessionManager} that is the source of this event.
 	 * @param session The {@link CySession} object that was just loaded.
 	 * @param fileName the name of the file representing the session.
 	 */
-	public SessionLoadedEvent(final CySessionManager source, final CySession session, final String fileName) {
-		super(source,SessionLoadedListener.class);
+	public SessionLoadedEvent(CySessionManager source, CySession session, String fileName) {
+		super(source, SessionLoadedListener.class);
 		this.session = session;
 		this.fileName = fileName;
 	}
-
+	
 	/**
 	 * Returns the session that was just loaded.
 	 * @return The session that was just loaded.
