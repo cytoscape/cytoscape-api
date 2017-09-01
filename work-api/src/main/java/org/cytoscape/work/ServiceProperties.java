@@ -70,9 +70,19 @@ public interface ServiceProperties {
 	public static final String COMMAND_DESCRIPTION = "commandDescription";
 	
 	/**
-	 * Description for a command
+	 * Prose description for a command
 	 */
 	public static final String COMMAND_LONG_DESCRIPTION = "commandLongDescription";
+	
+	/**
+	 * A valid JSON string representative of the expected JSON output of a command.
+	 */
+	public static final String COMMAND_EXAMPLE_JSON = "commandExampleJSON";
+	
+	/**
+	 * Indicates if the command supports JSON output.
+	 */
+	public static final String COMMAND_SUPPORTS_JSON = "commandSupportsJSON";
 	
 	/**
 	 * Location of large icon data for desktop application
