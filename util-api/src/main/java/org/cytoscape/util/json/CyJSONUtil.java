@@ -1,4 +1,4 @@
-package org.cytoscape.model.json;
+package org.cytoscape.util.json;
 
 import java.util.Collection;
 
