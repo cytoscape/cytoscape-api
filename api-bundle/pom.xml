@@ -188,6 +188,11 @@
       <artifactId>jobs-api</artifactId>
       <version>${project.version}</version>
     </dependency>
+     <dependency>
+      <groupId>org.cytoscape</groupId>
+      <artifactId>util-api</artifactId>
+      <version>${project.version}</version>
+    </dependency>
   </dependencies>
 
   <build>

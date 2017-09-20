@@ -1,4 +1,4 @@
-package org.cytoscape.model.json;
+package org.cytoscape.util.json;
 
 import java.util.Collection;
 
@@ -45,9 +45,10 @@ public interface CyJSONUtil {
 	 * 
 	 * @param network
 	 * @param cyNode
+	 * @param columns The columns to be included in the output. If none are passed, return all.
 	 * @return a JSON representation of a single CyNode and its relevant data.
 	 */
-	public String toJson(CyNetwork network, CyNode cyNode);
+	public String toJson(CyNetwork network, CyNode cyNode, CyColumn ... columns);
 	
 	/**
 	 * Returns a JSON representation of a single CyEdge and its relevant data. 
@@ -57,9 +58,10 @@ public interface CyJSONUtil {
 	 * 
 	 * @param network
 	 * @param cyEdge
+	 * @param columns The columns to be included in the output. If none are passed, return all.
 	 * @return a JSON representation of a single CyEdge and its relevant data. 
 	 */
-	public String toJson(CyNetwork network, CyEdge cyEdge);
+	public String toJson(CyNetwork network, CyEdge cyEdge, CyColumn ... columns);
 	
 	/**
 	 * Returns a JSON representation of a network and its relevant data. 
@@ -110,7 +112,8 @@ public interface CyJSONUtil {
 	 * Returns a JSON representation of a table row.
 	 * 
 	 * @param cyRow
+	 * @param columns The columns to be included in the output. If none are passed, return all.
 	 * @return a JSON representation of a table row.
 	 */
-	public String toJson(CyRow cyRow);
+	public String toJson(CyRow cyRow, CyColumn ... columns);
 }

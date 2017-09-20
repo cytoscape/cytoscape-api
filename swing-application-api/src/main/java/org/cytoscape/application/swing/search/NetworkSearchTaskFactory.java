@@ -18,9 +18,22 @@ public interface NetworkSearchTaskFactory extends TaskFactory {
 	 * Name of the property that indicates that the provided query or options component changed the
 	 * query parameters. The provided {@link JComponent}s should fire a {@link java.beans.PropertyChangeEvent}
 	 * for this property if it wants Cytoscape to check this TaskFactory's {@link #isReady()} method again.
+	 * @see #getQueryComponent()
+	 * @see #getOptionsComponent()
 	 * @see java.awt.Component#firePropertyChange(String, Object, Object)
 	 */
 	public String QUERY_PROPERTY = "query";
+	
+	/**
+	 * Name of the property that indicates that a search action has been requested by the custom query component.
+	 * If a query component is provided by this factory, the component can fire a {@link java.beans.PropertyChangeEvent}
+	 * for this property whenever it wants Cytoscape execute the search (i.e. run the tasks created by this factory's
+	 * implementation).
+	 * Note that the {@link #isReady()} method must also return true when the event is fired).
+	 * @see #getQueryComponent()
+	 * @see java.awt.Component#firePropertyChange(String, Object, Object)
+	 */
+	public String SEARCH_REQUESTED_PROPERTY = "searchRequested";
 	
 	/**
 	 * Returns the unique id of this network search provider.
@@ -69,7 +82,10 @@ public interface NetworkSearchTaskFactory extends TaskFactory {
 	 * in a way that affects the return of the {@link #isReady()} method. That way, Cytoscape can listen to
 	 * this property change event and call {@link #isReady()} again to update the Network Search widget accordingly
 	 * (e.g. by enabling or disabling the search button). All the query component needs to do is call
-	 * <code>firePropertyChange(NetworkSearchTaskFactory.QUERY_PROPERTY, null, null);</code>
+	 * <code>firePropertyChange(NetworkSearchTaskFactory.QUERY_PROPERTY, null, null);</code><br>
+	 * The query component can also fire a {@link java.beans.PropertyChangeEvent} for the property
+	 * {@link #SEARCH_REQUESTED_PROPERTY} in order to ask Cytoscape to run the search as soon as possible--for instance,
+	 * you can do this when the user presses the ENTER key on your custom query fields.
 	 * @return If null, Cytoscape will create a basic search field for you.
 	 */
 	JComponent getQueryComponent();

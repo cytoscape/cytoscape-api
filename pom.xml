@@ -46,6 +46,7 @@
 		<module>command-executor-api</module>
 		<module>filter-api</module>
 		<module>jobs-api</module>
+		<module>util-api</module>
 		<module>api-bundle</module>
 	</modules>
 
