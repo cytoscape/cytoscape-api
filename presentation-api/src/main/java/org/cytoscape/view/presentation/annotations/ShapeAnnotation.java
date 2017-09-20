@@ -52,17 +52,11 @@ public interface ShapeAnnotation extends Annotation {
 		CUSTOM ("Custom");
 	
 		private final String name;
-		ShapeType (String name) { 
-			this.name = name; 
-		}
+		ShapeType (String name) { 			this.name = name; 	}
 	
-		public String shapeName() {
-			return this.name;
-		}
+		public String shapeName() {			return name;		}
 
-		public String toString() {
-			return this.name;
-		}
+		public String toString() {			return name;		}
 	} 
 	
 	/**
