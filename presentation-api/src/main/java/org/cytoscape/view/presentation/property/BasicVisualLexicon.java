@@ -228,6 +228,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 	public static final VisualProperty<Integer> NODE_TRANSPARENCY = new IntegerVisualProperty(255,
 			new ContinuousRange<Integer>(Integer.class, 0, 255, true, true), "NODE_TRANSPARENCY", "Node Transparency",
 			CyNode.class);
+	public static final VisualProperty<Integer> NODE_OPACITY = NODE_TRANSPARENCY;
 	public static final VisualProperty<Integer> NODE_BORDER_TRANSPARENCY = new IntegerVisualProperty(255,
 			new ContinuousRange<Integer>(Integer.class, 0, 255, true, true), "NODE_BORDER_TRANSPARENCY",
 			"Node Border Transparency", CyNode.class);
@@ -345,7 +346,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 		addVisualProperty(NODE_TOOLTIP, NODE);
 		addVisualProperty(NODE_LABEL_WIDTH, NODE);
 
-		// Level 2: Children of edge VP
+		// Level 2: Children of edge Visual Property
 		addVisualProperty(EDGE_PAINT, EDGE);
 		addVisualProperty(EDGE_VISIBLE, EDGE);
 		addVisualProperty(EDGE_SELECTED, EDGE);
