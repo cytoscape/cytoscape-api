@@ -238,6 +238,17 @@ public interface CyTable extends CyIdentifiable {
 	 */
 	Collection<CyRow> getMatchingRows(String columnName, Object value);
 
+	
+	/**
+	 * Returns all the keys of a specified column that match the given value.
+	 * @param columnName the column for which we want the row keys
+	 * @param value       the value for which we want the rows that contain it
+	 * @return the keys, if any that contain the value "value" for the column "columnName"
+	 * @throws ClassCastException if the keys are not of the given type
+	 */
+	<T> Collection<T> getMatchingKeys(String columnName, Object value, Class<T> type);
+
+	
 	/** 
 	 * Returns the number of rows with the in the specified column with the specified value. 
 	 * @param columnName  the column to check 

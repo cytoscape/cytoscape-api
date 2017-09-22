@@ -56,14 +56,27 @@ public class CyTableUtil {
 	public static List<CyNode> getNodesInState(final CyNetwork net, final String columnName, final boolean state) {
 		if ( net == null )
 			throw new NullPointerException("network is null");
-		List<CyNode> ret = new ArrayList<CyNode>();
-		Collection<CyRow> rows = net.getDefaultNodeTable().getMatchingRows(columnName, state);
-		for (CyRow row : rows) {
-			CyNode node = net.getNode(row.get(CyTable.SUID, Long.class));
-			if (node != null)
+		Collection<Long> suids = net.getDefaultNodeTable().getMatchingKeys(columnName, state, Long.class);
+		List<CyNode> ret = new ArrayList<>(suids.size());
+		for (Long suid : suids) {
+			CyNode node = net.getNode(suid);
+			if (node != null) {
 				ret.add(node);
+			}
 		}
 		return ret;
+	}
+	
+	/**
+	 * Equivalent to 
+	 * <pre>
+	 * getNodesInState(network, CyNetwork.SELECTED, true);
+	 * </pre>
+	 * @param network The network to be queried.
+	 * @return a list of nodes that are in the selected state
+	 */
+	public static List<CyNode> getSelectedNodes(CyNetwork network) {
+		return getNodesInState(network, CyNetwork.SELECTED, true);
 	}
 
 	/**
@@ -81,16 +94,31 @@ public class CyTableUtil {
 	public static List<CyEdge> getEdgesInState(final CyNetwork net, final String columnName, final boolean state) {
 		if ( net == null )
 			throw new NullPointerException("network is null");
-		List<CyEdge> ret = new ArrayList<CyEdge>();
-		Collection<CyRow> rows = net.getDefaultEdgeTable().getMatchingRows(columnName, state);
-		for (CyRow row : rows) {
-			CyEdge edge = net.getEdge(row.get(CyTable.SUID, Long.class));
-			if (edge != null)
+		
+		Collection<Long> suids = net.getDefaultEdgeTable().getMatchingKeys(columnName, state, Long.class);
+		List<CyEdge> ret = new ArrayList<CyEdge>(suids.size());
+		for (Long suid : suids) {
+			CyEdge edge = net.getEdge(suid);
+			if (edge != null) {
 				ret.add(edge);
+			}
 		}
 		return ret;
 	}
+	
+	/**
+	 * Equivalent to 
+	 * <pre>
+	 * getEdgesInState(network, CyNetwork.SELECTED, true);
+	 * </pre>
+	 * @param network The network to be queried.
+	 * @return a list of edges that are in the selected state
+	 */
+	public static List<CyEdge> getSelectedEdges(CyNetwork network) {
+		return getEdgesInState(network, CyNetwork.SELECTED, true);
+	}
 
+	
 	/** Returns all the column names of a given table.
 	 *  @param table  the table whose column names we want
 	 *  @return the column names for all the columns in "table"
