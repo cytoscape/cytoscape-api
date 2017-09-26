@@ -62,7 +62,7 @@ import org.cytoscape.view.model.CyNetworkView;
  */
 public interface StringToModel {
 
-	static final String _CY_NETWORK_DESC = "pecifies a network by name, or by SUID if the prefix ```SUID:``` is used. The keyword ```CURRENT```, or a blank value can also be used to specify the current network.";
+	static final String _CY_NETWORK_DESC = "specifies a network by name, or by SUID if the prefix ```SUID:``` is used. The keyword ```CURRENT```, or a blank value can also be used to specify the current network.";
 	
 	static final String _CY_LIST_DESC = "A list of ```COLUMN:VALUE``` pairs of the format ```COLUMN1:VALUE1,COLUMN2:VALUE2,...``` can be used to match multiple values.";
 	
