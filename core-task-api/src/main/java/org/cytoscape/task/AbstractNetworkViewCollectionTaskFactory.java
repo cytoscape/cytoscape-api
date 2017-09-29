@@ -6,7 +6,7 @@ package org.cytoscape.task;
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2017 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -34,6 +34,7 @@ import org.cytoscape.view.model.CyNetworkView;
  * @CyAPI.InModule core-task-api
  */
 public abstract class AbstractNetworkViewCollectionTaskFactory implements NetworkViewCollectionTaskFactory {
+	
 	/**
 	 * Returns true if the supplied collection is not null.
 	 * @param networkViews The collection of network views.
@@ -41,6 +42,6 @@ public abstract class AbstractNetworkViewCollectionTaskFactory implements Networ
 	 */
 	@Override
 	public boolean isReady(Collection<CyNetworkView> networkViews) {
-		return networkViews != null;
+		return networkViews != null && !networkViews.isEmpty();
 	}
 }
