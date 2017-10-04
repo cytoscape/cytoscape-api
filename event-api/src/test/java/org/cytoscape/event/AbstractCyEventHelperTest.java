@@ -1,5 +1,10 @@
 package org.cytoscape.event;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Ignore;
+
 /*
  * #%L
  * Cytoscape Event API (event-api)
@@ -25,8 +30,6 @@ package org.cytoscape.event;
  */
 
 import org.junit.Test;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertEquals;
 
 
 /**
@@ -55,7 +58,7 @@ public abstract class AbstractCyEventHelperTest {
 	// This is a performance test that counts the number of events fired in 1/5 second. 
 	// We verify that the payload approach is at least 3 times faster than the
 	// event/listener combo. 
-	@Test
+	@Ignore
 	public void testLD1fifthsecond() {
 		final long duration = 200000000;
 

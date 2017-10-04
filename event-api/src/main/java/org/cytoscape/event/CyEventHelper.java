@@ -73,6 +73,16 @@ public interface CyEventHelper {
 	 * of habit.
 	 */
 	 void flushPayloadEvents();
+	 
+	 /**
+	 * Forces accumulated payload events to be fired.  This is a useful method
+	 * that flushes all accumulated payload events for the given envent source, 
+	 * which are normally fired 
+	 * asynchronously to be fired synchronously at a precise time. While this method
+	 * can be safely called at any time, it probably shouldn't be called as a force 
+	 * of habit.
+	 */
+	 void flushPayloadEvents(Object eventSource);
 
 	/**
 	 * This method will prevent any events fired from the specified source 

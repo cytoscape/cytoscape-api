@@ -81,4 +81,7 @@ public class DummyCyEventHelper implements CyEventHelper {
 
 	public void flushPayloadEvents() {
 	}
+
+	public void flushPayloadEvents(Object eventSource) {
+	}
 }
