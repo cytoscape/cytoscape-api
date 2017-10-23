@@ -10,7 +10,7 @@ import org.cytoscape.work.TaskObserver;
 
 /**
  * This abstract implementation of {@link NetworkSearchTaskFactory} makes the method {@link #getQueryComponent()}
- * optional. If your Network Search provider extends this class and don't overwrite the {@link #getQueryComponent()}
+ * optional. If your Network Search provider extends this class and doesn't overwrite the {@link #getQueryComponent()}
  * method, Cytoscape will use a default text field instead. It will also pass the new query text to the
  * {@link #setQuery(String)} method every time the content of the default text field changes.
  */

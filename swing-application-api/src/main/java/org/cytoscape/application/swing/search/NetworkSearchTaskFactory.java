@@ -27,7 +27,7 @@ public interface NetworkSearchTaskFactory extends TaskFactory {
 	/**
 	 * Name of the property that indicates that a search action has been requested by the custom query component.
 	 * If a query component is provided by this factory, the component can fire a {@link java.beans.PropertyChangeEvent}
-	 * for this property whenever it wants Cytoscape execute the search (i.e. run the tasks created by this factory's
+	 * for this property whenever it wants Cytoscape to execute the search (i.e. run the tasks created by this factory's
 	 * implementation).
 	 * Note that the {@link #isReady()} method must also return true when the event is fired).
 	 * @see #getQueryComponent()
