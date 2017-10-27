@@ -23,9 +23,7 @@ package org.cytoscape.application.swing;
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
  */
-
-
-import java.awt.*;
+import java.awt.Component;
 
 
 /**
@@ -59,10 +57,13 @@ public interface CytoPanel {
 	public int getSelectedIndex();
 
 	/**
-	 * Returns the component at index.
-	 * @param index the index of the component.
-	 *
+	 * Returns the component at the passed index.
+	 * 
+	 * @param index the index of the component, which must be non-negative and less than the component count.
 	 * @return component at the given index.
+	 * 
+	 * @exception IndexOutOfBoundsException if index is out of range {@code (index < 0 || index >= component count)}
+	 * @see #getCytoPanelComponentCount()
 	 */
 	public Component getComponentAt(int index);
 	
