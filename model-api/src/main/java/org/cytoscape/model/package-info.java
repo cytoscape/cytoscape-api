@@ -24,6 +24,14 @@ point numbers, and lists.
 </p>
 
 <p>
+App writers are free to create columns having names meaningful to the user in the context of the app (e.g., MeanTemp). 
+To avoid having multiple apps using the same column name for different data, we created a 
+<a href="https://goo.gl/DgwpQu">community-maintained registry of columns created by apps</a>. App writers should 
+create column names prefixed by a short identifier unique to the app (e.g., jam_MeanTemp) and then add
+the column names to the registry spreadsheet.
+</p>
+
+<p>
 You can get cell values in a table through a
 {@link org.cytoscape.model.CyRow}. Each row has a <i>primary key</i>,
 which is the row's unique identifier. No two rows in the

@@ -48,20 +48,15 @@ public interface ShapeAnnotation extends Annotation {
 		STAR5 ("5-Pointed Star"),
 		HEXAGON ("Hexagon"),
 		STAR6 ("6-Pointed Star"),
+		OCTAGON ("Octagon"),
 		CUSTOM ("Custom");
 	
 		private final String name;
-		ShapeType (String name) { 
-			this.name = name; 
-		}
+		ShapeType (String name) { 			this.name = name; 	}
 	
-		public String shapeName() {
-			return this.name;
-		}
+		public String shapeName() {			return name;		}
 
-		public String toString() {
-			return this.name;
-		}
+		public String toString() {			return name;		}
 	} 
 	
 	/**

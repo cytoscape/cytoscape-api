@@ -1,6 +1,7 @@
 package org.cytoscape.util.swing;
 
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -10,9 +11,12 @@ import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URI;
 import java.net.URL;
+import java.util.Dictionary;
+import java.util.Enumeration;
 
 import javax.swing.Action;
 import javax.swing.BorderFactory;
+import javax.swing.DefaultListCellRenderer;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout.ParallelGroup;
@@ -21,12 +25,18 @@ import javax.swing.InputMap;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
+import javax.swing.JSlider;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /*
  * #%L
@@ -82,6 +92,8 @@ public final class LookAndFeelUtil {
 			throw new RuntimeException();
 		}
 	}
+	
+	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 	
 	/**
 	 * @return true if the current Look and Feel is "Aqua", usually available on Mac OS X only.
@@ -357,6 +369,58 @@ public final class LookAndFeelUtil {
 	}
 	
 	/**
+	 * If one of the components is a {@link JSlider}, make sure this method is called after the slider has been added to
+	 * its parent container and had its UI assigned, otherwise it will have no effect on the slider's labels.
+	 */
+	@SuppressWarnings({ "serial", "unchecked" })
+	public static void makeSmall(final JComponent... components) {
+		if (components == null || components.length == 0)
+			return;
+
+		for (JComponent c : components) {
+			if (isAquaLAF()) {
+				c.putClientProperty("JComponent.sizeVariant", "small");
+			} else {
+				if (c.getFont() != null)
+					c.setFont(c.getFont().deriveFont(getSmallFontSize()));
+			}
+
+			if (c instanceof JList) {
+				((JList<?>) c).setCellRenderer(new DefaultListCellRenderer() {
+					@Override
+					public Component getListCellRendererComponent(JList<?> list, Object value, int index,
+							boolean isSelected, boolean cellHasFocus) {
+						super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+						setFont(getFont().deriveFont(getSmallFontSize()));
+
+						return this;
+					}
+				});
+			} else if (c instanceof JMenuItem) {
+				c.setFont(c.getFont().deriveFont(getSmallFontSize()));
+			} else if (c instanceof JSlider) {
+				// Change the slider's label sizes -- only works if it's done after the slider has been added to
+				// its parent container and had its UI assigned
+				JSlider slider = (JSlider) c;
+				
+				try {
+					Font tickFont = slider.getFont().deriveFont(getSmallFontSize());
+					Dictionary<?, JLabel> labelTable = slider.getLabelTable();
+					
+					for (Enumeration<?> enumeration = labelTable.keys(); enumeration.hasMoreElements();) {
+						Object k = enumeration.nextElement();
+						JLabel lbl = labelTable.get(k);
+						lbl.setFont(tickFont); // Updates the font size
+						lbl.setSize(lbl.getPreferredSize()); // Updates the label size and slider layout
+					}
+				} catch (Exception e) {
+					logger.error("Cannot make slider labels smaller", e);
+				}
+			}
+		}
+	}
+	
+	/**
 	 * Returns true if the current operating system is Mac OS X.
 	 * @return true if the current OS is Mac OS X and false otherwise.
 	 */
@@ -398,7 +462,7 @@ public final class LookAndFeelUtil {
 		try {
 			return new URL(helpStrToURL(helpStr)).toURI();
 		} catch (Exception e) {
-			System.out.println(" helpStrToURI  Exception: " + e.getMessage());
+			e.printStackTrace();
 		}
 
 		return null;
@@ -417,8 +481,8 @@ public final class LookAndFeelUtil {
 			
 			if (uri != null)
 				Desktop.getDesktop().browse(uri);
-		} catch (Exception ex) {
-			System.out.println("Exception: " + ex.getMessage());
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
 	}
 	

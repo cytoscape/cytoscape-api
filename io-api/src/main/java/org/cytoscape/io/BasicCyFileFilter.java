@@ -1,12 +1,28 @@
 package org.cytoscape.io;
 
+import static java.util.Arrays.asList;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URI;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+
+import org.cytoscape.io.util.StreamUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /*
  * #%L
  * Cytoscape IO API (io-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2017 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -24,21 +40,6 @@ package org.cytoscape.io;
  * #L%
  */
 
-
-import org.cytoscape.io.util.StreamUtil;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URI;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
 /**
  * This is meant to be an basic implementation of {@link CyFileFilter} that can
  * either be used directly or extended to provide different acceptance criteria.
@@ -55,7 +56,7 @@ public class BasicCyFileFilter implements CyFileFilter {
 	protected final StreamUtil streamUtil;
 	/** Type of data that this filter applies to. */
 	protected final DataCategory category;
-	private static final Logger logger = LoggerFactory.getLogger(BasicCyFileFilter.class);
+	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 
 	/**
 	 * Creates a file filter from the specified arguments. Note that a "."
@@ -73,12 +74,13 @@ public class BasicCyFileFilter implements CyFileFilter {
 	 * @param streamUtil
 	 *            An instance of the StreamUtil service.
 	 */
-	public BasicCyFileFilter(final Set<String> extensions,
-			                 final Set<String> contentTypes,
-			                 final String description,
-			                 final DataCategory category,
-			                 StreamUtil streamUtil) {
-
+	public BasicCyFileFilter(
+			final Set<String> extensions,
+			final Set<String> contentTypes,
+			final String description,
+			final DataCategory category,
+			final StreamUtil streamUtil
+	) {
 		this.extensions = cleanStringSet(extensions);
 		this.contentTypes = contentTypes;
 		this.category = category;
@@ -86,9 +88,8 @@ public class BasicCyFileFilter implements CyFileFilter {
 		final StringBuilder builder = new StringBuilder();
 		builder.append(description == null ? "(" : description + " (");
 
-		for (String ex : this.extensions) {
+		for (String ex : this.extensions)
 			builder.append("*." + ex + ", ");
-		}
 
 		String d = builder.toString();
 		d = d.substring(0, d.length() - 2);
@@ -114,9 +115,14 @@ public class BasicCyFileFilter implements CyFileFilter {
 	 * @param streamUtil
 	 *            An instance of the StreamUtil service.
 	 */
-	public BasicCyFileFilter(final String[] extensions, final String[] contentTypes, final String description,
-			final DataCategory category, StreamUtil streamUtil) {
-		this(createSet(extensions), createSet(contentTypes), description, category, streamUtil);
+	public BasicCyFileFilter(
+			final String[] extensions,
+			final String[] contentTypes,
+			final String description,
+			final DataCategory category,
+			final StreamUtil streamUtil
+	) {
+		this(new HashSet<>(asList(extensions)), new HashSet<>(asList(contentTypes)), description, category, streamUtil);
 	}
 
    /**
@@ -125,31 +131,21 @@ public class BasicCyFileFilter implements CyFileFilter {
 	* @param strings a Set of Strings to be cleaned
 	* @return a SorteSet of Strings containing only non-null Strings 
 	*/
-	private final static SortedSet<String> cleanStringSet( final Set<String> strings) {
-		final SortedSet<String> cleaned_strings = new TreeSet<String>();
+	private final static SortedSet<String> cleanStringSet(final Set<String> strings) {
+		final SortedSet<String> cleanedStrings = new TreeSet<>();
+		
 		if (strings != null) {
 			for (final String string : strings) {
-				if (string != null) {
-					cleaned_strings.add(string.trim());
-				}
+				if (string != null)
+					cleanedStrings.add(string.trim());
 			}
 		}
-		return cleaned_strings;
+		
+		return cleanedStrings;
 	}
 	
-	private static Set<String> createSet(String[] values) {
-		Set<String> set = new HashSet<String>();
-		for (String v : values)
-			set.add(v);
-		return set;
-	}
-
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean accepts(URI uri, DataCategory category) {
-
 		// Check data category
 		if (category != this.category)
 			return false;
@@ -158,16 +154,12 @@ public class BasicCyFileFilter implements CyFileFilter {
 			return true;
 		else
 			return false;
-
 	}
 
 	private boolean extensionsMatch(URI uri) {
 		final String extension = getExtension(uri.toString());
-		//extension is never null anymore, but can be empty string, which works ok
-		if (extensions.contains(extension))
-			return true;
-		else
-			return false;
+		// Extension is never null anymore, but can be empty string, which works ok
+		return extensions.contains(extension);
 	}
 
 	/**
@@ -187,33 +179,21 @@ public class BasicCyFileFilter implements CyFileFilter {
 		return false;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public final Set<String> getExtensions() {
 		return extensions;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public final Set<String> getContentTypes() {
 		return contentTypes;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public final String getDescription() {
 		return description;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public final DataCategory getDataCategory() {
 		return category;

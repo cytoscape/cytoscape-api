@@ -6,7 +6,7 @@ package org.cytoscape.work;
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2017 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -23,7 +23,6 @@ package org.cytoscape.work;
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
  */
-
 
 /**
  * A base class for tasks that need to be able to access the TaskIterator that contains them.
@@ -46,6 +45,10 @@ public abstract class AbstractTask implements Task {
 	public final void setTaskIterator(final TaskIterator taskIterator) {
 		this.taskIterator = taskIterator;
 	}
+	
+	public TaskIterator getTaskIterator() {
+		return taskIterator;
+	}
 
 	/** 
 	 * Inserts "newTasks" after the current Task, in the TaskIterator that is being managed by this class.
@@ -65,9 +68,7 @@ public abstract class AbstractTask implements Task {
 		taskIterator.insertTasksAfter(this, newTasks);
 	}
 
-	/** 
-	 * {@inheritDoc}
-	 */
+	@Override
 	abstract public void run(TaskMonitor taskMonitor) throws Exception;
 
 	/** 
@@ -75,6 +76,7 @@ public abstract class AbstractTask implements Task {
 	 * on the granularity of the implementing <code>Task</code> checking whether the "canceled" 
 	 * is true or not and then taking appropriate action.
 	 */
+	@Override
 	public void cancel() {
 		cancelled = true;
 	}

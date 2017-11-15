@@ -1,5 +1,21 @@
 package org.cytoscape.application.swing;
 
+import static org.cytoscape.work.ServiceProperties.ACCELERATOR;
+import static org.cytoscape.work.ServiceProperties.ENABLE_FOR;
+import static org.cytoscape.work.ServiceProperties.INSERT_SEPARATOR_AFTER;
+import static org.cytoscape.work.ServiceProperties.INSERT_SEPARATOR_BEFORE;
+import static org.cytoscape.work.ServiceProperties.INSERT_TOOLBAR_SEPARATOR_AFTER;
+import static org.cytoscape.work.ServiceProperties.INSERT_TOOLBAR_SEPARATOR_BEFORE;
+import static org.cytoscape.work.ServiceProperties.IN_MENU_BAR;
+import static org.cytoscape.work.ServiceProperties.IN_TOOL_BAR;
+import static org.cytoscape.work.ServiceProperties.LARGE_ICON_URL;
+import static org.cytoscape.work.ServiceProperties.MENU_GRAVITY;
+import static org.cytoscape.work.ServiceProperties.PREFERRED_MENU;
+import static org.cytoscape.work.ServiceProperties.SMALL_ICON_URL;
+import static org.cytoscape.work.ServiceProperties.TITLE;
+import static org.cytoscape.work.ServiceProperties.TOOLTIP;
+import static org.cytoscape.work.ServiceProperties.TOOL_BAR_GRAVITY;
+
 /*
  * #%L
  * Cytoscape Swing Application API (swing-application-api)
@@ -43,8 +59,6 @@ import org.cytoscape.work.TaskFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import static org.cytoscape.work.ServiceProperties.*;
-
 /**
  * An abstract implementation of the CyAction interface. Instead of using this
  * class directly you should (strongly) consider implementing a
@@ -58,7 +72,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	
 	private static final long serialVersionUID = -2245672104075936952L;
 	
-	private static final Logger logger = LoggerFactory.getLogger(AbstractCyAction.class);
+	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 
 	/**
 	 * The name describing the preferred menu for the action. 
@@ -417,6 +431,10 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		return inMenuBar;
 	}
 
+	
+	@Override
+	public void setIsInMenuBar(boolean b) {	inMenuBar = b;	}
+
 	/**
 	 * By default no CytoscapeActions will be included in the toolbar.
 	 *
@@ -426,6 +444,9 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	public boolean isInToolBar() {
 		return inToolBar;
 	}
+
+	@Override
+	public void setIsInToolBar(boolean b) {	inToolBar = b;	}
 
 	/**
 	 * Insert a separator before this menu item.  
@@ -453,7 +474,6 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * @return true if this Action should have a separator before it
 	 */
 	public boolean insertToolbarSeparatorBefore() {
-		// TODO Auto-generated method stub
 		return insertToolbarSeparatorBefore;
 	}
 	
@@ -463,7 +483,6 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * @return true if this Action should have a separator after it
 	 */
 	public boolean insertToolbarSeparatorAfter() {
-		// TODO Auto-generated method stub
 		return insertToolbarSeparatorAfter;
 	}
 
@@ -508,7 +527,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *            This parameter may be null, in which case no accelerator is
 	 *            defined.
 	 */
-	public void setAcceleratorKeyStroke(KeyStroke ks) {
+	@Override public void setAcceleratorKeyStroke(KeyStroke ks) {
 		acceleratorKeyStroke = ks;
 	}
 

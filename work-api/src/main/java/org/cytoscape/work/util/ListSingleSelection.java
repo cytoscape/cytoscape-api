@@ -40,7 +40,7 @@ import org.slf4j.LoggerFactory;
  */
 public final class ListSingleSelection<T> extends ListSelection<T> {
 
-	private static final Logger logger = LoggerFactory.getLogger(ListSingleSelection.class);
+	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 	
 	/**
 	 * The item that will be selected.
@@ -60,8 +60,7 @@ public final class ListSingleSelection<T> extends ListSelection<T> {
 	 */
 	public ListSingleSelection(final T ... values) {
 		super(Arrays.asList(values));
-		if(!this.values.isEmpty())
-			selected = this.values.get(0);
+		selected = this.values.isEmpty() ? null : this.values.get(0);
 	}
 
 	/**
@@ -85,8 +84,7 @@ public final class ListSingleSelection<T> extends ListSelection<T> {
 	 */
 	public ListSingleSelection(final List<T> values) {
 		super(values);
-		if(!this.values.isEmpty())
-			selected = this.values.get(0);
+		selected = this.values.isEmpty() ? null : this.values.get(0);
 	}
 
 	/**

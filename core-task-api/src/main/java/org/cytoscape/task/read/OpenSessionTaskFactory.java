@@ -1,12 +1,17 @@
 package org.cytoscape.task.read;
 
+import java.io.File;
+
+import org.cytoscape.work.TaskFactory;
+import org.cytoscape.work.TaskIterator;
+
 /*
  * #%L
  * Cytoscape Core Task API (core-task-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2017 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -24,12 +29,6 @@ package org.cytoscape.task.read;
  * #L%
  */
 
-import java.io.File;
-
-import org.cytoscape.session.CySession;
-import org.cytoscape.work.TaskFactory;
-import org.cytoscape.work.TaskIterator;
-
 /**
  * This interface provides a task iterator for loading a session.
  * @CyAPI.Api.Interface
@@ -39,9 +38,20 @@ public interface OpenSessionTaskFactory extends TaskFactory {
 	
 	/**
 	 * Creates a task iterator for loading a session from a file.
+	 * The task created here will not ask the user to confirm it, even if there is currently a non-empty session.
+	 * This is the same as calling <code>createTaskIterator(file, false)</code>.
 	 * @param file The input file for loading the session from.
-	 * @return a task iterator of type {@link TaskIterator}. 
+	 * @return a task iterator of type {@link TaskIterator}.
 	 */
 	TaskIterator createTaskIterator(final File file);
+	
+	/**
+	 * Creates a task iterator for loading a session from a file, with an option to let the user confirm it
+	 * before disposing the current session if it is not empty.
+	 * @param file The input file for loading the session from.
+	 * @param confirm Whether or not Cytoscape should ask the user to confirm this action.
+	 * @return a task iterator of type {@link TaskIterator}. 
+	 */
+	TaskIterator createTaskIterator(final File file, boolean confirm);
 
 }

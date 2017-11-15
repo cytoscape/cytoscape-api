@@ -7,12 +7,12 @@
 	<parent>
 		<artifactId>parent</artifactId>
 		<groupId>org.cytoscape</groupId>
-		<version>3.5.0</version>
+		<version>3.6.0</version>
 		<relativePath>../parent</relativePath>
 	</parent>
 
 	<artifactId>api-parent</artifactId>
-	<version>3.5.0</version>
+	<version>3.6.0</version>
 	<packaging>pom</packaging>
 	<name>Cytoscape API Parent Project POM</name>
 
@@ -21,6 +21,7 @@
 		<module>event-api</module>
 		<module>model-api</module>
 		<module>viewmodel-api</module>
+		<module>ci-api</module>
 		<module>core-task-api</module>
 		<module>equations-api</module>
 		<module>io-api</module>
@@ -45,6 +46,7 @@
 		<module>command-executor-api</module>
 		<module>filter-api</module>
 		<module>jobs-api</module>
+		<module>util-api</module>
 		<module>api-bundle</module>
 	</modules>
 

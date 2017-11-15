@@ -121,4 +121,30 @@ public interface CyAction extends Action, MenuListener, PopupMenuListener {
  	 * @returns configuration properties as a Map.
  	 */
 	Map<String,String> getProperties();
+
+	/**
+ 	 * To support configurable menus and tools, setIsInMenuBar added for 3.6
+ 	 */
+	void setIsInMenuBar(boolean b);
+	/**
+ 	 * To support configurable menus and tools, setIsInToolBar added for 3.6
+ 	 */
+	void setIsInToolBar(boolean b);
+	/**
+ 	 * To support configurable menus and tools, setPreferredMenu added for 3.6
+ 	 */
+	void setPreferredMenu(String menu);
+	/**
+ 	 * To support configurable menus and tools, setToolbarGravity added for 3.6
+ 	 */
+	void setToolbarGravity(float f);
+	/**
+ 	 * To support configurable menus and tools, setMenuGravity added for 3.6
+ 	 */
+	void setMenuGravity(float f);
+
+	/**
+ 	 * was defined in AbstractCyAction, but not in this interface
+ 	 */
+	void setAcceleratorKeyStroke(KeyStroke ks);
 }

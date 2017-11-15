@@ -66,6 +66,7 @@ public interface VisualStyle {
 	 * Add a new {@linkplain VisualMappingFunction} to this VisualStyle.
 	 *
 	 * @param mapping new VisualMappingFunction to be added.
+	 * @throws NullPointerException if the specified mapping is null
 	 */
 	void addVisualMappingFunction(final VisualMappingFunction<?, ?> mapping);
 	
@@ -133,6 +134,7 @@ public interface VisualStyle {
 	 * Apply Visual Style to the entire network view.
 	 * 
 	 * @param networkView The view that the visual property should be applied to.
+	 * @throws NullPointerException if the specified networkView is null
 	 */
 	void apply(final CyNetworkView networkView);
 

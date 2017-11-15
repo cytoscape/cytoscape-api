@@ -32,4 +32,7 @@ package org.cytoscape.view.presentation.property.values;
  * @CyAPI.Api.Interface
  * @CyAPI.InModule presentation-api
  */
-public interface ArrowShape extends VisualPropertyValue {}
+public interface ArrowShape extends VisualPropertyValue {
+	
+	public boolean isFilled();
+}

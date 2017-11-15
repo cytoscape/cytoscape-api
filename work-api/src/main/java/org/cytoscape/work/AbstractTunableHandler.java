@@ -1,12 +1,19 @@
 package org.cytoscape.work;
 
+import java.lang.ref.Reference;
+import java.lang.ref.WeakReference;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.util.Properties;
+
 /*
  * #%L
  * Cytoscape Work API (work-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2017 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -24,15 +31,6 @@ package org.cytoscape.work;
  * #L%
  */
 
-
-import java.lang.ref.Reference;
-import java.lang.ref.WeakReference;
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.util.Properties;
-
-
 /** 
  * Provides the standard implementation for most of the methods declared by the 
  * TunableHandler interface.
@@ -40,6 +38,7 @@ import java.util.Properties;
  * @CyAPI.InModule work-api
  */
 public abstract class AbstractTunableHandler implements TunableHandler {
+	
 	private enum ParamsParseState {
 		KEY_START, LOOKING_FOR_EQUAL_SIGN, VALUE_START, LOOKING_FOR_SEMICOLON;
 	}
@@ -92,77 +91,65 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 		this.tunable = tunable;
 	}
 
-	/** 
-	 * {@inheritDoc}
-	 */
+	@Override
 	public final Class<?> getType() {
 		return field != null ? field.getType() : getter.getReturnType();
 	}
 
-	/** 
-	 * {@inheritDoc}
-	 */
+	@Override
 	public final Object getValue() throws IllegalAccessException, InvocationTargetException {
 		return field != null ? field.get(instance.get()) : getter.invoke(instance.get());
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
-	 public void setValue(final Object newValue) throws IllegalAccessException, InvocationTargetException {
-		 
+	@Override
+	public void setValue(final Object newValue) throws IllegalAccessException, InvocationTargetException {
 		if (field != null)
 			field.set(instance.get(), newValue);
 		else
 			setter.invoke(instance.get(), newValue);
-		
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
+	@Override
 	public final String getDescription() {
 		return tunable.description();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
+	@Override
+	public final String getLongDescription() {
+		return tunable.longDescription();
+	}
+
+	@Override
+	public final String getExampleStringValue() {
+		return tunable.exampleStringValue();
+	}
+
+	@Override
 	public final String[] getGroups() {
 		return tunable.groups();
 	}
-	
-	/**
-	 * {@inheritDoc}
-	 */
+
+	@Override
 	public final boolean controlsMutuallyExclusiveNestedChildren() {
 		return tunable.xorChildren();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
+	@Override
 	public final String getChildKey() {
 		return tunable.xorKey();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
+	@Override
 	public final String dependsOn() {
 		return tunable.dependsOn();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
+	@Override
 	public final String[] listenForChange() {
 		return tunable.listenForChange();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
+	@Override
 	public final String getName() {
 		if (field != null)
 			return field.getName();
@@ -170,25 +157,22 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 			return setter.getName().substring(3);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
+	@Override
 	public final String getQualifiedName() {
-		final String unqualifiedClassName =
-			field == null ? getter.getDeclaringClass().toString() : field.getDeclaringClass().toString();
-		
-                return unqualifiedClassName.substring(unqualifiedClassName.lastIndexOf(".") + 1) + "." + getName();
+		final String unqualifiedClassName = field == null ? getter.getDeclaringClass().toString()
+				: field.getDeclaringClass().toString();
+
+		return unqualifiedClassName.substring(unqualifiedClassName.lastIndexOf(".") + 1) + "." + getName();
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
+	@Override
 	public final Properties getParams() throws IllegalArgumentException {
 		final String rawString = tunable.params();
 		final Properties keyValuesPairs = new Properties();
 		keyValuesPairs.put(GRAVITY, Double.toString(tunable.gravity()+offset));
 		keyValuesPairs.put(TOOLTIP, tunable.tooltip());
 		keyValuesPairs.put(CONTEXT, tunable.context());
+		
 		if (tunable.format() != null && tunable.format().length() > 0)
 			keyValuesPairs.put(FORMAT, tunable.format());
 
@@ -196,6 +180,7 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 		StringBuilder value = null;
 		ParamsParseState state = ParamsParseState.KEY_START;
 		boolean escaped = false;
+		
 		for (int i = 0; i < rawString.length(); ++i) {
 			final char ch = rawString.charAt(i);
 
@@ -285,7 +270,7 @@ public abstract class AbstractTunableHandler implements TunableHandler {
 	 * @return Tunable gravity as a double
 	 */
 	public final double getGravity() {
-		return tunable.gravity()+offset;
+		return tunable.gravity() + offset;
 	}
 
 	/**

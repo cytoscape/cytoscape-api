@@ -71,6 +71,13 @@ public interface TunableHandler {
 	String getDescription();
 
 	/**
+	 * Returns the associated <code>Tunable</code>'s longDescription
+	 * @return the associated <code>Tunable</code>'s longDescription
+	 */
+	
+	default String getLongDescription() { return null; }
+	
+	/**
 	 * Returns the associated <code>Tunable</code>'s groups or nesting hierarchy.
 	 * @return the associated <code>Tunable</code>'s groups or nesting hierarchy
 	 */
@@ -138,4 +145,10 @@ public interface TunableHandler {
 	 *  @return the class type of the field or method annotated by <code>Tunable</code>.
 	 */
 	Class<?> getType();
+
+	/**
+	 * Returns the exampleStringValue property of the associated <code>Tunable</code>.
+	 * @return the exampleStringValue property of the associated <code>Tunable</code>.
+	 */
+	String getExampleStringValue();
 }

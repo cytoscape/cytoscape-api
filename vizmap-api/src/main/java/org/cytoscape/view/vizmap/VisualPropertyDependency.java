@@ -1,12 +1,21 @@
 package org.cytoscape.view.vizmap;
 
+import java.util.Collections;
+import java.util.Set;
+
+import org.cytoscape.event.CyEventHelper;
+import org.cytoscape.view.model.VisualLexicon;
+import org.cytoscape.view.model.VisualLexiconNode;
+import org.cytoscape.view.model.VisualProperty;
+import org.cytoscape.view.vizmap.events.VisualPropertyDependencyChangedEvent;
+
 /*
  * #%L
  * Cytoscape VizMap API (vizmap-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2017 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -23,13 +32,6 @@ package org.cytoscape.view.vizmap;
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
  */
-
-import java.util.Collections;
-import java.util.Set;
-
-import org.cytoscape.view.model.VisualLexicon;
-import org.cytoscape.view.model.VisualLexiconNode;
-import org.cytoscape.view.model.VisualProperty;
 
 /**
  * Represents a set of Visual Properties to be set by their parent value if
@@ -48,6 +50,8 @@ public final class VisualPropertyDependency<T> {
 	private final VisualProperty<T> parentVisualProperty;
 	
 	private boolean enabled;
+	
+	private CyEventHelper eventHelper;
 
 	/**
 	 * Constructor.
@@ -121,7 +125,12 @@ public final class VisualPropertyDependency<T> {
 	 * @param enable Whether to enable (true) or disable (false) this dependency.
 	 */
 	public void setDependency(boolean enable) {
-		this.enabled = enable;
+		if (enable != this.enabled) {
+			this.enabled = enable;
+			
+			if (eventHelper != null)
+				eventHelper.fireEvent(new VisualPropertyDependencyChangedEvent(this));
+		}
 	}
 
 	/**
@@ -138,6 +147,15 @@ public final class VisualPropertyDependency<T> {
 	 */
 	public VisualProperty<T> getParentVisualProperty() {
 		return parentVisualProperty;
+	}
+	
+	/**
+	 * The {@link VisualStyle} implementation should use this method to pass a valid CyEventHelper
+	 * after this dependency is added to the visual style object.
+	 * @param eventHelper
+	 */
+	public void setEventHelper(CyEventHelper eventHelper) {
+		this.eventHelper = eventHelper;
 	}
 	
 	@Override

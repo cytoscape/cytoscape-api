@@ -45,7 +45,7 @@ import org.slf4j.LoggerFactory;
  * @CyAPI.InModule swing-util-api
  */
 public final class PopupMenuGravityTracker implements GravityTracker {
-	private final static Logger logger = LoggerFactory.getLogger(PopupMenuGravityTracker.class);
+	private final static Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 	private final JPopupMenu menu;
 	private final Map<Component, Double> componentGravity;
 

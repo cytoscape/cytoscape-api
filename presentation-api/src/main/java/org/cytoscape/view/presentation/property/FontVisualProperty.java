@@ -46,7 +46,7 @@ import org.slf4j.LoggerFactory;
  */
 public final class FontVisualProperty extends AbstractVisualProperty<Font> {
 	
-	private static final Logger logger = LoggerFactory.getLogger(FontVisualProperty.class);
+	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 
 	private static final Range<Font> FONT_RANGE;
 	private static final int DEF_FONT_SIZE = 12;
@@ -122,11 +122,12 @@ public final class FontVisualProperty extends AbstractVisualProperty<Font> {
 
 		final Matcher sizeMatcher = FONT_SIZE_PATTERN.matcher(text);
 		final String sSize = sizeMatcher.replaceAll(EMPTY_STRING);
-
+//		System.out.println(sSize);
+		if (sSize != null && !sSize.isEmpty())
 		try {
 			size = Integer.valueOf(sSize);
 		} catch (NumberFormatException nfe) {
-			logger.warn("Cannot parse font size in '" + text + "'", nfe);
+//			logger.warn("Cannot parse font size in '" + text + "'", nfe);
 		}
 
 		return new Font(name, style, size);

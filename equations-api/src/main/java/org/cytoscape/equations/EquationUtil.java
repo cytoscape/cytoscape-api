@@ -42,7 +42,7 @@ import org.slf4j.LoggerFactory;
 public final class EquationUtil {
 	private EquationUtil() { } // Exists to prevent creating instances of this class!
 	
-	private static final Logger logger = LoggerFactory.getLogger(EquationUtil.class);
+	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 
 	/** Converts a bare name to a variable reference.
 	 *  @param attribName  the bare name that will be converted

@@ -28,6 +28,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.function.BiConsumer;
 
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
@@ -113,11 +114,10 @@ public final class ServiceUtil {
 	 * @param serviceListeners A reference to the list of service listeners that has been already registered, 
 	 * The given service listener will be added to this list if the list is not null.
 	 */
-	public static void registerServiceListener(final BundleContext bc, final Object listener, final String registerMethodName, 
-			final String unregisterMethodName, final Class<?> serviceClass, final Class<?> methodClass, final String additionalFilter , 
-			List<CyServiceListener> serviceListeners) {
+	public static void registerServiceListener(BundleContext bc, Object listener, String registerMethodName, 
+			String unregisterMethodName, Class<?> serviceClass, Class<?> methodClass, String additionalFilter, List<CyServiceListener> serviceListeners) {
 		try {
-			CyServiceListener serviceListener = new CyServiceListener(bc, listener, registerMethodName, unregisterMethodName, serviceClass, methodClass, additionalFilter);
+			CyServiceListener<?> serviceListener = new CyServiceListener<>(bc, listener, registerMethodName, unregisterMethodName, serviceClass, methodClass, additionalFilter);
 			serviceListener.open();
 			if (serviceListeners != null)
 				serviceListeners.add( serviceListener );
@@ -127,6 +127,38 @@ public final class ServiceUtil {
 	}
 	
 
+	/**
+	 * A method that will cause the specified register/unregister methods on the listener
+	 * object to be called any time that a service of the specified type is registered or unregistered. 
+	 * 
+	 * <pre>
+	 * public class MyServiceListener {
+	 *    public void addService(MyService s, Map&lt;String,String&gt; props) { ... }
+	 *    public void removeService(MyService s, Map&lt;String,String&gt; props { ... }
+	 * }
+	 * 
+	 * registerServiceListener(bc, myServiceListener::addService, myServiceListener::removeService, MyService.class);
+	 * </pre>
+	 * 
+	 * @param bc The BundleContext used to find services.
+	 * @param registerConsumer A reference to the method to be called when a service is registered.
+	 * @param unregisterConsumer A reference to the method to be called when a service is unregistered.
+	 * @param serviceClass The class defining the type of service desired.
+	 * @param additionalFilter An additional filter to be applied to the OSGi services 
+	 */
+	public static <S> void registerServiceListener(BundleContext bc, BiConsumer<S,Map<String,String>> registerConsumer, 
+			BiConsumer<S,Map<String,String>> unregisterConsumer, Class<S> serviceClass, String additionalFilter, List<CyServiceListener> serviceListeners) {
+		try {
+			CyServiceListener<S> serviceListener = new CyServiceListener<S>(bc, registerConsumer, unregisterConsumer, serviceClass, additionalFilter);
+			serviceListener.open();
+			if (serviceListeners != null)
+				serviceListeners.add( serviceListener );
+		} catch (Exception e) {
+			throw new RuntimeException("Could not listen to services for object: service type: " + serviceClass + ", and additional filter: " + additionalFilter, e); 
+		}
+	}
+	
+	
 	/**
 	 * A utility method that registers the specified service object as an OSGi service of
 	 * the specified type.

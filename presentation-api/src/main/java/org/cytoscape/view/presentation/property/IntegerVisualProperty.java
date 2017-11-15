@@ -51,7 +51,16 @@ public final class IntegerVisualProperty extends AbstractVisualProperty<Integer>
 	
 	@Override
 	public String toSerializableString(final Integer value) {
+	try
+	{
 		return value.toString();
+	}
+	catch (ClassCastException ex)
+	{
+		System.err.println("ClassCast: " + value);
+		ex.printStackTrace();
+		return "";
+	}
 	}
 
 	

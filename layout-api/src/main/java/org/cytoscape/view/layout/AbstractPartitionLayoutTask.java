@@ -52,7 +52,7 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 	
-	private static Logger logger = LoggerFactory.getLogger(AbstractPartitionLayoutTask.class);
+	private static Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 	
 	/**
 	 * The TaskMonitor initially set in the run method of the task. 

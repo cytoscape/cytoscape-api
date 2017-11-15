@@ -66,7 +66,7 @@ public abstract class AbstractTunableInterceptor<T extends TunableHandler> {
 	 */
 	protected final List<TunableHandlerFactory<T>> tunableHandlerFactories;
 
-	private final static Logger logger = LoggerFactory.getLogger(AbstractTunableInterceptor.class);
+	private final static Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 
 	/**
 	 * Creates a new AbstractTunableInterceptor object.

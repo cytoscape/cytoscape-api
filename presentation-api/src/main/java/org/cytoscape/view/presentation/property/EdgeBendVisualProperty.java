@@ -72,7 +72,15 @@ public class EdgeBendVisualProperty extends AbstractVisualProperty<Bend> {
 
 	@Override
 	public String toSerializableString(final Bend value) {
+	try
+	{
 		return value.getSerializableString();
+	}
+	catch(ClassCastException ex)
+	{
+		System.out.println("Bend: " + getIdString() + ", " + getDisplayName() + " - - " + value);
+		return null;
+	}
 	}
 
 	@Override

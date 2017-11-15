@@ -37,7 +37,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Deque;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -164,46 +166,60 @@ public final class PartitionUtil {
 	  * @param edgesSeenMap       A map of edges already visited.
 	  */
 	private static void traverse(CyNetwork network, CyNetworkView networkView,
-	                             Map<CyNode,View<CyNode>> nodesToViews, CyNode node,
-	                             LayoutPartition partition, Map<CyNode,Integer> nodesSeenMap, 
-	                             Map<CyEdge,Integer> edgesSeenMap ) {
-		// Get the View<CyNode>
-		final View<CyNode> nv = nodesToViews.get(node);
+           Map<CyNode,View<CyNode>> nodesToViews, CyNode startNode,
+           LayoutPartition partition, Map<CyNode,Integer> nodesSeenMap, 
+           Map<CyEdge,Integer> edgesSeenMap ) {
 
-		// Add this node to the partition
-		partition.addNode(network, nv, false);
-
-		// Iterate through each connected edge
-		for (final CyEdge incidentEdge: network.getAdjacentEdgeList(node, CyEdge.Type.ANY)){
-
-			// Have we already seen this edge?
-			if (edgesSeenMap.get(incidentEdge) == m_NODE_HAS_BEEN_SEEN) {
-				// Yes, continue since it means we *must* have seen both sides
-				continue;
+		// This method cannot be recursive because of bug #3747, a very large graph can have a path 
+		// that is so long that recursively traversing it can cause a StackOverflowError.
+		Deque<CyNode> nodeStack = new LinkedList<>();
+		nodeStack.add(startNode);
+		
+		while (!nodeStack.isEmpty()) {
+			CyNode currentNode = nodeStack.pop();
+			
+			// Get the View<CyNode>
+			final View<CyNode> nv = nodesToViews.get(currentNode);
+			
+			// Add this node to the partition
+			partition.addNode(network, nv, false);
+			List<CyEdge> edgeList = network.getAdjacentEdgeList(currentNode, CyEdge.Type.ANY);
+			List<CyNode> connectedNodes = new LinkedList<>();
+			
+			// Iterate through each connected edge
+			for (final CyEdge incidentEdge : edgeList) {
+				
+				// Have we already seen this edge?
+				if (edgesSeenMap.get(incidentEdge) == m_NODE_HAS_BEEN_SEEN) {
+					// Yes, continue since it means we must have seen both sides
+					continue;
+				}
+				
+				edgesSeenMap.put(incidentEdge, m_NODE_HAS_BEEN_SEEN);
+				
+				// Add the edge to the partition
+				partition.addEdge(incidentEdge, network.getRow(incidentEdge));
+				
+				// Determine the node's index that is on the other side of the edge
+				CyNode otherNode;
+				
+				if (incidentEdge.getSource() == currentNode) {
+					otherNode = incidentEdge.getTarget();
+				} else {
+					otherNode = incidentEdge.getSource();
+				}
+				
+				// Have we seen the connecting node yet?
+				if (nodesSeenMap.get(otherNode) == m_NODE_HAS_NOT_BEEN_SEEN) {
+					// Mark it as having been seen
+					nodesSeenMap.put(otherNode, m_NODE_HAS_BEEN_SEEN);
+					// Collect adjacent nodes in reverse order
+					connectedNodes.add(0, otherNode);
+				}
 			}
-
-			edgesSeenMap.put(incidentEdge, m_NODE_HAS_BEEN_SEEN);
-
-			// Add the edge to the partition
-			partition.addEdge(incidentEdge,network.getRow(incidentEdge));
-
-			// Determine the node's index that is on the other side of the edge
-			CyNode otherNode;
-
-			if (incidentEdge.getSource() == node) {
-				otherNode = incidentEdge.getTarget();
-			} else {
-				otherNode = incidentEdge.getSource();
-			}
-
-			// Have we seen the connecting node yet?
-			if (nodesSeenMap.get(otherNode) == m_NODE_HAS_NOT_BEEN_SEEN) {
-				// Mark it as having been seen
-				nodesSeenMap.put(otherNode, m_NODE_HAS_BEEN_SEEN);
-
-				// Traverse through this one
-				traverse(network, networkView, nodesToViews, otherNode, partition, nodesSeenMap, edgesSeenMap);
-			}
+			
+			// Pushing nodes causes them to be visited in reverse order (LIFO)
+			connectedNodes.forEach(nodeStack::push);
 		}
 	}
 }

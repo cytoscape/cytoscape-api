@@ -44,9 +44,10 @@ import org.cytoscape.work.util.ListSingleSelection;
  * @CyAPI.InModule layout-api
  */
 public final class EdgeWeighter {
-
+	
   public WeightTypes type = WeightTypes.GUESS;
-  @Tunable(description="How to interpret weight values:", groups={"Edge Weight Settings"}, gravity=2.0)
+
+  @Tunable(description="How to interpret weight values:", groups={"Edge Weight Settings"}, gravity=2.0, context="both", longDescription="How to interpret weight values; must be one of ```Heuristic```, ```-Log(value)```, ```1 - normalized value``` and ```normalized value```. Defaults to ```Heuristic```", exampleStringValue="Heuristic")
 	public ListSingleSelection<WeightTypes> getType() {
 		ListSingleSelection<WeightTypes> t = 
 			new ListSingleSelection<WeightTypes>(WeightTypes.GUESS, WeightTypes.LOG, 
@@ -59,13 +60,13 @@ public final class EdgeWeighter {
 		type = t.getSelectedValue();
 	}
 
-	@Tunable(description="The minimum edge weight to consider:", groups={"Edge Weight Settings"})
+	@Tunable(description="The minimum edge weight to consider:", groups={"Edge Weight Settings"}, context="both", longDescription="The minimum edge weight to consider, numeric values, default is 0", exampleStringValue="0")
 	public double minWeightCutoff = 0;
 
-	@Tunable(description="The maximum edge weight to consider:", groups={"Edge Weight Settings"})
+	@Tunable(description="The maximum edge weight to consider:", groups={"Edge Weight Settings"}, context="both", longDescription="The maximum edge weight to consider, default to the Double.MAX value", exampleStringValue="1000")
 	public double maxWeightCutoff = Double.MAX_VALUE;
 	
-	@Tunable(description="The default edge weight to consider:", groups={"Edge Weight Settings"})
+	@Tunable(description="The default edge weight to consider:", groups={"Edge Weight Settings"}, context="both", longDescription="The default edge weight to consider, default is 0.5 ", exampleStringValue="0.5")
 	public double defaultEdgeWeight = 0.5;
 	
 	private String weightAttribute = "";

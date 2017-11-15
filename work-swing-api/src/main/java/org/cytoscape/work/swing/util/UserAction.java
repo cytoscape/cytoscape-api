@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
  */
 public final class UserAction {
 
-	private static final Logger logger = LoggerFactory.getLogger(UserAction.class);
+	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 	private ActionListener actionListener = null;
 	private boolean enabled = false;
 	
@@ -72,7 +72,7 @@ public final class UserAction {
 	public ActionListener getActionListener() { return actionListener; }
 	public void setActionListener(final ActionListener actionListener) {
 		this.actionListener = actionListener;
-		if (this.actionListener == null) enabled = false;
+		enabled = actionListener != null;
 	}
 
 	public boolean getEnabled() { return enabled; }
