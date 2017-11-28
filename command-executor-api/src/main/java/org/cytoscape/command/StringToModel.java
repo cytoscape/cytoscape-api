@@ -62,6 +62,15 @@ import org.cytoscape.view.model.CyNetworkView;
  */
 public interface StringToModel {
 
+	static final String _CY_NETWORK_DESC = "pecifies a network by name, or by SUID if the prefix ```SUID:``` is used. The keyword ```CURRENT```, or a blank value can also be used to specify the current network.";
+	
+	static final String _CY_LIST_DESC = "A list of ```COLUMN:VALUE``` pairs of the format ```COLUMN1:VALUE1,COLUMN2:VALUE2,...``` can be used to match multiple values.";
+	
+	static final String _CY_ROW_DESC = "The pattern ```COLUMN:VALUE``` sets this parameter to any rows that contain the specified column value; if the ```COLUMN``` prefix is not used, the NAME column is matched by default.";
+	
+	public static final String CY_NETWORK_LONG_DESCRIPTION = "S" + _CY_NETWORK_DESC;
+	
+	public static final String CY_NETWORK_EXAMPLE_STRING = "current";
 	/**
  	 * Convert a string request for a network into a {@link CyNetwork}.  This method
  	 * may be used to find a network with a given name or the current network.
@@ -71,6 +80,18 @@ public interface StringToModel {
  	 * @return the returned CyNetwork or null if the name doesn't exist
  	 */
 	public CyNetwork getNetwork(String strNet);
+	
+	public static final String TABLE_LONG_DESCRIPTION = "Specifies a table using the pattern ```TYPE:NETWORK``` where ```TYPE``` is one of ```node```, ```edge```, or ```network```. ```NETWORK``` s" + _CY_NETWORK_DESC;
+	public static final String ROW_LONG_DESCRIPTION = "Specifies a row of a table using the primary key as the indentifier";
+	public static final String COLUMN_LONG_DESCRIPTION = "Specifies the name of a column in the table";
+	public static final String VALUE_LONG_DESCRIPTION = "Specifies the primary key of a value in the row of a table";
+	public static final String ROW_EXAMPLE = "Key";
+	public static final String COLUMN_EXAMPLE = "Property";
+	public static final String VALUE_EXAMPLE = "BRCA";
+	public static final String TABLE_TITLE_LONG_DESCRIPTION = "The name of the table used in the current network";
+	public static final String TABLE_TITLE_EXAMPLE = "Nodes";
+	public static final String KEY_TYPE_LONG_DESCRIPTION = "The syntactical type of the value used in the key";
+	public static final String KEY_TYPE_EXAMPLE = "Double";
 	
 	/**
  	 * Convert a string request for a table into a {@link CyTable}.  This method
@@ -82,6 +103,9 @@ public interface StringToModel {
  	 */
 	public CyTable getTable(String strTable);
 
+	public static final String CY_NODE_LIST_LONG_DESCRIPTION = "Specifies a list of nodes. The keywords ```all```, ```selected```, or ```unselected``` can be used to specify nodes by their selection state. " + _CY_ROW_DESC + " " + _CY_LIST_DESC;
+
+	public static final String CY_NODE_LIST_EXAMPLE_STRING = "selected";
 	/**
  	 * Convert a string request for a nodelist into a list of {@link CyNode}s.  This
  	 * method may be used to find selected nodes, or nodes matching a particular column
@@ -98,6 +122,9 @@ public interface StringToModel {
  	 */
 	public List<CyNode> getNodeList(CyNetwork net, String nodelist);
 
+	public static final String CY_EDGE_LIST_LONG_DESCRIPTION = "Specifies a list of edges. The keywords ```all```, ```selected```, or ```unselected``` can be used to specify edges by their selection state. " + _CY_ROW_DESC + " " + _CY_LIST_DESC;
+
+	public static final String CY_EDGE_LIST_EXAMPLE_STRING = "selected";
 	/**
  	 * Convert a string request for a edgelist into a list of {@link CyEdge}s.  This
  	 * method may be used to find selected edges, or edges matching a particular column
@@ -114,6 +141,7 @@ public interface StringToModel {
  	 */
 	public List<CyEdge> getEdgeList(CyNetwork net, String edgelist);
 
+	public static final String CY_ROW_LIST_LONG_DESCRIPTION = "Specifies a list of rows. " + _CY_ROW_DESC + " " + _CY_LIST_DESC + " This parameter can also be set to ```all``` to include all rows.";
 	/**
  	 * Convert a string request for a rowlist into a list of {@link CyRow}s.  This
  	 * method may be used to find all rows, or rows matching a particular column
@@ -127,4 +155,17 @@ public interface StringToModel {
  	 * @return a list of CyRows or null if nothing matched
  	 */
 	public List<CyRow> getRowList(CyTable table, String rowlist);
+	
+	
+	/**
+	 *  Group terms
+	 */
+	public static final String GROUP_NAME_LONG_DESCRIPTION = "Specifies the name used to identify the group. ";
+
+	public static final String GROUP_NAME_EXAMPLE_STRING = "MyLocus";
+	public static final String GROUP_NAME_EXAMPLE_STRING2 = "ImprovedLocus";
+	public static final String GROUP_LIST_LONG_DESCRIPTION = "Specifies a list of groups. The keywords ```all```, ```selected```, or ```unselected``` can be used to specify groups by their selection state. ";
+
+	public static final String GROUP_LIST_EXAMPLE_STRING = "selected";
+
 }
