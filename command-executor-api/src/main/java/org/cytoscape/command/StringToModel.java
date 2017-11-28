@@ -81,7 +81,17 @@ public interface StringToModel {
  	 */
 	public CyNetwork getNetwork(String strNet);
 	
-	public static final String CY_TABLE_LONG_DESCRIPTION = "Specifies a table using the pattern ```TYPE:NETWORK``` where ```TYPE``` is one of ```node```, ```edge```, or ```network```. ```NETWORK``` s" + _CY_NETWORK_DESC;
+	public static final String TABLE_LONG_DESCRIPTION = "Specifies a table using the pattern ```TYPE:NETWORK``` where ```TYPE``` is one of ```node```, ```edge```, or ```network```. ```NETWORK``` s" + _CY_NETWORK_DESC;
+	public static final String ROW_LONG_DESCRIPTION = "Specifies a row of a table using the primary key as the indentifier";
+	public static final String COLUMN_LONG_DESCRIPTION = "Specifies the name of a column in the table";
+	public static final String VALUE_LONG_DESCRIPTION = "Specifies the primary key of a value in the row of a table";
+	public static final String ROW_EXAMPLE = "Key";
+	public static final String COLUMN_EXAMPLE = "Property";
+	public static final String VALUE_EXAMPLE = "BRCA";
+	public static final String TABLE_TITLE_LONG_DESCRIPTION = "The name of the table used in the current network";
+	public static final String TABLE_TITLE_EXAMPLE = "Nodes";
+	public static final String KEY_TYPE_LONG_DESCRIPTION = "The syntactical type of the value used in the key";
+	public static final String KEY_TYPE_EXAMPLE = "Double";
 	
 	/**
  	 * Convert a string request for a table into a {@link CyTable}.  This method
@@ -145,4 +155,17 @@ public interface StringToModel {
  	 * @return a list of CyRows or null if nothing matched
  	 */
 	public List<CyRow> getRowList(CyTable table, String rowlist);
+	
+	
+	/**
+	 *  Group terms
+	 */
+	public static final String GROUP_NAME_LONG_DESCRIPTION = "Specifies the name used to identify the group. ";
+
+	public static final String GROUP_NAME_EXAMPLE_STRING = "MyLocus";
+	public static final String GROUP_NAME_EXAMPLE_STRING2 = "ImprovedLocus";
+	public static final String GROUP_LIST_LONG_DESCRIPTION = "Specifies a list of groups. The keywords ```all```, ```selected```, or ```unselected``` can be used to specify groups by their selection state. ";
+
+	public static final String GROUP_LIST_EXAMPLE_STRING = "selected";
+
 }
