@@ -1,5 +1,7 @@
 package org.cytoscape.service.util.internal.utils;
 
+import java.util.Dictionary;
+
 /*
  * #%L
  * Cytoscape Service API (service-api)
@@ -25,6 +27,7 @@ package org.cytoscape.service.util.internal.utils;
  */
 
 import java.util.HashMap;
+import java.util.Hashtable;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -56,9 +59,9 @@ public final class ServiceUtil {
 	 * @return A reference to a service of type serviceClass.
 	 * @throws RuntimeException If the requested service can't be found.
 	 */
-	public static <S> S getService(BundleContext bc, Class<S> serviceClass, List<ServiceReference> gottenServices) {
+	public static <S> S getService(BundleContext bc, Class<S> serviceClass, List<ServiceReference<?>> gottenServices) {
 		try {
-			ServiceReference ref = bc.getServiceReference(serviceClass.getName());
+			ServiceReference<?> ref =  bc.getServiceReference(serviceClass.getName());
 			if ( ref == null ) 
 				throw new NullPointerException("ServiceReference is null for: " + serviceClass.getName());
 			if (gottenServices != null)
@@ -84,9 +87,9 @@ public final class ServiceUtil {
 	 * @return A reference to a service of type serviceClass that passes the specified filter.
 	 * @throws RuntimeException If the requested service can't be found.
 	 */
-	public static <S> S getService(BundleContext bc, Class<S> serviceClass, String filter, List<ServiceReference> gottenServices) {
+	public static <S> S getService(BundleContext bc, Class<S> serviceClass, String filter, List<ServiceReference<?>> gottenServices) {
 		try { 
-			ServiceReference[] refs = bc.getServiceReferences(serviceClass.getName(),filter);
+			ServiceReference<?>[] refs = bc.getServiceReferences(serviceClass.getName(),filter);
 			if ( refs == null ) 
 				throw new NullPointerException("ServiceReference is null for: " + serviceClass.getName() + " with filter: " + filter);
 			if (gottenServices != null)
@@ -181,8 +184,13 @@ public final class ServiceUtil {
 		if ( bc == null )
 			throw new IllegalStateException( "BundleContext is null" );
 
+			Hashtable<String, Object> newProps = new Hashtable<>();
+			for (Map.Entry<Object, Object> entry : props.entrySet()) {
+				newProps.put(entry.getKey().toString(), entry.getValue());
+			}
+		
 		//logger.debug("attempting to register service: " + service.toString() + " of type " + serviceClass.getName());
-		ServiceRegistration s = bc.registerService( serviceClass.getName(), service, props );
+		ServiceRegistration s = bc.registerService( serviceClass.getName(), service, newProps );
 
 		Map<Object, ServiceRegistration> registrations = serviceRegistrations.get(serviceClass);
 		if ( registrations == null ) {

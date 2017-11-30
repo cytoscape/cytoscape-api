@@ -67,6 +67,8 @@
 				<version>${maven-bundle-plugin.version}</version>
 				<extensions>true</extensions>
 				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
 					<instructions>
 						<Bundle-SymbolicName>${bundle.symbolicName}</Bundle-SymbolicName>
 						<Bundle-Version>${project.version}</Bundle-Version>
@@ -102,9 +104,16 @@
 		<dependency>
 			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.compendium</artifactId>
-			<version>${osgi.api.version}</version>
+			<version>${osgi.compendium.version}</version>
 			<scope>provided</scope>
+			<optional>true</optional>
 		</dependency>
+			<dependency>
+    <groupId>org.osgi</groupId>
+    <artifactId>org.osgi.util.tracker</artifactId>
+    <version>1.5.1</version>
+    <scope>provided</scope>
+</dependency>
 		
 		<!-- for testing -->
 		<dependency>
