@@ -1,5 +1,6 @@
 package org.cytoscape.view.presentation.annotations;
 
+import java.util.Collection;
 import java.util.List;
 
 import org.cytoscape.view.model.CyNetworkView;
@@ -21,6 +22,14 @@ public interface AnnotationManager {
 	 * @param networkView the network view to add this annotation to
 	 */
 	public void addAnnotation(Annotation annotation);
+	
+	/**
+	 * Adds annotations to the specified network view.
+	 *
+	 * @param annotations the annotations to add
+	 * @param networkView the network view to add this annotation to
+	 */
+	public void addAnnotations(Collection<? extends Annotation> annotations);
 
 	/**
 	 * Remove an annotation from its network view.  If there are
@@ -29,6 +38,14 @@ public interface AnnotationManager {
 	 * @param annotation the annotation to remove
 	 */
 	public void removeAnnotation(Annotation annotation);
+	
+	/**
+	 * Remove an annotation from its network view.  If there are
+	 * no other references to this annotation, it will be garbage collected.
+	 *
+	 * @param annotation the annotation to remove
+	 */
+	public void removeAnnotations(Collection<? extends Annotation> annotations);
 
 	/**
 	 * Retrieve the list of annotations for a specific network view.

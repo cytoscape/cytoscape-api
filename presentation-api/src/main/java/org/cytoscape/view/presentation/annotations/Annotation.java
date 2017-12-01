@@ -25,7 +25,6 @@ package org.cytoscape.view.presentation.annotations;
  */
 
 import java.awt.geom.Point2D;
-
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -212,7 +211,9 @@ public interface Annotation {
 	/**
 	 * Remove the annotation.  This will remove the annotation from the canvas
 	 * and the annotation manager.
+	 * @deprecated Use {@link AnnotationManager#removeAnnotation()} instead.
 	 */
+	@Deprecated
 	public void removeAnnotation();
 
 	/**

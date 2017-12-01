@@ -23,13 +23,7 @@ package org.cytoscape.model;
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
  */
-
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.awt.Color;
 import java.util.ArrayList;
@@ -691,6 +685,54 @@ public abstract class AbstractCyTableTest {
 		assertEquals(matchingRow.get("x", Integer.class), Integer.valueOf(33));
 	}
 
+	
+	@Test
+	public void testVirtualColumnCountMatchingRows() {
+		table.createColumn("x", Integer.class, false);
+		table.getRow(1L).set("x", 11);
+		table.getRow(2L).set("x", 22);
+		
+		table2.createColumn("s", String.class, false);
+		table.addVirtualColumn("s1", "s", table2, table.getPrimaryKey().getName(), true);
+		
+		table2.getRow(1L).set("s", "a");
+		table2.getRow(2L).set("s", "a");
+		table2.getRow(3L).set("s", "a");
+		
+		assertEquals(2, table.getRowCount()); 
+		assertEquals(2, table.countMatchingRows("s1","a")); // Can't return more rows than are in the table!!!
+		assertEquals(3, table2.getRowCount()); 
+		assertEquals(3, table2.countMatchingRows("s","a"));
+	}
+	
+	
+	@Test
+	public void testVirtualColumnGetMatchingKeys() {
+		table.createColumn("x", Integer.class, false);
+		table.getRow(1L).set("x", 11);
+		table.getRow(2L).set("x", 22);
+		
+		table2.createColumn("s", String.class, false);
+		table.addVirtualColumn("s1", "s", table2, table.getPrimaryKey().getName(), true);
+		
+		table2.getRow(1L).set("s", "a");
+		table2.getRow(2L).set("s", "a");
+		table2.getRow(3L).set("s", "a");
+		
+		assertEquals(2, table.getRowCount()); 
+		Collection<Long> matchingKeys = table.getMatchingKeys("s1","a", Long.class);
+		assertEquals(2, matchingKeys.size()); // Can't return more rows than are in the table!!!
+		assertTrue(matchingKeys.contains(1L));
+		assertTrue(matchingKeys.contains(2L));
+		
+		matchingKeys = table2.getMatchingKeys("s","a", Long.class);
+		assertEquals(3, matchingKeys.size());
+		assertTrue(matchingKeys.contains(1L));
+		assertTrue(matchingKeys.contains(2L));
+		assertTrue(matchingKeys.contains(3L));
+	}
+	
+	
 	@Test
 	public void testVirtualColumnDelete() {
 		table.createColumn("x", Long.class, false);
