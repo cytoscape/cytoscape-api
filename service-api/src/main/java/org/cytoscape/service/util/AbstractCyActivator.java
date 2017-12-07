@@ -58,7 +58,7 @@ public abstract class AbstractCyActivator implements BundleActivator {
 	
 	private final Map<Class,Map<Object,ServiceRegistration>> serviceRegistrations;
 	private final List<CyServiceListener> serviceListeners;
-	private final List<ServiceReference> gottenServices;
+	private final List<ServiceReference<?>> gottenServices;
 
 	/**
 	 * Constructor.
@@ -66,7 +66,7 @@ public abstract class AbstractCyActivator implements BundleActivator {
 	public AbstractCyActivator() {
 		serviceRegistrations = new HashMap<Class,Map<Object,ServiceRegistration>>();
 		serviceListeners = new ArrayList<CyServiceListener>();
-		gottenServices = new ArrayList<ServiceReference>();
+		gottenServices = new ArrayList<ServiceReference<?>>();
 	}
 
 	/**
