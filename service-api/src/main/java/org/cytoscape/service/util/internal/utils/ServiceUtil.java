@@ -43,9 +43,9 @@ import org.osgi.framework.ServiceRegistration;
  *
  */
 public final class ServiceUtil {
-	
+
 	private ServiceUtil(){
-		
+
 	}
 
 	/**
@@ -99,8 +99,8 @@ public final class ServiceUtil {
 			throw new RuntimeException("Couldn't find service: " + serviceClass.getName() + " with filter: " + filter, e);
 		}
 	}
-	
-	
+
+
 	/**
 	 * A method that will cause the specified register/unregister methods on the listener
 	 * object to be called any time that a service of the specified type is registered or
@@ -128,7 +128,7 @@ public final class ServiceUtil {
 			throw new RuntimeException("Could not listen to services for object: " + listener + " with methods: " + registerMethodName + ", " + unregisterMethodName + ", service type: " + serviceClass + ", and additional filter: " + additionalFilter, e); 
 		}
 	}
-	
+
 
 	/**
 	 * A method that will cause the specified register/unregister methods on the listener
@@ -160,8 +160,8 @@ public final class ServiceUtil {
 			throw new RuntimeException("Could not listen to services for object: service type: " + serviceClass + ", and additional filter: " + additionalFilter, e); 
 		}
 	}
-	
-	
+
+
 	/**
 	 * A utility method that registers the specified service object as an OSGi service of
 	 * the specified type.
@@ -174,7 +174,7 @@ public final class ServiceUtil {
 	 */
 	public static void registerService(final BundleContext bc, final Object service, final Class<?> serviceClass, final Properties props, 
 			Map<Class,Map<Object,ServiceRegistration>> serviceRegistrations) {
-		
+
 		if ( service == null )
 			throw new NullPointerException( "service object is null" );
 		if ( serviceClass == null )
@@ -184,13 +184,8 @@ public final class ServiceUtil {
 		if ( bc == null )
 			throw new IllegalStateException( "BundleContext is null" );
 
-			Hashtable<String, Object> newProps = new Hashtable<>();
-			for (Map.Entry<Object, Object> entry : props.entrySet()) {
-				newProps.put(entry.getKey().toString(), entry.getValue());
-			}
-		
 		//logger.debug("attempting to register service: " + service.toString() + " of type " + serviceClass.getName());
-		ServiceRegistration s = bc.registerService( serviceClass.getName(), service, newProps );
+		ServiceRegistration s = bc.registerService( serviceClass.getName(), service, getDictionary(props));
 
 		Map<Object, ServiceRegistration> registrations = serviceRegistrations.get(serviceClass);
 		if ( registrations == null ) {
@@ -200,6 +195,15 @@ public final class ServiceUtil {
 
 		registrations.put(service,s);
 	}
+	
+	public static Dictionary<String, ?> getDictionary(Properties props) {
+		Hashtable<String, Object> dictionary = new Hashtable<>();
+		for (Map.Entry<Object, Object> entry : props.entrySet()) {
+			dictionary.put(entry.getKey().toString(), entry.getValue());
+		}
+		return dictionary;
+	}
+	
 	/**
 	 * This method registers an object as an OSGi service
 	 * for all interfaces that the object implements

@@ -25,12 +25,22 @@ package org.cytoscape.service.util;
  */
 
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.doAnswer;
 import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;import java.util.Dictionary;
+import static org.mockito.Mockito.when;
+import static org.mockito.Matchers.any;
+import static org.mockito.Matchers.eq;
+import static org.mockito.Matchers.same;
+
+
+import java.util.Dictionary;
 import java.util.Properties;
 
 import org.junit.Before;
 import org.junit.Test;
+import org.mockito.invocation.InvocationOnMock;
+import org.mockito.stubbing.Answer;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceRegistration;
 
@@ -66,53 +76,68 @@ public class AbstractCyActivatorTest {
 	}
 	
 	
-//	@Test
-//	public void testRegisterAllServices (){
-//		
-//		DummyClass2 service = new DummyClass2();
-//		Dictionary props = mock(Dictionary<K, V>.c)
-//
-//		ServiceRegistration s = mock(ServiceRegistration.class);
-//		ServiceRegistration s2 = mock(ServiceRegistration.class);
-//		when(bc.registerService(DummyInterface2.class.getName(), service, props)).thenReturn(s2); 
-//		when(bc.registerService(DummyInterface.class.getName(), service, props)).thenReturn(s); 
-//		
-//		activator.registerAllServices(bc, service, props);
-//		assertTrue(activator.getServiceRegistrations().get(DummyInterface2.class).get(service).equals(s2));
-//		assertTrue(activator.getServiceRegistrations().get(DummyInterface.class).get(service).equals(s));
-//
-//	}
-//	
-//	@Test
-//	public void testRegisterService (){
-//		
-//		DummyClass2 service = new DummyClass2();
-//		Properties props = new Properties();
-//
-//		ServiceRegistration s2 = mock(ServiceRegistration.class);
-//		when(bc.registerService(DummyInterface2.class.getName(), service, props)).thenReturn(s2); 
-//		
-//		activator.registerService(bc, service, DummyInterface2.class, props);
-//		assertTrue(activator.getServiceRegistrations().get(DummyInterface2.class).get(service).equals(s2));
-//
-//	}
-//	
-//	@Test
-//	public void testStop (){
-//		
-//		DummyClass2 service = new DummyClass2();
-//		Properties props = new Properties();
-//
-//		ServiceRegistration s = mock(ServiceRegistration.class);
-//		ServiceRegistration s2 = mock(ServiceRegistration.class);
-//		when(bc.registerService(DummyInterface2.class.getName(), service, props)).thenReturn(s2); 
-//		when(bc.registerService(DummyInterface.class.getName(), service, props)).thenReturn(s); 
-//		
-//		activator.registerAllServices(bc, service, props);
-//		assertTrue(activator.getServiceRegistrations().get(DummyInterface2.class).get(service).equals(s2));
-//		assertTrue(activator.getServiceRegistrations().get(DummyInterface.class).get(service).equals(s));
-//	
-//		activator.stop(bc);
-//		assertTrue(activator.getServiceRegistrations().isEmpty());
-//	}
+	@Test
+	public void testRegisterAllServices (){
+		
+		DummyClass2 service = new DummyClass2();
+		
+		ServiceRegistration s = mock(ServiceRegistration.class);
+		ServiceRegistration s2 = mock(ServiceRegistration.class);
+		when(bc.registerService(eq(DummyInterface2.class.getName()), same(service), any(Dictionary.class))).thenReturn(s2); 
+		when(bc.registerService(eq(DummyInterface.class.getName()), same(service), any(Dictionary.class))).thenReturn(s); 
+		
+		Properties props = mock(Properties.class);
+		activator.registerAllServices(bc, service, props);
+		assertEquals(2, activator.getServiceRegistrations().size());
+		assertTrue(activator.getServiceRegistrations().get(DummyInterface2.class).get(service).equals(s2));
+		assertTrue(activator.getServiceRegistrations().get(DummyInterface.class).get(service).equals(s));
+
+	}
+	
+	@Test
+	public void testRegisterService (){
+		
+		DummyClass2 service = new DummyClass2();
+		Properties props = new Properties();
+		
+		final String DUMMY_KEY = "dummyKey";
+		final String DUMMY_VALUE = "dummyValue";
+		props.put(DUMMY_KEY, DUMMY_VALUE);
+		
+		ServiceRegistration s2 = mock(ServiceRegistration.class);
+		doAnswer(new Answer<ServiceRegistration>() {
+			public ServiceRegistration answer(InvocationOnMock invocation) {
+				Object[] args = invocation.getArguments();
+				assertTrue(args[2] instanceof Dictionary);
+				Dictionary dictionary = (Dictionary) args[2];
+				assertEquals(1, dictionary.size());
+				assertEquals(DUMMY_VALUE, dictionary.get(DUMMY_KEY));
+				return s2;
+			}
+		}).when(bc).registerService(eq(DummyInterface2.class.getName()), same(service), any(Dictionary.class));
+			
+		activator.registerService(bc, service, DummyInterface2.class, props);
+		assertEquals(1, activator.getServiceRegistrations().size());
+		assertTrue(activator.getServiceRegistrations().get(DummyInterface2.class).get(service).equals(s2));
+
+	}
+	
+	@Test
+	public void testStop (){
+		
+		DummyClass2 service = new DummyClass2();
+		Properties props = new Properties();
+
+		ServiceRegistration s = mock(ServiceRegistration.class);
+		ServiceRegistration s2 = mock(ServiceRegistration.class);
+		when(bc.registerService(eq(DummyInterface2.class.getName()), same(service), any(Dictionary.class))).thenReturn(s2); 
+		when(bc.registerService(eq(DummyInterface.class.getName()), same(service), any(Dictionary.class))).thenReturn(s); 
+		
+		activator.registerAllServices(bc, service, props);
+		assertTrue(activator.getServiceRegistrations().get(DummyInterface2.class).get(service).equals(s2));
+		assertTrue(activator.getServiceRegistrations().get(DummyInterface.class).get(service).equals(s));
+	
+		activator.stop(bc);
+		assertTrue(activator.getServiceRegistrations().isEmpty());
+	}
 }
