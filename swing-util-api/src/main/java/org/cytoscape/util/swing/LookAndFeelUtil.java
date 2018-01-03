@@ -30,6 +30,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPanel;
 import javax.swing.JRootPane;
 import javax.swing.JSlider;
+import javax.swing.JSpinner;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
@@ -396,22 +397,26 @@ public final class LookAndFeelUtil {
 						return this;
 					}
 				});
-			} else if (c instanceof JMenuItem) {
-				c.setFont(c.getFont().deriveFont(getSmallFontSize()));
+			} else if (c instanceof JMenuItem || c instanceof JSpinner) {
+				if (c.getFont() != null)
+					c.setFont(c.getFont().deriveFont(getSmallFontSize()));
 			} else if (c instanceof JSlider) {
 				// Change the slider's label sizes -- only works if it's done after the slider has been added to
 				// its parent container and had its UI assigned
 				JSlider slider = (JSlider) c;
 				
 				try {
-					Font tickFont = slider.getFont().deriveFont(getSmallFontSize());
 					Dictionary<?, JLabel> labelTable = slider.getLabelTable();
 					
-					for (Enumeration<?> enumeration = labelTable.keys(); enumeration.hasMoreElements();) {
-						Object k = enumeration.nextElement();
-						JLabel lbl = labelTable.get(k);
-						lbl.setFont(tickFont); // Updates the font size
-						lbl.setSize(lbl.getPreferredSize()); // Updates the label size and slider layout
+					if (labelTable != null) {
+						Font tickFont = slider.getFont().deriveFont(getSmallFontSize());
+						
+						for (Enumeration<?> enumeration = labelTable.keys(); enumeration.hasMoreElements();) {
+							Object k = enumeration.nextElement();
+							JLabel lbl = labelTable.get(k);
+							lbl.setFont(tickFont); // Updates the font size
+							lbl.setSize(lbl.getPreferredSize()); // Updates the label size and slider layout
+						}
 					}
 				} catch (Exception e) {
 					logger.error("Cannot make slider labels smaller", e);
