@@ -3,7 +3,7 @@
 	<parent>
 		<artifactId>api-parent</artifactId>
 		<groupId>org.cytoscape</groupId>
-		<version>3.6.0</version>
+		<version>3.6.1</version>
 	</parent>
 
 	<properties>
