@@ -363,6 +363,10 @@ public abstract class AbstractGUITunableHandler extends AbstractTunableHandler i
 			this.update();
 		}
 
+		public GUITunableHandler getTunableHandler() {
+			return AbstractGUITunableHandler.this;
+		}
+		
 		public JLabel getLabel() {
 			return label;
 		}
