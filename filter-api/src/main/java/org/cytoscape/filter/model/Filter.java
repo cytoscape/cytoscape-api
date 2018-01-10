@@ -29,4 +29,15 @@ public interface Filter<C, E> extends Transformer<C, E> {
 	 * @return {@code true} if this filter accepts the given element.
 	 */
 	boolean accepts(C context, E element);
+	
+
+	/**
+	 * Returns true if the accepts() method will always return false for all inputs.
+	 * This is an optimization to avoid running the filter if its just going to fail on all input anyway.
+	 * This typically happens when the filter is not fully configured, for example a column
+	 * filter might still be displaying "choose column". 
+	 */
+	default boolean isAlwaysFalse() {
+		return false;
+	}
 }
