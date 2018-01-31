@@ -49,6 +49,7 @@ public interface ShapeAnnotation extends Annotation {
 		HEXAGON ("Hexagon"),
 		STAR6 ("6-Pointed Star"),
 		OCTAGON ("Octagon"),
+		PARALLELOGRAM ("Parallelogram"),
 		CUSTOM ("Custom");
 	
 		private final String name;
