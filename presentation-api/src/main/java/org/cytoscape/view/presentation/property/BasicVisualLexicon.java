@@ -108,25 +108,33 @@ public class BasicVisualLexicon implements VisualLexicon {
 	// //// Node VP /////////
 
 	/**
-	 * The color of the whole node, including its border, label and selected paint. 
+	 * The color of the whole node, including its border, label and selected paint.
+	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Range:</strong> A non-null color </p>
 	 */
 	public static final VisualProperty<Paint> NODE_PAINT = new PaintVisualProperty(new Color(120, 120, 120),
 			PAINT_RANGE, "NODE_PAINT", "Node Paint", CyNode.class);
 
 	/**
 	 * The color of the node.
+	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Range:</strong> A non-null color </p> 
 	 */
 	public static final VisualProperty<Paint> NODE_FILL_COLOR = new PaintVisualProperty(new Color(200, 0, 0),
 			PAINT_RANGE, "NODE_FILL_COLOR", "Node Fill Color", CyNode.class);
 
 	/**
 	 * The color of the node label.
+	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Range:</strong> A non-null color </p> 
 	 */
 	public static final VisualProperty<Paint> NODE_LABEL_COLOR = new PaintVisualProperty(Color.BLACK, PAINT_RANGE,
 			"NODE_LABEL_COLOR", "Node Label Color", CyNode.class);
 
 	/**
 	 * The text used for the node label.
+	 * <p><strong>Property Type: </strong> {@see java.lang.String} </p>
+	 * <p><strong>Property Range:</strong> Any string </p> 
 	 */
 	public static final VisualProperty<String> NODE_LABEL = new StringVisualProperty("", ARBITRARY_STRING_RANGE,
 			"NODE_LABEL", "Node Label", CyNode.class);
@@ -189,12 +197,16 @@ public class BasicVisualLexicon implements VisualLexicon {
 	// Moved from DING rendering engine.
 	/**
 	 * TODO Documentation
+	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Range:</strong> A non-null color </p> 
 	 */
 	public static final VisualProperty<Paint> NODE_SELECTED_PAINT = new PaintVisualProperty(Color.YELLOW,
 			PAINT_RANGE, "NODE_SELECTED_PAINT", "Node Selected Paint", CyNode.class);
 
 	/**
 	 * The color of the border of the node.
+	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Range:</strong> A non-null color </p>  
 	 */
 	public static final VisualProperty<Paint> NODE_BORDER_PAINT = new PaintVisualProperty(Color.BLACK,
 			PAINT_RANGE, "NODE_BORDER_PAINT", "Node Border Paint", CyNode.class);
@@ -208,6 +220,8 @@ public class BasicVisualLexicon implements VisualLexicon {
 
 	/**
 	 * The text of the tooltip that appears when a mouse hovers over the node.
+	 * <p><strong>Property Type: </strong> {@see java.lang.String} </p>
+	 * <p><strong>Property Range:</strong> Any string </p> 
 	 */
 	public static final VisualProperty<String> NODE_TOOLTIP = new StringVisualProperty("",
 			ARBITRARY_STRING_RANGE, "NODE_TOOLTIP", "Node Tooltip", CyNode.class);
@@ -267,18 +281,24 @@ public class BasicVisualLexicon implements VisualLexicon {
 	/**
 	 * The color of the whole edge (including the stroke and arrows) when it is selected or
 	 *  unselected.
+	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Range:</strong> A non-null color </p> 
 	 */
 	public static final VisualProperty<Paint> EDGE_PAINT = new PaintVisualProperty(Color.gray, PAINT_RANGE,
 			"EDGE_PAINT", "Edge Paint", CyEdge.class);
 
 	/**
 	 * TODO Documentation
+	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Range:</strong> A non-null color </p> 
 	 */
 	public static final VisualProperty<Paint> EDGE_LABEL_COLOR = new PaintVisualProperty(Color.BLACK, PAINT_RANGE,
 			"EDGE_LABEL_COLOR", "Edge Label Color", CyEdge.class);
 
 	/**
 	 * The text used for the edge label.
+	 * <p><strong>Property Type: </strong> {@see java.lang.String} </p>
+	 * <p><strong>Property Range:</strong> Any string </p> 
 	 */
 	public static final VisualProperty<String> EDGE_LABEL = new StringVisualProperty("", ARBITRARY_STRING_RANGE,
 			"EDGE_LABEL", "Edge Label", CyEdge.class);
@@ -310,6 +330,8 @@ public class BasicVisualLexicon implements VisualLexicon {
 
 	/**
 	 * The text of the tooltip that appears when a mouse hovers over the edge.
+	 * <p><strong>Property Type: </strong> {@see java.lang.String} </p>
+	 * <p><strong>Property Range:</strong> Any string </p> 
 	 */
 	public static final VisualProperty<String> EDGE_TOOLTIP = new StringVisualProperty("",
 			ARBITRARY_STRING_RANGE, "EDGE_TOOLTIP", "Edge Tooltip", CyEdge.class);
@@ -334,19 +356,25 @@ public class BasicVisualLexicon implements VisualLexicon {
 			new ContinuousRange<Integer>(Integer.class, 0, 255, true, true), "EDGE_LABEL_TRANSPARENCY",
 			"Edge Label Transparency", CyEdge.class);
 	/**
-	 * The color of the whole edge (stroke and arrows) when selected. 
+	 * The color of the whole edge (stroke and arrows) when selected.
+	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Range:</strong> A non-null color </p>  
 	 */
 	public static final VisualProperty<Paint> EDGE_SELECTED_PAINT = new PaintVisualProperty(Color.RED,
 			PAINT_RANGE, "EDGE_SELECTED_PAINT", "Edge Color (Selected)", CyEdge.class);
 	
 	/**
 	 * The color of the whole edge (stroke and arrows) when it is not selected.
+	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Range:</strong> A non-null color </p> 
 	 */
 	public static final VisualProperty<Paint> EDGE_UNSELECTED_PAINT = new PaintVisualProperty(Color.DARK_GRAY,
 			PAINT_RANGE, "EDGE_UNSELECTED_PAINT", "Edge Color (Unselected)", CyEdge.class);
 	
 	/**
 	 * The color of the edge line when selected. 
+	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Range:</strong> A non-null color </p>  
 	 */
 	public static final VisualProperty<Paint> EDGE_STROKE_SELECTED_PAINT = new PaintVisualProperty(Color.RED,
 			PAINT_RANGE, "EDGE_STROKE_SELECTED_PAINT", "Edge Stroke Color (Selected)",
@@ -354,6 +382,8 @@ public class BasicVisualLexicon implements VisualLexicon {
 	
 	/**
 	 * The color of the edge line.
+	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Range:</strong> A non-null color </p>  
 	 */
 	public static final VisualProperty<Paint> EDGE_STROKE_UNSELECTED_PAINT = new PaintVisualProperty(Color.DARK_GRAY,
 			PAINT_RANGE, "EDGE_STROKE_UNSELECTED_PAINT", "Edge Stroke Color (Unselected)",
@@ -439,11 +469,15 @@ public class BasicVisualLexicon implements VisualLexicon {
 
 	/**
 	 * The title of the network view.
+	 * <p><strong>Property Type: </strong> {@see java.lang.String} </p>
+	 * <p><strong>Property Range:</strong> Any string </p> 
 	 */
 	public static final VisualProperty<String> NETWORK_TITLE = new StringVisualProperty("", ARBITRARY_STRING_RANGE,
 			"NETWORK_TITLE", "Network Title", true, CyNetwork.class);
 	/**
 	 * The background color of the network view.
+	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Range:</strong> A non-null color </p> 
 	 */
 	public static final VisualProperty<Paint> NETWORK_BACKGROUND_PAINT = new PaintVisualProperty(Color.WHITE,
 			PAINT_RANGE, "NETWORK_BACKGROUND_PAINT", "Network Background Paint", CyNetwork.class);

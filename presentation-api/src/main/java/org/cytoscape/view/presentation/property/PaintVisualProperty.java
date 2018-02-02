@@ -62,6 +62,7 @@ public final class PaintVisualProperty extends AbstractVisualProperty<Paint> {
 	/**
 	 * Constructor.
 	 * @param def The default paint value.
+	 * @param range The range of possible values for this visual property
 	 * @param id A machine readable string identifying this visual property used for XML serialization. 
 	 * @param displayName A human readable string used for displays and user interfaces. 
 	 * @param modelDataType The model data type associated with this visual property, e.g. CyNode, CyEdge, or CyNetwork. 
