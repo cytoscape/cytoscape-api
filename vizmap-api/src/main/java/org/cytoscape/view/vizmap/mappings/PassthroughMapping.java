@@ -29,6 +29,51 @@ import org.cytoscape.view.vizmap.VisualMappingFunction;
 /**
  * An interface describing a passthrough or identity mapping from attribute value
  * to visual property.
+ * 
+ *  <p>Fully Supported Node Visual Properties
+ *   <ul>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#NODE_FILL_COLOR}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#NODE_BORDER_LINE_TYPE}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#NODE_BORDER_PAINT}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#NODE_BORDER_WIDTH}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#NODE_BORDER_TRANSPARENCY}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#NODE_LABEL}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#NODE_LABEL_COLOR}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#NODE_LABEL_FONT_FACE}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#NODE_LABEL_FONT_SIZE}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#NODE_LABEL_WIDTH}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#NODE_LABEL_TRANSPARENCY}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#NODE_SIZE}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#NODE_WIDTH}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#NODE_HEIGHT}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#NODE_TRANSPARENCY}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#NODE_SHAPE}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#NODE_TOOLTIP}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#NODE_LABEL_FONT_FACE}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#NODE_NESTED_NETWORK_IMAGE_VISIBLE}</li>
+ *   </ul>
+ *   </p>
+ *   <p>Fully Supported Edge Visual Properties
+ *    <ul>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#EDGE_PAINT}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#EDGE_TRANSPARENCY}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#EDGE_LABEL}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#EDGE_LABEL_COLOR}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#EDGE_LABEL_TRANSPARENCY}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#EDGE_WIDTH}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#EDGE_LABEL_FONT_SIZE}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#EDGE_LABEL_WIDTH}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#EDGE_LINE_TYPE}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#EDGE_SOURCE_ARROW_SHAPE}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#EDGE_TARGET_ARROW_SHAPE}</li>
+ *     <li>{@link org.cytoscape.view.presentation.property.BasicVisualLexicon#EDGE_TOOLTIP}</li>
+ *   </ul>
+ * </p>
+ * <p>Partially Supported Visual Properties
+ * 	<ul>
+ * 	
+ *  </ul>
+ * </p>
  * @param <K> Generic type of the attribute mapped.
  * @param <V> Generic type of the VisualProperty used in this mapping.
  * @CyAPI.Api.Interface
@@ -36,6 +81,8 @@ import org.cytoscape.view.vizmap.VisualMappingFunction;
  */
 public interface PassthroughMapping<K, V> extends VisualMappingFunction<K,V> {
 
+	
+	
 	/** A label describing the mapping. */
 	public static final String PASSTHROUGH = "Passthrough Mapping";
 

@@ -106,180 +106,375 @@ public class BasicVisualLexicon implements VisualLexicon {
 			"Edge Visual Property", CyEdge.class);
 
 	// //// Node VP /////////
+
+	/**
+	 * The color of the whole node, including its border, label and selected paint. 
+	 */
 	public static final VisualProperty<Paint> NODE_PAINT = new PaintVisualProperty(new Color(120, 120, 120),
 			PAINT_RANGE, "NODE_PAINT", "Node Paint", CyNode.class);
+
+	/**
+	 * The color of the node.
+	 */
 	public static final VisualProperty<Paint> NODE_FILL_COLOR = new PaintVisualProperty(new Color(200, 0, 0),
 			PAINT_RANGE, "NODE_FILL_COLOR", "Node Fill Color", CyNode.class);
 
+	/**
+	 * The color of the node label.
+	 */
 	public static final VisualProperty<Paint> NODE_LABEL_COLOR = new PaintVisualProperty(Color.BLACK, PAINT_RANGE,
 			"NODE_LABEL_COLOR", "Node Label Color", CyNode.class);
 
+	/**
+	 * The text used for the node label.
+	 */
 	public static final VisualProperty<String> NODE_LABEL = new StringVisualProperty("", ARBITRARY_STRING_RANGE,
 			"NODE_LABEL", "Node Label", CyNode.class);
 
+	/**
+	 * X location of the node. Default value of this will be ignored. The value will be used only when mapping function is defined.
+	 */
 	public static final VisualProperty<Double> NODE_X_LOCATION = new DoubleVisualProperty(0.0, ARBITRARY_DOUBLE_RANGE,
 			"NODE_X_LOCATION", "Node X Location", true, CyNode.class);
+
+	/**
+	 * X location of the node. Default value of this will be ignored. The value will be used only when mapping function is defined.
+	 */
 	public static final VisualProperty<Double> NODE_Y_LOCATION = new DoubleVisualProperty(0.0, ARBITRARY_DOUBLE_RANGE,
 			"NODE_Y_LOCATION", "Node Y Location", true, CyNode.class);
 
+	/**
+	 * The size of the node. Width and height will be equal. This property is mutually exclusive of Node Height and Node Width.
+	 */
 	public static final VisualProperty<Double> NODE_SIZE = new DoubleVisualProperty(50.0,
 			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NODE_SIZE", "Node Size", CyNode.class);
+
+	/**
+	 * The width of the node. Width will be independent of height. This property is mutually exclusive of Node Size.
+	 */
 	public static final VisualProperty<Double> NODE_WIDTH = new DoubleVisualProperty(60.0,
 			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NODE_WIDTH", "Node Width", CyNode.class);
+
+	/**
+	 * The height of the node. Height will be independent of width. This property is mutually exclusive of Node Size.
+	 */	
 	public static final VisualProperty<Double> NODE_HEIGHT = new DoubleVisualProperty(40.0,
 			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NODE_HEIGHT", "Node Height", CyNode.class);
-
+	/**
+	 * Hides the node if set to false. By default, this value is set to true.
+	 */	
 	public static final VisualProperty<Boolean> NODE_VISIBLE = new BooleanVisualProperty(true, "NODE_VISIBLE",
 			"Node Visible", CyNode.class);
-
+	/**
+	 * TODO Documentation
+	 */
 	public static final VisualProperty<Boolean> NODE_SELECTED = new BooleanVisualProperty(false, "NODE_SELECTED",
 			"Node Selected", true, CyNode.class);
-	
+	/**
+	 * A boolean value that indicates whether a nested network should be visualized (assuming 
+	 * a nested network is present for the specified node).
+	 */
 	public static final VisualProperty<Boolean> NODE_NESTED_NETWORK_IMAGE_VISIBLE = new BooleanVisualProperty(true,
 			"NODE_NESTED_NETWORK_IMAGE_VISIBLE", "Nested Network Image Visible", CyNode.class);
 
-	
+	/**
+	 * The maximum width of the node label. If the node label is wider than the specified 
+	 * width, Cytoscape will automatically wrap the label on space characters. Cytoscape 
+	 * will not hyphenate words, meaning that if a single word (i.e. no spaces) is longer 
+	 * than maximum width, the word will be displayed beyond the maximum width.
+	 */
 	public static final VisualProperty<Double> NODE_LABEL_WIDTH = new DoubleVisualProperty(200d, NONE_ZERO_POSITIVE_DOUBLE_RANGE,
 			"NODE_LABEL_WIDTH", "Node Label Width", CyNode.class);
-	
-	////////////////////////////////// Edge VP ////////////////////////////////////////
-	
-	public static final VisualProperty<Paint> EDGE_PAINT = new PaintVisualProperty(Color.gray, PAINT_RANGE,
-			"EDGE_PAINT", "Edge Paint", CyEdge.class);
-
-	public static final VisualProperty<Paint> EDGE_LABEL_COLOR = new PaintVisualProperty(Color.BLACK, PAINT_RANGE,
-			"EDGE_LABEL_COLOR", "Edge Label Color", CyEdge.class);
-
-	public static final VisualProperty<String> EDGE_LABEL = new StringVisualProperty("", ARBITRARY_STRING_RANGE,
-			"EDGE_LABEL", "Edge Label", CyEdge.class);
-
-	public static final VisualProperty<Double> EDGE_WIDTH = new DoubleVisualProperty(1d,
-			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "EDGE_WIDTH", "Edge Width", CyEdge.class);
-
-	public static final VisualProperty<Boolean> EDGE_VISIBLE = new BooleanVisualProperty(true, "EDGE_VISIBLE",
-			"Edge Visible", CyEdge.class);
-
-	public static final VisualProperty<Boolean> EDGE_SELECTED = new BooleanVisualProperty(false, "EDGE_SELECTED",
-			"Edge Selected", true, CyEdge.class);
-
-	// ////// Network VP ////////
-	public static final VisualProperty<Double> NETWORK_SCALE_FACTOR = new DoubleVisualProperty(1.0,
-			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NETWORK_SCALE_FACTOR", "Network Scale Factor", true, CyNetwork.class);
-
-	public static final VisualProperty<Double> NETWORK_CENTER_X_LOCATION = new DoubleVisualProperty(0.0,
-			ARBITRARY_DOUBLE_RANGE, "NETWORK_CENTER_X_LOCATION", "Network Center X Location", true, CyNetwork.class);
-	public static final VisualProperty<Double> NETWORK_CENTER_Y_LOCATION = new DoubleVisualProperty(0.0,
-			ARBITRARY_DOUBLE_RANGE, "NETWORK_CENTER_Y_LOCATION", "Network Center Y Location", true, CyNetwork.class);
-
-	public static final VisualProperty<Double> NETWORK_SIZE = new DoubleVisualProperty(550.0,
-			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NETWORK_SIZE", "Network Size", true, CyNetwork.class);
-	public static final VisualProperty<Double> NETWORK_WIDTH = new DoubleVisualProperty(550.0,
-			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NETWORK_WIDTH", "Network Width", true, CyNetwork.class);
-	public static final VisualProperty<Double> NETWORK_HEIGHT = new DoubleVisualProperty(400.0,
-			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NETWORK_HEIGHT", "Network Height", true, CyNetwork.class);
-
-	public static final VisualProperty<String> NETWORK_TITLE = new StringVisualProperty("", ARBITRARY_STRING_RANGE,
-			"NETWORK_TITLE", "Network Title", true, CyNetwork.class);
-
-	public static final VisualProperty<Paint> NETWORK_BACKGROUND_PAINT = new PaintVisualProperty(Color.WHITE,
-			PAINT_RANGE, "NETWORK_BACKGROUND_PAINT", "Network Background Paint", CyNetwork.class);
-
-	// 3D-related props
-	public static final VisualProperty<Double> NODE_Z_LOCATION = new DoubleVisualProperty(0.0, ARBITRARY_DOUBLE_RANGE,
-			"NODE_Z_LOCATION", "Node Z Location", true, CyNode.class);
-
-	public static final VisualProperty<Double> NODE_DEPTH = new DoubleVisualProperty(0.0,
-			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NODE_DEPTH", "Node Depth", CyNode.class);
-
-	public static final VisualProperty<Double> NETWORK_CENTER_Z_LOCATION = new DoubleVisualProperty(0.0,
-			ARBITRARY_DOUBLE_RANGE, "NETWORK_CENTER_Z_LOCATION", "Network Center Z Location", true, CyNetwork.class);
-
-	public static final VisualProperty<Double> NETWORK_DEPTH = new DoubleVisualProperty(0.0,
-			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NETWORK_DEPTH", "Network Depth", CyNetwork.class);
-
-	public static final VisualProperty<NodeShape> NODE_SHAPE = new NodeShapeVisualProperty(
-			NodeShapeVisualProperty.ELLIPSE, "NODE_SHAPE", "Node Shape", CyNode.class);
-
-	// Line Types
-	public static final VisualProperty<LineType> NODE_BORDER_LINE_TYPE = new LineTypeVisualProperty(
-			LineTypeVisualProperty.SOLID, "NODE_BORDER_STROKE", "Node Border Line Type", CyNode.class);
-	public static final VisualProperty<LineType> EDGE_LINE_TYPE = new LineTypeVisualProperty(
-			LineTypeVisualProperty.SOLID, "EDGE_LINE_TYPE", "Edge Line Type", CyEdge.class);
 
 	// Moved from DING rendering engine.
+	/**
+	 * TODO Documentation
+	 */
 	public static final VisualProperty<Paint> NODE_SELECTED_PAINT = new PaintVisualProperty(Color.YELLOW,
 			PAINT_RANGE, "NODE_SELECTED_PAINT", "Node Selected Paint", CyNode.class);
+
+	/**
+	 * The color of the border of the node.
+	 */
 	public static final VisualProperty<Paint> NODE_BORDER_PAINT = new PaintVisualProperty(Color.BLACK,
 			PAINT_RANGE, "NODE_BORDER_PAINT", "Node Border Paint", CyNode.class);
 
+	/**
+	 * TODO Documentation
+	 */
 	public static final VisualProperty<Double> NODE_BORDER_WIDTH = new DoubleVisualProperty(DEF_BORDER_WIDTH,
 			new ContinuousRange<Double>(Double.class, 0d, Double.POSITIVE_INFINITY, true, true), "NODE_BORDER_WIDTH",
 			"Node Border Width", CyNode.class);
 
+	/**
+	 * The text of the tooltip that appears when a mouse hovers over the node.
+	 */
 	public static final VisualProperty<String> NODE_TOOLTIP = new StringVisualProperty("",
 			ARBITRARY_STRING_RANGE, "NODE_TOOLTIP", "Node Tooltip", CyNode.class);
 
+	/**
+	 * The font used for the node label.
+	 */
 	public static final VisualProperty<Font> NODE_LABEL_FONT_FACE = new FontVisualProperty(new Font("SansSerif",
 			Font.PLAIN, DEF_FONT_SIZE), "NODE_LABEL_FONT_FACE", "Node Label Font Face", CyNode.class);
+
+	/**
+	 * The size of the font used for the node label.
+	 */
 	public static final VisualProperty<Integer> NODE_LABEL_FONT_SIZE = new IntegerVisualProperty(DEF_FONT_SIZE,
 			new ContinuousRange<Integer>(Integer.class, 1, Integer.MAX_VALUE, true, true), "NODE_LABEL_FONT_SIZE",
 			"Node Label Font Size", CyNode.class);
 
+	/**
+	 * The opacity of the color of the node. Zero means totally transparent, and 255 means
+	 *  totally opaque.
+	 */
 	public static final VisualProperty<Integer> NODE_TRANSPARENCY = new IntegerVisualProperty(255,
 			new ContinuousRange<Integer>(Integer.class, 0, 255, true, true), "NODE_TRANSPARENCY", "Node Transparency",
 			CyNode.class);
+	/**
+	 * See {@see BasicVisualLexicon#NODE_TRANSPARENCY}
+	 */
 	public static final VisualProperty<Integer> NODE_OPACITY = NODE_TRANSPARENCY;
+
+	/**
+	 * TODO Documentation
+	 */
 	public static final VisualProperty<Integer> NODE_BORDER_TRANSPARENCY = new IntegerVisualProperty(255,
 			new ContinuousRange<Integer>(Integer.class, 0, 255, true, true), "NODE_BORDER_TRANSPARENCY",
 			"Node Border Transparency", CyNode.class);
 
+	/**
+	 * TODO Documentation
+	 */
 	public static final VisualProperty<Integer> NODE_LABEL_TRANSPARENCY = new IntegerVisualProperty(255,
 			new ContinuousRange<Integer>(Integer.class, 0, 255, true, true), "NODE_LABEL_TRANSPARENCY",
 			"Node Label Transparency", CyNode.class);
+	/**
+	 * The shape of the node.
+	 */
+	public static final VisualProperty<NodeShape> NODE_SHAPE = new NodeShapeVisualProperty(
+			NodeShapeVisualProperty.ELLIPSE, "NODE_SHAPE", "Node Shape", CyNode.class);
 
+	/**
+	 * The type of line used for the border of the node.
+	 */
+	public static final VisualProperty<LineType> NODE_BORDER_LINE_TYPE = new LineTypeVisualProperty(
+			LineTypeVisualProperty.SOLID, "NODE_BORDER_STROKE", "Node Border Line Type", CyNode.class);
+
+
+	////////////////////////////////// Edge VP ////////////////////////////////////////
+	/**
+	 * The color of the whole edge (including the stroke and arrows) when it is selected or
+	 *  unselected.
+	 */
+	public static final VisualProperty<Paint> EDGE_PAINT = new PaintVisualProperty(Color.gray, PAINT_RANGE,
+			"EDGE_PAINT", "Edge Paint", CyEdge.class);
+
+	/**
+	 * TODO Documentation
+	 */
+	public static final VisualProperty<Paint> EDGE_LABEL_COLOR = new PaintVisualProperty(Color.BLACK, PAINT_RANGE,
+			"EDGE_LABEL_COLOR", "Edge Label Color", CyEdge.class);
+
+	/**
+	 * The text used for the edge label.
+	 */
+	public static final VisualProperty<String> EDGE_LABEL = new StringVisualProperty("", ARBITRARY_STRING_RANGE,
+			"EDGE_LABEL", "Edge Label", CyEdge.class);
+
+	/**
+	 * 	The width of the edge line.
+	 */
+	public static final VisualProperty<Double> EDGE_WIDTH = new DoubleVisualProperty(1d,
+			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "EDGE_WIDTH", "Edge Width", CyEdge.class);
+
+	/**
+	 * Hides the edge if set to false. By default, this value is set to true.
+	 */
+	public static final VisualProperty<Boolean> EDGE_VISIBLE = new BooleanVisualProperty(true, "EDGE_VISIBLE",
+			"Edge Visible", CyEdge.class);
+
+	/**
+	 * TODO Documentation
+	 */
+	public static final VisualProperty<Boolean> EDGE_SELECTED = new BooleanVisualProperty(false, "EDGE_SELECTED",
+			"Edge Selected", true, CyEdge.class);
+
+	// Line Types
+	/**
+	 * The type of stoke used to render the line (solid, dashed, etc.)
+	 */
+	public static final VisualProperty<LineType> EDGE_LINE_TYPE = new LineTypeVisualProperty(
+			LineTypeVisualProperty.SOLID, "EDGE_LINE_TYPE", "Edge Line Type", CyEdge.class);
+
+	/**
+	 * The text of the tooltip that appears when a mouse hovers over the edge.
+	 */
 	public static final VisualProperty<String> EDGE_TOOLTIP = new StringVisualProperty("",
 			ARBITRARY_STRING_RANGE, "EDGE_TOOLTIP", "Edge Tooltip", CyEdge.class);
 
+	/**
+	 * The font used for the edge label.
+	 */
 	public static final VisualProperty<Font> EDGE_LABEL_FONT_FACE = new FontVisualProperty(new Font("SansSerif",
 			Font.PLAIN, 10), "EDGE_LABEL_FONT_FACE", "Edge Label Font Face", CyEdge.class);
+	
+	/**
+	 * The size of the font used for the edge label.
+	 */
 	public static final VisualProperty<Integer> EDGE_LABEL_FONT_SIZE = new IntegerVisualProperty(10,
 			new ContinuousRange<Integer>(Integer.class, 1, Integer.MAX_VALUE, true, true), "EDGE_LABEL_FONT_SIZE",
 			"Edge Label Font Size", CyEdge.class);
 
+	/**
+	 * The opacity of the color of the edge label. Zero means totally transparent, and 255 means totally opaque.
+	 */
+	public static final VisualProperty<Integer> EDGE_LABEL_TRANSPARENCY = new IntegerVisualProperty(255,
+			new ContinuousRange<Integer>(Integer.class, 0, 255, true, true), "EDGE_LABEL_TRANSPARENCY",
+			"Edge Label Transparency", CyEdge.class);
+	/**
+	 * The color of the whole edge (stroke and arrows) when selected. 
+	 */
 	public static final VisualProperty<Paint> EDGE_SELECTED_PAINT = new PaintVisualProperty(Color.RED,
 			PAINT_RANGE, "EDGE_SELECTED_PAINT", "Edge Color (Selected)", CyEdge.class);
+	
+	/**
+	 * The color of the whole edge (stroke and arrows) when it is not selected.
+	 */
 	public static final VisualProperty<Paint> EDGE_UNSELECTED_PAINT = new PaintVisualProperty(Color.DARK_GRAY,
 			PAINT_RANGE, "EDGE_UNSELECTED_PAINT", "Edge Color (Unselected)", CyEdge.class);
+	
+	/**
+	 * The color of the edge line when selected. 
+	 */
 	public static final VisualProperty<Paint> EDGE_STROKE_SELECTED_PAINT = new PaintVisualProperty(Color.RED,
 			PAINT_RANGE, "EDGE_STROKE_SELECTED_PAINT", "Edge Stroke Color (Selected)",
 			CyEdge.class);
+	
+	/**
+	 * The color of the edge line.
+	 */
 	public static final VisualProperty<Paint> EDGE_STROKE_UNSELECTED_PAINT = new PaintVisualProperty(Color.DARK_GRAY,
 			PAINT_RANGE, "EDGE_STROKE_UNSELECTED_PAINT", "Edge Stroke Color (Unselected)",
 			CyEdge.class);
 
+	/**
+	 * The opacity of the of the edge. Zero means totally transparent, and 255 means totally 
+	 * opaque.
+	 */
 	public static final VisualProperty<Integer> EDGE_TRANSPARENCY = new IntegerVisualProperty(255,
 			new ContinuousRange<Integer>(Integer.class, 0, 255, true, true), "EDGE_TRANSPARENCY", "Edge Transparency",
 			CyEdge.class);
 
-	public static final VisualProperty<Integer> EDGE_LABEL_TRANSPARENCY = new IntegerVisualProperty(255,
-			new ContinuousRange<Integer>(Integer.class, 0, 255, true, true), "EDGE_LABEL_TRANSPARENCY",
-			"Edge Label Transparency", CyEdge.class);
-
+	/**
+	 * The shape of the arrow on the source node end of the edge.
+	 */
 	public static final VisualProperty<ArrowShape> EDGE_SOURCE_ARROW_SHAPE = new ArrowShapeVisualProperty(
 			ArrowShapeVisualProperty.NONE, "EDGE_SOURCE_ARROW_SHAPE", "Edge Source Arrow Shape", CyEdge.class);
+	/**
+	 *The shape of the arrow on the target node end of the edge.
+	 */
 	public static final VisualProperty<ArrowShape> EDGE_TARGET_ARROW_SHAPE = new ArrowShapeVisualProperty(
 			ArrowShapeVisualProperty.NONE, "EDGE_TARGET_ARROW_SHAPE", "Edge Target Arrow Shape", CyEdge.class);
-	
+	/* 
+	 * TODO Documentation
+	 */
 	public static final VisualProperty<Double> EDGE_SOURCE_ARROW_SIZE = new DoubleVisualProperty(6d, NONE_ZERO_POSITIVE_DOUBLE_RANGE,
 			"EDGE_SOURCE_ARROW_SIZE", "Edge Source Arrow Size", CyEdge.class);
+	
+	/**
+	 * TODO Documentation
+	 */
 	public static final VisualProperty<Double> EDGE_TARGET_ARROW_SIZE = new DoubleVisualProperty(6d, NONE_ZERO_POSITIVE_DOUBLE_RANGE,
 			"EDGE_TARGET_ARROW_SIZE", "Edge Target Arrow Size", CyEdge.class);
-	
+
+	/**
+	 * If Edge Bend is defined, edges will be rendered as straight or curved lines. If this 
+	 * value is set to true, edges will be drawn as curved lines.
+	 */
 	public static final EdgeBendVisualProperty EDGE_BEND = new EdgeBendVisualProperty(
 			EdgeBendVisualProperty.DEFAULT_EDGE_BEND, "EDGE_BEND", "Edge Bend");
-	
+
+	/**
+	 * TODO Documentation
+	 */
 	public static final VisualProperty<Double> EDGE_LABEL_WIDTH = new DoubleVisualProperty(200d, NONE_ZERO_POSITIVE_DOUBLE_RANGE,
 			"EDGE_LABEL_WIDTH", "Edge Label Width", CyEdge.class);
+
+
+	// ////// Network VP ////////
+	/**
+	 * The zoom level of the network view.
+	 */
+	public static final VisualProperty<Double> NETWORK_SCALE_FACTOR = new DoubleVisualProperty(1.0,
+			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NETWORK_SCALE_FACTOR", "Network Scale Factor", true, CyNetwork.class);
+	/**
+	 * The X location of network view center.
+	 */
+	public static final VisualProperty<Double> NETWORK_CENTER_X_LOCATION = new DoubleVisualProperty(0.0,
+			ARBITRARY_DOUBLE_RANGE, "NETWORK_CENTER_X_LOCATION", "Network Center X Location", true, CyNetwork.class);
+	/**
+	 * The Y location of network view center.
+	 */
+	public static final VisualProperty<Double> NETWORK_CENTER_Y_LOCATION = new DoubleVisualProperty(0.0,
+			ARBITRARY_DOUBLE_RANGE, "NETWORK_CENTER_Y_LOCATION", "Network Center Y Location", true, CyNetwork.class);
+
+	/**
+	 * The size (width and height) of the network view.
+	 */
+	public static final VisualProperty<Double> NETWORK_SIZE = new DoubleVisualProperty(550.0,
+			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NETWORK_SIZE", "Network Size", true, CyNetwork.class);
+	
+	/**
+	 * The width of the network view.
+	 */
+	public static final VisualProperty<Double> NETWORK_WIDTH = new DoubleVisualProperty(550.0,
+			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NETWORK_WIDTH", "Network Width", true, CyNetwork.class);
+	/**
+	 * The height of the network view.
+	 */
+	public static final VisualProperty<Double> NETWORK_HEIGHT = new DoubleVisualProperty(400.0,
+			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NETWORK_HEIGHT", "Network Height", true, CyNetwork.class);
+
+	/**
+	 * The title of the network view.
+	 */
+	public static final VisualProperty<String> NETWORK_TITLE = new StringVisualProperty("", ARBITRARY_STRING_RANGE,
+			"NETWORK_TITLE", "Network Title", true, CyNetwork.class);
+	/**
+	 * The background color of the network view.
+	 */
+	public static final VisualProperty<Paint> NETWORK_BACKGROUND_PAINT = new PaintVisualProperty(Color.WHITE,
+			PAINT_RANGE, "NETWORK_BACKGROUND_PAINT", "Network Background Paint", CyNetwork.class);
+
+	// 3D-related props
+	/**
+	 * Z location of the node. Default value of this will be ignored. The value will be used
+	 *  only when mapping function is defined.
+	 */
+	public static final VisualProperty<Double> NODE_Z_LOCATION = new DoubleVisualProperty(0.0, ARBITRARY_DOUBLE_RANGE,
+			"NODE_Z_LOCATION", "Node Z Location", true, CyNode.class);
+
+	/**
+	 * TODO Documentation
+	 */
+	public static final VisualProperty<Double> NODE_DEPTH = new DoubleVisualProperty(0.0,
+			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NODE_DEPTH", "Node Depth", CyNode.class);
+
+	/**
+	 * TODO Documentation
+	 */
+	public static final VisualProperty<Double> NETWORK_CENTER_Z_LOCATION = new DoubleVisualProperty(0.0,
+			ARBITRARY_DOUBLE_RANGE, "NETWORK_CENTER_Z_LOCATION", "Network Center Z Location", true, CyNetwork.class);
+
+	/**
+	 * TODO Documentation
+	 */
+	public static final VisualProperty<Double> NETWORK_DEPTH = new DoubleVisualProperty(0.0,
+			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NETWORK_DEPTH", "Network Depth", CyNetwork.class);
+
+
 
 	/**
 	 * Constructor for VisualLexicon. The parameters are required for all
@@ -299,10 +494,10 @@ public class BasicVisualLexicon implements VisualLexicon {
 		this.identifierLookup.put(CyNode.class, new HashMap<String, VisualProperty<?>>());
 		this.identifierLookup.put(CyEdge.class, new HashMap<String, VisualProperty<?>>());
 		this.identifierLookup.put(CyNetwork.class, new HashMap<String, VisualProperty<?>>());
-		
+
 		addVisualProperties(rootVisualProperty);
 	}
-	
+
 	public final void addBendFactory(final BendFactory bendFactory, final Map<?, ?> props) {
 		EDGE_BEND.setBendFactory(bendFactory);
 	}
@@ -320,12 +515,12 @@ public class BasicVisualLexicon implements VisualLexicon {
 		addVisualProperty(NETWORK_CENTER_X_LOCATION, NETWORK);
 		addVisualProperty(NETWORK_CENTER_Y_LOCATION, NETWORK);
 		addVisualProperty(NETWORK_CENTER_Z_LOCATION, NETWORK);
-		
+
 		// Level 2: Network-related VP
 		addVisualProperty(NETWORK_WIDTH, NETWORK_SIZE);
 		addVisualProperty(NETWORK_HEIGHT, NETWORK_SIZE);
 		addVisualProperty(NETWORK_DEPTH, NETWORK_SIZE);
-		
+
 		// Level 2: Children of node VP
 		addVisualProperty(NODE_PAINT, NODE);
 		addVisualProperty(NODE_SIZE, NODE);
@@ -544,15 +739,15 @@ public class BasicVisualLexicon implements VisualLexicon {
 	public boolean isSupported(VisualProperty<?> vp) {
 		return visualPropertyMap.containsKey(vp);
 	}
-	
+
 	@Override
 	public <T> Set<T> getSupportedValueRange(VisualProperty<T> vp) {
-	    final Range<T> range = vp.getRange();
-	    
-	    if (range.isDiscrete())
-	        return ((DiscreteRange<T>)range).values();
-	    
-	    return Collections.emptySet();
+		final Range<T> range = vp.getRange();
+
+		if (range.isDiscrete())
+			return ((DiscreteRange<T>)range).values();
+
+		return Collections.emptySet();
 	}
 
 	/**
