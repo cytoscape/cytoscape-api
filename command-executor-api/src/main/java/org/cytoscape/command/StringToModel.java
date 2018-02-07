@@ -63,6 +63,8 @@ import org.cytoscape.view.model.CyNetworkView;
 public interface StringToModel {
 
 	static final String _CY_NETWORK_DESC = "pecifies a network by name, or by SUID if the prefix ```SUID:``` is used. The keyword ```CURRENT```, or a blank value can also be used to specify the current network.";
+
+	static final String _CY_NETWORK_VIEW_DESC = "pecifies a network view by name, or by SUID if the prefix ```SUID:``` is used. The keyword ```CURRENT```, or a blank value can also be used to specify the current network view.";
 	
 	static final String _CY_LIST_DESC = "A list of ```COLUMN:VALUE``` pairs of the format ```COLUMN1:VALUE1,COLUMN2:VALUE2,...``` can be used to match multiple values.";
 	
@@ -80,6 +82,19 @@ public interface StringToModel {
  	 * @return the returned CyNetwork or null if the name doesn't exist
  	 */
 	public CyNetwork getNetwork(String strNet);
+
+	public static final String CY_NETWORK_VIEW_LONG_DESCRIPTION = "S" + _CY_NETWORK_VIEW_DESC;
+	
+	public static final String CY_NETWORK_VIEW_EXAMPLE_STRING = "current";
+	/**
+ 	 * Convert a string request for a network view into a {@link CyNetworkView}.  This method
+ 	 * may be used to find a network view with a given name or the current network view.
+ 	 * Future implementations might accept other columns to search on.
+ 	 *
+ 	 * @param strNet the name of the network view to return or "current"
+ 	 * @return the returned CyNetworkView or null if the name doesn't exist
+ 	 */
+	public CyNetworkView getNetworkView(String strNetView);
 	
 	public static final String TABLE_LONG_DESCRIPTION = "Specifies a table using the pattern ```TYPE:NETWORK``` where ```TYPE``` is one of ```node```, ```edge```, or ```network```. ```NETWORK``` s" + _CY_NETWORK_DESC;
 	public static final String ROW_LONG_DESCRIPTION = "Specifies a row of a table using the primary key as the indentifier";
