@@ -40,10 +40,11 @@ public class CytoPanelNameTest {
 		assertEquals("Tool Panel", CytoPanelName.SOUTH_WEST.getTitle());
 		assertEquals("Results Panel", CytoPanelName.EAST.getTitle());
 		assertEquals("Control Panel", CytoPanelName.WEST.getTitle());
+		assertEquals("Automation Panel", CytoPanelName.BOTTOM.getTitle());
 	}
 	
 	@Test
 	public void checkNumber() {
-		assertEquals(4, CytoPanelName.values().length);
+		assertEquals(5, CytoPanelName.values().length);
 	}
 }
