@@ -98,32 +98,17 @@ public final class ArrowShapeVisualProperty extends AbstractVisualProperty<Arrow
 	
 	static {
 		DEFAULT_SHAPES = new HashMap<String, ArrowShape>();
-		DEFAULT_SHAPES.put(NONE.getSerializableString().toUpperCase(), NONE);
-		DEFAULT_SHAPES.put(DIAMOND.getSerializableString().toUpperCase(), DIAMOND);
-		DEFAULT_SHAPES.put(OPEN_DIAMOND.getSerializableString().toUpperCase(), OPEN_DIAMOND);
-		DEFAULT_SHAPES.put(DELTA.getSerializableString().toUpperCase(), DELTA);
-		DEFAULT_SHAPES.put(OPEN_DELTA.getSerializableString().toUpperCase(), OPEN_DELTA);
-		DEFAULT_SHAPES.put(CROSS_DELTA.getSerializableString().toUpperCase(), CROSS_DELTA);
-		DEFAULT_SHAPES.put(CROSS_OPEN_DELTA.getSerializableString().toUpperCase(), CROSS_OPEN_DELTA);
-		DEFAULT_SHAPES.put(ARROW.getSerializableString().toUpperCase(), ARROW);
-		DEFAULT_SHAPES.put(T.getSerializableString().toUpperCase(), T);
-		DEFAULT_SHAPES.put(CIRCLE.getSerializableString().toUpperCase(), CIRCLE);
-		DEFAULT_SHAPES.put(OPEN_CIRCLE.getSerializableString().toUpperCase(), OPEN_CIRCLE);
-		DEFAULT_SHAPES.put(HALF_CIRCLE.getSerializableString().toUpperCase(), HALF_CIRCLE);
-		DEFAULT_SHAPES.put(OPEN_HALF_CIRCLE.getSerializableString().toUpperCase(), OPEN_HALF_CIRCLE);
-		DEFAULT_SHAPES.put(SQUARE.getSerializableString().toUpperCase(), SQUARE);
-		DEFAULT_SHAPES.put(OPEN_SQUARE.getSerializableString().toUpperCase(), OPEN_SQUARE);
-		DEFAULT_SHAPES.put(HALF_TOP.getSerializableString().toUpperCase(), HALF_TOP);
-		DEFAULT_SHAPES.put(HALF_BOTTOM.getSerializableString().toUpperCase(), HALF_BOTTOM);
-		DEFAULT_SHAPES.put(DELTA_SHORT_1.getSerializableString().toUpperCase(), DELTA_SHORT_1);
-		DEFAULT_SHAPES.put(DELTA_SHORT_2.getSerializableString().toUpperCase(), DELTA_SHORT_2);
-		DEFAULT_SHAPES.put(ARROW_SHORT.getSerializableString().toUpperCase(), ARROW_SHORT);
-		DEFAULT_SHAPES.put(DIAMOND_SHORT_1.getSerializableString().toUpperCase(), DIAMOND_SHORT_1);
-		DEFAULT_SHAPES.put(DIAMOND_SHORT_2.getSerializableString().toUpperCase(), DIAMOND_SHORT_2);
-
+		putShapes(NONE, DIAMOND ,OPEN_DIAMOND, DELTA,OPEN_DELTA,CROSS_DELTA,CROSS_OPEN_DELTA);
+		putShapes(ARROW, T, CIRCLE, OPEN_CIRCLE, HALF_CIRCLE, OPEN_HALF_CIRCLE, SQUARE, OPEN_SQUARE);
+		putShapes(HALF_TOP, HALF_BOTTOM, DELTA_SHORT_1, DELTA_SHORT_2, ARROW_SHORT, DIAMOND_SHORT_1, DIAMOND_SHORT_2);
 		ARROW_SHAPE_RANGE = new DiscreteRange<ArrowShape>(ArrowShape.class, new HashSet<ArrowShape>(DEFAULT_SHAPES.values()));
 	}
 
+	private static void putShapes(ArrowShape ... shapes)
+	{
+		for (ArrowShape shape : shapes)
+			DEFAULT_SHAPES.put(shape.getSerializableString().toUpperCase(), shape);
+	}
 	/**
 	 * Constructor.
 	 * @param defaultValue The default arrow shape.
