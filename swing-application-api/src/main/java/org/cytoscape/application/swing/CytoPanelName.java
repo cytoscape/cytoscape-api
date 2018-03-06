@@ -51,6 +51,11 @@ public enum CytoPanelName {
 	 * The south-west or bottom left panel.
 	 */
 	SOUTH_WEST("Tool Panel"),
+
+	/**
+	 * The command panel.
+	 */
+	BOTTOM("Automation Panel"),
 	;
 
 	private final String title;
