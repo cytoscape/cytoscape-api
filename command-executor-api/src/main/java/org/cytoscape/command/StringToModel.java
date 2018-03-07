@@ -75,9 +75,6 @@ public interface StringToModel {
 	public static final String CY_NETWORK_EXAMPLE_STRING = "current";
 
 	
-	public static final String CY_NETWORK_VIEW_LONG_DESCRIPTION  = "1";
-	public static final String CY_NETWORK_VIEW_EXAMPLE_STRING = "2";
-	public Object getNetworkView(String net);			///////// HACK
 	/**
  	 * Convert a string request for a network into a {@link CyNetwork}.  This method
  	 * may be used to find a network with a given name or the current network.
