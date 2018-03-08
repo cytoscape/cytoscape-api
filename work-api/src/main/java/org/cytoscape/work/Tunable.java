@@ -247,6 +247,12 @@ public @interface Tunable {
 	 *    collapsible. The value must be either "collapsed" or "uncollapsed" indicating the 
 	 *    initial display state.
 	 *   </li>
+	 *   <li>
+	 *    lookup: if present and the <code>Tunable</code> is a {@link org.cytoscape.work.util.ListSingleSelection}
+	 *    <code>Tunable</code> then provide a lookup capability to the JComboBox that allows users to type in values.
+	 *    If the value of this parameter is "contains" then any matching text will be searched.  If the value
+	 *    is "begins" then only the beginning of the string will be searched.
+	 *   </li>
 	 *  </ul>
 	 *
 	 *  Note: Blanks/spaces in values are significant!
