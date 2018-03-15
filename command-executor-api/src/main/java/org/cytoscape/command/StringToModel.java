@@ -31,31 +31,31 @@ import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyRow;
 import org.cytoscape.model.CyTable;
-
 import org.cytoscape.view.model.CyNetworkView;
 
 /**
  * The service implementing StringToModel provides a common mechanism for converting
  * command arguments into Cytoscape model elements.  For example, the command:
  *
- * 	nodes select network=current nodelist="name:gene1,name:gene2"
+ * <pre>
+ * nodes select network=current nodelist="name:gene1,name:gene2"
+ * </pre>
  *
  * could be handled as follows:
  *
  * <pre>
- *     @Tunable(description="Network to select", context="nongui")
- *     String network;
- *     @Tunable(description="List of nodes to select", context="nongui")
- *     String nodelist;
- *
- *     SelectedNodesTask() {}
- *     public run(TaskMonitor mon) {
- *         CyNetwork net = stringToModel.getNetwork(network);
- *         List<CyNode> nodeList = stringToModel.getNodeList(net, nodelist);
- *         // Actually select the nodes...
- *     }
+ * &#64;Tunable(description="Network to select", context="nongui")
+ * String network;
+ * 
+ * &#64;Tunable(description="List of nodes to select", context="nongui")
+ * String nodelist;
+ * 
+ * public run(TaskMonitor mon) {
+ *   CyNetwork net = stringToModel.getNetwork(network);
+ *   List&lt;CyNode&gt; nodeList = stringToModel.getNodeList(net, nodelist);
+ *   // Actually select the nodes...
+ * }
  * </pre>
- *
  *
  * @CyAPI.Api.Interface
  * @CyAPI.InModule command-executor-api
@@ -93,7 +93,7 @@ public interface StringToModel {
  	 * may be used to find a network view with a given name or the current network view.
  	 * Future implementations might accept other columns to search on.
  	 *
- 	 * @param strNet the name of the network view to return or "current"
+ 	 * @param strNetView the name of the network view to return or "current"
  	 * @return the returned CyNetworkView or null if the name doesn't exist
  	 */
 	public CyNetworkView getNetworkView(String strNetView);

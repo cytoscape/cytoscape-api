@@ -38,12 +38,14 @@ import org.cytoscape.model.CyNetwork;
  * A typical use might look like:
  * <pre>
  * public EdgeList edgeList = new EdgeList(null);
- * @Tunable(description="Edges to select", context="nogui")
+ * 
+ * &#64;Tunable(description="Edges to select", context="nogui")
  * public EdgeList getedgeList() {
  * 	edgeList.setNetwork(network); // This assumes the network is 
  * 	                              // made available via some other mechanism
  *	return edgeList;
  * }
+ * 
  * public void setedgeList(EdgeList setValue) {}
  * </pre>
  *

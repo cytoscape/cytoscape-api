@@ -37,15 +37,17 @@ import org.cytoscape.model.CyNode;
  *
  * A typical use might look like:
  * <pre>
- * @Tunable(description="Network", context="nogui", gravity=1.0)
+ * &#64;Tunable(description="Network", context="nogui", gravity=1.0)
  * CyNetwork network;
  *
  * public NodeList nodeList = new NodeList(null);
- * @Tunable(description="Nodes to select", context="nogui", gravity=2.0)
+ * 
+ * &#64;Tunable(description="Nodes to select", context="nogui", gravity=2.0)
  * public NodeList getnodeList() {
  * 	nodeList.setNetwork(network); // Should check for null
  *	return nodeList;
  * }
+ * 
  * public void setnodeList(NodeList setValue) {}
  * </pre>
  *
