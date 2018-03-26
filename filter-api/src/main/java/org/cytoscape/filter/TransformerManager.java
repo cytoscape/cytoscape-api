@@ -3,6 +3,7 @@ package org.cytoscape.filter;
 import java.util.List;
 
 import org.cytoscape.filter.model.CompositeFilter;
+import org.cytoscape.filter.model.NamedTransformer;
 import org.cytoscape.filter.model.Transformer;
 import org.cytoscape.filter.model.TransformerSink;
 import org.cytoscape.filter.model.TransformerSource;
@@ -43,6 +44,14 @@ public interface TransformerManager {
 	 */
 	<C, E> Transformer<C, E> createTransformer(String id);
 
+	/**
+	 * Returns a new {@code NamedTransformer} with the given name and list of transformers.
+	 * 
+	 * @param name The name of the new transformer.
+	 * @param transformers The list of transformers that will be contained in the new NamedTransformer.
+	 */
+	<C, E> NamedTransformer<C, E> createNamedTransformer(String name, List<Transformer<C, E>> transformers);
+	
 	/**
 	 * Applies {@code transformer} to the {@code context}.  The results
 	 * of the transformation are collected by {@code sink}.
