@@ -1,5 +1,6 @@
 package org.cytoscape.filter.model;
 
+import java.util.Collections;
 import java.util.List;
 
 
@@ -24,6 +25,18 @@ public interface ValidatableTransformer<C, E> extends Transformer<C, E> {
 	 * @returns If the Transformer is invalid then return a non-empty list of warning messages. 
 	 * If the Transformer is valid then return an empty list.
 	 */
-	List<ValidationWarning> validate(C context);
+	default List<ValidationWarning> validate(C context) {
+		return Collections.emptyList();
+	}
+	
+	/**
+	 * Called when a filter is created through a command.
+	 * 
+	 * @returns If the Transformer is invalid then return a non-empty list of warning messages. 
+	 * If the Transformer is valid then return an empty list.
+	 */
+	default List<ValidationWarning> validateCreation() {
+		return Collections.emptyList();
+	}
 	
 }
