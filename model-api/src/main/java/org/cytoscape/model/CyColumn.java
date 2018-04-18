@@ -28,23 +28,118 @@ package org.cytoscape.model;
 import java.util.List;
 
 
-/** This class describes a column in a CyTable. 
+/** 
+ * This class describes a column in a CyTable. 
+ * <br><br>
+ * 
+ * <h1>Column Namespaces</h1>
+ * <p>
+ * A column name can be broken down into two parts, a "namespace" and a "name". The namespace and name
+ * can be combined into a String by separating them with a "::", for example: "MyNamespace::MyName".
+ * The namespace part is optional, for example the column name "MyName" does not have a namespace.
+ * All methods that take a namespace argument will accept null to indicate no namespace.
+ * All of the default network columns created by Cytoscape do not have a namespace.
+ * </p>
+ * <p>
+ * Apps are encouraged to put any columns they create into a namespace. The advantages of doing this are:
+ * <ol>
+ * <li>Avoid name collision with other apps.</li>
+ * <li>Enable UI features based on namespaces.</li>
+ * <li>Use namespace aware APIs in CyColumn, CyRow and CyTable</li>
+ * </ol>
+ * </p>
+ *
+ * <h1>Column Naming Rules</h1>
+ * <p>
+ * Case is ignored when column names are compared, or example "MyColumnName" and "mycolumnname" are equivalent.
+ * This also applies to namespaces, for example "MyNamespace::MyName" and "mynamespace::myname" are equivalent.
+ * </p>
+ * <p>
+ * Whitespace is significant in both the namespace and the name (for historical reasons), for example " mynamespace ::myname" is in the
+ * namespace " mynamespace ". The empty string is a valid name for a namespace, for example "::myname" is in the "" namespace.
+ * It is highly recommended not to use whitespace in namespace identifiers, stick with alphanumeric characters and underscores.
+ * </p>
+ * <p>
+ * Pick a namespace identifier that is between 6-15 characters in length that does not contain whitespace or special characters. 
+ * Good examples are "EnrichmentMap", "clusterMaker" or "WordCloud".
+ * </p>
+ * 
  * @CyAPI.Api.Interface
  * @CyAPI.InModule model-api
  */
 public interface CyColumn {
+	
+public static final String NAMESPACE_SEPARATOR = "::";
+	
+	/**
+	 * Splits a column name into a namespace part and a name part at the first occurrence of a "::".
+	 * 
+	 * If the column name does not contain a "::" then the namespace part will be null.
+	 * 
+	 * Whitespace is significant. The string "::hello" has "" as the namespace.
+	 */
+	public static String[] splitColumnName(String fullyQualifiedName) {
+		int index = fullyQualifiedName.indexOf(NAMESPACE_SEPARATOR);
+		if(index == -1) {
+			return new String[] { null, fullyQualifiedName };
+		}
+		String namespace = fullyQualifiedName.substring(0, index);
+		String name = fullyQualifiedName.substring(index + NAMESPACE_SEPARATOR.length(), fullyQualifiedName.length());
+		return new String[] { namespace, name };
+	}
+	
+	
+	/**
+	 * Joins a namespace and a name string into a fully-qualified column name.
+	 * For example: <code>joinColumnName("MyNamespace", "MyName")</code> results in <code>"MyNamespace::MyName"</code>.
+	 */
+	public static String joinColumnName(String namespace, String name) {
+		if(namespace == null)
+			return name;
+		return namespace + NAMESPACE_SEPARATOR + name;
+	}
+	
 	/** 
-	 * Returns the name of the column.
-	 * @return the name of the column. 
+	 * Returns the fully-qualified name of the column.
+	 * @return the fully-qualified name of the column. 
 	 */
 	String getName();
-
-	/** Change the name of this column. If another column with a matching name already exists, IllegalArgumentException will be thrown.
-	 * The check for matching column names is case insensitive. 
-	 *  @param newName  the new column name
-	 *  @throws IllegalArgumentException if the column is immutable
+	
+	/**
+	 * Returns the namespace of the column, or null if the column does not have a namespace.
+	 * Default columns created by Cytoscape do not have a namespace.
 	 */
-	void setName(String newName);
+	default String getNamespace() {
+		return splitColumnName(getName())[0];
+	}
+	
+	/**
+	 * Returns the name portion without the namespace.
+	 */
+	default String getNameOnly() {
+		return splitColumnName(getName())[1];
+	}
+	
+	/** 
+	 * Change the name of this column. If another column with a matching name already exists 
+	 * in the same namespace, IllegalArgumentException will be thrown.
+	 * The check for matching column names is case insensitive. 
+	 * @param newName  the new fully qualified column name
+	 * @throws IllegalArgumentException if the column is immutable
+	 */
+	void setName(String fullyQualifiedName);
+	
+	/** 
+	 * Change the name of this column. If another column with a matching name already exists 
+	 * in the same namespace, IllegalArgumentException will be thrown.
+	 * The check for matching column names is case insensitive. 
+	 * @param namespace  the new namespace, use null to indicate no namespace
+	 * @param name the new name
+	 * @throws IllegalArgumentException if the column is immutable
+	 */
+	default void setName(String namespace, String name) {
+		setName(joinColumnName(namespace, name));
+	};
 
 	/** 
 	 * Returns the data type of the column.

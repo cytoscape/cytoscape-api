@@ -25,7 +25,7 @@ package org.cytoscape.model.events;
  */
 
 import org.cytoscape.event.AbstractCyEvent;
-
+import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyTable;
 
 
@@ -41,10 +41,25 @@ class AbstractColumnEvent extends AbstractCyEvent<CyTable> {
 	}
 
 	/**
-	 * Returns the name of the column for this event.
+	 * Returns the fully-qualified name of the column for this event.
 	 * @return The name of the column for this event.
 	 */
 	public String getColumnName() {
 		return columnName;
+	}
+	
+	/**
+	 * Returns the namespace of the column, or null if the column does not have a namespace.
+	 * Default columns created by Cytoscape do not have a namespace.
+	 */
+	public String getNamespace() {
+		return CyColumn.splitColumnName(columnName)[0];
+	}
+	
+	/**
+	 * Returns the name portion without the namespace.
+	 */
+	public String getNameOnly() {
+		return CyColumn.splitColumnName(columnName)[1];
 	}
 }

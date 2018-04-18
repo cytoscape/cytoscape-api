@@ -1,5 +1,7 @@
 package org.cytoscape.model.events;
 
+import org.cytoscape.model.CyColumn;
+
 /*
  * #%L
  * Cytoscape Model API (model-api)
@@ -44,8 +46,7 @@ public final class RowSetRecord {
 	 * @param value The value the data was set as.
 	 * @param rawValue The raw value the data was set as.
 	 */
-	public RowSetRecord(final CyRow row, final String column,
-			final Object value, final Object rawValue) {
+	public RowSetRecord(final CyRow row, final String column, final Object value, final Object rawValue) {
 		this.row = row;
 		this.column = column;
 		this.value = value;
@@ -67,6 +68,22 @@ public final class RowSetRecord {
 	public String getColumn() {
 		return column;
 	}
+	
+	/**
+	 * Returns the namespace of the column, or null if the column does not have a namespace.
+	 * Default columns created by Cytoscape do not have a namespace.
+	 */
+	public String getNamespace() {
+		return CyColumn.splitColumnName(column)[0];
+	}
+	
+	/**
+	 * Returns the name portion without the namespace.
+	 */
+	public String getNameOnly() {
+		return CyColumn.splitColumnName(column)[1];
+	}
+	
 
 	/**
 	 * Returns the value that the data was set as.

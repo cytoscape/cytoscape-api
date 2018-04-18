@@ -1,5 +1,7 @@
 package org.cytoscape.model;
 
+import static org.cytoscape.model.CyColumn.joinColumnName;
+
 /*
  * #%L
  * Cytoscape Model API (model-api)
@@ -26,8 +28,10 @@ package org.cytoscape.model;
 
 
 import java.util.Collection;
+import java.util.LinkedHashSet;
 import java.util.List;
-
+import java.util.Objects;
+import java.util.stream.Collectors;
 
 /** 
  * A simple representation of a table object consisting of rows
@@ -36,12 +40,45 @@ import java.util.List;
  * types of data that may be stored.  The allowable types are:
  * String, Integer, Long, Double, Boolean, and Lists of those five
  * types. For column naming conventions: 
- * {@link org.cytoscape.model org.cytoscape.model} document
+ * {@link org.cytoscape.model org.cytoscape.model} document.
+ * 
+ * <h1>Column Namespaces</h1>
+ * <p>
+ * A column name can be broken down into two parts, a "namespace" and a "name". The namespace and name
+ * can be combined into a String by separating them with a "::", for example: "MyNamespace::MyName".
+ * The namespace part is optional, for example the column name "MyName" does not have a namespace.
+ * All methods that take a namespace argument will accept null to indicate no namespace.
+ * All of the default network columns created by Cytoscape do not have a namespace.
+ * </p>
+ * <p>
+ * Apps are encouraged to put any columns they create into a namespace. The advantages of doing this are:
+ * <ol>
+ * <li>Avoid name collision with other apps.</li>
+ * <li>Enable UI features based on namespaces.</li>
+ * <li>Use namespace aware APIs in CyColumn, CyRow and CyTable</li>
+ * </ol>
+ * </p>
+ *
+ * <h1>Column Naming Rules</h1>
+ * <p>
+ * Case is ignored when column names are compared, or example "MyColumnName" and "mycolumnname" are equivalent.
+ * This also applies to namespaces, for example "MyNamespace::MyName" and "mynamespace::myname" are equivalent.
+ * </p>
+ * <p>
+ * Whitespace is significant in both the namespace and the name (for historical reasons), for example " mynamespace ::myname" is in the
+ * namespace " mynamespace ". The empty string is a valid name for a namespace, for example "::myname" is in the "" namespace.
+ * It is highly recommended not to use whitespace in namespace identifiers, stick with alphanumeric characters and underscores.
+ * </p>
+ * <p>
+ * Pick a namespace identifier that is between 6-15 characters in length that does not contain whitespace or special characters. 
+ * Good examples are "EnrichmentMap", "clusterMaker" or "WordCloud".
+ * </p>
  *
  * @CyAPI.Api.Interface
  * @CyAPI.InModule model-api
  */
 public interface CyTable extends CyIdentifiable {
+	
 	/**
 	 * Mutability of the table specifies whether or not it is able to be deleted..
 	 *
@@ -115,26 +152,71 @@ public interface CyTable extends CyIdentifiable {
 	CyColumn getPrimaryKey();
 
 	/**
-	 * Returns the column for the specified name. 
-	 * @param columnName  The name of the column.
-	 * @return The column for the name provided, or null if there is
-	 *         no column named "columnName".
+	 * Returns the column with the specified fully-qualified name. 
+	 * @param fullyQualifiedName The fully-qualified name of the column, not null.
+	 * @return The column for the name provided, or null if there is no column with the given name.
+	 * @see CyTable#getColumn(String, String)
 	 */
-	CyColumn getColumn(String columnName);
+	CyColumn getColumn(String fullyQualifiedName);
+	
+	/**
+	 * Returns the column for the specified name in the specified namespace. 
+	 * Default columns created by Cytoscape do not have a namespace.
+	 * @param name The name of the column, not null.
+	 * @param namespace The namespace of the column, or null to indicate no namespace.
+	 * @return The column for the name provided, or null if there is no column with the given namespace and name.
+	 */
+	default CyColumn getColumn(String namespace, String name) {
+		return getColumn(joinColumnName(namespace, name));
+	}
 
 	/**
 	 * Returns the column types for all columns in this table.
 	 * @return A set of {@link CyColumn} objects that describe all columns in this table.
 	 */
 	Collection<CyColumn> getColumns();
+	
+	/**
+	 * Returns the column types for all columns in this table in the given namespace.
+	 * @param namespace The namespace, or null to indicate no namespace.
+	 * @return A set of {@link CyColumn} objects that describe all columns in the given namespace.
+	 */
+	default Collection<CyColumn> getColumns(String namespace) {
+		return getColumns().stream()
+				.filter(col -> Objects.equals(col.getNamespace(), namespace))
+				.collect(Collectors.toList());
+	}
 
 	/**
-	 * Will delete the column of the specified name. columnName must be not null. If the column does not exist,
+	 * Returns all the namespaces used in the table.
+	 * If there is a column in the default namespace then the returned collection will contain null.
+	 */
+	default Collection<String> getNamespaces() {
+		return getColumns().stream()
+				.map(CyColumn::getNamespace)
+				.collect(Collectors.toCollection(LinkedHashSet::new));
+	}
+	
+	/**
+	 * Will delete the column with the specified fully-qualified name. If the column does not exist,
 	 * there is no effect. If the column is immutable, IllegalArgumentException will be thrown. If the deletion is 
 	 * successful, {@link org.cytoscape.model.events.ColumnDeletedEvent} will be fired.  
-	 * @param columnName The name identifying the attribute.
+	 * Default columns created by Cytoscape do not have a namespace.
+	 * @param fullyQualifiedName The fully-qualified name of the column, not null.
+	 * @see CyTable#deleteColumn(String, String)
 	 */
-	void deleteColumn(String columnName);
+	void deleteColumn(String fullyQualifiedName);
+	
+	/**
+	 * Will delete the column of the specified name in the specified namespace. If the column does not exist,
+	 * there is no effect. If the column is immutable, IllegalArgumentException will be thrown. If the deletion is 
+	 * successful, {@link org.cytoscape.model.events.ColumnDeletedEvent} will be fired.  
+	 * @param columnName The name identifying the attribute, must not be null.
+	 * @param namespace The namespace of the column, or null to indicate no namespace.
+	 */
+	default void deleteColumn(String namespace, String columnName) {
+		deleteColumn(joinColumnName(namespace, columnName));
+	}
 
 	/**
 	 * Create a column of the specified name and the specified type. The column
@@ -145,24 +227,58 @@ public interface CyTable extends CyIdentifiable {
 	 * CyEdges and CyNetworks can be updated.
 	 * If the column already exists, IllegalArgumentException will be thrown.
 	 * @param <T> The generic type of the column.
+	 * @param fullyQualifiedName The fully-qualified name identifying the attribute.
+	 * @param type The type of the column.
+	 * @param isImmutable  if true, this column can never be deleted
+	 * @see CyTable#createColumn(String, String, Class, boolean)
+	 */
+	<T> void createColumn(String fullyQualifiedName, Class<?extends T> type, boolean isImmutable);
+	
+	/**
+	 * Create a column of the specified name and the specified type in the specified namespace. The column
+	 * type is limited to Integer, Long, Double, String, and Boolean. The
+	 * default value for the column will be null.
+	 * If the column name has the suffix ".SUID" and the column type is Long, Cytoscape will handle it as a column
+	 * of SUIDs, and automatically update its values when the session file is loaded. However only SUIDs of CyNodes,
+	 * CyEdges and CyNetworks can be updated.
+	 * If the column already exists, IllegalArgumentException will be thrown.
+	 * @param <T> The generic type of the column.
 	 * @param columnName The name identifying the attribute.
+	 * @param namespace The namespace for the column, or null to indicate no namespace.
 	 * @param type The type of the column.
 	 * @param isImmutable  if true, this column can never be deleted
 	 */
-	<T> void createColumn(String columnName, Class<?extends T> type, boolean isImmutable);
+	default <T> void createColumn(String namespace, String columnName, Class<?extends T> type, boolean isImmutable) {
+		createColumn(joinColumnName(namespace, columnName), type, isImmutable);
+	}
 
 	/**
 	 * Create a column of the specified name and the specified type. The column
 	 * type is limited to Integer, Long, Double, String, and Boolean. If the column already exists, IllegalArgumentException will be thrown.
 	 * The check for matching column names is case insensitive. 
 	 * @param <T> The generic type of the column.
-	 * @param columnName The name identifying the attribute.
+	 * @param fullyQualifiedName The fully-qualified name identifying the attribute.
 	 * @param type The type of the column.
 	 * @param isImmutable  if true, this column can never be deleted
-	 * @param defaultValue The default value for the column. Must be of 
-	 * the specified type or null.
+	 * @param defaultValue The default value for the column. Must be of the specified type or null.
+	 * @see CyTable#createColumn(String, String, Class, boolean, Object)
 	 */
-	<T> void createColumn(String columnName, Class<?extends T> type, boolean isImmutable, T defaultValue);
+	<T> void createColumn(String fullyQualifiedName, Class<?extends T> type, boolean isImmutable, T defaultValue);
+	
+	/**
+	 * Create a column of the specified name and the specified type in the specified namespace. The column
+	 * type is limited to Integer, Long, Double, String, and Boolean. If the column already exists, IllegalArgumentException will be thrown.
+	 * The check for matching column names is case insensitive. 
+	 * @param <T> The generic type of the column.
+	 * @param columnName The name identifying the attribute.
+	 * @param namespace The namespace for the column, or null to indicate no namespace.
+	 * @param type The type of the column.
+	 * @param isImmutable  if true, this column can never be deleted
+	 * @param defaultValue The default value for the column. Must be of the specified type or null.
+	 */
+	default <T> void createColumn(String namespace, String columnName, Class<?extends T> type, boolean isImmutable, T defaultValue) {
+		createColumn(joinColumnName(namespace, columnName), type, isImmutable, defaultValue);
+	}
 
 	/**
 	 * Create a column of Lists with the specified name and the specified element type.
@@ -170,24 +286,55 @@ public interface CyTable extends CyIdentifiable {
 	 * default value for the column will be null. If the column already exists, IllegalArgumentException will be thrown.
 	 * The check for matching column names is case insensitive. 
 	 * @param <T> The generic type of the elements of the list.
+	 * @param fullyQualifiedName The fully-qualified name identifying the attribute.
+	 * @param listElementType The type of the elements of the list.
+	 * @param isImmutable  if true, this column can never be deleted
+	 * @see CyTable#createListColumn(String, String, Class, boolean)
+	 */
+	<T> void createListColumn(String fullyQualifiedName, Class<T> listElementType, boolean isImmutable);
+
+	/**
+	 * Create a column of Lists with the specified name and the specified element type in the specified namespace.
+	 * The column type is limited to Integer, Long, Double, String, and Boolean. The
+	 * default value for the column will be null. If the column already exists, IllegalArgumentException will be thrown.
+	 * The check for matching column names is case insensitive. 
+	 * @param <T> The generic type of the elements of the list.
 	 * @param columnName The name identifying the attribute.
+	 * @param namespace The namespace for the column, or null to indicate no namespace.
 	 * @param listElementType The type of the elements of the list.
 	 * @param isImmutable  if true, this column can never be deleted
 	 */
-	<T> void createListColumn(String columnName, Class<T> listElementType, boolean isImmutable);
-
+	default <T> void createListColumn(String namespace, String columnName, Class<T> listElementType, boolean isImmutable) {
+		createListColumn(joinColumnName(namespace, columnName), listElementType, isImmutable);
+	}
+	
 	/**
 	 * Create a column of Lists with the specified name and the specified element type.
 	 * The column type is limited to Integer, Long, Double, String, and Boolean. If the column already exists, IllegalArgumentException will be thrown.
 	 * The check for matching column names is case insensitive. 
 	 * @param <T> The generic type of the elements of the list.
-	 * @param columnName The name identifying the attribute.
+	 * @param fullyQualifiedName The fully-qualified name identifying the attribute.
 	 * @param listElementType The type of the elements of the list.
 	 * @param isImmutable  if true, this column can never be deleted
-	 * @param defaultValue A default list for the column. Must be a List of 
-	 * the specified element type or null.
+	 * @param defaultValue A default list for the column. Must be a List of the specified element type or null.
+	 * @see CyTable#createListColumn(String, String, Class, boolean, List)
 	 */
-	<T> void createListColumn(String columnName, Class<T> listElementType, boolean isImmutable, List<T> defaultValue );
+	<T> void createListColumn(String fullyQualifiedName, Class<T> listElementType, boolean isImmutable, List<T> defaultValue);
+	
+	/**
+	 * Create a column of Lists with the specified name and the specified element type in the specified namespace.
+	 * The column type is limited to Integer, Long, Double, String, and Boolean. If the column already exists, IllegalArgumentException will be thrown.
+	 * The check for matching column names is case insensitive. 
+	 * @param <T> The generic type of the elements of the list.
+	 * @param columnName The name identifying the attribute.
+	 * @param namespace The namespace for the column, or null to indicate no namespace.
+	 * @param listElementType The type of the elements of the list.
+	 * @param isImmutable  if true, this column can never be deleted
+	 * @param defaultValue A default list for the column. Must be a List of the specified element type or null.
+	 */
+	default <T> void createListColumn(String namespace, String columnName, Class<T> listElementType, boolean isImmutable, List<T> defaultValue) {
+		createListColumn(joinColumnName(namespace, columnName), listElementType, isImmutable);
+	}
 
 	/**
 	 * Returns the row specified by the primary key object and if a row
@@ -232,30 +379,69 @@ public interface CyTable extends CyIdentifiable {
 
 	/**
 	 * Returns all the rows of a specified column that contain a certain value for that column.
+	 * @param fullyQualifiedName  the fully-qualified column name for which we want the rows
+	 * @param value       the value for which we want the rows that contain it
+	 * @return the rows, if any that contain the value "value" for the column "columnName"
+	 * @see CyTable#getMatchingRows(String, String, Object)
+	 */
+	Collection<CyRow> getMatchingRows(String fullyQualifiedName, Object value);
+
+	/**
+	 * Returns all the rows of a specified column that contain a certain value for that column.
+	 * Default columns created by Cytoscape are in the {@link CyTable#USER_NAMESPACE} namespace.
 	 * @param columnName  the column for which we want the rows
+	 * @param namespace the namespace that contains the column.
 	 * @param value       the value for which we want the rows that contain it
 	 * @return the rows, if any that contain the value "value" for the column "columnName"
 	 */
-	Collection<CyRow> getMatchingRows(String columnName, Object value);
-
+	default Collection<CyRow> getMatchingRows(String namespace, String columnName, Object value) {
+		return getMatchingRows(joinColumnName(namespace, columnName), value);
+	}
 	
 	/**
 	 * Returns all the keys of a specified column that match the given value.
+	 * @param fullyQualifiedName the fully-qualified column name for which we want the row keys
+	 * @param value       the value for which we want the rows that contain it
+	 * @return the keys, if any that contain the value "value" for the column "columnName"
+	 * @throws ClassCastException if the keys are not of the given type
+	 * @see CyTable#getMatchingKeys(String, String, Object, Class)
+	 */
+	<T> Collection<T> getMatchingKeys(String fullyQualifiedName, Object value, Class<T> type);
+	
+	/**
+	 * Returns all the keys of a specified column that match the given value.
+	 * Default columns created by Cytoscape are in the {@link CyTable#USER_NAMESPACE} namespace.
 	 * @param columnName the column for which we want the row keys
+	 * @param namespace the namespace that contains the column
 	 * @param value       the value for which we want the rows that contain it
 	 * @return the keys, if any that contain the value "value" for the column "columnName"
 	 * @throws ClassCastException if the keys are not of the given type
 	 */
-	<T> Collection<T> getMatchingKeys(String columnName, Object value, Class<T> type);
-
+	default <T> Collection<T> getMatchingKeys(String namespace, String columnName, Object value, Class<T> type) {
+		return getMatchingKeys(joinColumnName(namespace, columnName), value, type);
+	}
+	
+	/** 
+	 * Returns the number of rows with the in the specified column with the specified value in the user namespace. 
+	 * @param fullyQualifiedName  the fully-qualified column name to check 
+	 * @param value       the value we want to check for 
+	 * @return the number of rows with the in the specified column with the specified value. 
+	 * @see CyTable#countMatchingRows(String, String, Object)
+	 */
+	int countMatchingRows(String fullyQualifiedName, Object value);
 	
 	/** 
 	 * Returns the number of rows with the in the specified column with the specified value. 
+	 * Default columns created by Cytoscape are in the {@link CyTable#USER_NAMESPACE} namespace.
 	 * @param columnName  the column to check 
+	 * @param namespace the namespace that contains the column
 	 * @param value       the value we want to check for 
 	 * @return the number of rows with the in the specified column with the specified value. 
 	 */
-	int countMatchingRows(String columnName, Object value);
+	default int countMatchingRows(String namespace, String columnName, Object value) {
+		return countMatchingRows(joinColumnName(namespace, columnName), value);
+	}
+	
 
 	/** Returns the number of rows in this table.
 	 *  @return The number if rows in the table.
@@ -271,8 +457,7 @@ public interface CyTable extends CyIdentifiable {
 	 * @param virtualColumn  The name of the new virtual column, if this name already exists,
 	 *                       new column names with -1, -2 and so appended to this name on will
 	 *                       be tried until a non-existing name will be found.
-	 * @param sourceColumn   The name of the column in "sourceTable" that will be mapped to
-	 *                       "virtualColumn".
+	 * @param sourceColumn   The name of the column in "sourceTable" that will be mapped to "virtualColumn".
 	 * @param sourceTable    The table that really contains the column that we're adding (all
 	 *                       updates and lookups of this new column will be redirected to here).
 	 *                       The table will be joined on the primary key column of this table.
@@ -282,9 +467,9 @@ public interface CyTable extends CyIdentifiable {
 	 * @param isImmutable    If true, this column cannot be deleted.
 	 * @return The actual name of the new virtual column.
 	 */
-	String addVirtualColumn(String virtualColumn, String sourceColumn, CyTable sourceTable,
-	                        String targetJoinKey, boolean isImmutable);
-
+	String addVirtualColumn(String virtualColumn, String sourceColumn, CyTable sourceTable, String targetJoinKey, boolean isImmutable);
+	
+	
 	/** Adds all columns in another table as "virtual" columns to the the current table.
 	 * A virtual column is a column in one table that points to a column in a different table. 
 	 * Instead of duplicating the column data found in the other table, a virtual column allows 
@@ -322,4 +507,6 @@ public interface CyTable extends CyIdentifiable {
 	 *       fired to give any listeners a chance to react to the exchange!
 	 */
 	void swap(CyTable otherTable);
+	
+	
 }

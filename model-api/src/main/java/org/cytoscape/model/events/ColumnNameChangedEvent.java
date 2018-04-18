@@ -26,6 +26,7 @@ package org.cytoscape.model.events;
 
 
 import org.cytoscape.event.AbstractCyEvent;
+import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyTable;
 
 
@@ -44,9 +45,7 @@ public final class ColumnNameChangedEvent extends AbstractCyEvent<CyTable> {
 	 * @param oldColumnName the columns old name before the change.
 	 * @param newColumnName the name the column name was changed to.
 	 */
-	public ColumnNameChangedEvent(final CyTable source, final String oldColumnName,
-				      final String newColumnName)
-	{
+	public ColumnNameChangedEvent(final CyTable source, final String oldColumnName, final String newColumnName) {
 		super(source, ColumnNameChangedListener.class);
 
 		if (oldColumnName == null)
@@ -66,11 +65,43 @@ public final class ColumnNameChangedEvent extends AbstractCyEvent<CyTable> {
 		return oldColumnName;
 	}
 
+	
+	/**
+	 * Returns the old namespace of the column, or null if the column did not have a namespace.
+	 * Default columns created by Cytoscape do not have a namespace.
+	 */
+	public String getOldNamespace() {
+		return CyColumn.splitColumnName(oldColumnName)[0];
+	}
+	
+	/**
+	 * Returns the old name portion without the namespace.
+	 */
+	public String getOldNameOnly() {
+		return CyColumn.splitColumnName(oldColumnName)[1];
+	}
+	
+	
 	/**
 	 * Returns the new name of the column.
 	 * @return the new name of the column
 	 */
 	public String getNewColumnName() {
 		return newColumnName;
+	}
+	
+	/**
+	 * Returns the new namespace of the column, or null if the column does not have a namespace.
+	 * Default columns created by Cytoscape do not have a namespace.
+	 */
+	public String getNewNamespace() {
+		return CyColumn.splitColumnName(newColumnName)[0];
+	}
+	
+	/**
+	 * Returns the name name portion without the namespace.
+	 */
+	public String getNewNameOnly() {
+		return CyColumn.splitColumnName(newColumnName)[1];
 	}
 }
