@@ -89,6 +89,11 @@
 			<artifactId>application-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+			<groupId>org.cytoscape</groupId>
+			<artifactId>swing-util-api</artifactId>
+			<version>${project.version}</version>
+		</dependency>
 		
 		<!-- Testing -->
 		<dependency>

@@ -1,5 +1,13 @@
 package org.cytoscape.util.swing;
 
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Insets;
+import java.awt.RenderingHints;
+import java.awt.event.ActionListener;
+
 /*
  * #%L
  * Cytoscape Swing Utility API (swing-util-api)
@@ -23,36 +31,46 @@ package org.cytoscape.util.swing;
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
  */
-
-import javax.swing.*;
-
-import java.awt.*;
+import javax.swing.AbstractAction;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JPopupMenu;
+import javax.swing.UIManager;
 
 /**
  * Button with drop down menu.
  * 
- * @CyAPI.Final.Class
  * @CyAPI.InModule swing-util-api
  */
-public final class DropDownMenuButton extends JButton {
-
-	private final static long serialVersionUID = 1202339868695691L;
+@SuppressWarnings("serial")
+public class DropDownMenuButton extends JButton {
 
 	private final Icon buttonIcon = new MenuArrowIcon();
+	
+	private ActionListener popupMenuActionListener;
 
+	
 	/**
 	 * Creates a new DropDownMenuButton object.
-	 * 
-	 * @param action
-	 *            The action that this button represents.
+	 * @param action  The action that this button represents.
 	 */
-	public DropDownMenuButton(final AbstractAction action) {
-		super(action);
-		
-		this.setFocusPainted(false);
-		this.setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4 + buttonIcon.getIconWidth()));
+	public DropDownMenuButton(AbstractAction action) {
+		this();
+		setAction(action);
 	}
-
+	
+	public DropDownMenuButton(JPopupMenu popupMenu) {
+		this();
+		setPopupMenu(popupMenu);
+	}
+	
+	public DropDownMenuButton() {
+		setFocusPainted(false);
+		setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4 + buttonIcon.getIconWidth()));
+	}
+	
+	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
@@ -64,6 +82,22 @@ public final class DropDownMenuButton extends JButton {
 		buttonIcon.paintIcon(this, g, x, y);
 	}
 
+	public void setPopupMenu(JPopupMenu popupMenu) {
+		if(popupMenuActionListener != null)
+			removeActionListener(popupMenuActionListener);
+		
+		if(popupMenu != null) {
+			popupMenuActionListener = e -> {
+				popupMenu.show(DropDownMenuButton.this, 0, getHeight());
+				popupMenu.requestFocusInWindow();
+			};
+			addActionListener(popupMenuActionListener);
+		}
+		
+//		updateEnabled();
+	}
+	
+	
 	private static final class MenuArrowIcon implements Icon {
 		
 		@Override
