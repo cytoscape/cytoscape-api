@@ -1,6 +1,12 @@
 package org.cytoscape.util.swing;
 
 import java.awt.Font;
+import java.awt.Graphics2D;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  * Interface that provides constants for simple icons that can be used by Cytoscape and third party apps in order to
@@ -28,6 +34,40 @@ public interface IconManager {
 	 * @return
 	 */
 	Font getIconFont(float size);
+	
+	
+	/**
+	 * Resizes an icon so that its maximum dimension (width or height) is no larger
+	 * than the given 'max' parameter.
+	 * @return the resized Icon
+	 */
+	public static Icon resizeIcon(Icon icon, int max) {
+		final int height = icon.getIconHeight(), width = icon.getIconWidth();
+		if(width <= 16 && height <= 16)
+ 			return icon;
+		
+		// calculate new height and width
+		final int newHeight, newWidth;
+		
+		if(height > width) {
+			newHeight = max;
+			newWidth = (int)((float)width/(float)height * max);
+		} else {
+			newWidth = max;
+			newHeight = (int)((float)height/(float)width * max);
+		}
+		
+		
+		BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
+		Graphics2D g = img.createGraphics();
+		icon.paintIcon(null, g, 0, 0);
+		g.dispose();
+		
+		Image resizedImage = img.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
+		ImageIcon resizedIcon = new ImageIcon(resizedImage);
+		return resizedIcon;
+	}
+	
 	
 	static final String ICON_ADJUST = "\uf042";
 	static final String ICON_ADN = "\uf170";

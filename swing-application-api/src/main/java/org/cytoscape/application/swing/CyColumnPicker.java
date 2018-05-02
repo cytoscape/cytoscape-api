@@ -11,13 +11,10 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Graphics2D;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
 import java.text.Collator;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,7 +34,6 @@ import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
 import javax.swing.Icon;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -428,32 +424,6 @@ public class CyColumnPicker extends JPanel {
 		}
 	}
 	
-	private static Icon resizeIcon(Icon icon, int max) {
-		final int height = icon.getIconHeight(), width = icon.getIconWidth();
-		if(width <= 16 && height <= 16)
- 			return icon;
-		
-		// calculate new height and width
-		final int newHeight, newWidth;
-		
-		if(height > width) {
-			newHeight = max;
-			newWidth = (int)((float)width/(float)height * max);
-		} else {
-			newWidth = max;
-			newHeight = (int)((float)height/(float)width * max);
-		}
-		
-		
-		BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
-		Graphics2D g = img.createGraphics();
-		icon.paintIcon(null, g, 0, 0);
-		g.dispose();
-		
-		Image resizedImage = img.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
-		ImageIcon resizedIcon = new ImageIcon(resizedImage);
-		return resizedIcon;
-	}
 	
 	private class NamespaceListRenderer extends DefaultListCellRenderer {
 		@Override
@@ -464,7 +434,7 @@ public class CyColumnPicker extends JPanel {
 				value = "Cytoscape";
 			Component component = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 			Icon icon = columnPresentation.getNamespaceIcon();
-			icon = resizeIcon(icon, 16);
+			icon = IconManager.resizeIcon(icon, 16);
 			setIcon(icon);
 			return component;
 		}
