@@ -434,7 +434,9 @@ public class CyColumnPicker extends JPanel {
 				value = "Cytoscape";
 			Component component = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 			Icon icon = columnPresentation.getNamespaceIcon();
-			icon = IconManager.resizeIcon(icon, 16);
+			if(icon != null) {
+				icon = IconManager.resizeIcon(icon, 16);
+			}
 			setIcon(icon);
 			return component;
 		}

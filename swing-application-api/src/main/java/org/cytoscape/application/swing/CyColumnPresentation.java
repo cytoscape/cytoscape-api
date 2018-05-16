@@ -17,12 +17,16 @@ public interface CyColumnPresentation {
 	 */
 	public static final String NAMESPACE = "namespace";
 	
-	default Icon getNamespaceIcon() {
-		return null;
-	}
+	/**
+	 * Returns an icon associated with the namespace.
+	 * @return Must not return null;
+	 */
+	Icon getNamespaceIcon();
 	
-	default String getNamespaceDescription() {
-		return null;
-	}
+	/**
+	 * Returns a String description of the namespace.
+	 * @return Must not return null.
+	 */
+	String getNamespaceDescription();
 	
 }
