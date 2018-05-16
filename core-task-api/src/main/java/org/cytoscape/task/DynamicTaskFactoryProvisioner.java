@@ -1,12 +1,14 @@
 package org.cytoscape.task;
 
+import org.cytoscape.work.TaskFactory;
+
 /*
  * #%L
  * Cytoscape Core Task API (core-task-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2018 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -24,16 +26,19 @@ package org.cytoscape.task;
  * #L%
  */
 
-import org.cytoscape.work.TaskFactory;
-
 /**
  * TODO: Missing documentation
  * @CyAPI.InModule core-task-api
  */
 public interface DynamicTaskFactoryProvisioner {
-	public  TaskFactory createFor(final NetworkTaskFactory factory);
-	public  TaskFactory createFor(final NetworkViewTaskFactory factory);
-	public  TaskFactory createFor(final NetworkCollectionTaskFactory factory);
-	public  TaskFactory createFor(final NetworkViewCollectionTaskFactory factory);
-	public  TaskFactory createFor(final TableTaskFactory factory);
+	
+	TaskFactory createFor(NetworkTaskFactory factory);
+
+	TaskFactory createFor(NetworkViewTaskFactory factory);
+
+	TaskFactory createFor(NetworkCollectionTaskFactory factory);
+
+	TaskFactory createFor(NetworkViewCollectionTaskFactory factory);
+
+	TaskFactory createFor(TableTaskFactory factory);
 }

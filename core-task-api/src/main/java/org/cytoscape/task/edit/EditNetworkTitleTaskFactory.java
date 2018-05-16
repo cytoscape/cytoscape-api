@@ -40,7 +40,7 @@ public interface EditNetworkTitleTaskFactory extends NetworkTaskFactory{
 	 * Creates a task iterator for editing a network's title.
 	 * @param network The network to edit the name of.
 	 * @param title The new network title.
-	 * @return a task ietrator of type {@link TaskIterator}.
+	 * @return a task iterator of type {@link TaskIterator}.
 	 */
-	TaskIterator createTaskIterator (CyNetwork network, String title);
+	TaskIterator createTaskIterator(CyNetwork network, String title);
 }
