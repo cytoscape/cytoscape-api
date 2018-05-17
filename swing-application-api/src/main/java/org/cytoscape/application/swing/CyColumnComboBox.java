@@ -11,16 +11,24 @@ import javax.swing.JList;
 
 import org.cytoscape.model.CyColumn;
 
+/**
+ * An implementation of JComboBox that displays a list of CyColumns with their namespace icons.
+ *
+ * @CyAPI.InModule swing-application-api
+ */
 @SuppressWarnings("serial")
 public class CyColumnComboBox extends JComboBox<CyColumn> {
 	
 	private final CyColumnPresentationManager columnPresentationManager;
 	private final Predicate<CyColumn> enabledPredicate;
 	
-	public CyColumnComboBox(CyColumnPresentationManager columnPresentationManager, Collection<CyColumn> columns) {
-		this(columnPresentationManager, columns, c -> true);
-	}
-	
+	/**
+	 * Creates a CyColumnComboBox.
+	 * @param columnPresentationManager CyColumnPresentationManager OSGi service.
+	 * @param columns Collection of CyColumn objects to display. If this collection contains null it will be displayed as "-- None --".
+	 * @param enabledPredicate A predicate used to determine which CyColumn items should be enabled or disabled.
+	 * @throws NullPointerException If any parameter is null.
+	 */
 	public CyColumnComboBox(CyColumnPresentationManager columnPresentationManager, Collection<CyColumn> columns, Predicate<CyColumn> enabledPredicate) {
 		this.columnPresentationManager = Objects.requireNonNull(columnPresentationManager);
 		this.enabledPredicate = Objects.requireNonNull(enabledPredicate);
@@ -28,6 +36,15 @@ public class CyColumnComboBox extends JComboBox<CyColumn> {
 		columns.forEach(this::addItem);
 	}
 	
+	/**
+	 * Creates a CyColumnComboBox with all entries enabled.
+	 * @param columnPresentationManager CyColumnPresentationManager OSGi service.
+	 * @param columns Collection of CyColumn objects to display. If this collection contains null it will be displayed as "-- None --".
+	 * @throws NullPointerException If any parameter is null.
+	 */
+	public CyColumnComboBox(CyColumnPresentationManager columnPresentationManager, Collection<CyColumn> columns) {
+		this(columnPresentationManager, columns, c -> true);
+	}
 	
 	/**
 	 * Override getSelectedItem() and use covariant return type to change return type to CyColumn.
@@ -51,7 +68,5 @@ public class CyColumnComboBox extends JComboBox<CyColumn> {
 			return component;
 		}
 	}
-	
-	
 
 }

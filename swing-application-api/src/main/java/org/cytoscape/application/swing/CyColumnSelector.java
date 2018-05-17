@@ -58,6 +58,11 @@ import org.cytoscape.model.CyColumn;
 import org.cytoscape.util.swing.IconManager;
 import org.cytoscape.util.swing.LookAndFeelUtil;
 
+/**
+ * An Swing control that allows the user to select a set of CyColumn objects.
+ *
+ * @CyAPI.InModule swing-application-api
+ */
 @SuppressWarnings("serial")
 public class CyColumnSelector extends JPanel {
 
@@ -78,7 +83,12 @@ public class CyColumnSelector extends JPanel {
 	private final SortedMap<String,List<CyColumn>> namespaces;
 	private final Set<String> selectedColumnNames;
 	
-	
+	/**
+	 * Creates a CyColumnSelector.
+	 * @param iconManager IconManager OSGi service, may not be null.
+	 * @param columnPresentationManager CyColumnPresentationManager OSGi service, may not be null.
+	 * @throws NullPointerException If any paramter is null.
+	 */
 	public CyColumnSelector(IconManager iconManager, CyColumnPresentationManager columnPresentationManager) {
 		this.iconManager = Objects.requireNonNull(iconManager);
 		this.columnPresentationManager = Objects.requireNonNull(columnPresentationManager);
@@ -88,7 +98,11 @@ public class CyColumnSelector extends JPanel {
 		this.selectedColumnNames = new HashSet<>();
 	}
 	
-	
+	/**
+	 * Updates the control to display the given CyColumn objects. 
+	 * @param columns The CyColumn objects to display for selection.
+	 * @param selectedColumnNames Names of columns that should be pre-selected.
+	 */
 	public void update(Collection<CyColumn> columns, Collection<String> selectedColumnNames) {
 		this.namespaces.clear();
 		this.selectedColumnNames.clear();
@@ -102,6 +116,9 @@ public class CyColumnSelector extends JPanel {
 		init();
 	}
 	
+	/**
+	 * Returns the names of the CyColumns that have been selected.
+	 */
 	public Set<String> getSelectedColumnNames() {
 		return new HashSet<>(selectedColumnNames);
 	}

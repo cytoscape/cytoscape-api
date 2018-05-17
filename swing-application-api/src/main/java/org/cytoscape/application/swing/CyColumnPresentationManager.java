@@ -9,7 +9,7 @@ import org.cytoscape.model.CyColumn;
 import org.cytoscape.util.swing.IconManager;
 
 /**
- * This class provides access to registered CyColumnPresentation objects.
+ * This class provides access to registered CyColumnPresentation service objects.
  * 
  * @see org.cytoscape.model.CyColumn
  * 
@@ -19,8 +19,7 @@ import org.cytoscape.util.swing.IconManager;
 public interface CyColumnPresentationManager {
 
 	/**
-	 * Returns a column presentation associated with the given namespace.
-	 * @return A CyColumnPresentation for the given namespace. If null is given then the
+	 * Returns a CyColumnPresentation for the given namespace. If null is given then the
 	 * default presentation used for Cytoscape columns is returned. If a CyColumnPresentation
 	 * has not been registered for the given namespace then a dummy CyColumnPresentation
 	 * is returned. Does not return null.
@@ -37,7 +36,7 @@ public interface CyColumnPresentationManager {
 	}
 	
 	/**
-	 * Calls the given lambda callbacks with an icon of and text string that it represents
+	 * Calls the given Consumer callbacks with an icon and text string that represents
 	 * the given column in an esthetically pleasing way.
 	 * @throws NullPointerException if column is null
 	 */

@@ -2,8 +2,17 @@ package org.cytoscape.application.swing;
 
 import javax.swing.Icon;
 
+
 /**
- * Service that allows presentation to be given for a column namespace.
+ * Service that allows UI presentation to be given for a column namespace.
+ * 
+ * Register as an OSGi service.
+ * 
+ * <pre>
+ * Properties props = new Properties();
+ * props.put(CyColumnPresentation.NAMESPACE, "myNamespace");
+ * registerService(bc, new MyColumnPresentation(), CyColumnPresentation.class, props);
+ * </pre>
  * 
  * @see org.cytoscape.model.CyColumn
  * 
@@ -19,13 +28,13 @@ public interface CyColumnPresentation {
 	
 	/**
 	 * Returns an icon associated with the namespace.
-	 * @return Must not return null;
+	 * @return May return null, but is not recommended.
 	 */
 	Icon getNamespaceIcon();
 	
 	/**
 	 * Returns a String description of the namespace.
-	 * @return Must not return null.
+	 * @return May return null, but is not recommended.
 	 */
 	String getNamespaceDescription();
 	
