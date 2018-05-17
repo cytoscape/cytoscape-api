@@ -71,12 +71,19 @@ public class TextIcon implements Icon {
         g2d.setRenderingHints(new RenderingHints(RenderingHints.KEY_TEXT_ANTIALIASING,
 				RenderingHints.VALUE_TEXT_ANTIALIAS_ON));
         
-        int xx = c.getWidth();
-        int yy = c.getHeight();
+        int xx, yy;
+        if(c == null) {
+        		xx = getIconWidth();
+        		yy = getIconHeight();
+        } else {
+        		xx = c.getWidth();
+        		yy = c.getHeight();
+        }
+        
         g2d.setPaint(TRANSPARENT_COLOR);
         g2d.fillRect(0, 0, xx, yy);
         
-        Color fg = color != null ? color : c.getForeground();
+        Color fg = color == null ? (c == null ? Color.GRAY : c.getForeground()) : color;
         
         if (c instanceof AbstractButton) {
 	        	if (!c.isEnabled())
