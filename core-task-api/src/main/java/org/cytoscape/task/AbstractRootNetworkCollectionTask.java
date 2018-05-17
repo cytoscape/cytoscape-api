@@ -1,6 +1,9 @@
 package org.cytoscape.task;
 
+import java.util.Collection;
+
 import org.cytoscape.model.subnetwork.CyRootNetwork;
+import org.cytoscape.work.AbstractTask;
 
 /*
  * #%L
@@ -26,20 +29,20 @@ import org.cytoscape.model.subnetwork.CyRootNetwork;
  * #L%
  */
 
-/**
- * A {@link RootNetworkTaskFactory} implementation that is always ready to produce a TaskIterator.
+/** 
+ * The base class for all tasks that need to operate on a Collection of {@link CyRootNetwork}s.
  * @CyAPI.Abstract.Class
  * @CyAPI.InModule core-task-api
  */
-public abstract class AbstractRootNetworkTaskFactory implements RootNetworkTaskFactory {
+public abstract class AbstractRootNetworkCollectionTask extends AbstractTask {
 	
-	/**
-	 * Returns true if the supplied network is not null.
-	 * @param network The root-network.
-	 * @return true if the supplied root-network is not null.
-	 */
-	@Override
-	public boolean isReady(CyRootNetwork network) {
-		return network != null;
+	/** The collection of root-networks that subclasses will operate on. */
+	protected final Collection<CyRootNetwork> networks;
+
+	public AbstractRootNetworkCollectionTask(final Collection<CyRootNetwork> networks) {
+		if (networks == null)
+			throw new NullPointerException("CyRootNetwork Collection is null");
+
+		this.networks = networks;	
 	}
 }
