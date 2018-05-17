@@ -1,7 +1,8 @@
 package org.cytoscape.task;
 
+import java.util.Collection;
+
 import org.cytoscape.model.subnetwork.CyRootNetwork;
-import org.cytoscape.work.TaskIterator;
 
 /*
  * #%L
@@ -28,25 +29,19 @@ import org.cytoscape.work.TaskIterator;
  */
 
 /**
- * A task factory that creates one or more tasks that operate on the specified {@link CyRootNetwork}. 
- * @CyAPI.Spi.Interface
+ * A {@link RootNetworkCollectionTaskFactory} that is always ready to produce a TaskIterator.
+ * @CyAPI.Abstract.Class
  * @CyAPI.InModule core-task-api
  */
-public interface RootNetworkTaskFactory {
-
-
-    /**
-     * Provisions this factory with the {@link CyRootNetwork} that will be passed
-     * into any task created by it.
-     * @param network a non-null {@link CyRootNetwork}
-	 * @return A TaskIterator object containing one or more {@link org.cytoscape.work.Task} objects to execute.
-     */
-    TaskIterator createTaskIterator(CyRootNetwork network);
-
-    /**
-     * Returns true if this task factory is ready to produce a TaskIterator.
-     * @param network a {@link CyRootNetwork} object
-     * @return true if this task factory is ready to produce a TaskIterator.
-     */
-    boolean isReady(CyRootNetwork network);
+public abstract class AbstractRootNetworkCollectionTaskFactory implements RootNetworkCollectionTaskFactory {
+	
+	/**
+	 * Returns true if the supplied collection of root-networks is not null or empty.
+	 * @param networks The collection of root-networks.
+	 * @return true if the supplied collection is not null or empty.
+	 */
+	@Override
+	public boolean isReady(Collection<CyRootNetwork> networks) {
+		return networks != null && !networks.isEmpty();
+	}
 }
