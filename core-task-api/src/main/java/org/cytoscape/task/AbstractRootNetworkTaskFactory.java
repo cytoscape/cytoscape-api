@@ -1,4 +1,6 @@
-package org.cytoscape.task.edit;
+package org.cytoscape.task;
+
+import org.cytoscape.model.subnetwork.CyRootNetwork;
 
 /*
  * #%L
@@ -6,7 +8,7 @@ package org.cytoscape.task.edit;
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2018 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -24,23 +26,20 @@ package org.cytoscape.task.edit;
  * #L%
  */
 
-import org.cytoscape.model.CyNetwork;
-import org.cytoscape.task.NetworkTaskFactory;
-import org.cytoscape.work.TaskIterator;
-
-
 /**
- * This interface provides a task iterator for editing a network's title.
- * @CyAPI.Api.Interface
+ * A {@link RootNetworkTaskFactory} implementation that is always ready to produce a TaskIterator.
+ * @CyAPI.Abstract.Class
  * @CyAPI.InModule core-task-api
  */
-public interface EditNetworkTitleTaskFactory extends NetworkTaskFactory{
+public abstract class AbstractRootNetworkTaskFactory implements RootNetworkTaskFactory {
 	
 	/**
-	 * Creates a task iterator for editing a network's title.
-	 * @param network The network to edit the name of.
-	 * @param title The new network title.
-	 * @return a task iterator of type {@link TaskIterator}.
+	 * Returns true if the supplied network is not null.
+	 * @param network The root-network.
+	 * @return true if the supplied root-network is not null.
 	 */
-	TaskIterator createTaskIterator(CyNetwork network, String title);
+	@Override
+	public boolean isReady(CyRootNetwork network) {
+		return network != null;
+	}
 }
