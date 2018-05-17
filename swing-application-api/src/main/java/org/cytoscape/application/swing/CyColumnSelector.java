@@ -59,10 +59,8 @@ import org.cytoscape.util.swing.IconManager;
 import org.cytoscape.util.swing.LookAndFeelUtil;
 
 @SuppressWarnings("serial")
-public class CyColumnPicker extends JPanel {
+public class CyColumnSelector extends JPanel {
 
-	public static final String SHARED_COL_ICON_TEXT = IconManager.ICON_SITEMAP;
-	
 	private static final int SELECTED_COL_IDX = 0;
 	private static final int NAME_COL_IDX = 1;
 	private static final int TYPE_COL_IDX = 2;
@@ -81,7 +79,7 @@ public class CyColumnPicker extends JPanel {
 	private final Set<String> selectedColumnNames;
 	
 	
-	public CyColumnPicker(IconManager iconManager, CyColumnPresentationManager columnPresentationManager) {
+	public CyColumnSelector(IconManager iconManager, CyColumnPresentationManager columnPresentationManager) {
 		this.iconManager = Objects.requireNonNull(iconManager);
 		this.columnPresentationManager = Objects.requireNonNull(columnPresentationManager);
 		
@@ -469,7 +467,7 @@ public class CyColumnPicker extends JPanel {
 				setHorizontalAlignment(JLabel.CENTER);
 				
 				if (column == SHARED_COL_IDX) {
-					setText((boolean)value ? SHARED_COL_ICON_TEXT : "");
+					setText((boolean)value ? IconManager.ICON_SITEMAP : "");
 					setToolTipText((boolean)value ? "Network Collection Column" : null);
 				} else {
 					setText((boolean)value ? IconManager.ICON_CHECK_SQUARE : IconManager.ICON_SQUARE_O);
