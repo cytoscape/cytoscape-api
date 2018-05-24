@@ -31,10 +31,6 @@ import java.awt.Color;
  * ColourLovers, etc.) to provide color palettes to Cytoscape routines.
  **/
 public interface Palette {
-	enum PaletteType {
-		DIVERGING, SEQUENTIAL, QUALITATIVE, ANY;
-	}
-
 	/**
 	 * Return the name of this palette.  This is intended to be the user-visible
 	 * name, not the internal identifier.
@@ -89,4 +85,11 @@ public interface Palette {
 	 * @return true if the palette is color blind safe
 	 */
 	public boolean isColorBlindSafe();
+
+	/**
+	 * Return the string representation of this palette (usually the name)
+	 *
+	 * @return the palette name
+	 */
+	public String toString();
 }

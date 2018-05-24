@@ -45,7 +45,7 @@ public interface PaletteProvider {
 	 * 
 	 * @return the list of palette types supported
 	 */
-	public List<Palette.PaletteType> getPaletteTypes();
+	public List<PaletteType> getPaletteTypes();
 
 	/**
 	 * List all of the palettes available from this provider, optionally restricted by
@@ -56,7 +56,7 @@ public interface PaletteProvider {
 	 * @param colorBlindSafe if this provider distinguishes between color blind safe palettes or not
 	 * @return a list of palette names
 	 **/
-	public List<String> listPaletteNames(Palette.PaletteType type, boolean colorBlindSafe);
+	public List<String> listPaletteNames(PaletteType type, boolean colorBlindSafe);
 
 	/**
 	 * List all of the palettes available from this provider, optionally restricted by
@@ -67,7 +67,7 @@ public interface PaletteProvider {
 	 * @param colorBlindSafe if this provider distinguishes between color blind safe palettes or not
 	 * @return a list of palette identifiers
 	 **/
-	public List<Object> listPaletteIdentifiers(Palette.PaletteType type, boolean colorBlindSafe);
+	public List<Object> listPaletteIdentifiers(PaletteType type, boolean colorBlindSafe);
 
 	/**
 	 * Get a palette by its name

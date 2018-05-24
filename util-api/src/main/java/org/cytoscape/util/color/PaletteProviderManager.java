@@ -47,7 +47,7 @@ public interface PaletteProviderManager {
 	 * @param colorSafe true if the palette should provide color safe palettes
 	 * @return the list of palette providers
 	 **/
-	public List<PaletteProvider> getPaletteProviders(Palette.PaletteType type, boolean colorSafe);
+	public List<PaletteProvider> getPaletteProviders(PaletteType type, boolean colorSafe);
 
 	/**
 	 * Return the palette provider that matches the name in the argument.
