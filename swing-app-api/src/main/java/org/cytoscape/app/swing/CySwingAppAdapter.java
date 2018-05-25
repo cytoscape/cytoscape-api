@@ -1,34 +1,9 @@
 package org.cytoscape.app.swing;
 
-/*
- * #%L
- * Cytoscape Swing App API (swing-app-api)
- * $Id:$
- * $HeadURL:$
- * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
- * %%
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as 
- * published by the Free Software Foundation, either version 2.1 of the 
- * License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Lesser Public License for more details.
- * 
- * You should have received a copy of the GNU General Lesser Public 
- * License along with this program.  If not, see
- * <http://www.gnu.org/licenses/lgpl-2.1.html>.
- * #L%
- */
-
-import java.util.Properties;
+import org.cytoscape.app.CyAppAdapter;
 import org.cytoscape.application.swing.CySwingApplication;
 import org.cytoscape.work.swing.DialogTaskManager;
 import org.cytoscape.work.swing.PanelTaskManager;
-import org.cytoscape.app.CyAppAdapter;
 
 
 /**
@@ -42,9 +17,15 @@ import org.cytoscape.app.CyAppAdapter;
  * and creational facilities defined in the Cytoscape API.
  * This is a convenience interface intended make app development
  * as simple as possible.
+ * 
  * @CyAPI.Api.Interface
  * @CyAPI.InModule swing-app-api
+ * 
+ * @deprecated (As of Cytoscape 3.7) 
+ * Support for simple apps will be removed in a future version 
+ * of Cytoscape, please provide an OSGi bundle app instead.
  */
+@Deprecated
 public interface CySwingAppAdapter extends CyAppAdapter {
 
 	//

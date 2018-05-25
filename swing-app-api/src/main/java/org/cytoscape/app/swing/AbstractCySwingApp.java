@@ -32,9 +32,15 @@ import org.cytoscape.app.AbstractCyApp;
  * AbstractCyApp simply provides access to CySwingAppAdapter,
  * which provides access to Swing specific services.  All other
  * services from CyAppAdapter will still be available.
+ * 
  * @CyAPI.Abstract.Class
  * @CyAPI.InModule swing-app-api
+ * 
+ * @deprecated (As of Cytoscape 3.7) 
+ * Support for simple apps will be removed in a future version 
+ * of Cytoscape, please provide an OSGi bundle app instead.
  */
+@Deprecated
 public abstract class AbstractCySwingApp extends AbstractCyApp {
 
 	/**

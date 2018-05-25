@@ -37,9 +37,15 @@ package org.cytoscape.app;
  * be included in the app jar based on those already loaded in the classpath.
  * To load alternative versions of the same library used by other apps or 
  * Cytoscape itself, it will be necessary to write your app using OSGi.
+ * 
  * @CyAPI.Abstract.Class
  * @CyAPI.InModule app-api
+ * 
+ * @deprecated (As of Cytoscape 3.7) 
+ * Support for simple apps will be removed in a future version 
+ * of Cytoscape, please provide an OSGi bundle app instead.
  */
+@Deprecated
 public abstract class AbstractCyApp {
 
 	/**

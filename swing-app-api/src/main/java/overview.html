@@ -16,6 +16,13 @@ that use the same external library (not provided by the Cytoscape core) to co-ex
 And second, "Simple Apps" and "Bundle Apps" access services in the Cytoscape core slightly
 differently.
 <h4>Simple App</h4>
+
+<p>
+<i>Simple Apps are deprecated as of Cytoscape 3.7.<br>
+Support for simple apps will be removed in a future version 
+of Cytoscape, please provide an OSGi bundle app instead.</i>
+</p>
+
 A Cytoscape "Simple App" will generally be an extension of {@link org.cytoscape.app.swing.AbstractCySwingApp}
 if you intend to use the swing version of Cytoscape, or {@link org.cytoscape.app.AbstractCyApp} if you
 don't need any swing functions.  Apps that inherit from {@link org.cytoscape.app.AbstractCyApp} can access
