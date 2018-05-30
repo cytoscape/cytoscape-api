@@ -1,5 +1,7 @@
 package org.cytoscape.filter;
 
+import java.util.List;
+
 import org.cytoscape.filter.model.NamedTransformer;
 
 /**
@@ -41,5 +43,10 @@ public interface TransformerContainer<C,E> {
 	 * does not exist in this container.
 	 */
 	NamedTransformer<C, E> getNamedTransformer(String name);
+	
+	/**
+	 * Returns the list of transformers contained in this container. 
+	 */
+	List<NamedTransformer<C, E>> getNamedTransformers();
 
 }
