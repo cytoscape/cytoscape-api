@@ -16,13 +16,31 @@ import static org.cytoscape.work.ServiceProperties.TITLE;
 import static org.cytoscape.work.ServiceProperties.TOOLTIP;
 import static org.cytoscape.work.ServiceProperties.TOOL_BAR_GRAVITY;
 
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.Map;
+
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.ImageIcon;
+import javax.swing.KeyStroke;
+import javax.swing.event.MenuEvent;
+import javax.swing.event.PopupMenuEvent;
+
+import org.cytoscape.application.CyApplicationManager;
+import org.cytoscape.application.CyUserLog;
+import org.cytoscape.view.model.CyNetworkViewManager;
+import org.cytoscape.work.TaskFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 /*
  * #%L
  * Cytoscape Swing Application API (swing-application-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2018 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -40,25 +58,6 @@ import static org.cytoscape.work.ServiceProperties.TOOL_BAR_GRAVITY;
  * #L%
  */
 
-import java.beans.PropertyChangeEvent;
-import java.beans.PropertyChangeListener;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.util.Map;
-
-import javax.swing.AbstractAction;
-import javax.swing.Action;
-import javax.swing.ImageIcon;
-import javax.swing.KeyStroke;
-import javax.swing.event.MenuEvent;
-import javax.swing.event.PopupMenuEvent;
-
-import org.cytoscape.application.CyApplicationManager;
-import org.cytoscape.view.model.CyNetworkViewManager;
-import org.cytoscape.work.TaskFactory;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 /**
  * An abstract implementation of the CyAction interface. Instead of using this
  * class directly you should (strongly) consider implementing a
@@ -72,12 +71,12 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	
 	private static final long serialVersionUID = -2245672104075936952L;
 	
-	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
+	private static final Logger logger = LoggerFactory.getLogger(CyUserLog.NAME);
 
 	/**
 	 * The name describing the preferred menu for the action. 
 	 */
-	protected String preferredMenu = null;
+	protected String preferredMenu;
 
 	/**
 	 * The float value placing the action within the menu.
@@ -98,22 +97,22 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	/**
 	 * Indicates whether accelerator keys have been set for the action.
 	 */
-	protected boolean acceleratorSet = false;
+	protected boolean acceleratorSet;
 
 	/**
 	 * The accelerator keystroke, if set.
 	 */
-	protected KeyStroke acceleratorKeyStroke = null;
+	protected KeyStroke acceleratorKeyStroke;
 
 	/**
 	 * Indicates whether to use a checkbox menu item.
 	 */
-	protected boolean useCheckBoxMenuItem = false;
+	protected boolean useCheckBoxMenuItem;
 
 	/**
 	 * Indicates whether the action is in the toolbar.
 	 */
-	protected boolean inToolBar = false;
+	protected boolean inToolBar;
 
 	/**
 	 * Indicates whether the action is in a menu.
@@ -123,22 +122,22 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	/**
 	 * Indicates whether a menu separator should be inserted before this item
 	 */
-	protected boolean insertSeparatorBefore = false;
+	protected boolean insertSeparatorBefore;
 
 	/**
 	 * Indicates whether a menu separator should be inserted after this item
 	 */
-	protected boolean insertSeparatorAfter = false;
+	protected boolean insertSeparatorAfter;
 	
 	/**
 	 * Indicates whether a toolbar separator should be inserted before this item
 	 */
-	protected boolean insertToolbarSeparatorBefore = false;
+	protected boolean insertToolbarSeparatorBefore;
 	
 	/**
 	 * Indicates whether a toolbar separator should be inserted after this item
 	 */
-	protected boolean insertToolbarSeparatorAfter = false;
+	protected boolean insertToolbarSeparatorAfter;
 
 	/**
 	 * The name of the action.
@@ -155,7 +154,8 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * A support class for deciding whether the action should be enabled.
 	 */
 	private final AbstractEnableSupport enabler;
-
+	
+	
 	/**
 	 * Creates a new AbstractCyAction object that is
 	 * always enabled.
@@ -170,15 +170,11 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	private void addNameChangeListener() {
 		name = (String) getValue(Action.NAME);
 		
-		addPropertyChangeListener(new PropertyChangeListener() {
-			@Override
-			public void propertyChange(PropertyChangeEvent event) {
-				if (!Action.NAME.equals(event.getPropertyName())) {
-					return;
-				}
-				
-				name = (String) event.getNewValue();
-			}
+		addPropertyChangeListener(evt -> {
+			if (!Action.NAME.equals(evt.getPropertyName()))
+				return;
+			
+			name = (String) evt.getNewValue();
 		});
 	}
 
@@ -307,72 +303,73 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		super(configProps.get(TITLE));
 		
 		final String enableFor = configProps.get(ENABLE_FOR);
-		if (enableFor == null)
-			this.enabler = new TaskFactoryEnableSupport(this, factory);
-		else {
+		
+		if (enableFor == null) {
+			enabler = new TaskFactoryEnableSupport(this, factory);
+		} else {
 			TaskFactoryEnableSupport taskFactoryEnabler = new TaskFactoryEnableSupport((CyAction) null, factory);
 			ActionEnableSupport actionEnabler = new ActionEnableSupport((CyAction) null, enableFor, applicationManager, networkViewManager);
-			this.enabler = new ConjunctionEnableSupport(this, actionEnabler, taskFactoryEnabler);
+			enabler = new ConjunctionEnableSupport(this, actionEnabler, taskFactoryEnabler);
 		}
+		
 		configFromProps(configProps);
 		addNameChangeListener();
 	}
 
-	private void configFromProps(final Map<String, String> configProps) {
+	private void configFromProps(final Map<String, String> props) {
+		configurationProperties = props;
 
-		logger.debug("New CyAction with title: " + configProps.get(TITLE));
-
-		configurationProperties = configProps;
-
-		final String prefMenu = configProps.get(PREFERRED_MENU);
+		final String prefMenu = props.get(PREFERRED_MENU);
 
 		if (prefMenu != null)
 			setPreferredMenu(prefMenu);
 
-		final URL largeIconURL = getURL( configProps.get(LARGE_ICON_URL) );
-		if ( largeIconURL != null ) 
+		final URL largeIconURL = getURL(props.get(LARGE_ICON_URL));
+
+		if (largeIconURL != null) // Use image as icon
 			putValue(LARGE_ICON_KEY, new ImageIcon(largeIconURL));
 
-		final URL smallIconURL = getURL( configProps.get(SMALL_ICON_URL) );
-		if ( smallIconURL != null ) 
+		final URL smallIconURL = getURL(props.get(SMALL_ICON_URL));
+		
+		if (smallIconURL != null)
 			putValue(SMALL_ICON, new ImageIcon(smallIconURL));
 
-		final String tooltip = configProps.get(TOOLTIP);
+		final String tooltip = props.get(TOOLTIP);
 
 		if (tooltip != null)
 			putValue(SHORT_DESCRIPTION, tooltip);
 
-		final String foundInToolBar = configProps.get(IN_TOOL_BAR);
+		final String foundInToolBar = props.get(IN_TOOL_BAR);
 
 		if (foundInToolBar != null && Boolean.parseBoolean(foundInToolBar))
 			inToolBar = true;
 
-		final String foundInMenuBar = configProps.get(IN_MENU_BAR);
+		final String foundInMenuBar = props.get(IN_MENU_BAR);
 
 		if (foundInMenuBar != null  && Boolean.parseBoolean(foundInMenuBar))
 			inMenuBar = true;
 
-		final String foundInsertSeparatorBefore = configProps.get(INSERT_SEPARATOR_BEFORE);
+		final String foundInsertSeparatorBefore = props.get(INSERT_SEPARATOR_BEFORE);
 
 		if (foundInsertSeparatorBefore != null  && Boolean.parseBoolean(foundInsertSeparatorBefore))
 			insertSeparatorBefore = true;
 
-		final String foundInsertSeparatorAfter = configProps.get(INSERT_SEPARATOR_AFTER);
+		final String foundInsertSeparatorAfter = props.get(INSERT_SEPARATOR_AFTER);
 
 		if (foundInsertSeparatorAfter != null  && Boolean.parseBoolean(foundInsertSeparatorAfter))
 			insertSeparatorAfter = true;
 		
-		final String foundInsertToolbarSeparatorBefore = configProps.get(INSERT_TOOLBAR_SEPARATOR_BEFORE);
+		final String foundInsertToolbarSeparatorBefore = props.get(INSERT_TOOLBAR_SEPARATOR_BEFORE);
 
 		if (foundInsertToolbarSeparatorBefore != null  && Boolean.parseBoolean(foundInsertToolbarSeparatorBefore))
 			insertToolbarSeparatorBefore = true;
 
-		final String foundInsertToolbarSeparatorAfter = configProps.get(INSERT_TOOLBAR_SEPARATOR_AFTER);
+		final String foundInsertToolbarSeparatorAfter = props.get(INSERT_TOOLBAR_SEPARATOR_AFTER);
 
 		if (foundInsertToolbarSeparatorAfter != null  && Boolean.parseBoolean(foundInsertToolbarSeparatorAfter))
 			insertToolbarSeparatorAfter = true;
 
-		final String keyComboString = configProps.get(ACCELERATOR);
+		final String keyComboString = props.get(ACCELERATOR);
 
 		if (keyComboString != null) {
 			final KeyStroke command = AcceleratorParser.parse(keyComboString);
@@ -381,7 +378,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 				setAcceleratorKeyStroke(command);
 		}
 
-		final String menuGravityString = configProps.get(MENU_GRAVITY);
+		final String menuGravityString = props.get(MENU_GRAVITY);
 
 		if (menuGravityString != null) {
 			try {
@@ -391,7 +388,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 			}
 		}
 
-		final String toolbarGravityString = configProps.get(TOOL_BAR_GRAVITY);
+		final String toolbarGravityString = props.get(TOOL_BAR_GRAVITY);
 
 		if (toolbarGravityString != null) {
 			try {
@@ -400,6 +397,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 				logger.warn("failed to set toolBarGravity with: " + toolbarGravityString, nfe);
 			}
 		}
+		
 		setEnabled(true);
 	}
 
@@ -653,13 +651,13 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 
 	
 	private URL getURL(final String s) {
-		if ( s == null )
+		if (s == null)
 			return null;
-		
+
 		try {
 			return new URL(s);
 		} catch (MalformedURLException e) {
-			logger.warn("Incorrectly formatted URL string: '" + s +"'",e);
+			logger.warn("Incorrectly formatted URL string: '" + s + "'", e);
 			return null;
 		}
 	}
@@ -675,13 +673,15 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		@Override
 		public void updateEnableState() {
 			boolean enabled = true;
+
 			for (AbstractEnableSupport enableSupport : enableSupports) {
 				enableSupport.updateEnableState();
 				enabled &= enableSupport.isCurrentlyEnabled();
-				if (!enabled) {
+
+				if (!enabled)
 					break;
-				}
 			}
+
 			setEnabled(enabled);
 		}
 	}
