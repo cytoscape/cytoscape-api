@@ -27,6 +27,8 @@ import javax.swing.ImageIcon;
  */
 public interface IconManager {
 	
+	static final String DEFAULT_FONT_NAME = "FontAwesome";
+	
 	/**
 	 * Returns the font that renders the text as an icon.
 	 * @see <a href="http://fortawesome.github.io/Font-Awesome/icons/">Font Awesome Icons</a>
@@ -35,6 +37,23 @@ public interface IconManager {
 	 */
 	Font getIconFont(float size);
 	
+	Font getIconFont(String fontName, float size);
+	
+	void addIconFont(Font font);
+	
+	Font removeIconFont(String fontName);
+
+	/**
+	 * 
+	 * @param id The icon id should have at least the app name as a namespace 
+	 *           to avoid colisions (e.g. <code>"MyApp::ImportIcon"</code>).
+	 * @param icon
+	 */
+	void addIcon(String id, Icon icon);
+	
+	Icon removeIcon(String id);
+	
+	Icon getIcon(String id);
 	
 	/**
 	 * Resizes an icon so that its maximum dimension (width or height) is no larger
@@ -43,31 +62,31 @@ public interface IconManager {
 	 */
 	public static Icon resizeIcon(Icon icon, int max) {
 		final int height = icon.getIconHeight(), width = icon.getIconWidth();
-		if(width <= 16 && height <= 16)
- 			return icon;
-		
+
+		if (width <= 16 && height <= 16)
+			return icon;
+
 		// calculate new height and width
 		final int newHeight, newWidth;
-		
-		if(height > width) {
+
+		if (height > width) {
 			newHeight = max;
-			newWidth = (int)((float)width/(float)height * max);
+			newWidth = (int) ((float) width / (float) height * max);
 		} else {
 			newWidth = max;
-			newHeight = (int)((float)height/(float)width * max);
+			newHeight = (int) ((float) height / (float) width * max);
 		}
-		
-		
+
 		BufferedImage img = new BufferedImage(width, height, BufferedImage.TYPE_INT_ARGB);
 		Graphics2D g = img.createGraphics();
 		icon.paintIcon(null, g, 0, 0);
 		g.dispose();
-		
+
 		Image resizedImage = img.getScaledInstance(newWidth, newHeight, Image.SCALE_SMOOTH);
 		ImageIcon resizedIcon = new ImageIcon(resizedImage);
+		
 		return resizedIcon;
 	}
-	
 	
 	static final String ICON_ADJUST = "\uf042";
 	static final String ICON_ADN = "\uf170";

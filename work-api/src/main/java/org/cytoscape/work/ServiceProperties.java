@@ -85,14 +85,27 @@ public interface ServiceProperties {
 	public static final String COMMAND_SUPPORTS_JSON = "commandSupportsJSON";
 	
 	/**
-	 * Location of large icon data for desktop application
+	 * Location of large icon data for desktop application (see {@link #IN_TOOL_BAR}).
 	 */
 	public static final String LARGE_ICON_URL = "largeIconURL";
 	
+	
 	/**
-	 * Location of small icon data for desktop application
+	 * Location of small icon data for desktop application (see {@link #IN_MENU_BAR}).
 	 */
 	public static final String SMALL_ICON_URL = "smallIconURL";
+	
+	/**
+	 * The String ID of the Icon to be used in a swing component, usually a tool bar button (see {@link #IN_TOOL_BAR}).
+	 * The icon must be registered with the same ID first -- see <code>IconManager.addIcon(String, Icon)</code>.
+	 */
+	public static final String LARGE_ICON_ID = "largeIconID";
+	
+	/**
+	 * The String ID of the Icon to be used in a swing component, usually a menu item (see {@link #IN_MENU_BAR}).
+	 * The icon must be registered with the same ID first -- see <code>IconManager.addIcon(String, Icon)</code>.
+	 */
+	public static final String SMALL_ICON_ID = "smallIconID";
 	
 	/**
 	 * Tool tip text for an action
@@ -100,12 +113,14 @@ public interface ServiceProperties {
 	public static final String TOOLTIP = "tooltip";
 	
 	/**
-	 * Action will be added to tool bar if this flag is set to true
+	 * Action (or TaskFactory) will be added to tool bar if this flag is set to "true".
+	 * You can also set the button's icon through the properties {@link #LARGE_ICON_URL} or {@link #LARGE_ICON_ID}.
 	 */
 	public static final String IN_TOOL_BAR = "inToolBar";
 	
 	/**
-	 * Action will be added to menu bar if this flag is set to true
+	 * Action (or TaskFactory) will be added to menu bar if this flag is set to "true".
+	 * You can also set the menu item's icon through the properties {@link #SMALL_ICON_URL} or {@link #SMALL_ICON_ID}.
 	 */
 	public static final String IN_MENU_BAR = "inMenuBar";
 	

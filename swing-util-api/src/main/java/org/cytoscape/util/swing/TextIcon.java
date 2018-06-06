@@ -8,6 +8,9 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.Rectangle2D;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.swing.AbstractButton;
 import javax.swing.Icon;
@@ -50,6 +53,8 @@ public class TextIcon implements Icon {
 	private final int width;
 	private final int height;
 	
+	private Set<Integer> disabledLayers = new HashSet<>();
+	
 	public TextIcon(String text, Font font, Color color, int width, int height) {
 		this.texts = new String[] { text };
 		this.fonts = new Font[] { font };
@@ -69,12 +74,41 @@ public class TextIcon implements Icon {
 		this(texts, new Font[] { font }, colors, width, height);
 	}
 	
+	/**
+	 * 
+	 * @param texts
+	 * @param font
+	 * @param colors
+	 * @param width
+	 * @param height
+	 * @param disabledLayers The indexes of the layers that must be transparent when the target component is disabled.
+	 */
+	public TextIcon(String[] texts, Font font, Color[] colors, int width, int height, Integer... disabledLayers) {
+		this(texts, new Font[] { font }, colors, width, height, disabledLayers);
+	}
+	
 	public TextIcon(String[] texts, Font[] fonts, Color[] colors, int width, int height) {
+		this(texts, fonts, colors, width, height, (Integer[]) null);
+	}
+	
+	/**
+	 * 
+	 * @param texts
+	 * @param fonts
+	 * @param colors
+	 * @param width
+	 * @param height
+	 * @param disabledLayers The indexes of the layers that must be transparent when the target component is disabled.
+	 */
+	public TextIcon(String[] texts, Font[] fonts, Color[] colors, int width, int height, Integer... disabledLayers) {
 		this.texts = texts;
 		this.fonts = fonts;
 		this.colors = colors;
 		this.width = width;
 		this.height = height;
+		
+		if (disabledLayers != null)
+			this.disabledLayers.addAll(Arrays.asList(disabledLayers));
 	}
 	
 	@Override
@@ -91,6 +125,9 @@ public class TextIcon implements Icon {
 			Color fg = null;
 
 			for (int i = 0; i < texts.length; i++) {
+				if (c != null && !c.isEnabled() && disabledLayers.contains(i))
+					continue;
+				
 				String txt = texts[i];
 
 				if (fonts.length > i)
