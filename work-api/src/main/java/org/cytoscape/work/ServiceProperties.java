@@ -108,7 +108,7 @@ public interface ServiceProperties {
 	public static final String SMALL_ICON_ID = "smallIconID";
 	
 	/**
-	 * Tool tip text for an action
+	 * Tool tip text for an action.
 	 */
 	public static final String TOOLTIP = "tooltip";
 	

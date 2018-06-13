@@ -112,14 +112,12 @@ public interface CyAction extends Action, MenuListener, PopupMenuListener {
 	boolean useCheckBoxMenuItem();
 
 	/**
-	 * Forces the action to update its enable state based on the criteria defined for
-	 * the action.
+	 * Forces the action to update its enable state based on the criteria defined for the action.
 	 */
 	void updateEnableState();	
 
 	/**
- 	 * Returns the configuration properties that were passed to the CyAction
- 	 * when it was created.
+ 	 * Returns the configuration properties that were passed to the CyAction when it was created.
  	 * @returns configuration properties as a Map.
  	 */
 	Map<String,String> getProperties();
@@ -128,18 +126,22 @@ public interface CyAction extends Action, MenuListener, PopupMenuListener {
  	 * To support configurable menus and tools, setIsInMenuBar added for 3.6
  	 */
 	void setIsInMenuBar(boolean b);
+	
 	/**
  	 * To support configurable menus and tools, setIsInToolBar added for 3.6
  	 */
 	void setIsInToolBar(boolean b);
+	
 	/**
  	 * To support configurable menus and tools, setPreferredMenu added for 3.6
  	 */
 	void setPreferredMenu(String menu);
+	
 	/**
  	 * To support configurable menus and tools, setToolbarGravity added for 3.6
  	 */
 	void setToolbarGravity(float f);
+	
 	/**
  	 * To support configurable menus and tools, setMenuGravity added for 3.6
  	 */

@@ -421,9 +421,6 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		putValue(Action.NAME, name);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String getName() {
 		return name;
@@ -447,7 +444,9 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 
 	
 	@Override
-	public void setIsInMenuBar(boolean b) {	inMenuBar = b;	}
+	public void setIsInMenuBar(boolean b) {
+		inMenuBar = b;
+	}
 
 	/**
 	 * By default no CytoscapeActions will be included in the toolbar.
@@ -460,7 +459,9 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	}
 
 	@Override
-	public void setIsInToolBar(boolean b) {	inToolBar = b;	}
+	public void setIsInToolBar(boolean b) {
+		inToolBar = b;
+	}
 
 	/**
 	 * Insert a separator before this menu item.  
@@ -509,9 +510,6 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		menuGravity = gravity;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public float getMenuGravity() {
 		return menuGravity;
@@ -522,13 +520,11 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *
 	 * @param gravity The gravity for ordering toolbar actions.
 	 */
+	@Override
 	public void setToolbarGravity(float gravity) {
 		toolbarGravity = gravity;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public float getToolbarGravity() {
 		return toolbarGravity;
@@ -545,17 +541,11 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		acceleratorKeyStroke = ks;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public KeyStroke getAcceleratorKeyStroke() {
 		return acceleratorKeyStroke;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public String getPreferredMenu() {
 		return preferredMenu;
@@ -567,13 +557,11 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *
 	 * @param newPreferredMenu The string describing the preferred menu name.
 	 */
+	@Override
 	public void setPreferredMenu(String newPreferredMenu) {
 		preferredMenu = newPreferredMenu;
 	}
 
-	/**
-	 * {@inheritDoc}
-	 */
 	@Override
 	public boolean useCheckBoxMenuItem() {
 		return useCheckBoxMenuItem;
@@ -661,10 +649,9 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
  	 * Return the config props. 
  	 */
 	@Override
-	public Map<String,String> getProperties() {
+	public Map<String, String> getProperties() {
 		return configurationProperties;
 	}
-
 	
 	private URL getURL(final String s) {
 		if (s == null)
