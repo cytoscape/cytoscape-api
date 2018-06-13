@@ -1,12 +1,20 @@
 package org.cytoscape.application.swing;
 
+import java.net.URL;
+import java.util.Map;
+
+import javax.swing.Action;
+import javax.swing.KeyStroke;
+import javax.swing.event.MenuListener;
+import javax.swing.event.PopupMenuListener;
+
 /*
  * #%L
  * Cytoscape Swing Application API (swing-application-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2018 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -23,12 +31,6 @@ package org.cytoscape.application.swing;
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
  */
-
-import java.util.Map;
-import javax.swing.Action;
-import javax.swing.KeyStroke;
-import javax.swing.event.MenuListener;
-import javax.swing.event.PopupMenuListener;
 
 /**
  * An interface that describes how an action should be placed within 
@@ -147,4 +149,12 @@ public interface CyAction extends Action, MenuListener, PopupMenuListener {
  	 * was defined in AbstractCyAction, but not in this interface
  	 */
 	void setAcceleratorKeyStroke(KeyStroke ks);
+
+	/**
+	 * Optional image to be displayed in the target component's tool tip.
+	 * @returns Path to an image file. The default value is <code>null</code>.
+	 */
+	default URL getToolTipImage() {
+		return null;
+	}
 }

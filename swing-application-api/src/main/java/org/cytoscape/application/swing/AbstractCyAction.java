@@ -14,6 +14,7 @@ import static org.cytoscape.work.ServiceProperties.PREFERRED_MENU;
 import static org.cytoscape.work.ServiceProperties.SMALL_ICON_URL;
 import static org.cytoscape.work.ServiceProperties.TITLE;
 import static org.cytoscape.work.ServiceProperties.TOOLTIP;
+import static org.cytoscape.work.ServiceProperties.TOOLTIP_IMAGE;
 import static org.cytoscape.work.ServiceProperties.TOOL_BAR_GRAVITY;
 
 import java.net.MalformedURLException;
@@ -143,6 +144,11 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * The name of the action.
 	 */
 	protected String name;
+	
+	/**
+	 * Path to an optional tool tip image
+	 */
+	protected URL toolTipImage;
 
 	/**
  	 * The configuration properties.  Adding it here allows extensions of
@@ -338,6 +344,11 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 
 		if (tooltip != null)
 			putValue(SHORT_DESCRIPTION, tooltip);
+		
+		final URL tooltipImg = getURL(props.get(TOOLTIP_IMAGE));
+		
+		if (tooltipImg != null)
+			toolTipImage = tooltipImg;
 
 		final String foundInToolBar = props.get(IN_TOOL_BAR);
 
@@ -418,6 +429,11 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		return name;
 	}
 
+	@Override
+	public URL getToolTipImage() {
+		return toolTipImage;
+	}
+	
 	/**
 	 * By default all CytoscapeActions wish to be included in the menu bar at
 	 * the 'preferredMenuName' location is specified and the 'Tools' menu not.

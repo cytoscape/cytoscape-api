@@ -113,6 +113,11 @@ public interface ServiceProperties {
 	public static final String TOOLTIP = "tooltip";
 	
 	/**
+	 * Tool tip image for an action.
+	 */
+	public static final String TOOLTIP_IMAGE = "tooltipImage";
+	
+	/**
 	 * Action (or TaskFactory) will be added to tool bar if this flag is set to "true".
 	 * You can also set the button's icon through the properties {@link #LARGE_ICON_URL} or {@link #LARGE_ICON_ID}.
 	 */
