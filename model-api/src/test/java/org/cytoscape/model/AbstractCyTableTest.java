@@ -27,6 +27,7 @@ import static org.junit.Assert.*;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
@@ -56,6 +57,9 @@ public abstract class AbstractCyTableTest {
 		}
 	}
 
+	abstract protected CyTable createTable(String title);
+	
+	
 	@Test
 	public void testAddStringAttr() {
 		table.createColumn("someString", String.class, false);
@@ -1218,17 +1222,224 @@ public abstract class AbstractCyTableTest {
 		List<Object> payloads = eventHelper.getAllPayloads();
 		payloads.clear();
 		
-		// If we set a value through the virtual column, all the parent tables
-		// should fire an event
+		// If we set a value through the virtual column, all the parent tables should fire an event
 		row1.set("s1", "test");
 		assertEquals(2, payloads.size());
 		
 		payloads.clear();
 		
-		// If we set a value through the parent table, all the dependent tables
-		// should fire an event
+		// If we set a value through the parent table, all the dependent tables should fire an event
 		row2.set("s", "test2");
 		assertEquals(2, payloads.size());
+	}
+	
+	@Test
+	public void testVirtualColumnEventsList() {
+		table2.createListColumn("s", String.class, false);
+		table.addVirtualColumn("s1", "s", table2, table.getPrimaryKey().getName(), true);
+		CyRow row1 = table.getRow(1L);
+		CyRow row2 = table2.getRow(1L);
+		
+		List<Object> payloads = eventHelper.getAllPayloads();
+		payloads.clear();
+		
+		// If we set a value through the virtual column, all the parent tables should fire an event
+		row1.set("s1", Arrays.asList("test"));
+		assertEquals(2, payloads.size());
+		
+		payloads.clear();
+		
+		// If we set a value through the parent table, all the dependent tables should fire an event
+		row2.set("s", Arrays.asList("test2"));
+		assertEquals(2, payloads.size());
+	}
+	
+	@Test
+	public void testVirtualColumnEventsNull() {
+		table2.createColumn("s", String.class, false);
+		table.addVirtualColumn("s1", "s", table2, table.getPrimaryKey().getName(), true);
+		CyRow row1 = table.getRow(1L);
+		CyRow row2 = table2.getRow(1L);
+		
+		List<Object> payloads = eventHelper.getAllPayloads();
+		payloads.clear();
+		
+		// If we set a value through the virtual column, all the parent tables should fire an event
+		row1.set("s1","test");
+		assertEquals(2, payloads.size());
+		
+		payloads.clear();
+		
+		// If we set a value through the parent table, all the dependent tables should fire an event
+		row2.set("s", null);
+		assertEquals(2, payloads.size());
+	}
+	
+	@Test
+	public void testVirtualColumnEvents2() {
+		CyTable table3 = createTable("bart");
+		
+		table.createColumn("s", String.class, false);
+		table2.addVirtualColumn("s1", "s", table, table2.getPrimaryKey().getName(), true);
+		table3.addVirtualColumn("s1", "s", table, table3.getPrimaryKey().getName(), true);
+		
+		CyRow row1 = table.getRow(1L);
+		CyRow row2 = table2.getRow(1L);
+		CyRow row3 = table3.getRow(1L);
+		
+		List<Object> payloads = eventHelper.getAllPayloads();
+		payloads.clear();
+		
+		// If we set a value through the parent table, all the dependent tables should fire an event
+		row1.set("s", "test");
+		assertEquals(3, payloads.size());
+		
+		payloads.clear();
+		
+		// If we set a value through the virtual column, all the parent tables should fire an event
+		row2.set("s1", "test2");
+		assertEquals(3, payloads.size());
+		
+		payloads.clear();
+		
+		// If we set a value through the parent table, all the dependent tables should fire an event
+		row3.set("s1", "test3");
+		assertEquals(3, payloads.size());
+	}
+	
+	@Test
+	public void testVirtualColumnEventsList2() {
+		CyTable table3 = createTable("bart");
+		
+		table.createListColumn("s", String.class, false);
+		table2.addVirtualColumn("s1", "s", table, table2.getPrimaryKey().getName(), true);
+		table3.addVirtualColumn("s1", "s", table, table3.getPrimaryKey().getName(), true);
+		
+		CyRow row1 = table.getRow(1L);
+		CyRow row2 = table2.getRow(1L);
+		CyRow row3 = table3.getRow(1L);
+		
+		List<Object> payloads = eventHelper.getAllPayloads();
+		payloads.clear();
+		
+		// If we set a value through the parent table, all the dependent tables should fire an event
+		row1.set("s", Arrays.asList("test"));
+		assertEquals(3, payloads.size());
+		
+		payloads.clear();
+		
+		// If we set a value through the virtual column, all the parent tables should fire an event
+		row2.set("s1", Arrays.asList("test2"));
+		assertEquals(3, payloads.size());
+		
+		payloads.clear();
+		
+		// If we set a value through the parent table, all the dependent tables should fire an event
+		row3.set("s1", Arrays.asList("test3"));
+		assertEquals(3, payloads.size());
+	}
+	
+	@Test
+	public void testVirtualColumnEventsNull2() {
+		CyTable table3 = createTable("bart");
+		
+		table.createColumn("s", String.class, false);
+		table2.addVirtualColumn("s1", "s", table, table2.getPrimaryKey().getName(), true);
+		table3.addVirtualColumn("s1", "s", table, table3.getPrimaryKey().getName(), true);
+		
+		CyRow row1 = table.getRow(1L);
+		CyRow row2 = table2.getRow(1L);
+		CyRow row3 = table3.getRow(1L);
+		
+		List<Object> payloads = eventHelper.getAllPayloads();
+		payloads.clear();
+		
+		// If we set a value through the parent table, all the dependent tables should fire an event
+		row1.set("s", "test");
+		assertEquals(3, payloads.size());
+		
+		payloads.clear();
+		
+		// If we set a value through the virtual column, all the parent tables should fire an event
+		row2.set("s1", null);
+		assertEquals(3, payloads.size());
+		
+		row1.set("s", "test");
+		payloads.clear();
+		
+		// If we set a value through the parent table, all the dependent tables should fire an event
+		row3.set("s1", null);
+		assertEquals(3, payloads.size());
+		
+		row1.set("s", "test");
+		payloads.clear();
+		
+		// If we set a value through the parent table, all the dependent tables should fire an event
+		row1.set("s", null);
+		assertEquals(3, payloads.size());
+	}
+	
+	@Test
+	public void testVirtualColumnNoEventWhenValueIsTheSame() {
+		table2.createColumn("s", String.class, false);
+		table.addVirtualColumn("s1", "s", table2, table.getPrimaryKey().getName(), true);
+		CyRow row1 = table.getRow(1L);
+		CyRow row2 = table2.getRow(1L);
+		
+		row1.set("s1", "test");
+		
+		List<Object> payloads = eventHelper.getAllPayloads();
+		payloads.clear();
+		
+		row1.set("s1", "test");
+		assertEquals(0, payloads.size());
+		
+		payloads.clear();
+		
+		row2.set("s", "test");
+		assertEquals(0, payloads.size());
+	}
+	
+	@Test
+	public void testVirtualColumnNoEventWhenValueIsTheSameList() {
+		table2.createListColumn("s", String.class, false);
+		table.addVirtualColumn("s1", "s", table2, table.getPrimaryKey().getName(), true);
+		CyRow row1 = table.getRow(1L);
+		CyRow row2 = table2.getRow(1L);
+		
+		row1.set("s1", Arrays.asList("test"));
+		
+		List<Object> payloads = eventHelper.getAllPayloads();
+		payloads.clear();
+		
+		row1.set("s1", Arrays.asList("test"));
+		assertEquals(0, payloads.size());
+		
+		payloads.clear();
+		
+		row2.set("s", Arrays.asList("test"));
+		assertEquals(0, payloads.size());
+	}
+	
+	@Test
+	public void testVirtualColumnNoEventWhenValueIsTheSameNull() {
+		table2.createListColumn("s", String.class, false);
+		table.addVirtualColumn("s1", "s", table2, table.getPrimaryKey().getName(), true);
+		CyRow row1 = table.getRow(1L);
+		CyRow row2 = table2.getRow(1L);
+		
+		row1.set("s1", null);
+		
+		List<Object> payloads = eventHelper.getAllPayloads();
+		payloads.clear();
+		
+		row1.set("s1", null);
+		assertEquals(0, payloads.size());
+		
+		payloads.clear();
+		
+		row2.set("s", null);
+		assertEquals(0, payloads.size());
 	}
 	
 	@Test
