@@ -106,8 +106,8 @@ public final class CyToolTip extends JToolTip {
 	}
 
 	private void init() {
-		final Color bg = UIManager.getColor("Table.foreground");
-		final Color fg = UIManager.getColor("Table.background");
+		final Color bg = new Color(UIManager.getColor("Table.foreground").getRGB());
+		final Color fg = new Color(UIManager.getColor("Table.background").getRGB());
 		
 		final JPanel content = new JPanel();
 		content.setBackground(bg);
