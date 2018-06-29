@@ -171,7 +171,7 @@ public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 			// not partitioning.  This makes the code further down
 			// much cleaner
 			LayoutPartition partition = new LayoutPartition(networkView, nodesToLayOut, edgeWeighter);
-			partitionList = new ArrayList<LayoutPartition>(1);
+			partitionList = new ArrayList<>(1);
 			partitionList.add(partition);
 		} else {
 			Set<CyNode> nodes = nodesToLayOut.stream().map(nv->nv.getModel()).collect(Collectors.toSet());

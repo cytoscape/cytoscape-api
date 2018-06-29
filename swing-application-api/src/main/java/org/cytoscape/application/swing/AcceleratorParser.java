@@ -1,5 +1,11 @@
 package org.cytoscape.application.swing;
 
+import java.awt.Toolkit;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.util.HashMap;
+import java.util.Map;
+
 /*
  * #%L
  * Cytoscape Swing Application API (swing-application-api)
@@ -25,12 +31,10 @@ package org.cytoscape.application.swing;
  */
 
 import java.util.StringTokenizer;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
+
 import javax.swing.KeyStroke;
-import java.awt.Toolkit;
-import java.util.Map;
-import java.util.HashMap;
+
+import org.cytoscape.application.CyUserLog;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -64,12 +68,12 @@ import org.slf4j.LoggerFactory;
  */
 final class AcceleratorParser {
 
-	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
+	private static final Logger logger = LoggerFactory.getLogger(CyUserLog.NAME);
 
 	private static final String PREFIX = "VK_";
 	private static final String FUNCTION_KEY = "fn";
 
-	private static final Map<String, Integer> MOD_MAP = new HashMap<String, Integer>();
+	private static final Map<String, Integer> MOD_MAP = new HashMap<>();
 
 	static {
 		MOD_MAP.put("command", Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());

@@ -1,29 +1,5 @@
 package org.cytoscape.view.presentation.property;
 
-/*
- * #%L
- * Cytoscape Presentation API (presentation-api)
- * $Id:$
- * $HeadURL:$
- * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
- * %%
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as 
- * published by the Free Software Foundation, either version 2.1 of the 
- * License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Lesser Public License for more details.
- * 
- * You should have received a copy of the GNU General Lesser Public 
- * License along with this program.  If not, see
- * <http://www.gnu.org/licenses/lgpl-2.1.html>.
- * #L%
- */
-
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Paint;
@@ -52,6 +28,30 @@ import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/*
+ * #%L
+ * Cytoscape Presentation API (presentation-api)
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2006 - 2018 The Cytoscape Consortium
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as 
+ * published by the Free Software Foundation, either version 2.1 of the 
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Lesser Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Lesser Public 
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/lgpl-2.1.html>.
+ * #L%
+ */
+
 /**
  * Basic Implementation of VisualLexicon.
  * 
@@ -79,7 +79,8 @@ public class BasicVisualLexicon implements VisualLexicon {
 	protected static final Range<Paint> PAINT_RANGE = new ContinuousRange<>(Paint.class, MIN_COLOR, MAX_COLOR,
 			true, true);
 
-	protected static final Set<String> STRING_SET = new HashSet<String>();
+	protected static final Set<String> STRING_SET = new HashSet<>();
+	
 	// This will be used to for String VP which accepts any string values.
 	protected static final Range<String> ARBITRARY_STRING_RANGE = new DiscreteRange<String>(String.class, STRING_SET) {
 		// Takes any String as valid value.
@@ -235,7 +236,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 	 * <p><strong>Property Range:</strong> 0 &LT;= value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
 	 */
 	public static final VisualProperty<Double> NODE_BORDER_WIDTH = new DoubleVisualProperty(DEF_BORDER_WIDTH,
-			new ContinuousRange<Double>(Double.class, 0d, Double.POSITIVE_INFINITY, true, true), "NODE_BORDER_WIDTH",
+			new ContinuousRange<>(Double.class, 0d, Double.POSITIVE_INFINITY, true, true), "NODE_BORDER_WIDTH",
 			"Node Border Width", CyNode.class);
 
 	/**
@@ -260,7 +261,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 	 * <p><strong>Property Range:</strong> 1 &LT;= value &LT;= {@see java.lang.Integer#MAX_VALUE}</p> 
 	 */
 	public static final VisualProperty<Integer> NODE_LABEL_FONT_SIZE = new IntegerVisualProperty(DEF_FONT_SIZE,
-			new ContinuousRange<Integer>(Integer.class, 1, Integer.MAX_VALUE, true, true), "NODE_LABEL_FONT_SIZE",
+			new ContinuousRange<>(Integer.class, 1, Integer.MAX_VALUE, true, true), "NODE_LABEL_FONT_SIZE",
 			"Node Label Font Size", CyNode.class);
 
 	/**
@@ -270,7 +271,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 	 * <p><strong>Property Range:</strong> 0 &LT;= value &LT;= 255</p> 
 	 */
 	public static final VisualProperty<Integer> NODE_TRANSPARENCY = new IntegerVisualProperty(255,
-			new ContinuousRange<Integer>(Integer.class, 0, 255, true, true), "NODE_TRANSPARENCY", "Node Transparency",
+			new ContinuousRange<>(Integer.class, 0, 255, true, true), "NODE_TRANSPARENCY", "Node Transparency",
 			CyNode.class);
 	/**
 	 * See {@see BasicVisualLexicon#NODE_TRANSPARENCY}
@@ -283,7 +284,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 	 * <p><strong>Property Range:</strong> 0 &LT;= value &LT;= 255</p> 
 	 */
 	public static final VisualProperty<Integer> NODE_BORDER_TRANSPARENCY = new IntegerVisualProperty(255,
-			new ContinuousRange<Integer>(Integer.class, 0, 255, true, true), "NODE_BORDER_TRANSPARENCY",
+			new ContinuousRange<>(Integer.class, 0, 255, true, true), "NODE_BORDER_TRANSPARENCY",
 			"Node Border Transparency", CyNode.class);
 
 	/**
@@ -292,7 +293,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 	 * <p><strong>Property Range:</strong> 0 &LT;= value &LT;= 255</p> 
 	 */
 	public static final VisualProperty<Integer> NODE_LABEL_TRANSPARENCY = new IntegerVisualProperty(255,
-			new ContinuousRange<Integer>(Integer.class, 0, 255, true, true), "NODE_LABEL_TRANSPARENCY",
+			new ContinuousRange<>(Integer.class, 0, 255, true, true), "NODE_LABEL_TRANSPARENCY",
 			"Node Label Transparency", CyNode.class);
 	/**
 	 * The shape of the node.
@@ -389,7 +390,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 	 * <p><strong>Property Range:</strong> 1 &LT;= value &LT;= {@see java.lang.Integer#MAX_VALUE}</p> 
 	 */
 	public static final VisualProperty<Integer> EDGE_LABEL_FONT_SIZE = new IntegerVisualProperty(10,
-			new ContinuousRange<Integer>(Integer.class, 1, Integer.MAX_VALUE, true, true), "EDGE_LABEL_FONT_SIZE",
+			new ContinuousRange<>(Integer.class, 1, Integer.MAX_VALUE, true, true), "EDGE_LABEL_FONT_SIZE",
 			"Edge Label Font Size", CyEdge.class);
 
 	/**
@@ -398,7 +399,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 	 * <p><strong>Property Range:</strong> 0 &LT;= value &LT;= 255</p> 
 	 */
 	public static final VisualProperty<Integer> EDGE_LABEL_TRANSPARENCY = new IntegerVisualProperty(255,
-			new ContinuousRange<Integer>(Integer.class, 0, 255, true, true), "EDGE_LABEL_TRANSPARENCY",
+			new ContinuousRange<>(Integer.class, 0, 255, true, true), "EDGE_LABEL_TRANSPARENCY",
 			"Edge Label Transparency", CyEdge.class);
 	/**
 	 * The color of the whole edge (stroke and arrows) when selected.
@@ -441,7 +442,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 	 * <p><strong>Property Range:</strong> 0 &LT;= value &LT;= 255</p> 
 	 */
 	public static final VisualProperty<Integer> EDGE_TRANSPARENCY = new IntegerVisualProperty(255,
-			new ContinuousRange<Integer>(Integer.class, 0, 255, true, true), "EDGE_TRANSPARENCY", "Edge Transparency",
+			new ContinuousRange<>(Integer.class, 0, 255, true, true), "EDGE_TRANSPARENCY", "Edge Transparency",
 			CyEdge.class);
 
 	/**
@@ -600,9 +601,9 @@ public class BasicVisualLexicon implements VisualLexicon {
 		visualPropertyMap.put(rootVisualProperty, rootNode);
 
 		this.identifierLookup = new HashMap<>();
-		this.identifierLookup.put(CyNode.class, new HashMap<String, VisualProperty<?>>());
-		this.identifierLookup.put(CyEdge.class, new HashMap<String, VisualProperty<?>>());
-		this.identifierLookup.put(CyNetwork.class, new HashMap<String, VisualProperty<?>>());
+		this.identifierLookup.put(CyNode.class, new HashMap<>());
+		this.identifierLookup.put(CyEdge.class, new HashMap<>());
+		this.identifierLookup.put(CyNetwork.class, new HashMap<>());
 
 		addVisualProperties(rootVisualProperty);
 	}
@@ -764,7 +765,7 @@ public class BasicVisualLexicon implements VisualLexicon {
 
 	@Override
 	public final Set<VisualProperty<?>> getAllVisualProperties() {
-		return new HashSet<VisualProperty<?>>(visualPropertyMap.keySet());
+		return new HashSet<>(visualPropertyMap.keySet());
 	}
 
 	@Override

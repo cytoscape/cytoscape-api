@@ -12,6 +12,7 @@ import java.util.Set;
 import java.util.SortedSet;
 import java.util.TreeSet;
 
+import org.cytoscape.application.CyUserLog;
 import org.cytoscape.io.util.StreamUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,7 +23,7 @@ import org.slf4j.LoggerFactory;
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2017 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2018 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -56,7 +57,7 @@ public class BasicCyFileFilter implements CyFileFilter {
 	protected final StreamUtil streamUtil;
 	/** Type of data that this filter applies to. */
 	protected final DataCategory category;
-	private static final Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
+	private static final Logger logger = LoggerFactory.getLogger(CyUserLog.NAME);
 
 	/**
 	 * Creates a file filter from the specified arguments. Note that a "."

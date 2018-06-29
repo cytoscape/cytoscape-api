@@ -115,7 +115,7 @@ public abstract class AbstractLayoutTask extends AbstractTask {
 		this.undo = undo;
 
 		if (nodesToLayOut.size() == 0) {
-			this.nodesToLayOut = new HashSet<View<CyNode>>();
+			this.nodesToLayOut = new HashSet<>();
 			for (final View<CyNode> view : networkView.getNodeViews()) {
 				if (view.getVisualProperty(BasicVisualLexicon.NODE_VISIBLE))
 					this.nodesToLayOut.add(view);
