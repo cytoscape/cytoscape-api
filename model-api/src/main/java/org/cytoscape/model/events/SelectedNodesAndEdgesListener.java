@@ -1,6 +1,7 @@
-package org.cytoscape.view.model.events;
+package org.cytoscape.model.events;
 
 import org.cytoscape.event.CyListener;
+
 
 public interface SelectedNodesAndEdgesListener extends CyListener {
 
