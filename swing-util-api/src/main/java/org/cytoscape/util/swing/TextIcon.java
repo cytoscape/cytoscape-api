@@ -75,6 +75,13 @@ public class TextIcon implements Icon {
 	}
 	
 	/**
+	 * The icon color is the target component's foreground.
+	 */
+	public TextIcon(String[] texts, Font font, int width, int height) {
+		this(texts, new Font[] { font }, null, width, height);
+	}
+	
+	/**
 	 * 
 	 * @param texts
 	 * @param font
@@ -92,7 +99,13 @@ public class TextIcon implements Icon {
 	}
 	
 	/**
-	 * 
+	 * The icon color is the target component's foreground.
+	 */
+	public TextIcon(String[] texts, Font[] fonts, int width, int height) {
+		this(texts, fonts, null, width, height, (Integer[]) null);
+	}
+	
+	/**
 	 * @param texts
 	 * @param fonts
 	 * @param colors

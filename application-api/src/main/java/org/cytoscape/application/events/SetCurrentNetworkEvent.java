@@ -1,5 +1,7 @@
 package org.cytoscape.application.events;
 
+import java.util.Collection;
+
 /*
  * #%L
  * Cytoscape Application API (application-api)
@@ -26,7 +28,10 @@ package org.cytoscape.application.events;
 
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.event.AbstractCyEvent;
+import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyNode;
+import org.cytoscape.model.CyTableUtil;
 
 
 /**
@@ -39,6 +44,11 @@ public final class SetCurrentNetworkEvent extends AbstractCyEvent<CyApplicationM
 
 	private final CyNetwork net;
 
+	private Collection<CyNode> selectedNodes;
+	private Collection<CyNode> unselectedNodes;
+	private Collection<CyEdge> selectedEdges;
+	private Collection<CyEdge> unselectedEdges;
+	
 	/**
 	 * Returns the network associated with this event. The network returned may be null!
 	 * @return the network associated with this event.
@@ -55,5 +65,34 @@ public final class SetCurrentNetworkEvent extends AbstractCyEvent<CyApplicationM
 	public SetCurrentNetworkEvent(final CyApplicationManager source, final CyNetwork net) {
 		super(source, SetCurrentNetworkListener.class);
 		this.net = net;
+	}
+	
+	
+	public Collection<CyNode> getSelectedNodes() {
+		if(selectedNodes == null) {
+			selectedNodes = CyTableUtil.getNodesInState(getNetwork(), CyNetwork.SELECTED, true);
+		}
+		return selectedNodes;
+	}
+	
+	public Collection<CyNode> getUnselectedNodes() {
+		if(unselectedNodes == null) {
+			unselectedNodes = CyTableUtil.getNodesInState(getNetwork(), CyNetwork.SELECTED, false);
+		}
+		return unselectedNodes;
+	}
+	
+	public Collection<CyEdge> getSelectedEdges() {
+		if(selectedEdges == null) {
+			selectedEdges = CyTableUtil.getEdgesInState(getNetwork(), CyNetwork.SELECTED, true);
+		}
+		return selectedEdges;
+	}
+	
+	public Collection<CyEdge> getUnselectedEdges() {
+		if(unselectedEdges == null) {
+			unselectedEdges = CyTableUtil.getEdgesInState(getNetwork(), CyNetwork.SELECTED, false);
+		}
+		return unselectedEdges;
 	}
 }

@@ -4,6 +4,8 @@ import java.util.Collection;
 import java.util.List;
 
 import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.presentation.events.AnnotationsAddedEvent;
+import org.cytoscape.view.presentation.events.AnnotationsRemovedEvent;
 
 /**
  * The annotation manager is responsible for managing all of the
@@ -15,8 +17,9 @@ import org.cytoscape.view.model.CyNetworkView;
  * @CyAPI.InModule presentation-api
  */
 public interface AnnotationManager {
+	
 	/**
-	 * Add an annotation to the specified network view.
+	 * Add an annotation to the specified network view and fires an {@link AnnotationsAddedEvent}.
 	 *
 	 * @param annotation the annotation to add
 	 * @param networkView the network view to add this annotation to
@@ -24,7 +27,7 @@ public interface AnnotationManager {
 	public void addAnnotation(Annotation annotation);
 	
 	/**
-	 * Adds annotations to the specified network view.
+	 * Adds annotations to the specified network view and fires an {@link AnnotationsAddedEvent}.
 	 *
 	 * @param annotations the annotations to add
 	 * @param networkView the network view to add this annotation to
@@ -32,16 +35,16 @@ public interface AnnotationManager {
 	public void addAnnotations(Collection<? extends Annotation> annotations);
 
 	/**
-	 * Remove an annotation from its network view.  If there are
-	 * no other references to this annotation, it will be garbage collected.
+	 * Remove an annotation from its network view and fires an {@link AnnotationsRemovedEvent}.
+	 * If there are no other references to this annotation, it will be garbage collected.
 	 *
 	 * @param annotation the annotation to remove
 	 */
 	public void removeAnnotation(Annotation annotation);
 	
 	/**
-	 * Remove an annotation from its network view.  If there are
-	 * no other references to this annotation, it will be garbage collected.
+	 * Remove an annotation from its network view and fires an {@link AnnotationsRemovedEvent}.
+	 * If there are no other references to this annotation, it will be garbage collected.
 	 *
 	 * @param annotation the annotation to remove
 	 */

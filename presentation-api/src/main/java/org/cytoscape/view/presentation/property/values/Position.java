@@ -36,16 +36,17 @@ import java.util.TreeSet;
  */
 public enum Position {
 
+	// do not change the order, there is code that depends on ordinal()
 	NORTH_WEST("Northwest", "NW"), 
 	NORTH("North", "N"), 
 	NORTH_EAST("Northeast","NE"), 
 	WEST("West", "W"), 
 	CENTER("Center", "C"), 
 	EAST("East", "E"), 
-	NONE("None", "NONE"), 
 	SOUTH_WEST("Southwest", "SW"), 
 	SOUTH("South", "S"), 
-	SOUTH_EAST("Southeast", "SE");
+	SOUTH_EAST("Southeast", "SE"),
+	NONE("None", "NONE");
 
 	private static SortedSet<String> displayNames;
 
