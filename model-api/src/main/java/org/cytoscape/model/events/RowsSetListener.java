@@ -28,6 +28,12 @@ import org.cytoscape.event.CyListener;
 
 /**
  * Listener for {@link RowsSetEvent}
+ * 
+ * <p>
+ * Note: {@link SelectedNodesAndEdgesListener} may be used instead if you just 
+ * want to be signaled about node and edge selection changes.
+ * </p>
+ * 
  * @CyAPI.Spi.Interface
  * @CyAPI.InModule model-api
  */

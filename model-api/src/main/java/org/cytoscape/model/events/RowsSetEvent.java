@@ -27,15 +27,21 @@ package org.cytoscape.model.events;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
-import java.util.HashMap;
 
 import org.cytoscape.event.AbstractCyPayloadEvent;
 import org.cytoscape.model.CyTable;
 
 /**
  * This event signals that rows have been set.
+ * 
+ * <p>
+ * Note: {@link SelectedNodesAndEdgesEvent} may be used instead if you just 
+ * want to be signaled about node and edge selection changes.
+ * </p> 
+ * 
  * @CyAPI.Final.Class
  * @CyAPI.InModule model-api
  */
