@@ -96,6 +96,25 @@ public interface FileUtil {
 		     String customApproveText, Collection<FileChooserFilter> filters);
 
 	/**
+	 * Returns a File object, this method should be used instead
+	 * of rolling your own JFileChooser.
+	 *
+	 * @return the location of the selected file
+	 * @param parent the parent of the JFileChooser or FileDialog
+	 * @param title the title of the dialog box
+	 * @param loadSaveCustom a flag for the type of file dialog
+	 * @param startDir an alternate start dir, if null the default
+	 *                  Cytoscape MUD will be used
+	 * @param fileName a suggested file name to use
+	 * @param customApproveText if this is a custom dialog, then
+	 *                            custom text should be on the approve
+	 *                            button.
+	 * @param filters a non-empty collection of file filters 
+	 */
+	File getFile(Component parent, String title, int loadSaveCustom, String startDir,
+		     String fileName, String customApproveText, Collection<FileChooserFilter> filters);
+
+	/**
 	 * Returns an array of File objects, this method should be used instead
 	 * of rolling your own JFileChooser.
 	 * @return the location of the selected file
@@ -146,6 +165,29 @@ public interface FileUtil {
 	 */
 	File[] getFiles(Component parent, String title, int loadSaveCustom,
 			String startDir, String customApproveText, boolean multiselect,
+			Collection<FileChooserFilter> filters);
+	
+	/**
+	 * Returns a list of File objects, this method should be used instead
+	 * of rolling your own JFileChooser.
+	 *
+	 * @return and array of selected files, or null if none are selected
+	 * @param parent the parent of the JFileChooser or FileDialog
+	 * @param title the title of the dialog box
+	 * @param loadSaveCustom a flag for the type of file dialog
+	 * @param startDir an alternate start dir, if null the default
+	 *                  cytoscape MUD will be used
+	 * @param fileName a suggested file name to use
+	 * @param customApproveText if this is a custom dialog, then
+	 *                            custom text should be on the approve
+	 *                            button.
+	 * @param multiselect Enable selection of multiple files (Macs are
+	 *                    still limited to a single file because we use
+	 *                    FileDialog there -- is this fixed in Java 1.5?)
+	 * @param filters a non-empty collection of file filters 
+	 */
+	File[] getFiles(Component parent, String title, int loadSaveCustom,
+			String startDir, String fileName, String customApproveText, boolean multiselect,
 			Collection<FileChooserFilter> filters);
 	
 	
