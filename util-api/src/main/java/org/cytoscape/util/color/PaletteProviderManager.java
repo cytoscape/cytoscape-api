@@ -70,4 +70,25 @@ public interface PaletteProviderManager {
 	 * @param provider the provider to remove.
 	 */
 	public void removePaletteProvider(PaletteProvider provider);
+
+	/**
+	 * Save a palette.  This is a convenience method that provides a way for apps
+	 * (and the core) to remember palettes that were previously used.  The main
+	 * idea is that palettes can be saved with an arbitrary key (use the full name
+	 * of the class to avoid conflicts) and recalled later.  This mechanism is
+	 * used internally by the Styles (vizmap) interface to remember palette
+	 * selections used for color visual properties.
+	 *
+	 * @param key the key to save this palette under
+	 * @param palette the {@link Palette} to save
+	 */
+	public void savePalette(Object key, Palette palette);
+
+	/**
+	 * Retrieve a palette previously saved
+	 *
+	 * @param key the key that was used to save the {@link Palette} 
+	 * @return the saved {@link Palette} or null
+	 */
+	public Palette retrievePalette(Object key);
 }
