@@ -145,6 +145,8 @@ public class TextIcon implements Icon {
 
 				if (fonts.length > i)
 					f = fonts[i];
+				else if (fonts.length > 0)
+					f = fonts[0];
 
 				if (txt == null || f == null)
 					continue;
