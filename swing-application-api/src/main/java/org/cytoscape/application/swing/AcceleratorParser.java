@@ -5,6 +5,13 @@ import java.awt.event.InputEvent;
 import java.awt.event.KeyEvent;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.StringTokenizer;
+
+import javax.swing.KeyStroke;
+
+import org.cytoscape.application.CyUserLog;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 /*
  * #%L
@@ -12,7 +19,7 @@ import java.util.Map;
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2018 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -29,14 +36,6 @@ import java.util.Map;
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
  */
-
-import java.util.StringTokenizer;
-
-import javax.swing.KeyStroke;
-
-import org.cytoscape.application.CyUserLog;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 /**
  * Parses accelerator combinations to be used with menu items.
@@ -146,6 +145,7 @@ final class AcceleratorParser {
 
 		while (tokenizer.hasMoreTokens()) {
 			String token = tokenizer.nextToken();
+			
 			if (tokenizer.hasMoreTokens())
 				modifierCode |= lookupModifier(token);
 			else
@@ -160,22 +160,24 @@ final class AcceleratorParser {
 
 	private static int lookupModifier(String mod) {
 		final Integer modifier = MOD_MAP.get(mod.toLowerCase());
+		
 		if (modifier == null) {
 			logger.warn("The modifier '" + mod + "' is invalid; valid modifiers are: " + MOD_MAP.keySet().toString());
 			return 0;
 		}
+		
 		return modifier;
 	}
 
 	private static int lookupVKCode(final String name) {
-
 		String newName = name.toUpperCase();
+		
 		if (newName.startsWith(PREFIX) == false)
 			newName = PREFIX + newName;
 
 		final String error = "The virtual key '" + newName + "' does not exist.";
-
 		int code = 0;
+		
 		try {
 			code = KeyEvent.class.getField(newName).getInt(KeyEvent.class);
 		} catch (NoSuchFieldException ex) {

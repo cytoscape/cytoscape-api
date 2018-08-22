@@ -35,6 +35,7 @@ import javax.swing.JRootPane;
 import javax.swing.JSlider;
 import javax.swing.JSpinner;
 import javax.swing.JTable;
+import javax.swing.JTree;
 import javax.swing.KeyStroke;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
@@ -394,7 +395,7 @@ public final class LookAndFeelUtil {
 
 			if (c instanceof JList) {
 				makeSmall((JList<?>) c);
-			} else if (c instanceof JMenuItem || c instanceof JSpinner || c instanceof JTable) {
+			} else if (c instanceof JMenuItem || c instanceof JSpinner || c instanceof JTable || c instanceof JTree) {
 				if (c.getFont() != null)
 					c.setFont(c.getFont().deriveFont(getSmallFontSize()));
 				
