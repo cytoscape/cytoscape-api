@@ -43,10 +43,9 @@ public interface AnnotationManager {
 	public void removeAnnotation(Annotation annotation);
 	
 	/**
-	 * Remove an annotation from its network view and fires an {@link AnnotationsRemovedEvent}.
-	 * If there are no other references to this annotation, it will be garbage collected.
+	 * Removes annotations from its network view and fires an {@link AnnotationsRemovedEvent}.
 	 *
-	 * @param annotation the annotation to remove
+	 * @param annotations the annotations to remove
 	 */
 	public void removeAnnotations(Collection<? extends Annotation> annotations);
 
