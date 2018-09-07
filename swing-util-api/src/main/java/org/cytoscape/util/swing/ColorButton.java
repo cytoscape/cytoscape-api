@@ -1,12 +1,19 @@
 package org.cytoscape.util.swing;
 
+import java.awt.Color;
+import java.awt.Component;
+import java.awt.Graphics;
+
+import javax.swing.Icon;
+import javax.swing.JButton;
+
 /*
  * #%L
  * Cytoscape Swing Utility API (swing-util-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2018 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -23,15 +30,6 @@ package org.cytoscape.util.swing;
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
  */
-
-import java.awt.Color;
-import java.awt.Component;
-import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.Icon;
-import javax.swing.JButton;
 
 /**
  * JButton that opens a Color Chooser when clicked and shows the previously set color as an icon.
@@ -50,20 +48,20 @@ public final class ColorButton extends JButton {
 
 	public ColorButton(final Color color) {
 		super(" ");
-		putClientProperty("JButton.buttonType", "gradient"); // Aqua LAF only
+		
+		if (LookAndFeelUtil.isAquaLAF())
+			putClientProperty("JButton.buttonType", "gradient");
+		
 		setHorizontalTextPosition(JButton.CENTER);
 		setVerticalTextPosition(JButton.CENTER);
 		borderColor = getContrastingColor(getBackground());
 		setIcon(new ColorIcon());
 		setColor(color);
 		
-		addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				// Open color chooser
-				final Color c = CyColorChooser.showDialog(ColorButton.this, "Colors", color);
-				ColorButton.this.setColor(c);
-			}
+		addActionListener(evt -> {
+			// Open color chooser
+			final Color c = CyColorChooser.showDialog(ColorButton.this, "Colors", color);
+			ColorButton.this.setColor(c);
 		});
 	}
 

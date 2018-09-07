@@ -11,8 +11,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.Collator;
@@ -47,8 +45,6 @@ import javax.swing.ListSelectionModel;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
-import javax.swing.event.ListSelectionEvent;
-import javax.swing.event.ListSelectionListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
@@ -167,7 +163,7 @@ public class CyColumnSelector extends JPanel {
 		JScrollPane scrollPane = createScrollPane(namespaceList);
 		scrollPane.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 2));
 		
-		namespaceList.addListSelectionListener(e -> {
+		namespaceList.addListSelectionListener(evt -> {
 			String namespace = namespaceList.getSelectedValue();
 			CardLayout cardLayout = (CardLayout) cardPanel.getLayout();
 			cardLayout.show(cardPanel, namespace == null ? CYTOSCAPE_CARD : namespace);
@@ -187,7 +183,6 @@ public class CyColumnSelector extends JPanel {
 		tableScrollPane.getViewport().setBackground(bg);
 		return tableScrollPane;
 	}
-	
 	
 	private class MutipleSelectColumnTable extends JPanel {
 		
@@ -310,16 +305,13 @@ public class CyColumnSelector extends JPanel {
 				table.setTableHeader(null);
 				table.setShowGrid(false);
 				
-				table.getSelectionModel().addListSelectionListener(new ListSelectionListener() {
-					@Override
-					public void valueChanged(ListSelectionEvent e) {
-						if (!e.getValueIsAdjusting()) {
-							// Workaround for preventing a click on the check-box in a selected row
-							// from changing the selection when multiple table rows are already selected
-							if (table.getSelectedRowCount() > 0)
-								previousSelectedRows = Arrays.stream(table.getSelectedRows()).boxed()
-										.collect(Collectors.toList());
-						}
+				table.getSelectionModel().addListSelectionListener(evt -> {
+					if (!evt.getValueIsAdjusting()) {
+						// Workaround for preventing a click on the check-box in a selected row
+						// from changing the selection when multiple table rows are already selected
+						if (table.getSelectedRowCount() > 0)
+							previousSelectedRows = Arrays.stream(table.getSelectedRows()).boxed()
+									.collect(Collectors.toList());
 					}
 				});
 				table.addMouseListener(new MouseAdapter() {
@@ -367,12 +359,7 @@ public class CyColumnSelector extends JPanel {
 		private JButton getSelectAllButton() {
 			if (selectAllButton == null) {
 				selectAllButton = new JButton("Select All");
-				selectAllButton.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(final ActionEvent e) {
-						setSelectedToAllRows(true);
-					}
-				});
+				selectAllButton.addActionListener(evt -> setSelectedToAllRows(true));
 				
 				if (isAquaLAF()) {
 					selectAllButton.putClientProperty("JButton.buttonType", "gradient");
@@ -386,12 +373,7 @@ public class CyColumnSelector extends JPanel {
 		private JButton getSelectNoneButton() {
 			if (selectNoneButton == null) {
 				selectNoneButton = new JButton("Select None");
-				selectNoneButton.addActionListener(new ActionListener() {
-					@Override
-					public void actionPerformed(final ActionEvent e) {
-						setSelectedToAllRows(false);
-					}
-				});
+				selectNoneButton.addActionListener(evt -> setSelectedToAllRows(false));
 				
 				if (isAquaLAF()) {
 					selectNoneButton.putClientProperty("JButton.buttonType", "gradient");
