@@ -37,6 +37,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTree;
 import javax.swing.KeyStroke;
+import javax.swing.MenuElement;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
 import javax.swing.border.TitledBorder;
@@ -386,16 +387,16 @@ public final class LookAndFeelUtil {
 			return;
 
 		for (JComponent c : components) {
-			if (isAquaLAF()) {
+			if (isAquaLAF())
 				c.putClientProperty("JComponent.sizeVariant", "small");
-			} else {
-				if (c.getFont() != null)
-					c.setFont(c.getFont().deriveFont(getSmallFontSize()));
-			}
+			else if (c.getFont() != null)
+				c.setFont(c.getFont().deriveFont(getSmallFontSize()));
 
-			if (c instanceof JList) {
+			if (c instanceof MenuElement) { // Includes JPopupMenu, JMenu and JMenuItem
+				makeSmall((MenuElement) c);
+			} else if (c instanceof JList) {
 				makeSmall((JList<?>) c);
-			} else if (c instanceof JMenuItem || c instanceof JSpinner || c instanceof JTable || c instanceof JTree) {
+			} else if (c instanceof JSpinner || c instanceof JTable || c instanceof JTree) {
 				if (c.getFont() != null)
 					c.setFont(c.getFont().deriveFont(getSmallFontSize()));
 				
@@ -403,6 +404,22 @@ public final class LookAndFeelUtil {
 					makeSmall((JTable) c);
 			} else if (c instanceof JSlider) {
 				makeSmall((JSlider) c);
+			}
+		}
+	}
+
+	private static void makeSmall(final MenuElement c) {
+		if (c instanceof JMenuItem && ((JMenuItem) c).getFont() != null)
+			((JMenuItem) c).setFont(((JMenuItem) c).getFont().deriveFont(getSmallFontSize()));
+		
+		MenuElement[] elements = c.getSubElements();
+		
+		if (elements != null) {
+			int total = elements.length;
+			
+			for (int i = 0 ; i < total; i++) {
+				MenuElement item = elements[i];
+				makeSmall(item);
 			}
 		}
 	}
@@ -415,7 +432,7 @@ public final class LookAndFeelUtil {
 					boolean isSelected, boolean cellHasFocus) {
 				super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
 				setFont(getFont().deriveFont(getSmallFontSize()));
-
+				
 				return this;
 			}
 		});
@@ -476,6 +493,7 @@ public final class LookAndFeelUtil {
 				makeSmall((JComponent) c);
 		}
 	}
+	
 	/**
 	 * Returns true if the current operating system is Mac OS X.
 	 * @return true if the current OS is Mac OS X and false otherwise.
