@@ -15,6 +15,7 @@ import static org.cytoscape.work.ServiceProperties.SMALL_ICON_URL;
 import static org.cytoscape.work.ServiceProperties.TITLE;
 import static org.cytoscape.work.ServiceProperties.TOOLTIP;
 import static org.cytoscape.work.ServiceProperties.TOOLTIP_IMAGE;
+import static org.cytoscape.work.ServiceProperties.TOOLTIP_LONG_DESCRIPTION;
 import static org.cytoscape.work.ServiceProperties.TOOL_BAR_GRAVITY;
 
 import java.net.MalformedURLException;
@@ -344,6 +345,11 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 
 		if (tooltip != null)
 			putValue(SHORT_DESCRIPTION, tooltip);
+		
+		final String tooltipDesc = props.get(TOOLTIP_LONG_DESCRIPTION);
+		
+		if (tooltipDesc != null)
+			putValue(LONG_DESCRIPTION, tooltipDesc);
 		
 		final URL tooltipImg = getURL(props.get(TOOLTIP_IMAGE));
 		

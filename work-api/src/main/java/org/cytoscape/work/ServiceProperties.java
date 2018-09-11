@@ -108,12 +108,17 @@ public interface ServiceProperties {
 	public static final String SMALL_ICON_ID = "smallIconID";
 	
 	/**
-	 * Tool tip text for an action.
+	 * Short tool tip text for an action.
 	 */
 	public static final String TOOLTIP = "tooltip";
 	
 	/**
-	 * Tool tip image for an action.
+	 * Optional longer tool tip description for an action (usually used in tool bars).
+	 */
+	public static final String TOOLTIP_LONG_DESCRIPTION = "tooltipLongDescription";
+	
+	/**
+	 * Optional tool tip image for an action (usually used in tool bars).
 	 */
 	public static final String TOOLTIP_IMAGE = "tooltipImage";
 	
