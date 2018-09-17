@@ -76,7 +76,9 @@ public interface Annotation {
 	public static final String Y = "y";
 
 	/**
-	 * Arg map key to initialize the z location for this annotation
+	 * Arg map key to initialize the z location for this annotation.
+	 * Note that the z-order is just a hint. The AnnotationManager is free to set an annotation's
+	 * z-order according to its placement within an AnnotationGroup.
 	 */
 	public static final String Z = "z";
 
@@ -102,7 +104,10 @@ public interface Annotation {
 	/**
 	 * Set the canvas for this annotation.  This must be one of
 	 * BACKGROUND or FOREGROUND.
-	 *
+	 * <br><br>
+	 * Note: Changing the canvas of a GroupAnnotation will not automatically set its members
+	 * to the same canvas. Each annotation must have its setCanvas() method called individually.
+	 * 
 	 * @param canvas the canvas to move the annotation to
 	 */
 	public void setCanvas(String canvas);

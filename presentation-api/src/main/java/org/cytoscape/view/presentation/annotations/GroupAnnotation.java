@@ -28,8 +28,17 @@ import java.util.List;
 
 /**
  *
- * The Group annotation is a container for a collextion of
+ * The GroupAnnotation is a container for a collection of
  * annotations that should be grouped together.
+ * 
+ * <br><br>
+ * A GroupAnnotation may contain members from either the foreground or background canvas.
+ * Changing the canvas of the GroupAnnotation itself will not automatically set its members
+ * to the same canvas, each annotation must have its setCanvas() method called individually.
+ * <br><br>
+ * The z-order of member annotations will automatically be set so that the annotations are adjacent
+ * within the same canvas. The AnnotationManager is free to change the z-order of annotations in order
+ * to maintain this property.
  *
  * @CyAPI.Api.Interface
  * @CyAPI.InModule presentation-api
@@ -43,8 +52,9 @@ public interface GroupAnnotation extends Annotation {
 
 
 	/**
-	 * Add a new annotation to the group
-	 *
+	 * Add a new annotation to the group.
+	 * 
+	 * @throws IllegalArgumentException if the given Annotation is already a member of another group
 	 * @param member the annotation to add to the group
 	 */
 	public void addMember(Annotation member);
