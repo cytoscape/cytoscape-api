@@ -7,12 +7,12 @@
 	<parent>
 		<artifactId>parent</artifactId>
 		<groupId>org.cytoscape</groupId>
-		<version>3.7.0-RC2</version>
+		<version>3.7.0</version>
 		<relativePath>../parent</relativePath>
 	</parent>
 
 	<artifactId>api-parent</artifactId>
-	<version>3.7.0-RC2</version>
+	<version>3.7.0</version>
 	<packaging>pom</packaging>
 	<name>Cytoscape API Parent Project POM</name>
 
