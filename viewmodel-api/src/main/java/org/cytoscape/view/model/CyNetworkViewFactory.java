@@ -44,6 +44,6 @@ public interface CyNetworkViewFactory {
 	 * @param network Network for which the CyNetworkView is to be created
 	 * @return the view model for the network data model
 	 */
-	public CyNetworkView createNetworkView(final CyNetwork network);
-
+	CyNetworkView createNetworkView(CyNetwork network);
+	
 }

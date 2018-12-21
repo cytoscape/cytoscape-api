@@ -55,6 +55,12 @@ import org.cytoscape.model.CyNode;
  */
 public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 
+	
+	default CyNetworkView createSnapshot() {
+		return null;
+	};
+	
+	
 	/**
 	 * Returns a View for a specified Node.
      *
@@ -132,4 +138,10 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	  * @see org.cytoscape.application.CyApplicationManager#getNetworkViewRenderer(rendererId)
 	  */
 	 String getRendererId();
+	 
+	 
+	 default void addNetworkViewListener(CyNetworkViewListener listener) {}
+	 
+	 default void removeNetworkViewListener(CyNetworkViewListener listener) {}
+	 
 }
