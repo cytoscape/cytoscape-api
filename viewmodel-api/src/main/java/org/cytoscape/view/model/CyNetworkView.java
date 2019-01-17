@@ -120,6 +120,10 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	 */
 	void updateView();
 
+	
+	public default boolean isDirty() {
+		return false;
+	}
 	 
 	/**
 	 * Sets the default value to be used for the specified visual property.

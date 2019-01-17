@@ -25,6 +25,7 @@ package org.cytoscape.view.model;
  */
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Set;
 
 /**
@@ -103,4 +104,12 @@ public interface VisualLexicon {
 	 * @param vp VisualProperty where vp.getRange().isDiscrete() == true
 	 */
 	<T> Set<T> getSupportedValueRange(VisualProperty<T> vp);
+	
+	
+	/**
+	 * These visual properties will not be cleared when {@link View#clearVisualProperties()} is called.
+	 */
+	default Collection<VisualProperty<?>> getNonClearableVisualProperties() {
+		return Collections.emptyList();
+	}
 }
