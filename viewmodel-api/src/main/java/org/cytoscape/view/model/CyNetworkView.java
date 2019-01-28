@@ -31,6 +31,7 @@ import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
+import org.cytoscape.view.model.spacial.SpacialIndex2D;
 
 /**
  * 
@@ -58,7 +59,12 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	
 	default CyNetworkView createSnapshot() {
 		return null;
-	};
+	}
+	
+	
+	default SpacialIndex2D getSpacialIndex2D() {
+		return null;
+	}
 	
 	
 	/**
