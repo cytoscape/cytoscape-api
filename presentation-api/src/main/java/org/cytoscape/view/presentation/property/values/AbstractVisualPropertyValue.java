@@ -38,7 +38,7 @@ public abstract class AbstractVisualPropertyValue implements VisualPropertyValue
 	/**
 	 * Constructs an AbstractVisualPropertyValue.
 	 * @param displayName the display name of the visual property value.
-	 * @param serializableString #ASKMIKE
+	 * @param serializableString the serialiable string of the visual property value
 	 */
 	public AbstractVisualPropertyValue(final String displayName, final String serializableString) {
 		this.displayName = displayName;
