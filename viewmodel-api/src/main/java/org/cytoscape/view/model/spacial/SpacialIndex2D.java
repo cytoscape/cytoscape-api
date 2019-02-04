@@ -5,10 +5,17 @@ public interface SpacialIndex2D {
 	final int X_MIN = 0, Y_MIN = 1, X_MAX = 2, Y_MAX = 3;
 	
 	
-	void getMBR(float[] extentsArr);
+	void getMBR(float[] extents);
 
 	boolean exists(long suid);
+	
+	boolean get(long suid, float[] extents);
+	
+	double getZOrder(long suid);
 
+	
 	SpacialIndex2DEnumerator queryOverlap(float xMin, float yMin, float xMax, float yMax);
+	
+	SpacialIndex2DEnumerator queryAll();
 	
 }
