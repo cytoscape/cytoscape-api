@@ -62,10 +62,53 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	}
 	
 	
+	// MKTODO
+	// This is a lot of new methods, and some of the default implementations
+	// will have bad performance. However I don't think anyone is implementing this
+	// interface other than Cy3D and Ding so the default implementation probably
+	// won't get called anyway. 
+	// Another approach might be to create a new interface for the snapshot
+	// called CyNetworkViewSnapshot, and then put these new methods there.
+	// That would also help to enforce that we are using the snapshot by its type.
+	
 	default SpacialIndex2D getSpacialIndex2D() {
 		return null;
 	}
 	
+	
+	default int getNodeCount() {
+		return getNodeViews().size();
+	}
+	
+	
+	default int getEdgeCount() {
+		return getEdgeViews().size();
+	}
+	
+	
+	default View<CyNode> getNodeView(long suid) {
+		Collection<View<CyNode>> nodeViews = getNodeViews();
+		for(View<CyNode> node : nodeViews) {
+			if(node.getSUID().equals(suid)) {
+				return node;
+			}
+		}
+		return null;
+	}
+	
+	default View<CyNode> getEdgeView(long suid) {
+		Collection<View<CyNode>> nodeViews = getNodeViews();
+		for(View<CyNode> node : nodeViews) {
+			if(node.getSUID().equals(suid)) {
+				return node;
+			}
+		}
+		return null;
+	}
+	
+	default Iterable<View<CyEdge>> getAdjacentEdgeIterable(View<CyNode> node) {
+		return null;
+	}
 	
 	/**
 	 * Returns a View for a specified Node.
@@ -75,7 +118,7 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
      * 
 	 * @return View for the given node object.
 	 */
-	View<CyNode> getNodeView(final CyNode node);
+	View<CyNode> getNodeView(CyNode node);
 
 	/**
 	 * Returns a list of Views for all CyNodes in the network.
@@ -84,6 +127,8 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	 */
 	Collection<View<CyNode>> getNodeViews();
 
+	
+	
 	/**
 	 * Returns a View for a specified Edge.
 	 * @param edge the edge to return the view for.
