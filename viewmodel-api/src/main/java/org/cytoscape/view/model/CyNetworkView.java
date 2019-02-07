@@ -1,29 +1,5 @@
 package org.cytoscape.view.model;
 
-/*
- * #%L
- * Cytoscape View Model API (viewmodel-api)
- * $Id:$
- * $HeadURL:$
- * %%
- * Copyright (C) 2008 - 2013 The Cytoscape Consortium
- * %%
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as 
- * published by the Free Software Foundation, either version 2.1 of the 
- * License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Lesser Public License for more details.
- * 
- * You should have received a copy of the GNU General Lesser Public 
- * License along with this program.  If not, see
- * <http://www.gnu.org/licenses/lgpl-2.1.html>.
- * #L%
- */
-
 import java.util.Collection;
 
 import org.cytoscape.model.CyDisposable;
@@ -31,7 +7,6 @@ import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
-import org.cytoscape.view.model.spacial.SpacialIndex2D;
 
 /**
  * 
@@ -54,70 +29,22 @@ import org.cytoscape.view.model.spacial.SpacialIndex2D;
  * @CyAPI.Api.Interface
  * @CyAPI.InModule viewmodel-api
  */
-public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
+public interface CyNetworkView extends ReadableNetworkView, View<CyNetwork>, CyDisposable {
 
 	
-	default CyNetworkView createSnapshot() {
-		return null;
-	}
-	
-	
-	// MKTODO
-	// This is a lot of new methods, and some of the default implementations
-	// will have bad performance. However I don't think anyone is implementing this
-	// interface other than Cy3D and Ding so the default implementation probably
-	// won't get called anyway. 
-	// Another approach might be to create a new interface for the snapshot
-	// called CyNetworkViewSnapshot, and then put these new methods there.
-	// That would also help to enforce that we are using the snapshot by its type.
-	
-	default SpacialIndex2D getSpacialIndex2D() {
-		return null;
-	}
-	
-	
-	default int getNodeCount() {
-		return getNodeViews().size();
-	}
-	
-	
-	default int getEdgeCount() {
-		return getEdgeViews().size();
-	}
-	
-	
-	default View<CyNode> getNodeView(long suid) {
-		Collection<View<CyNode>> nodeViews = getNodeViews();
-		for(View<CyNode> node : nodeViews) {
-			if(node.getSUID().equals(suid)) {
-				return node;
-			}
-		}
-		return null;
-	}
-	
-	default View<CyNode> getEdgeView(long suid) {
-		Collection<View<CyNode>> nodeViews = getNodeViews();
-		for(View<CyNode> node : nodeViews) {
-			if(node.getSUID().equals(suid)) {
-				return node;
-			}
-		}
-		return null;
-	}
-	
-	default Iterable<View<CyEdge>> getAdjacentEdgeIterable(View<CyNode> node) {
+	default CyNetworkViewSnapshot createSnapshot() {
 		return null;
 	}
 	
 	/**
 	 * Returns a View for a specified Node.
-     *
+	 *
 	 * 
 	 * @param node Node object
-     * 
+	 * 
 	 * @return View for the given node object.
 	 */
+	@Override
 	View<CyNode> getNodeView(CyNode node);
 
 	/**
@@ -125,23 +52,24 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	 * 
 	 * @return Collection of all node views in this network.
 	 */
+	@Override
 	Collection<View<CyNode>> getNodeViews();
 
-	
-	
 	/**
 	 * Returns a View for a specified Edge.
 	 * @param edge the edge to return the view for.
 	 * 
 	 * @return View model for the edge data.
 	 */
-	View<CyEdge> getEdgeView(final CyEdge edge);
+	@Override
+	View<CyEdge> getEdgeView(CyEdge edge);
 
 	/**
 	 * Returns a list of Views for all CyEdges in the network.
 	 * 
 	 * @return All edge views in this network.
 	 */
+	@Override
 	Collection<View<CyEdge>> getEdgeViews();
 
 	/**
@@ -149,8 +77,8 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	 * 
 	 * @return All view objects in this network including network view itself.
 	 */
+	@Override
 	Collection<View<? extends CyIdentifiable>> getAllViews();
-	
 	
 	/**
 	 * Utility method to fit content to the presentation container (usually a Swing Window).
@@ -185,15 +113,6 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	 */
 	 <T, V extends T> void setViewDefault(final VisualProperty<? extends T> vp, final V defaultValue);
 
-	 
-	 /**
-	  * Returns the ID of the renderer that must be used to render this view.
-	  * 
-	  * @see org.cytoscape.application.NetworkViewRenderer#getId()
-	  * @see org.cytoscape.application.CyApplicationManager#getNetworkViewRenderer(rendererId)
-	  */
-	 String getRendererId();
-	 
 	 
 	 default void addNetworkViewListener(CyNetworkViewListener listener) {}
 	 
