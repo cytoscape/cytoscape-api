@@ -1,15 +1,19 @@
 package org.cytoscape.view.model;
 
+import org.cytoscape.model.CyNode;
+
 public interface SnapshotEdgeInfo {
 	
 	Long getSUID();
 	
 	long getSourceSUID();
 	
+	ReadableView<CyNode> getSourceNodeView();
+	
 	long getTargetSUID();
 	
-	boolean isDirected();
+	ReadableView<CyNode> getTargetNodeView();
 	
-//	boolean isSelected();
+	boolean isDirected();
 
 }

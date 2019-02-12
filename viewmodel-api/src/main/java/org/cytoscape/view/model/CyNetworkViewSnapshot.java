@@ -18,11 +18,6 @@ public interface CyNetworkViewSnapshot extends ReadableNetworkView {
 	int getEdgeCount();
 	
 	
-	ReadableView<CyNode> getNodeView(long suid);
-	
-	ReadableView<CyEdge> getEdgeView(long suid);
-	
-	
 	Collection<ReadableView<CyNode>> getSelectedNodes();
 	
 	

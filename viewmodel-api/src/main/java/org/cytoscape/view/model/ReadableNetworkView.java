@@ -4,9 +4,10 @@ import java.util.Collection;
 
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyIdentifiable;
+import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 
-public interface ReadableNetworkView {
+public interface ReadableNetworkView extends ReadableView<CyNetwork> {
 
 	/**
 	 * Returns a View for a specified Node.
