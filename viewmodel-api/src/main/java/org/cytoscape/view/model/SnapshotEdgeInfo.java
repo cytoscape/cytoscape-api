@@ -10,11 +10,11 @@ public interface SnapshotEdgeInfo {
 	
 	long getSourceViewSUID();
 	
-	ReadableView<CyNode> getSourceNodeView();
+	View<CyNode> getSourceNodeView();
 	
 	long getTargetViewSUID();
 	
-	ReadableView<CyNode> getTargetNodeView();
+	View<CyNode> getTargetNodeView();
 	
 	boolean isDirected();
 

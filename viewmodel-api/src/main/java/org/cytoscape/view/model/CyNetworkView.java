@@ -29,12 +29,13 @@ import org.cytoscape.model.CyNode;
  * @CyAPI.Api.Interface
  * @CyAPI.InModule viewmodel-api
  */
-public interface CyNetworkView extends ReadableNetworkView, View<CyNetwork>, CyDisposable {
+public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 
 	
 	default CyNetworkViewSnapshot createSnapshot() {
 		return null;
 	}
+	
 	
 	/**
 	 * Returns a View for a specified Node.
@@ -44,7 +45,6 @@ public interface CyNetworkView extends ReadableNetworkView, View<CyNetwork>, CyD
 	 * 
 	 * @return View for the given node object.
 	 */
-	@Override
 	View<CyNode> getNodeView(CyNode node);
 
 	/**
@@ -52,7 +52,6 @@ public interface CyNetworkView extends ReadableNetworkView, View<CyNetwork>, CyD
 	 * 
 	 * @return Collection of all node views in this network.
 	 */
-	@Override
 	Collection<View<CyNode>> getNodeViews();
 
 	/**
@@ -61,7 +60,6 @@ public interface CyNetworkView extends ReadableNetworkView, View<CyNetwork>, CyD
 	 * 
 	 * @return View model for the edge data.
 	 */
-	@Override
 	View<CyEdge> getEdgeView(CyEdge edge);
 
 	/**
@@ -69,7 +67,6 @@ public interface CyNetworkView extends ReadableNetworkView, View<CyNetwork>, CyD
 	 * 
 	 * @return All edge views in this network.
 	 */
-	@Override
 	Collection<View<CyEdge>> getEdgeViews();
 
 	/**
@@ -77,28 +74,35 @@ public interface CyNetworkView extends ReadableNetworkView, View<CyNetwork>, CyD
 	 * 
 	 * @return All view objects in this network including network view itself.
 	 */
-	@Override
 	Collection<View<? extends CyIdentifiable>> getAllViews();
 	
 	/**
 	 * Utility method to fit content to the presentation container (usually a Swing Window).
 	 * This fires event to the presentation layer for updating presentation.
 	 */
-	void fitContent();
+	default void fitContent() { }
 	
 	
 	/**
 	 * Utility method to fit selected graph objects to the presentation container.
 	 * This fires event to the presentation layer for updating presentation.
 	 */
-	void fitSelected();
+	default void fitSelected() { }
 	
 	
 	/**
 	 * Cascading event for the presentation layer for updating presentation.
 	 */
-	void updateView();
-
+	default void updateView() { }
+	
+	/**
+	  * Returns the ID of the renderer that must be used to render this view.
+	  * 
+	  * @see org.cytoscape.application.NetworkViewRenderer#getId()
+	  * @see org.cytoscape.application.CyApplicationManager#getNetworkViewRenderer(rendererId)
+	  */
+	String getRendererId();
+	
 	
 	public default boolean isDirty() {
 		return false;

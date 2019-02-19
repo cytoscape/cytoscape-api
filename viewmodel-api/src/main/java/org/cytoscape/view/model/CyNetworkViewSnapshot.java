@@ -6,7 +6,7 @@ import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.spacial.SpacialIndex2D;
 
-public interface CyNetworkViewSnapshot extends ReadableNetworkView {
+public interface CyNetworkViewSnapshot extends CyNetworkView {
 	
 	CyNetworkView getMutableNetworkView();
 	
@@ -18,22 +18,22 @@ public interface CyNetworkViewSnapshot extends ReadableNetworkView {
 	int getEdgeCount();
 	
 	
-	ReadableView<CyNode> getNodeView(long suid);
+	View<CyNode> getNodeView(long suid);
 	
-	ReadableView<CyEdge> getEdgeView(long suid);
-	
-	
-	Collection<ReadableView<CyNode>> getSelectedNodes();
+	View<CyEdge> getEdgeView(long suid);
 	
 	
-	Iterable<ReadableView<CyEdge>> getAdjacentEdgeIterable(ReadableView<CyNode> node);
-	
-	Iterable<ReadableView<CyEdge>> getAdjacentEdgeIterable(long nodeSuid);
+	Collection<View<CyNode>> getSelectedNodes();
 	
 	
-	SnapshotEdgeInfo getEdgeInfo(ReadableView<CyEdge> edge);
+	Iterable<View<CyEdge>> getAdjacentEdgeIterable(View<CyNode> node);
 	
-	SnapshotNodeInfo getNodeInfo(ReadableView<CyNode> node);
+	Iterable<View<CyEdge>> getAdjacentEdgeIterable(long nodeSuid);
+	
+	
+	SnapshotEdgeInfo getEdgeInfo(View<CyEdge> edge);
+	
+	SnapshotNodeInfo getNodeInfo(View<CyNode> node);
 	
 	
 	<T> T getViewDefault(VisualProperty<T> vp);
