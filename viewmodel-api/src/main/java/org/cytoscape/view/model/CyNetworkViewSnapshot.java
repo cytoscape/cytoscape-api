@@ -28,7 +28,13 @@ public interface CyNetworkViewSnapshot extends ReadableNetworkView {
 	
 	Iterable<ReadableView<CyEdge>> getAdjacentEdgeIterable(ReadableView<CyNode> node);
 	
+	Iterable<ReadableView<CyEdge>> getAdjacentEdgeIterable(long nodeSuid);
+	
 	
 	SnapshotEdgeInfo getEdgeInfo(ReadableView<CyEdge> edge);
 	
+	SnapshotNodeInfo getNodeInfo(ReadableView<CyNode> node);
+	
+	
+	<T> T getViewDefault(VisualProperty<T> vp);
 }

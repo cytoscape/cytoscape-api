@@ -6,11 +6,13 @@ public interface SnapshotEdgeInfo {
 	
 	Long getSUID();
 	
-	long getSourceSUID();
+	Long getModelSUID();
+	
+	long getSourceViewSUID();
 	
 	ReadableView<CyNode> getSourceNodeView();
 	
-	long getTargetSUID();
+	long getTargetViewSUID();
 	
 	ReadableView<CyNode> getTargetNodeView();
 	
