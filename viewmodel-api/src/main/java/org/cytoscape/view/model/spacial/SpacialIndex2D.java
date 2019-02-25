@@ -6,10 +6,14 @@ public interface SpacialIndex2D {
 	
 	
 	void getMBR(float[] extents);
+	
+	void getMBR(double[] extents);
 
 	boolean exists(long suid);
 	
 	boolean get(long suid, float[] extents);
+	
+	boolean get(long suid, double[] extents);
 	
 	double getZOrder(long suid);
 

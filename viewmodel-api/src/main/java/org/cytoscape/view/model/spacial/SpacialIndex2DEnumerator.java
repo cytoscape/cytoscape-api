@@ -8,4 +8,8 @@ public interface SpacialIndex2DEnumerator {
 	
 	long nextExtents(float[] extents);
 	
+	default long next() {
+		return nextExtents(null);
+	}
+	
 }
