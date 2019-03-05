@@ -10,7 +10,8 @@ public interface CyNetworkViewSnapshot extends CyNetworkView {
 	
 	CyNetworkView getMutableNetworkView();
 	
-	SpacialIndex2D getSpacialIndex2D();
+	// MKTODO change method name to getNodeSpacialIndex2D();
+	SpacialIndex2D<Long> getSpacialIndex2D();
 	
 	
 	int getNodeCount();
@@ -18,12 +19,14 @@ public interface CyNetworkViewSnapshot extends CyNetworkView {
 	int getEdgeCount();
 	
 	
-	View<CyNode> getNodeView(long suid);
-	
-	View<CyEdge> getEdgeView(long suid);
-	
-	
 	Collection<View<CyNode>> getSelectedNodes();
+	
+	Collection<View<CyEdge>> getSelectedEdges();
+	
+	
+	int getSelectedNodeCount();
+	
+	int getSelectedEdgeCount();
 	
 	
 	Iterable<View<CyEdge>> getAdjacentEdgeIterable(View<CyNode> node);

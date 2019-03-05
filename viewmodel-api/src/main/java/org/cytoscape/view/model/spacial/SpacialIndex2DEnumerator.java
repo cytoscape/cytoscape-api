@@ -1,14 +1,14 @@
 package org.cytoscape.view.model.spacial;
 
-public interface SpacialIndex2DEnumerator {
+public interface SpacialIndex2DEnumerator<T> {
 
 	int size();
 	
 	boolean hasNext();
 	
-	long nextExtents(float[] extents);
+	T nextExtents(float[] extents);
 	
-	default long next() {
+	default T next() {
 		return nextExtents(null);
 	}
 	

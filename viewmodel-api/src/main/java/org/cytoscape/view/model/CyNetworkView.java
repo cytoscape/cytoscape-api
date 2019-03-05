@@ -39,14 +39,17 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	
 	/**
 	 * Returns a View for a specified Node.
-	 *
-	 * 
 	 * @param node Node object
-	 * 
 	 * @return View for the given node object.
 	 */
 	View<CyNode> getNodeView(CyNode node);
 
+
+	default View<CyNode> getNodeView(long suid) {
+		throw new UnsupportedOperationException();
+	}
+
+	
 	/**
 	 * Returns a list of Views for all CyNodes in the network.
 	 * 
@@ -57,11 +60,14 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	/**
 	 * Returns a View for a specified Edge.
 	 * @param edge the edge to return the view for.
-	 * 
 	 * @return View model for the edge data.
 	 */
 	View<CyEdge> getEdgeView(CyEdge edge);
 
+	default View<CyEdge> getEdgeView(long suid) {
+		throw new UnsupportedOperationException();
+	}
+	
 	/**
 	 * Returns a list of Views for all CyEdges in the network.
 	 * 
