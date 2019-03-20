@@ -44,7 +44,6 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	 */
 	View<CyNode> getNodeView(CyNode node);
 
-
 	default View<CyNode> getNodeView(long suid) {
 		throw new UnsupportedOperationException();
 	}
@@ -56,6 +55,10 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	 * @return Collection of all node views in this network.
 	 */
 	Collection<View<CyNode>> getNodeViews();
+	
+	default Iterable<View<CyNode>> getNodeViewsIterable() {
+		return getNodeViews();
+	}
 
 	/**
 	 * Returns a View for a specified Edge.
@@ -74,6 +77,10 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	 * @return All edge views in this network.
 	 */
 	Collection<View<CyEdge>> getEdgeViews();
+	
+	default Iterable<View<CyEdge>> getEdgeViewsIterable() {
+		return getEdgeViews();
+	}
 
 	/**
 	 * Returns a list of all View including those for Nodes, Edges, and Network.
@@ -127,5 +134,6 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	 default void addNetworkViewListener(CyNetworkViewListener listener) {}
 	 
 	 default void removeNetworkViewListener(CyNetworkViewListener listener) {}
+
 	 
 }
