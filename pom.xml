@@ -17,7 +17,7 @@
 	<name>Cytoscape API Parent Project POM</name>
 
 	<modules>
-		<module>taglets</module>
+		<!--  <module>taglets</module> -->
 		<module>event-api</module>
 		<module>model-api</module>
 		<module>viewmodel-api</module>
