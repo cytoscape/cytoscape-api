@@ -42,6 +42,12 @@ public interface OpenBrowser {
 	String DEF_WEB_BROWSER_PROP_NAME = "defaultWebBrowser";
 
 	/**
+	 * A boolean indicating whether to attempt to use Cytoscape's internal
+	 * web browser.
+	 */
+	String USE_CYBROWSER = "useCyBrowser";
+
+	/**
 	 * Opens a web browser pointing to the specified URL.  
 	 * @param url A string URL that should be opened in the web browser. 
 	 * @return Whether the browser opened successfully or not.
