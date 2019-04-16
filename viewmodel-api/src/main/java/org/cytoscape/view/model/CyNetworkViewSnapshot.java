@@ -19,9 +19,9 @@ public interface CyNetworkViewSnapshot extends CyNetworkView {
 	int getEdgeCount();
 	
 	
-	Collection<View<CyNode>> getSelectedNodes();
+	Collection<View<CyNode>> getTrackedNodes(Object key);
 	
-	Collection<View<CyEdge>> getSelectedEdges();
+	Collection<View<CyEdge>> getTrackedEdges(Object key);
 	
 	
 	Iterable<View<CyEdge>> getAdjacentEdgeIterable(View<CyNode> node);
