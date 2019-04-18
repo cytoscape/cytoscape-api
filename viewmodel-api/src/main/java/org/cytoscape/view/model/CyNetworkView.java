@@ -32,11 +32,6 @@ import org.cytoscape.model.CyNode;
 public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 
 	
-	default CyNetworkViewSnapshot createSnapshot() {
-		return null;
-	}
-	
-	
 	/**
 	 * Returns a View for a specified Node.
 	 * @param node Node object
@@ -44,10 +39,16 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	 */
 	View<CyNode> getNodeView(CyNode node);
 
+	/**
+	 * Returns the node View for the given view SUID (optional operation).
+	 * @param suid SUID of the node view
+	 * @return View for the given node object.
+	 * @throws UnsupportedOperationException if this method
+	 *   is not supported by this network view
+	 */
 	default View<CyNode> getNodeView(long suid) {
 		throw new UnsupportedOperationException();
 	}
-
 	
 	/**
 	 * Returns a list of Views for all CyNodes in the network.
@@ -56,6 +57,11 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	 */
 	Collection<View<CyNode>> getNodeViews();
 	
+	/**
+	 * Returns an Iterable for all node views in the network.
+	 * Note, this operation may have better performance than 
+	 * {@link CyNetworkView#getNodeViews()} but this is not guaranteed.
+	 */
 	default Iterable<View<CyNode>> getNodeViewsIterable() {
 		return getNodeViews();
 	}
@@ -67,6 +73,13 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	 */
 	View<CyEdge> getEdgeView(CyEdge edge);
 
+	/**
+	 * Returns the edge View for the given view SUID (optional operation).
+	 * @param suid SUID of the edge view
+	 * @return View for the given edge object.
+	 * @throws UnsupportedOperationException if this method
+	 *   is not supported by this network view
+	 */
 	default View<CyEdge> getEdgeView(long suid) {
 		throw new UnsupportedOperationException();
 	}
@@ -78,6 +91,11 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	 */
 	Collection<View<CyEdge>> getEdgeViews();
 	
+	/**
+	 * Returns an Iterable for all edge views in the network.
+	 * Note, this operation may have better performance than 
+	 * {@link CyNetworkView#getEdgeViews()} but this is not guaranteed.
+	 */
 	default Iterable<View<CyEdge>> getEdgeViewsIterable() {
 		return getEdgeViews();
 	}
@@ -117,7 +135,25 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	String getRendererId();
 	
 	
-	public default boolean isDirty() {
+	/**
+	 * Returns an immutable snapshot of this network view (optional operation).
+	 * 
+	 * @throws UnsupportedOperationException if creating a snapshot 
+	 *   is not supported by this network view
+	 */
+	default CyNetworkViewSnapshot createSnapshot() {
+		throw new UnsupportedOperationException();
+	}
+
+	/**
+	 * If this network view supports creating snapshots using the 
+	 * {@link CyNetworkView#createSnapshot()} method, then this method will
+	 * return true if the state of the network has changed since creating the last
+	 * snapshot.
+	 * If this network view does not support creating snapshots then this method
+	 * will always return false.
+	 */
+	default boolean isDirty() {
 		return false;
 	}
 	 
@@ -131,9 +167,22 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	 <T, V extends T> void setViewDefault(final VisualProperty<? extends T> vp, final V defaultValue);
 
 	 
-	 default void addNetworkViewListener(CyNetworkViewListener listener) {}
+	 /**
+	  * Adds a CyNetworkViewListener (optional operation).
+	  * @throws UnsupportedOperationException if this method
+	  *   is not supported by this network view
+	  */
+	 default void addNetworkViewListener(CyNetworkViewListener listener) { 
+		 throw new UnsupportedOperationException();
+	 }
 	 
-	 default void removeNetworkViewListener(CyNetworkViewListener listener) {}
+	 /**
+	  * Removes a CyNetworkViewListener.
+	  * @throws UnsupportedOperationException if this method
+	  *   is not supported by this network view
+	  */
+	 default void removeNetworkViewListener(CyNetworkViewListener listener) {
+		 throw new UnsupportedOperationException();
+	 }
 
-	 
 }

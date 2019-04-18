@@ -1,29 +1,32 @@
 package org.cytoscape.view.model;
 
+
+/**
+ * Callback interface for use with {@link CyNetworkView} instances that are created
+ * from {@link CyNetworkViewFactoryFactory} factories.
+ */
 public interface CyNetworkViewListener {
 
 	/**
-	 * Utility method to fit content to the presentation container (usually a Swing Window).
-	 * This fires event to the presentation layer for updating presentation.
+	 * Fired when {@link CyNetworkView#fitContent()} is called.
 	 */
 	default void handleFitContent() {};
 	
 	
 	/**
-	 * Utility method to fit selected graph objects to the presentation container.
-	 * This fires event to the presentation layer for updating presentation.
+	 * Fired when {@link CyNetworkView#fitSelected()} is called.
 	 */
 	default void handleFitSelected() {};
 	
 	
 	/**
-	 * Cascading event for the presentation layer for updating presentation.
+	 * Fired when {@link CyNetworkView#updateView()} is called.
 	 */
 	default void handleUpdateView() {};
 	
 	
 	/**
-	 * Called on dispose
+	 * Fired when {@link CyNetworkView#dispose()} is called.
 	 */
 	default void handleDispose() {};
 }
