@@ -26,6 +26,7 @@ package org.cytoscape.view.model;
 
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.function.Consumer;
 
 /**
  * A node in the visual property tree (lexicon).
@@ -102,6 +103,18 @@ public final class VisualLexiconNode implements Comparable<VisualLexiconNode> {
 	@Override
 	public int compareTo(final VisualLexiconNode other) {
 		return this.getVisualProperty().getDisplayName().compareTo(other.getVisualProperty().getDisplayName());
+	}
+	
+	
+	/**
+	 * Visitor pattern. The given visitor function will get applied to this
+	 * node and all its children recursively.
+	 */
+	public void visit(Consumer<VisualLexiconNode> visitor) {
+		visitor.accept(this);
+		for(VisualLexiconNode child : getChildren()) {
+			child.visit(visitor);
+		}
 	}
 
 }
