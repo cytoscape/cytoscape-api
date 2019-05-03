@@ -8,13 +8,20 @@ import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.event.ActionListener;
 
+import javax.swing.AbstractAction;
+import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.JButton;
+import javax.swing.JPopupMenu;
+import javax.swing.UIManager;
+
 /*
  * #%L
  * Cytoscape Swing Utility API (swing-util-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2019 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -31,12 +38,6 @@ import java.awt.event.ActionListener;
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
  */
-import javax.swing.AbstractAction;
-import javax.swing.BorderFactory;
-import javax.swing.Icon;
-import javax.swing.JButton;
-import javax.swing.JPopupMenu;
-import javax.swing.UIManager;
 
 /**
  * Button with drop down menu.
@@ -46,6 +47,7 @@ import javax.swing.UIManager;
 @SuppressWarnings("serial")
 public class DropDownMenuButton extends JButton {
 
+	private final static int TEXT_ARROW_GAP = 6;
 	private final Icon buttonIcon = new MenuArrowIcon();
 	
 	private ActionListener popupMenuActionListener;
@@ -70,33 +72,37 @@ public class DropDownMenuButton extends JButton {
 		setBorder(BorderFactory.createEmptyBorder(4, 4, 4, 4 + buttonIcon.getIconWidth()));
 	}
 	
-	
 	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
 		final Dimension dim = getSize();
 		final Insets ins = getInsets();
-		final int x = dim.width - ins.right;
+		final int x = dim.width - buttonIcon.getIconWidth() - ins.right;
 		final int y = ins.top + ((dim.height - ins.top - ins.bottom - buttonIcon.getIconHeight()) / 2);
 		buttonIcon.paintIcon(this, g, x, y);
 	}
 
 	public void setPopupMenu(JPopupMenu popupMenu) {
-		if(popupMenuActionListener != null)
+		if (popupMenuActionListener != null)
 			removeActionListener(popupMenuActionListener);
-		
-		if(popupMenu != null) {
+
+		if (popupMenu != null) {
 			popupMenuActionListener = e -> {
 				popupMenu.show(DropDownMenuButton.this, 0, getHeight());
 				popupMenu.requestFocusInWindow();
 			};
 			addActionListener(popupMenuActionListener);
 		}
-		
-//		updateEnabled();
 	}
 	
+	@Override
+	public Dimension getPreferredSize() {
+		final Dimension d = super.getPreferredSize();
+		d.width += buttonIcon.getIconWidth() + TEXT_ARROW_GAP;
+		
+		return d;
+	}
 	
 	private static final class MenuArrowIcon implements Icon {
 		
