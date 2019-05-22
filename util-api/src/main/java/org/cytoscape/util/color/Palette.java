@@ -92,4 +92,12 @@ public interface Palette {
 	 * @return the palette name
 	 */
 	public String toString();
+
+	/**
+	 * Return the PaletteProvider for this palette.  Note that by default, this
+	 * returns null so as not to break existing palette implementations. 
+	 *
+	 * @return the {@link PaletteProvider} for this palette
+	 */
+	public default PaletteProvider getPaletteProvider() { return null; }
 }
