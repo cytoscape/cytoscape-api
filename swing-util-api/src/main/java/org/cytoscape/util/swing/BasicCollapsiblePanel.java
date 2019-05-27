@@ -41,7 +41,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import java.net.URL;
 import java.util.EventListener;
 import java.util.Vector;
 
@@ -49,7 +48,6 @@ import javax.swing.AbstractAction;
 import javax.swing.AbstractButton;
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
@@ -91,8 +89,6 @@ public class BasicCollapsiblePanel extends JPanel {
 	AbstractButton titleComponent; 
 
 	// Expand/Collapse button
-	private final static int COLLAPSED = 0, EXPANDED = 1; // image States
-	private ImageIcon[] iconArrow = createExpandAndCollapseIcon();
 	private JButton arrowBtn;
 
 	// Content Pane
@@ -145,7 +141,6 @@ public class BasicCollapsiblePanel extends JPanel {
 	 */
 	private BasicCollapsiblePanel(final AbstractButton titleComponent, final boolean collapsed) {
 		border = createPanelBorder();
-		iconArrow = createExpandAndCollapseIcon();
 		this.titleComponent = titleComponent != null ? titleComponent : getArrowBtn();
 		this.collapsed = collapsed;
 
@@ -254,11 +249,11 @@ public class BasicCollapsiblePanel extends JPanel {
 		if (collapse) {
 			// Hide content
 			getContentPane().setVisible(false);
-			getArrowBtn().setIcon(iconArrow[COLLAPSED]);
+			getArrowBtn().setIcon(UIManager.getIcon("Tree.collapsedIcon"));
 		} else {
 			// Show content
 			getContentPane().setVisible(true);
-			getArrowBtn().setIcon(iconArrow[EXPANDED]);
+			getArrowBtn().setIcon(UIManager.getIcon("Tree.expandedIcon"));
 		}
 		
 		collapsed = collapse;
@@ -304,33 +299,9 @@ public class BasicCollapsiblePanel extends JPanel {
 		return collapseListeners.remove(listener);
 	}
 
-	/**
-	 * Returns an ImageIcon array with arrow images used for the different
-	 * states of the panel.
-	 * 
-	 * @return iconArrow An ImageIcon array holding the collapse and expanded
-	 *         versions of the right hand side arrow
-	 */
-	private ImageIcon[] createExpandAndCollapseIcon() {
-		ImageIcon[] iconArrow = new ImageIcon[2];
-		URL iconURL;
-
-		iconURL = getClass().getResource("/images/arrow_collapsed.png");
-
-		if (iconURL != null) {
-			iconArrow[COLLAPSED] = new ImageIcon(iconURL);
-		}
-		iconURL = getClass().getResource("/images/arrow_expanded.png");
-
-		if (iconURL != null) {
-			iconArrow[EXPANDED] = new ImageIcon(iconURL);
-		}
-		return iconArrow;
-	}
-
 	private JButton getArrowBtn() {
 		if (arrowBtn == null) {
-			arrowBtn = new JButton("", iconArrow[COLLAPSED]);
+			arrowBtn = new JButton("", UIManager.getIcon("Tree.collapsedIcon"));
 			
 			if (isWinLAF()) {
 				arrowBtn.setBorder(BorderFactory.createEmptyBorder(0, 0, 0, 0));
