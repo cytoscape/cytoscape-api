@@ -16,13 +16,13 @@ public interface CyNetworkViewConfig {
 	 * Key used to get a list of selected nodes from the 
 	 * {@link CyNetworkViewSnapshot#getTrackedNodes(Object)} method.
 	 */
-	public static final Object SELECTED_NODES = new Object();
+	public static final Object SELECTED_NODES = "SELECTED_NODES";
 	
 	/**
 	 * Key used to get a list of selected edges from the 
 	 * {@link CyNetworkViewSnapshot#getTrackedEdges(Object)} method.
 	 */
-	public static final Object SELECTED_EDGES = new Object();
+	public static final Object SELECTED_EDGES = "SELECTED_EDGES";
 	
 	
 	/**

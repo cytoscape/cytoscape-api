@@ -44,20 +44,14 @@ public interface CyNetworkViewFactoryFactory {
 	
 	/**
 	 * Creates a CyNetworkViewFactory.
-	 * 
-	 * @param lexicon
-	 * @param rendererId
 	 * @param config may be null, an empty config will be used if null
 	 */
 	CyNetworkViewFactory createNetworkViewFactory(VisualLexicon lexicon, String rendererID, CyNetworkViewConfig config);
 	
 	/**
-	 * Creates a CyNetworkViewFactory with an empty CyNetworkViewConfig.
-	 * 
-	 * @param lexicon
-	 * @param rendererId
+	 * Creates a CyNetworkViewFactory with a default CyNetworkViewConfig that supports standard 2D rendering.
 	 */
-	default CyNetworkViewFactory createNetworkViewFactory(VisualLexicon lexicon, String rendererId) {
-		return createNetworkViewFactory(lexicon, rendererId, null);
+	default CyNetworkViewFactory createNetworkViewFactory(VisualLexicon lexicon, String rendererID) {
+		return createNetworkViewFactory(lexicon, rendererID, createConfig(lexicon));
 	}
 }
