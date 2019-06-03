@@ -1,29 +1,5 @@
 package org.cytoscape.view.model;
 
-/*
- * #%L
- * Cytoscape View Model API (viewmodel-api)
- * $Id:$
- * $HeadURL:$
- * %%
- * Copyright (C) 2008 - 2013 The Cytoscape Consortium
- * %%
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as 
- * published by the Free Software Foundation, either version 2.1 of the 
- * License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Lesser Public License for more details.
- * 
- * You should have received a copy of the GNU General Lesser Public 
- * License along with this program.  If not, see
- * <http://www.gnu.org/licenses/lgpl-2.1.html>.
- * #L%
- */
-
 import java.util.Collection;
 
 import org.cytoscape.model.CyDisposable;
@@ -55,37 +31,74 @@ import org.cytoscape.model.CyNode;
  */
 public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 
+	
 	/**
 	 * Returns a View for a specified Node.
-     *
-	 * 
 	 * @param node Node object
-     * 
 	 * @return View for the given node object.
 	 */
-	View<CyNode> getNodeView(final CyNode node);
+	View<CyNode> getNodeView(CyNode node);
 
+	/**
+	 * Returns the node View for the given view SUID (optional operation).
+	 * @param suid SUID of the node view
+	 * @return View for the given node object.
+	 * @throws UnsupportedOperationException if this method
+	 *   is not supported by this network view
+	 */
+	default View<CyNode> getNodeView(long suid) {
+		throw new UnsupportedOperationException();
+	}
+	
 	/**
 	 * Returns a list of Views for all CyNodes in the network.
 	 * 
 	 * @return Collection of all node views in this network.
 	 */
 	Collection<View<CyNode>> getNodeViews();
+	
+	/**
+	 * Returns an Iterable for all node views in the network.
+	 * Note, this operation may have better performance than 
+	 * {@link CyNetworkView#getNodeViews()} but this is not guaranteed.
+	 */
+	default Iterable<View<CyNode>> getNodeViewsIterable() {
+		return getNodeViews();
+	}
 
 	/**
 	 * Returns a View for a specified Edge.
 	 * @param edge the edge to return the view for.
-	 * 
 	 * @return View model for the edge data.
 	 */
-	View<CyEdge> getEdgeView(final CyEdge edge);
+	View<CyEdge> getEdgeView(CyEdge edge);
 
+	/**
+	 * Returns the edge View for the given view SUID (optional operation).
+	 * @param suid SUID of the edge view
+	 * @return View for the given edge object.
+	 * @throws UnsupportedOperationException if this method
+	 *   is not supported by this network view
+	 */
+	default View<CyEdge> getEdgeView(long suid) {
+		throw new UnsupportedOperationException();
+	}
+	
 	/**
 	 * Returns a list of Views for all CyEdges in the network.
 	 * 
 	 * @return All edge views in this network.
 	 */
 	Collection<View<CyEdge>> getEdgeViews();
+	
+	/**
+	 * Returns an Iterable for all edge views in the network.
+	 * Note, this operation may have better performance than 
+	 * {@link CyNetworkView#getEdgeViews()} but this is not guaranteed.
+	 */
+	default Iterable<View<CyEdge>> getEdgeViewsIterable() {
+		return getEdgeViews();
+	}
 
 	/**
 	 * Returns a list of all View including those for Nodes, Edges, and Network.
@@ -94,26 +107,55 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	 */
 	Collection<View<? extends CyIdentifiable>> getAllViews();
 	
-	
 	/**
 	 * Utility method to fit content to the presentation container (usually a Swing Window).
 	 * This fires event to the presentation layer for updating presentation.
 	 */
-	void fitContent();
+	default void fitContent() { }
 	
 	
 	/**
 	 * Utility method to fit selected graph objects to the presentation container.
 	 * This fires event to the presentation layer for updating presentation.
 	 */
-	void fitSelected();
+	default void fitSelected() { }
 	
 	
 	/**
 	 * Cascading event for the presentation layer for updating presentation.
 	 */
-	void updateView();
+	default void updateView() { }
+	
+	/**
+	  * Returns the ID of the renderer that must be used to render this view.
+	  * 
+	  * @see org.cytoscape.application.NetworkViewRenderer#getId()
+	  * @see org.cytoscape.application.CyApplicationManager#getNetworkViewRenderer(rendererId)
+	  */
+	String getRendererId();
+	
+	
+	/**
+	 * Returns an immutable snapshot of this network view (optional operation).
+	 * 
+	 * @throws UnsupportedOperationException if creating a snapshot 
+	 *   is not supported by this network view
+	 */
+	default CyNetworkViewSnapshot createSnapshot() {
+		throw new UnsupportedOperationException();
+	}
 
+	/**
+	 * If this network view supports creating snapshots using the 
+	 * {@link CyNetworkView#createSnapshot()} method, then this method will
+	 * return true if the state of the network has changed since creating the last
+	 * snapshot.
+	 * If this network view does not support creating snapshots then this method
+	 * will always return false.
+	 */
+	default boolean isDirty() {
+		return false;
+	}
 	 
 	/**
 	 * Sets the default value to be used for the specified visual property.
@@ -126,10 +168,21 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 
 	 
 	 /**
-	  * Returns the ID of the renderer that must be used to render this view.
-	  * 
-	  * @see org.cytoscape.application.NetworkViewRenderer#getId()
-	  * @see org.cytoscape.application.CyApplicationManager#getNetworkViewRenderer(rendererId)
+	  * Adds a CyNetworkViewListener (optional operation).
+	  * @throws UnsupportedOperationException if this method
+	  *   is not supported by this network view
 	  */
-	 String getRendererId();
+	 default void addNetworkViewListener(CyNetworkViewListener listener) { 
+		 throw new UnsupportedOperationException();
+	 }
+	 
+	 /**
+	  * Removes a CyNetworkViewListener.
+	  * @throws UnsupportedOperationException if this method
+	  *   is not supported by this network view
+	  */
+	 default void removeNetworkViewListener(CyNetworkViewListener listener) {
+		 throw new UnsupportedOperationException();
+	 }
+
 }
