@@ -103,4 +103,5 @@ public interface VisualLexicon {
 	 * @param vp VisualProperty where vp.getRange().isDiscrete() == true
 	 */
 	<T> Set<T> getSupportedValueRange(VisualProperty<T> vp);
+	
 }
