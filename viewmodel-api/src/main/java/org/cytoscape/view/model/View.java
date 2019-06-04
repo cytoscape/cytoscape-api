@@ -1,5 +1,7 @@
 package org.cytoscape.view.model;
 
+import java.util.function.Consumer;
+
 import org.cytoscape.model.CyIdentifiable;
 
 /**
@@ -90,5 +92,45 @@ public interface View<S> extends CyIdentifiable {
 	 * Clear all VisualProperty values previously set to this view.
 	 */
 	void clearVisualProperties();
+	
+	
+	/**
+	 * Performs the given action on this View object. Any synchronization resources, 
+	 * such as locks, are acquired at the start of the action and held until the
+	 * action is complete. Allows multiple visual properties to be set as a single atomic
+	 * action.
+	 * 
+	 * If this network view supports creating snapshots then the dirty flag is not
+	 * set until the action is complete.
+	 * 
+	 * <p>
+	 * The default implementation of this method assumes there are no resorces to aquire.
+	 * </p>
+	 * 
+	 * @param viewAction The action to be performed once on this view.
+	 * @param setDirty If false then the dirty flag will not be set when the action completes.
+	 * 
+	 * @see CyNetworkView#isDirty()
+	 */
+	default void batch(Consumer<View<S>> viewAction, boolean setDirty) {
+		viewAction.accept(this);
+	}
+	
+	/**
+	 * Performs the given action on this View object. Any synchronization resources, 
+	 * such as locks, are acquired at the start of the action and held until the
+	 * action is complete. Allows multiple visual properties to be set as a single atomic
+	 * action.
+	 * 
+	 * If this network view supports creating snapshots then the dirty flag is not
+	 * set until the action is complete.
+	 * 
+	 * @param viewAction The action to be performed once on this view.
+	 * 
+	 * @see CyNetworkView#isDirty()
+	 */
+	default void batch(Consumer<View<S>> viewAction) {
+		batch(viewAction, true);
+	}
 	
 }
