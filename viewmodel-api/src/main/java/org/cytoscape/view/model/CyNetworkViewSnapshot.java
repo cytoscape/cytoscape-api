@@ -50,10 +50,10 @@ public interface CyNetworkViewSnapshot extends CyNetworkView {
 	 */
 	CyNetworkView getMutableNetworkView();
 	
-	
 	/**
 	 * Returns an immutable SpacialIndex2D object that can be used to query the bounds
-	 * of nodes in the network view.
+	 * of nodes in the network view, or null if the SpacialIndex has been turned off.
+	 * @see CyNetworkViewConfig#setEnableSpacialIndex2D(boolean)
 	 */
 	SpacialIndex2D<Long> getSpacialIndex2D();
 	
