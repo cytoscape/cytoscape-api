@@ -22,28 +22,27 @@
   <repositories>
       <!-- bootstrap for cytoscape dependencies, namely the parent POM snapshots -->
       <repository>
-          <id>cytoscape_snapshots</id>
-          <snapshots>
-            <enabled>true</enabled>
-          </snapshots>
-          <releases>
-            <enabled>false</enabled>
-          </releases>
-          <name>Cytoscape Snapshots</name>
-          <url>http://code.cytoscape.org/nexus/content/repositories/snapshots/</url>
-       </repository>
-       <!-- bootstrap for cytoscape dependencies, namely the parent POM releases -->
-       <repository>
-          <id>cytoscape_releases</id>
-          <snapshots>
-            <enabled>false</enabled>
-          </snapshots>
-          <releases>
-            <enabled>true</enabled>
-          </releases>
-          <name>Cytoscape Releases</name>
-          <url>http://code.cytoscape.org/nexus/content/repositories/releases/</url>
-       </repository>
+        <id>cytoscape_snapshots</id>
+        <snapshots>
+          <enabled>true</enabled>
+        </snapshots>
+        <releases>
+          <enabled>false</enabled>
+        </releases>
+        <name>Cytoscape Snapshots</name>
+        <url>http://nrnb-nexus.ucsd.edu/repository/cytoscape_snapshots/</url>
+      </repository>
+      <repository>
+        <id>cytoscape_releases</id>
+        <snapshots>
+          <enabled>false</enabled>
+        </snapshots>
+        <releases>
+          <enabled>true</enabled>
+        </releases>
+        <name>Cytoscape Releases</name>
+        <url>http://nrnb-nexus.ucsd.edu/repository/cytoscape_releases/</url>
+      </repository>
   </repositories>
 
   <dependencies>
