@@ -25,9 +25,18 @@ package org.cytoscape.taglets.compatibility;
  * #L%
  */
 
-import com.sun.tools.doclets.Taglet;
-import com.sun.javadoc.Tag;
+import jdk.javadoc.doclet.Taglet;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
+
+import javax.lang.model.element.Element;
+
+import com.sun.source.doctree.DocTree;
+import com.sun.source.doctree.TextTree;
+import com.sun.source.doctree.UnknownBlockTagTree;
+import com.sun.source.doctree.UnknownInlineTagTree;
+import com.sun.source.util.SimpleDocTreeVisitor;
 
 /**
  * An abstract taglet for specifying the Cytoscape API documentation
@@ -57,12 +66,7 @@ abstract class AbstractApiTaglet implements Taglet {
 	 */
     public String getName() { return name; }
 
-	/**
-	 * Returns false because this taglet should not appear in this context.
-	 * @return false because this taglet should not appear in this context.
-	 */
-    public boolean inField() { return false; }
-
+	
 	/**
 	 * Returns false because this taglet should not appear in this context.
 	 * @return false because this taglet should not appear in this context.
@@ -113,21 +117,65 @@ abstract class AbstractApiTaglet implements Taglet {
 	 * Actually generates the html included in the javadoc for this tag.
 	 * @return A string of HTML to be inserted into the javadoc.
 	 */
-    public String toString(Tag tag) {
+	/*
+    public String toString(DocTree tag) {
 		String result = "<br/><b>Cytoscape Backwards Compatibility (" + header + ")</b>:  " + desc +"<br/>";
 		if ( tag.text() != null && !tag.text().equals("") )
 			result += tag.text() + "<br/>";
 		return result;
     }
-   
+   */
    	/**
 	 * Simply calls toString(tag) for tag found and concatenates the result.
 	 * @return A string of HTML to be inserted into the javadoc.
 	 */
-    public String toString(Tag[] tags) {
+	/*
+    public String toString(DocTree[] tags) {
         String result = ""; 
-		for ( Tag t : tags ) 
+		for ( DocTree t : tags ) 
             result += toString(t); 
         return result; 
     }
+    */
+    
+    public String toString(List<? extends DocTree> tags, Element element) {
+    	String result = new SimpleDocTreeVisitor<String, Void>() {
+            @Override
+            public String visitUnknownBlockTag(UnknownBlockTagTree node, Void p) {
+                for (DocTree dt : node.getContent()) {
+                    return dt.accept(this, null);
+                }
+                return "";
+            }
+
+            @Override
+            public String visitUnknownInlineTag(UnknownInlineTagTree node, Void p) {
+                for (DocTree dt : node.getContent()) {
+                    return dt.accept(this, null);
+                }
+                return "";
+            }
+
+            @Override
+            public String visitText(TextTree node, Void p) {
+            	String result = "<br/><b>Cytoscape Backwards Compatibility (" + header + ")</b>:  " + desc +"<br/>";
+        		if ( node.getBody() != null && !node.getBody().equals("") )
+        			result +=node.getBody() + "<br/>";
+        		return result;
+            }
+
+            @Override
+            protected String defaultAction(DocTree node, Void p) {
+                return "";
+            }
+
+        }.visit(tags, null);
+    	
+    	return result;
+    }
+    
+    @Override
+	public Set<Location> getAllowedLocations() {
+		return Set.of(Location.TYPE);
+	}
 }
