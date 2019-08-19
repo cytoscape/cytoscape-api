@@ -102,7 +102,7 @@
 					<skip>false</skip>
 					<encoding>UTF-8</encoding>
 					<locale>en</locale>
-					<javadocVersion>11.0.4</javadocVersion>
+					<javadocVersion>11.0.2</javadocVersion>
 					<links>
 						<link>https://docs.oracle.com/en/java/javase/11/docs/api/</link>
 						<link>https://osgi.org/javadoc/r6/core/</link>
@@ -185,7 +185,7 @@
 		<profile>
 			<id>disable-java8-doclint</id>
 			<activation>
-				<jdk>[11.0.4,</jdk>
+				<jdk>[11.0.2,</jdk>
 			</activation>
 			<build>
 				<plugins>
