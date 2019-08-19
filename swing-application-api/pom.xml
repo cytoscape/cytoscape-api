@@ -47,7 +47,7 @@
 				<enabled>false</enabled>
 			</releases>
 			<name>Cytoscape Snapshots</name>
-			<url>http://code.cytoscape.org/nexus/content/repositories/snapshots/</url>
+			<url>http://nrnb-nexus.ucsd.edu/repository/cytoscape_snapshots/</url>
 		</repository>
 		<!-- bootstrap for cytoscape dependencies, namely the parent POM releases -->
 		<repository>
@@ -59,7 +59,7 @@
 				<enabled>true</enabled>
 			</releases>
 			<name>Cytoscape Releases</name>
-			<url>http://code.cytoscape.org/nexus/content/repositories/releases/</url>
+			<url>http://nrnb-nexus.ucsd.edu/repository/cytoscape_releases/</url>
 		</repository>
 	</repositories>
 	<dependencies>
@@ -99,6 +99,11 @@
 			<artifactId>service-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
+		<dependency>
+    		<groupId>javax.help</groupId>
+    		<artifactId>javahelp</artifactId>
+    		<version>2.0.05</version>
+		</dependency>
 		
 		<!-- Testing -->
 		<dependency>
@@ -108,7 +113,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
+			<artifactId>mockito-core</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

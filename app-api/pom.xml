@@ -65,23 +65,26 @@
 					</execution>
 				</executions>
 			</plugin>
+			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>${maven-javadoc-plugin.version}</version>
 				<configuration>
+					<javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
 					<skip>false</skip>
 					<encoding>UTF-8</encoding>
 					<locale>en</locale>
-					<javadocVersion>1.8</javadocVersion>
-					<links>
-						<link>http://docs.oracle.com/javase/8/docs/api/</link>
-					</links>
+					<javadocVersion>11.0.4</javadocVersion>
+					
+					
+					
 					<footer>Cytoscape ${project.version} API</footer>
 					<header>Cytoscape ${project.version} API</header>
 					<bottom>Copyright 2011-2015 Cytoscape Consortium. All rights reserved.</bottom>
 					<maxmemory>2g</maxmemory>
 					<additionalJOption>-J-Xmx2g</additionalJOption>
+					<detectLinks>true</detectLinks>
 					<includeDependencySources>true</includeDependencySources>
 					<dependencySourceIncludes>
 						<dependencySourceInclude>org.cytoscape:*</dependencySourceInclude>
@@ -93,11 +96,12 @@
 						<id>javadoc-jar</id>
 						<phase>package</phase>
 						<goals>
-							<goal>aggregate-jar</goal>
+							<goal>jar</goal>
 						</goals>
 					</execution>
 				</executions>
 			</plugin>
+			
 		</plugins>
 	</build>
 
@@ -148,6 +152,12 @@
 		<!-- These dependencies aren't used to build this bundle, but we include 
 			them here to get them into the jar-with-dependencies and javadoc. -->
 		<dependency>
+			<groupId>org.osgi</groupId>
+			<artifactId>org.osgi.core</artifactId>
+			<version>${osgi.api.version}</version>
+		</dependency>
+		
+		<dependency>
 			<groupId>org.cytoscape</groupId>
 			<artifactId>equations-api</artifactId>
 			<version>${project.version}</version>
@@ -197,7 +207,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.mockito</groupId>
-			<artifactId>mockito-all</artifactId>
+			<artifactId>mockito-core</artifactId>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

@@ -12,7 +12,6 @@
 	</parent>
 
 	<artifactId>api-parent</artifactId>
-	<version>3.8.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>Cytoscape API Parent Project POM</name>
 
@@ -59,7 +58,7 @@
 			</dependency>
 			<dependency>
 				<groupId>org.mockito</groupId>
-				<artifactId>mockito-all</artifactId>
+				<artifactId>mockito-core</artifactId>
 				<version>${mockito.version}</version>
 			</dependency>
 		</dependencies>

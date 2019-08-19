@@ -53,4 +53,6 @@ public class StaticClassTaglet extends AbstractApiTaglet {
 	public static void register(Map tagletMap) {
 		registerTaglet(tagletMap, new StaticClassTaglet());
 	}
+	
+	
 }

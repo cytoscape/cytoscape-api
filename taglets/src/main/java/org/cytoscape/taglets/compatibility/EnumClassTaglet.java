@@ -54,4 +54,6 @@ public class EnumClassTaglet extends AbstractApiTaglet {
 	public static void register(Map tagletMap) {
 		registerTaglet(tagletMap, new EnumClassTaglet());
 	}
+	
+
 }

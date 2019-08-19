@@ -24,11 +24,19 @@ package org.cytoscape.taglets.compatibility;
  * #L%
  */
 
-import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
-import com.sun.javadoc.Tag;
-import com.sun.tools.doclets.Taglet;
+import javax.lang.model.element.Element;
+
+import com.sun.source.doctree.DocTree;
+import com.sun.source.doctree.TextTree;
+import com.sun.source.doctree.UnknownBlockTagTree;
+import com.sun.source.doctree.UnknownInlineTagTree;
+import com.sun.source.util.SimpleDocTreeVisitor;
+
+import jdk.javadoc.doclet.Taglet;
 
 @SuppressWarnings("restriction")
 public class InModuleTaglet implements Taglet {
@@ -39,42 +47,13 @@ public class InModuleTaglet implements Taglet {
 		return NAME;
 	}
 
-	@Override
-	public boolean inConstructor() {
-		return false;
-	}
-
-	@Override
-	public boolean inField() {
-		return false;
-	}
-
-	@Override
-	public boolean inMethod() {
-		return false;
-	}
-
-	@Override
-	public boolean inOverview() {
-		return false;
-	}
-
-	@Override
-	public boolean inPackage() {
-		return true;
-	}
-
-	@Override
-	public boolean inType() {
-		return true;
-	}
 
 	@Override
 	public boolean isInlineTag() {
 		return false;
 	}
 
-	@Override
+	/*
 	public String toString(Tag tag) {
 		return "<hr/><p><b>Module:</b> <code>"
 				+ tag.text()
@@ -84,7 +63,8 @@ public class InModuleTaglet implements Taglet {
 				+ tag.text() + "</b>&lt;/artifactId>\n&lt;/dependency></pre>";
 	}
 
-	@Override
+	*/
+/*
 	public String toString(Tag[] tags) {
 		System.out.println(Arrays.asList(tags));
 		if (tags.length == 0) {
@@ -93,6 +73,7 @@ public class InModuleTaglet implements Taglet {
 		System.out.println(System.getProperties());
 		return toString(tags[0]);
 	}
+	*/
 
 	public static void register(Map<String, Taglet> tagletMap) {
 		if (tagletMap.containsKey(NAME))
@@ -100,4 +81,50 @@ public class InModuleTaglet implements Taglet {
 		Taglet tag = new InModuleTaglet();
 		tagletMap.put(NAME, tag);
 	}
+	
+	public String toString(List<? extends DocTree> tags, Element element) {
+    	String result = new SimpleDocTreeVisitor<String, Void>() {
+            private String result = null;
+    		
+    		@Override
+            public String visitUnknownBlockTag(UnknownBlockTagTree node, Void p) {
+                for (DocTree dt : node.getContent()) {
+                    return dt.accept(this, null);
+                }
+                return "";
+            }
+
+            @Override
+            public String visitUnknownInlineTag(UnknownInlineTagTree node, Void p) {
+                for (DocTree dt : node.getContent()) {
+                    return dt.accept(this, null);
+                }
+                return "";
+            }
+
+            @Override
+            public String visitText(TextTree node, Void p) {
+            	if (result == null) { result = "<hr/><p><b>Module:</b> <code>"
+        				+ node.getBody()
+        				+ "</code></p>"
+        				+ "<p>To use this in your app, include the following dependency in your POM:</p>"
+        				+ "<pre>&lt;dependency>\n    &lt;groupId>org.cytoscape&lt;/groupId>\n    &lt;artifactId><b>"
+        				+ node.getBody() + "</b>&lt;/artifactId>\n&lt;/dependency></pre>";
+            	}
+            	return result;
+            }
+
+            @Override
+            protected String defaultAction(DocTree node, Void p) {
+                return "";
+            }
+
+        }.visit(tags, null);
+    	return result;
+	}
+	
+	  @Override
+		public Set<Location> getAllowedLocations() {
+			return Set.of(Location.PACKAGE);
+		}
 }
