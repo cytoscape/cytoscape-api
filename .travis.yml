@@ -13,7 +13,7 @@ script: mvn clean install -U -B -Dorg.slf4j.simpleLogger.log.org.apache.maven.cl
 
 deploy:
   on:
-    branch: java11
+    branch: develop
   provider: script
   script: "mvn deploy"
   skip_cleanup: true
