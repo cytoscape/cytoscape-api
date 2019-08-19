@@ -53,4 +53,5 @@ public class FinalClassTaglet extends AbstractApiTaglet {
 	public static void register(Map tagletMap) {
 		registerTaglet(tagletMap, new FinalClassTaglet());
 	}
+
 }

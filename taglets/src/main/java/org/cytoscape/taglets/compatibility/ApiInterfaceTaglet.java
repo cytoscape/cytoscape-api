@@ -55,4 +55,5 @@ public class ApiInterfaceTaglet extends AbstractApiTaglet {
 	public static void register(Map tagletMap) {
 		registerTaglet(tagletMap, new ApiInterfaceTaglet());
 	}
+	
 }

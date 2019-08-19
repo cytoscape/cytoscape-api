@@ -30,6 +30,7 @@
 			<version>1.8.1</version>
 			<scope>test</scope>
 		</dependency>
+		<!--  
 		<dependency>
 			<groupId>com.sun</groupId>
 			<artifactId>tools</artifactId>
@@ -37,18 +38,19 @@
 			<scope>system</scope>
 			<systemPath>${toolsjar}</systemPath>
 		</dependency>
+	    -->
 	</dependencies>
 
 	<distributionManagement>
 		<repository>
 			<id>releases</id>
 			<name>Internal Releases</name>
-			<url>http://code.cytoscape.org/nexus/content/repositories/releases</url>
+			<url>http://nrnb-nexus.ucsd.edu/repository/cytoscape_releases/</url>
 		</repository>
 		<snapshotRepository>
 			<id>snapshots</id>
 			<name>Internal Snapshots</name>
-			<url>http://code.cytoscape.org/nexus/content/repositories/snapshots</url>
+			<url>http://nrnb-nexus.ucsd.edu/repository/cytoscape_snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
 
