@@ -100,6 +100,7 @@
 				<configuration>
 				<!--  <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>-->
 					<skip>false</skip>
+					<failOnError>false</failOnError>
 					<encoding>UTF-8</encoding>
 					<locale>en</locale>
 					<javadocVersion>[11.0,</javadocVersion>
@@ -185,7 +186,7 @@
 		<profile>
 			<id>disable-java8-doclint</id>
 			<activation>
-				<jdk>[11.0.2,</jdk>
+				<jdk>[11.0,</jdk>
 			</activation>
 			<build>
 				<plugins>
