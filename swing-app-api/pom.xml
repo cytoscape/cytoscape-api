@@ -98,11 +98,11 @@
 				<artifactId>maven-javadoc-plugin</artifactId>
 				<version>${maven-javadoc-plugin.version}</version>
 				<configuration>
-				<javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>
+				<!--  <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable>-->
 					<skip>false</skip>
 					<encoding>UTF-8</encoding>
 					<locale>en</locale>
-					<javadocVersion>11.0.2</javadocVersion>
+					<javadocVersion>[11.0,</javadocVersion>
 					<links>
 						<link>https://docs.oracle.com/en/java/javase/11/docs/api/</link>
 						<link>https://osgi.org/javadoc/r6/core/</link>
