@@ -73,7 +73,8 @@
 				<configuration>
 					<!-- <javadocExecutable>${java.home}/bin/javadoc</javadocExecutable> -->
 					<skip>false</skip>
-					<failOnError>false</failOnError>
+					<doclint>none</doclint>
+					<!-- <failOnError>false</failOnError> -->
 					<encoding>UTF-8</encoding>
 					<locale>en</locale>
 					<javadocVersion>[11.0,</javadocVersion>		
