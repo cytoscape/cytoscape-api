@@ -6,14 +6,14 @@ jdk:
 - openjdk11
 branches:
   only:
-  - develop
+  - java11-javadoc
 install:
 - cp .travis.settings.xml $HOME/.m2/settings.xml
 script: mvn clean install -U -B -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=warn
 
 deploy:
   on:
-    branch: develop
+    branch: java11-javadoc
   provider: script
   script: "mvn deploy"
   skip_cleanup: true
