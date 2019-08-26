@@ -66,43 +66,36 @@ abstract class AbstractApiTaglet implements Taglet {
 	 */
     public String getName() { return name; }
 
-	
-	/**
-	 * Returns false because this taglet should not appear in this context.
-	 * @return false because this taglet should not appear in this context.
-	 */
-    public boolean inConstructor() { return false; }
-
-	/**
-	 * Returns false because this taglet should not appear in this context.
-	 * @return false because this taglet should not appear in this context.
-	 */
-    public boolean inMethod() { return false; }
-
-	/**
-	 * Returns false because this taglet should not appear in this context.
-	 * @return false because this taglet should not appear in this context.
-	 */
-    public boolean inOverview() { return false; }
-
-	/**
-	 * Returns false because this taglet should not appear in this context.
-	 * @return false because this taglet should not appear in this context.
-	 */
-    public boolean inPackage() { return false; }
-
-	/**
-	 * Returns true because this taglet only appears in the type (class) description. 
-	 * @return true because this taglet  only appears in the type (class) description.
-	 */
-    public boolean inType() { return true; }
-
 	/**
 	 * Returns false because this taglet should not appear in this context.
 	 * @return false because this taglet should not appear in this context.
 	 */
     public boolean isInlineTag() { return false; }
 
+    static class ApiDocTreeVisitor extends SimpleDocTreeVisitor<String, Void>
+    {
+    	@Override
+		public String visitUnknownBlockTag(UnknownBlockTagTree node, Void p) {
+			for (DocTree dt : node.getContent()) {
+				return dt.accept(this, null);
+			}
+			return "";
+		}
+
+		@Override
+		public String visitUnknownInlineTag(UnknownInlineTagTree node, Void p) {
+			for (DocTree dt : node.getContent()) {
+				return dt.accept(this, null);
+			}
+			return "";
+		}
+		
+    	 @Override
+         public String visitText(TextTree node, Void p) { return node.getBody(); }
+    }
+    
+    private static final ApiDocTreeVisitor dummyVisitor = new ApiDocTreeVisitor();
+    
     /**
 	 * Can be used by children to easily implement register(tagletMap).
 	 */
@@ -126,52 +119,25 @@ abstract class AbstractApiTaglet implements Taglet {
     }
    */
    	/**
-	 * Simply calls toString(tag) for tag found and concatenates the result.
+	 * Simply calls toString(DocTree) for tag found and concatenates the result.
 	 * @return A string of HTML to be inserted into the javadoc.
 	 */
-	/*
-    public String toString(DocTree[] tags) {
-        String result = ""; 
-		for ( DocTree t : tags ) 
-            result += toString(t); 
-        return result; 
+    public String toString(DocTree docTree) {
+    	final String text = dummyVisitor.visit(docTree, null);
+    	String result = "<br/><b>Cytoscape Backwards Compatibility (" + header + ")</b>:  " + desc +"<br/>" ;
+    	
+    	if ( text != null && !text.equals("") )
+			result += "<br>" + text + "</br>";
+		return result;
     }
-    */
+    
     
     public String toString(List<? extends DocTree> tags, Element element) {
-    	String result = new SimpleDocTreeVisitor<String, Void>() {
-            @Override
-            public String visitUnknownBlockTag(UnknownBlockTagTree node, Void p) {
-                for (DocTree dt : node.getContent()) {
-                    return dt.accept(this, null);
-                }
-                return "";
-            }
-
-            @Override
-            public String visitUnknownInlineTag(UnknownInlineTagTree node, Void p) {
-                for (DocTree dt : node.getContent()) {
-                    return dt.accept(this, null);
-                }
-                return "";
-            }
-
-            @Override
-            public String visitText(TextTree node, Void p) {
-            	String result = "<br/><b>Cytoscape Backwards Compatibility (" + header + ")</b>:  " + desc +"<br/>";
-        		if ( node.getBody() != null && !node.getBody().equals("") )
-        			result +=node.getBody() + "<br/>";
-        		return result;
-            }
-
-            @Override
-            protected String defaultAction(DocTree node, Void p) {
-                return "";
-            }
-
-        }.visit(tags, null);
-    	
-    	return result;
+    	StringBuilder sb = new StringBuilder();
+    	for (DocTree docTree : tags) {
+    		sb.append(toString(docTree));
+    	}
+    	return sb.toString();
     }
     
     @Override

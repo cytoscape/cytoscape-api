@@ -47,33 +47,50 @@ public class InModuleTaglet implements Taglet {
 		return NAME;
 	}
 
-
 	@Override
 	public boolean isInlineTag() {
 		return false;
 	}
 
-	/*
-	public String toString(Tag tag) {
-		return "<hr/><p><b>Module:</b> <code>"
-				+ tag.text()
-				+ "</code></p>"
-				+ "<p>To use this in your app, include the following dependency in your POM:</p>"
-				+ "<pre>&lt;dependency>\n    &lt;groupId>org.cytoscape&lt;/groupId>\n    &lt;artifactId><b>"
-				+ tag.text() + "</b>&lt;/artifactId>\n&lt;/dependency></pre>";
-	}
-
-	*/
-/*
-	public String toString(Tag[] tags) {
-		System.out.println(Arrays.asList(tags));
-		if (tags.length == 0) {
+	static class InModuleDocTreeVisitor extends SimpleDocTreeVisitor<String, Void> {
+		@Override
+		public String visitUnknownBlockTag(UnknownBlockTagTree node, Void p) {
+			for (DocTree dt : node.getContent()) {
+				return dt.accept(this, null);
+			}
 			return "";
 		}
-		System.out.println(System.getProperties());
-		return toString(tags[0]);
+
+		@Override
+		public String visitUnknownInlineTag(UnknownInlineTagTree node, Void p) {
+			for (DocTree dt : node.getContent()) {
+				return dt.accept(this, null);
+			}
+			return "";
+		}
+
+		@Override
+		public String visitText(TextTree node, Void p) {
+			return node.getBody();
+		}
 	}
-	*/
+
+	private static final InModuleDocTreeVisitor dummyVisitor = new InModuleDocTreeVisitor();
+
+	public String toString(DocTree docTree) {
+		final String text = dummyVisitor.visit(docTree, null);
+		// final String text = docTree.getClass().getName();
+		return "<hr/><p><b>Module:</b> <code>" + text + "</code></p>"
+				+ "<p>To use this in your app, include the following dependency in your POM:</p>"
+				+ "<pre>&lt;dependency>\n    &lt;groupId>org.cytoscape&lt;/groupId>\n    &lt;artifactId><b>" + text
+				+ "</b>&lt;/artifactId>\n&lt;/dependency></pre>";
+	}
+
+	/*
+	 * public String toString(Tag[] tags) { System.out.println(Arrays.asList(tags));
+	 * if (tags.length == 0) { return ""; }
+	 * System.out.println(System.getProperties()); return toString(tags[0]); }
+	 */
 
 	public static void register(Map<String, Taglet> tagletMap) {
 		if (tagletMap.containsKey(NAME))
@@ -81,50 +98,17 @@ public class InModuleTaglet implements Taglet {
 		Taglet tag = new InModuleTaglet();
 		tagletMap.put(NAME, tag);
 	}
-	
+
 	public String toString(List<? extends DocTree> tags, Element element) {
-    	String result = new SimpleDocTreeVisitor<String, Void>() {
-            private String result = null;
-    		
-    		@Override
-            public String visitUnknownBlockTag(UnknownBlockTagTree node, Void p) {
-                for (DocTree dt : node.getContent()) {
-                    return dt.accept(this, null);
-                }
-                return "";
-            }
-
-            @Override
-            public String visitUnknownInlineTag(UnknownInlineTagTree node, Void p) {
-                for (DocTree dt : node.getContent()) {
-                    return dt.accept(this, null);
-                }
-                return "";
-            }
-
-            @Override
-            public String visitText(TextTree node, Void p) {
-            	if (result == null) { result = "<hr/><p><b>Module:</b> <code>"
-        				+ node.getBody()
-        				+ "</code></p>"
-        				+ "<p>To use this in your app, include the following dependency in your POM:</p>"
-        				+ "<pre>&lt;dependency>\n    &lt;groupId>org.cytoscape&lt;/groupId>\n    &lt;artifactId><b>"
-        				+ node.getBody() + "</b>&lt;/artifactId>\n&lt;/dependency></pre>";
-            	}
-            	return result;
-            }
-
-            @Override
-            protected String defaultAction(DocTree node, Void p) {
-                return "";
-            }
-
-        }.visit(tags, null);
-    	return result;
-	}
-	
-	  @Override
-		public Set<Location> getAllowedLocations() {
-			return Set.of(Location.PACKAGE);
+		StringBuilder sb = new StringBuilder();
+		for (DocTree docTree : tags) {
+			sb.append(toString(docTree));
 		}
+		return sb.toString();
+	}
+
+	@Override
+	public Set<Location> getAllowedLocations() {
+		return Set.of(Location.PACKAGE, Location.TYPE);
+	}
 }

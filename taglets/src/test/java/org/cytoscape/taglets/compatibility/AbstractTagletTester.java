@@ -87,7 +87,7 @@ public abstract class AbstractTagletTester {
 		DocTree t = mock(DocTree.class);
 		when(t.text()).thenReturn("test text");
 		assertNotNull(taglet.toString(t));
-	*/
+		*/
 	}
 
 	@Test
