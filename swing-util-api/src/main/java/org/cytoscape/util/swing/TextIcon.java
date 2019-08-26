@@ -7,6 +7,7 @@ import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.font.LineMetrics;
 import java.awt.geom.Rectangle2D;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -184,16 +185,21 @@ public class TextIcon implements Icon {
 	}
 	
 	private void drawText(String text, Font font, Graphics g, Component c, int x, int y) {
+		// IMPORTANT:
+		// For height and ascent, we now use LineMetrics, because the values returned by FontMetrics
+		// have changed in Java 11 (maybe since Java 9?), and are just incorrect
+		// (e.g. FontMetrics.getHeight() and FontMetrics.getAscent() always return 0 for our custom font icons)
 		FontMetrics fm = g.getFontMetrics(font);
 		Rectangle2D rect = fm.getStringBounds(text, g);
+		LineMetrics lm = fm.getLineMetrics(text, g);
 
-		int textHeight = (int) rect.getHeight();
+		int textHeight = (int) lm.getHeight();
 		int textWidth = (int) rect.getWidth();
 
 		// Center text horizontally and vertically
 		int xx = x + Math.round((getIconWidth() - textWidth) / 2.0f);
-		int yy = y + Math.round((getIconHeight() - textHeight) / 2.0f) + fm.getAscent();
-
+		int yy = y + Math.round(((getIconHeight() - textHeight) / 2.0f) + lm.getAscent());
+		
 		g.drawString(text, xx, yy);
 	}
 }
