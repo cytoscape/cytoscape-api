@@ -67,7 +67,7 @@ public interface CyApplicationManager {
 
 	/**
 	 * Sets the current network view to the specified network view.
-	 * @param netView The network view to become the current network view. 
+	 * @param netView The network view to become the current network view (it can be null). 
 	 */
 	public void setCurrentNetworkView(final CyNetworkView netView);
 
@@ -109,13 +109,13 @@ public interface CyApplicationManager {
 
 	/**
 	 * Returns the currently active table.
-	 * @return the currently active {@link CyTable}.
+	 * @return the currently active {@link CyTable} or null if no table is currently being visualized
 	 */
 	public CyTable getCurrentTable();
 	
 	/**
 	 * Sets the currently active table.
-	 * @param table The table that should be made current.
+	 * @param table The table that should be made current (it can be null).
 	 */
 	public void setCurrentTable(CyTable table);
 
