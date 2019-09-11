@@ -1,12 +1,21 @@
 package org.cytoscape.application;
 
+import java.io.File;
+import java.util.List;
+import java.util.Set;
+
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyTable;
+import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.presentation.RenderingEngine;
+
 /*
  * #%L
  * Cytoscape Application API (application-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2019 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -24,17 +33,6 @@ package org.cytoscape.application;
  * #L%
  */
 
-
-import java.io.File;
-import java.util.List;
-import java.util.Set;
-
-import org.cytoscape.model.CyNetwork;
-import org.cytoscape.model.CyTable;
-import org.cytoscape.view.model.CyNetworkView;
-import org.cytoscape.view.presentation.RenderingEngine;
-
-
 /**
  * Basic access to current and/or currently selected networks, 
  * views and rendering engines in an instance of Cytoscape.
@@ -51,17 +49,18 @@ public interface CyApplicationManager {
 
 	/**
 	 * Sets the current network to the specified network.
-	 * If the passed network is different from the current one, a {@link SetCurrentNetworkEvent} is fired.
+	 * If the passed network is different from the current one, a 
+	 * {@link org.cytoscape.application.events.SetCurrentNetworkEvent} is fired.
 	 * If the passed network is not yet selected, any selected networks are unselected before the passed
-	 * one is selected. That means that the {@link SetSelectedNetworksEvent} can also be fired.
-	 * @param net The network that will become the current network. 
+	 * one is selected. That means that the {@link org.cytoscape.application.events.SetSelectedNetworksEvent} 
+	 * can also be fired.
+	 * @param net The network that will become the current network (it can be null). 
 	 */
 	public void setCurrentNetwork(final CyNetwork net);
 
 	/**
 	 * Returns the current network view.
-	 * @return the current network view or null if no network 
-	 * is currently being visualized
+	 * @return the current network view or null if no network is currently being visualized
 	 */
 	public CyNetworkView getCurrentNetworkView();
 
@@ -125,35 +124,27 @@ public interface CyApplicationManager {
 	public void reset();
 	
 	/**
-	 * Returns the NetworkViewRenderer associated with the current
-	 * RenderingEngine.
-	 * 
-	 * @return the NetworkViewRenderer associated with the current
-	 * RenderingEngine
+	 * Returns the NetworkViewRenderer associated with the current RenderingEngine.
+	 * @return the NetworkViewRenderer associated with the current RenderingEngine
 	 */
 	NetworkViewRenderer getCurrentNetworkViewRenderer();
 	
 	/**
-	 * Returns the NetworkViewRenderer that should be used to create
-	 * CyNetworkViews.
-	 * @return the NetworkViewRenderer that should be used to create
-	 * CyNetworkViews.
+	 * Returns the NetworkViewRenderer that should be used to create CyNetworkViews.
+	 * @return the NetworkViewRenderer that should be used to create CyNetworkViews.
 	 */
 	NetworkViewRenderer getDefaultNetworkViewRenderer();
 	
 	/**
-	 * Sets the {@link NetworkViewRenderer} that should be used to create
-	 * CyNetworkViews.
-	 * @param renderer the NetworkViewRenderer that should be used by
-	 *                 default.
+	 * Sets the {@link NetworkViewRenderer} that should be used to create CyNetworkViews.
+	 * @param renderer the NetworkViewRenderer that should be used by default.
 	 */
 	void setDefaultNetworkViewRenderer(NetworkViewRenderer renderer);
 
 	/**
 	 * Returns the {@link NetworkViewRenderer} that has the passed id or null if it doesn't exist.
 	 * @param rendererId
-	 * @return the NetworkViewRenderer that should be used to create
-	 * CyNetworkViews
+	 * @return the NetworkViewRenderer that should be used to create CyNetworkViews
 	 */
 	NetworkViewRenderer getNetworkViewRenderer(String rendererId);
 	
