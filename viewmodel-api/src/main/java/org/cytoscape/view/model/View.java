@@ -97,14 +97,13 @@ public interface View<S> extends CyIdentifiable {
 	/**
 	 * Performs the given action on this View object. Any synchronization resources, 
 	 * such as locks, are acquired at the start of the action and held until the
-	 * action is complete. Allows multiple visual properties to be set as a single atomic
-	 * action.
+	 * action is complete.
 	 * 
 	 * If this network view supports creating snapshots then the dirty flag is not
 	 * set until the action is complete.
 	 * 
 	 * <p>
-	 * The default implementation of this method assumes there are no resorces to aquire.
+	 * The default implementation of this method assumes there are no resources to acquire.
 	 * </p>
 	 * 
 	 * @param viewAction The action to be performed once on this view.
@@ -119,8 +118,7 @@ public interface View<S> extends CyIdentifiable {
 	/**
 	 * Performs the given action on this View object. Any synchronization resources, 
 	 * such as locks, are acquired at the start of the action and held until the
-	 * action is complete. Allows multiple visual properties to be set as a single atomic
-	 * action.
+	 * action is complete.
 	 * 
 	 * If this network view supports creating snapshots then the dirty flag is not
 	 * set until the action is complete.
