@@ -174,7 +174,7 @@ public abstract class AbstractFunction implements Function {
 	 * @return the return type for this function (Double.class, String.class, or Boolean.class)
 	 *          or null if the args passed in had the wrong arity or a type mismatch
 	 */
-	public final Class validateArgTypes(final Class[] argTypes) {
+	public Class validateArgTypes(final Class[] argTypes) {
 		return argTypesAreValid(argTypes) ? getReturnType() : null;
 	}
 
