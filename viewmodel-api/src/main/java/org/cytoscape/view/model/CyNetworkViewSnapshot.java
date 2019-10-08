@@ -13,7 +13,7 @@ import org.cytoscape.view.model.spacial.SpacialIndex2D;
  * {@link CyNetworkView#createSnapshot()} method. The snapshot represents
  * the state of the CyNetworkView at the moment that createSnapshot() was called.
  * Any subsequent updates to the mutable CyNetworkView will not be reflected
- * in the snapshot, making the snapshot safe to read from without locks.
+ * in the snapshot, making the snapshot safe to read without locks.
  * The intention is that a renderer can create a snapshot at the start of
  * rendering a frame and then safely read from the snapshot without the threat of
  * other threads updating the CyNetworkView while the frame is being rendered.

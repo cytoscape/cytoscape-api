@@ -2,8 +2,6 @@ package org.cytoscape.view.model;
 
 import java.util.function.Predicate;
 
-import org.cytoscape.view.model.spacial.SpacialIndex2D;
-
 
 /**
  * Used to configure the behavior of {@link CyNetworkView} objects created using
@@ -69,13 +67,13 @@ public interface CyNetworkViewConfig {
 	 */
 	public void addNonClearableVisualProperty(VisualProperty<?> vp);
 	
-	/**
-	 * If true enables tracking of node height/width.
-	 * Note the VisualLexicon used to create the CyNetworkView must be an instance of BasicVisualLexicon
-	 * in order for the SpacialIndex2D to be enabled.
-	 * 
-	 * @see CyNetworkViewSnapshot#getSpacialIndex2D()
-	 * @see SpacialIndex2D
-	 */
-	public void setEnableSpacialIndex2D(boolean enable);
+//	/**
+//	 * If true enables tracking of node height/width.
+//	 * Note the VisualLexicon used to create the CyNetworkView must be an instance of BasicVisualLexicon
+//	 * in order for the SpacialIndex2D to be enabled.
+//	 * 
+//	 * @see CyNetworkViewSnapshot#getSpacialIndex2D()
+//	 * @see SpacialIndex2D
+//	 */
+//	public void setEnableSpacialIndex2D(boolean enable);
 }

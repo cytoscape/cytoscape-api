@@ -28,25 +28,20 @@ public interface CyNetworkViewFactoryFactory {
 	 * <p>
 	 * If VisualLexicon is an instance of BasicVisualLexicon then the returned
 	 * configuration object will be pre-configured to track node and edge selection.
-	 * Selected nodes and edges can be retreived via {@link CyNetworkViewSnapshot#getTrackedNodes(Object)}
+	 * Selected nodes and edges can be retrieved via {@link CyNetworkViewSnapshot#getTrackedNodes(Object)}
 	 * and {@link CyNetworkViewSnapshot#getTrackedEdges(Object)} using the {@link CyNetworkViewConfig#SELECTED_NODES} and
 	 * {@link CyNetworkViewConfig#SELECTED_EDGES} keys respectively.
 	 * </p>
 	 */
 	CyNetworkViewConfig createConfig(VisualLexicon lexicon);
 	
-	/**
-	 * Create and return an empty config object.
-	 */
-	default CyNetworkViewConfig createConfig() {
-		return createConfig(null);
-	}
 	
 	/**
 	 * Creates a CyNetworkViewFactory.
 	 * @param config may be null, an empty config will be used if null
 	 */
 	CyNetworkViewFactory createNetworkViewFactory(VisualLexicon lexicon, String rendererID, CyNetworkViewConfig config);
+	
 	
 	/**
 	 * Creates a CyNetworkViewFactory with a default CyNetworkViewConfig that supports standard 2D rendering.

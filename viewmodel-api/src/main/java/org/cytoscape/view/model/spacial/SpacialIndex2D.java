@@ -1,7 +1,5 @@
 package org.cytoscape.view.model.spacial;
 
-import org.cytoscape.view.model.CyNetworkViewSnapshot;
-
 /**
  * Stores the location and rectangular boundary of objects 
  * (typically <code>View&lt;CyNode&gt;</code> objects)
@@ -77,22 +75,5 @@ public interface SpacialIndex2D<K> {
 	 * Returns an enumerator of all the objects stored in this SpacialIndex2D.
 	 */
 	SpacialIndex2DEnumerator<K> queryAll();
-	
-	/**
-	 * Adds a new rectangular object with the given key to this SpacialIndex2D. 
-	 * <br><br>
-	 * Note: The SpacialIndex2D returned by {@link CyNetworkViewSnapshot#getSpacialIndex2D()} is immutable
-	 * and does not support this method.
-	 */
-	void put(K key, float xMin, float yMin, float xMax, float yMax);
-	
-	/**
-	 * Deletes the new rectangular object with the given key from this SpacialIndex2D. If this
-	 * SpacialIndex2D does not contain an object with the given key then nothing happens.
-	 * <br><br>
-	 * Note: The SpacialIndex2D returned by {@link CyNetworkViewSnapshot#getSpacialIndex2D()} is immutable
-	 * and does not support this method.
-	 */
-	void delete(K key);
 	
 }
