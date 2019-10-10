@@ -82,7 +82,9 @@
 					<header>Cytoscape ${project.version} API</header>
 					<bottom>Copyright 2011-2015 Cytoscape Consortium. All rights reserved.</bottom>
 					<maxmemory>2g</maxmemory>
+					
 					<additionalJOption>-J-Xmx2g</additionalJOption>
+					<additionalOptions>--frames</additionalOptions>
 					<detectLinks>true</detectLinks>
 					<includeDependencySources>true</includeDependencySources>
 					<dependencySourceIncludes>
