@@ -110,6 +110,11 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * Indicates whether to use a checkbox menu item.
 	 */
 	protected boolean useCheckBoxMenuItem;
+	
+	/**
+	 * Indicates whether to use a toggle button in the tool bar.
+	 */
+	protected boolean useToggleButton;
 
 	/**
 	 * Indicates whether the action is in the toolbar.
@@ -140,7 +145,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * Indicates whether a toolbar separator should be inserted after this item
 	 */
 	protected boolean insertToolbarSeparatorAfter;
-
+	
 	/**
 	 * The name of the action.
 	 */
@@ -572,6 +577,11 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	public boolean useCheckBoxMenuItem() {
 		return useCheckBoxMenuItem;
 	}
+	
+	@Override
+	public boolean useToggleButton() {
+		return useToggleButton;
+	}
 
 	/**
 	 * This method can be used at your discretion, but otherwise does nothing.
@@ -650,7 +660,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	public void updateEnableState() {
 		enabler.updateEnableState();
 	}
-
+	
 	/**
  	 * Return the config props. 
  	 */

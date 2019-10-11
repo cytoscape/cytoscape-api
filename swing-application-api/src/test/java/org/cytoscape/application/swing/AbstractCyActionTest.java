@@ -1,12 +1,27 @@
 package org.cytoscape.application.swing;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.swing.KeyStroke;
+
+import org.cytoscape.application.CyApplicationManager;
+import org.cytoscape.view.model.CyNetworkViewManager;
+import org.cytoscape.work.TaskFactory;
+import org.junit.Test;
+import org.mockito.Mock;
+
 /*
  * #%L
  * Cytoscape Swing Application API (swing-application-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2019 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -23,21 +38,6 @@ package org.cytoscape.application.swing;
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
  */
-
-import static org.junit.Assert.*;
-
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.swing.KeyStroke;
-
-import org.cytoscape.application.CyApplicationManager;
-import org.cytoscape.view.model.CyNetworkViewManager;
-import org.cytoscape.work.TaskFactory;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-import org.mockito.Mock;
 
 public abstract class AbstractCyActionTest {
 	
@@ -100,6 +100,11 @@ public abstract class AbstractCyActionTest {
 	@Test
 	public void testUseCheckBoxMenuItem() {
 		assertFalse(action.useCheckBoxMenuItem());
+	}
+	
+	@Test
+	public void testUseToggleButton() {
+		assertFalse(action.useToggleButton);
 	}
 
 	@Test

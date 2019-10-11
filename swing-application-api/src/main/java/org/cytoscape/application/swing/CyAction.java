@@ -107,9 +107,22 @@ public interface CyAction extends Action, MenuListener, PopupMenuListener {
 
 	/** 
 	 * Returns whether or not a checkbox menu item should be used.
+	 * Use {@link #putValue(String, Object)} to set the value of {@link Action#SELECTED_KEY} to true
+	 * in order to have the menu item checked.
 	 * @return whether or not a checkbox menu item should be used.
 	 */
 	boolean useCheckBoxMenuItem();
+	
+	/**
+	 * Returns whether or not a toggle button should be used in the tool bar.
+	 * Only valid when {@link #setIsInToolBar(boolean)} is also set to true.
+	 * Use {@link #putValue(String, Object)} to set the value of {@link Action#SELECTED_KEY} to true
+	 * in order to have the toggle button selected.
+	 * @return true toggle button should be used.
+	 */
+	default boolean useToggleButton() {
+		return false;
+	}
 
 	/**
 	 * Forces the action to update its enable state based on the criteria defined for the action.
@@ -148,7 +161,7 @@ public interface CyAction extends Action, MenuListener, PopupMenuListener {
 	void setMenuGravity(float f);
 
 	/**
- 	 * was defined in AbstractCyAction, but not in this interface
+ 	 * Was defined in AbstractCyAction, but not in this interface
  	 */
 	void setAcceleratorKeyStroke(KeyStroke ks);
 
