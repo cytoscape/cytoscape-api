@@ -24,6 +24,18 @@ public interface CyNetworkViewConfig {
 	 */
 	public static final Object SELECTED_EDGES = "SELECTED_EDGES";
 	
+
+	/**
+	 * Key used to get a list of hidden nodes from the 
+	 * {@link CyNetworkViewSnapshot#getTrackedNodes(Object)} method.
+	 */
+	public static final Object HIDDEN_NODES = "HIDDEN_NODES";
+	
+	/**
+	 * Key used to get a list of hidden edges from the 
+	 * {@link CyNetworkViewSnapshot#getTrackedEdges(Object)} method.
+	 */
+	public static final Object HIDDEN_EDGES = "HIDDEN_EDGES";
 	
 	/**
 	 * Turns on tracking of the given VisualProperty such that nodes/edge that have the VisualProperty set 
@@ -66,14 +78,4 @@ public interface CyNetworkViewConfig {
 	 * are cleared.
 	 */
 	public void addNonClearableVisualProperty(VisualProperty<?> vp);
-	
-//	/**
-//	 * If true enables tracking of node height/width.
-//	 * Note the VisualLexicon used to create the CyNetworkView must be an instance of BasicVisualLexicon
-//	 * in order for the SpacialIndex2D to be enabled.
-//	 * 
-//	 * @see CyNetworkViewSnapshot#getSpacialIndex2D()
-//	 * @see SpacialIndex2D
-//	 */
-//	public void setEnableSpacialIndex2D(boolean enable);
 }

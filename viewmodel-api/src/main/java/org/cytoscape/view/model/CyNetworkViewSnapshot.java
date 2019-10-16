@@ -69,7 +69,8 @@ public interface CyNetworkViewSnapshot extends CyNetworkView {
 	
 	/**
 	 * Returns nodes that were configured to have their VisualProperties tracked using 
-	 * {@link CyNetworkViewConfig#addTrackedVisualProperty(Object, VisualProperty, java.util.function.Predicate)}.
+	 * {@link CyNetworkViewConfig#addTrackedVisualProperty(Object, VisualProperty, java.util.function.Predicate)}
+	 * and pass the predicate.
 	 * <br><br>
 	 * If using the default configuration then selected nodes can be retrieved like in this example:
 	 * <pre>
@@ -81,8 +82,16 @@ public interface CyNetworkViewSnapshot extends CyNetworkView {
 	Collection<View<CyNode>> getTrackedNodes(Object key);
 	
 	/**
-	 * Returns edges that were configured to have their VisualProperties tracked using 
+	 * Returns the number of nodes that are being tracked using the given key. This is the number of nodes that pass
+	 * the predicate that was given to  
 	 * {@link CyNetworkViewConfig#addTrackedVisualProperty(Object, VisualProperty, java.util.function.Predicate)}.
+	 */
+	int getTrackedNodeCount(Object key);
+	
+	/**
+	 * Returns edges that were configured to have their VisualProperties tracked using 
+	 * {@link CyNetworkViewConfig#addTrackedVisualProperty(Object, VisualProperty, java.util.function.Predicate)}
+	 * and pass the predicate.
 	 * <br><br>
 	 * If using the default configuration then selected edges can be retrieved like in this example:
 	 * <pre>
@@ -92,6 +101,13 @@ public interface CyNetworkViewSnapshot extends CyNetworkView {
 	 * @param key The same key object that was passed to CyNetworkViewConfig.addTrackedVisualProperty()
 	 */
 	Collection<View<CyEdge>> getTrackedEdges(Object key);
+	
+	/**
+	 * Returns the number of edges that are being tracked using the given key. This is the number of edges that pass
+	 * the predicate that was given to  
+	 * {@link CyNetworkViewConfig#addTrackedVisualProperty(Object, VisualProperty, java.util.function.Predicate)}.
+	 */
+	int getTrackedEdgeCount(Object key);
 	
 	/**
 	 * Returns an Iterable that contains the edges that are adjacent (connected) to the given node.
@@ -118,4 +134,19 @@ public interface CyNetworkViewSnapshot extends CyNetworkView {
 	 * using {@link CyNetworkView#setViewDefault(VisualProperty, Object)}.
 	 */
 	<T> T getViewDefault(VisualProperty<T> vp);
+
+	/**
+	 * Returns true if nodes were configured to have their VisualProperties tracked using the given key.
+	 * 
+	 * @param key The same key object that was passed to CyNetworkViewConfig.addTrackedVisualProperty()
+	 */
+	boolean isTrackedNodeKey(Object key);
+	
+	/**
+	 * Returns true if edges were configured to have their VisualProperties tracked using the given key.
+	 * 
+	 * @param key The same key object that was passed to CyNetworkViewConfig.addTrackedVisualProperty()
+	 */
+	boolean isTrackedEdgeKey(Object key);
+	
 }
