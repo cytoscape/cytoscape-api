@@ -109,6 +109,11 @@ public class CyColumnSelector extends JPanel {
 			this.selectedColumnNames.addAll(selectedColumnNames);
 		}
 		
+		var nameComparator = Comparator.comparing(CyColumn::getNameOnly, Collator.getInstance(Locale.getDefault()));
+		for(List<CyColumn> namespaceColumns : namespaces.values()) {
+			namespaceColumns.sort(nameComparator);
+		}
+		
 		init();
 	}
 	
