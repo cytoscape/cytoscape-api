@@ -6,6 +6,10 @@ package org.cytoscape.view.model.spacial;
  * in 2D space. Coordinates are stored as floats.
  *
  * @param <K> The key type.
+ * 
+ * @CyAPI.Spi.Interface
+ * @CyAPI.InModule viewmodel-api
+ * @since 3.8
  */
 public interface SpacialIndex2D<K> {
 

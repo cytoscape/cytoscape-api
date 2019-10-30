@@ -42,6 +42,10 @@ import org.cytoscape.view.model.spacial.SpacialIndex2D;
  * 
  * @see CyNetworkView#createSnapshot()
  * @see CyNetworkView#isDirty() 
+ * 
+ * @CyAPI.Spi.Interface
+ * @CyAPI.InModule viewmodel-api
+ * @since 3.8
  */
 public interface CyNetworkViewSnapshot extends CyNetworkView {
 	
@@ -56,6 +60,37 @@ public interface CyNetworkViewSnapshot extends CyNetworkView {
 	 * @see CyNetworkViewConfig#setEnableSpacialIndex2D(boolean)
 	 */
 	SpacialIndex2D<Long> getSpacialIndex2D();
+	
+	/**
+	 * Returns the immutable node View for the given view SUID.
+	 * @param suid SUID of the node view
+	 * @return View for the given node object.
+	 */
+	View<CyNode> getNodeView(long suid);
+	
+	/**
+	 * Returns the mutable node View for the given view SUID, or null if the node
+	 * view no longer exists in the mutable network view.
+	 * @param suid SUID of the node view
+	 * @return View for the given node object, or null
+	 */
+	View<CyNode> getMutableNodeView(long suid);
+	
+	/**
+	 * Returns the immutable edge View for the given view SUID.
+	 * @param suid SUID of the edge view
+	 * @return View for the given edge object.
+	 */
+	View<CyEdge> getEdgeView(long suid);
+
+	/**
+	 * Returns the mutable edge View for the given view SUID, or null if the edge
+	 * view no longer exists in the mutable network view.
+	 * @param suid SUID of the edge view
+	 * @return View for the given edge object.
+	 */
+	View<CyEdge> getMutableEdgeView(long suid);
+
 	
 	/**
 	 * Returns the number of nodes in the network view.

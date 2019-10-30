@@ -5,6 +5,9 @@ import org.cytoscape.model.CyEdge;
 /**
  * Contains additional info about a <code>View&lt;CyNode&gt;</code> obtained from a {@link CyNetworkViewSnapshot}.
  *
+ * @CyAPI.Spi.Interface
+ * @CyAPI.InModule viewmodel-api
+ * @since 3.8
  */ 
 public interface SnapshotNodeInfo {
 

@@ -17,6 +17,8 @@ package org.cytoscape.view.model;
  * 
  * @CyAPI.Api.Interface
  * @CyAPI.InModule viewmodel-api
+ * 
+ * @since 3.8
  */
 public interface CyNetworkViewFactoryFactory {
 	

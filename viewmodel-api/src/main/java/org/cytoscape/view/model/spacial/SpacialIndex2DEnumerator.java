@@ -27,6 +27,10 @@ package org.cytoscape.view.model.spacial;
  * 
  * @see SpacialIndex2D#queryOverlap(float, float, float, float)
  * @see SpacialIndex2D#queryAll()
+ * 
+ * @CyAPI.Spi.Interface
+ * @CyAPI.InModule viewmodel-api
+ * @since 3.8
  */
 public interface SpacialIndex2DEnumerator<K> {
 

@@ -26,7 +26,7 @@ import org.cytoscape.model.CyNode;
  * <i>after</i> all the nodes and edges are created.
  * </p>
  * 
- * @CyAPI.Api.Interface
+ * @CyAPI.Spi.Interface
  * @CyAPI.InModule viewmodel-api
  */
 public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
@@ -38,17 +38,6 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	 * @return View for the given node object.
 	 */
 	View<CyNode> getNodeView(CyNode node);
-
-	/**
-	 * Returns the node View for the given view SUID (optional operation).
-	 * @param suid SUID of the node view
-	 * @return View for the given node object.
-	 * @throws UnsupportedOperationException if this method
-	 *   is not supported by this network view
-	 */
-	default View<CyNode> getNodeView(long suid) {
-		throw new UnsupportedOperationException();
-	}
 	
 	/**
 	 * Returns a list of Views for all CyNodes in the network.
@@ -59,8 +48,8 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	
 	/**
 	 * Returns an Iterable for all node views in the network.
-	 * Note, this operation may have better performance than 
-	 * {@link CyNetworkView#getNodeViews()} but this is not guaranteed.
+	 * This operation may have better performance than 
+	 * {@link CyNetworkView#getNodeViews()} but that is not guaranteed.
 	 */
 	default Iterable<View<CyNode>> getNodeViewsIterable() {
 		return getNodeViews();
@@ -74,17 +63,6 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	View<CyEdge> getEdgeView(CyEdge edge);
 
 	/**
-	 * Returns the edge View for the given view SUID (optional operation).
-	 * @param suid SUID of the edge view
-	 * @return View for the given edge object.
-	 * @throws UnsupportedOperationException if this method
-	 *   is not supported by this network view
-	 */
-	default View<CyEdge> getEdgeView(long suid) {
-		throw new UnsupportedOperationException();
-	}
-	
-	/**
 	 * Returns a list of Views for all CyEdges in the network.
 	 * 
 	 * @return All edge views in this network.
@@ -93,8 +71,8 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	
 	/**
 	 * Returns an Iterable for all edge views in the network.
-	 * Note, this operation may have better performance than 
-	 * {@link CyNetworkView#getEdgeViews()} but this is not guaranteed.
+	 * This operation may have better performance than 
+	 * {@link CyNetworkView#getEdgeViews()} but that is not guaranteed.
 	 */
 	default Iterable<View<CyEdge>> getEdgeViewsIterable() {
 		return getEdgeViews();
@@ -111,30 +89,39 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	 * Utility method to fit content to the presentation container (usually a Swing Window).
 	 * This fires event to the presentation layer for updating presentation.
 	 */
-	default void fitContent() { }
+	void fitContent();
 	
 	
 	/**
 	 * Utility method to fit selected graph objects to the presentation container.
 	 * This fires event to the presentation layer for updating presentation.
 	 */
-	default void fitSelected() { }
+	void fitSelected();
 	
 	
 	/**
 	 * Cascading event for the presentation layer for updating presentation.
 	 */
-	default void updateView() { }
+	void updateView();
 	
 	/**
-	  * Returns the ID of the renderer that must be used to render this view.
-	  * 
-	  * @see org.cytoscape.application.NetworkViewRenderer#getId()
-	  * @see org.cytoscape.application.CyApplicationManager#getNetworkViewRenderer(rendererId)
-	  */
+	 * Returns the ID of the renderer that must be used to render this view.
+	 * 
+	 * @see org.cytoscape.application.NetworkViewRenderer#getId()
+	 * @see org.cytoscape.application.CyApplicationManager#getNetworkViewRenderer(rendererId)
+	 */
 	String getRendererId();
 	
+	/**
+	 * Sets the default value to be used for the specified visual property.
+	 * @param <T> The type of the visual property value. 
+	 * @param <V> The default value for the visual property, which must extend T. 
+	 * @param vp The visual property whose default value we're specifying.
+	 * @param defaultValue The default value to be used for this visual property for this view. 
+	 */
+	 <T, V extends T> void setViewDefault(final VisualProperty<? extends T> vp, final V defaultValue);
 	
+	 
 	/**
 	 * Returns true if this network view supports creating snapshots,
 	 * the createSnapshot() method will not throw an exception.
@@ -164,32 +151,22 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	default boolean isDirty() {
 		return false;
 	}
-	 
+	
 	/**
-	 * Sets the default value to be used for the specified visual property.
-	 * @param <T> The type of the visual property value. 
-	 * @param <V> The default value for the visual property, which must extend T. 
-	 * @param vp The visual property whose default value we're specifying.
-	 * @param defaultValue The default value to be used for this visual property for this view. 
+	 * Adds a CyNetworkViewListener (optional operation).
+	 * @throws UnsupportedOperationException if this method
+	 *   is not supported by this network view
 	 */
-	 <T, V extends T> void setViewDefault(final VisualProperty<? extends T> vp, final V defaultValue);
-
-	 
-	 /**
-	  * Adds a CyNetworkViewListener (optional operation).
-	  * @throws UnsupportedOperationException if this method
-	  *   is not supported by this network view
-	  */
-	 default void addNetworkViewListener(CyNetworkViewListener listener) { 
+	default void addNetworkViewListener(CyNetworkViewListener listener) { 
 		 throw new UnsupportedOperationException();
 	 }
-	 
-	 /**
-	  * Removes a CyNetworkViewListener.
-	  * @throws UnsupportedOperationException if this method
-	  *   is not supported by this network view
-	  */
-	 default void removeNetworkViewListener(CyNetworkViewListener listener) {
+	
+	/**
+	 * Removes a CyNetworkViewListener.
+	 * @throws UnsupportedOperationException if this method
+	 *   is not supported by this network view
+	 */
+	default void removeNetworkViewListener(CyNetworkViewListener listener) {
 		 throw new UnsupportedOperationException();
 	 }
 
