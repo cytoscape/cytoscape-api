@@ -9,6 +9,7 @@ import java.util.function.Predicate;
  *
  * @CyAPI.Api.Interface
  * @CyAPI.InModule viewmodel-api
+ * @since 3.8
  */
 public interface CyNetworkViewConfig {
 	
