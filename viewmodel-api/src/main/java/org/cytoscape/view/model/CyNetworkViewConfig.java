@@ -12,32 +12,7 @@ import java.util.function.Predicate;
  * @since 3.8
  */
 public interface CyNetworkViewConfig {
-	
-	/**
-	 * Key used to get a list of selected nodes from the 
-	 * {@link CyNetworkViewSnapshot#getTrackedNodes(Object)} method.
-	 */
-	public static final Object SELECTED_NODES = "SELECTED_NODES";
-	
-	/**
-	 * Key used to get a list of selected edges from the 
-	 * {@link CyNetworkViewSnapshot#getTrackedEdges(Object)} method.
-	 */
-	public static final Object SELECTED_EDGES = "SELECTED_EDGES";
-	
-
-	/**
-	 * Key used to get a list of hidden nodes from the 
-	 * {@link CyNetworkViewSnapshot#getTrackedNodes(Object)} method.
-	 */
-	public static final Object HIDDEN_NODES = "HIDDEN_NODES";
-	
-	/**
-	 * Key used to get a list of hidden edges from the 
-	 * {@link CyNetworkViewSnapshot#getTrackedEdges(Object)} method.
-	 */
-	public static final Object HIDDEN_EDGES = "HIDDEN_EDGES";
-	
+		
 	/**
 	 * Turns on tracking of the given VisualProperty such that nodes/edge that have the VisualProperty set 
 	 * to a value that satisfies the given Predicate are returned by the 
