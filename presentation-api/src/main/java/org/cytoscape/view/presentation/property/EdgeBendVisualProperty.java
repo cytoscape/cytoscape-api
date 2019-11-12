@@ -126,5 +126,11 @@ public class EdgeBendVisualProperty extends AbstractVisualProperty<Bend> {
 		public String getSerializableString() {
 			return null;
 		}
+		
+		@Override
+		public String toString() {
+			// This is visible in the vizmap tooltip when hovering over the empty bend icon.
+			return "None";
+		}
 	}
 }
