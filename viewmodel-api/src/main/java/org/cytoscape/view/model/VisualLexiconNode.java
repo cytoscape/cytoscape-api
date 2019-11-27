@@ -101,19 +101,21 @@ public final class VisualLexiconNode implements Comparable<VisualLexiconNode> {
 	 * Compare by display name of this Visual Property.
 	 */
 	@Override
-	public int compareTo(final VisualLexiconNode other) {
-		return this.getVisualProperty().getDisplayName().compareTo(other.getVisualProperty().getDisplayName());
+	public int compareTo(VisualLexiconNode other) {
+		var n1 =  this.getVisualProperty().getDisplayName();
+		var n2 = other.getVisualProperty().getDisplayName();
+		return n1.compareTo(n2);
 	}
 	
 	
 	/**
-	 * Visitor pattern. The given visitor function will get applied to this
-	 * node and all its children recursively.
+	 * The given visitor function will be applied to this node and all its children recursively.
+	 * @since 3.8
 	 */
-	public void visit(Consumer<VisualLexiconNode> visitor) {
+	public void visitDescendants(Consumer<VisualLexiconNode> visitor) {
 		visitor.accept(this);
-		for(VisualLexiconNode child : getChildren()) {
-			child.visit(visitor);
+		for(var child : getChildren()) {
+			child.visitDescendants(visitor);
 		}
 	}
 
