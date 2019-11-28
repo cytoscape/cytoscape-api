@@ -143,12 +143,12 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	/**
 	 * If this network view supports creating snapshots using the 
 	 * {@link CyNetworkView#createSnapshot()} method, then this method will
-	 * return true if the state of the network has changed since creating the last
-	 * snapshot.
-	 * If this network view does not support creating snapshots then this method
-	 * will always return false.
+	 * return true if the state of the network has changed since last clearing the dirty flag.
+	 * 
+	 * If this network view does not support creating snapshots then this method will always return false.
+	 * @param clear If true then the dirty flag will be set to false.
 	 */
-	default boolean isDirty() {
+	default boolean isDirty(boolean clear) {
 		return false;
 	}
 	
