@@ -125,6 +125,7 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	/**
 	 * Returns true if this network view supports creating snapshots,
 	 * the createSnapshot() method will not throw an exception.
+	 * @since 3.8
 	 */
 	default boolean supportsSnapshots() {
 		return false;
@@ -133,8 +134,8 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	/**
 	 * Returns an immutable snapshot of this network view (optional operation).
 	 * 
-	 * @throws UnsupportedOperationException if creating a snapshot 
-	 *   is not supported by this network view
+	 * @throws UnsupportedOperationException if creating a snapshot is not supported by this network view
+	 * @since 3.8
 	 */
 	default CyNetworkViewSnapshot createSnapshot() {
 		throw new UnsupportedOperationException();
@@ -143,19 +144,20 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	/**
 	 * If this network view supports creating snapshots using the 
 	 * {@link CyNetworkView#createSnapshot()} method, then this method will
-	 * return true if the state of the network has changed since creating the last
-	 * snapshot.
-	 * If this network view does not support creating snapshots then this method
-	 * will always return false.
+	 * return true if the state of the network has changed since last clearing the dirty flag.
+	 * 
+	 * If this network view does not support creating snapshots then this method will always return false.
+	 * @param clear If true then the dirty flag will be set to false.
+	 * @since 3.8
 	 */
-	default boolean isDirty() {
+	default boolean isDirty(boolean clear) {
 		return false;
 	}
 	
 	/**
 	 * Adds a CyNetworkViewListener (optional operation).
-	 * @throws UnsupportedOperationException if this method
-	 *   is not supported by this network view
+	 * @throws UnsupportedOperationException if this method is not supported by this network view
+	 * @since 3.8
 	 */
 	default void addNetworkViewListener(CyNetworkViewListener listener) { 
 		 throw new UnsupportedOperationException();
@@ -163,8 +165,8 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	
 	/**
 	 * Removes a CyNetworkViewListener.
-	 * @throws UnsupportedOperationException if this method
-	 *   is not supported by this network view
+	 * @throws UnsupportedOperationException if this method is not supported by this network view
+	 * @since 3.8
 	 */
 	default void removeNetworkViewListener(CyNetworkViewListener listener) {
 		 throw new UnsupportedOperationException();
