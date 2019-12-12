@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.Executors;
+import java.util.concurrent.RejectedExecutionException;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -99,6 +100,7 @@ public class DebounceTimer {
 	 * </pre>
 	 * 
 	 * @param key A key object to associate with the runnable, each key object will get its own timer.
+	 * @throws RejectedExecutionException if this timer has been shutdown
 	 * @throws NullPointerException if key or runnable are null
 	 */
 	public synchronized void debounce(Object key, Runnable runnable) {
