@@ -167,19 +167,19 @@ public final class EquationUtil {
 	 *  @param eqnType the equation type
 	 *  @return true if the types are compatible, false if incompatible
 	 */
-	public static boolean eqnTypeIsCompatible(final Class<?> columnType, final Class<?> listElementType,
-			final Class<?> eqnType) {
+	public static boolean eqnTypeIsCompatible(final Class<?> columnType, final Class<?> listElementType, final Class<?> eqnType) {
 		if (columnType == eqnType)
 			return true;
 		if (columnType == String.class) // Anything can be trivially converted to a string.
 			return true;
 		if (columnType == Integer.class && (eqnType == Long.class || eqnType == Double.class))
 			return true;
+		if (columnType == Long.class && (eqnType == Integer.class || eqnType == Double.class))
+			return true;
 		if (columnType == Double.class && eqnType == Long.class)
 			return true;
 		if (columnType == Boolean.class && (eqnType == Long.class || eqnType == Double.class))
 			return true;
-
 		if (columnType != List.class || !columnType.isAssignableFrom(eqnType))
 			return false;
 
