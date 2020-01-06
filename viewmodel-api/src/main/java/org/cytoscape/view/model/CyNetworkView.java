@@ -150,7 +150,7 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	 * @param clear If true then the dirty flag will be set to false.
 	 * @since 3.8
 	 */
-	default boolean isDirty(boolean clear) {
+	default boolean dirty(boolean clear) {
 		return false;
 	}
 	

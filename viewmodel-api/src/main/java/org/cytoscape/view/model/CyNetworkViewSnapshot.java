@@ -57,7 +57,7 @@ public interface CyNetworkViewSnapshot extends CyNetworkView {
 	/**
 	 * Returns an immutable SpacialIndex2D object that can be used to query the bounds
 	 * of nodes in the network view, or null if the SpacialIndex has been turned off.
-	 * @see CyNetworkViewConfig#setEnableSpacialIndex2D(boolean)
+	 * @see CyNetworkViewFactoryConfig#setEnableSpacialIndex2D(boolean)
 	 */
 	SpacialIndex2D<Long> getSpacialIndex2D();
 	
@@ -104,7 +104,7 @@ public interface CyNetworkViewSnapshot extends CyNetworkView {
 	
 	/**
 	 * Returns nodes that were configured to have their VisualProperties tracked using 
-	 * {@link CyNetworkViewConfig#addTrackedVisualProperty(Object, VisualProperty, java.util.function.Predicate)}
+	 * {@link CyNetworkViewFactoryConfig#addTrackedVisualProperty(Object, VisualProperty, java.util.function.Predicate)}
 	 * and pass the predicate.
 	 * <br><br>
 	 * If using the default configuration then selected nodes can be retrieved like in this example:
@@ -119,13 +119,13 @@ public interface CyNetworkViewSnapshot extends CyNetworkView {
 	/**
 	 * Returns the number of nodes that are being tracked using the given key. This is the number of nodes that pass
 	 * the predicate that was given to  
-	 * {@link CyNetworkViewConfig#addTrackedVisualProperty(Object, VisualProperty, java.util.function.Predicate)}.
+	 * {@link CyNetworkViewFactoryConfig#addTrackedVisualProperty(Object, VisualProperty, java.util.function.Predicate)}.
 	 */
 	int getTrackedNodeCount(Object key);
 	
 	/**
 	 * Returns edges that were configured to have their VisualProperties tracked using 
-	 * {@link CyNetworkViewConfig#addTrackedVisualProperty(Object, VisualProperty, java.util.function.Predicate)}
+	 * {@link CyNetworkViewFactoryConfig#addTrackedVisualProperty(Object, VisualProperty, java.util.function.Predicate)}
 	 * and pass the predicate.
 	 * <br><br>
 	 * If using the default configuration then selected edges can be retrieved like in this example:
@@ -140,7 +140,7 @@ public interface CyNetworkViewSnapshot extends CyNetworkView {
 	/**
 	 * Returns the number of edges that are being tracked using the given key. This is the number of edges that pass
 	 * the predicate that was given to  
-	 * {@link CyNetworkViewConfig#addTrackedVisualProperty(Object, VisualProperty, java.util.function.Predicate)}.
+	 * {@link CyNetworkViewFactoryConfig#addTrackedVisualProperty(Object, VisualProperty, java.util.function.Predicate)}.
 	 */
 	int getTrackedEdgeCount(Object key);
 	

@@ -3,7 +3,7 @@ package org.cytoscape.view.model;
 
 /**
  * Callback interface for use with {@link CyNetworkView} instances that are created
- * from {@link CyNetworkViewFactoryFactory} factories.
+ * from {@link CyNetworkViewFactoryProvider} factories.
  * 
  * @see CyNetworkView#addNetworkViewListener(CyNetworkViewListener)
  * 

@@ -11,7 +11,7 @@ import java.util.function.Predicate;
  * @CyAPI.InModule viewmodel-api
  * @since 3.8
  */
-public interface CyNetworkViewConfig {
+public interface CyNetworkViewFactoryConfig {
 		
 	/**
 	 * Turns on tracking of the given VisualProperty such that nodes/edge that have the VisualProperty set 
