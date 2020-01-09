@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.font.LineMetrics;
 import java.awt.geom.Rectangle2D;
+import java.awt.image.BufferedImage;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
@@ -127,12 +128,44 @@ public class TextIcon implements Icon {
 	
 	@Override
 	public void paintIcon(Component c, Graphics g, int x, int y) {
-		Graphics2D g2d = (Graphics2D) g.create();
-        g2d.setRenderingHints(new RenderingHints(RenderingHints.KEY_TEXT_ANTIALIASING,
-				RenderingHints.VALUE_TEXT_ANTIALIAS_ON));
+		// Draw to an upscaled image first, to prevent the misaligned icon layers that happens
+		// when drawing directly on the component's Graphics on Java 11 and low density monitors
+        var scale = 2;
+        var img = createImage(c, scale);
+        
+        // Now draw the image to the component (it has to be rescaled back to the original size)
+        var g2d = (Graphics2D) g.create();
+		g2d.setRenderingHints(
+				new RenderingHints(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR));
+        
+		g2d.scale(1.0 / scale, 1.0 / scale);
+        g2d.translate(x, y);
+        g2d.drawImage(img, x, y, c);
+        
+        g2d.dispose();
+	}
+	
+	@Override
+	public int getIconWidth() {
+		return width;
+	}
+
+	@Override
+	public int getIconHeight() {
+		return height;
+	}
+	
+	private BufferedImage createImage(Component c, int scale) {
+		var w = width * scale;
+		var h = height * scale;
+		var img = new BufferedImage(w, h * scale, BufferedImage.TYPE_INT_ARGB);
+		
+		var g2d = img.createGraphics();
+		g2d.setRenderingHints(
+				new RenderingHints(RenderingHints.KEY_TEXT_ANTIALIASING, RenderingHints.VALUE_TEXT_ANTIALIAS_ON));
         
         g2d.setPaint(TRANSPARENT_COLOR);
-        g2d.fillRect(x, y, width, height);
+        g2d.fillRect(0, 0, w, h);
         
 		if (texts != null && fonts != null) {
 			Font f = null;
@@ -152,6 +185,8 @@ public class TextIcon implements Icon {
 				if (txt == null || f == null)
 					continue;
 
+				f = f.deriveFont(f.getSize2D() * scale);
+				
 				if (colors != null && colors.length > i)
 					fg = colors[i];
 
@@ -167,24 +202,14 @@ public class TextIcon implements Icon {
 
 				g2d.setPaint(fg);
 				g2d.setFont(f);
-				drawText(txt, f, g2d, c, x, y);
+				drawText(txt, f, g2d, 0, 0, scale);
 			}
         }
         
-        g2d.dispose();
+        return img;
 	}
 	
-	@Override
-	public int getIconWidth() {
-		return width;
-	}
-
-	@Override
-	public int getIconHeight() {
-		return height;
-	}
-	
-	private void drawText(String text, Font font, Graphics g, Component c, int x, int y) {
+	private void drawText(String text, Font font, Graphics g, int x, int y, int scale) {
 		// IMPORTANT:
 		// For height and ascent, we now use LineMetrics, because the values returned by FontMetrics
 		// have changed in Java 11 (maybe since Java 9?), and are just incorrect
@@ -197,8 +222,10 @@ public class TextIcon implements Icon {
 		int textWidth = (int) rect.getWidth();
 
 		// Center text horizontally and vertically
-		int xx = x + Math.round((getIconWidth() - textWidth) / 2.0f);
-		int yy = y + Math.round(((getIconHeight() - textHeight) / 2.0f) + lm.getAscent());
+		var w = width * scale;
+		var h = height * scale;
+		int xx = x + Math.round((w - textWidth) / 2.0f);
+		int yy = y + Math.round(((h - textHeight) / 2.0f) + lm.getAscent());
 		
 		g.drawString(text, xx, yy);
 	}
