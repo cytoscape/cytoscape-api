@@ -96,4 +96,15 @@ public abstract class AbstractTaskManager<T,C> implements TaskManager<T,C> {
 	public void setExecutionContext(C context) {
 		executionContext = context;
 	}
+
+	/**
+	 * Returns the {@link TunableMutator} for this {@link TaskManager} or
+	 * <b>null</b> if there is none.
+	 *
+	 * @return the {@link TunableMutator} or <b>none</b>
+	 */
+	@Override
+	public TunableMutator<?,?> getTunableMutator() {
+		return tunableMutator;
+	}
 }

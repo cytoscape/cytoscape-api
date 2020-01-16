@@ -75,4 +75,12 @@ public interface TaskManager<T,C> {
 	 * @param observer The {@link TaskObserver} that will be called with the results of the {@link ObservableTask}s.
 	 */
 	void execute(TaskIterator iterator, TaskObserver observer);
+
+	/**
+	 * This method returns the {@link TunableMutator} that is being used by this TaskManager.
+	 * 
+	 * @return the {@link TunableMutator} being used by the TaskManager, or <b>null</b>
+	 * if none is being used.
+	 */
+	default TunableMutator<?,?> getTunableMutator() { return null; }
 }

@@ -48,7 +48,8 @@ public class AbstractTaskManagerTest {
 			super(tunableMutator);
 		}
 
-		TunableMutator getTunableMutator() {
+		@Override
+		public TunableMutator getTunableMutator() {
 			return this.tunableMutator;
 		}
 
