@@ -57,7 +57,9 @@ public interface Annotation {
 
 	/**
 	 * Arg map key to initialize the zoom value for this annotation
+	 * @deprecated The zoom should remain at the default of 1.0.
 	 */
+	@Deprecated
 	public static final String ZOOM = "zoom";
 
 	/**
@@ -138,6 +140,7 @@ public interface Annotation {
 	 *
 	 * @return the current zoom value
 	 */
+	@Deprecated
 	public double getZoom();
 
 	/**
@@ -145,6 +148,7 @@ public interface Annotation {
 	 *
 	 * @param zoom the zoom to set
 	 */
+	@Deprecated
 	public void setZoom(double zoom);
 
 
@@ -153,6 +157,7 @@ public interface Annotation {
 	 *
 	 * @return the current specific zoom for this annotation
 	 */
+	@Deprecated
 	public double getSpecificZoom();
 
 	/**
@@ -160,6 +165,7 @@ public interface Annotation {
 	 *
 	 * @param zoom the specific zoom for this annotation
 	 */
+	@Deprecated
 	public void setSpecificZoom(double zoom);
 
 	/**
