@@ -30,7 +30,7 @@
 			<version>1.8.1</version>
 			<scope>test</scope>
 		</dependency>
-		<!--  
+		<!--
 		<dependency>
 			<groupId>com.sun</groupId>
 			<artifactId>tools</artifactId>
@@ -43,13 +43,13 @@
 
 	<distributionManagement>
 		<repository>
-			<id>releases</id>
-			<name>Internal Releases</name>
+			<id>cytoscape_releases</id>
+			<name>Cytoscape Releases</name>
 			<url>http://nrnb-nexus.ucsd.edu/repository/cytoscape_releases/</url>
 		</repository>
 		<snapshotRepository>
-			<id>snapshots</id>
-			<name>Internal Snapshots</name>
+			<id>cytoscape_snapshots</id>
+			<name>Cytoscape Snapshots</name>
 			<url>http://nrnb-nexus.ucsd.edu/repository/cytoscape_snapshots/</url>
 		</snapshotRepository>
 	</distributionManagement>
