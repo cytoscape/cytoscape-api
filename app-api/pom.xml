@@ -65,7 +65,7 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-javadoc-plugin</artifactId>
@@ -77,12 +77,12 @@
 					<!-- <failOnError>false</failOnError> -->
 					<encoding>UTF-8</encoding>
 					<locale>en</locale>
-					<javadocVersion>[11.0,</javadocVersion>		
+					<javadocVersion>[11.0,</javadocVersion>
 					<footer>Cytoscape ${project.version} API</footer>
 					<header>Cytoscape ${project.version} API</header>
 					<bottom>Copyright 2011-2015 Cytoscape Consortium. All rights reserved.</bottom>
 					<maxmemory>2g</maxmemory>
-					
+
 					<additionalJOption>-J-Xmx2g</additionalJOption>
 					<additionalOptions>--frames</additionalOptions>
 					<detectLinks>true</detectLinks>
@@ -102,11 +102,11 @@
 					</execution>
 				</executions>
 			</plugin>
-			
+
 		</plugins>
 	</build>
 
-	<!-- These dependencies are meant to capture the entire public Cytoscape 
+	<!-- These dependencies are meant to capture the entire public Cytoscape
 		API -->
 	<dependencies>
 		<dependency>
@@ -150,14 +150,14 @@
 			<version>${project.version}</version>
 		</dependency>
 
-		<!-- These dependencies aren't used to build this bundle, but we include 
+		<!-- These dependencies aren't used to build this bundle, but we include
 			them here to get them into the jar-with-dependencies and javadoc. -->
 		<dependency>
 			<groupId>org.osgi</groupId>
 			<artifactId>org.osgi.core</artifactId>
 			<version>${osgi.api.version}</version>
 		</dependency>
-		
+
 		<dependency>
 			<groupId>org.cytoscape</groupId>
 			<artifactId>equations-api</artifactId>
@@ -188,11 +188,7 @@
 			<artifactId>command-executor-api</artifactId>
 			<version>${project.version}</version>
 		</dependency>
-		<dependency>
-			<groupId>org.cytoscape</groupId>
-			<artifactId>jobs-api</artifactId>
-			<version>${project.version}</version>
-		</dependency>
+
 		<dependency>
 			<groupId>org.cytoscape</groupId>
 			<artifactId>util-api</artifactId>
