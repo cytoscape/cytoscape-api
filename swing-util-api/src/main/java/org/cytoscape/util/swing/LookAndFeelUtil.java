@@ -6,7 +6,6 @@ import java.awt.Desktop;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
-import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 import java.net.URI;
@@ -54,7 +53,7 @@ import org.slf4j.LoggerFactory;
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2016 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2020 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -80,6 +79,9 @@ import org.slf4j.LoggerFactory;
  */
 public final class LookAndFeelUtil {
 
+	private static String HELP_PREFIX = "https://manual.cytoscape.org/en/";
+	private static String HELP_SUFFIX = ".html";
+	
 	private static final float AQUA_SMALL_FONT_SIZE;
 	
 	private static Font iconFont;
@@ -324,9 +326,7 @@ public final class LookAndFeelUtil {
 			helpButton.setMinimumSize(new Dimension(22, 22));
 		}
 		
-		helpButton.addActionListener((ActionEvent e) -> {
-			launch(helpStr);
-		});
+		helpButton.addActionListener(evt -> launch(helpStr));
 		
 		return helpButton;
 	}
@@ -528,10 +528,6 @@ public final class LookAndFeelUtil {
 			currentSize.width = minSize.width;
 	}
 	
-	//FIXME         don't hardcode version tag!
-	private static String HELP_PREFIX = "http://manual.cytoscape.org/en/3.4.0/";
-	private static String HELP_SUFFIX = ".html";
-
 	private static URI helpStrToURI(String helpStr) {
 		try {
 			return new URL(helpStrToURL(helpStr)).toURI();
@@ -545,8 +541,16 @@ public final class LookAndFeelUtil {
 	private static String helpStrToURL(String rawString) {
 		if (rawString.startsWith("http"))
 			return rawString;
-
-		return HELP_PREFIX + rawString + HELP_SUFFIX;
+		
+		// We cannot get the CyVersion service, so let's hope these system properties have been set
+		var major = System.getProperty("cytoscape.version.major");
+		var minor = System.getProperty("cytoscape.version.minor");
+		var fix = System.getProperty("cytoscape.version.fix");
+		// If they were not set, we use the "stable" version instead
+		var version = (major != null && minor != null && fix != null) ?
+				String.format("%s.%s.%s/", major, minor, fix) : "stable/";
+		
+		return HELP_PREFIX + version + rawString + HELP_SUFFIX;
 	}
 
 	private static void launch(String helpStr) {
