@@ -529,7 +529,7 @@ public final class LookAndFeelUtil {
 	}
 	
 	//FIXME         don't hardcode version tag!
-	private static String HELP_PREFIX = "http://manual.cytoscape.org/en/3.4.0/";
+	private static String HELP_PREFIX = "http://manual.cytoscape.org/en/3.8.0/";
 	private static String HELP_SUFFIX = ".html";
 
 	private static URI helpStrToURI(String helpStr) {
