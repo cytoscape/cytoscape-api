@@ -25,11 +25,13 @@ package org.cytoscape.view.vizmap;
  */
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Set;
 
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyRow;
 import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.CyTableView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
 
@@ -70,6 +72,12 @@ public interface VisualStyle {
 	 */
 	void addVisualMappingFunction(final VisualMappingFunction<?, ?> mapping);
 	
+	
+	<T> void addVisualMappingFunction(final VisualMappingFunction<?, ?> mapping, Collection<? extends View<T>> targets);
+	
+	default void addVisualMappingFunction(final VisualMappingFunction<?, ?> mapping, View<?> target) {
+		addVisualMappingFunction(mapping, Collections.singleton(target));
+	}
 	
 	/**
 	 *  Remove a VisualMappingFunction for the VisualProperty.
@@ -136,9 +144,11 @@ public interface VisualStyle {
 	 * @param networkView The view that the visual property should be applied to.
 	 * @throws NullPointerException if the specified networkView is null
 	 */
-	void apply(final CyNetworkView networkView);
+	void apply(CyNetworkView networkView);
 
 
+	void apply(CyTableView tableView);
+	
 	/**
 	 * Apply Visual Property values only to the given View Object (node or edge).
 	 * If you need to update only few set of node/edge views, then this is more efficient.
@@ -171,4 +181,6 @@ public interface VisualStyle {
 	 * @param dependency
 	 */
 	void removeVisualPropertyDependency(final VisualPropertyDependency<?> dependency);
+	
+	
 }

@@ -67,9 +67,9 @@ import java.util.List;
  * @CyAPI.Api.Interface
  * @CyAPI.InModule model-api
  */
-public interface CyColumn {
+public interface CyColumn extends CyIdentifiable {
 	
-public static final String NAMESPACE_SEPARATOR = "::";
+	public static final String NAMESPACE_SEPARATOR = "::";
 	
 	/**
 	 * Splits a column name into a namespace part and a name part at the first occurrence of a "::".
