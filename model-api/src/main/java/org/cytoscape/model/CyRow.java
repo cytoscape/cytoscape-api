@@ -35,7 +35,7 @@ import java.util.Map;
  * @CyAPI.Api.Interface
  * @CyAPI.InModule model-api
  */
-public interface CyRow {
+public interface CyRow extends CyIdentifiable {
 	
 	/**
 	 * Returns the value found for this row in the specified column with the specified type. 

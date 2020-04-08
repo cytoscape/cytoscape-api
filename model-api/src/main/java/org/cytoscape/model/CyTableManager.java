@@ -112,6 +112,8 @@ public interface CyTableManager {
 
 	/**
 	 * Releases all currently held references and resources.
+	 * 
+	 * @CyAPI.NoReference.Method
 	 */
 	void reset();
 	

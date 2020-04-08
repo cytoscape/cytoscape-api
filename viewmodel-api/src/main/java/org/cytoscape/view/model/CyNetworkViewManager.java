@@ -99,6 +99,10 @@ public interface CyNetworkViewManager {
 	 * 
 	 * Note: make sure all references are released after this method call.
 	 * Otherwise, it can be a potential memory leak problem.
+	 * 
+	 * @CyAPI.NoReference.Method Apps should not call this method. Resetting 
+	 * the CyNetworkViewManager at the wrong time will put Cytoscape into 
+	 * an inconsistent internal state.
 	 */
 	void reset();
 }
