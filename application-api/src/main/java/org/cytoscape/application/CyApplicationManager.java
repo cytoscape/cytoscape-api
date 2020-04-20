@@ -154,6 +154,33 @@ public interface CyApplicationManager {
 	 */
 	Set<NetworkViewRenderer> getNetworkViewRendererSet();
 	
+	
+	/**
+	 * Returns the TableViewRenderer that should be used to create CyTableViews.
+	 * @return the TableViewRenderer that should be used to create CyTableViews.
+	 */
+	TableViewRenderer getDefaultTableViewRenderer();
+	
+	/**
+	 * Sets the {@link TableViewRenderer} that should be used to create CyTableViews.
+	 * @param renderer the TableViewRenderer that should be used by default.
+	 */
+	void setDefaultTableViewRenderer(TableViewRenderer renderer);
+
+	/**
+	 * Returns the {@link TableViewRenderer} that has the passed id or null if it doesn't exist.
+	 * @param rendererId
+	 * @return the TableViewRenderer that should be used to create CyTableViews
+	 */
+	TableViewRenderer getTableViewRenderer(String rendererId);
+	
+	/**
+	 * Returns a set with all the {@link TableViewRenderer} objects that have been registered.
+	 * @return the complete set of all the currently known renderers
+	 */
+	Set<TableViewRenderer> getTableViewRendererSet();
+	
+	
 	/**
 	 * Get the current working directory.
 	 * @return a File pointing to the current working directory as set in Properties,

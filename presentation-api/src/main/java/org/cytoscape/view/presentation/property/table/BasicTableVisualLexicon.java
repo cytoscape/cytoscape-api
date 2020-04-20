@@ -9,6 +9,7 @@ import org.cytoscape.view.model.NullDataType;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.model.Visualizable;
 import org.cytoscape.view.presentation.property.AbstractVisualLexicon;
+import org.cytoscape.view.presentation.property.BooleanVisualProperty;
 import org.cytoscape.view.presentation.property.DefaultVisualizableVisualProperty;
 import org.cytoscape.view.presentation.property.NullVisualProperty;
 import org.cytoscape.view.presentation.property.PaintVisualProperty;
@@ -55,10 +56,10 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 //	// VPs that apply to an entire column or to the column header
 //	public static final VisualProperty<Paint> COLUMN_HEADER_PAINT = new PaintVisualProperty(new Color(120, 120, 120),
 //			PAINT_RANGE, "COLUMN_HEADER_PAINT", "Column Header Paint", CyColumn.class);
-//	
-//	public static final VisualProperty<Boolean> COLUMN_VISIBLE = new BooleanVisualProperty(true, 
-//			"COLUMN_VISIBLE", "Column Visibility", CyColumn.class);
-//	
+	
+	public static final VisualProperty<Boolean> COLUMN_VISIBLE = new BooleanVisualProperty(true, 
+			"COLUMN_VISIBLE", "Column Visibility", CyColumn.class);
+	
 //	public static final VisualProperty<Double> COLUMN_GRAVITY = new DoubleVisualProperty(1.0, 
 //			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "COLUMN_GRAVITY", "Column Gravity", CyColumn.class);
 	
