@@ -13,6 +13,7 @@ import org.cytoscape.view.presentation.property.BooleanVisualProperty;
 import org.cytoscape.view.presentation.property.DefaultVisualizableVisualProperty;
 import org.cytoscape.view.presentation.property.NullVisualProperty;
 import org.cytoscape.view.presentation.property.PaintVisualProperty;
+import org.cytoscape.view.presentation.property.StringVisualProperty;
 
 public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	
@@ -43,6 +44,10 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 //	
 //	public static final VisualProperty<Boolean> TABLE_PRIVATE = new BooleanVisualProperty(false, 
 //			"TABLE_PRIVATE", "Table Private", CyTable.class);
+	
+	public static final VisualProperty<TableMode> TABLE_VIEW_MODE = new TableModeVisualProperty(TableModeVisualProperty.AUTO, 
+			"TABLE_VIEW_MODE", "View Mode", CyTable.class);
+	
 //	
 //	
 //	// VPs that apply to rows
@@ -59,6 +64,9 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	
 	public static final VisualProperty<Boolean> COLUMN_VISIBLE = new BooleanVisualProperty(true, 
 			"COLUMN_VISIBLE", "Column Visibility", CyColumn.class);
+	
+	public static final VisualProperty<String> COLUMN_FORMAT = new StringVisualProperty("", ARBITRARY_STRING_RANGE,
+			"COLUMN_FORMAT", "Column Number Format", CyColumn.class);
 	
 //	public static final VisualProperty<Double> COLUMN_GRAVITY = new DoubleVisualProperty(1.0, 
 //			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "COLUMN_GRAVITY", "Column Gravity", CyColumn.class);

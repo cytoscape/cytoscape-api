@@ -96,8 +96,7 @@ public final class ColumnResizer {
 			for (int row = 0; row < table.getRowCount(); row++) {
 				TableCellRenderer rend = table.getCellRenderer(row, col);
 				Object value = table.getValueAt(row, col);
-				Component comp = rend.getTableCellRendererComponent(table, value, false, false,
-				                                                    row, col);
+				Component comp = rend.getTableCellRendererComponent(table, value, false, false, row, col);
 				maxwidth = Math.max(comp.getPreferredSize().width, maxwidth);
 			}
 		}
@@ -110,8 +109,7 @@ public final class ColumnResizer {
 			headerRenderer = table.getTableHeader().getDefaultRenderer();
 
 		Object headerValue = column.getHeaderValue();
-		Component headerComp = headerRenderer.getTableCellRendererComponent(table, headerValue,
-		                                                                    false, false, 0, col);
+		Component headerComp = headerRenderer.getTableCellRendererComponent(table, headerValue, false, false, 0, col);
 		maxwidth = Math.max(maxwidth, headerComp.getPreferredSize().width);
 
 		// If the value is too big, adjust to fixed maximum value

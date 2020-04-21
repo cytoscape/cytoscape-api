@@ -67,7 +67,7 @@ public final class NodeShapeVisualProperty extends AbstractVisualProperty<NodeSh
 	private static final Map<String, NodeShape> DEFAULT_SHAPES;
 
 	static {
-		DEFAULT_SHAPES = new HashMap<String, NodeShape>();
+		DEFAULT_SHAPES = new HashMap<>();
 		DEFAULT_SHAPES.put(RECTANGLE.getSerializableString().toUpperCase(), RECTANGLE);
 		DEFAULT_SHAPES.put(ROUND_RECTANGLE.getSerializableString().toUpperCase(), ROUND_RECTANGLE);
 		DEFAULT_SHAPES.put(TRIANGLE.getSerializableString().toUpperCase(), TRIANGLE);
@@ -87,7 +87,7 @@ public final class NodeShapeVisualProperty extends AbstractVisualProperty<NodeSh
 		DEFAULT_SHAPES.put("HOR_ELLIPSIS", ELLIPSE);
 		DEFAULT_SHAPES.put("RHOMBUS", PARALLELOGRAM);
 
-		NODE_SHAPE_RANGE = new DiscreteRange<NodeShape>(NodeShape.class, new HashSet<NodeShape>(DEFAULT_SHAPES.values()));
+		NODE_SHAPE_RANGE = new DiscreteRange<>(NodeShape.class, new HashSet<>(DEFAULT_SHAPES.values()));
 	}
 
 	/**
