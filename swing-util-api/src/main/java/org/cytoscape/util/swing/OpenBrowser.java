@@ -53,4 +53,13 @@ public interface OpenBrowser {
 	 * @return Whether the browser opened successfully or not.
 	 */
 	boolean openURL(String url);
+
+	/**
+	 * Opens a web browser pointing to the specified URL.  
+	 * @param url A string URL that should be opened in the web browser. 
+	 * @param useCyBrowser a boolean that provides control over whether to
+	 * use the internal browser or not
+	 * @return Whether the browser opened successfully or not.
+	 */
+	boolean openURL(String url, boolean useCyBrowser);
 }
