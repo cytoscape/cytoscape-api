@@ -1,7 +1,8 @@
 package org.cytoscape.view.presentation.property.table;
 
-import java.awt.Color;
 import java.awt.Paint;
+
+import javax.swing.UIManager;
 
 import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyTable;
@@ -11,6 +12,7 @@ import org.cytoscape.view.model.Visualizable;
 import org.cytoscape.view.presentation.property.AbstractVisualLexicon;
 import org.cytoscape.view.presentation.property.BooleanVisualProperty;
 import org.cytoscape.view.presentation.property.DefaultVisualizableVisualProperty;
+import org.cytoscape.view.presentation.property.DoubleVisualProperty;
 import org.cytoscape.view.presentation.property.NullVisualProperty;
 import org.cytoscape.view.presentation.property.PaintVisualProperty;
 import org.cytoscape.view.presentation.property.StringVisualProperty;
@@ -68,12 +70,13 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	public static final VisualProperty<String> COLUMN_FORMAT = new StringVisualProperty("", ARBITRARY_STRING_RANGE,
 			"COLUMN_FORMAT", "Column Number Format", CyColumn.class);
 	
-//	public static final VisualProperty<Double> COLUMN_GRAVITY = new DoubleVisualProperty(1.0, 
-//			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "COLUMN_GRAVITY", "Column Gravity", CyColumn.class);
+	// MKTODO treat this like an index for now...
+	public static final VisualProperty<Double> COLUMN_GRAVITY = new DoubleVisualProperty(1.0, 
+			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "COLUMN_GRAVITY", "Column Gravity", CyColumn.class);
 	
 	
 	// VPs that apply to cells within columns
-	public static final VisualProperty<Paint> CELL_BACKGROUND_PAINT = new PaintVisualProperty(new Color(120, 120, 120),
+	public static final VisualProperty<Paint> CELL_BACKGROUND_PAINT = new PaintVisualProperty(UIManager.getColor("Table.background"),
 			PAINT_RANGE, "CELL_BACKGROUND_PAINT", "Cell Background Paint", CyColumn.class);
 	
 //	public static final VisualProperty<Font> CELL_FONT_FACE = new FontVisualProperty(new Font("SansSerif", Font.PLAIN, 12), 

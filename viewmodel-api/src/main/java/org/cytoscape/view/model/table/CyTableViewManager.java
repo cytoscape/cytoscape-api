@@ -4,6 +4,7 @@ import java.util.Set;
 
 import org.cytoscape.model.CyTable;
 
+// MKTODO make sure these are getting called in the right places
 public interface CyTableViewManager {
 
 	
