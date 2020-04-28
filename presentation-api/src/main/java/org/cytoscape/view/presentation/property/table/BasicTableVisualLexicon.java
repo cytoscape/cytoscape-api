@@ -120,18 +120,13 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 		addVisualProperty(COLUMN, TABLE);
 		addVisualProperty(CELL, TABLE);
 		
-//		addVisualProperty(TABLE_BACKGROUND_PAINT, TABLE);
-//		addVisualProperty(TABLE_PRIVATE, TABLE);
-//		
-//		addVisualProperty(ROW_HIGHLIGHT, ROW);
-//		addVisualProperty(ROW_SELECTED, ROW);
-//		
-//		addVisualProperty(COLUMN_HEADER_PAINT, COLUMN);
-//		addVisualProperty(COLUMN_VISIBLE, COLUMN);
-//		addVisualProperty(COLUMN_GRAVITY, COLUMN);
+		addVisualProperty(TABLE_VIEW_MODE, TABLE);
+		
+		addVisualProperty(COLUMN_VISIBLE, COLUMN);
+		addVisualProperty(COLUMN_FORMAT, COLUMN);
+		addVisualProperty(COLUMN_GRAVITY, COLUMN);
 		
 		addVisualProperty(CELL_BACKGROUND_PAINT, CELL);
-//		addVisualProperty(CELL_FONT_FACE, CELL);
 	}
 	
 

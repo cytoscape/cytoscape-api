@@ -39,5 +39,7 @@ public interface CyTableView extends View<CyTable>, CyDisposable {
 	String getRendererId();
 	
 	<T, V extends T> void setViewDefault(final VisualProperty<? extends T> vp, final V defaultValue);
+
+	Collection<View<CyRow>> getRowViews();
 	
 }
