@@ -40,7 +40,12 @@ public final class ColumnCreatedEvent extends AbstractColumnEvent {
 	 * @param source The table in which the column was created.
 	 * @param columnName The name of the column created.
 	 */
-	public ColumnCreatedEvent(final CyTable source, final String columnName) {
-		super(source, ColumnCreatedListener.class, columnName);
+	@Deprecated
+	public ColumnCreatedEvent(CyTable source, String columnName) {
+		this(source, columnName, null);
+	}
+	
+	public ColumnCreatedEvent(CyTable source, String columnName, Long suid) {
+		super(source, ColumnCreatedListener.class, columnName, suid);
 	}
 }

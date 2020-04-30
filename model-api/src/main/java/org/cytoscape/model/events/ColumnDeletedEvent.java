@@ -41,7 +41,12 @@ public final class ColumnDeletedEvent extends AbstractColumnEvent {
 	 * @param source The table from which the column was deleted. 
 	 * @param columnName The name of the column deleted. 
 	 */
-	public ColumnDeletedEvent(final CyTable source, final String columnName) {
-		super(source, ColumnDeletedListener.class, columnName);
+	@Deprecated
+	public ColumnDeletedEvent(CyTable source, String columnName) {
+		this(source, columnName, null);
+	}
+	
+	public ColumnDeletedEvent(CyTable source, String columnName, Long suid) {
+		super(source, ColumnDeletedListener.class, columnName, suid);
 	}
 }

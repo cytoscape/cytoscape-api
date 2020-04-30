@@ -32,12 +32,18 @@ import org.cytoscape.model.CyTable;
 class AbstractColumnEvent extends AbstractCyEvent<CyTable> {
 
 	private final String columnName;
+	private final Long suid;
 
-	AbstractColumnEvent(final CyTable source, final Class<?> listenerClass, final String columnName) {
+	AbstractColumnEvent(CyTable source, Class<?> listenerClass, String columnName) {
+		this(source, listenerClass, columnName, null);
+	}
+	
+	AbstractColumnEvent(CyTable source, Class<?> listenerClass, String columnName, Long suid) {
 		super(source, listenerClass);
 		if ( columnName == null )
 			throw new NullPointerException("columnName can't be null");
 		this.columnName = columnName;
+		this.suid = suid;
 	}
 
 	/**
@@ -61,5 +67,9 @@ class AbstractColumnEvent extends AbstractCyEvent<CyTable> {
 	 */
 	public String getNameOnly() {
 		return CyColumn.splitColumnName(columnName)[1];
+	}
+	
+	public Long getSUID() {
+		return suid;
 	}
 }
