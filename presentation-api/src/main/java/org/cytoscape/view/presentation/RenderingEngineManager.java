@@ -30,8 +30,8 @@ import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualLexicon;
 
 /**
- * Manager for {@linkplain RenderingEngine} objects. All RenderingEngine objects
- * created by {@linkplain RenderingEngineFactory} should be registered to this
+ * Manager for network {@linkplain RenderingEngine} objects. All RenderingEngine objects
+ * created by {@linkplain RenderingEngineFactory} for networks should be registered to this
  * manager.
  * <P>
  * Register/unregister engines are handled through
