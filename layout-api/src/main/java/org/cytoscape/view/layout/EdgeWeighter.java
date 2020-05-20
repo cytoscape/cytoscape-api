@@ -126,7 +126,8 @@ public final class EdgeWeighter {
 				eValue = (double) val.longValue();
 			} else if (type == Double.class) {
 				Double val = row.get(weightAttribute, Double.class);
-				eValue = val.doubleValue();
+				if (!val.isNaN())
+					eValue = val.doubleValue();
 			}
 		}
 		layoutEdge.setWeight(eValue);

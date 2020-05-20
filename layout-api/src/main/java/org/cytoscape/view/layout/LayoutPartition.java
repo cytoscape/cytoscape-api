@@ -91,6 +91,10 @@ public final class LayoutPartition {
 	// Keep track of the number of locked nodes we have in this partition
 	private int lockedNodes = 0;
 
+	// A way to postpone actually moving the nodes until
+	// later
+	private boolean dontMove = false;
+
 
 	/**
 	 * LayoutPartition: use this constructor to create an empty LayoutPartition.
@@ -116,6 +120,8 @@ public final class LayoutPartition {
 	public LayoutPartition(CyNetworkView networkView, Collection<View<CyNode>> nodeSet, EdgeWeighter edgeWeighter) {
 		initialize(networkView, nodeSet, edgeWeighter);
 	}
+
+	protected void dontMove(boolean dm) { dontMove = dm; }
 
 	private void initialize(CyNetworkView networkView, Collection<View<CyNode>> nodeSet, EdgeWeighter edgeWeighter) {
 
@@ -241,7 +247,8 @@ public final class LayoutPartition {
 		if (node.isLocked())
 			return;
 
-		node.moveToLocation();
+		if (!dontMove)
+			node.moveToLocation();
 		updateMinMax(node.getX(), node.getY(), 0);
 	}
 	
@@ -258,7 +265,8 @@ public final class LayoutPartition {
 		if (node.isLocked())
 			return;
 
-		node.moveToLocation3D();
+		if (!dontMove)
+			node.moveToLocation3D();
 		updateMinMax(node.getX(), node.getY(), node.getZ());
 	}
 
@@ -517,6 +525,7 @@ public final class LayoutPartition {
 		double myMinX = this.minX;
 		double myMinY = this.minY;
 		double myMinZ = this.minZ;
+		dontMove = false;
 		resetNodes();
 
 		for (LayoutNode node: nodeList) {
@@ -541,6 +550,10 @@ public final class LayoutPartition {
 		averageX = 0;
 		averageY = 0;
 		averageZ = 0;
+	}
+
+	public double getArea() {
+		return (maxX-minX)*(maxY-minY);
 	}
 
 	
@@ -596,6 +609,9 @@ public final class LayoutPartition {
 		averageX += x;
 		averageY += y;
 		averageZ += z;
+		width = maxX-minX;
+		height = maxY-minY;
+		depth = maxZ-minZ;
 	}
 
 	private void updateWeights(final LayoutEdge newEdge) {

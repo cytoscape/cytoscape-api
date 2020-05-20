@@ -28,6 +28,9 @@ package org.cytoscape.view.layout;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
 import org.cytoscape.model.CyNetwork;
@@ -52,7 +55,7 @@ import org.slf4j.LoggerFactory;
  */
 public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 	
-	private static Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
+	protected static Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
 	
 	/**
 	 * The TaskMonitor initially set in the run method of the task. 
@@ -179,27 +182,26 @@ public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 		}
 
 		total_nodes = network.getNodeCount();
-		current_start = 0;
 
-		// Set up offsets -- we start with the overall min and max
-		double xStart = (partitionList.get(0)).getMinX();
-		double yStart = (partitionList.get(0)).getMinY();
+		// Get the screen coordinates
+		double screen_scale = networkView.getVisualProperty(BasicVisualLexicon.NETWORK_SCALE_FACTOR);
+		double screen_width = networkView.getVisualProperty(BasicVisualLexicon.NETWORK_WIDTH)/screen_scale;
+		double screen_height = networkView.getVisualProperty(BasicVisualLexicon.NETWORK_HEIGHT)/screen_scale;
 
-		for (LayoutPartition part: partitionList) {
-			xStart = Math.min(xStart, part.getMinX());
-			yStart = Math.min(yStart, part.getMinY());
+		// Get the smallest and largest positions
+		double min_x = Double.MAX_VALUE;
+		double max_x = Double.MIN_VALUE;
+		double min_y = Double.MAX_VALUE;
+		double max_y = Double.MIN_VALUE;
+
+		for (LayoutPartition partition: partitionList) {
+			min_x = Math.min(min_x, partition.getMinX());
+			max_x = Math.max(max_x, partition.getMaxX());
+			min_y = Math.min(min_y, partition.getMinY());
+			max_y = Math.max(max_y, partition.getMaxY());
 		}
 
-		double next_x_start = xStart;
-		double next_y_start = yStart;
-		double current_max_y = 0;
-
-		double max_dimensions = Math.sqrt((double) network.getNodeCount());
-		// give each node room
-		max_dimensions *= incr;
-		max_dimensions += xStart;
-
-
+		// Layout each individual partition
 		for (LayoutPartition partition: partitionList) {
 			if (cancelled)
 				break;
@@ -212,48 +214,73 @@ public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 			// Partitions Requiring Layout
 			if (partition.nodeCount() > 1) {
 				try {
+					partition.dontMove(true);
 					layoutPartition(partition);
+					partition.dontMove(false);
 				} catch (Throwable _e) {
 					_e.printStackTrace();
+					partition.dontMove(false);
 					return;
 				}
-
-			if (useAllNodes && !singlePartition) {
-				// System.out.println("Offsetting partition #"+partition.getPartitionNumber()+" to "+next_x_start+", "+next_y_start);
-				// OFFSET
-				partition.offset(next_x_start, next_y_start);
-			}
-
-			// single nodes
-			} else if ( partition.nodeCount() == 1 ) {
-				// Reset our bounds
-				partition.resetNodes();
-
-				// Single node -- get it
-				LayoutNode node = (LayoutNode) partition.getNodeList().get(0);
-				node.setLocation(next_x_start, next_y_start);
-				partition.moveNodeToLocation(node);
-			} else {
-				continue;
-			}
-			double last_max_x = partition.getMaxX();
-			double last_max_y = partition.getMaxY();
-
-			if (last_max_y > current_max_y) {
-				current_max_y = last_max_y;
-			}
-
-			if (last_max_x > max_dimensions) {
-				next_x_start = xStart;
-				next_y_start = current_max_y;
-				next_y_start += incr;
-			} else {
-				next_x_start = last_max_x;
-				next_x_start += incr;
 			}
 
 			setTaskStatus( 100 );
 			current_start += current_size;
 		} 
+
+		double width = max_x - min_x;
+		double height = max_y - min_y;
+
+		double max_dimension = calculate_max_dimension(width, height, screen_width, screen_height, partitionList);
+		double start_x = 0.0;
+		double next_y_start = 0.0;
+		double next_x_start = start_x;
+		double y_max = 0.0;
+
+		// Now, reposition each individual partition
+		for (LayoutPartition partition: partitionList) {
+			if (cancelled)
+				break;
+
+			partition.offset(next_x_start, next_y_start);
+
+			next_x_start = partition.getMaxX()+incr;
+			y_max = Math.max(y_max, partition.getMaxY());
+			if (next_x_start > max_dimension) {
+				next_x_start = start_x;
+				next_y_start = y_max+incr;
+			}
+		}
+	}
+
+	protected double calculate_max_dimension(double width, double height, 
+	                                         double screen_width, double screen_height, 
+	                                         List<LayoutPartition> partitionList) {
+		double max_dimension = Math.max(width, screen_width);
+		double wh_ratio = screen_width/screen_height;
+		// System.out.println("screen: "+screen_width+"x"+screen_height+", wh_ratio = "+wh_ratio);
+		int max_attempts = 10;
+		for (int attempt = 0; attempt < max_attempts; attempt++) {
+			double next_y_start = 0.0;
+			double next_x_start = 0.0;
+			double y_max = 0.0;
+			for (LayoutPartition partition: partitionList) {
+				// System.out.println("Partition: "+partition.getPartitionNumber()+": "+partition.getWidth()+"x"+partition.getHeight());
+				next_x_start += partition.getWidth()+incr;
+				y_max = Math.max(y_max, partition.getHeight());
+				if (next_x_start > max_dimension) {
+					next_x_start = 0.0;
+					next_y_start += y_max+incr;
+					y_max = 0.0;
+				}
+			}
+			// Figure out our new ratio
+			double layout_ratio = max_dimension/(next_y_start+y_max);
+			// System.out.println("Layout: "+max_dimension+"x"+(next_y_start+y_max)+", layout_ratio = "+layout_ratio);
+
+			double ratio = wh_ratio / layout_ratio;
+			max_dimension *= ratio;
+		}
+		return max_dimension;
 	}
 }

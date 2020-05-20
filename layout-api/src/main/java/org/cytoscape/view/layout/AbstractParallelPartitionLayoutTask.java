@@ -31,12 +31,13 @@ import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
+import org.cytoscape.view.presentation.property.BasicVisualLexicon;
 import org.cytoscape.work.TaskMonitor;
 import org.cytoscape.work.undo.UndoSupport;
 
@@ -54,6 +55,7 @@ import org.cytoscape.work.undo.UndoSupport;
 public abstract class AbstractParallelPartitionLayoutTask extends AbstractPartitionLayoutTask {
 
 	private final boolean singlePartition;
+	private int nodesDone = 0;
 	
 	/**
 	 * Creates a new AbstractPartitionLayoutTask object.
@@ -89,9 +91,16 @@ public abstract class AbstractParallelPartitionLayoutTask extends AbstractPartit
 		if (edgeWeighter != null)
 			edgeWeighter.reset();
 
+		// networkView.fitContent();
+
 		this.taskMonitor = taskMonitor;
 		
-		boolean useAllNodes = nodesToLayOut.size() == networkView.getNodeViews().size();
+		long visibleNodeCount =
+			networkView.getNodeViews().stream()
+			.filter(view -> view.getVisualProperty(BasicVisualLexicon.NODE_VISIBLE))
+			.count();
+
+		boolean useAllNodes = nodesToLayOut.size() == visibleNodeCount;
 		
 		// Depending on whether we are partitioned or not,
 		// we use different initialization.  Note that if the user only wants
@@ -108,129 +117,109 @@ public abstract class AbstractParallelPartitionLayoutTask extends AbstractPartit
 		}
 
 		total_nodes = network.getNodeCount();
-		current_start = 0;
 
-		// Set up offsets -- we start with the overall min and max
-		double xStart = (partitionList.get(0)).getMinX();
-		double yStart = (partitionList.get(0)).getMinY();
+		// Get the screen coordinates
+		double screen_scale = networkView.getVisualProperty(BasicVisualLexicon.NETWORK_SCALE_FACTOR);
+		double screen_width = networkView.getVisualProperty(BasicVisualLexicon.NETWORK_WIDTH)/screen_scale;
+		double screen_height = networkView.getVisualProperty(BasicVisualLexicon.NETWORK_HEIGHT)/screen_scale;
 
-		for (LayoutPartition part: partitionList) {
-			xStart = Math.min(xStart, part.getMinX());
-			yStart = Math.min(yStart, part.getMinY());
-		}
+		final int numThreads = Runtime.getRuntime().availableProcessors();
 
-		double next_x_start = xStart;
-		double next_y_start = yStart;
-		double current_max_y = 0;
+		taskMonitor.setStatusMessage("Calling layout for individual partitions");
 
-		double max_dimensions = Math.sqrt((double) network.getNodeCount());
-		// give each node room
-		max_dimensions *= incr;
-		max_dimensions += xStart;
-
-		final int numThreads = Runtime.getRuntime().availableProcessors() * 4;	// Overthread to account for inefficiencies.
-		
-		// Parallelized run through partitionList that executes 
-		// the layoutPartition method on each partition.
-		class ParallelLayoutTask implements Runnable
-		{
-			private final int partitionID;
-			
-			public ParallelLayoutTask(int partitionID)
-			{
-				this.partitionID = partitionID;
-			}
-			
-			@Override
-			public void run() 
-			{
-				if (cancelled)
-					return;
-				
-				LayoutPartition partition = partitionList.get(partitionID);
-	
-				// Partitions Requiring Layout
-				if (partition.nodeCount() > 1) 
-				{
-					try 
-					{
-						layoutPartition(partition);
-					} 
-					catch (Throwable _e) 
-					{
-						_e.printStackTrace();
-						return;
-					}
-				}
-				else
-				{
-					// Reset our bounds
-					partition.resetNodes();
-				}
-				
-				synchronized (partitionList)
-				{
-					current_start += (double)partition.size();
-					taskMonitor.setProgress(current_start / total_nodes);
-				}
-			} 
-		}
-		
 		// Create thread pool, ...
 		ExecutorService threadPool = Executors.newFixedThreadPool(numThreads);
-		// ... spawn futures, ...
-		List<Future<?>> futures = new LinkedList<Future<?>>();
-		for (int i = 0; i < partitionList.size(); i++)
-			futures.add(threadPool.submit(new ParallelLayoutTask(i)));
+
+		// ... spawn tasks
+		double min_x = Double.MAX_VALUE;
+		double max_x = Double.MIN_VALUE;
+		double min_y = Double.MAX_VALUE;
+		double max_y = Double.MIN_VALUE;
+
+		for (LayoutPartition partition: partitionList) {
+			min_x = Math.min(min_x, partition.getMinX());
+			max_x = Math.max(max_x, partition.getMaxX());
+			min_y = Math.min(min_y, partition.getMinY());
+			max_y = Math.max(max_y, partition.getMaxY());
+			threadPool.submit(new ParallelLayoutTask(partition));
+		}
+
 		// ... and wait for them to execute.
-		for (Future<?> future : futures)
-			try 
-			{
-				future.get();
-			} 
-			catch (Exception e) { } 
+		threadPool.shutdown();
+		try {
+			boolean result = threadPool.awaitTermination(7, TimeUnit.DAYS);
+		} catch (Exception e) {
+		}
+
+		double width = max_x - min_x;
+		double height = max_y - min_y;
+
+		double max_dimension = calculate_max_dimension(width, height, screen_width, screen_height, partitionList);
+		double start_x = 0.0;
+		double next_y_start = 0.0;
+		double next_x_start = start_x;
+		double y_max = 0.0;
 		
+		taskMonitor.setStatusMessage("Moving partitions");
+
+		// System.out.println("Max dimension = "+max_dimension);
+
 		// Now move the partitions into a reasonably compact grid.
 		for (LayoutPartition partition : partitionList)
 		{
 			if (cancelled)
 				break;
 
-			// get the partition
-			current_size = (double)partition.size();
+			partition.offset(next_x_start, next_y_start);
+
+			next_x_start = partition.getMaxX()+incr;
+			y_max = Math.max(y_max, partition.getMaxY());
+			if (next_x_start > max_dimension) {
+				next_x_start = start_x;
+				next_y_start = y_max+incr;
+			}
+		}
+	}	
+
+	// Parallelized run through partitionList that executes 
+	// the layoutPartition method on each partition.
+	class ParallelLayoutTask implements Runnable
+	{
+		private final LayoutPartition partition;
+
+		public ParallelLayoutTask(final LayoutPartition partition)
+		{
+			this.partition = partition;
+		}
+
+		@Override
+		public void run() 
+		{
+			if (cancelled)
+				return;
 
 			// Partitions Requiring Layout
 			if (partition.nodeCount() > 1) 
 			{
-				// OFFSET
-				if (useAllNodes && !singlePartition)
-					partition.offset(next_x_start, next_y_start);
-			} 
-			else // single nodes
-			{
-				// Single node -- get it
-				LayoutNode node = (LayoutNode) partition.getNodeList().get(0);
-				node.setLocation(next_x_start, next_y_start);
-				partition.moveNodeToLocation(node);
+				try 
+				{
+					partition.dontMove(true);
+					layoutPartition(partition);
+					partition.dontMove(false);
+				} 
+				catch (Throwable _e) 
+				{
+					_e.printStackTrace();
+					partition.dontMove(false);
+					return;
+				}
 			}
-			
-			double last_max_x = partition.getMaxX();
-			double last_max_y = partition.getMaxY();
 
-			if (last_max_y > current_max_y)
-				current_max_y = last_max_y;
-
-			if (last_max_x > max_dimensions) 
-			{
-				next_x_start = xStart;
-				next_y_start = current_max_y;
-				next_y_start += incr;
-			} 
-			else 
-			{
-				next_x_start = last_max_x;
-				next_x_start += incr;
-			}
+			// current_start += (double)partition.size();
+			// taskMonitor.setProgress(current_start / total_nodes);
+			nodesDone += partition.size();
+			double pDone = nodesDone/total_nodes;
+			taskMonitor.setProgress(pDone);
 		}
 	}
 }
