@@ -184,11 +184,22 @@ public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 		total_nodes = network.getNodeCount();
 
 		// Get the screen coordinates
-		double screen_x = networkView.getVisualProperty(BasicVisualLexicon.NETWORK_CENTER_X_LOCATION);
-		double screen_y = networkView.getVisualProperty(BasicVisualLexicon.NETWORK_CENTER_Y_LOCATION);
-		double screen_width = networkView.getVisualProperty(BasicVisualLexicon.NETWORK_WIDTH);
-		double screen_height = networkView.getVisualProperty(BasicVisualLexicon.NETWORK_HEIGHT);
 		double screen_scale = networkView.getVisualProperty(BasicVisualLexicon.NETWORK_SCALE_FACTOR);
+		double screen_width = networkView.getVisualProperty(BasicVisualLexicon.NETWORK_WIDTH)/screen_scale;
+		double screen_height = networkView.getVisualProperty(BasicVisualLexicon.NETWORK_HEIGHT)/screen_scale;
+
+		// Get the smallest and largest positions
+		double min_x = Double.MAX_VALUE;
+		double max_x = Double.MIN_VALUE;
+		double min_y = Double.MAX_VALUE;
+		double max_y = Double.MIN_VALUE;
+
+		for (LayoutPartition partition: partitionList) {
+			min_x = Math.min(min_x, partition.getMinX());
+			max_x = Math.max(max_x, partition.getMaxX());
+			min_y = Math.min(min_y, partition.getMinY());
+			max_y = Math.max(max_y, partition.getMaxY());
+		}
 
 		// Layout each individual partition
 		for (LayoutPartition partition: partitionList) {
@@ -217,11 +228,10 @@ public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 			current_start += current_size;
 		} 
 
-		double width = screen_width/screen_scale;
-		double height = screen_height/screen_scale;
+		double width = max_x - min_x;
+		double height = max_y - min_y;
 
-		double max_dimension = Math.min(width, height);
-		// System.out.println("max_dimension = "+max_dimension);
+		double max_dimension = calculate_max_dimension(width, height, screen_width, screen_height, partitionList);
 		double start_x = 0.0;
 		double next_y_start = 0.0;
 		double next_x_start = start_x;
@@ -232,12 +242,7 @@ public abstract class AbstractPartitionLayoutTask extends AbstractLayoutTask {
 			if (cancelled)
 				break;
 
-			// System.out.println("next_x_start = "+next_x_start+", next_y_start = "+next_y_start);
-			// System.out.println("Partition size = "+partition.size()+", max_x = "+partition.getMaxX()+", min_x = "+partition.getMinX());
-
 			partition.offset(next_x_start, next_y_start);
-
-			// System.out.println("Partition size = "+partition.size()+", max_x = "+partition.getMaxX()+", min_x = "+partition.getMinX());
 
 			next_x_start = partition.getMaxX()+incr;
 			y_max = Math.max(y_max, partition.getMaxY());

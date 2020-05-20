@@ -119,8 +119,6 @@ public abstract class AbstractParallelPartitionLayoutTask extends AbstractPartit
 		total_nodes = network.getNodeCount();
 
 		// Get the screen coordinates
-		// double screen_x = networkView.getVisualProperty(BasicVisualLexicon.NETWORK_CENTER_X_LOCATION);
-		// double screen_y = networkView.getVisualProperty(BasicVisualLexicon.NETWORK_CENTER_Y_LOCATION);
 		double screen_scale = networkView.getVisualProperty(BasicVisualLexicon.NETWORK_SCALE_FACTOR);
 		double screen_width = networkView.getVisualProperty(BasicVisualLexicon.NETWORK_WIDTH)/screen_scale;
 		double screen_height = networkView.getVisualProperty(BasicVisualLexicon.NETWORK_HEIGHT)/screen_scale;
@@ -153,20 +151,16 @@ public abstract class AbstractParallelPartitionLayoutTask extends AbstractPartit
 		} catch (Exception e) {
 		}
 
-		// double width = screen_width/screen_scale;
-		// double height = screen_height/screen_scale;
 		double width = max_x - min_x;
 		double height = max_y - min_y;
 
-		// double max_dimension = Math.max(width, screen_width);
 		double max_dimension = calculate_max_dimension(width, height, screen_width, screen_height, partitionList);
-		// System.out.println("max_dimension = "+max_dimension);
 		double start_x = 0.0;
 		double next_y_start = 0.0;
 		double next_x_start = start_x;
 		double y_max = 0.0;
 		
-		taskMonitor.setStatusMessage("Moving paritions");
+		taskMonitor.setStatusMessage("Moving partitions");
 
 		// System.out.println("Max dimension = "+max_dimension);
 
@@ -177,8 +171,6 @@ public abstract class AbstractParallelPartitionLayoutTask extends AbstractPartit
 				break;
 
 			partition.offset(next_x_start, next_y_start);
-
-			// System.out.println("Partition size = "+partition.size()+", max_x = "+partition.getMaxX()+", min_x = "+partition.getMinX());
 
 			next_x_start = partition.getMaxX()+incr;
 			y_max = Math.max(y_max, partition.getMaxY());
