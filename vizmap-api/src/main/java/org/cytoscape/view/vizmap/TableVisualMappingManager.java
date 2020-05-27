@@ -2,8 +2,9 @@ package org.cytoscape.view.vizmap;
 
 import java.util.Set;
 
+import org.cytoscape.model.CyColumn;
+import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualLexicon;
-import org.cytoscape.view.model.table.CyTableView;
 
 public interface TableVisualMappingManager {
 
@@ -13,7 +14,7 @@ public interface TableVisualMappingManager {
 	 * @param visualStyle Visual Style to be set.
 	 * @param networkViewModel The target network view model.
 	 */
-	void setVisualStyle(VisualStyle visualStyle, CyTableView viewModel);
+	void setVisualStyle(VisualStyle visualStyle, View<CyColumn> viewModel);
 	
 	/**
 	 * Returns the {@linkplain VisualStyle} associated with the target network
@@ -24,7 +25,7 @@ public interface TableVisualMappingManager {
 	 *         always non-null value. If there is no mapping from given view
 	 *         model to a style, then default style will be used.
 	 */
-	VisualStyle getVisualStyle(CyTableView viewModel);
+	VisualStyle getVisualStyle(View<CyColumn> viewModel);
 
 	/**
 	 * Returns all available {@linkplain VisualStyle}s managed by this object.
@@ -56,21 +57,6 @@ public interface TableVisualMappingManager {
 	 * @return default Visual Style.
 	 */
 	VisualStyle getDefaultVisualStyle();
-	
-	/**
-	 * Set the specified {@link VisualStyle} as the current one. 
-	 * 
-	 * @param visualStyle the {@link VisualStyle} that will become the current style.
-	 */
-	void setCurrentVisualStyle(VisualStyle visualStyle);
-	
-	/**
-	 * Returns currently selected Visual Style.
-	 * 
-	 * @return Selected Visual Style.
-	 */
-	VisualStyle getCurrentVisualStyle();
-	
 	
 	/**
 	 * Returns a Set of all {@link VisualLexicon}s.
