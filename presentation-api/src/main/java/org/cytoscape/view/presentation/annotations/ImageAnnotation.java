@@ -6,7 +6,7 @@ package org.cytoscape.view.presentation.annotations;
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2020 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -38,42 +38,61 @@ import java.net.URL;
  * @CyAPI.InModule presentation-api
  */
 public interface ImageAnnotation extends ShapeAnnotation {
+	
 	/**
 	 * The URL that points to the image.  This is pretty much mandatory
 	 */
-  public static final String URL="URL";
+	public static final String URL = "URL";
 
 	/**
 	 * The opacity of the image.
 	 */
-  public static final String OPACITY="opacity";
+	public static final String OPACITY = "opacity";
 
 	/**
 	 * This value allows the image contrast to be adjusted
 	 */
-  public static final String CONTRAST="contrast";
+	public static final String CONTRAST = "contrast";
 
 	/**
 	 * This value allows the image brighteness to be adjusted
 	 */
-  public static final String LIGHTNESS="brightness";
+	public static final String LIGHTNESS = "brightness";
 
 	/**
-	 * Return the image currently assigned to this annotation
+	 * Return the image currently assigned to this annotation.
 	 * 
 	 * @return the current image
 	 */
 	public Image getImage();
 
 	/**
-	 * Set the image to be displayed as part of this annotation
+	 * Set the image to be displayed as part of this annotation.
 	 *
 	 * @param image the image to be displayed
 	 */
 	public void setImage(Image image);
 
 	/**
-	 * Get the {@link URL} for the image to be displayed
+	 * Return the SVG text currently assigned to this annotation.
+	 * 
+	 * @return the current SVG image as XML text or null if the current image is not an SVG
+	 */
+	public default String getSVG() {
+		return null;
+	}
+
+	/**
+	 * Set the SVG image to be displayed as part of this annotation.
+	 *
+	 * @param image the SVG text to be parsed and displayed
+	 */
+	public default void setSVG(String svg) {
+		// ...
+	}
+
+	/**
+	 * Get the {@link URL} for the image to be displayed.
 	 *
 	 * @param the image url
 	 */
@@ -126,7 +145,7 @@ public interface ImageAnnotation extends ShapeAnnotation {
 	public void setImageContrast(int contrast);
 
 	/**
-	 * Return the contrast adjustment for this image
+	 * Return the contrast adjustment for this image.
 	 *
 	 * @return contrast adjustment
 	 */
