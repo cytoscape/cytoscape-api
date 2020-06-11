@@ -27,6 +27,7 @@ package org.cytoscape.view.vizmap;
 import java.util.Collection;
 import java.util.Set;
 
+import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyRow;
 import org.cytoscape.view.model.CyNetworkView;
@@ -137,6 +138,15 @@ public interface VisualStyle {
 	 * @throws NullPointerException if the specified networkView is null
 	 */
 	void apply(final CyNetworkView networkView);
+	
+	
+	/**
+	 * Apply Visual Style to the entire table view.
+	 * 
+	 * @param networkView The view that the visual property should be applied to.
+	 * @throws NullPointerException if the specified networkView is null
+	 */
+	void apply(final View<CyColumn> columnView);
 
 
 	/**
