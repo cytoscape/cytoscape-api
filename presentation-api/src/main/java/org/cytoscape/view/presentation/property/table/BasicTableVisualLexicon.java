@@ -1,5 +1,6 @@
 package org.cytoscape.view.presentation.property.table;
 
+import java.awt.Font;
 import java.awt.Paint;
 
 import javax.swing.UIManager;
@@ -13,6 +14,7 @@ import org.cytoscape.view.presentation.property.AbstractVisualLexicon;
 import org.cytoscape.view.presentation.property.BooleanVisualProperty;
 import org.cytoscape.view.presentation.property.DefaultVisualizableVisualProperty;
 import org.cytoscape.view.presentation.property.DoubleVisualProperty;
+import org.cytoscape.view.presentation.property.FontVisualProperty;
 import org.cytoscape.view.presentation.property.NullVisualProperty;
 import org.cytoscape.view.presentation.property.PaintVisualProperty;
 import org.cytoscape.view.presentation.property.StringVisualProperty;
@@ -79,8 +81,8 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	public static final VisualProperty<Paint> CELL_BACKGROUND_PAINT = new PaintVisualProperty(UIManager.getColor("Table.background"),
 			PAINT_RANGE, "CELL_BACKGROUND_PAINT", "Cell Background Paint", CyColumn.class);
 	
-//	public static final VisualProperty<Font> CELL_FONT_FACE = new FontVisualProperty(new Font("SansSerif", Font.PLAIN, 12), 
-//			"CELL_FONT_FACE", "Cell Font Face", CyColumn.class);
+	public static final VisualProperty<Font> CELL_FONT_FACE = new FontVisualProperty(new Font("SansSerif", Font.PLAIN, 12), 
+			"CELL_FONT_FACE", "Cell Font Face", CyColumn.class);
 	
 	
 	
@@ -127,6 +129,7 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 		addVisualProperty(COLUMN_GRAVITY, COLUMN);
 		
 		addVisualProperty(CELL_BACKGROUND_PAINT, CELL);
+		addVisualProperty(CELL_FONT_FACE, CELL);
 	}
 	
 
