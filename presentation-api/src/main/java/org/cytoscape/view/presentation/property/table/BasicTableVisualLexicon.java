@@ -17,9 +17,9 @@ import org.cytoscape.view.presentation.property.DoubleVisualProperty;
 import org.cytoscape.view.presentation.property.FontVisualProperty;
 import org.cytoscape.view.presentation.property.NullVisualProperty;
 import org.cytoscape.view.presentation.property.PaintVisualProperty;
-import org.cytoscape.view.presentation.property.StringVisualProperty;
 
 public class BasicTableVisualLexicon extends AbstractVisualLexicon {
+	
 	
 	// TEMPORARY, the renderer should extend the visual lexicon and define the root VP
 	public static final VisualProperty<NullDataType> TEMP_ROOT = new NullVisualProperty(
@@ -69,8 +69,6 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	public static final VisualProperty<Boolean> COLUMN_VISIBLE = new BooleanVisualProperty(true, 
 			"COLUMN_VISIBLE", "Column Visibility", CyColumn.class);
 	
-	public static final VisualProperty<String> COLUMN_FORMAT = new StringVisualProperty("", ARBITRARY_STRING_RANGE,
-			"COLUMN_FORMAT", "Column Number Format", CyColumn.class);
 	
 	// MKTODO treat this like an index for now...
 	public static final VisualProperty<Double> COLUMN_GRAVITY = new DoubleVisualProperty(1.0, 
@@ -84,6 +82,8 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	public static final VisualProperty<Font> CELL_FONT_FACE = new FontVisualProperty(new Font("SansSerif", Font.PLAIN, 12), 
 			"CELL_FONT_FACE", "Cell Font Face", CyColumn.class);
 	
+	public static final VisualProperty<CellFormat> CELL_FORMAT = new CellFormatVisualProperty(new CellFormat(""),
+			"CELL_FORMAT", "Cell Number Format", CyColumn.class);
 	
 	
 	private static BasicTableVisualLexicon instance;
@@ -125,11 +125,11 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 		addVisualProperty(TABLE_VIEW_MODE, TABLE);
 		
 		addVisualProperty(COLUMN_VISIBLE, COLUMN);
-		addVisualProperty(COLUMN_FORMAT, COLUMN);
 		addVisualProperty(COLUMN_GRAVITY, COLUMN);
 		
 		addVisualProperty(CELL_BACKGROUND_PAINT, CELL);
 		addVisualProperty(CELL_FONT_FACE, CELL);
+		addVisualProperty(CELL_FORMAT, CELL);
 	}
 	
 
