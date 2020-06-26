@@ -36,6 +36,7 @@ import javax.swing.JSpinner;
 import javax.swing.JTable;
 import javax.swing.JTree;
 import javax.swing.KeyStroke;
+import javax.swing.ListCellRenderer;
 import javax.swing.MenuElement;
 import javax.swing.UIManager;
 import javax.swing.border.Border;
@@ -380,7 +381,9 @@ public final class LookAndFeelUtil {
 	
 	/**
 	 * If one of the components is a {@link JSlider}, make sure this method is called after the slider has been added to
-	 * its parent container and had its UI assigned, otherwise it will have no effect on the slider's labels.
+	 * its parent container and had its UI assigned, otherwise it will have no effect on the slider's labels.<br>
+	 * Also be careful when using this on a {@link JList}, because this could mess up the original
+	 * {@link ListCellRenderer}.
 	 */
 	public static void makeSmall(final JComponent... components) {
 		if (components == null || components.length == 0)
@@ -424,16 +427,26 @@ public final class LookAndFeelUtil {
 		}
 	}
 	
-	@SuppressWarnings("serial")
-	private static void makeSmall(final JList<?> c) {
-		c.setCellRenderer(new DefaultListCellRenderer() {
+	@SuppressWarnings({ "serial", "rawtypes", "unchecked" })
+	private static void makeSmall(final JList<?> list) {
+		if (list.getCellRenderer() instanceof DefaultListCellRenderer == false)
+			return;
+		
+		ListCellRenderer renderer = list.getCellRenderer();
+		
+		list.setCellRenderer(new DefaultListCellRenderer() {
 			@Override
-			public Component getListCellRendererComponent(JList<?> list, Object value, int index,
-					boolean isSelected, boolean cellHasFocus) {
-				super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-				setFont(getFont().deriveFont(getSmallFontSize()));
-				
-				return this;
+			public Component getListCellRendererComponent(JList<?> l, Object v, int idx, boolean sel, boolean focus) {
+				final Component c;
+
+				if (renderer != null)
+					c = renderer.getListCellRendererComponent(l, v, idx, sel, focus);
+				else
+					c = super.getListCellRendererComponent(l, v, idx, sel, focus);
+
+				c.setFont(getFont().deriveFont(getSmallFontSize()));
+
+				return c;
 			}
 		});
 	}
