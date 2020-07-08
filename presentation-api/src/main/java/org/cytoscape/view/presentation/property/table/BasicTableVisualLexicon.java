@@ -126,10 +126,11 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 		
 		addVisualProperty(COLUMN_VISIBLE, COLUMN);
 		addVisualProperty(COLUMN_GRAVITY, COLUMN);
+		addVisualProperty(CELL_FORMAT, COLUMN);
 		
 		addVisualProperty(CELL_BACKGROUND_PAINT, CELL);
 		addVisualProperty(CELL_FONT_FACE, CELL);
-		addVisualProperty(CELL_FORMAT, CELL);
+		
 	}
 	
 
