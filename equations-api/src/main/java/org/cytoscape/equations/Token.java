@@ -1,5 +1,6 @@
 package org.cytoscape.equations;
 
+import java.util.Objects;
 
 public final class Token {
 	
@@ -55,6 +56,30 @@ public final class Token {
 		return end;
 	}
 	
-}
+	public int getLength() {
+		return end - start;
+	}
 
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(end, start, type);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (!(obj instanceof Token))
+			return false;
+		Token other = (Token) obj;
+		return end == other.end && start == other.start && type == other.type;
+	}
+
+	@Override
+	public String toString() {
+		return "Token[" + type + "," + start + "," + end + "]";
+	}
+	
+}
 
