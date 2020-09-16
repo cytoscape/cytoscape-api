@@ -45,6 +45,13 @@ public interface EquationCompiler {
 	 *  Please note that it is probably a good idea to only call this method if compile() returned false.
 	 */
 	String getLastErrorMsg();
+	
+	/**
+	 * If compile() failed, this will return the index in the equation where the error was encountered.
+	 * The value -1 is returned if the compile did not fail or if the error location could not be determined.
+	 * @return the error location 
+	 */
+	int getErrorLocation();
 
 	/** If compile() returns true, this returns the result of the compilation.
 	 *  @return an <code>Equation</code> representing the code compiled from the string passed into compile()

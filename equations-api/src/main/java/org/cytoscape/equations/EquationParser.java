@@ -75,6 +75,13 @@ public interface EquationParser {
 	 *  @return the last error message of null
 	 */
 	String getErrorMsg();
+	
+	/**
+	 * If parse() failed, this will return the index in the equation where the error was encountered.
+	 * The value -1 is returned if the parse did not fail or if the error location could not be determined.
+	 * @return the error location 
+	 */
+	int getErrorLocation();
 
 	/**
 	 * Returns all the variable names that have been detected in the most recently parsed equation.
