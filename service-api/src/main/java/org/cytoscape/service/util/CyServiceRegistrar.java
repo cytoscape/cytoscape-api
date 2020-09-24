@@ -26,8 +26,6 @@ package org.cytoscape.service.util;
 
 import java.util.Properties;
 
-import org.osgi.framework.BundleContext;
-
 /** 
  * An interface to hide the OSGi dependencies needed to register 
  * services dynamically at runtime. This provides similar methods to
@@ -132,6 +130,16 @@ public interface CyServiceRegistrar {
 	 * @param props The service properties. 
 	 */
 	void registerService(Object service, Class<?> serviceClass, Properties props);
+	
+	/**
+	 * This method registers an object as an OSGi service
+	 * with the specified service interface.
+	 * @param service The object to be registered as a service.
+	 * @param serviceClass The service interface the object should be registered as. 
+	 */
+	default void registerService(Object service, Class<?> serviceClass) {
+		registerService(service, serviceClass, new Properties());
+	}
 
 	/**
 	 * This method unregisters an object as an OSGi service
@@ -153,6 +161,20 @@ public interface CyServiceRegistrar {
 	 * @param props The service properties. 
 	 */
 	void registerAllServices(Object service,  Properties props);
+	
+	/**
+	 * This method registers an object as an OSGi service
+	 * for all interfaces that the object implements. 
+	 * Note that this method
+	 * will NOT register services for any packages with names that
+	 * begin with "java", which is an effort to avoid registering
+	 * meaningless services for core Java APIs.
+	 * @param service The object to be registered as a service for all
+	 * interfaces that the object implements.
+	 */
+	default void registerAllServices(Object service) {
+		registerAllServices(service, new Properties());
+	}
 
 	/**
 	 * This method unregisters an object as all OSGi service
