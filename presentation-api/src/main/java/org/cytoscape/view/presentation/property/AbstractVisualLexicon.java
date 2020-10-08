@@ -57,8 +57,12 @@ public abstract class AbstractVisualLexicon implements VisualLexicon {
 
 	protected static final Range<Double> ARBITRARY_DOUBLE_RANGE = new ContinuousRange<>(Double.class,
 			Double.NEGATIVE_INFINITY, Double.POSITIVE_INFINITY, true, true);
+
 	protected static final Range<Double> NONE_ZERO_POSITIVE_DOUBLE_RANGE = new ContinuousRange<>(Double.class,
 			0d, Double.POSITIVE_INFINITY, false, true);
+
+	protected static final Range<Double> ANGLE_DOUBLE_RANGE = new ContinuousRange<>(Double.class,
+			-360d, 360d, false, true);
 	
 	
 	public AbstractVisualLexicon(final VisualProperty<NullDataType> rootVisualProperty) {
@@ -89,8 +93,9 @@ public abstract class AbstractVisualLexicon implements VisualLexicon {
 		if (prop == null)
 			throw new NullPointerException("Target visual property cannot be null.");
 
-		if (!this.visualPropertyMap.containsKey(prop))
-			throw new IllegalArgumentException("No such Visual Property in the Lexicon.");
+		if (!this.visualPropertyMap.containsKey(prop)) {
+			throw new IllegalArgumentException("No such Visual Property in the Lexicon: "+prop.getDisplayName());
+		}
 
 		return getChildNodes(prop);
 	}
