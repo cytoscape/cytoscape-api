@@ -90,6 +90,11 @@ public interface Annotation {
 	public static final String NAME = "name";
 
 	/**
+	 * Arg map key to initialize the rotation in degrees of this annotation
+	 */
+	public static final String ROTATION = "rotation";
+
+	/**
 	 * Return the view that this Annotation is for
 	 *
 	 * @return the network view this annotation is for
@@ -167,6 +172,20 @@ public interface Annotation {
 	 */
 	@Deprecated
 	public void setSpecificZoom(double zoom);
+
+	/**
+	 * Get the rotation (in degrees) for this annotation
+	 *
+	 * @return the rotation in degrees
+	 */
+	public double getRotation();
+
+	/**
+	 * Set the rotation (in degrees) for this annotation
+	 *
+	 * @param rotation the rotation in degrees
+	 */
+	public void setRotation(double rotation);
 
 	/**
 	 * Return true if this annotation is currently selected
