@@ -220,6 +220,20 @@ public interface ShapeAnnotation extends Annotation {
 	public void setCustomShape(Shape shape);
 
 	/**
+	 * Set a custom shape to be drawn.  This is 
+	 * optional functionality that will only be
+	 * funcional when "Custom" is in the list
+	 * of supported shapes.  If custom shapes
+	 * are supported, setting this parameter
+	 * will force the shape type to "Custom".  If
+	 * they are not supported, this method is
+	 * implemented, but ignored.
+	 *
+	 * @param shape the custom shape to be drawn
+	 */
+	public void setCustomShape(String shape);
+
+	/**
 	 * Get the current shape as a {@link java.awt.Shape} object
 	 *
 	 * @return the current shape

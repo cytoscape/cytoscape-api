@@ -141,6 +141,20 @@ public interface Annotation {
 	public void moveAnnotation(Point2D location);
 
 	/**
+	 * Get the Z order of the annotation
+	 *
+	 * @return the z position of the annotation
+	 */
+	public double getZ();
+
+	/**
+	 * Reorder annotation.  Set the Z order of the annotation
+	 *
+	 * @param z the z position of the annotation
+	 */
+	public void setZ(double z);
+
+	/**
 	 * Get the current zoom for this annotation
 	 *
 	 * @return the current zoom value
