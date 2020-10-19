@@ -82,7 +82,7 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	public static final VisualProperty<Font> CELL_FONT_FACE = new FontVisualProperty(new Font("SansSerif", Font.PLAIN, 12), 
 			"CELL_FONT_FACE", "Cell Font Face", CyColumn.class);
 	
-	public static final VisualProperty<CellFormat> CELL_FORMAT = new CellFormatVisualProperty(new CellFormat(""),
+	public static final VisualProperty<CellFormat> COLUMN_FORMAT = new CellFormatVisualProperty(new CellFormat(""),
 			"CELL_FORMAT", "Cell Number Format", CyColumn.class);
 	
 	
@@ -126,7 +126,7 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 		
 		addVisualProperty(COLUMN_VISIBLE, COLUMN);
 		addVisualProperty(COLUMN_GRAVITY, COLUMN);
-		addVisualProperty(CELL_FORMAT, COLUMN);
+		addVisualProperty(COLUMN_FORMAT, COLUMN);
 		
 		addVisualProperty(CELL_BACKGROUND_PAINT, CELL);
 		addVisualProperty(CELL_FONT_FACE, CELL);
