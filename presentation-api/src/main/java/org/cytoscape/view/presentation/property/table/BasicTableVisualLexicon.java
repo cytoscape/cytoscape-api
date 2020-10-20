@@ -2,14 +2,18 @@ package org.cytoscape.view.presentation.property.table;
 
 import java.awt.Font;
 import java.awt.Paint;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.UIManager;
 
 import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.view.model.NullDataType;
+import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.model.Visualizable;
+import org.cytoscape.view.model.table.CyTableView;
 import org.cytoscape.view.presentation.property.AbstractVisualLexicon;
 import org.cytoscape.view.presentation.property.BooleanVisualProperty;
 import org.cytoscape.view.presentation.property.DefaultVisualizableVisualProperty;
@@ -133,5 +137,15 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 		
 	}
 	
+	
+	public static  List<View<CyColumn>> getColumnViewsSortedByGravity(CyTableView tableView) {
+		List<View<CyColumn>> cols =  new ArrayList<>(tableView.getColumnViews());
+		cols.sort((v1, v2) -> {
+			var grav1 = v1.getVisualProperty(BasicTableVisualLexicon.COLUMN_GRAVITY);
+			var grav2 = v2.getVisualProperty(BasicTableVisualLexicon.COLUMN_GRAVITY);
+			return Double.compare(grav1, grav2);
+		});
+		return cols;
+	}
 
 }
