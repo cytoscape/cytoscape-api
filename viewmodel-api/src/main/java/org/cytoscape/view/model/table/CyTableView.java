@@ -22,6 +22,10 @@ public interface CyTableView extends View<CyTable>, CyDisposable {
 		return null;
 	}
 	
+	/**
+	 * Returns all column views, in the same order as {@link CyTable#getColumns()}.
+	 * @see CyTable#getColumns()
+	 */
 	Collection<View<CyColumn>> getColumnViews();
 	
 	View<CyRow> getRowView(CyRow row);
@@ -32,9 +36,6 @@ public interface CyTableView extends View<CyTable>, CyDisposable {
 	 * @return
 	 */
 	Class<? extends CyIdentifiable> getTableType();
-	
-	// MKTODO this seems like something that is used a lot by the table browser. It could be a VP or it could be a method.
-//	View<CyRow> getCurrentRow();
 	
 	String getRendererId();
 	
