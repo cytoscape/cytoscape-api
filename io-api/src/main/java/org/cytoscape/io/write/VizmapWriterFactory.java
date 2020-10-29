@@ -1,5 +1,7 @@
 package org.cytoscape.io.write;
 
+import java.io.OutputStream;
+
 /*
  * #%L
  * Cytoscape IO API (io-api)
@@ -26,8 +28,6 @@ package org.cytoscape.io.write;
 
 import java.util.Set;
 
-import java.io.OutputStream;
-
 import org.cytoscape.view.vizmap.VisualStyle;
 
 
@@ -43,7 +43,17 @@ public interface VizmapWriterFactory extends CyWriterFactory {
 	 * Creates a single Task that will write the specified set of {@link VisualStyle} 
 	 * objects to the specified OutputStream. 
 	 * @param os The stream to which the data will be written. 
-	 * @param styles A list of {@link org.cytoscape.view.vizmap.VisualStyle} objects to be written.
+	 * @param networkStyles A list of network {@link org.cytoscape.view.vizmap.VisualStyle} objects to be written.
 	 */
-	CyWriter createWriter(OutputStream os, Set<VisualStyle> styles);
+	CyWriter createWriter(OutputStream os, Set<VisualStyle> networkStyles);
+	
+	
+	/**
+	 * Creates a single Task that will write the specified set of {@link VisualStyle} 
+	 * objects to the specified OutputStream. 
+	 * @param os The stream to which the data will be written. 
+	 * @param networkStyles A list of network {@link org.cytoscape.view.vizmap.VisualStyle} objects to be written.
+	 * @param tableStyles A list of network {@link org.cytoscape.view.vizmap.VisualStyle} objects to be written.
+	 */
+	CyWriter createWriter(OutputStream os, Set<VisualStyle> networkStyles, Set<VisualStyle> tableStyles);
 }

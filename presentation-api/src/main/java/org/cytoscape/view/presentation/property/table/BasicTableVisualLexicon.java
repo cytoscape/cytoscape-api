@@ -15,16 +15,9 @@ import org.cytoscape.view.presentation.property.BooleanVisualProperty;
 import org.cytoscape.view.presentation.property.DefaultVisualizableVisualProperty;
 import org.cytoscape.view.presentation.property.DoubleVisualProperty;
 import org.cytoscape.view.presentation.property.FontVisualProperty;
-import org.cytoscape.view.presentation.property.NullVisualProperty;
 import org.cytoscape.view.presentation.property.PaintVisualProperty;
 
 public class BasicTableVisualLexicon extends AbstractVisualLexicon {
-	
-	
-	// TEMPORARY, the renderer should extend the visual lexicon and define the root VP
-	public static final VisualProperty<NullDataType> TEMP_ROOT = new NullVisualProperty(
-			"TABLE_VISUAL_LEXICON_ROOT",
-			"blah");
 	
 	
 	// Four Categories of VisualProperty
@@ -69,33 +62,21 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	public static final VisualProperty<Boolean> COLUMN_VISIBLE = new BooleanVisualProperty(true, 
 			"COLUMN_VISIBLE", "Column Visibility", CyColumn.class);
 	
-	
-	// MKTODO treat this like an index for now...
 	public static final VisualProperty<Double> COLUMN_GRAVITY = new DoubleVisualProperty(1.0, 
 			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "COLUMN_GRAVITY", "Column Gravity", CyColumn.class);
 	
+	public static final VisualProperty<CellFormat> COLUMN_FORMAT = new CellFormatVisualProperty(new CellFormat(""),
+			"CELL_FORMAT", "Cell Number Format", CyColumn.class);
 	
-	// VPs that apply to cells within columns
+	
+	// VPs that apply to cells within columns, these show up in the vizmapper and can have mappings
 	public static final VisualProperty<Paint> CELL_BACKGROUND_PAINT = new PaintVisualProperty(UIManager.getColor("Table.background"),
 			PAINT_RANGE, "CELL_BACKGROUND_PAINT", "Cell Background Paint", CyColumn.class);
 	
 	public static final VisualProperty<Font> CELL_FONT_FACE = new FontVisualProperty(new Font("SansSerif", Font.PLAIN, 12), 
 			"CELL_FONT_FACE", "Cell Font Face", CyColumn.class);
 	
-	public static final VisualProperty<CellFormat> COLUMN_FORMAT = new CellFormatVisualProperty(new CellFormat(""),
-			"CELL_FORMAT", "Cell Number Format", CyColumn.class);
-	
-	
-	private static BasicTableVisualLexicon instance;
-	
-	/** @deprecated this is temporary */
-	@Deprecated
-	public static synchronized BasicTableVisualLexicon getInstance() {
-		if(instance == null) {
-			instance = new BasicTableVisualLexicon(TEMP_ROOT);
-		}
-		return instance; 
-	}
+
 	
 	
 	
