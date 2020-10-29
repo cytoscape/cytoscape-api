@@ -10,10 +10,10 @@ public interface TableVisualMappingManager {
 
 	/**
 	 * Set a {@linkplain VisualStyle} to the target column view model.
-	 * @param visualStyle Visual Style to be set.
-	 * @param networkViewModel The target column view model.
+	 * @param visualStyle Visual Style to be set.  May be null.
+	 * @param viewModel The target column view model.
 	 */
-	void setVisualStyle(VisualStyle visualStyle, View<CyColumn> viewModel);
+	void setVisualStyle(View<CyColumn> viewModel, VisualStyle visualStyle);
 	
 	/**
 	 * Returns the {@linkplain VisualStyle} associated with the target network view model.
@@ -28,18 +28,6 @@ public interface TableVisualMappingManager {
 	 */
 	Set<VisualStyle> getAllVisualStyles();
 
-	/**
-	 * Add a new {@link VisualStyle} to this manager.
-	 * @param visualStyle  new visual style to be registered.
-	 */
-	void addVisualStyle(VisualStyle visualStyle);
-
-	/**
-	 * Remove a VisualStyle from this manager.
-	 * @param visualStyle  VisualStyle to be removed.
-	 */
-	void removeVisualStyle(VisualStyle visualStyle);
-	
 	/**
 	 * Returns a Set of all {@link VisualLexicon}s.
 	 * @return a Set of all {@link VisualLexicon}s.
