@@ -42,6 +42,7 @@ import org.cytoscape.model.CyTableMetadata;
 import org.cytoscape.property.CyProperty;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
+import org.cytoscape.view.model.table.CyTableView;
 import org.cytoscape.view.vizmap.VisualStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,6 +73,7 @@ public final class CySession {
 	private final Set<CyNetwork> networks;
 	private final Set<CyNetworkView> netViews;
 	private final Set<CyTableMetadata> tables;
+	private final Set<CyTableView> tableViews;
 	private final Map<CyNetworkView, String> vsMap;
 	private final Map<View<CyColumn>, String> csMap;
 	private final Set<CyProperty<?>> properties;
@@ -84,20 +86,17 @@ public final class CySession {
 
 	private CySession(Builder b) {
 		// Make defensive copies of objects
-		networks = Collections.unmodifiableSet( b.networks == null ? new HashSet<CyNetwork>() : b.networks );
-		netViews = Collections.unmodifiableSet( b.netViews == null ? new HashSet<CyNetworkView>() : b.netViews );
-		tables = Collections.unmodifiableSet( b.tables == null ? new HashSet<CyTableMetadata>() : b.tables );
-		vsMap = Collections.unmodifiableMap( b.vsMap == null ? new WeakHashMap<CyNetworkView, String>() : b.vsMap );
-		csMap = Collections.unmodifiableMap( b.csMap == null ? new WeakHashMap<View<CyColumn>, String>() : b.csMap );
-		properties = Collections.unmodifiableSet( b.properties == null ? new HashSet<CyProperty<?>>() : b.properties );
-		visualStyles = Collections.unmodifiableSet( b.visualStyles == null ? new HashSet<VisualStyle>() : b.visualStyles );
-		tableStyles = Collections.unmodifiableSet( b.tableStyles == null ? new HashSet<VisualStyle>() : b.tableStyles );
-		appFiles = Collections.unmodifiableMap( b.appFiles == null ? new HashMap<String, List<File>>() : b.appFiles );
-		
-		if (b.objectMap == null)
-			objectMap = Collections.unmodifiableMap(new HashMap<Class<? extends CyIdentifiable>, Map<Object, ? extends CyIdentifiable>>());
-		else
-			objectMap = Collections.unmodifiableMap(b.objectMap);
+		networks = Collections.unmodifiableSet( b.networks == null ? new HashSet<>() : b.networks );
+		netViews = Collections.unmodifiableSet( b.netViews == null ? new HashSet<>() : b.netViews );
+		tableViews = Collections.unmodifiableSet( b.tableViews == null ? new HashSet<>() : b.tableViews );
+		tables = Collections.unmodifiableSet( b.tables == null ? new HashSet<>() : b.tables );
+		vsMap = Collections.unmodifiableMap( b.vsMap == null ? new WeakHashMap<>() : b.vsMap );
+		csMap = Collections.unmodifiableMap( b.csMap == null ? new WeakHashMap<>() : b.csMap );
+		properties = Collections.unmodifiableSet( b.properties == null ? new HashSet<>() : b.properties );
+		visualStyles = Collections.unmodifiableSet( b.visualStyles == null ? new HashSet<>() : b.visualStyles );
+		tableStyles = Collections.unmodifiableSet( b.tableStyles == null ? new HashSet<>() : b.tableStyles );
+		appFiles = Collections.unmodifiableMap( b.appFiles == null ? new HashMap<>() : b.appFiles );
+		objectMap =  Collections.unmodifiableMap( b.objectMap == null ? new HashMap<>() : b.objectMap );
 	}
 
 	/**
@@ -109,6 +108,7 @@ public final class CySession {
 		private Set<CyNetwork> networks; 
 		private Set<CyNetworkView> netViews; 
 		private Set<CyTableMetadata> tables;
+		private Set<CyTableView> tableViews;
 		private Map<CyNetworkView, String> vsMap; 
 		private Map<View<CyColumn>, String> csMap;
 		private Set<CyProperty<?>> properties;
@@ -135,12 +135,21 @@ public final class CySession {
 		
 		/**
 		 * Returns an instance of Builder that has at least been configured with the specified network views.
-		 * @param views A Set of CyNetworkView objects, presumably all network views that exist in this instance of
-		 *            Cytoscape.
+		 * @param views A Set of CyNetworkView objects, presumably all network views that exist in this instance of Cytoscape.
 		 * @return An instance of Builder that has at least been configured with the specified network views.
 		 */
 		public Builder networkViews(final Set<CyNetworkView> views) { 
 			netViews = views; 
+			return this;
+		}
+		
+		/**
+		 * Returns an instance of Builder that has at least been configured with the specified table views.
+		 * @param views A Set of CyTableView objects, presumably all table views that exist in this instance of Cytoscape.
+		 * @return An instance of Builder that has at least been configured with the specified table views.
+		 */
+		public Builder tableViews(final Set<CyTableView> views) { 
+			tableViews = views; 
 			return this;
 		}
 
@@ -246,6 +255,12 @@ public final class CySession {
 	 * @return A set of all CyNetworkView objects contained in this Session. 
 	 */
     public Set<CyNetworkView> getNetworkViews() { return netViews; }
+    
+    /**
+	 * Returns a set of all CyTableView objects contained in this Session. 
+	 * @return A set of all CyTableView objects contained in this Session. 
+	 */
+    public Set<CyTableView> getTableViews() { return tableViews; }
 
 	/**
 	 * Returns a set of all CyTable objects contained in this Session. 
@@ -329,8 +344,7 @@ public final class CySession {
 			try {
 				tableEntry = (T) obj;
 			} catch (ClassCastException cce) {
-				logger.error("ClassCastException: Tried to cast object " + obj + " to " + type + " (old id = " + oldId
-						+ ")");
+				logger.error("ClassCastException: Tried to cast object " + obj + " to " + type + " (old id = " + oldId + ")");
 			}
 		}
 		
