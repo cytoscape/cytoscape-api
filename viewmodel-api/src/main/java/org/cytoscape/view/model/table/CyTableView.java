@@ -4,7 +4,6 @@ import java.util.Collection;
 
 import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyDisposable;
-import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyRow;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.view.model.View;
@@ -30,12 +29,6 @@ public interface CyTableView extends View<CyTable>, CyDisposable {
 	
 	View<CyRow> getRowView(CyRow row);
 	
-	
-	/**
-	 * Returns CyNode, CyEdge or CyNetwork typically. May return null for unassigned tables.
-	 * @return
-	 */
-	Class<? extends CyIdentifiable> getTableType();
 	
 	String getRendererId();
 	
