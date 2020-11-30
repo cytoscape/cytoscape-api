@@ -33,7 +33,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 
-import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyEdge;
 import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyNetwork;
@@ -41,8 +40,7 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.model.CyTableMetadata;
 import org.cytoscape.property.CyProperty;
 import org.cytoscape.view.model.CyNetworkView;
-import org.cytoscape.view.model.View;
-import org.cytoscape.view.model.table.CyTableView;
+import org.cytoscape.view.model.table.CyTableViewMetadata;
 import org.cytoscape.view.vizmap.VisualStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -73,9 +71,8 @@ public final class CySession {
 	private final Set<CyNetwork> networks;
 	private final Set<CyNetworkView> netViews;
 	private final Set<CyTableMetadata> tables;
-	private final Set<CyTableView> tableViews;
+	private final Set<CyTableViewMetadata> tableViews;
 	private final Map<CyNetworkView, String> vsMap;
-	private final Map<View<CyColumn>, String> csMap;
 	private final Set<CyProperty<?>> properties;
 	private final Set<VisualStyle> visualStyles;
 	private final Set<VisualStyle> tableStyles;
@@ -91,7 +88,6 @@ public final class CySession {
 		tableViews = Collections.unmodifiableSet( b.tableViews == null ? new HashSet<>() : b.tableViews );
 		tables = Collections.unmodifiableSet( b.tables == null ? new HashSet<>() : b.tables );
 		vsMap = Collections.unmodifiableMap( b.vsMap == null ? new WeakHashMap<>() : b.vsMap );
-		csMap = Collections.unmodifiableMap( b.csMap == null ? new WeakHashMap<>() : b.csMap );
 		properties = Collections.unmodifiableSet( b.properties == null ? new HashSet<>() : b.properties );
 		visualStyles = Collections.unmodifiableSet( b.visualStyles == null ? new HashSet<>() : b.visualStyles );
 		tableStyles = Collections.unmodifiableSet( b.tableStyles == null ? new HashSet<>() : b.tableStyles );
@@ -108,9 +104,8 @@ public final class CySession {
 		private Set<CyNetwork> networks; 
 		private Set<CyNetworkView> netViews; 
 		private Set<CyTableMetadata> tables;
-		private Set<CyTableView> tableViews;
+		private Set<CyTableViewMetadata> tableViews;
 		private Map<CyNetworkView, String> vsMap; 
-		private Map<View<CyColumn>, String> csMap;
 		private Set<CyProperty<?>> properties;
 		private Set<VisualStyle> visualStyles; 
 		private Set<VisualStyle> tableStyles;
@@ -148,7 +143,7 @@ public final class CySession {
 		 * @param views A Set of CyTableView objects, presumably all table views that exist in this instance of Cytoscape.
 		 * @return An instance of Builder that has at least been configured with the specified table views.
 		 */
-		public Builder tableViews(final Set<CyTableView> views) { 
+		public Builder tableViews(final Set<CyTableViewMetadata> views) { 
 			tableViews = views; 
 			return this;
 		}
@@ -176,19 +171,6 @@ public final class CySession {
 			return this;
 		}
     	
-    	/**
-		 * Returns an instance of Builder that has at least been configured with the specified table view visual style
-		 * name map.
-		 * @param vs A map of CyTableView to the names of the VisualStyle currently applied to that network view, for
-		 *            presumably all network views that exist in this instance of Cytoscape.
-		 * @return An instance of Builder that has at least been configured with the specified network view visual style
-		 *         name map.
-		 */
-    	public Builder viewColumnStyleMap(final  Map<View<CyColumn>, String> vs) { 
-			csMap = vs; 
-			return this;
-		}
-
 		/**
 		 * Returns an instance of Builder that has at least been configured with the specified properties.
 		 * @param p A set of session related {@link CyProperty} objects.
@@ -260,7 +242,7 @@ public final class CySession {
 	 * Returns a set of all CyTableView objects contained in this Session. 
 	 * @return A set of all CyTableView objects contained in this Session. 
 	 */
-    public Set<CyTableView> getTableViews() { return tableViews; }
+    public Set<CyTableViewMetadata> getTableViews() { return tableViews; }
 
 	/**
 	 * Returns a set of all CyTable objects contained in this Session. 
@@ -274,12 +256,6 @@ public final class CySession {
 	 */
     public Map<CyNetworkView, String> getViewVisualStyleMap() { return vsMap; }
     
-    /**
-	 * Returns a map of View<CyColumn> to the names of the VisualStyle applied to that network view in this session.
-	 * @return A map of View<CyColumn> to the names of the VisualStyle applied to that network view in this session.
-	 */
-    public Map<View<CyColumn>, String> getTableVisualStyleMap() { return csMap; }
-
 	/**
 	 * Returns a set of {@link CyProperty} objects defined for this session.
 	 * @return A set of session related {@link CyProperty} objects. defined for this session.
