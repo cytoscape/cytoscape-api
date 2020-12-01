@@ -66,7 +66,7 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "COLUMN_GRAVITY", "Column Gravity", CyColumn.class);
 	
 	public static final VisualProperty<CellFormat> COLUMN_FORMAT = new CellFormatVisualProperty(new CellFormat(""),
-			"CELL_FORMAT", "Cell Number Format", CyColumn.class);
+			"COLUMN_FORMAT", "Cell Number Format", CyColumn.class);
 	
 	
 	// VPs that apply to cells within columns, these show up in the vizmapper and can have mappings
