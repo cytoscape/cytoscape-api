@@ -21,6 +21,8 @@ public interface CyTableView extends View<CyTable>, CyDisposable {
 		return null;
 	}
 	
+	View<CyColumn> getColumnView(long viewSuid);
+	
 	/**
 	 * Returns all column views, in the same order as {@link CyTable#getColumns()}.
 	 * @see CyTable#getColumns()
