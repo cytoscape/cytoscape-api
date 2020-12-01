@@ -1,5 +1,7 @@
 package org.cytoscape.view.model;
 
+import java.util.Comparator;
+
 /*
  * #%L
  * Cytoscape View Model API (viewmodel-api)
@@ -107,5 +109,24 @@ public interface VisualProperty<T> {
 	 * 
 	 */
 	Class<? extends CyIdentifiable> getTargetDataType();
+	
+	
+	/**
+	 * Utility method for sorting collections of Views according to the value of a VisualProperty.
+	 * The VisualProperty value type must implement {@link Comparable}.
+	 * Null values are sorted first.
+	 * <br><br>
+	 * Example:
+	 * <pre>
+	 * // sort node views by z-order
+	 * List&lt;View&lt;CyNode&gt;&gt; nodeViews = new ArrayList<>(networkView.getNodeViews());
+	 * nodeViews.sort(VisualProperty.comparing(BasicVisualLexicon.NODE_Z_LOCATION));
+	 * </pre>
+	 * 
+	 * @since 3.9
+	 */
+	public static <T, V extends Comparable<V>> Comparator<View<T>> comparing(VisualProperty<V> vp) {
+		return Comparator.comparing(view -> view.getVisualProperty(vp), Comparator.nullsFirst(Comparator.naturalOrder()));
+	}
 
 }

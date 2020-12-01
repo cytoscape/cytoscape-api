@@ -43,8 +43,14 @@ import org.cytoscape.work.Task;
 public interface VizmapReader extends Task {
 
 	/**
-	 * Returns a list of {@link org.cytoscape.view.vizmap.VisualStyle} objects.
-	 * @return A list of {@link org.cytoscape.view.vizmap.VisualStyle} objects.
+	 * Returns a list of network {@link org.cytoscape.view.vizmap.VisualStyle} objects.
+	 * @return A list of network {@link org.cytoscape.view.vizmap.VisualStyle} objects.
 	 */
 	Set<VisualStyle> getVisualStyles();
+	
+	/**
+	 * Returns a list of table {@link org.cytoscape.view.vizmap.VisualStyle} objects.
+	 * @return A list of table {@link org.cytoscape.view.vizmap.VisualStyle} objects.
+	 */
+	Set<VisualStyle> getTableVisualStyles();
 }

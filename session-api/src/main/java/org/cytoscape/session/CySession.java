@@ -33,12 +33,14 @@ import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 
+import org.cytoscape.model.CyEdge;
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.model.CyNode;
-import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyTableMetadata;
 import org.cytoscape.property.CyProperty;
 import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.table.CyTableViewMetadata;
 import org.cytoscape.view.vizmap.VisualStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -69,9 +71,11 @@ public final class CySession {
 	private final Set<CyNetwork> networks;
 	private final Set<CyNetworkView> netViews;
 	private final Set<CyTableMetadata> tables;
+	private final Set<CyTableViewMetadata> tableViews;
 	private final Map<CyNetworkView, String> vsMap;
 	private final Set<CyProperty<?>> properties;
 	private final Set<VisualStyle> visualStyles;
+	private final Set<VisualStyle> tableStyles;
 	private final Map<String, List<File>> appFiles;
 	private final Map<Class<? extends CyIdentifiable>, Map<Object, ? extends CyIdentifiable>> objectMap;
 
@@ -79,18 +83,16 @@ public final class CySession {
 
 	private CySession(Builder b) {
 		// Make defensive copies of objects
-		networks = Collections.unmodifiableSet( b.networks == null ? new HashSet<CyNetwork>() : b.networks );
-		netViews = Collections.unmodifiableSet( b.netViews == null ? new HashSet<CyNetworkView>() : b.netViews );
-		tables = Collections.unmodifiableSet( b.tables == null ? new HashSet<CyTableMetadata>() : b.tables );
-		vsMap = Collections.unmodifiableMap( b.vsMap == null ? new WeakHashMap<CyNetworkView, String>() : b.vsMap );
-		properties = Collections.unmodifiableSet( b.properties == null ? new HashSet<CyProperty<?>>() : b.properties );
-		visualStyles = Collections.unmodifiableSet( b.visualStyles == null ? new HashSet<VisualStyle>() : b.visualStyles );
-		appFiles = Collections.unmodifiableMap( b.appFiles == null ? new HashMap<String, List<File>>() : b.appFiles );
-		
-		if (b.objectMap == null)
-			objectMap = Collections.unmodifiableMap(new HashMap<Class<? extends CyIdentifiable>, Map<Object, ? extends CyIdentifiable>>());
-		else
-			objectMap = Collections.unmodifiableMap(b.objectMap);
+		networks = Collections.unmodifiableSet( b.networks == null ? new HashSet<>() : b.networks );
+		netViews = Collections.unmodifiableSet( b.netViews == null ? new HashSet<>() : b.netViews );
+		tableViews = Collections.unmodifiableSet( b.tableViews == null ? new HashSet<>() : b.tableViews );
+		tables = Collections.unmodifiableSet( b.tables == null ? new HashSet<>() : b.tables );
+		vsMap = Collections.unmodifiableMap( b.vsMap == null ? new WeakHashMap<>() : b.vsMap );
+		properties = Collections.unmodifiableSet( b.properties == null ? new HashSet<>() : b.properties );
+		visualStyles = Collections.unmodifiableSet( b.visualStyles == null ? new HashSet<>() : b.visualStyles );
+		tableStyles = Collections.unmodifiableSet( b.tableStyles == null ? new HashSet<>() : b.tableStyles );
+		appFiles = Collections.unmodifiableMap( b.appFiles == null ? new HashMap<>() : b.appFiles );
+		objectMap =  Collections.unmodifiableMap( b.objectMap == null ? new HashMap<>() : b.objectMap );
 	}
 
 	/**
@@ -102,9 +104,11 @@ public final class CySession {
 		private Set<CyNetwork> networks; 
 		private Set<CyNetworkView> netViews; 
 		private Set<CyTableMetadata> tables;
+		private Set<CyTableViewMetadata> tableViews;
 		private Map<CyNetworkView, String> vsMap; 
 		private Set<CyProperty<?>> properties;
 		private Set<VisualStyle> visualStyles; 
+		private Set<VisualStyle> tableStyles;
 		private Map<String, List<File>> appFiles;
 		private Map<Class<? extends CyIdentifiable>, Map<Object, ? extends CyIdentifiable>> objectMap;
 
@@ -126,12 +130,21 @@ public final class CySession {
 		
 		/**
 		 * Returns an instance of Builder that has at least been configured with the specified network views.
-		 * @param views A Set of CyNetworkView objects, presumably all network views that exist in this instance of
-		 *            Cytoscape.
+		 * @param views A Set of CyNetworkView objects, presumably all network views that exist in this instance of Cytoscape.
 		 * @return An instance of Builder that has at least been configured with the specified network views.
 		 */
 		public Builder networkViews(final Set<CyNetworkView> views) { 
 			netViews = views; 
+			return this;
+		}
+		
+		/**
+		 * Returns an instance of Builder that has at least been configured with the specified table views.
+		 * @param views A Set of CyTableView objects, presumably all table views that exist in this instance of Cytoscape.
+		 * @return An instance of Builder that has at least been configured with the specified table views.
+		 */
+		public Builder tableViews(final Set<CyTableViewMetadata> views) { 
+			tableViews = views; 
 			return this;
 		}
 
@@ -157,7 +170,7 @@ public final class CySession {
 			vsMap = vs; 
 			return this;
 		}
-
+    	
 		/**
 		 * Returns an instance of Builder that has at least been configured with the specified properties.
 		 * @param p A set of session related {@link CyProperty} objects.
@@ -170,7 +183,7 @@ public final class CySession {
 
 		/**
 		 * Returns an instance of Builder that has at least been configured with the specified properties.
-		 * @param styles All VisualStyles in this instance of Cytoscape.
+		 * @param styles All network VisualStyles in this instance of Cytoscape.
 		 * @return An instance of Builder that has at least been configured with the specified properties.
 		 */
     	public Builder visualStyles(final Set<VisualStyle> styles) { 
@@ -178,6 +191,16 @@ public final class CySession {
 			return this;
 		}
 
+    	/**
+		 * Returns an instance of Builder that has at least been configured with the specified properties.
+		 * @param styles All table VisualStyles in this instance of Cytoscape.
+		 * @return An instance of Builder that has at least been configured with the specified properties.
+		 */
+    	public Builder tableStyles(final Set<VisualStyle> styles) { 
+			tableStyles = styles; 
+			return this;
+		}
+    	
 		/**
 		 * Returns an instance of Builder that has at least been configured with the specified app file list map.<br/>
 		 * The app name should follow the java class namespace convention (e.g. org.orgname.appname) in order to prevent
@@ -214,6 +237,12 @@ public final class CySession {
 	 * @return A set of all CyNetworkView objects contained in this Session. 
 	 */
     public Set<CyNetworkView> getNetworkViews() { return netViews; }
+    
+    /**
+	 * Returns a set of all CyTableView objects contained in this Session. 
+	 * @return A set of all CyTableView objects contained in this Session. 
+	 */
+    public Set<CyTableViewMetadata> getTableViews() { return tableViews; }
 
 	/**
 	 * Returns a set of all CyTable objects contained in this Session. 
@@ -226,7 +255,7 @@ public final class CySession {
 	 * @return A map of CyNetworkViews to the names of the VisualStyle applied to that network view in this session.
 	 */
     public Map<CyNetworkView, String> getViewVisualStyleMap() { return vsMap; }
-
+    
 	/**
 	 * Returns a set of {@link CyProperty} objects defined for this session.
 	 * @return A set of session related {@link CyProperty} objects. defined for this session.
@@ -234,10 +263,16 @@ public final class CySession {
     public Set<CyProperty<?>> getProperties() { return properties; }
 
 	/**
-	 * Returns a set containing all VisualStyles defined for this session.
+	 * Returns a set containing all network VisualStyles defined for this session.
 	 * @return A Set of {@link org.cytoscape.view.vizmap.VisualStyle} objects
 	 */
     public Set<VisualStyle> getVisualStyles() { return visualStyles; }
+    
+    /**
+	 * Returns a set containing all table VisualStyles defined for this session.
+	 * @return A Set of {@link org.cytoscape.view.vizmap.VisualStyle} objects
+	 */
+    public Set<VisualStyle> getTableStyles() { return tableStyles; }
 
 	/**
 	 * Returns a map of app names to lists of File objects that are stored as part of the session for the specified app.
@@ -285,8 +320,7 @@ public final class CySession {
 			try {
 				tableEntry = (T) obj;
 			} catch (ClassCastException cce) {
-				logger.error("ClassCastException: Tried to cast object " + obj + " to " + type + " (old id = " + oldId
-						+ ")");
+				logger.error("ClassCastException: Tried to cast object " + obj + " to " + type + " (old id = " + oldId + ")");
 			}
 		}
 		

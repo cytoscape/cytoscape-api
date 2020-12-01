@@ -43,12 +43,22 @@ import org.cytoscape.view.model.VisualLexicon;
 public interface RenderingEngineManager {
 
 	/**
-	 * Provide default {@link VisualLexicon} from a default engine factory. In
+	 * Provide default network {@link VisualLexicon} from a default engine factory. In
 	 * current implementation, this is always DING's lexicon.
 	 * 
-	 * @return default VisualLexicon.
+	 * Note: this does not return the visual lexicon used for table styles.
+	 * 
+	 * @return default network VisualLexicon.
 	 */
 	VisualLexicon getDefaultVisualLexicon();
+	
+	/**
+	 * Provide default table {@link VisualLexicon} from a default engine factory. In
+	 * current implementation, this is the lexicon used by the table browser.
+	 * 
+	 * @return default table VisualLexicon.
+	 */
+	VisualLexicon getDefaultTableVisualLexicon();
 
 	/**
 	 * Get rendering engines for the given view model.

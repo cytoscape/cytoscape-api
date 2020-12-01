@@ -4,21 +4,33 @@ import java.util.Set;
 
 import org.cytoscape.model.CyTable;
 
-// MKTODO make sure these are getting called in the right places
+/**
+ * Basic access to table views in an instance of Cytoscape.
+ * There can only be one table view per table, and the table view
+ * is created automatically on demand.
+ * 
+ * @CyAPI.Api.Interface
+ * @CyAPI.InModule viewmodel-api
+ */
 public interface CyTableViewManager {
 
-	
 	Set<CyTableView> getTableViewSet();
-	
-	// NO support for multiple table views!
+
+	/**
+	 * Returns the table view for the table.
+	 */
 	CyTableView getTableView(CyTable table);
 	
+	/**
+	 * Sets the table view for the given table.
+	 * Note: you cannot replace the table view for the default node/edge/network tables.
+	 */
+	void setTableView(CyTableView tableView);
 	
-	void addTableView(CyTableView tableView);
-	
-	
-	void destroyTableView(CyTableView tableView);
-
+	/**
+	 * Destroys the given table view.
+	 */
+	void destroyTableView(CyTableView view);
 	
 	/**
 	 * @CyAPI.NoReference.Method Apps should not call this method. Resetting 
