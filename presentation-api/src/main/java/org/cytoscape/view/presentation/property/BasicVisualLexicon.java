@@ -14,6 +14,7 @@ import org.cytoscape.view.model.VisualProperty;
 import org.cytoscape.view.model.Visualizable;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
 import org.cytoscape.view.presentation.property.values.BendFactory;
+import org.cytoscape.view.presentation.property.values.EdgeStacking;
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 
@@ -445,6 +446,13 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 			"EDGE_LABEL_WIDTH", "Edge Label Width", CyEdge.class);
 
 
+	public static final VisualProperty<EdgeStacking> EDGE_STACKING = new EdgeStackingVisualProperty(
+			EdgeStackingVisualProperty.AUTO_BEND, "EDGE_STACKING", "Edge Stacking", CyEdge.class);
+	
+	public static final VisualProperty<Double> EDGE_STACKING_DENSITY = new DoubleVisualProperty(0.5, // default must be 0.5 for backwards compatibility
+			new ContinuousRange<>(Double.class, 0.0, 1.0, true, true), 
+			"EDGE_STACKING_DENSITY", "Stacking Density", CyEdge.class);
+	
 	// ////// Network VP ////////
 	/**
 	 * The zoom level of the network view.
@@ -619,6 +627,8 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 		addVisualProperty(EDGE_TARGET_ARROW_SIZE, EDGE);
 		addVisualProperty(EDGE_BEND, EDGE);
 		addVisualProperty(EDGE_LABEL_WIDTH, EDGE);
+		addVisualProperty(EDGE_STACKING, EDGE);
+		addVisualProperty(EDGE_STACKING_DENSITY, EDGE);
 
 		// Level 3 - 4: Node-related VP
 		addVisualProperty(NODE_FILL_COLOR, NODE_PAINT);
