@@ -5,7 +5,8 @@ import java.awt.Graphics;
 
 import javax.swing.CellRendererPane;
 import javax.swing.JComponent;
-import javax.swing.JTextArea;
+import javax.swing.JEditorPane;
+import javax.swing.JTextPane;
 import javax.swing.JToolTip;
 import javax.swing.JWindow;
 import javax.swing.plaf.basic.BasicToolTipUI;
@@ -32,7 +33,7 @@ class TextWrapToolTipUI extends BasicToolTipUI {
 	private static TextWrapToolTipUI instance;
 	
 	private CellRendererPane rendererPane;
-	private JTextArea textArea;
+	private JTextPane textPane;
 
 	
 	private TextWrapToolTipUI() {
@@ -62,8 +63,8 @@ class TextWrapToolTipUI extends BasicToolTipUI {
 	@Override
 	public void paint(Graphics g, JComponent c) {
 		Dimension size = c.getSize();
-		textArea.setBackground(c.getBackground());
-		rendererPane.paintComponent(g, textArea, c, 1, 1, size.width - 1, size.height - 1, true);
+		textPane.setBackground(c.getBackground());
+		rendererPane.paintComponent(g, textPane, c, 1, 1, size.width - 1, size.height - 1, true);
 	}
 
 	@Override
@@ -73,13 +74,17 @@ class TextWrapToolTipUI extends BasicToolTipUI {
 		if (tipText == null)
 			return new Dimension(0, 0);
 
-		textArea = new JTextArea(tipText);
-		textArea.setWrapStyleWord(true);
+		textPane = new JTextPane();
 		
-		if (c.getFont() != null)
-			textArea.setFont(c.getFont());
+		if(tipText.trim().startsWith("<html>"))
+			textPane.setContentType("text/html");
 		
-		textArea.setLineWrap(true);
+		textPane.setText(tipText);
+		
+		if (c.getFont() != null) {
+			textPane.putClientProperty(JEditorPane.HONOR_DISPLAY_PROPERTIES, Boolean.TRUE);
+			textPane.setFont(c.getFont());
+		}
 		
 		Dimension pref = super.getPreferredSize(c);
 		Dimension max = c.getMaximumSize();
@@ -87,32 +92,32 @@ class TextWrapToolTipUI extends BasicToolTipUI {
 		int h = Math.min(max.height, pref.height);
 		
 		JWindow win = new JWindow();
-		win.getContentPane().add(textArea);
+		win.getContentPane().add(textPane);
 		win.setPreferredSize(new Dimension(w, h));
 		win.setMaximumSize(new Dimension(w, max.height));
 		win.pack();
 		Dimension size = win.getSize();
 		win.getContentPane().removeAll();
 		
-		textArea.setSize(size);
+		textPane.setSize(size);
 		
-		Dimension dim = textArea.getPreferredSize();
+		Dimension dim = textPane.getPreferredSize();
 		dim.height += 1;
 		dim.width += 1;
 		
 		rendererPane.removeAll();
-		rendererPane.add(textArea);
+		rendererPane.add(textPane);
 		
 		return dim;
 	}
 
 	@Override
 	public Dimension getMinimumSize(JComponent c) {
-		return textArea == null ? super.getMinimumSize(c) : textArea.getMinimumSize();
+		return textPane == null ? super.getMinimumSize(c) : textPane.getMinimumSize();
 	}
 
 	@Override
 	public Dimension getMaximumSize(JComponent c) {
-		return textArea == null ? super.getMaximumSize(c) : textArea.getMaximumSize();
+		return textPane == null ? super.getMaximumSize(c) : textPane.getMaximumSize();
 	}
 }
