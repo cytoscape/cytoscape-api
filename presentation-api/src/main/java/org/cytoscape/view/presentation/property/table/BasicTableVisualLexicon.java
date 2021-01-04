@@ -69,6 +69,7 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 			"COLUMN_FORMAT", "Cell Number Format", CyColumn.class);
 	
 	
+	
 	// VPs that apply to cells within columns, these show up in the vizmapper and can have mappings
 	public static final VisualProperty<Paint> CELL_BACKGROUND_PAINT = new PaintVisualProperty(UIManager.getColor("Table.background"),
 			PAINT_RANGE, "CELL_BACKGROUND_PAINT", "Cell Background Paint", CyColumn.class);
@@ -76,7 +77,8 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	public static final VisualProperty<Font> CELL_FONT_FACE = new FontVisualProperty(new Font("SansSerif", Font.PLAIN, 12), 
 			"CELL_FONT_FACE", "Cell Font Face", CyColumn.class);
 	
-
+	public static final VisualProperty<Paint> CELL_TEXT_COLOR = new PaintVisualProperty(UIManager.getColor("Table.foreground"),
+			PAINT_RANGE, "CELL_TEXT_COLOR", "Cell Text Paint", CyColumn.class);
 	
 	
 	
@@ -111,7 +113,7 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 		
 		addVisualProperty(CELL_BACKGROUND_PAINT, CELL);
 		addVisualProperty(CELL_FONT_FACE, CELL);
-		
+		addVisualProperty(CELL_TEXT_COLOR, CELL);
 	}
 	
 }

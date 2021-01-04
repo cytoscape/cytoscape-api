@@ -23,12 +23,7 @@ package org.cytoscape.view.presentation;
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
  */
-
-import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.util.Collection;
 
@@ -72,7 +67,7 @@ public class BasicVisualLexiconTest extends AbstractVisualLexiconTest {
 
 	@Test
 	public void test2DLexicon() throws Exception {
-		assertEquals(62, richLex.getAllVisualProperties().size());
+		assertEquals(64, richLex.getAllVisualProperties().size());
 	}
 
 	@Test
@@ -87,12 +82,10 @@ public class BasicVisualLexiconTest extends AbstractVisualLexiconTest {
 
 		assertEquals(richLex.getAllVisualProperties().size() - 1, allChildren.size());
 
-		Collection<VisualLexiconNode> nodeTextChild = richLex.getVisualLexiconNode(BasicVisualLexicon.NODE_LABEL)
-				.getChildren();
+		Collection<VisualLexiconNode> nodeTextChild = richLex.getVisualLexiconNode(BasicVisualLexicon.NODE_LABEL).getChildren();
 		assertEquals(0, nodeTextChild.size());
 
-		Collection<VisualLexiconNode> nodePaintChild = richLex.getVisualLexiconNode(BasicVisualLexicon.NODE_PAINT)
-				.getChildren();
+		Collection<VisualLexiconNode> nodePaintChild = richLex.getVisualLexiconNode(BasicVisualLexicon.NODE_PAINT).getChildren();
 		assertEquals(4, nodePaintChild.size());
 		assertEquals(richLex.getAllDescendants(BasicVisualLexicon.NODE_PAINT).size(), nodePaintChild.size());
 
@@ -100,7 +93,7 @@ public class BasicVisualLexiconTest extends AbstractVisualLexiconTest {
 		assertEquals(26, nodeChildren.size());
 
 		Collection<VisualProperty<?>> edgeChildren = richLex.getAllDescendants(BasicVisualLexicon.EDGE);
-		assertEquals(22, edgeChildren.size());
+		assertEquals(24, edgeChildren.size());
 
 		Collection<VisualProperty<?>> leaf = richLex.getAllDescendants(BasicVisualLexicon.EDGE_LABEL_COLOR);
 		assertEquals(0, leaf.size());
