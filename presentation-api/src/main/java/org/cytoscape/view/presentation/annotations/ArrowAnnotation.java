@@ -1,12 +1,20 @@
 package org.cytoscape.view.presentation.annotations;
 
+import java.awt.Paint;
+import java.awt.geom.Point2D;
+import java.util.List;
+
+import org.cytoscape.model.CyIdentifiable;
+import org.cytoscape.model.CyNode;
+import org.cytoscape.view.model.View;
+
 /*
  * #%L
  * Cytoscape Presentation API (presentation-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2020 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -23,13 +31,6 @@ package org.cytoscape.view.presentation.annotations;
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
  */
-
-import java.awt.Graphics;
-import java.awt.Paint;
-import java.awt.geom.Point2D;
-import java.util.List;
-
-import org.cytoscape.model.CyNode;
 
 /**
  * This is the interface for an arrow annotation.  In general, an arrow connects
@@ -71,11 +72,11 @@ public interface ArrowAnnotation extends Annotation {
 	public void setSource(Annotation source);
 
 	/**
- 	 * Return the target object for this arrow.  Currently supported
- 	 * targets include {@link Annotation}s, {@link CyNode}s, and arbitrary
- 	 * points on the canvas.
+ 	 * Return the target object for this arrow.
+ 	 * Currently supported targets include {@link Annotation}s, {@link CyNode} {@link View}s,
+ 	 * and arbitrary points on the canvas.
  	 *
- 	 * @return the the target.  Callers should test to determine the appropriate type
+ 	 * @return the the target. Callers should test to determine the appropriate type
  	 */
 	public Object getTarget();
 
@@ -90,8 +91,18 @@ public interface ArrowAnnotation extends Annotation {
  	 * Set the target for this arrow assuming the target is a {@link CyNode}
  	 *
  	 * @param target the target for this arrow
+ 	 * @deprecated Use {@link #setTarget(View)} instead.
  	 */
+	@Deprecated
 	public void setTarget(CyNode target);
+	
+	/**
+ 	 * Set the target for this arrow assuming the target is a {@link View} object.
+ 	 * Only {@link CyNode} views are supported currently.
+ 	 *
+ 	 * @param target the target node view for this arrow
+ 	 */
+	public void setTarget(View<? extends CyIdentifiable> target);
 
 	/**
  	 * Set the target for this arrow assuming the target is a point on the canvas

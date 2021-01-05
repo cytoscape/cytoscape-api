@@ -1,12 +1,19 @@
 package org.cytoscape.view.presentation.annotations;
 
+import java.awt.geom.Point2D;
+import java.util.Map;
+import java.util.Set;
+import java.util.UUID;
+
+import org.cytoscape.view.model.CyNetworkView;
+
 /*
  * #%L
  * Cytoscape Presentation API (presentation-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2021 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -23,13 +30,6 @@ package org.cytoscape.view.presentation.annotations;
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
  */
-
-import java.awt.geom.Point2D;
-import java.util.Map;
-import java.util.Set;
-import java.util.UUID;
-
-import org.cytoscape.view.model.CyNetworkView;
 
 /**
  * This is the base interface for all Annotations.  An annotation is a graphical object that
@@ -140,6 +140,20 @@ public interface Annotation {
 	 */
 	public void moveAnnotation(Point2D location);
 
+	/**
+	 * Get the x position of the annotation
+	 *
+	 * @return the x position of the annotation
+	 */
+	public default double getX() { return 0.0; }
+	
+	/**
+	 * Get the y position of the annotation
+	 *
+	 * @return the y position of the annotation
+	 */
+	public default double getY() { return 0.0; }
+	
 	/**
 	 * Get the Z order of the annotation
 	 *
