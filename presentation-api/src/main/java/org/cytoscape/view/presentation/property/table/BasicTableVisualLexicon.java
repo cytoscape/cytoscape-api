@@ -19,7 +19,6 @@ import org.cytoscape.view.presentation.property.PaintVisualProperty;
 
 public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	
-	
 	// Four Categories of VisualProperty
 	
 	public static final VisualProperty<Visualizable> TABLE = new DefaultVisualizableVisualProperty("Table",
@@ -80,12 +79,9 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	public static final VisualProperty<Paint> CELL_TEXT_COLOR = new PaintVisualProperty(UIManager.getColor("Table.foreground"),
 			PAINT_RANGE, "CELL_TEXT_COLOR", "Cell Text Paint", CyColumn.class);
 	
-	
-	
 	public BasicTableVisualLexicon(VisualProperty<NullDataType> root) {
 		super(root);
 	}
-
 
 	@Override
 	protected Class<?>[] getTypes() {
@@ -95,7 +91,6 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 			CyColumn.class
 		};
 	}
-	
 	
 	@Override
 	protected void addVisualProperties(final VisualProperty<NullDataType> root) {
@@ -115,5 +110,4 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 		addVisualProperty(CELL_FONT_FACE, CELL);
 		addVisualProperty(CELL_TEXT_COLOR, CELL);
 	}
-	
 }

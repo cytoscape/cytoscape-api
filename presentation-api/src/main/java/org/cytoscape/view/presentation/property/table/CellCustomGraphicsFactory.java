@@ -1,71 +1,65 @@
-package org.cytoscape.view.presentation.customgraphics;
+package org.cytoscape.view.presentation.property.table;
 
 import java.util.Map;
 
 import javax.swing.Icon;
 import javax.swing.JComponent;
 
-
 /**
  * <p>
- * Factory to create {@link CyCustomGraphics2} objects. 
- * CyCustomGraphics2Factory objects are registered as OSGi services and 
- * will be used by Renderers to create the actual custom graphics
- * implementations. 
- * Note that the type parameter T of CyCustomGraphics2Factory is
- * the type of the underlying {@link CustomGraphicLayer} not the type
- * of the resulting {@link CyCustomGraphics2} object this factory creates.
+ * Factory to create {@link CellCustomGraphics} objects. 
+ * CellCustomGraphicsFactory objects are registered as OSGi services and 
+ * will be used by Renderers to create the actual custom graphics implementations. 
  * </p>
  * <p>
- * The pattern is to register CyCustomGraphics2Factory 
- * implementations as OSGi services in your CyActivator class.
+ * The pattern is to register CellCustomGraphicsFactory implementations as OSGi services in your CyActivator class.
  * </p>
- * 
  * 
  * <pre>
- * CyCustomGraphics2Factory myCustomGraphics2Factory = new MyCustomGraphics2Factory();
- * registerService(bundleContext, myCustomGraphics2Factory, CyCustomGraphics2Factory.class, new Properties());
+ * CellCustomGraphicsFactory myCgFactory = new MyCustomGraphicsFactory();
+ * registerService(bundleContext, myCgFactory, CellCustomGraphicsFactory.class, new Properties());
  * </pre>
  * 
- * <h2>Charts</h2>
+ * <h2>Sparklines</h2>
  * 
  * <p>
- * Cytoscape provides some predefined custom graphics factories for creating charts.
+ * Cytoscape provides some predefined custom graphics factories for creating sparklines.
  * These factories can be retrieved as OSGi services by using their IDs.
  * </p>
  * 
+ * TODO:
  * <table border="1">
- * <tr><td>Bar Chart</td><td><code>org.cytoscape.BarChart</code></td>
- * <tr><td>Box Chart</td><td><code>org.cytoscape.BoxChart</code></td>
- * <tr><td>Heat Map Chart</td><td><code>org.cytoscape.HeatMapChart</code></td>
- * <tr><td>Line Chart</td><td><code>org.cytoscape.LineChart</code></td>
- * <tr><td>Pie Chart</td><td><code>org.cytoscape.PieChart</code></td>
- * <tr><td>Ring Chart</td><td><code>org.cytoscape.RingChart</code></td>
- * <tr><td>Linear Gradient</td><td><code>org.cytoscape.LinearGradient</code></td>
- * <tr><td>Radial Gradient</td><td><code>org.cytoscape.RadialGradient</code></td>
+ * <tr><td>Bar Sparkline</td><td><code>org.cytoscape.BarCellSparkline</code></td>
+ * <tr><td>Box Sparkline</td><td><code>org.cytoscape.BoxCellSparkline</code></td>
+ * <tr><td>Heat Map Sparkline</td><td><code>org.cytoscape.HeatMapCellSparkline</code></td>
+ * <tr><td>Line Sparkline</td><td><code>org.cytoscape.LineCellSparkline</code></td>
+ * <tr><td>Pie Sparkline</td><td><code>org.cytoscape.PieCellSparkline</code></td>
+ * <tr><td>Ring Sparkline</td><td><code>org.cytoscape.RingCellSparkline</code></td>
+ * <tr><td>Linear Gradient</td><td><code>org.cytoscape.LinearCellGradient</code></td>
+ * <tr><td>Radial Gradient</td><td><code>org.cytoscape.RadialCellGradient</code></td>
  * </table>
  * 
  * <p>
- * To retrieve a reference to a predefined chart factory you must use an OSGi service listener.
+ * To retrieve a reference to a predefined sparkline factory you must use an OSGi service listener.
  * For example:
  * </p>
  * 
  * <pre>
  * public class CustomChartListener {
  *	private static final String FACTORY_ID = "org.cytoscape.PieChart";
- *	private CyCustomGraphics2Factory&lt;?&gt; factory;
+ *	private CellCustomGraphicsFactory&lt;?&gt; factory;
  *	
- *	public void addCustomGraphicsFactory(CyCustomGraphics2Factory&lt;?&gt; factory, Map&lt;Object,Object&gt; serviceProps) {
+ *	public void addCustomGraphicsFactory(CellCustomGraphicsFactory&lt;?&gt; factory, Map&lt;Object,Object&gt; serviceProps) {
  *		if(FACTORY_ID.equals(factory.getId())) {
  *			this.factory = factory;
  *		}
  *	}
  *	
- *	public void removeCustomGraphicsFactory(CyCustomGraphics2Factory&lt;?&gt; factory, Map&lt;Object,Object&gt; serviceProps) {
+ *	public void removeCustomGraphicsFactory(CellCustomGraphicsFactory&lt;?&gt; factory, Map&lt;Object,Object&gt; serviceProps) {
  *		this.factory = null;
  *	}
  *	
- *	public CyCustomGraphics2Factory&lt;?&gt; getFactory() {
+ *	public CellCustomGraphicsFactory&lt;?&gt; getFactory() {
  *		return factory;
  *	}
  * }
@@ -75,17 +69,17 @@ import javax.swing.JComponent;
  * 
  * <pre>
  *   CustomChartListener customChartListener = new CustomChartListener();
- *   registerServiceListener(context, customChartListener, "addCustomGraphicsFactory", "removeCustomGraphicsFactory", CyCustomGraphics2Factory.class);
+ *   registerServiceListener(context, customChartListener, "addCustomGraphicsFactory", "removeCustomGraphicsFactory", CellCustomGraphicsFactory.class);
  * </pre>
  * 
  * <p>
- * Use the factory to create an instance of CyCustomGraphics2 for your charts.
- * The data and appearance of the charts are controlled by a Map of properties
+ * Use the factory to create an instance of CellCustomGraphics for your sparklines.
+ * The data and appearance of the sparklines are controlled by a Map of properties
  * that are passed to the getInstance() method.
  * </p>
  * 
  * <pre>
- * CyCustomGraphics2Factory&lt;?&gt; customGraphicsFactory = customChartListener.getFactory();
+ * CellCustomGraphicsFactory&lt;?&gt; customGraphicsFactory = customChartListener.getFactory();
  * CyColumnIdentifierFactory columnIdFactory; // Get OSGi service
  * 
  * CyColumnIdentifier columnId = columnIdFactory.createColumnIdentifier(chartColumn);
@@ -93,7 +87,7 @@ import javax.swing.JComponent;
  * chartProps.put("cy_dataColumns", Arrays.asList(columnId)); 
  * chartProps.put("cy_colorScheme", "CONTRASTING");
  *		
- * CyCustomGraphics2&lt;?&gt; customGraphics = customGraphicsFactory.getInstance(chartProps);
+ * CellCustomGraphics&lt;?&gt; customGraphics = customGraphicsFactory.getInstance(chartProps);
  *
  * // Set the custom graphics on the visual style
  * VisualStyle visualStyle = visualMappingManager.getCurrentVisualStyle();
@@ -106,7 +100,7 @@ import javax.swing.JComponent;
  *     visualStyle.setDefaultValue(visualProperty, customGraphics);
  * </pre>
  * 
- * <h3>Chart Properties</h3>
+ * <h3>Sparkline Properties</h3>
  * 
  * All built-in properties start with the "cy_" prefix. If you are writing an App that provides
  * additional properties please specify your own prefix in order to prevent name collisions.
@@ -190,11 +184,11 @@ import javax.swing.JComponent;
  * @CyAPI.InModule presentation-api
  * 
  */
-public interface CyCustomGraphics2Factory<T extends CustomGraphicLayer> {
+public interface CellCustomGraphicsFactory {
 	
 	/**
 	 * Optional property key that tells Cytoscape under which group it 
-	 * should add the editor created by this factory (see {@link #createEditor(CyCustomGraphics2)}).
+	 * should add the editor created by this factory (see {@link #createEditor(CellCustomGraphics)}).
 	 */
 	static final String GROUP = "group";
 	
@@ -203,12 +197,12 @@ public interface CyCustomGraphics2Factory<T extends CustomGraphicLayer> {
  	 * This is used by the passthrough mapping logic to figure out if a
  	 * given String value should be mapped to this factory.
  	 *
- 	 * @return the prefix for this CyCustomGraphics2Factory
+ 	 * @return the prefix for this CellCustomGraphicsFactory
  	 */
 	String getId();
 	
 	/**
-	 * Return the {@link CyCustomGraphics2} name which is will be displayed to the user.
+	 * Return the {@link CellCustomGraphics} name which is will be displayed to the user.
 	 * 
 	 * @return display name as String.
 	 */
@@ -222,49 +216,49 @@ public interface CyCustomGraphics2Factory<T extends CustomGraphicLayer> {
 	Icon getIcon(int width, int height);
 	
 	/**
- 	 * Get a new instance of a {@link CyCustomGraphics2}.  The string argument may
- 	 * be used by some implementations to create the initial {@link CyCustomGraphics2} objects.
+ 	 * Get a new instance of a {@link CellCustomGraphics}.  The string argument may
+ 	 * be used by some implementations to create the initial {@link CellCustomGraphics} objects.
  	 * This is the method that will be used to take a String passthrough mapping and create the
- 	 * correct {@link CyCustomGraphics2} instance.  Note that the prefix defined
+ 	 * correct {@link CellCustomGraphics} instance.  Note that the prefix defined
  	 * above will get removed from the string before this method is called.
  	 *
  	 * @param input a possible input string that may be used to create the
  	 *              instance.  Not all implementations will use this.
  	 * @return the new instance
  	 */
-	CyCustomGraphics2<T> getInstance(String input);
+	CellCustomGraphics getInstance(String input);
 	
 	/**
-	 * Get a new instance of a {@link CyCustomGraphics2} that is a clone of the passed argument.
+	 * Get a new instance of a {@link CellCustomGraphics} that is a clone of the passed argument.
 	 * 
 	 * @param customGraphics another Custom Graphics
 	 * @return the new instance
 	 */
-	CyCustomGraphics2<T> getInstance(CyCustomGraphics2<T> customGraphics);
+	CellCustomGraphics getInstance(CellCustomGraphics customGraphics);
 	
 	/**
-	 * Get a new instance of a {@link CyCustomGraphics2} with the passed properties.
+	 * Get a new instance of a {@link CellCustomGraphics} with the passed properties.
 	 * The properties object should contain the same keys that are returned by the corresponding
-	 * {@link CyCustomGraphics2#getProperties()} implementation.
+	 * {@link CellCustomGraphics#getProperties()} implementation.
 	 * 
 	 * @param properties optional properties to initialize the new custom graphics.
 	 * @return the new instance
 	 */
-	CyCustomGraphics2<T> getInstance(Map<String, Object> properties);
+	CellCustomGraphics getInstance(Map<String, Object> properties);
 	
 	/**
  	 * @return the class that this factory creates.  This is used by the deserialization
  	 * mechanism to find the factory method that can deserialize a given string.
  	 */
-	Class<? extends CyCustomGraphics2<T>> getSupportedClass();
+	Class<? extends CellCustomGraphics> getSupportedClass();
 	
 	/**
-	 * Creates a UI component that configures the given {@code CyCustomGraphics2}.
+	 * Creates a UI component that configures the given {@code CellCustomGraphics}.
 	 * 
-	 * @param customGraphics the {@link CyCustomGraphics2} to be configured.
-	 * @return a UI panel that configures the given {@code CyCustomGraphics2}
+	 * @param customGraphics the {@link CellCustomGraphics} to be configured.
+	 * @return a UI panel that configures the given {@code CellCustomGraphics}
 	 *         or null if the factory does not want to provide a visual editor.
 	 */
-	JComponent createEditor(CyCustomGraphics2<T> customGraphics);
+	JComponent createEditor(CellCustomGraphics customGraphics);
 	
 }
