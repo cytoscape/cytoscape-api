@@ -8,6 +8,7 @@ import javax.swing.UIManager;
 import org.cytoscape.model.CyColumn;
 import org.cytoscape.model.CyRow;
 import org.cytoscape.model.CyTable;
+import org.cytoscape.util.swing.LookAndFeelUtil;
 import org.cytoscape.view.model.ContinuousRange;
 import org.cytoscape.view.model.NullDataType;
 import org.cytoscape.view.model.Range;
@@ -22,6 +23,10 @@ import org.cytoscape.view.presentation.property.IntegerVisualProperty;
 import org.cytoscape.view.presentation.property.PaintVisualProperty;
 
 public class BasicTableVisualLexicon extends AbstractVisualLexicon {
+	
+	private static final Font DEF_FONT = new Font("SansSerif", Font.PLAIN, (int) LookAndFeelUtil.getSmallFontSize());
+	
+	private static final Range<Integer> ROW_HEIGHT_RANGE = new ContinuousRange<>(Integer.class, 1, 400, true, true);
 	
 	// Categories of VisualProperty ====================================================================================
 	
@@ -49,8 +54,6 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 			"TABLE_VIEW_MODE", "View Mode", CyTable.class);
 	
 	// VPs that apply to ROWs ==========================================================================================
-	
-	private static final Range<Integer> ROW_HEIGHT_RANGE = new ContinuousRange<>(Integer.class, 1, 400, true, true);
 	
 	public static final VisualProperty<Integer> ROW_HEIGHT = new IntegerVisualProperty(16, 
 			ROW_HEIGHT_RANGE, "ROW_HEIGHT", "Row Height", CyRow.class);
@@ -81,7 +84,7 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	public static final VisualProperty<Paint> CELL_BACKGROUND_PAINT = new PaintVisualProperty(UIManager.getColor("Table.background"),
 			PAINT_RANGE, "CELL_BACKGROUND_PAINT", "Cell Background Paint", CyColumn.class);
 	
-	public static final VisualProperty<Font> CELL_FONT_FACE = new FontVisualProperty(new Font("SansSerif", Font.PLAIN, 12), 
+	public static final VisualProperty<Font> CELL_FONT_FACE = new FontVisualProperty(DEF_FONT, 
 			"CELL_FONT_FACE", "Cell Font Face", CyColumn.class);
 	
 	public static final VisualProperty<Paint> CELL_TEXT_COLOR = new PaintVisualProperty(UIManager.getColor("Table.foreground"),
