@@ -59,5 +59,5 @@ public interface CustomGraphicLayer {
  	 * @param xform transform to perform on the shape
  	 * @return the transformed CustomGraphicLayer
  	 */
-  public CustomGraphicLayer transform(AffineTransform xform);
+	public CustomGraphicLayer transform(AffineTransform xform);
 }

@@ -1,12 +1,20 @@
 package org.cytoscape.view.presentation.customgraphics;
 
+import java.net.URL;
+import java.util.Collections;
+import java.util.Set;
+
+import org.cytoscape.model.CyIdentifiable;
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.model.CyTable;
+
 /*
  * #%L
  * Cytoscape Presentation API (presentation-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2021 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -23,9 +31,6 @@ package org.cytoscape.view.presentation.customgraphics;
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
  */
-
-import java.net.URL;
-
 
 /**
  * This interface provides the factory to create {@link CyCustomGraphics} objects.
@@ -97,8 +102,18 @@ public interface CyCustomGraphicsFactory<T extends CustomGraphicLayer> {
 	public CyCustomGraphics<T> parseSerializableString(String string);
 
 	/**
- 	 * Return the class that this factory creates.  This is used by the deserialization
+ 	 * Returns the class that this factory creates.  This is used by the deserialization
  	 * mechanism to find the factory method that can deserialize a given string.
  	 */
 	public Class<? extends CyCustomGraphics> getSupportedClass();
+	
+	/**
+	 * Returns all the target types supported by this factory, usually {@link CyNetwork} and {@link CyTable}.
+	 * Only {@link CyNetwork} is supported by default.
+	 * 
+	 * @return A set containing all types supported by this factory and the CyCustomGraphics it creates.
+	 */
+	default Set<Class<? extends CyIdentifiable>> getSupportedTargetTypes() {
+		return Collections.singleton(CyNetwork.class);
+	}
 }
