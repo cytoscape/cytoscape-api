@@ -108,7 +108,7 @@ public interface CyCustomGraphics<T extends CustomGraphicLayer> {
 	 */
 	public List<T> getLayers(CyNetworkView networkView, View<? extends CyIdentifiable> grView);
 	
-	default List<T> getLayers(CyTableView tableView, CyColumnView columnView) {
+	default List<T> getLayers(CyTableView tableView, CyColumnView columnView, CyRow row) {
 		return Collections.emptyList(); // To be implemented by the implementation class...
 	}
 	
