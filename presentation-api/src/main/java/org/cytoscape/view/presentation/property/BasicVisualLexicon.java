@@ -446,12 +446,29 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 			"EDGE_LABEL_WIDTH", "Edge Label Width", CyEdge.class);
 
 
+	/**
+	 * The strategy to use to render edges when there are more than one edge between a pair of nodes.
+	 * <p><strong>Additional Details: </strong> {@see org.cytoscape.view.presentation.property.EdgeStackingVisualProperty} </p>
+	 */
 	public static final VisualProperty<EdgeStacking> EDGE_STACKING = new EdgeStackingVisualProperty(
 			EdgeStackingVisualProperty.AUTO_BEND, "EDGE_STACKING", "Edge Stacking", CyEdge.class);
 	
+	/**
+	 * Controls how tightly packed edges are when there are more than one edge between a pair of nodes.
+	 */
 	public static final VisualProperty<Double> EDGE_STACKING_DENSITY = new DoubleVisualProperty(0.5, // default must be 0.5 for backwards compatibility
 			new ContinuousRange<>(Double.class, 0.0, 1.0, true, true), 
 			"EDGE_STACKING_DENSITY", "Stacking Density", CyEdge.class);
+	
+	
+	/**
+	 * When rendering edges in 2D, edges with a higher Z-order will be rendered on top of edges with lower Z-order.
+	 * If two edges overlap and have the same Z-order then the order they are rendered in is unpredictable.
+	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
+	 * <p><strong>Property Range:</strong> {@see java.lang.Double#NEGATIVE_INFINITY} &LT;= value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
+	 */
+	public static final VisualProperty<Double> EDGE_Z_ORDER = new DoubleVisualProperty(0.0, ARBITRARY_DOUBLE_RANGE,
+			"EDGE_Z_ORDER", "Edge Z Order", true, CyEdge.class);
 	
 	// ////// Network VP ////////
 	/**
@@ -629,6 +646,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 		addVisualProperty(EDGE_LABEL_WIDTH, EDGE);
 		addVisualProperty(EDGE_STACKING, EDGE);
 		addVisualProperty(EDGE_STACKING_DENSITY, EDGE);
+		addVisualProperty(EDGE_Z_ORDER, EDGE);
 
 		// Level 3 - 4: Node-related VP
 		addVisualProperty(NODE_FILL_COLOR, NODE_PAINT);
