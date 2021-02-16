@@ -69,6 +69,9 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 //	public static final VisualProperty<Paint> COLUMN_HEADER_PAINT = new PaintVisualProperty(new Color(120, 120, 120),
 //			PAINT_RANGE, "COLUMN_HEADER_PAINT", "Column Header Paint", CyColumn.class);
 	
+	public static final VisualProperty<Boolean> COLUMN_EDITABLE = new BooleanVisualProperty(true, 
+			"COLUMN_EDITABLE", "Column Editable", CyColumn.class);
+	
 	public static final VisualProperty<Boolean> COLUMN_VISIBLE = new BooleanVisualProperty(true, 
 			"COLUMN_VISIBLE", "Column Visibility", CyColumn.class);
 	
@@ -115,6 +118,7 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 		
 		addVisualProperty(ROW_HEIGHT, ROW);
 		
+		addVisualProperty(COLUMN_EDITABLE, COLUMN);
 		addVisualProperty(COLUMN_VISIBLE, COLUMN);
 		addVisualProperty(COLUMN_GRAVITY, COLUMN);
 		addVisualProperty(COLUMN_FORMAT, COLUMN);
