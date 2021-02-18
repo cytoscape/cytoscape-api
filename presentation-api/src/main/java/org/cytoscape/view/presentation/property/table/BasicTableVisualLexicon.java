@@ -25,6 +25,7 @@ import org.cytoscape.view.presentation.property.PaintVisualProperty;
 public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	
 	private static final Font DEF_FONT = new Font("SansSerif", Font.PLAIN, (int) LookAndFeelUtil.getSmallFontSize());
+	private static final int DEF_FONT_SIZE = (int) LookAndFeelUtil.getSmallFontSize();
 	
 	private static final Range<Integer> ROW_HEIGHT_RANGE = new ContinuousRange<>(Integer.class, 1, 400, true, true);
 	
@@ -90,6 +91,10 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	public static final VisualProperty<Font> CELL_FONT_FACE = new FontVisualProperty(DEF_FONT, 
 			"CELL_FONT_FACE", "Cell Font Face", CyColumn.class);
 	
+	public static final VisualProperty<Integer> CELL_FONT_SIZE = new IntegerVisualProperty(DEF_FONT_SIZE,
+			new ContinuousRange<>(Integer.class, 1, Integer.MAX_VALUE, true, true), "CELL_FONT_SIZE",
+			"Cell Font Size", CyColumn.class);
+	
 	public static final VisualProperty<Paint> CELL_TEXT_COLOR = new PaintVisualProperty(UIManager.getColor("Table.foreground"),
 			PAINT_RANGE, "CELL_TEXT_COLOR", "Cell Text Paint", CyColumn.class);
 	
@@ -125,6 +130,7 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 		
 		addVisualProperty(CELL_BACKGROUND_PAINT, CELL);
 		addVisualProperty(CELL_FONT_FACE, CELL);
+		addVisualProperty(CELL_FONT_SIZE, CELL);
 		addVisualProperty(CELL_TEXT_COLOR, CELL);
 	}
 }
