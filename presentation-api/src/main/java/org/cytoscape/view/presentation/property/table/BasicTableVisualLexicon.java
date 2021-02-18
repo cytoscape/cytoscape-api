@@ -21,6 +21,7 @@ import org.cytoscape.view.presentation.property.DoubleVisualProperty;
 import org.cytoscape.view.presentation.property.FontVisualProperty;
 import org.cytoscape.view.presentation.property.IntegerVisualProperty;
 import org.cytoscape.view.presentation.property.PaintVisualProperty;
+import org.cytoscape.view.presentation.property.StringVisualProperty;
 
 public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	
@@ -98,6 +99,9 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	public static final VisualProperty<Paint> CELL_TEXT_COLOR = new PaintVisualProperty(UIManager.getColor("Table.foreground"),
 			PAINT_RANGE, "CELL_TEXT_COLOR", "Cell Text Paint", CyColumn.class);
 	
+	public static final VisualProperty<String> CELL_TOOLTIP = new StringVisualProperty("",
+			ARBITRARY_STRING_RANGE, "CELL_TOOLTIP", "Cell Tooltip", CyColumn.class);
+	
 	public BasicTableVisualLexicon(VisualProperty<NullDataType> root) {
 		super(root);
 	}
@@ -132,5 +136,6 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 		addVisualProperty(CELL_FONT_FACE, CELL);
 		addVisualProperty(CELL_FONT_SIZE, CELL);
 		addVisualProperty(CELL_TEXT_COLOR, CELL);
+		addVisualProperty(CELL_TOOLTIP, CELL);
 	}
 }
