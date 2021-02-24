@@ -55,6 +55,12 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	public static final VisualProperty<TableMode> TABLE_VIEW_MODE = new TableModeVisualProperty(TableModeVisualProperty.AUTO, 
 			"TABLE_VIEW_MODE", "View Mode", CyTable.class);
 	
+	public static final VisualProperty<Boolean> TABLE_ALTERNATE_ROW_COLORS = new BooleanVisualProperty(false, 
+			"TABLE_ALTERNATE_ROW_COLORS", "Alternate Row Colors", CyTable.class);
+	
+	public static final VisualProperty<Boolean> TABLE_SHOW_GRID = new BooleanVisualProperty(false, 
+			"TABLE_SHOW_GRID", "Show Table Grid", CyTable.class);
+	
 	// VPs that apply to ROWs ==========================================================================================
 	
 	public static final VisualProperty<Integer> ROW_HEIGHT = new IntegerVisualProperty(0/*auto*/, 
@@ -124,6 +130,8 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 		addVisualProperty(CELL, TABLE);
 		
 		addVisualProperty(TABLE_VIEW_MODE, TABLE);
+		addVisualProperty(TABLE_ALTERNATE_ROW_COLORS, TABLE);
+		addVisualProperty(TABLE_SHOW_GRID, TABLE);
 		
 		addVisualProperty(ROW_HEIGHT, ROW);
 		
