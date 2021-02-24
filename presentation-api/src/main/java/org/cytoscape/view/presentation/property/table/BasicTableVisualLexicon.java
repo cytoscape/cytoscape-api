@@ -28,7 +28,7 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	private static final Font DEF_FONT = new Font("SansSerif", Font.PLAIN, (int) LookAndFeelUtil.getSmallFontSize());
 	private static final int DEF_FONT_SIZE = (int) LookAndFeelUtil.getSmallFontSize();
 	
-	private static final Range<Integer> ROW_HEIGHT_RANGE = new ContinuousRange<>(Integer.class, 1, 400, true, true);
+	private static final Range<Integer> ROW_HEIGHT_RANGE = new ContinuousRange<>(Integer.class, 0, 400, true, true);
 	
 	// Categories of VisualProperty ====================================================================================
 	
@@ -57,7 +57,7 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	
 	// VPs that apply to ROWs ==========================================================================================
 	
-	public static final VisualProperty<Integer> ROW_HEIGHT = new IntegerVisualProperty(16, 
+	public static final VisualProperty<Integer> ROW_HEIGHT = new IntegerVisualProperty(0/*auto*/, 
 			ROW_HEIGHT_RANGE, "ROW_HEIGHT", "Row Height", CyRow.class);
 	
 //	public static final VisualProperty<Boolean> ROW_HIGHLIGHT = new BooleanVisualProperty(false, 
