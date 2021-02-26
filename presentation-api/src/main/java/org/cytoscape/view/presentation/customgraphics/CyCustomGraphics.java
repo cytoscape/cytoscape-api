@@ -6,7 +6,7 @@ package org.cytoscape.view.presentation.customgraphics;
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2021 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -25,11 +25,15 @@ package org.cytoscape.view.presentation.customgraphics;
  */
 
 import java.awt.Image;
+import java.util.Collections;
 import java.util.List;
 
 import org.cytoscape.model.CyIdentifiable;
+import org.cytoscape.model.CyRow;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
+import org.cytoscape.view.model.table.CyColumnView;
+import org.cytoscape.view.model.table.CyTableView;
 
 
 /**
@@ -74,7 +78,7 @@ public interface CyCustomGraphics<T extends CustomGraphicLayer> {
 	 * 
 	 * @param displayName
 	 */
-	public void setDisplayName(final String displayName);
+	public void setDisplayName(String displayName);
 	
 	/**
 	 * Generate a string suitable for serializing the state of this
@@ -104,6 +108,9 @@ public interface CyCustomGraphics<T extends CustomGraphicLayer> {
 	 */
 	public List<T> getLayers(CyNetworkView networkView, View<? extends CyIdentifiable> grView);
 	
+	default List<T> getLayers(CyTableView tableView, CyColumnView columnView, CyRow row) {
+		return Collections.emptyList(); // To be implemented by the implementation class...
+	}
 	
 	/**
 	 * Returns width of current object.
@@ -127,7 +134,7 @@ public interface CyCustomGraphics<T extends CustomGraphicLayer> {
 	 * 
 	 * @param width
 	 */
-	public void setWidth(final int width);
+	public void setWidth(int width);
 	
 	/**
 	 * Set height of Custom Graphics. This is used by discrete mappers to support the creation
@@ -135,7 +142,7 @@ public interface CyCustomGraphics<T extends CustomGraphicLayer> {
 	 * 
 	 * @param height
 	 */
-	public void setHeight(final int height);
+	public void setHeight(int height);
 	
 	/**
  	 * Get the fit ratio for this custom graphic.  This is used to set the proportion of the 

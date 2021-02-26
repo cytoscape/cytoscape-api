@@ -1,9 +1,15 @@
 package org.cytoscape.view.presentation.customgraphics;
 
+import java.util.Collections;
 import java.util.Map;
+import java.util.Set;
 
 import javax.swing.Icon;
 import javax.swing.JComponent;
+
+import org.cytoscape.model.CyColumn;
+import org.cytoscape.model.CyIdentifiable;
+import org.cytoscape.model.CyNode;
 
 
 /**
@@ -31,7 +37,7 @@ import javax.swing.JComponent;
  * 
  * <p>
  * Cytoscape provides some predefined custom graphics factories for creating charts.
- * These factories can be retreived as OSGi services by using their IDs.
+ * These factories can be retrieved as OSGi services by using their IDs.
  * </p>
  * 
  * <table border="1">
@@ -267,4 +273,13 @@ public interface CyCustomGraphics2Factory<T extends CustomGraphicLayer> {
 	 */
 	JComponent createEditor(CyCustomGraphics2<T> customGraphics);
 	
+	/**
+	 * Returns all the target types supported by this factory, usually {@link CyNode} and {@link CyColumn}.
+	 * Only {@link CyNode} is supported by default.
+	 * 
+	 * @return A set containing all types supported by this factory and the CyCustomGraphics it creates.
+	 */
+	default Set<Class<? extends CyIdentifiable>> getSupportedTargetTypes() {
+		return Collections.singleton(CyNode.class);
+	}
 }
