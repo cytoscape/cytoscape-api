@@ -55,7 +55,7 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	public static final VisualProperty<TableMode> TABLE_VIEW_MODE = new TableModeVisualProperty(TableModeVisualProperty.AUTO, 
 			"TABLE_VIEW_MODE", "View Mode", CyTable.class);
 	
-	public static final VisualProperty<Boolean> TABLE_ALTERNATE_ROW_COLORS = new BooleanVisualProperty(false, 
+	public static final VisualProperty<Boolean> TABLE_ALTERNATE_ROW_COLORS = new BooleanVisualProperty(true, 
 			"TABLE_ALTERNATE_ROW_COLORS", "Alternate Row Colors", CyTable.class);
 	
 	public static final VisualProperty<Boolean> TABLE_SHOW_GRID = new BooleanVisualProperty(false, 
