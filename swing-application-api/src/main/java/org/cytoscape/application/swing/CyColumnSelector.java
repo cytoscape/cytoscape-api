@@ -11,7 +11,6 @@ import static org.cytoscape.util.swing.LookAndFeelUtil.makeSmall;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -35,7 +34,6 @@ import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.GroupLayout;
-import javax.swing.Icon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JLabel;
@@ -52,11 +50,33 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableCellRenderer;
-import javax.swing.table.TableColumnModel;
 
 import org.cytoscape.model.CyColumn;
 import org.cytoscape.util.swing.IconManager;
-import org.cytoscape.util.swing.LookAndFeelUtil;
+
+/*
+ * #%L
+ * Cytoscape Swing Application API (swing-application-api)
+ * $Id:$
+ * $HeadURL:$
+ * %%
+ * Copyright (C) 2006 - 2021 The Cytoscape Consortium
+ * %%
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Lesser General Public License as 
+ * published by the Free Software Foundation, either version 2.1 of the 
+ * License, or (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU General Lesser Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Lesser Public 
+ * License along with this program.  If not, see
+ * <http://www.gnu.org/licenses/lgpl-2.1.html>.
+ * #L%
+ */
 
 /**
  * An Swing control that allows the user to select a set of CyColumn objects.
@@ -71,9 +91,9 @@ public class CyColumnSelector extends JPanel {
 	private static final int TYPE_COL_IDX = 2;
 	private static final int SHARED_COL_IDX = 3;
 	
-	private 	static final String[] headerNames = {"", "Column Name", "Type", ""};
+	private static final String[] headerNames = {"", "Column Name", "Type", ""};
 	
-	private static final Border CELL_BORDER = new EmptyBorder(0, 0, 0, 0);
+	private static final Border CELL_BORDER = BorderFactory.createEmptyBorder();
 	private static final String CYTOSCAPE_CARD = "::"; // not a valid namespace
 	
 	
@@ -93,7 +113,7 @@ public class CyColumnSelector extends JPanel {
 		this.iconManager = Objects.requireNonNull(iconManager);
 		this.columnPresentationManager = Objects.requireNonNull(columnPresentationManager);
 		
-		Collator collator = Collator.getInstance(Locale.getDefault());
+		var collator = Collator.getInstance(Locale.getDefault());
 		this.namespaces = new TreeMap<>(Comparator.nullsFirst(collator::compare));
 		this.selectedColumnNames = new HashSet<>();
 	}
@@ -106,18 +126,20 @@ public class CyColumnSelector extends JPanel {
 	public void update(Collection<CyColumn> columns, Collection<String> selectedColumnNames) {
 		this.namespaces.clear();
 		this.selectedColumnNames.clear();
-		for(CyColumn column : columns) {
+		
+		for (var column : columns) {
 			namespaces.computeIfAbsent(column.getNamespace(), k -> new ArrayList<>()).add(column);
 		}
-		if(selectedColumnNames != null) {
-			this.selectedColumnNames.addAll(selectedColumnNames);
-		}
 		
+		if (selectedColumnNames != null)
+			this.selectedColumnNames.addAll(selectedColumnNames);
+
 		var nameComparator = Comparator.comparing(CyColumn::getNameOnly, Collator.getInstance(Locale.getDefault()));
-		for(List<CyColumn> namespaceColumns : namespaces.values()) {
+		
+		for (var namespaceColumns : namespaces.values()) {
 			namespaceColumns.sort(nameComparator);
 		}
-		
+
 		init();
 	}
 	
@@ -135,14 +157,15 @@ public class CyColumnSelector extends JPanel {
 	}
 	
 	private void createContents() {
-		JPanel cardPanel = createCardPanel();
-		if(namespaces.size() == 1) {
+		var cardPanel = createCardPanel();
+		
+		if (namespaces.size() == 1) {
 			setLayout(new BorderLayout());
 			add(cardPanel, BorderLayout.CENTER);
 		} else {
-			JPanel namespaceListPanel = createNamespaceListPanel(cardPanel);
+			var namespaceListPanel = createNamespaceListPanel(cardPanel);
 			namespaceListPanel.setPreferredSize(new Dimension(180, namespaceListPanel.getPreferredSize().height));
-			JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, namespaceListPanel, cardPanel);
+			var splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, namespaceListPanel, cardPanel);
 			splitPane.setBorder(BorderFactory.createEmptyBorder());
 			setLayout(new BorderLayout());
 			add(splitPane, BorderLayout.CENTER);
@@ -150,21 +173,22 @@ public class CyColumnSelector extends JPanel {
 	}
 	
 	private JPanel createCardPanel() {
-		JPanel cardPanel = new JPanel(new CardLayout());
-		for(String namespace : namespaces.keySet()) {
-			List<CyColumn> columns = namespaces.get(namespace);
-			MutipleSelectColumnTable columnTable = new MutipleSelectColumnTable(columns);
+		var cardPanel = new JPanel(new CardLayout());
+
+		for (var namespace : namespaces.keySet()) {
+			var columns = namespaces.get(namespace);
+			var columnTable = new MutipleSelectColumnTable(columns);
 			cardPanel.add(namespace == null ? CYTOSCAPE_CARD : namespace, columnTable);
 		}
+		
 		return cardPanel;
 	}
-
 	
 	private JPanel createNamespaceListPanel(JPanel cardPanel) {
-		DefaultListModel<String> listModel = new DefaultListModel<>();
+		var listModel = new DefaultListModel<String>();
 		namespaces.keySet().forEach(listModel::addElement);
 		
-		JList<String> namespaceList = new JList<>(listModel);
+		var namespaceList = new JList<>(listModel);
 		namespaceList.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 		namespaceList.setCellRenderer(new NamespaceListRenderer());
 		namespaceList.setSelectedIndex(0);
@@ -173,23 +197,26 @@ public class CyColumnSelector extends JPanel {
 		scrollPane.setBorder(BorderFactory.createEmptyBorder());
 		
 		namespaceList.addListSelectionListener(evt -> {
-			String namespace = namespaceList.getSelectedValue();
-			CardLayout cardLayout = (CardLayout) cardPanel.getLayout();
+			var namespace = namespaceList.getSelectedValue();
+			var cardLayout = (CardLayout) cardPanel.getLayout();
 			cardLayout.show(cardPanel, namespace == null ? CYTOSCAPE_CARD : namespace);
 		});
 		
-		JPanel panel = new JPanel(new BorderLayout());
+		var panel = new JPanel(new BorderLayout());
 		panel.add(scrollPane, BorderLayout.CENTER);
+		
 		return panel;
 	}
 	
 	private static JScrollPane createScrollPane(Component view) {
-		JScrollPane tableScrollPane = new JScrollPane();
+		var tableScrollPane = new JScrollPane();
 		tableScrollPane.setPreferredSize(new Dimension(300, 180));
 		tableScrollPane.setViewportView(view);
-		final Color bg = UIManager.getColor("Table.background");
+		
+		var bg = UIManager.getColor("Table.background");
 		tableScrollPane.setBackground(bg);
 		tableScrollPane.getViewport().setBackground(bg);
+		
 		return tableScrollPane;
 	}
 	
@@ -213,7 +240,7 @@ public class CyColumnSelector extends JPanel {
 			this.columns.clear();
 			
 			if (columns != null) {
-				for (CyColumn c : columns)
+				for (var c : columns)
 					this.columns.add(c);
 			}
 			
@@ -227,7 +254,7 @@ public class CyColumnSelector extends JPanel {
 			makeSmall(getSelectAllButton(), getSelectNoneButton());
 			equalizeSize(getSelectAllButton(), getSelectNoneButton());
 			
-			final GroupLayout layout = new GroupLayout(this);
+			var layout = new GroupLayout(this);
 			setLayout(layout);
 			layout.setAutoCreateContainerGaps(false);
 			layout.setAutoCreateGaps(false);
@@ -252,10 +279,10 @@ public class CyColumnSelector extends JPanel {
 		}
 		
 		private void updateTable() {
-			final Object[][] data = new Object[columns.size()][headerNames.length];
+			var data = new Object[columns.size()][headerNames.length];
 			int i = 0;
 			
-			for (CyColumn c : columns) {
+			for (var c : columns) {
 				data[i][SELECTED_COL_IDX] = selectedColumnNames.contains(c.getName());
 				data[i][NAME_COL_IDX] = c.getName();
 				data[i][TYPE_COL_IDX] = c;
@@ -263,7 +290,7 @@ public class CyColumnSelector extends JPanel {
 				i++;
 			}
 			
-			final DefaultTableModel model = new DefaultTableModel(data, headerNames) {
+			var model = new DefaultTableModel(data, headerNames) {
 				@Override
 				public boolean isCellEditable(int row, int column) {
 					return false;
@@ -271,7 +298,7 @@ public class CyColumnSelector extends JPanel {
 			};
 			getTable().setModel(model);
 			
-			TableColumnModel columnModel = getTable().getColumnModel();
+			var columnModel = getTable().getColumnModel();
 			columnModel.getColumn(SELECTED_COL_IDX).setMaxWidth(22);
 			columnModel.getColumn(TYPE_COL_IDX).setMaxWidth(44);
 			columnModel.getColumn(SHARED_COL_IDX).setMaxWidth(22);
@@ -281,12 +308,12 @@ public class CyColumnSelector extends JPanel {
 		}
 		
 		private void updateSelectionButtons() {
-			final int rowCount = table.getRowCount();
+			int rowCount = table.getRowCount();
 			boolean hasUnselected = false;
 			boolean hasSelected = false;
 			
 			for (int i = 0; i < rowCount; i++) {
-				final boolean selected = (boolean) table.getModel().getValueAt(i, SELECTED_COL_IDX);
+				boolean selected = (boolean) table.getModel().getValueAt(i, SELECTED_COL_IDX);
 				
 				if (!hasUnselected)
 					hasUnselected = !selected;
@@ -302,8 +329,8 @@ public class CyColumnSelector extends JPanel {
 		
 		private JTable getTable() {
 			if (table == null) {
-				final DefaultSelectorTableCellRenderer defRenderer = new DefaultSelectorTableCellRenderer();
-				final CheckBoxTableCellRenderer checkBoxRenderer = new CheckBoxTableCellRenderer();
+				var defRenderer = new DefaultSelectorTableCellRenderer();
+				var checkBoxRenderer = new CheckBoxTableCellRenderer();
 				
 				table = new JTable(new DefaultTableModel(headerNames, 0)) {
 					@Override
@@ -327,16 +354,16 @@ public class CyColumnSelector extends JPanel {
 				table.addMouseListener(new MouseAdapter() {
 					@Override
 					public void mousePressed(MouseEvent e) {
-						final boolean isMac = LookAndFeelUtil.isMac();
+						boolean isMac = isMac();
 						
 						// COMMAND button down on MacOS (or CONTROL button down on another OS) or SHIFT?
 						if ((isMac && e.isMetaDown()) || (!isMac && e.isControlDown()) || e.isShiftDown())
 							return; // Ignore!
 						
-					    final int col = table.columnAtPoint(e.getPoint());
+					    int col = table.columnAtPoint(e.getPoint());
 					    
 						if (col == SELECTED_COL_IDX) {
-							final int row = table.rowAtPoint(e.getPoint());
+							int row = table.rowAtPoint(e.getPoint());
 							
 							// Restore previous multiple-row selection first
 						    if (previousSelectedRows != null && previousSelectedRows.contains(row)) {
@@ -392,12 +419,12 @@ public class CyColumnSelector extends JPanel {
 			return selectNoneButton;
 		}
 		
-		private void setSelectedToAllRows(final boolean selected) {
-			final int rowCount = getTable().getRowCount();
+		private void setSelectedToAllRows(boolean selected) {
+			int rowCount = getTable().getRowCount();
 			
 			for (int i = 0; i < rowCount; i++) {
 				getTable().setValueAt(selected, i, SELECTED_COL_IDX);
-				final String name = (String) getTable().getValueAt(i, NAME_COL_IDX);
+				var name = (String) getTable().getValueAt(i, NAME_COL_IDX);
 				
 				if (selected)
 					selectedColumnNames.add(name);
@@ -409,13 +436,13 @@ public class CyColumnSelector extends JPanel {
 			updateSelectionButtons();
 		}
 		
-		private void toggleSelection(final int row) {
-			final boolean selected = (boolean) getTable().getValueAt(row, SELECTED_COL_IDX);
-			final int[] selectedRows = getTable().getSelectedRows();
+		private void toggleSelection(int row) {
+			boolean selected = (boolean) getTable().getValueAt(row, SELECTED_COL_IDX);
+			int[] selectedRows = getTable().getSelectedRows();
 			
 			if (selectedRows != null) {
 				for (int i : selectedRows) {
-					final String name = (String) getTable().getValueAt(i, NAME_COL_IDX);
+					var name = (String) getTable().getValueAt(i, NAME_COL_IDX);
 					getTable().setValueAt(!selected, i, SELECTED_COL_IDX);
 					
 					if (selected)
@@ -429,61 +456,64 @@ public class CyColumnSelector extends JPanel {
 		}
 	}
 	
-	
 	private class NamespaceListRenderer extends DefaultListCellRenderer {
+		
 		@Override
 		public Component getListCellRendererComponent(JList<?> list, Object value, int index, boolean isSelected, boolean cellHasFocus) {
-			String namespace = (String) value;
-			CyColumnPresentation columnPresentation = columnPresentationManager.getColumnPresentation(namespace);
-			if(value == null)
+			var namespace = (String) value;
+			var columnPresentation = columnPresentationManager.getColumnPresentation(namespace);
+			
+			if (value == null)
 				value = "Cytoscape";
-			Component component = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
-			Icon icon = columnPresentation.getNamespaceIcon();
-			if(icon != null) {
+			
+			var component = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+			var icon = columnPresentation.getNamespaceIcon();
+			
+			if (icon != null)
 				icon = IconManager.resizeIcon(icon, 16);
-			}
+			
 			setIcon(icon);
+			
 			return component;
 		}
 	}
 	
-	
 	private class DefaultSelectorTableCellRenderer extends DefaultTableCellRenderer {
-		
+
 		final Font typeFont;
 		final Font defFont;
 		
 		DefaultSelectorTableCellRenderer() {
 			typeFont = new Font("Serif", Font.BOLD, 11); // This font is used as an icon--Don't change it!
-			defFont = getFont().deriveFont(LookAndFeelUtil.getSmallFontSize());
+			defFont = getFont().deriveFont(getSmallFontSize());
 		}
 		
 		@Override
-		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
-				boolean hasFocus, int row, int column) {
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
 			super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-			
+
 			setForeground(table.getForeground());
-			
-			final Color bg = UIManager.getColor("Table.background");
+
+			var bg = UIManager.getColor("Table.background");
 			setBackground(isSelected ? UIManager.getColor("Table.selectionBackground") : bg);
 			setBorder(CELL_BORDER);
-			
+
 			if (value instanceof Boolean) {
 				setFont(iconManager.getIconFont(12));
 				setHorizontalAlignment(JLabel.CENTER);
-				
+
 				if (column == SHARED_COL_IDX) {
-					setText((boolean)value ? IconManager.ICON_SITEMAP : "");
-					setToolTipText((boolean)value ? "Network Collection Column" : null);
+					setText((boolean) value ? IconManager.ICON_SITEMAP : "");
+					setToolTipText((boolean) value ? "Network Collection Column" : null);
 				} else {
-					setText((boolean)value ? IconManager.ICON_CHECK_SQUARE : IconManager.ICON_SQUARE_O);
+					setText((boolean) value ? IconManager.ICON_CHECK_SQUARE : IconManager.ICON_SQUARE_O);
 				}
 			} else {
-				 if (column == TYPE_COL_IDX && value instanceof CyColumn) {
-					 CyColumn c = (CyColumn) value;
-					 AttributeDataType adt = AttributeDataType.getAttributeDataType(c.getType(), c.getListElementType());
-					
+				if (column == TYPE_COL_IDX && value instanceof CyColumn) {
+					var c = (CyColumn) value;
+					var adt = AttributeDataType.getAttributeDataType(c.getType(), c.getListElementType());
+
 					if (adt != null) {
 						setFont(typeFont);
 						setHorizontalAlignment(JLabel.CENTER);
@@ -494,8 +524,9 @@ public class CyColumnSelector extends JPanel {
 					setFont(defFont);
 					setHorizontalAlignment(JLabel.LEFT);
 					setToolTipText("" + value);
-					if(column == NAME_COL_IDX && value instanceof String) {
-						String name = (String)value;
+
+					if (column == NAME_COL_IDX && value instanceof String) {
+						String name = (String) value;
 						String[] parts = CyColumn.splitColumnName(name);
 						setText(parts[1]);
 					}
@@ -507,6 +538,7 @@ public class CyColumnSelector extends JPanel {
 	}
 	
 	private class CheckBoxTableCellRenderer implements TableCellRenderer {
+		
 		final JPanel panel;
 		final JCheckBox chk;
 		
@@ -523,18 +555,18 @@ public class CyColumnSelector extends JPanel {
 		}
 
 		@Override
-		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected,
-				boolean hasFocus, int row, int column) {
-			final Color bg = UIManager.getColor("Table.background");
-			chk.setSelected((boolean)value);
-			chk.setToolTipText((boolean)value ? "Show" : "Hide");
+		public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus,
+				int row, int column) {
+			var bg = UIManager.getColor("Table.background");
+			chk.setSelected((boolean) value);
+			chk.setToolTipText((boolean) value ? "Show" : "Hide");
 			chk.setBackground(isSelected ? UIManager.getColor("Table.selectionBackground") : bg);
 			panel.setBackground(isSelected ? UIManager.getColor("Table.selectionBackground") : bg);
 			panel.setBorder(new EmptyBorder(0, 0, 0, 0));
+			
 			return panel;
 		}
 	}
-	
 	
 	private enum AttributeDataType {
 		TYPE_STRING(String.class, null, "ab", "String"),
@@ -547,47 +579,48 @@ public class CyColumnSelector extends JPanel {
 		TYPE_LONG_LIST(List.class, Long.class, "[ 123 ]", "List of Long Integers"),
 		TYPE_FLOATING_LIST(List.class, Double.class, "[ 1.0 ]", "List of Floating Point Numbers"),
 		TYPE_BOOLEAN_LIST(List.class, Boolean.class, "[ y/n ]", "List of Booleans");
-		
+
 		private final Class<?> type;
 		private final Class<?> listType;
 		private final String text;
 		private final String description;
-		
-	    private AttributeDataType(final Class<?> type, final Class<?> listType, final String text, final String description) {
+
+		private AttributeDataType(Class<?> type, Class<?> listType, String text, String description) {
 			this.type = type;
 			this.listType = listType;
 			this.text = text;
 			this.description = description;
 		}
-	    
-	    public Class<?> getType() {
+
+		public Class<?> getType() {
 			return type;
 		}
-	    
-	    public Class<?> getListType() {
+
+		public Class<?> getListType() {
 			return listType;
 		}
-	    
-	    public boolean isList() {
-	    	return listType != null;
-	    }
-	    
-	    public String getText() {
+
+		public boolean isList() {
+			return listType != null;
+		}
+
+		public String getText() {
 			return text;
 		}
-	    
-	    public String getDescription() {
+
+		public String getDescription() {
 			return description;
 		}
-	    
-	    public static AttributeDataType getAttributeDataType(final Class<?> type, final Class<?> listType) {
-		    	for (AttributeDataType adt : AttributeDataType.values()) {
-		    		if (adt.getType() == type) {
-		    			if (listType == null || listType == adt.getListType())
-		    				return adt;
-		    		}
-		    	}
-		    	return TYPE_STRING;
-	    }
+
+		public static AttributeDataType getAttributeDataType(Class<?> type, Class<?> listType) {
+			for (var adt : AttributeDataType.values()) {
+				if (adt.getType() == type) {
+					if (listType == null || listType == adt.getListType())
+						return adt;
+				}
+			}
+			
+			return TYPE_STRING;
+		}
 	}
 }
