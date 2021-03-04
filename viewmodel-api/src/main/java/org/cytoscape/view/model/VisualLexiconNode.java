@@ -25,7 +25,7 @@ package org.cytoscape.view.model;
  */
 
 import java.util.Collection;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.function.Consumer;
 
 /**
@@ -56,7 +56,7 @@ public final class VisualLexiconNode implements Comparable<VisualLexiconNode> {
 		
 		this.vp = vp;
 		this.parent = parent;
-		this.children = new HashSet<VisualLexiconNode>();
+		this.children = new LinkedHashSet<>(); // apply VPs in consistent order
 		
 		if(parent != null)
 			parent.getChildren().add(this);
