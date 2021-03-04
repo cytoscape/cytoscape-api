@@ -134,7 +134,7 @@ public abstract class AbstractConfigDirPropsReader implements CyProperty<Propert
 			if ( is != null )
 				props.load(is);
 			else
-				logger.warn("couldn't find resource '" + propFileName + "' in jar.");
+				logger.debug("couldn't find resource '" + propFileName + "' in jar.");
 		} finally {
 			if (is != null) {
 				try { is.close(); } catch (IOException ioe) {}
