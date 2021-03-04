@@ -3,7 +3,11 @@ package org.cytoscape.application.swing;
 import static javax.swing.GroupLayout.DEFAULT_SIZE;
 import static javax.swing.GroupLayout.PREFERRED_SIZE;
 import static javax.swing.GroupLayout.Alignment.CENTER;
+import static org.cytoscape.util.swing.LookAndFeelUtil.equalizeSize;
+import static org.cytoscape.util.swing.LookAndFeelUtil.getSmallFontSize;
 import static org.cytoscape.util.swing.LookAndFeelUtil.isAquaLAF;
+import static org.cytoscape.util.swing.LookAndFeelUtil.isMac;
+import static org.cytoscape.util.swing.LookAndFeelUtil.makeSmall;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -165,8 +169,8 @@ public class CyColumnSelector extends JPanel {
 		namespaceList.setCellRenderer(new NamespaceListRenderer());
 		namespaceList.setSelectedIndex(0);
 		
-		JScrollPane scrollPane = createScrollPane(namespaceList);
-		scrollPane.setBorder(BorderFactory.createEmptyBorder(0, 2, 0, 2));
+		var scrollPane = createScrollPane(namespaceList);
+		scrollPane.setBorder(BorderFactory.createEmptyBorder());
 		
 		namespaceList.addListSelectionListener(evt -> {
 			String namespace = namespaceList.getSelectedValue();
@@ -220,7 +224,8 @@ public class CyColumnSelector extends JPanel {
 		private void init() {
 			setBackground(getTableScrollPane().getBackground());
 			
-			LookAndFeelUtil.equalizeSize(getSelectAllButton(), getSelectNoneButton());
+			makeSmall(getSelectAllButton(), getSelectNoneButton());
+			equalizeSize(getSelectAllButton(), getSelectNoneButton());
 			
 			final GroupLayout layout = new GroupLayout(this);
 			setLayout(layout);
@@ -352,10 +357,8 @@ public class CyColumnSelector extends JPanel {
 		private JScrollPane getTableScrollPane() {
 			if (tableScrollPane == null) {
 				tableScrollPane = createScrollPane(getTable());
-				tableScrollPane.setBorder(BorderFactory.createCompoundBorder(
-						BorderFactory.createEmptyBorder(0, 2, 0, 2),
-						BorderFactory.createMatteBorder(0, 0, 1, 0, UIManager.getColor("Separator.foreground"))
-				));
+				tableScrollPane.setBorder(
+						BorderFactory.createMatteBorder(0, 0, 1, 0, UIManager.getColor("Separator.foreground")));
 			}
 
 			return tableScrollPane;
@@ -509,8 +512,13 @@ public class CyColumnSelector extends JPanel {
 		
 		CheckBoxTableCellRenderer() {
 			chk = new JCheckBox();
-			chk.putClientProperty("JComponent.sizeVariant", "mini"); // Aqua LAF only
+			
+			if (isAquaLAF())
+				chk.putClientProperty("JComponent.sizeVariant", "mini");
+			
 			panel = new JPanel(new BorderLayout());
+			panel.setBorder(BorderFactory.createEmptyBorder(1, 4, 1, 4));
+			
 			panel.add(chk, BorderLayout.WEST);
 		}
 
