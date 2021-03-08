@@ -29,6 +29,7 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	private static final int DEF_FONT_SIZE = (int) LookAndFeelUtil.getSmallFontSize();
 	
 	private static final Range<Integer> ROW_HEIGHT_RANGE = new ContinuousRange<>(Integer.class, 0, 400, true, true);
+	private static final Range<Integer> NONE_ZERO_POSITIVE_INT_RANGE = new ContinuousRange<>(Integer.class, 1, Integer.MAX_VALUE, true, true);
 	
 	// Categories of VisualProperty ====================================================================================
 	
@@ -86,6 +87,9 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	public static final VisualProperty<Double> COLUMN_GRAVITY = new DoubleVisualProperty(1.0, 
 			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "COLUMN_GRAVITY", "Column Gravity", CyColumn.class);
 	
+	public static final VisualProperty<Integer> COLUMN_WIDTH = new IntegerVisualProperty(1,
+			NONE_ZERO_POSITIVE_INT_RANGE, "COLUMN_WIDTH", "Column Width", CyColumn.class);
+	
 	public static final VisualProperty<CellFormat> COLUMN_FORMAT = new CellFormatVisualProperty(new CellFormat(""),
 			"COLUMN_FORMAT", "Cell Number Format", CyColumn.class);
 	
@@ -138,6 +142,7 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 		addVisualProperty(COLUMN_EDITABLE, COLUMN);
 		addVisualProperty(COLUMN_VISIBLE, COLUMN);
 		addVisualProperty(COLUMN_GRAVITY, COLUMN);
+		addVisualProperty(COLUMN_WIDTH, COLUMN);
 		addVisualProperty(COLUMN_FORMAT, COLUMN);
 		
 		addVisualProperty(CELL_BACKGROUND_PAINT, CELL);
