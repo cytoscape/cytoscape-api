@@ -59,8 +59,8 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	public static final VisualProperty<Boolean> TABLE_ALTERNATE_ROW_COLORS = new BooleanVisualProperty(false, 
 			"TABLE_ALTERNATE_ROW_COLORS", "Alternate Row Colors", CyTable.class);
 	
-	public static final VisualProperty<Boolean> TABLE_SHOW_GRID = new BooleanVisualProperty(false, 
-			"TABLE_SHOW_GRID", "Show Table Grid", CyTable.class);
+	public static final VisualProperty<Boolean> TABLE_GRID_VISIBLE = new BooleanVisualProperty(false, 
+			"TABLE_GRID_VISIBLE", "Table Grid Visible", CyTable.class);
 	
 	// VPs that apply to ROWs ==========================================================================================
 	
@@ -82,7 +82,7 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 			"COLUMN_EDITABLE", "Column Editable", CyColumn.class);
 	
 	public static final VisualProperty<Boolean> COLUMN_VISIBLE = new BooleanVisualProperty(true, 
-			"COLUMN_VISIBLE", "Column Visibility", CyColumn.class);
+			"COLUMN_VISIBLE", "Column Visible", CyColumn.class);
 	
 	public static final VisualProperty<Double> COLUMN_GRAVITY = new DoubleVisualProperty(1.0, 
 			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "COLUMN_GRAVITY", "Column Gravity", CyColumn.class);
@@ -135,7 +135,7 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 		
 		addVisualProperty(TABLE_VIEW_MODE, TABLE);
 		addVisualProperty(TABLE_ALTERNATE_ROW_COLORS, TABLE);
-		addVisualProperty(TABLE_SHOW_GRID, TABLE);
+		addVisualProperty(TABLE_GRID_VISIBLE, TABLE);
 		
 		addVisualProperty(ROW_HEIGHT, ROW);
 		
