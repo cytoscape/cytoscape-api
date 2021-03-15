@@ -91,4 +91,14 @@ public interface Function {
 	 *  Please note that if the returned set contains a null, this indicates an optional additional argument.
 	 */
 	List<Class<?>> getPossibleArgTypes(final Class<?>[] leadingArgs);
+	
+	
+	/**
+	 * Returns the usage descriptions for the function's arguments. Used to provide help for users.
+	 * 
+	 * This is an optional operation, may return null.
+	 * 
+	 * @since 3.9
+	 */
+	default List<ArgDescriptor> getArgumentDescriptors() { return null; };
 }

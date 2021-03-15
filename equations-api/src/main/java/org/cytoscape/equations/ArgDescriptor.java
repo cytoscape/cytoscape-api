@@ -33,16 +33,16 @@ import java.util.List;
  * @CyAPI.InModule equations-api
  */
 public final class ArgDescriptor {
-	private ArgType argType;
-	private String argName;
-	private String description;
+	private final ArgType argType;
+	private final String argName;
+	private final String description;
 
 	/**
 	 * @param argType The type of the argument.
 	 * @param argName The name of the argument.
 	 * @param description The description of the argument.
 	 */
-	public ArgDescriptor(final ArgType argType, final String argName, final String description) {
+	public ArgDescriptor(ArgType argType, String argName, String description) {
 		this.argType = argType;
 		this.argName = argName;
 		this.description = description;

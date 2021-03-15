@@ -343,19 +343,20 @@ public final class FunctionUtil {
 	 *  @return the converted array
 	 */
 	public static String[] getStrings(final Object[] args) {
-		final List<String> strings = new ArrayList<String>();
+		List<String> strings = new ArrayList<String>();
 
-		for (final Object arg : args) {
+		for (Object arg : args) {
 			if (arg instanceof List) {
-				final List list = (List)arg;
-				for (final Object listElement : list)
+				List<?> list = (List<?>)arg;
+				for (Object listElement : list) {
 					strings.add(getArgAsString(listElement));
-			} else
+				}
+			} else {
 				strings.add(getArgAsString(arg));
+			}
 		}
 
-		final String[] retVal = new String[strings.size()];
-		return strings.toArray(retVal);
+		return strings.toArray(String[]::new);
 	}
 
 	/** Attempts to convert all arguments, including Lists to a uniform array of booleans.

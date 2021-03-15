@@ -1,30 +1,6 @@
 package org.cytoscape.equations;
 
-/*
- * #%L
- * Cytoscape Equations API (equations-api)
- * $Id:$
- * $HeadURL:$
- * %%
- * Copyright (C) 2010 - 2013 The Cytoscape Consortium
- * %%
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU Lesser General Public License as 
- * published by the Free Software Foundation, either version 2.1 of the 
- * License, or (at your option) any later version.
- * 
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Lesser Public License for more details.
- * 
- * You should have received a copy of the GNU General Lesser Public 
- * License along with this program.  If not, see
- * <http://www.gnu.org/licenses/lgpl-2.1.html>.
- * #L%
- */
-
-import java.util.Iterator;
+import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
@@ -37,6 +13,7 @@ import java.util.TreeSet;
  * @CyAPI.InModule equations-api
  */
 public abstract class AbstractFunction implements Function {
+	
 	private final ArgDescriptor[] argDescriptors;
 
 	/** 
@@ -70,26 +47,18 @@ public abstract class AbstractFunction implements Function {
 			alreadySeen.add(argName);
 		}
 	}
-
+	
 	/**
-	 *  Used to parse the function string.  This name is treated in a case-insensitive manner!
-	 *  @return the name by which you must call the function when used in an attribute equation.
+	 * {@inheritDoc}
 	 */
-	public abstract String getName();
+	@Override
+	public List<ArgDescriptor> getArgumentDescriptors() {
+		return Arrays.asList(argDescriptors);
+	}
+	
 
 	/**
-	 *  Used to provide help for users.  Unlike getUsageDescription(), this is an informal English description,
-	 *  like "Calculates the sine of its argument."
-	 *
-	 *  @return a description of what this function does
-	 */
-	public abstract String getFunctionSummary();
-
-	/**
-	 *  Used to provide help for users.  Unlike getFunctionSummary(), this describes how to call this function,
-	 *  like "Call with SIN(number)."
-	 *
-	 *  @return a description of how to use this function
+	 * {@inheritDoc}
 	 */
 	public final String getUsageDescription() {
 		final StringBuilder usage = new StringBuilder("Call with ");
@@ -103,7 +72,7 @@ public abstract class AbstractFunction implements Function {
 				usage.append(isFirst ? "[" : " [,");
 				++optArgCount;
 			} else
-				usage.append(isFirst ? "" : " ,");
+				usage.append(isFirst ? "" : ", ");
 			usage.append(argDescriptor.getArgName());
 
 			isFirst = false;
@@ -116,26 +85,10 @@ public abstract class AbstractFunction implements Function {
 
 		return usage.toString();
 	}
-
+	
+	
 	/**
-	 * Returns the static return type of this function.
-	 * If the static return type is Object.class, the dynamic return type will be one of Double.cLass, 
-	 * String.class, or Boolean.class and will depend on the arguments passed to the function!
-	 * <br/>
-	 * Note, this is used by external tools used to filter a list of functions based on what a valid 
-	 * return type might be. In Cytoscape it is used in the attribute browser's formula builder.
-	 *
-	 * @return the static return type of this function, Object.class, Double.cLass, String.class, or Boolean.class.
-	 */
-	public abstract Class getReturnType();
-
-	/**
-	 * Returns true of false if the args passed in had arity of a type mismatch.
-	 * Note that this is different from getReturnType() in that it will never return the wildcard Object.class.
-	 * It is used by the parser which knows the actual type of the arguments in any given call to this function.
-	 *
-	 * @param argTypes the args to check for wrong arity or a type mismatch.
-	 * @return true or false if the args passed in had the wrong arity or a type mismatch
+	 * {@inheritDoc}
 	 */
 	protected final boolean argTypesAreValid(final Class[] argTypes) {
 		int i = 0;
@@ -166,37 +119,14 @@ public abstract class AbstractFunction implements Function {
 	}
 
 	/**
-	 * Returns the return type of this function.
-	 * Note that this is different from getReturnType() in that it will never return the wildcard Object.class.
-	 * It is used by the parser which knows the actual type of the arguments in any given call to this function.
-	 *
-	 * @param argTypes the args to check for wrong arity or a type mismatch.
-	 * @return the return type for this function (Double.class, String.class, or Boolean.class)
-	 *          or null if the args passed in had the wrong arity or a type mismatch
+	 * {@inheritDoc}
 	 */
 	public Class validateArgTypes(final Class[] argTypes) {
 		return argTypesAreValid(argTypes) ? getReturnType() : null;
 	}
 
 	/**
-	 * Used to invoke this function.
-	 * @param args the function arguments which must correspond in type and number to what getParameterTypes() returns.
-	 * @return the result of the function evaluation.  The actual type of the returned object will be what 
-	 * getReturnType() returns.
-	 * @throws ArithmeticException thrown if a numeric error, e.g. a division by zero occurred.
-	 * @throws IllegalArgumentException thrown for any error that is not a numeric error, 
-	 * for example if a function only accepts positive numbers and a negative number was passed in.
-	 */
-	public abstract Object evaluateFunction(final Object[] args) throws FunctionError;
-
-	/**
-	 *  Used with the equation builder.
-	 *
-	 *  @param leadingArgs the types of the arguments that have already been selected by the user.
-	 *  @return the set of arguments (must be a collection of String.class, Long.class, Double.class,
-	 *          Boolean.class and List.class) that are candidates for the next argument.  A null return
-	 *          indicates that no further arguments are valid.  Please note that if the returned set
-	 *          contains a null, this indicates an optional additional argument.
+	 * {@inheritDoc}
 	 */
 	public final List<Class<?>> getPossibleArgTypes(final Class[] leadingArgs) {
 		int i = 0;
