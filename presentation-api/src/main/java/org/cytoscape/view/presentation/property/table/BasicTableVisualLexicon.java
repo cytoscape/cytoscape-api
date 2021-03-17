@@ -6,9 +6,11 @@ import java.awt.Paint;
 import javax.swing.UIManager;
 
 import org.cytoscape.model.CyColumn;
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.model.CyRow;
 import org.cytoscape.model.CyTable;
 import org.cytoscape.util.swing.LookAndFeelUtil;
+import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.ContinuousRange;
 import org.cytoscape.view.model.NullDataType;
 import org.cytoscape.view.model.Range;
@@ -28,7 +30,7 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	private static final Font DEF_FONT = new Font("SansSerif", Font.PLAIN, (int) LookAndFeelUtil.getSmallFontSize());
 	private static final int DEF_FONT_SIZE = (int) LookAndFeelUtil.getSmallFontSize();
 	
-	private static final Range<Integer> ROW_HEIGHT_RANGE = new ContinuousRange<>(Integer.class, 0, 400, true, true);
+	private static final Range<Integer> ROW_HEIGHT_RANGE = new ContinuousRange<>(Integer.class, 1, 800, true, true);
 	private static final Range<Integer> NONE_ZERO_POSITIVE_INT_RANGE = new ContinuousRange<>(Integer.class, 1, Integer.MAX_VALUE, true, true);
 	
 	// Categories of VisualProperty ====================================================================================
@@ -62,10 +64,20 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	public static final VisualProperty<Boolean> TABLE_GRID_VISIBLE = new BooleanVisualProperty(false, 
 			"TABLE_GRID_VISIBLE", "Table Grid Visible", CyTable.class);
 	
+	/**
+	 * Can be used to set the same height to all rows in a table. It can be overridden by {@link #ROW_HEIGHT}.
+	 */
+	public static final VisualProperty<Integer> TABLE_ROW_HEIGHT = new RowHeightVisualProperty(ROW_HEIGHT_RANGE,
+			"TABLE_ROW_HEIGHT", "Table Row Height", CyTable.class);
+	
 	// VPs that apply to ROWs ==========================================================================================
 	
-	public static final VisualProperty<Integer> ROW_HEIGHT = new IntegerVisualProperty(0/*auto*/, 
-			ROW_HEIGHT_RANGE, "ROW_HEIGHT", "Row Height", CyRow.class);
+	/**
+	 * Change the height of specific rows in a table, which means this property must be used when a table requires
+	 * one or more rows to have a different height. When set, it overrides the value set to {@link #TABLE_ROW_HEIGHT}.
+	 */
+	public static final VisualProperty<Integer> ROW_HEIGHT = new RowHeightVisualProperty(ROW_HEIGHT_RANGE, "ROW_HEIGHT",
+			"Row Height", CyRow.class);
 	
 //	public static final VisualProperty<Boolean> ROW_HIGHLIGHT = new BooleanVisualProperty(false, 
 //			"ROW_HIGHLIGHT", "Row Highlight", CyRow.class);
@@ -118,7 +130,7 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	public BasicTableVisualLexicon(VisualProperty<NullDataType> root) {
 		super(root);
 	}
-
+	
 	@Override
 	protected Class<?>[] getTypes() {
 		return new Class<?>[] {
@@ -129,7 +141,7 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	}
 	
 	@Override
-	protected void addVisualProperties(final VisualProperty<NullDataType> root) {
+	protected void addVisualProperties(VisualProperty<NullDataType> root) {
 		addVisualProperty(TABLE, root);
 		
 		addVisualProperty(ROW, TABLE);
@@ -139,6 +151,7 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 		addVisualProperty(TABLE_VIEW_MODE, TABLE);
 		addVisualProperty(TABLE_ALTERNATE_ROW_COLORS, TABLE);
 		addVisualProperty(TABLE_GRID_VISIBLE, TABLE);
+		addVisualProperty(TABLE_ROW_HEIGHT, TABLE);
 		
 		addVisualProperty(ROW_HEIGHT, ROW);
 		
@@ -154,5 +167,43 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 		addVisualProperty(CELL_TEXT_COLOR, CELL);
 		addVisualProperty(CELL_TEXT_WRAPPED, CELL);
 		addVisualProperty(CELL_TOOLTIP, CELL);
+	}
+	
+	/**
+	 * The only reason for the existence of this class is that the default value must be retrieved
+	 * from the current look and feel property "Table.rowHeight".
+	 */
+	private final static class RowHeightVisualProperty extends AbstractVisualProperty<Integer> {
+
+		public RowHeightVisualProperty(
+				Range<Integer> range,
+				String id, 
+				String displayName,
+				Class<? extends CyIdentifiable> targetObjectDataType
+		) {
+			super(0, range, id, displayName, targetObjectDataType);
+		}
+		
+		@Override
+		public Integer getDefault() {
+			return UIManager.getInt("Table.rowHeight");
+		}
+		
+		@Override
+		public String toSerializableString(Integer value) {
+			try {
+				return value.toString();
+			} catch (ClassCastException ex) {
+				System.err.println("ClassCast: " + value);
+				ex.printStackTrace();
+				return "";
+			}
+		}
+
+		@Override
+		public Integer parseSerializableString(String text) {
+			// Cytoscape 2.x serializes integer attributes as decimals (e.g."1.0")!
+			return Double.valueOf(text).intValue();
+		}
 	}
 }
