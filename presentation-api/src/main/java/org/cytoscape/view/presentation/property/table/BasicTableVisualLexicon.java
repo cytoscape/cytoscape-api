@@ -93,6 +93,9 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	public static final VisualProperty<CellFormat> COLUMN_FORMAT = new CellFormatVisualProperty(new CellFormat(""),
 			"COLUMN_FORMAT", "Cell Number Format", CyColumn.class);
 	
+	public static final VisualProperty<Boolean> COLUMN_TEXT_WRAPPED = new BooleanVisualProperty(false, 
+			"COLUMN_TEXT_WRAPPED", "Cell Text Wrapped", CyColumn.class);
+	
 	// VPs that apply to CELLs within columns ==========================================================================
 	// (these show up in the vizmapper and can have mappings)
 	
@@ -108,9 +111,6 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	
 	public static final VisualProperty<Paint> CELL_TEXT_COLOR = new PaintVisualProperty(UIManager.getColor("Table.foreground"),
 			PAINT_RANGE, "CELL_TEXT_COLOR", "Cell Text Paint", CyColumn.class);
-	
-	public static final VisualProperty<Boolean> CELL_TEXT_WRAPPED = new BooleanVisualProperty(false, 
-			"CELL_TEXT_WRAPPED", "Cell Text Wrapped", CyColumn.class);
 	
 	public static final VisualProperty<String> CELL_TOOLTIP = new StringVisualProperty("",
 			ARBITRARY_STRING_RANGE, "CELL_TOOLTIP", "Cell Tooltip", CyColumn.class);
@@ -149,12 +149,12 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 		addVisualProperty(COLUMN_GRAVITY, COLUMN);
 		addVisualProperty(COLUMN_WIDTH, COLUMN);
 		addVisualProperty(COLUMN_FORMAT, COLUMN);
+		addVisualProperty(COLUMN_TEXT_WRAPPED, COLUMN);
 		
 		addVisualProperty(CELL_BACKGROUND_PAINT, CELL);
 		addVisualProperty(CELL_FONT_FACE, CELL);
 		addVisualProperty(CELL_FONT_SIZE, CELL);
 		addVisualProperty(CELL_TEXT_COLOR, CELL);
-		addVisualProperty(CELL_TEXT_WRAPPED, CELL);
 		addVisualProperty(CELL_TOOLTIP, CELL);
 	}
 	
