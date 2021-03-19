@@ -49,12 +49,6 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	
 	// VPs that apply to the entire TABLE ==============================================================================
 	
-//	public static final VisualProperty<Paint> TABLE_BACKGROUND_PAINT = new PaintVisualProperty(new Color(120, 120, 120),
-//			PAINT_RANGE, "TABLE_BACKGROUND_PAINT", "Table Background Paint", CyTable.class);
-//	
-//	public static final VisualProperty<Boolean> TABLE_PRIVATE = new BooleanVisualProperty(false, 
-//			"TABLE_PRIVATE", "Table Private", CyTable.class);
-	
 	public static final VisualProperty<TableMode> TABLE_VIEW_MODE = new TableModeVisualProperty(TableModeVisualProperty.AUTO, 
 			"TABLE_VIEW_MODE", "View Mode", CyTable.class);
 	
@@ -79,16 +73,10 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	public static final VisualProperty<Integer> ROW_HEIGHT = new RowHeightVisualProperty(ROW_HEIGHT_RANGE, "ROW_HEIGHT",
 			"Row Height", CyRow.class);
 	
-//	public static final VisualProperty<Boolean> ROW_HIGHLIGHT = new BooleanVisualProperty(false, 
-//			"ROW_HIGHLIGHT", "Row Highlight", CyRow.class);
-//	
-//	public static final VisualProperty<Boolean> ROW_SELECTED = new BooleanVisualProperty(false, 
-//			"ROW_SELECTED", "Row Selection", CyRow.class);
+	public static final VisualProperty<Boolean> ROW_SELECTED = new BooleanVisualProperty(false, "ROW_SELECTED",
+			"Row Selected", CyRow.class);
 	
 	// VPs that apply to an entire COLUMN or to the column header ======================================================
-	
-//	public static final VisualProperty<Paint> COLUMN_HEADER_PAINT = new PaintVisualProperty(new Color(120, 120, 120),
-//			PAINT_RANGE, "COLUMN_HEADER_PAINT", "Column Header Paint", CyColumn.class);
 	
 	public static final VisualProperty<Boolean> COLUMN_EDITABLE = new BooleanVisualProperty(true, 
 			"COLUMN_EDITABLE", "Column Editable", CyColumn.class);
@@ -154,6 +142,7 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 		addVisualProperty(TABLE_ROW_HEIGHT, TABLE);
 		
 		addVisualProperty(ROW_HEIGHT, ROW);
+		addVisualProperty(ROW_SELECTED, ROW);
 		
 		addVisualProperty(COLUMN_EDITABLE, COLUMN);
 		addVisualProperty(COLUMN_VISIBLE, COLUMN);
