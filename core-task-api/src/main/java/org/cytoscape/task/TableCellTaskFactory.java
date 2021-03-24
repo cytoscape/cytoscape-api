@@ -1,12 +1,15 @@
 package org.cytoscape.task;
 
+import org.cytoscape.model.CyColumn;
+import org.cytoscape.work.TaskIterator;
+
 /*
  * #%L
  * Cytoscape Core Task API (core-task-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2010 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2010 - 2021 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -24,11 +27,6 @@ package org.cytoscape.task;
  * #L%
  */
 
-
-import org.cytoscape.model.CyColumn;
-import org.cytoscape.work.TaskIterator;
-
-
 /**
  * A task factory that creates one or more tasks that operate on the specified CyColumn
  * along with primary key.
@@ -36,6 +34,7 @@ import org.cytoscape.work.TaskIterator;
  * @CyAPI.InModule core-task-api
  */
 public interface TableCellTaskFactory {
+	
 	/** 
 	 * Used to provision this factory with a {@link CyColumn} and a primary key that will be
 	 * used to create tasks.
@@ -43,7 +42,7 @@ public interface TableCellTaskFactory {
 	 * @param primaryKeyValue  a non-null primary key value
 	 * @return A TaskIterator object containing one or more {@link org.cytoscape.work.Task} objects to execute.
 	 */
-	TaskIterator createTaskIterator(final CyColumn column, final Object primaryKeyValue);
+	TaskIterator createTaskIterator(CyColumn column, Object primaryKeyValue);
 
     /**
      * Returns true if this task factory is ready to produce a TaskIterator.
@@ -51,5 +50,14 @@ public interface TableCellTaskFactory {
 	 * @param primaryKeyValue  a non-null primary key value
      * @return true if this task factory is ready to produce a TaskIterator.
      */
-	boolean isReady(final CyColumn column, final Object primaryKeyValue);
+	boolean isReady(CyColumn column, Object primaryKeyValue);
+	
+	/**
+	 * @param column  a non-null CyColumn
+	 * @param primaryKeyValue  a non-null primary key value
+     * @return true if the toggle state of this task is "on".
+     */
+    default boolean isOn(CyColumn column, Object primaryKeyValue) {
+    	return false;
+    }
 }

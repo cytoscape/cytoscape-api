@@ -1,5 +1,7 @@
 package org.cytoscape.task;
 
+import org.cytoscape.model.CyColumn;
+import org.cytoscape.model.CyRow;
 import org.cytoscape.work.TaskFactory;
 
 /*
@@ -8,7 +10,7 @@ import org.cytoscape.work.TaskFactory;
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2018 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2021 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -41,4 +43,10 @@ public interface DynamicTaskFactoryProvisioner {
 	TaskFactory createFor(NetworkViewCollectionTaskFactory factory);
 
 	TaskFactory createFor(TableTaskFactory factory);
+	
+	TaskFactory createFor(TableColumnTaskFactory factory, CyColumn column);
+	
+	TaskFactory createFor(RowTaskFactory factory, CyRow row);
+	
+	TaskFactory createFor(TableCellTaskFactory factory, CyColumn column, Object primaryKeyValue);
 }

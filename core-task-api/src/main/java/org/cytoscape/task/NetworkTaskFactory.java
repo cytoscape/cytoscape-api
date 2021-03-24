@@ -1,12 +1,15 @@
 package org.cytoscape.task;
 
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.work.TaskIterator;
+
 /*
  * #%L
  * Cytoscape Core Task API (core-task-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2008 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2010 - 2021 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -23,9 +26,6 @@ package org.cytoscape.task;
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
  */
-
-import org.cytoscape.model.CyNetwork;
-import org.cytoscape.work.TaskIterator;
 
 /**
  * A task factory that creates one or more tasks that operate on the specified CyNetwork. 
@@ -48,4 +48,13 @@ public interface NetworkTaskFactory {
      * @return true if this task factory is ready to produce a TaskIterator.
      */
     boolean isReady(CyNetwork network);
+    
+    /**
+     * 
+     * @param network
+     * @return
+     */
+    default boolean isOn(CyNetwork network) {
+    	return false;
+    }
 }

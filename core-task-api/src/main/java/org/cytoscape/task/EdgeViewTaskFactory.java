@@ -1,12 +1,17 @@
 package org.cytoscape.task;
 
+import org.cytoscape.model.CyEdge;
+import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.View;
+import org.cytoscape.work.TaskIterator;
+
 /*
  * #%L
  * Cytoscape Core Task API (core-task-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2008 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2008 - 2021 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -24,11 +29,6 @@ package org.cytoscape.task;
  * #L%
  */
 
-import org.cytoscape.model.CyEdge;
-import org.cytoscape.view.model.CyNetworkView;
-import org.cytoscape.view.model.View;
-import org.cytoscape.work.TaskIterator;
-
 /**
  * A task factory that creates one or more tasks that operate on the specified View&lt;CyEdge&gt; within
  * the specified CyNetworkView.
@@ -36,6 +36,7 @@ import org.cytoscape.work.TaskIterator;
  * @CyAPI.InModule core-task-api
  */
 public interface EdgeViewTaskFactory {
+	
 	/**
 	 * Creates a new TaskIterator using the given edge view and network view.
 	 * @param edgeView  a non-null edge view
@@ -51,4 +52,14 @@ public interface EdgeViewTaskFactory {
 	 * @return true if this task factory is ready to produce a TaskIterator.
 	 */
 	boolean isReady(View<CyEdge> edgeView, CyNetworkView networkView);
+	
+	/**
+     * 
+     * @param edgeView
+     * @param networkView
+     * @return
+     */
+    default boolean isOn(View<CyEdge> edgeView, CyNetworkView networkView) {
+    	return false;
+    }
 }

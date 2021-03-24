@@ -1,12 +1,17 @@
 package org.cytoscape.task;
 
+import java.util.Collection;
+
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.work.TaskIterator;
+
 /*
  * #%L
  * Cytoscape Core Task API (core-task-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2008 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2008 - 2021 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -24,18 +29,13 @@ package org.cytoscape.task;
  * #L%
  */
 
-import java.util.Collection;
-
-import org.cytoscape.model.CyNetwork;
-import org.cytoscape.work.TaskIterator;
-
-
 /**
  * Produces a task iterator for the specified collection of networks. 
  * @CyAPI.Spi.Interface
  * @CyAPI.InModule core-task-api
  */
 public interface NetworkCollectionTaskFactory {
+	
 	/** 
 	 * Provisions this factory with the collection of networks that will be passed into any task
 	 * created by it.
@@ -50,4 +50,13 @@ public interface NetworkCollectionTaskFactory {
 	 * @return true if this task factory is ready to produce a task iterator.
 	 */
 	boolean isReady(Collection<CyNetwork> networks);
+	
+	/**
+     * 
+     * @param networks
+     * @return
+     */
+    default boolean isOn(Collection<CyNetwork> networks) {
+    	return false;
+    }
 }

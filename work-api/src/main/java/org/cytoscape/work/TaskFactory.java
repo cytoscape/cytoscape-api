@@ -6,7 +6,7 @@ package org.cytoscape.work;
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2021 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -43,6 +43,7 @@ package org.cytoscape.work;
  * @CyAPI.InModule work-api
  */
 public interface TaskFactory {
+	
 	/** 
 	 * Returns an iterator containing a sequence of <code>Task</code>s.
 	 * @return an iterator containing a sequence of <code>Task</code>s.
@@ -56,4 +57,14 @@ public interface TaskFactory {
 	 * a task that will execute properly, false otherwise.
 	 */
 	boolean isReady();
+	
+	/**
+     * Returns <code>true</code> if the function provided by the factory's implementation is on
+	 * and <code>false</code> if it is off.
+	 * This method is only called by Cytoscape if the factory also implements the {@link Togglable} interface.
+     * @return
+     */
+    default boolean isOn() {
+    	return false;
+    }
 }

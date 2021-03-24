@@ -1,12 +1,16 @@
 package org.cytoscape.task;
 
+import java.util.Collection;
+
+import org.cytoscape.model.CyNetwork;
+
 /*
  * #%L
  * Cytoscape Core Task API (core-task-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2021 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -24,16 +28,13 @@ package org.cytoscape.task;
  * #L%
  */
 
-import java.util.Collection;
-
-import org.cytoscape.model.CyNetwork;
-
 /**
  * An NetworkCollectionTaskFactory that is always ready to produce a TaskIterator.
  * @CyAPI.Abstract.Class
  * @CyAPI.InModule core-task-api
  */
 public abstract class AbstractNetworkCollectionTaskFactory implements NetworkCollectionTaskFactory {
+	
 	/**
 	 * Returns true if the supplied collection is not null.
 	 * @param networks The collection of networks.
