@@ -309,7 +309,6 @@ public final class CySession {
 		return getObjectInternal(oldId, type);
 	}
 	
-	@SuppressWarnings("unchecked")
 	private <T extends CyIdentifiable> T getObjectInternal(Object oldId, Class<T> type) {
 		T tableEntry = null;
 		Map<Object, ? extends CyIdentifiable> objByIdMap = objectMap.get(type);
@@ -318,7 +317,7 @@ public final class CySession {
 			Object obj = objByIdMap.get(oldId);
 			
 			try {
-				tableEntry = (T) obj;
+				tableEntry = type.cast(obj);
 			} catch (ClassCastException cce) {
 				logger.error("ClassCastException: Tried to cast object " + obj + " to " + type + " (old id = " + oldId + ")");
 			}
