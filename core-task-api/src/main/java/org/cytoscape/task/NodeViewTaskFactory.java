@@ -1,12 +1,17 @@
 package org.cytoscape.task;
 
+import org.cytoscape.model.CyNode;
+import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.view.model.View;
+import org.cytoscape.work.TaskIterator;
+
 /*
  * #%L
  * Cytoscape Core Task API (core-task-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2008 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2008 - 2021 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -24,12 +29,6 @@ package org.cytoscape.task;
  * #L%
  */
 
-import org.cytoscape.model.CyNode;
-import org.cytoscape.view.model.CyNetworkView;
-import org.cytoscape.view.model.View;
-import org.cytoscape.work.TaskIterator;
-
-
 /**
  * A task factory that creates a task that operates on the specified View&lt;CyNode&gt; within
  * the specified CyNetworkView.
@@ -37,6 +36,7 @@ import org.cytoscape.work.TaskIterator;
  * @CyAPI.InModule core-task-api
  */
 public interface NodeViewTaskFactory {
+	
 	/** 
 	 * Provisions this factory with the node view and its associated network view, both of
 	 * which will be passed into any task that will be created by this factory.
@@ -55,4 +55,14 @@ public interface NodeViewTaskFactory {
 	 * ready to be processed by the generated tasks and false otherwise.
 	 */
 	boolean isReady(View<CyNode> nodeView, CyNetworkView networkView);
+	
+	/**
+     * 
+     * @param nodeView
+     * @param networkView
+     * @return
+     */
+    default boolean isOn(View<CyNode> nodeView, CyNetworkView networkView) {
+    	return false;
+    }
 }

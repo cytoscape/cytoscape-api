@@ -1,12 +1,14 @@
 package org.cytoscape.task;
 
+import org.cytoscape.model.CyNetwork;
+
 /*
  * #%L
  * Cytoscape Core Task API (core-task-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2021 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -24,14 +26,13 @@ package org.cytoscape.task;
  * #L%
  */
 
-import org.cytoscape.model.CyNetwork;
-
 /**
  * A NetworkTaskFactory that is always ready to produce a TaskIterator.
  * @CyAPI.Abstract.Class
  * @CyAPI.InModule core-task-api
  */
 public abstract class AbstractNetworkTaskFactory implements NetworkTaskFactory {
+	
 	/**
 	 * Returns true if the supplied network is not null.
 	 * @param network The network.

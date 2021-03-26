@@ -1,12 +1,17 @@
 package org.cytoscape.task;
 
+import java.util.Collection;
+
+import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.work.TaskIterator;
+
 /*
  * #%L
  * Cytoscape Core Task API (core-task-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2008 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2008 - 2021 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -23,12 +28,6 @@ package org.cytoscape.task;
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
  */
-
-import java.util.Collection;
-
-import org.cytoscape.view.model.CyNetworkView;
-import org.cytoscape.work.TaskIterator;
-
 
 /**
  * A task factory that creates one or more tasks that operate on the specified 
@@ -52,4 +51,13 @@ public interface NetworkViewCollectionTaskFactory {
      * @return true if this task factory is ready to produce a TaskIterator.
      */
 	boolean isReady(Collection<CyNetworkView> networkViews);
+	
+	/**
+     * 
+     * @param networkViews
+     * @return
+     */
+    default boolean isOn(Collection<CyNetworkView> networkViews) {
+    	return false;
+    }
 }

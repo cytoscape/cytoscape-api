@@ -1,12 +1,17 @@
 package org.cytoscape.task;
 
+import java.awt.geom.Point2D;
+
+import org.cytoscape.view.model.CyNetworkView;
+import org.cytoscape.work.TaskIterator;
+
 /*
  * #%L
  * Cytoscape Core Task API (core-task-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2021 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -23,11 +28,6 @@ package org.cytoscape.task;
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
  */
-
-import java.awt.geom.Point2D;
-
-import org.cytoscape.view.model.CyNetworkView;
-import org.cytoscape.work.TaskIterator;
 
 /**
  * An extension of TaskFactory that provides support for
@@ -56,4 +56,15 @@ public interface NetworkViewLocationTaskFactory{
 	 * @return true if this task factory is ready to produce a TaskIterator.
 	 */
 	boolean isReady(CyNetworkView networkView, Point2D javaPt, Point2D xformPt);
+	
+	/**
+     * 
+     * @param networkView
+     * @param javaPt
+     * @param xformPt
+     * @return
+     */
+    default boolean isOn(CyNetworkView networkView, Point2D javaPt, Point2D xformPt) {
+    	return false;
+    }
 }
