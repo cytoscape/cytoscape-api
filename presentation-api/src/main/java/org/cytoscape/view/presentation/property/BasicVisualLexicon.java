@@ -68,7 +68,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 
 	/**
 	 * The color of the whole node, including its border, label and selected paint.
-	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Type: </strong> {@link Color} </p>
 	 * <p><strong>Property Range:</strong> A non-null color </p>
 	 */
 	public static final VisualProperty<Paint> NODE_PAINT = new PaintVisualProperty(new Color(120, 120, 120),
@@ -76,7 +76,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 
 	/**
 	 * The color of the node.
-	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Type: </strong> {@link Color} </p>
 	 * <p><strong>Property Range:</strong> A non-null color </p> 
 	 */
 	public static final VisualProperty<Paint> NODE_FILL_COLOR = new PaintVisualProperty(new Color(200, 0, 0),
@@ -84,7 +84,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 
 	/**
 	 * The color of the node label.
-	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Type: </strong> {@link Color} </p>
 	 * <p><strong>Property Range:</strong> A non-null color </p> 
 	 */
 	public static final VisualProperty<Paint> NODE_LABEL_COLOR = new PaintVisualProperty(Color.BLACK, PAINT_RANGE,
@@ -92,7 +92,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 
 	/**
 	 * The text used for the node label.
-	 * <p><strong>Property Type: </strong> {@see java.lang.String} </p>
+	 * <p><strong>Property Type: </strong> {@link String} </p>
 	 * <p><strong>Property Range:</strong> Any string </p> 
 	 */
 	public static final VisualProperty<String> NODE_LABEL = new StringVisualProperty("", ARBITRARY_STRING_RANGE,
@@ -100,53 +100,53 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 
 	/**
 	 * X location of the node. Default value of this will be ignored. The value will be used only when mapping function is defined.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
-	 * <p><strong>Property Range:</strong> {@see java.lang.Double#NEGATIVE_INFINITY} &LT;= value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
+	 * <p><strong>Property Range:</strong> {@link Double#NEGATIVE_INFINITY} &LT;= value &LT;= {@link Double#POSITIVE_INFINITY}</p> 
 	 */
 	public static final VisualProperty<Double> NODE_X_LOCATION = new DoubleVisualProperty(0.0, ARBITRARY_DOUBLE_RANGE,
 			"NODE_X_LOCATION", "Node X Location", true, CyNode.class);
 
 	/**
 	 * Y location of the node. Default value of this will be ignored. The value will be used only when mapping function is defined.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
-	 * <p><strong>Property Range:</strong> {@see java.lang.Double#NEGATIVE_INFINITY} &LT;= value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
+	 * <p><strong>Property Range:</strong> {@link Double#NEGATIVE_INFINITY} &LT;= value &LT;= {@link Double#POSITIVE_INFINITY}</p> 
 	 */
 	public static final VisualProperty<Double> NODE_Y_LOCATION = new DoubleVisualProperty(0.0, ARBITRARY_DOUBLE_RANGE,
 			"NODE_Y_LOCATION", "Node Y Location", true, CyNode.class);
 
 	/**
 	 * The size of the node. Width and height will be equal. This property is mutually exclusive of Node Height and Node Width.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
-	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
+	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@link Double#POSITIVE_INFINITY}</p> 
 	 */
 	public static final VisualProperty<Double> NODE_SIZE = new DoubleVisualProperty(50.0,
 			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NODE_SIZE", "Node Size", CyNode.class);
 
 	/**
 	 * The width of the node. Width will be independent of height. This property is mutually exclusive of Node Size.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
-	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
+	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@link Double#POSITIVE_INFINITY}</p> 
 	 */
 	public static final VisualProperty<Double> NODE_WIDTH = new DoubleVisualProperty(60.0,
 			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NODE_WIDTH", "Node Width", CyNode.class);
 
 	/**
 	 * The height of the node. Height will be independent of width. This property is mutually exclusive of Node Size.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
-	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
+	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@link Double#POSITIVE_INFINITY}</p> 
 	 */	
 	public static final VisualProperty<Double> NODE_HEIGHT = new DoubleVisualProperty(40.0,
 			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NODE_HEIGHT", "Node Height", CyNode.class);
 	/**
 	 * Hides the node if set to false. By default, this value is set to true.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Boolean} </p>
+	 * <p><strong>Property Type: </strong> {@link Boolean} </p>
 	 * <p><strong>Property Range:</strong> true or false </p> 
 	 */	
 	public static final VisualProperty<Boolean> NODE_VISIBLE = new BooleanVisualProperty(true, "NODE_VISIBLE",
 			"Node Visible", CyNode.class);
 	/**
 	 * TODO Documentation
-	 * <p><strong>Property Type: </strong> {@see java.lang.Boolean} </p>
+	 * <p><strong>Property Type: </strong> {@link Boolean} </p>
 	 * <p><strong>Property Range:</strong> true or false </p> 
 	 */
 	public static final VisualProperty<Boolean> NODE_SELECTED = new BooleanVisualProperty(false, "NODE_SELECTED",
@@ -154,7 +154,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 	/**
 	 * A boolean value that indicates whether a nested network should be visualized (assuming 
 	 * a nested network is present for the specified node).
-	 * <p><strong>Property Type: </strong> {@see java.lang.Boolean} </p>
+	 * <p><strong>Property Type: </strong> {@link Boolean} </p>
 	 * <p><strong>Property Range:</strong> true or false </p>  
 	 */
 	public static final VisualProperty<Boolean> NODE_NESTED_NETWORK_IMAGE_VISIBLE = new BooleanVisualProperty(true,
@@ -165,8 +165,8 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 	 * width, Cytoscape will automatically wrap the label on space characters. Cytoscape 
 	 * will not hyphenate words, meaning that if a single word (i.e. no spaces) is longer 
 	 * than maximum width, the word will be displayed beyond the maximum width.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
-	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
+	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@link Double#POSITIVE_INFINITY}</p> 
 	 */
 	public static final VisualProperty<Double> NODE_LABEL_WIDTH = new DoubleVisualProperty(200d, NONE_ZERO_POSITIVE_DOUBLE_RANGE,
 			"NODE_LABEL_WIDTH", "Node Label Width", CyNode.class);
@@ -183,7 +183,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 
 	/**
 	 * A value used to rotate the node label about its center, in degrees.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
 	 * <p><strong>Property Range:</strong> -360 &LT;= value &LT;= 360</p> 
 	 */
 	public static final VisualProperty<Double> NODE_LABEL_ROTATION = new DoubleVisualProperty(
@@ -191,7 +191,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 	
 	/**
 	 * The color of the node when it is in the selected state.
-	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Type: </strong> {@link Color} </p>
 	 * <p><strong>Property Range:</strong> A non-null color </p> 
 	 */
 	public static final VisualProperty<Paint> NODE_SELECTED_PAINT = new PaintVisualProperty(Color.YELLOW,
@@ -199,7 +199,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 
 	/**
 	 * The color of the border of the node.
-	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Type: </strong> {@link Color} </p>
 	 * <p><strong>Property Range:</strong> A non-null color </p>  
 	 */
 	public static final VisualProperty<Paint> NODE_BORDER_PAINT = new PaintVisualProperty(Color.BLACK,
@@ -207,8 +207,8 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 
 	/**
 	 * TODO Documentation
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
-	 * <p><strong>Property Range:</strong> 0 &LT;= value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
+	 * <p><strong>Property Range:</strong> 0 &LT;= value &LT;= {@link Double#POSITIVE_INFINITY}</p> 
 	 */
 	public static final VisualProperty<Double> NODE_BORDER_WIDTH = new DoubleVisualProperty(DEF_BORDER_WIDTH,
 			new ContinuousRange<>(Double.class, 0d, Double.POSITIVE_INFINITY, true, true), "NODE_BORDER_WIDTH",
@@ -216,7 +216,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 
 	/**
 	 * The text of the tooltip that appears when a mouse hovers over the node.
-	 * <p><strong>Property Type: </strong> {@see java.lang.String} </p>
+	 * <p><strong>Property Type: </strong> {@link String} </p>
 	 * <p><strong>Property Range:</strong> Any string </p> 
 	 */
 	public static final VisualProperty<String> NODE_TOOLTIP = new StringVisualProperty("",
@@ -224,7 +224,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 
 	/**
 	 * The font used for the node label.
-	 * <p><strong>Property Type: </strong> {@see java.awt.Font} </p>
+	 * <p><strong>Property Type: </strong> {@link Font} </p>
 	 * <p><strong>Property Range:</strong> Any font available in the local graphics environment</p> 
 	 */
 	public static final VisualProperty<Font> NODE_LABEL_FONT_FACE = new FontVisualProperty(new Font("SansSerif",
@@ -232,8 +232,8 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 
 	/**
 	 * The size of the font used for the node label.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Integer} </p>
-	 * <p><strong>Property Range:</strong> 1 &LT;= value &LT;= {@see java.lang.Integer#MAX_VALUE}</p> 
+	 * <p><strong>Property Type: </strong> {@link Integer} </p>
+	 * <p><strong>Property Range:</strong> 1 &LT;= value &LT;= {@link Integer#MAX_VALUE}</p> 
 	 */
 	public static final VisualProperty<Integer> NODE_LABEL_FONT_SIZE = new IntegerVisualProperty(DEF_FONT_SIZE,
 			new ContinuousRange<>(Integer.class, 1, Integer.MAX_VALUE, true, true), "NODE_LABEL_FONT_SIZE",
@@ -242,20 +242,20 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 	/**
 	 * The opacity of the color of the node. Zero means totally transparent, and 255 means
 	 *  totally opaque.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Integer} </p>
+	 * <p><strong>Property Type: </strong> {@link Integer} </p>
 	 * <p><strong>Property Range:</strong> 0 &LT;= value &LT;= 255</p> 
 	 */
 	public static final VisualProperty<Integer> NODE_TRANSPARENCY = new IntegerVisualProperty(255,
 			new ContinuousRange<>(Integer.class, 0, 255, true, true), "NODE_TRANSPARENCY", "Node Transparency",
 			CyNode.class);
 	/**
-	 * See {@see BasicVisualLexicon#NODE_TRANSPARENCY}
+	 * @see BasicVisualLexicon#NODE_TRANSPARENCY
 	 */
 	public static final VisualProperty<Integer> NODE_OPACITY = NODE_TRANSPARENCY;
 
 	/**
 	 * TODO Documentation
-	 * <p><strong>Property Type: </strong> {@see java.lang.Integer} </p>
+	 * <p><strong>Property Type: </strong> {@link Integer} </p>
 	 * <p><strong>Property Range:</strong> 0 &LT;= value &LT;= 255</p> 
 	 */
 	public static final VisualProperty<Integer> NODE_BORDER_TRANSPARENCY = new IntegerVisualProperty(255,
@@ -264,7 +264,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 
 	/**
 	 * TODO Documentation
-	 * <p><strong>Property Type: </strong> {@see java.lang.Integer} </p>
+	 * <p><strong>Property Type: </strong> {@link Integer} </p>
 	 * <p><strong>Property Range:</strong> 0 &LT;= value &LT;= 255</p> 
 	 */
 	public static final VisualProperty<Integer> NODE_LABEL_TRANSPARENCY = new IntegerVisualProperty(255,
@@ -272,14 +272,14 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 			"Node Label Transparency", CyNode.class);
 	/**
 	 * The shape of the node.
-	 * <p><strong>Additional Details: </strong> {@see org.cytoscape.view.presentation.property.NodeShapeVisualProperty} </p>
+	 * <p><strong>Additional Details: </strong> {@link NodeShapeVisualProperty} </p>
 	 */
 	public static final VisualProperty<NodeShape> NODE_SHAPE = new NodeShapeVisualProperty(
 			NodeShapeVisualProperty.ELLIPSE, "NODE_SHAPE", "Node Shape", CyNode.class);
 
 	/**
 	 * The type of line used for the border of the node.
-	 * <p><strong>Additional Details: </strong> {@see org.cytoscape.view.presentation.property.LineTypeVisualProperty} </p>
+	 * <p><strong>Additional Details: </strong> {@link LineTypeVisualProperty} </p>
 	 */
 	public static final VisualProperty<LineType> NODE_BORDER_LINE_TYPE = new LineTypeVisualProperty(
 			LineTypeVisualProperty.SOLID, "NODE_BORDER_STROKE", "Node Border Line Type", CyNode.class);
@@ -287,9 +287,8 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 
 	////////////////////////////////// Edge VP ////////////////////////////////////////
 	/**
-	 * The color of the whole edge (including the stroke and arrows) when it is selected or
-	 *  unselected.
-	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * The color of the whole edge (including the stroke and arrows) when it is selected or unselected.
+	 * <p><strong>Property Type: </strong> {@link Color} </p>
 	 * <p><strong>Property Range:</strong> A non-null color </p> 
 	 */
 	public static final VisualProperty<Paint> EDGE_PAINT = new PaintVisualProperty(Color.gray, PAINT_RANGE,
@@ -297,7 +296,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 
 	/**
 	 * TODO Documentation
-	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Type: </strong> {@link Color} </p>
 	 * <p><strong>Property Range:</strong> A non-null color </p> 
 	 */
 	public static final VisualProperty<Paint> EDGE_LABEL_COLOR = new PaintVisualProperty(Color.BLACK, PAINT_RANGE,
@@ -305,7 +304,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 
 	/**
 	 * The text used for the edge label.
-	 * <p><strong>Property Type: </strong> {@see java.lang.String} </p>
+	 * <p><strong>Property Type: </strong> {@link String} </p>
 	 * <p><strong>Property Range:</strong> Any string </p> 
 	 */
 	public static final VisualProperty<String> EDGE_LABEL = new StringVisualProperty("", ARBITRARY_STRING_RANGE,
@@ -313,15 +312,15 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 
 	/**
 	 * 	The width of the edge line.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
-	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
+	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@link Double#POSITIVE_INFINITY}</p> 
 	 */
 	public static final VisualProperty<Double> EDGE_WIDTH = new DoubleVisualProperty(1d,
 			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "EDGE_WIDTH", "Edge Width", CyEdge.class);
 
 	/**
 	 * Hides the edge if set to false. By default, this value is set to true.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Boolean} </p>
+	 * <p><strong>Property Type: </strong> {@link Boolean} </p>
 	 * <p><strong>Property Range:</strong> true or false </p> 
 	 */
 	public static final VisualProperty<Boolean> EDGE_VISIBLE = new BooleanVisualProperty(true, "EDGE_VISIBLE",
@@ -329,7 +328,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 
 	/**
 	 * TODO Documentation
-	 * <p><strong>Property Type: </strong> {@see java.lang.Boolean} </p>
+	 * <p><strong>Property Type: </strong> {@link Boolean} </p>
 	 * <p><strong>Property Range:</strong> true or false </p> 
 	 */
 	public static final VisualProperty<Boolean> EDGE_SELECTED = new BooleanVisualProperty(false, "EDGE_SELECTED",
@@ -338,14 +337,14 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 	// Line Types
 	/**
 	 * The type of stoke used to render the line (solid, dashed, etc.)
-	 * <p><strong>Additional Details: </strong> {@see org.cytoscape.view.presentation.property.LineTypeVisualProperty} </p>
+	 * <p><strong>Additional Details: </strong> {@link LineTypeVisualProperty} </p>
 	 */
 	public static final VisualProperty<LineType> EDGE_LINE_TYPE = new LineTypeVisualProperty(
 			LineTypeVisualProperty.SOLID, "EDGE_LINE_TYPE", "Edge Line Type", CyEdge.class);
 
 	/**
 	 * The text of the tooltip that appears when a mouse hovers over the edge.
-	 * <p><strong>Property Type: </strong> {@see java.lang.String} </p>
+	 * <p><strong>Property Type: </strong> {@link String} </p>
 	 * <p><strong>Property Range:</strong> Any string </p> 
 	 */
 	public static final VisualProperty<String> EDGE_TOOLTIP = new StringVisualProperty("",
@@ -353,7 +352,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 
 	/**
 	 * The font used for the edge label.
-	 * <p><strong>Property Type: </strong> {@see java.awt.Font} </p>
+	 * <p><strong>Property Type: </strong> {@link Font} </p>
 	 * <p><strong>Property Range:</strong> Any font available in the local graphics environment</p> 
 	 */
 	public static final VisualProperty<Font> EDGE_LABEL_FONT_FACE = new FontVisualProperty(new Font("SansSerif",
@@ -361,8 +360,8 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 	
 	/**
 	 * The size of the font used for the edge label.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Integer} </p>
-	 * <p><strong>Property Range:</strong> 1 &LT;= value &LT;= {@see java.lang.Integer#MAX_VALUE}</p> 
+	 * <p><strong>Property Type: </strong> {@link Integer} </p>
+	 * <p><strong>Property Range:</strong> 1 &LT;= value &LT;= {@link Integer#MAX_VALUE}</p> 
 	 */
 	public static final VisualProperty<Integer> EDGE_LABEL_FONT_SIZE = new IntegerVisualProperty(10,
 			new ContinuousRange<>(Integer.class, 1, Integer.MAX_VALUE, true, true), "EDGE_LABEL_FONT_SIZE",
@@ -370,7 +369,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 
 	/**
 	 * The opacity of the color of the edge label. Zero means totally transparent, and 255 means totally opaque.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Integer} </p>
+	 * <p><strong>Property Type: </strong> {@link Integer} </p>
 	 * <p><strong>Property Range:</strong> 0 &LT;= value &LT;= 255</p> 
 	 */
 	public static final VisualProperty<Integer> EDGE_LABEL_TRANSPARENCY = new IntegerVisualProperty(255,
@@ -378,7 +377,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 			"Edge Label Transparency", CyEdge.class);
 	/**
 	 * The color of the whole edge (stroke and arrows) when selected.
-	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Type: </strong> {@link Color} </p>
 	 * <p><strong>Property Range:</strong> A non-null color </p>  
 	 */
 	public static final VisualProperty<Paint> EDGE_SELECTED_PAINT = new PaintVisualProperty(Color.RED,
@@ -386,7 +385,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 	
 	/**
 	 * The color of the whole edge (stroke and arrows) when it is not selected.
-	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Type: </strong> {@link Color} </p>
 	 * <p><strong>Property Range:</strong> A non-null color </p> 
 	 */
 	public static final VisualProperty<Paint> EDGE_UNSELECTED_PAINT = new PaintVisualProperty(Color.DARK_GRAY,
@@ -394,7 +393,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 	
 	/**
 	 * The color of the edge line when selected. 
-	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Type: </strong> {@link Color} </p>
 	 * <p><strong>Property Range:</strong> A non-null color </p>  
 	 */
 	public static final VisualProperty<Paint> EDGE_STROKE_SELECTED_PAINT = new PaintVisualProperty(Color.RED,
@@ -403,7 +402,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 	
 	/**
 	 * The color of the edge line.
-	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Type: </strong> {@link Color} </p>
 	 * <p><strong>Property Range:</strong> A non-null color </p>  
 	 */
 	public static final VisualProperty<Paint> EDGE_STROKE_UNSELECTED_PAINT = new PaintVisualProperty(Color.DARK_GRAY,
@@ -413,7 +412,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 	/**
 	 * The opacity of the of the edge. Zero means totally transparent, and 255 means totally 
 	 * opaque.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Integer} </p>
+	 * <p><strong>Property Type: </strong> {@link Integer} </p>
 	 * <p><strong>Property Range:</strong> 0 &LT;= value &LT;= 255</p> 
 	 */
 	public static final VisualProperty<Integer> EDGE_TRANSPARENCY = new IntegerVisualProperty(255,
@@ -422,28 +421,28 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 
 	/**
 	 * The shape of the arrow on the source node end of the edge.
-	 * <p><strong>Additional Details: </strong> {@see org.cytoscape.view.presentation.property.ArrowShapeVisualProperty} </p>
+	 * <p><strong>Additional Details: </strong> {@link ArrowShapeVisualProperty} </p>
 	 */
 	public static final VisualProperty<ArrowShape> EDGE_SOURCE_ARROW_SHAPE = new ArrowShapeVisualProperty(
 			ArrowShapeVisualProperty.NONE, "EDGE_SOURCE_ARROW_SHAPE", "Edge Source Arrow Shape", CyEdge.class);
 	/**
 	 * The shape of the arrow on the target node end of the edge.
-	 * <p><strong>Additional Details: </strong> {@see org.cytoscape.view.presentation.property.ArrowShapeVisualProperty} </p>
+	 * <p><strong>Additional Details: </strong> {@link ArrowShapeVisualProperty} </p>
 	 */
 	public static final VisualProperty<ArrowShape> EDGE_TARGET_ARROW_SHAPE = new ArrowShapeVisualProperty(
 			ArrowShapeVisualProperty.NONE, "EDGE_TARGET_ARROW_SHAPE", "Edge Target Arrow Shape", CyEdge.class);
 	/** 
 	 * TODO Documentation
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
-	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
+	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@link Double#POSITIVE_INFINITY}</p> 
 	 */
 	public static final VisualProperty<Double> EDGE_SOURCE_ARROW_SIZE = new DoubleVisualProperty(6d, NONE_ZERO_POSITIVE_DOUBLE_RANGE,
 			"EDGE_SOURCE_ARROW_SIZE", "Edge Source Arrow Size", CyEdge.class);
 	
 	/**
 	 * TODO Documentation
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
-	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
+	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@link Double#POSITIVE_INFINITY}</p> 
 	 */
 	public static final VisualProperty<Double> EDGE_TARGET_ARROW_SIZE = new DoubleVisualProperty(6d, NONE_ZERO_POSITIVE_DOUBLE_RANGE,
 			"EDGE_TARGET_ARROW_SIZE", "Edge Target Arrow Size", CyEdge.class);
@@ -452,7 +451,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 	
 	/**
 	 * The color of the edge source arrow when selected.
-	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Type: </strong> {@link Color} </p>
 	 * <p><strong>Property Range:</strong> A non-null color </p> 
 	 */
 	public static final VisualProperty<Paint> EDGE_SOURCE_ARROW_SELECTED_PAINT = new PaintVisualProperty(
@@ -462,7 +461,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 	
 	/**
 	 * The color of the edge target arrow when selected.
-	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Type: </strong> {@link Color} </p>
 	 * <p><strong>Property Range:</strong> A non-null color </p> 
 	 */
 	public static final VisualProperty<Paint> EDGE_TARGET_ARROW_SELECTED_PAINT = new PaintVisualProperty(
@@ -472,7 +471,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 	
 	/**
 	 * The color of the edge source arrow when unselected.
-	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Type: </strong> {@link Color} </p>
 	 * <p><strong>Property Range:</strong> A non-null color </p> 
 	 */
 	public static final VisualProperty<Paint> EDGE_SOURCE_ARROW_UNSELECTED_PAINT = new PaintVisualProperty(
@@ -482,7 +481,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 	
 	/**
 	 * The color of the edge target arrow when unselected.
-	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Type: </strong> {@link Color} </p>
 	 * <p><strong>Property Range:</strong> A non-null color </p> 
 	 */
 	public static final VisualProperty<Paint> EDGE_TARGET_ARROW_UNSELECTED_PAINT = new PaintVisualProperty(
@@ -492,7 +491,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 	
 	/**
 	 * A value used to rotate the edge label about its center, in degrees.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
 	 * <p><strong>Property Range:</strong> -360 &LT;= value &LT;= 360</p> 
 	 */
 	public static final VisualProperty<Double> EDGE_LABEL_ROTATION = new DoubleVisualProperty(
@@ -507,8 +506,8 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 
 	/**
 	 * TODO Documentation
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
-	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
+	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@link Double#POSITIVE_INFINITY}</p> 
 	 */
 	public static final VisualProperty<Double> EDGE_LABEL_WIDTH = new DoubleVisualProperty(200d, NONE_ZERO_POSITIVE_DOUBLE_RANGE,
 			"EDGE_LABEL_WIDTH", "Edge Label Width", CyEdge.class);
@@ -516,7 +515,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 
 	/**
 	 * The strategy to use to render edges when there are more than one edge between a pair of nodes.
-	 * <p><strong>Additional Details: </strong> {@see org.cytoscape.view.presentation.property.EdgeStackingVisualProperty} </p>
+	 * <p><strong>Additional Details: </strong> {@link EdgeStackingVisualProperty} </p>
 	 */
 	public static final VisualProperty<EdgeStacking> EDGE_STACKING = new EdgeStackingVisualProperty(
 			EdgeStackingVisualProperty.AUTO_BEND, "EDGE_STACKING", "Edge Stacking", CyEdge.class);
@@ -532,8 +531,8 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 	/**
 	 * When rendering edges in 2D, edges with a higher Z-order will be rendered on top of edges with lower Z-order.
 	 * If two edges overlap and have the same Z-order then the order they are rendered in is unpredictable.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
-	 * <p><strong>Property Range:</strong> {@see java.lang.Double#NEGATIVE_INFINITY} &LT;= value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
+	 * <p><strong>Property Range:</strong> {@link Double#NEGATIVE_INFINITY} &LT;= value &LT;= {@link Double#POSITIVE_INFINITY}</p> 
 	 */
 	public static final VisualProperty<Double> EDGE_Z_ORDER = new DoubleVisualProperty(0.0, ARBITRARY_DOUBLE_RANGE,
 			"EDGE_Z_ORDER", "Edge Z Order", true, CyEdge.class);
@@ -541,59 +540,59 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 	// ////// Network VP ////////
 	/**
 	 * The zoom level of the network view.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
-	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
+	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@link Double#POSITIVE_INFINITY}</p> 
 	 */
 	public static final VisualProperty<Double> NETWORK_SCALE_FACTOR = new DoubleVisualProperty(1.0,
 			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NETWORK_SCALE_FACTOR", "Network Scale Factor", true, CyNetwork.class);
 	/**
 	 * The X location of network view center.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
-	 * <p><strong>Property Range:</strong> {@see java.lang.Double#NEGATIVE_INFINITY} &LT;= value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
+	 * <p><strong>Property Range:</strong> {@link Double#NEGATIVE_INFINITY} &LT;= value &LT;= {@link Double#POSITIVE_INFINITY}</p> 
 	 */
 	public static final VisualProperty<Double> NETWORK_CENTER_X_LOCATION = new DoubleVisualProperty(0.0,
 			ARBITRARY_DOUBLE_RANGE, "NETWORK_CENTER_X_LOCATION", "Network Center X Location", true, CyNetwork.class);
 	/**
 	 * The Y location of network view center.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
-	 * <p><strong>Property Range:</strong> {@see java.lang.Double#NEGATIVE_INFINITY} &LT;= value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
+	 * <p><strong>Property Range:</strong> {@link Double#NEGATIVE_INFINITY} &LT;= value &LT;= {@link Double#POSITIVE_INFINITY}</p> 
 	 */
 	public static final VisualProperty<Double> NETWORK_CENTER_Y_LOCATION = new DoubleVisualProperty(0.0,
 			ARBITRARY_DOUBLE_RANGE, "NETWORK_CENTER_Y_LOCATION", "Network Center Y Location", true, CyNetwork.class);
 
 	/**
 	 * The size (width and height) of the network view.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
-	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
+	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@link Double#POSITIVE_INFINITY}</p> 
 	 */
 	public static final VisualProperty<Double> NETWORK_SIZE = new DoubleVisualProperty(550.0,
 			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NETWORK_SIZE", "Network Size", true, CyNetwork.class);
 	
 	/**
 	 * The width of the network view.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
-	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
+	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@link Double#POSITIVE_INFINITY}</p> 
 	 */
 	public static final VisualProperty<Double> NETWORK_WIDTH = new DoubleVisualProperty(550.0,
 			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NETWORK_WIDTH", "Network Width", true, CyNetwork.class);
 	/**
 	 * The height of the network view.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
-	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
+	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@link Double#POSITIVE_INFINITY}</p> 
 	 */
 	public static final VisualProperty<Double> NETWORK_HEIGHT = new DoubleVisualProperty(400.0,
 			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NETWORK_HEIGHT", "Network Height", true, CyNetwork.class);
 
 	/**
 	 * The title of the network view.
-	 * <p><strong>Property Type: </strong> {@see java.lang.String} </p>
+	 * <p><strong>Property Type: </strong> {@link String} </p>
 	 * <p><strong>Property Range:</strong> Any string </p> 
 	 */
 	public static final VisualProperty<String> NETWORK_TITLE = new StringVisualProperty("", ARBITRARY_STRING_RANGE,
 			"NETWORK_TITLE", "Network Title", true, CyNetwork.class);
 	/**
 	 * The background color of the network view.
-	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Type: </strong> {@link Color} </p>
 	 * <p><strong>Property Range:</strong> A non-null color </p> 
 	 */
 	public static final VisualProperty<Paint> NETWORK_BACKGROUND_PAINT = new PaintVisualProperty(Color.WHITE,
@@ -603,32 +602,32 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 	/**
 	 * Z location of the node. Default value of this will be ignored. The value will be used
 	 *  only when mapping function is defined.
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
-	 * <p><strong>Property Range:</strong> {@see java.lang.Double#NEGATIVE_INFINITY} &LT;= value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
+	 * <p><strong>Property Range:</strong> {@link Double#NEGATIVE_INFINITY} &LT;= value &LT;= {@link Double#POSITIVE_INFINITY}</p> 
 	 */
 	public static final VisualProperty<Double> NODE_Z_LOCATION = new DoubleVisualProperty(0.0, ARBITRARY_DOUBLE_RANGE,
 			"NODE_Z_LOCATION", "Node Z Location", true, CyNode.class);
 
 	/**
 	 * TODO Documentation
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
-	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
+	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@link Double#POSITIVE_INFINITY}</p> 
 	 */
 	public static final VisualProperty<Double> NODE_DEPTH = new DoubleVisualProperty(0.0,
 			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NODE_DEPTH", "Node Depth", CyNode.class);
 
 	/**
 	 * TODO Documentation
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
-	 * <p><strong>Property Range:</strong> {@see java.lang.Double#NEGATIVE_INFINITY} &LT;= value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
+	 * <p><strong>Property Range:</strong> {@link Double#NEGATIVE_INFINITY} &LT;= value &LT;= {@link Double#POSITIVE_INFINITY}</p> 
 	 */
 	public static final VisualProperty<Double> NETWORK_CENTER_Z_LOCATION = new DoubleVisualProperty(0.0,
 			ARBITRARY_DOUBLE_RANGE, "NETWORK_CENTER_Z_LOCATION", "Network Center Z Location", true, CyNetwork.class);
 
 	/**
 	 * TODO Documentation
-	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
-	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@see java.lang.Double#POSITIVE_INFINITY}</p> 
+	 * <p><strong>Property Type: </strong> {@link Double} </p>
+	 * <p><strong>Property Range:</strong> 0 &LT; value &LT;= {@link Double#POSITIVE_INFINITY}</p> 
 	 */
 	public static final VisualProperty<Double> NETWORK_DEPTH = new DoubleVisualProperty(0.0,
 			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "NETWORK_DEPTH", "Network Depth", CyNetwork.class);
