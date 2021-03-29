@@ -17,6 +17,7 @@ import org.cytoscape.view.presentation.property.values.BendFactory;
 import org.cytoscape.view.presentation.property.values.EdgeStacking;
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.NodeShape;
+import org.cytoscape.view.presentation.property.values.ObjectPosition;
 
 /*
  * #%L
@@ -169,10 +170,27 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 	 */
 	public static final VisualProperty<Double> NODE_LABEL_WIDTH = new DoubleVisualProperty(200d, NONE_ZERO_POSITIVE_DOUBLE_RANGE,
 			"NODE_LABEL_WIDTH", "Node Label Width", CyNode.class);
-
-	// Moved from DING rendering engine.
+	
 	/**
-	 * TODO Documentation
+	 * The anchor point on the node relative to which the node label will be positioned. 
+	 * Includes the anchor point of the target, the justification, and an x,y offset.
+	 * <p><strong>Property Type: </strong> {@link ObjectPosition} </p>
+	 * <p><strong>Property Range:</strong> A non-null ObjectPosition value.</p> 
+	 */
+	public static final VisualProperty<ObjectPosition> NODE_LABEL_POSITION = new ObjectPositionVisualProperty(
+			ObjectPosition.DEFAULT_POSITION, "NODE_LABEL_POSITION",
+			"Node Label Position", CyNode.class);
+
+	/**
+	 * A value used to rotate the node label about its center, in degrees.
+	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
+	 * <p><strong>Property Range:</strong> -360 &LT;= value &LT;= 360</p> 
+	 */
+	public static final VisualProperty<Double> NODE_LABEL_ROTATION = new DoubleVisualProperty(
+			0.0, ANGLE_DOUBLE_RANGE, "NODE_LABEL_ROTATION", "Node Label Rotation", CyNode.class);
+	
+	/**
+	 * The color of the node when it is in the selected state.
 	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
 	 * <p><strong>Property Range:</strong> A non-null color </p> 
 	 */
@@ -430,6 +448,56 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 	public static final VisualProperty<Double> EDGE_TARGET_ARROW_SIZE = new DoubleVisualProperty(6d, NONE_ZERO_POSITIVE_DOUBLE_RANGE,
 			"EDGE_TARGET_ARROW_SIZE", "Edge Target Arrow Size", CyEdge.class);
 
+	// Edge VPs
+	
+	/**
+	 * The color of the edge source arrow when selected.
+	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Range:</strong> A non-null color </p> 
+	 */
+	public static final VisualProperty<Paint> EDGE_SOURCE_ARROW_SELECTED_PAINT = new PaintVisualProperty(
+			Color.YELLOW, BasicVisualLexicon.PAINT_RANGE,
+			"EDGE_SOURCE_ARROW_SELECTED_PAINT",
+			"Edge Source Arrow Selected Paint", CyEdge.class);
+	
+	/**
+	 * The color of the edge target arrow when selected.
+	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Range:</strong> A non-null color </p> 
+	 */
+	public static final VisualProperty<Paint> EDGE_TARGET_ARROW_SELECTED_PAINT = new PaintVisualProperty(
+			Color.YELLOW, BasicVisualLexicon.PAINT_RANGE,
+			"EDGE_TARGET_ARROW_SELECTED_PAINT",
+			"Edge Target Arrow Selected Paint", CyEdge.class);
+	
+	/**
+	 * The color of the edge source arrow when unselected.
+	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Range:</strong> A non-null color </p> 
+	 */
+	public static final VisualProperty<Paint> EDGE_SOURCE_ARROW_UNSELECTED_PAINT = new PaintVisualProperty(
+			Color.BLACK, BasicVisualLexicon.PAINT_RANGE,
+			"EDGE_SOURCE_ARROW_UNSELECTED_PAINT",
+			"Edge Source Arrow Unselected Paint", CyEdge.class);
+	
+	/**
+	 * The color of the edge target arrow when unselected.
+	 * <p><strong>Property Type: </strong> {@see java.awt.Color} </p>
+	 * <p><strong>Property Range:</strong> A non-null color </p> 
+	 */
+	public static final VisualProperty<Paint> EDGE_TARGET_ARROW_UNSELECTED_PAINT = new PaintVisualProperty(
+			Color.BLACK, BasicVisualLexicon.PAINT_RANGE,
+			"EDGE_TARGET_ARROW_UNSELECTED_PAINT",
+			"Edge Target Arrow Unselected Paint", CyEdge.class);
+	
+	/**
+	 * A value used to rotate the edge label about its center, in degrees.
+	 * <p><strong>Property Type: </strong> {@see java.lang.Double} </p>
+	 * <p><strong>Property Range:</strong> -360 &LT;= value &LT;= 360</p> 
+	 */
+	public static final VisualProperty<Double> EDGE_LABEL_ROTATION = new DoubleVisualProperty(
+			0.0, ANGLE_DOUBLE_RANGE, "EDGE_LABEL_ROTATION", "Edge Label Rotation", CyEdge.class);
+	
 	/**
 	 * If Edge Bend is defined, edges will be rendered as straight or curved lines. If this 
 	 * value is set to true, edges will be drawn as curved lines.
@@ -625,6 +693,8 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 		addVisualProperty(NODE_LABEL_TRANSPARENCY, NODE);
 		addVisualProperty(NODE_TOOLTIP, NODE);
 		addVisualProperty(NODE_LABEL_WIDTH, NODE);
+		addVisualProperty(NODE_LABEL_POSITION, NODE);
+		addVisualProperty(NODE_LABEL_ROTATION, NODE);
 
 		// Level 2: Children of edge Visual Property
 		addVisualProperty(EDGE_PAINT, EDGE);
@@ -647,6 +717,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 		addVisualProperty(EDGE_STACKING, EDGE);
 		addVisualProperty(EDGE_STACKING_DENSITY, EDGE);
 		addVisualProperty(EDGE_Z_ORDER, EDGE);
+		addVisualProperty(EDGE_LABEL_ROTATION, EDGE);
 
 		// Level 3 - 4: Node-related VP
 		addVisualProperty(NODE_FILL_COLOR, NODE_PAINT);
@@ -664,6 +735,10 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 		addVisualProperty(EDGE_UNSELECTED_PAINT, EDGE_PAINT);
 		addVisualProperty(EDGE_STROKE_SELECTED_PAINT, EDGE_SELECTED_PAINT);
 		addVisualProperty(EDGE_STROKE_UNSELECTED_PAINT, EDGE_UNSELECTED_PAINT);
+		addVisualProperty(EDGE_SOURCE_ARROW_SELECTED_PAINT, EDGE_SELECTED_PAINT);
+		addVisualProperty(EDGE_TARGET_ARROW_SELECTED_PAINT, EDGE_SELECTED_PAINT);
+		addVisualProperty(EDGE_SOURCE_ARROW_UNSELECTED_PAINT, EDGE_UNSELECTED_PAINT);
+		addVisualProperty(EDGE_TARGET_ARROW_UNSELECTED_PAINT, EDGE_UNSELECTED_PAINT);
 
 		createLookupMap();
 	}
@@ -691,11 +766,18 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 		addIdentifierMapping(CyNode.class, "nodeTransparency", NODE_TRANSPARENCY);
 		addIdentifierMapping(CyNode.class, "nodeLabelTransparency", NODE_LABEL_TRANSPARENCY);
 		addIdentifierMapping(CyNode.class, "nodeBorderTransparency", NODE_BORDER_TRANSPARENCY);
+		addIdentifierMapping(CyNode.class, "nodeLabelPosition", NODE_LABEL_POSITION);
+		addIdentifierMapping(CyNode.class, "nodeLabelRotation", NODE_LABEL_ROTATION);
 
 		addIdentifierMapping(CyEdge.class, "width", EDGE_WIDTH);
 		addIdentifierMapping(CyEdge.class, "fill", EDGE_STROKE_UNSELECTED_PAINT);
 		addIdentifierMapping(CyEdge.class, "edgeLineType", EDGE_LINE_TYPE);
 		addIdentifierMapping(CyEdge.class, "edgeLabelFont", EDGE_LABEL_FONT_FACE);
+		addIdentifierMapping(CyEdge.class, "sourceArrowColor", EDGE_SOURCE_ARROW_UNSELECTED_PAINT);
+		addIdentifierMapping(CyEdge.class, "targetArrowColor", EDGE_TARGET_ARROW_UNSELECTED_PAINT);
+		addIdentifierMapping(CyEdge.class, "edgeSourceArrowColor", EDGE_SOURCE_ARROW_UNSELECTED_PAINT);
+		addIdentifierMapping(CyEdge.class, "edgeTargetArrowColor", EDGE_TARGET_ARROW_UNSELECTED_PAINT);
+		addIdentifierMapping(CyEdge.class, "edgeLabelRotation", EDGE_LABEL_ROTATION);
 
 		// 2.x VizMap Properties:
 		addIdentifierMapping(CyNetwork.class, "backgroundColor", NETWORK_BACKGROUND_PAINT);
