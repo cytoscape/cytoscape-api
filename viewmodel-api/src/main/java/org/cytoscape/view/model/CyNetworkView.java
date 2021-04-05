@@ -124,7 +124,7 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	 
 	/**
 	 * Returns true if this network view supports creating snapshots,
-	 * the createSnapshot() method will not throw an exception.
+	 * if false the createSnapshot() method will throw an exception.
 	 * @since 3.8
 	 */
 	default boolean supportsSnapshots() {
@@ -134,6 +134,7 @@ public interface CyNetworkView extends View<CyNetwork>, CyDisposable {
 	/**
 	 * Returns an immutable snapshot of this network view (optional operation).
 	 * 
+	 * @see CyNetworkView#supportsSnapshots()
 	 * @throws UnsupportedOperationException if creating a snapshot is not supported by this network view
 	 * @since 3.8
 	 */
