@@ -123,19 +123,26 @@ public interface ServiceProperties {
 	public static final String TOOLTIP_IMAGE = "tooltipImage";
 	
 	/**
-	 * Action (or TaskFactory) will be added to tool bar if this flag is set to "true".
+	 * The CyAction or TaskFactory will be added to menu bar if this flag is set to {@code "true"}.
+	 * You can also set the menu item's icon through the properties {@link #SMALL_ICON_URL} or {@link #SMALL_ICON_ID}.
+	 */
+	public static final String IN_MENU_BAR = "inMenuBar";
+	
+	/**
+	 * The CyAction (or TaskFactory) will be added to the main tool bar if this flag is set to {@code "true"}.
 	 * You can also set the button's icon through the properties {@link #LARGE_ICON_URL} or {@link #LARGE_ICON_ID}.
 	 */
 	public static final String IN_TOOL_BAR = "inToolBar";
 	
 	/**
-	 * Action (or TaskFactory) will be added to menu bar if this flag is set to "true".
-	 * You can also set the menu item's icon through the properties {@link #SMALL_ICON_URL} or {@link #SMALL_ICON_ID}.
+	 * The {@code CyAction}, {@link TaskFactory} or {@code TableTaskFactory} will be added to the <b>Table Panel</b>'s
+	 * tool bar if this flag is set to {@code "true"}.
+	 * You can also set the button's icon through the properties {@link #LARGE_ICON_URL} or {@link #LARGE_ICON_ID}.
 	 */
-	public static final String IN_MENU_BAR = "inMenuBar";
+	public static final String IN_TABLE_TOOL_BAR = "inTableToolBar";
 	
     /**
-     * Action will be added to context menu if this flag is set to true.
+     * Action will be added to the network view context menu if this flag is set to {@code "true"}.
      *
      * <p>
      *   This service property only affects:

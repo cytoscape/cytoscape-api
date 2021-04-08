@@ -54,9 +54,17 @@ public interface CyAction extends Action, MenuListener, PopupMenuListener {
 
 	/**
 	 * Returns whether the action should be in the tool bar.
-	 * @return whether the action should be in the tool bar.
+	 * @return true if the action should be in the tool bar.
 	 */
 	boolean isInToolBar();
+	
+	/**
+	 * Returns whether the action should be in the Table Panel's tool bar.
+	 * @return true if the action should be in the Table Panel's tool bar.
+	 */
+	default boolean isInTableToolBar() {
+		return false;
+	}
 
 	/**
 	 * Insert a separator before this menu item.  
@@ -144,6 +152,13 @@ public interface CyAction extends Action, MenuListener, PopupMenuListener {
  	 * To support configurable menus and tools, setIsInToolBar added for 3.6
  	 */
 	void setIsInToolBar(boolean b);
+	
+	/**
+ 	 * To support configurable menus and tools, added for 3.9
+ 	 */
+	default void setIsInTableToolBar(boolean b) {
+		// Just ignore it here...
+	}
 	
 	/**
  	 * To support configurable menus and tools, setPreferredMenu added for 3.6

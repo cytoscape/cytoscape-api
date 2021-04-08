@@ -7,6 +7,7 @@ import static org.cytoscape.work.ServiceProperties.INSERT_SEPARATOR_BEFORE;
 import static org.cytoscape.work.ServiceProperties.INSERT_TOOLBAR_SEPARATOR_AFTER;
 import static org.cytoscape.work.ServiceProperties.INSERT_TOOLBAR_SEPARATOR_BEFORE;
 import static org.cytoscape.work.ServiceProperties.IN_MENU_BAR;
+import static org.cytoscape.work.ServiceProperties.IN_TABLE_TOOL_BAR;
 import static org.cytoscape.work.ServiceProperties.IN_TOOL_BAR;
 import static org.cytoscape.work.ServiceProperties.LARGE_ICON_URL;
 import static org.cytoscape.work.ServiceProperties.MENU_GRAVITY;
@@ -120,6 +121,11 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * Indicates whether the action is in the toolbar.
 	 */
 	protected boolean inToolBar;
+	
+	/**
+	 * Indicates whether the action is in the Table Panel's toolbar.
+	 */
+	protected boolean inTableToolBar;
 
 	/**
 	 * Indicates whether the action is in a menu.
@@ -220,6 +226,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *            <li>smallIconURL - (The icon to be used for the menu.)</li>
 	 *            <li>tooltip - (The toolbar or menu tooltip.)</li>
 	 *            <li>inToolBar - (Whether the action should be in the toolbar.)</li>
+	 *            <li>inTableToolBar - (Whether the action should be in the Table Panel's toolbar.)</li>
 	 *            <li>inMenuBar - (Whether the action should be in a menu.)</li>
 	 *            <li>insertSeparatorBefore - (Whether a separator should be inserted before this menu item.)</li>
 	 *            <li>insertSeparatorAfter - (Whether a separator should be inserted after this menu item.)</li>
@@ -255,6 +262,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *            <li>smallIconURL - (The icon to be used for the menu.)</li>
 	 *            <li>tooltip - (The toolbar or menu tooltip.)</li>
 	 *            <li>inToolBar - (Whether the action should be in the toolbar.)</li>
+	 *            <li>inTableToolBar - (Whether the action should be in the Table Panel's toolbar.)</li>
 	 *            <li>inMenuBar - (Whether the action should be in a menu.)</li>
 	 *            <li>insertSeparatorBefore - (Whether a separator should be inserted before this menu item.)</li>
 	 *            <li>insertSeparatorAfter - (Whether a separator should be inserted after this menu item.)</li>
@@ -291,6 +299,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *            <li>smallIconURL - (The icon to be used for the menu.)</li>
 	 *            <li>tooltip - (The toolbar or menu tooltip.)</li>
 	 *            <li>inToolBar - (Whether the action should be in the toolbar.)</li>
+	 *            <li>inTableToolBar - (Whether the action should be in the Table Panel's toolbar.)</li>
 	 *            <li>inMenuBar - (Whether the action should be in a menu.)</li>
 	 *            <li>insertSeparatorBefore - (Whether a separator should be inserted before this menu item.)</li>
 	 *            <li>insertSeparatorAfter - (Whether a separator should be inserted after this menu item.)</li>
@@ -365,6 +374,11 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 
 		if (foundInToolBar != null && Boolean.parseBoolean(foundInToolBar))
 			inToolBar = true;
+		
+		var foundInTableToolBar = props.get(IN_TABLE_TOOL_BAR);
+		
+		if (foundInTableToolBar != null && Boolean.parseBoolean(foundInTableToolBar))
+			inTableToolBar = true;
 
 		final String foundInMenuBar = props.get(IN_MENU_BAR);
 
@@ -472,6 +486,16 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	@Override
 	public void setIsInToolBar(boolean b) {
 		inToolBar = b;
+	}
+	
+	@Override
+	public boolean isInTableToolBar() {
+		return inTableToolBar;
+	}
+	
+	@Override
+	public void setIsInTableToolBar(boolean b) {
+		inTableToolBar = b;
 	}
 
 	/**
