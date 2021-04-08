@@ -6,7 +6,7 @@ package org.cytoscape.work;
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2021 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -50,27 +50,27 @@ public interface ServiceProperties {
 	public static final String ENABLE_FOR = "enableFor";
 	
 	/**
-	 * Preferred menu item for an action
+	 * Preferred menu item for an action.
 	 */
 	public static final String PREFERRED_MENU = "preferredMenu";
 	
 	/**
-	 *  Name of command used by Command Executor
+	 *  Name of command used by Command Executor.
 	 */
 	public static final String COMMAND = "command";
 	
 	/**
-	 * Name space for a command
+	 * Name space for a command.
 	 */
 	public static final String COMMAND_NAMESPACE = "commandNamespace";
 	
 	/**
-	 * Description for a command
+	 * Description for a command.
 	 */
 	public static final String COMMAND_DESCRIPTION = "commandDescription";
 	
 	/**
-	 * Prose description for a command
+	 * Prose description for a command.
 	 */
 	public static final String COMMAND_LONG_DESCRIPTION = "commandLongDescription";
 	
@@ -153,7 +153,7 @@ public interface ServiceProperties {
      *   </ul>
      * </p>
      *
-     * <p>If no value is defined, the default value is {@code true}.</p>
+     * <p>If no value is defined, the default value is {@code "true"}.</p>
      */
     public static final String IN_CONTEXT_MENU = "inContextMenu";
 
@@ -163,18 +163,17 @@ public interface ServiceProperties {
 	public static final String ACCELERATOR = "accelerator";
 	
 	/**
-	 * Specify relative location of the action in the menu
+	 * Specify relative location of the action in the menu.
 	 */
 	public static final String MENU_GRAVITY = "menuGravity";
 	
 	/**
-	 * Specify relative location of the action in the tool bar
+	 * Specify relative location of the action in the tool bar.
 	 */
 	public static final String TOOL_BAR_GRAVITY = "toolBarGravity";
 	
 	/**
-	 * Action will be added to network panel's context menu if this
-	 * flag is set to true
+	 * Action will be added to network panel's context menu if this flag is set to {@code "true"}.
 	 */
 	public static final String IN_NETWORK_PANEL_CONTEXT_MENU = "inNetworkPanelContextMenu";
 	
@@ -184,22 +183,22 @@ public interface ServiceProperties {
 	public static final String PREFERRED_ACTION = "preferredAction";
 
 	/**
-	 * Insert separator before this menu item
+	 * Insert separator before this menu item.
 	 */
 	public static final String INSERT_SEPARATOR_BEFORE = "insertSeparatorBefore";
 
 	/**
-	 * Insert separator after this menu item
+	 * Insert separator after this menu item.
 	 */
 	public static final String INSERT_SEPARATOR_AFTER = "insertSeparatorAfter";
 	
 	/**
-	 * Insert separator before this toolbar item
+	 * Insert separator before this toolbar item.
 	 */
 	public static final String INSERT_TOOLBAR_SEPARATOR_BEFORE = "insertToolbarSeparatorBefore";
 
 	/**
-	 * Insert separator after this toolbar item
+	 * Insert separator after this toolbar item.
 	 */
 	public static final String INSERT_TOOLBAR_SEPARATOR_AFTER = "insertToolbarSeparatorAfter";
 

@@ -1,12 +1,14 @@
 package org.cytoscape.view.model.events;
 
+import org.cytoscape.event.CyListener;
+
 /*
  * #%L
  * Cytoscape View Model API (viewmodel-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2021 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -24,10 +26,8 @@ package org.cytoscape.view.model.events;
  * #L%
  */
 
-import org.cytoscape.event.CyListener;
-
 /**
- * Listener for {@linkplain ViewChangedEvent}.
+ * Listener for {@linkplain TableViewChangedEvent}.
  * 
  * @CyAPI.Spi.Interface
  * @CyAPI.InModule viewmodel-api

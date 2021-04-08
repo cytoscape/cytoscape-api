@@ -2,13 +2,19 @@ package org.cytoscape.model;
 
 import static org.cytoscape.model.CyColumn.joinColumnName;
 
+import java.util.Collection;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.stream.Collectors;
+
 /*
  * #%L
  * Cytoscape Model API (model-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2008 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2008 - 2021 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -25,13 +31,6 @@ import static org.cytoscape.model.CyColumn.joinColumnName;
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
  */
-
-
-import java.util.Collection;
-import java.util.LinkedHashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 /** 
  * A simple representation of a table object consisting of rows
@@ -123,7 +122,7 @@ public interface CyTable extends CyIdentifiable {
 	 * This method may fire CyTablePrivacyChangedEvent.
 	 * @param isPublic if true, the table will be public and if false, the table will be private.
 	 */
-	void setPublic (boolean isPublic);
+	void setPublic(boolean isPublic);
 
 	/** The table can be deleted if this returns Mutability.MUTABLE, otherwise it cannot be
 	 *  deleted!
@@ -507,6 +506,5 @@ public interface CyTable extends CyIdentifiable {
 	 *       fired to give any listeners a chance to react to the exchange!
 	 */
 	void swap(CyTable otherTable);
-	
 	
 }

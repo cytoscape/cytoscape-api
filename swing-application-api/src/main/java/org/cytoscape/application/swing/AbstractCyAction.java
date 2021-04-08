@@ -43,7 +43,7 @@ import org.slf4j.LoggerFactory;
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2018 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2021 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -70,9 +70,8 @@ import org.slf4j.LoggerFactory;
  * @CyAPI.Abstract.Class
  * @CyAPI.InModule swing-application-api
  */
+@SuppressWarnings("serial")
 public abstract class AbstractCyAction extends AbstractAction implements CyAction {
-	
-	private static final long serialVersionUID = -2245672104075936952L;
 	
 	private static final Logger logger = LoggerFactory.getLogger(CyUserLog.NAME);
 
@@ -118,7 +117,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	protected boolean useToggleButton;
 
 	/**
-	 * Indicates whether the action is in the toolbar.
+	 * Indicates whether the action is in the main toolbar.
 	 */
 	protected boolean inToolBar;
 	
@@ -173,14 +172,14 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 */
 	private final AbstractEnableSupport enabler;
 	
-	
 	/**
 	 * Creates a new AbstractCyAction object that is
 	 * always enabled.
 	 * @param name The name of the action.
 	 */
-	public AbstractCyAction(final String name) {
+	public AbstractCyAction(String name) {
 		super(name);
+		
 		this.enabler = new AlwaysEnabledEnableSupport(this);
 		addNameChangeListener();
 	}
@@ -205,9 +204,14 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * @param enableFor A string declaring which states this action should be enabled for. 
 	 * @param networkViewManager The network view manager that provides context for this action. 
 	 */
-	public AbstractCyAction(final String name, final CyApplicationManager applicationManager, final String enableFor,
-			final CyNetworkViewManager networkViewManager) {
+	public AbstractCyAction(
+			String name,
+			CyApplicationManager applicationManager,
+			String enableFor,
+			CyNetworkViewManager networkViewManager
+	) {
 		super(name);
+		
 		this.enabler = new ActionEnableSupport(this, enableFor, applicationManager, networkViewManager);
 		addNameChangeListener();
 	}
@@ -240,8 +244,11 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * @param applicationManager
 	 *            The application manager providing context for this action.
 	 */
-	public AbstractCyAction(final Map<String, String> configProps, final CyApplicationManager applicationManager,
-			final CyNetworkViewManager networkViewManager) {
+	public AbstractCyAction(
+			Map<String, String> configProps,
+			CyApplicationManager applicationManager,
+			CyNetworkViewManager networkViewManager
+	) {
 		this(configProps.get(TITLE), applicationManager, configProps.get(ENABLE_FOR), networkViewManager);
 
 		configFromProps(configProps);
@@ -277,7 +284,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *            The task factory predicate that indicates whether or not this 
 	 *            action should be enabled.
 	 */
-	public AbstractCyAction(final Map<String, String> configProps, final TaskFactory predicate) {
+	public AbstractCyAction(Map<String, String> configProps, TaskFactory predicate) {
 		super(configProps.get(TITLE));
 		
 		this.enabler = new TaskFactoryEnableSupport(this, predicate);
@@ -319,17 +326,21 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *            TaskFactory is not used by the AbstractCyAction in any other way.  Any execution of tasks
 	 *            from this TaskFactory must be handled by a subclass.
 	 */
-	public AbstractCyAction(final Map<String, String> configProps, final CyApplicationManager applicationManager,
-			final CyNetworkViewManager networkViewManager, final TaskFactory factory) {
+	public AbstractCyAction(
+			Map<String, String> configProps,
+			CyApplicationManager applicationManager,
+			CyNetworkViewManager networkViewManager,
+			TaskFactory factory
+	) {
 		super(configProps.get(TITLE));
 		
-		final String enableFor = configProps.get(ENABLE_FOR);
+		var enableFor = configProps.get(ENABLE_FOR);
 		
 		if (enableFor == null) {
 			enabler = new TaskFactoryEnableSupport(this, factory);
 		} else {
-			TaskFactoryEnableSupport taskFactoryEnabler = new TaskFactoryEnableSupport((CyAction) null, factory);
-			ActionEnableSupport actionEnabler = new ActionEnableSupport((CyAction) null, enableFor, applicationManager, networkViewManager);
+			var taskFactoryEnabler = new TaskFactoryEnableSupport((CyAction) null, factory);
+			var actionEnabler = new ActionEnableSupport((CyAction) null, enableFor, applicationManager, networkViewManager);
 			enabler = new ConjunctionEnableSupport(this, actionEnabler, taskFactoryEnabler);
 		}
 		
@@ -337,40 +348,40 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		addNameChangeListener();
 	}
 
-	private void configFromProps(final Map<String, String> props) {
+	private void configFromProps(Map<String, String> props) {
 		configurationProperties = props;
 
-		final String prefMenu = props.get(PREFERRED_MENU);
+		var prefMenu = props.get(PREFERRED_MENU);
 
 		if (prefMenu != null)
 			setPreferredMenu(prefMenu);
 
-		final URL largeIconURL = getURL(props.get(LARGE_ICON_URL));
+		var largeIconURL = getURL(props.get(LARGE_ICON_URL));
 
 		if (largeIconURL != null) // Use image as icon
 			putValue(LARGE_ICON_KEY, new ImageIcon(largeIconURL));
 
-		final URL smallIconURL = getURL(props.get(SMALL_ICON_URL));
+		var smallIconURL = getURL(props.get(SMALL_ICON_URL));
 		
 		if (smallIconURL != null)
 			putValue(SMALL_ICON, new ImageIcon(smallIconURL));
 
-		final String tooltip = props.get(TOOLTIP);
+		var tooltip = props.get(TOOLTIP);
 
 		if (tooltip != null)
 			putValue(SHORT_DESCRIPTION, tooltip);
 		
-		final String tooltipDesc = props.get(TOOLTIP_LONG_DESCRIPTION);
+		var tooltipDesc = props.get(TOOLTIP_LONG_DESCRIPTION);
 		
 		if (tooltipDesc != null)
 			putValue(LONG_DESCRIPTION, tooltipDesc);
 		
-		final URL tooltipImg = getURL(props.get(TOOLTIP_IMAGE));
+		var tooltipImg = getURL(props.get(TOOLTIP_IMAGE));
 		
 		if (tooltipImg != null)
 			toolTipImage = tooltipImg;
 
-		final String foundInToolBar = props.get(IN_TOOL_BAR);
+		var foundInToolBar = props.get(IN_TOOL_BAR);
 
 		if (foundInToolBar != null && Boolean.parseBoolean(foundInToolBar))
 			inToolBar = true;
@@ -380,41 +391,41 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		if (foundInTableToolBar != null && Boolean.parseBoolean(foundInTableToolBar))
 			inTableToolBar = true;
 
-		final String foundInMenuBar = props.get(IN_MENU_BAR);
+		var foundInMenuBar = props.get(IN_MENU_BAR);
 
 		if (foundInMenuBar != null  && Boolean.parseBoolean(foundInMenuBar))
 			inMenuBar = true;
 
-		final String foundInsertSeparatorBefore = props.get(INSERT_SEPARATOR_BEFORE);
+		var foundInsertSeparatorBefore = props.get(INSERT_SEPARATOR_BEFORE);
 
 		if (foundInsertSeparatorBefore != null  && Boolean.parseBoolean(foundInsertSeparatorBefore))
 			insertSeparatorBefore = true;
 
-		final String foundInsertSeparatorAfter = props.get(INSERT_SEPARATOR_AFTER);
+		var foundInsertSeparatorAfter = props.get(INSERT_SEPARATOR_AFTER);
 
 		if (foundInsertSeparatorAfter != null  && Boolean.parseBoolean(foundInsertSeparatorAfter))
 			insertSeparatorAfter = true;
 		
-		final String foundInsertToolbarSeparatorBefore = props.get(INSERT_TOOLBAR_SEPARATOR_BEFORE);
+		var foundInsertToolbarSeparatorBefore = props.get(INSERT_TOOLBAR_SEPARATOR_BEFORE);
 
 		if (foundInsertToolbarSeparatorBefore != null  && Boolean.parseBoolean(foundInsertToolbarSeparatorBefore))
 			insertToolbarSeparatorBefore = true;
 
-		final String foundInsertToolbarSeparatorAfter = props.get(INSERT_TOOLBAR_SEPARATOR_AFTER);
+		var foundInsertToolbarSeparatorAfter = props.get(INSERT_TOOLBAR_SEPARATOR_AFTER);
 
 		if (foundInsertToolbarSeparatorAfter != null  && Boolean.parseBoolean(foundInsertToolbarSeparatorAfter))
 			insertToolbarSeparatorAfter = true;
 
-		final String keyComboString = props.get(ACCELERATOR);
+		var keyComboString = props.get(ACCELERATOR);
 
 		if (keyComboString != null) {
-			final KeyStroke command = AcceleratorParser.parse(keyComboString);
+			var command = AcceleratorParser.parse(keyComboString);
 
 			if (command != null)
 				setAcceleratorKeyStroke(command);
 		}
 
-		final String menuGravityString = props.get(MENU_GRAVITY);
+		var menuGravityString = props.get(MENU_GRAVITY);
 
 		if (menuGravityString != null) {
 			try {
@@ -424,7 +435,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 			}
 		}
 
-		final String toolbarGravityString = props.get(TOOL_BAR_GRAVITY);
+		var toolbarGravityString = props.get(TOOL_BAR_GRAVITY);
 
 		if (toolbarGravityString != null) {
 			try {
@@ -442,7 +453,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *
 	 * @param name The name of the action.
 	 */
-	public void setName(final String name) {
+	public void setName(String name) {
 		putValue(Action.NAME, name);
 	}
 
@@ -693,7 +704,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		return configurationProperties;
 	}
 	
-	private URL getURL(final String s) {
+	private URL getURL(String s) {
 		if (s == null)
 			return null;
 
@@ -717,7 +728,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		public void updateEnableState() {
 			boolean enabled = true;
 
-			for (AbstractEnableSupport enableSupport : enableSupports) {
+			for (var enableSupport : enableSupports) {
 				enableSupport.updateEnableState();
 				enabled &= enableSupport.isCurrentlyEnabled();
 

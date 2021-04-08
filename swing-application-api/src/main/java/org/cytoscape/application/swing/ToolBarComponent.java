@@ -1,12 +1,14 @@
 package org.cytoscape.application.swing;
 
+import java.awt.Component;
+
 /*
  * #%L
  * Cytoscape Swing Application API (swing-application-api)
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2021 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -24,11 +26,6 @@ package org.cytoscape.application.swing;
  * #L%
  */
 
-
-import java.awt.Component;
-import javax.swing.Icon;
-
-
 /**
  * An interface that allows a component to be registered as a service
  * that will then be added to the ToolBar.
@@ -41,11 +38,12 @@ public interface ToolBarComponent {
 	 * Returns the gravity used to place this component in the toolbar.
 	 * @return The gravity used to place this component in the toolbar.
 	 */
-	public float getToolBarGravity();
+	float getToolBarGravity();
 	
 	/**
 	 * Returns the Component to be added to the ToolBar. 
 	 * @return The Component to be added to the ToolBar. 
 	 */
-	public Component getComponent();
+	Component getComponent();
+
 }
