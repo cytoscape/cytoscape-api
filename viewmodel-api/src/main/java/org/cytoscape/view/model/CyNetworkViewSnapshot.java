@@ -168,7 +168,7 @@ public interface CyNetworkViewSnapshot extends CyNetworkView {
 	 * Returns true if the only thing that changed since the last time 
 	 * {@link CyNetworkView#createSnapshot()} was called was the selection increased.
 	 */
-	SnapshotSelectionInfo getSelectionInfo();
+	boolean isSelectionStrictlyIncreased();
 	
 	/**
 	 * Returns the default value of the VisualProperty that was set 
