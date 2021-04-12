@@ -135,11 +135,33 @@ public interface ServiceProperties {
 	public static final String IN_TOOL_BAR = "inToolBar";
 	
 	/**
-	 * The {@code CyAction}, {@link TaskFactory} or {@code TableTaskFactory} will be added to the <b>Table Panel</b>'s
-	 * tool bar if this flag is set to {@code "true"}.
+	 * The {@code CyAction}, {@link TaskFactory} or {@code TableTaskFactory} will be added to the
+	 * <b>Node Table Panel</b>'s tool bar if this flag is set to {@code "true"}.
 	 * You can also set the button's icon through the properties {@link #LARGE_ICON_URL} or {@link #LARGE_ICON_ID}.
 	 */
-	public static final String IN_TABLE_TOOL_BAR = "inTableToolBar";
+	public static final String IN_NODE_TABLE_TOOL_BAR = "inNodeTableToolBar";
+	
+	/**
+	 * The {@code CyAction}, {@link TaskFactory} or {@code TableTaskFactory} will be added to the
+	 * <b>Edge Table Panel</b>'s tool bar if this flag is set to {@code "true"}.
+	 * You can also set the button's icon through the properties {@link #LARGE_ICON_URL} or {@link #LARGE_ICON_ID}.
+	 */
+	public static final String IN_EDGE_TABLE_TOOL_BAR = "inEdgeTableToolBar";
+	
+	/**
+	 * The {@code CyAction}, {@link TaskFactory} or {@code TableTaskFactory} will be added to the
+	 * <b>Network Table Panel</b>'s tool bar if this flag is set to {@code "true"}.
+	 * You can also set the button's icon through the properties {@link #LARGE_ICON_URL} or {@link #LARGE_ICON_ID}.
+	 */
+	public static final String IN_NETWORK_TABLE_TOOL_BAR = "inNetworkTableToolBar";
+	
+	/**
+	 * The {@code CyAction}, {@link TaskFactory} or {@code TableTaskFactory} will be added to the
+	 * <b>Unassigned Tables Panel</b>'s tool bar if this flag is set to {@code "true"}.
+	 * You can also set the button's icon through the properties {@link #LARGE_ICON_URL} or {@link #LARGE_ICON_ID}.
+	 */
+	public static final String IN_UNASSIGNED_TABLE_TOOL_BAR = "inUnassignedTableToolBar";
+	
 	
     /**
      * Action will be added to the network view context menu if this flag is set to {@code "true"}.

@@ -6,9 +6,12 @@ import static org.cytoscape.work.ServiceProperties.INSERT_SEPARATOR_AFTER;
 import static org.cytoscape.work.ServiceProperties.INSERT_SEPARATOR_BEFORE;
 import static org.cytoscape.work.ServiceProperties.INSERT_TOOLBAR_SEPARATOR_AFTER;
 import static org.cytoscape.work.ServiceProperties.INSERT_TOOLBAR_SEPARATOR_BEFORE;
+import static org.cytoscape.work.ServiceProperties.IN_EDGE_TABLE_TOOL_BAR;
 import static org.cytoscape.work.ServiceProperties.IN_MENU_BAR;
-import static org.cytoscape.work.ServiceProperties.IN_TABLE_TOOL_BAR;
+import static org.cytoscape.work.ServiceProperties.IN_NETWORK_TABLE_TOOL_BAR;
+import static org.cytoscape.work.ServiceProperties.IN_NODE_TABLE_TOOL_BAR;
 import static org.cytoscape.work.ServiceProperties.IN_TOOL_BAR;
+import static org.cytoscape.work.ServiceProperties.IN_UNASSIGNED_TABLE_TOOL_BAR;
 import static org.cytoscape.work.ServiceProperties.LARGE_ICON_URL;
 import static org.cytoscape.work.ServiceProperties.MENU_GRAVITY;
 import static org.cytoscape.work.ServiceProperties.PREFERRED_MENU;
@@ -33,6 +36,7 @@ import javax.swing.event.PopupMenuEvent;
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.CyUserLog;
 import org.cytoscape.view.model.CyNetworkViewManager;
+import org.cytoscape.work.ServiceProperties;
 import org.cytoscape.work.TaskFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -122,9 +126,24 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	protected boolean inToolBar;
 	
 	/**
-	 * Indicates whether the action is in the Table Panel's toolbar.
+	 * Indicates whether the action is in the Node Table Panel's toolbar.
 	 */
-	protected boolean inTableToolBar;
+	protected boolean inNodeTableToolBar;
+	
+	/**
+	 * Indicates whether the action is in the Edge Table Panel's toolbar.
+	 */
+	protected boolean inEdgeTableToolBar;
+	
+	/**
+	 * Indicates whether the action is in the Network Table Panel's toolbar.
+	 */
+	protected boolean inNetworkTableToolBar;
+	
+	/**
+	 * Indicates whether the action is in the Unassigned Tables Panel's toolbar.
+	 */
+	protected boolean inUnassignedTableToolBar;
 
 	/**
 	 * Indicates whether the action is in a menu.
@@ -220,26 +239,29 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * Creates a new AbstractCyAction object.
 	 *
 	 * @param configProps
-	 *            A String-String Map of configuration metadata. This will
-	 *            usually be the Map provided by the OSGi service
-	 *            configuration. Available configuration keys include:
+	 *            A String-String Map of configuration metadata.
+	 *            This will usually be the Map provided by the OSGi service configuration.
+	 *            Available configuration keys include (see {@link ServiceProperties}):
 	 *            <ul>
-	 *            <li>title - (The title of the menu.)</li>
-	 *            <li>preferredMenu - (The preferred menu for the action.)</li>
-	 *            <li>largeIconURL - (The icon to be used for the toolbar.)</li>
-	 *            <li>smallIconURL - (The icon to be used for the menu.)</li>
-	 *            <li>tooltip - (The toolbar or menu tooltip.)</li>
-	 *            <li>inToolBar - (Whether the action should be in the toolbar.)</li>
-	 *            <li>inTableToolBar - (Whether the action should be in the Table Panel's toolbar.)</li>
-	 *            <li>inMenuBar - (Whether the action should be in a menu.)</li>
-	 *            <li>insertSeparatorBefore - (Whether a separator should be inserted before this menu item.)</li>
-	 *            <li>insertSeparatorAfter - (Whether a separator should be inserted after this menu item.)</li>
-	 *            <li>insertToolbarSeparatorBefore - (Whether a separator should be inserted before this toolbar item.)</li>
-	 *            <li>insertToolbarSeparatorAfter - (Whether a separator should be inserted after this toolbar item.)</li>
-	 *            <li>enableFor - (System state that the action should be enabled for. See {@link ActionEnableSupport} for more detail.)</li>
-	 *            <li>accelerator - (Accelerator key bindings.)</li>
-	 *            <li>menuGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the menu.)</li>
-	 *            <li>toolBarGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the toolbar.)</li>
+	 *            <li><code>title</code> - The title of the menu.</li>
+	 *            <li><code>preferredMenu</code> - The preferred menu for the action.</li>
+	 *            <li><code>largeIconURL</code> - The icon to be used for the toolbar.</li>
+	 *            <li><code>smallIconURL</code> - The icon to be used for the menu.</li>
+	 *            <li><code>tooltip</code> - The toolbar or menu tooltip.</li>
+	 *            <li><code>inToolBar</code> - Whether the action should be in the toolbar.</li>
+	 *            <li><code>inNodeTableToolBar</code> - Whether the action should be in the Node Table Panel's toolbar.</li>
+	 *            <li><code>inEdgeTableToolBar</code> - Whether the action should be in the Edge Table Panel's toolbar.</li>
+	 *            <li><code>inNetworkTableToolBar</code> - Whether the action should be in the Network Table Panel's toolbar.</li>
+	 *            <li><code>inUnassignedTableToolBar</code> - Whether the action should be in the Unassigned Tables Panel's toolbar.</li>
+	 *            <li><code>inMenuBar</code> - Whether the action should be in a menu.</li>
+	 *            <li><code>insertSeparatorBefore</code> - Whether a separator should be inserted before this menu item.</li>
+	 *            <li><code>insertSeparatorAfter</code> - Whether a separator should be inserted after this menu item.</li>
+	 *            <li><code>insertToolbarSeparatorBefore</code> - Whether a separator should be inserted before this toolbar item.</li>
+	 *            <li><code>insertToolbarSeparatorAfter</code> - Whether a separator should be inserted after this toolbar item.</li>
+	 *            <li><code>enableFor</code> - <i>Will only use this value if the TaskFactory is not a TaskFactoryPredicate!</i> See {@link ActionEnableSupport} for more detail.</li>
+	 *            <li><code>accelerator</code> - Accelerator key bindings.</li>
+	 *            <li><code>menuGravity</code> - Float value with 0.0 representing the top and larger values moving towards the bottom of the menu.</li>
+	 *            <li><code>toolBarGravity</code> - Float value with 0.0 representing the top and larger values moving towards the bottom of the toolbar.</li>
 	 *            </ul>
 	 * @param applicationManager
 	 *            The application manager providing context for this action.
@@ -259,26 +281,29 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * Creates a new AbstractCyAction object.
 	 *
 	 * @param configProps
-	 *            A String-String Map of configuration metadata. This will
-	 *            usually be the Map provided by the OSGi service
-	 *            configuration. Available configuration keys include:
+	 *            A String-String Map of configuration metadata.
+	 *            This will usually be the Map provided by the OSGi service configuration.
+	 *            Available configuration keys include (see {@link ServiceProperties}):
 	 *            <ul>
-	 *            <li>title - (The title of the menu.)</li>
-	 *            <li>preferredMenu - (The preferred menu for the action.)</li>
-	 *            <li>largeIconURL - (The icon to be used for the toolbar.)</li>
-	 *            <li>smallIconURL - (The icon to be used for the menu.)</li>
-	 *            <li>tooltip - (The toolbar or menu tooltip.)</li>
-	 *            <li>inToolBar - (Whether the action should be in the toolbar.)</li>
-	 *            <li>inTableToolBar - (Whether the action should be in the Table Panel's toolbar.)</li>
-	 *            <li>inMenuBar - (Whether the action should be in a menu.)</li>
-	 *            <li>insertSeparatorBefore - (Whether a separator should be inserted before this menu item.)</li>
-	 *            <li>insertSeparatorAfter - (Whether a separator should be inserted after this menu item.)</li>
-	 *            <li>insertToolbarSeparatorBefore - (Whether a separator should be inserted before this toolbar item.)</li>
-	 *            <li>insertToolbarSeparatorAfter - (Whether a separator should be inserted after this toolbar item.)</li>
-	 *            <li>enableFor - (<i>Ingored in this constructor and TaskFactoryPredicate is used instead!</i>)</li>
-	 *            <li>accelerator - (Accelerator key bindings.)</li>
-	 *            <li>menuGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the menu.)</li>
-	 *            <li>toolBarGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the toolbar.)</li>
+	 *            <li><code>title</code> - The title of the menu.</li>
+	 *            <li><code>preferredMenu</code> - The preferred menu for the action.</li>
+	 *            <li><code>largeIconURL</code> - The icon to be used for the toolbar.</li>
+	 *            <li><code>smallIconURL</code> - The icon to be used for the menu.</li>
+	 *            <li><code>tooltip</code> - The toolbar or menu tooltip.</li>
+	 *            <li><code>inToolBar</code> - Whether the action should be in the toolbar.</li>
+	 *            <li><code>inNodeTableToolBar</code> - Whether the action should be in the Node Table Panel's toolbar.</li>
+	 *            <li><code>inEdgeTableToolBar</code> - Whether the action should be in the Edge Table Panel's toolbar.</li>
+	 *            <li><code>inNetworkTableToolBar</code> - Whether the action should be in the Network Table Panel's toolbar.</li>
+	 *            <li><code>inUnassignedTableToolBar</code> - Whether the action should be in the Unassigned Tables Panel's toolbar.</li>
+	 *            <li><code>inMenuBar</code> - Whether the action should be in a menu.</li>
+	 *            <li><code>insertSeparatorBefore</code> - Whether a separator should be inserted before this menu item.</li>
+	 *            <li><code>insertSeparatorAfter</code> - Whether a separator should be inserted after this menu item.</li>
+	 *            <li><code>insertToolbarSeparatorBefore</code> - Whether a separator should be inserted before this toolbar item.</li>
+	 *            <li><code>insertToolbarSeparatorAfter</code> - Whether a separator should be inserted after this toolbar item.</li>
+	 *            <li><code>enableFor</code> - <i>Will only use this value if the TaskFactory is not a TaskFactoryPredicate!</i> See {@link ActionEnableSupport} for more detail.</li>
+	 *            <li><code>accelerator</code> - Accelerator key bindings.</li>
+	 *            <li><code>menuGravity</code> - Float value with 0.0 representing the top and larger values moving towards the bottom of the menu.</li>
+	 *            <li><code>toolBarGravity</code> - Float value with 0.0 representing the top and larger values moving towards the bottom of the toolbar.</li>
 	 *            </ul>
 	 * @param predicate
 	 *            The task factory predicate that indicates whether or not this 
@@ -296,27 +321,29 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * Creates a new AbstractCyAction object.
 	 *
 	 * @param configProps
-	 *            A String-String Map of configuration metadata. This will
-	 *            usually be the Map provided by the OSGi service
-	 *            configuration. Available configuration keys include:
+	 *            A String-String Map of configuration metadata.
+	 *            This will usually be the Map provided by the OSGi service configuration.
+	 *            Available configuration keys include (see {@link ServiceProperties}):
 	 *            <ul>
-	 *            <li>title - (The title of the menu.)</li>
-	 *            <li>preferredMenu - (The preferred menu for the action.)</li>
-	 *            <li>largeIconURL - (The icon to be used for the toolbar.)</li>
-	 *            <li>smallIconURL - (The icon to be used for the menu.)</li>
-	 *            <li>tooltip - (The toolbar or menu tooltip.)</li>
-	 *            <li>inToolBar - (Whether the action should be in the toolbar.)</li>
-	 *            <li>inTableToolBar - (Whether the action should be in the Table Panel's toolbar.)</li>
-	 *            <li>inMenuBar - (Whether the action should be in a menu.)</li>
-	 *            <li>insertSeparatorBefore - (Whether a separator should be inserted before this menu item.)</li>
-	 *            <li>insertSeparatorAfter - (Whether a separator should be inserted after this menu item.)</li>
-	 *            <li>insertToolbarSeparatorBefore - (Whether a separator should be inserted before this toolbar item.)</li>
-	 *            <li>insertToolbarSeparatorAfter - (Whether a separator should be inserted after this toolbar item.)</li>
-	 *            <li>enableFor - (<i>Will only use this value if the TaskFactory is not a TaskFactoryPredicate!</i> 
-	 *                             See {@link ActionEnableSupport} for more detail.)</li>
-	 *            <li>accelerator - (Accelerator key bindings.)</li>
-	 *            <li>menuGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the menu.)</li>
-	 *            <li>toolBarGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the toolbar.)</li>
+	 *            <li><code>title</code> - The title of the menu.</li>
+	 *            <li><code>preferredMenu</code> - The preferred menu for the action.</li>
+	 *            <li><code>largeIconURL</code> - The icon to be used for the toolbar.</li>
+	 *            <li><code>smallIconURL</code> - The icon to be used for the menu.</li>
+	 *            <li><code>tooltip</code> - The toolbar or menu tooltip.</li>
+	 *            <li><code>inToolBar</code> - Whether the action should be in the toolbar.</li>
+	 *            <li><code>inNodeTableToolBar</code> - Whether the action should be in the Node Table Panel's toolbar.</li>
+	 *            <li><code>inEdgeTableToolBar</code> - Whether the action should be in the Edge Table Panel's toolbar.</li>
+	 *            <li><code>inNetworkTableToolBar</code> - Whether the action should be in the Network Table Panel's toolbar.</li>
+	 *            <li><code>inUnassignedTableToolBar</code> - Whether the action should be in the Unassigned Tables Panel's toolbar.</li>
+	 *            <li><code>inMenuBar</code> - Whether the action should be in a menu.</li>
+	 *            <li><code>insertSeparatorBefore</code> - Whether a separator should be inserted before this menu item.</li>
+	 *            <li><code>insertSeparatorAfter</code> - Whether a separator should be inserted after this menu item.</li>
+	 *            <li><code>insertToolbarSeparatorBefore</code> - Whether a separator should be inserted before this toolbar item.</li>
+	 *            <li><code>insertToolbarSeparatorAfter</code> - Whether a separator should be inserted after this toolbar item.</li>
+	 *            <li><code>enableFor</code> - <i>Will only use this value if the TaskFactory is not a TaskFactoryPredicate!</i> See {@link ActionEnableSupport} for more detail.</li>
+	 *            <li><code>accelerator</code> - Accelerator key bindings.</li>
+	 *            <li><code>menuGravity</code> - Float value with 0.0 representing the top and larger values moving towards the bottom of the menu.</li>
+	 *            <li><code>toolBarGravity</code> - Float value with 0.0 representing the top and larger values moving towards the bottom of the toolbar.</li>
 	 *            </ul>
 	 * @param applicationManager
 	 *            The application manager providing context for this action.
@@ -351,11 +378,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	private void configFromProps(Map<String, String> props) {
 		configurationProperties = props;
 
-		var prefMenu = props.get(PREFERRED_MENU);
-
-		if (prefMenu != null)
-			setPreferredMenu(prefMenu);
-
+		// Icons
 		var largeIconURL = getURL(props.get(LARGE_ICON_URL));
 
 		if (largeIconURL != null) // Use image as icon
@@ -366,6 +389,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		if (smallIconURL != null)
 			putValue(SMALL_ICON, new ImageIcon(smallIconURL));
 
+		// Tooltip
 		var tooltip = props.get(TOOLTIP);
 
 		if (tooltip != null)
@@ -381,39 +405,43 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		if (tooltipImg != null)
 			toolTipImage = tooltipImg;
 
-		var foundInToolBar = props.get(IN_TOOL_BAR);
-
-		if (foundInToolBar != null && Boolean.parseBoolean(foundInToolBar))
+		// Main ToolBar
+		if (isTrue(props.get(IN_TOOL_BAR)))
 			inToolBar = true;
 		
-		var foundInTableToolBar = props.get(IN_TABLE_TOOL_BAR);
+		var prefMenu = props.get(PREFERRED_MENU);
+
+		if (prefMenu != null)
+			setPreferredMenu(prefMenu);
 		
-		if (foundInTableToolBar != null && Boolean.parseBoolean(foundInTableToolBar))
-			inTableToolBar = true;
-
-		var foundInMenuBar = props.get(IN_MENU_BAR);
-
-		if (foundInMenuBar != null  && Boolean.parseBoolean(foundInMenuBar))
+		// Table ToolBars
+		if (isTrue(props.get(IN_NODE_TABLE_TOOL_BAR)))
+			inNodeTableToolBar = true;
+		
+		if (isTrue(props.get(IN_EDGE_TABLE_TOOL_BAR)))
+			inEdgeTableToolBar = true;
+		
+		if (isTrue(props.get(IN_NETWORK_TABLE_TOOL_BAR)))
+			inNetworkTableToolBar = true;
+		
+		if (isTrue(props.get(IN_UNASSIGNED_TABLE_TOOL_BAR)))
+			inUnassignedTableToolBar = true;
+		
+		// Menu Bar
+		if (isTrue(props.get(IN_MENU_BAR)))
 			inMenuBar = true;
 
-		var foundInsertSeparatorBefore = props.get(INSERT_SEPARATOR_BEFORE);
-
-		if (foundInsertSeparatorBefore != null  && Boolean.parseBoolean(foundInsertSeparatorBefore))
+		// Separators
+		if (isTrue(props.get(INSERT_SEPARATOR_BEFORE)))
 			insertSeparatorBefore = true;
 
-		var foundInsertSeparatorAfter = props.get(INSERT_SEPARATOR_AFTER);
-
-		if (foundInsertSeparatorAfter != null  && Boolean.parseBoolean(foundInsertSeparatorAfter))
+		if (isTrue(props.get(INSERT_SEPARATOR_AFTER)))
 			insertSeparatorAfter = true;
 		
-		var foundInsertToolbarSeparatorBefore = props.get(INSERT_TOOLBAR_SEPARATOR_BEFORE);
-
-		if (foundInsertToolbarSeparatorBefore != null  && Boolean.parseBoolean(foundInsertToolbarSeparatorBefore))
+		if (isTrue(props.get(INSERT_TOOLBAR_SEPARATOR_BEFORE)))
 			insertToolbarSeparatorBefore = true;
 
-		var foundInsertToolbarSeparatorAfter = props.get(INSERT_TOOLBAR_SEPARATOR_AFTER);
-
-		if (foundInsertToolbarSeparatorAfter != null  && Boolean.parseBoolean(foundInsertToolbarSeparatorAfter))
+		if (isTrue(props.get(INSERT_TOOLBAR_SEPARATOR_AFTER)))
 			insertToolbarSeparatorAfter = true;
 
 		var keyComboString = props.get(ACCELERATOR);
@@ -500,13 +528,42 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	}
 	
 	@Override
-	public boolean isInTableToolBar() {
-		return inTableToolBar;
+	public boolean isInNodeTableToolBar() {
+		return inNodeTableToolBar;
 	}
 	
 	@Override
-	public void setIsInTableToolBar(boolean b) {
-		inTableToolBar = b;
+	public void setIsInNodeTableToolBar(boolean b) {
+		inNodeTableToolBar = b;
+	}
+	
+	@Override
+	public boolean isInEdgeTableToolBar() {
+		return inEdgeTableToolBar;
+	}
+
+	@Override
+	public void setIsInEdgeTableToolBar(boolean b) {
+		this.inEdgeTableToolBar = b;
+	}
+
+	@Override
+	public boolean isInNetworkTableToolBar() {
+		return inNetworkTableToolBar;
+	}
+
+	@Override
+	public void setIsInNetworkTableToolBar(boolean b) {
+		this.inNetworkTableToolBar = b;
+	}
+
+	public boolean isInUnassignedTableToolBar() {
+		return inUnassignedTableToolBar;
+	}
+
+	@Override
+	public void setIsInUnassignedTableToolBar(boolean b) {
+		this.inUnassignedTableToolBar = b;
 	}
 
 	/**
@@ -714,6 +771,10 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 			logger.warn("Incorrectly formatted URL string: '" + s + "'", e);
 			return null;
 		}
+	}
+	
+	private static boolean isTrue(String s) {
+		return s != null && Boolean.parseBoolean(s);
 	}
 	
 	private static class ConjunctionEnableSupport extends AbstractEnableSupport {

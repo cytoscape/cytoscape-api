@@ -59,10 +59,34 @@ public interface CyAction extends Action, MenuListener, PopupMenuListener {
 	boolean isInToolBar();
 	
 	/**
-	 * Returns whether the action should be in the Table Panel's tool bar.
-	 * @return true if the action should be in the Table Panel's tool bar.
+	 * Returns whether the action should be in the <b>Node Table Panel</b>'s tool bar.
+	 * @return true if the action should be in the Node Table Panel's tool bar.
 	 */
-	default boolean isInTableToolBar() {
+	default boolean isInNodeTableToolBar() {
+		return false;
+	}
+	
+	/**
+	 * Returns whether the action should be in the <b>Edge Table Panel</b>'s tool bar.
+	 * @return true if the action should be in the Edge Table Panel's tool bar.
+	 */
+	default boolean isInEdgeTableToolBar() {
+		return false;
+	}
+	
+	/**
+	 * Returns whether the action should be in the <b>Network Table Panel</b>'s tool bar.
+	 * @return true if the action should be in the Network Table Panel's tool bar.
+	 */
+	default boolean isInNetworkTableToolBar() {
+		return false;
+	}
+	
+	/**
+	 * Returns whether the action should be in the <b>Unassigned Tables Panel</b>'s tool bar.
+	 * @return true if the action should be in the Unassigned Tables Panel's tool bar.
+	 */
+	default boolean isInUnassignedTableToolBar() {
 		return false;
 	}
 
@@ -156,7 +180,28 @@ public interface CyAction extends Action, MenuListener, PopupMenuListener {
 	/**
  	 * To support configurable menus and tools, added for 3.9
  	 */
-	default void setIsInTableToolBar(boolean b) {
+	default void setIsInNodeTableToolBar(boolean b) {
+		// Just ignore it here...
+	}
+	
+	/**
+	 * To support configurable menus and tools, added for 3.9
+	 */
+	default void setIsInEdgeTableToolBar(boolean b) {
+		// Just ignore it here...
+	}
+	
+	/**
+	 * To support configurable menus and tools, added for 3.9
+	 */
+	default void setIsInNetworkTableToolBar(boolean b) {
+		// Just ignore it here...
+	}
+	
+	/**
+	 * To support configurable menus and tools, added for 3.9
+	 */
+	default void setIsInUnassignedTableToolBar(boolean b) {
 		// Just ignore it here...
 	}
 	
