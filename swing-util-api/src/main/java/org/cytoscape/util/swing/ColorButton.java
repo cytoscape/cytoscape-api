@@ -31,6 +31,10 @@ import javax.swing.JButton;
  * #L%
  */
 
+import org.cytoscape.service.util.CyServiceRegistrar;
+import org.cytoscape.util.color.Palette;
+import org.cytoscape.util.color.PaletteType;
+
 /**
  * JButton that opens a Color Chooser when clicked and shows the previously set color as an icon.
  * You can use the <code>addPropertyChangeListener</code> method to listen for a {@link java.beans.PropertyChangeEvent}
@@ -45,10 +49,61 @@ public final class ColorButton extends JButton {
 
 	private Color color;
 	private Color borderColor;
+  private Palette palette;
+  private CyColorPaletteChooserFactory chooserFactory;
 
+  /**
+   * The basic constructor for a color button without palettes.  The <b>color</b> argument
+   * is the initial color.
+   *
+   * @param color
+   */
 	public ColorButton(final Color color) {
 		super(" ");
+    init(color);
+		addActionListener(evt -> {
+			// Open color chooser
+			final Color c = CyColorChooser.showDialog(ColorButton.this, "Colors", this.color);
+			ColorButton.this.setColor(c);
+		});
+  }
+
+  /**
+   * The basic constructor for a color button with palettes.  The <b>color</b> argument
+   * is the initial color, and the <b>palette</b> argument is the initial palette.  Because
+   * palettes are dynamic, the caller must provide the CyServiceRegistrar service
+   * and pass that to this constructor.
+   *
+   * @param serviceRegistrar the CyServiceRegistrar -- used to get all of the currently available palettes
+   * @param palette the initial palette
+   * @param paletteType the types of palettes to use
+   * @param color the initial color
+   * @param paletteOnly if true, only allow palette selection, not color selection
+   */
+	public ColorButton(final CyServiceRegistrar serviceRegistrar, final Palette palette, PaletteType type, final Color color, 
+                     boolean paletteOnly) {
+    super(" ");
+    init(color);
+    setPalette(palette);
+
+		addActionListener(evt -> {
+			// Open color chooser
+      int size = 8;
+      if (palette != null)
+        size = palette.size();
+
+      CyColorPaletteChooserFactory chooserFactory = serviceRegistrar.getService(CyColorPaletteChooserFactory.class);
+      CyColorPaletteChooser chooser = chooserFactory.getColorPaletteChooser(type, paletteOnly);
+      String title = "Colors";
+      if (paletteOnly)
+        title = "Palettes";
+      final Color c = chooser.showDialog(ColorButton.this, title, palette, this.color, size);
+      ColorButton.this.setColor(c);
+		});
+  }
+
 		
+  private void init(final Color color) {
 		if (LookAndFeelUtil.isAquaLAF())
 			putClientProperty("JButton.buttonType", "gradient");
 		
@@ -57,12 +112,6 @@ public final class ColorButton extends JButton {
 		borderColor = getContrastingColor(getBackground());
 		setIcon(new ColorIcon());
 		setColor(color);
-		
-		addActionListener(evt -> {
-			// Open color chooser
-			final Color c = CyColorChooser.showDialog(ColorButton.this, "Colors", color);
-			ColorButton.this.setColor(c);
-		});
 	}
 
 	/**
@@ -75,12 +124,30 @@ public final class ColorButton extends JButton {
 		repaint();
 		firePropertyChange("color", oldColor, color);
 	}
+
+	/**
+	 * Sets a new color Palette and fires a {@link java.beans.PropertyChangeEvent} for the property "palette".
+	 * @param palette
+	 */
+	public void setPalette(final Palette palette) {
+		final Palette oldPalette = this.palette;
+		this.palette = palette;
+		repaint();
+		firePropertyChange("palette", oldPalette, palette);
+	}
 	
 	/**
 	 * @return The currently selected color.
 	 */
 	public Color getColor() {
 		return color;
+	}
+
+	/**
+	 * @return The currently selected palette (if any).
+	 */
+	public Palette getPalette() {
+		return palette;
 	}
 	
 	private static Color getContrastingColor(final Color color) {

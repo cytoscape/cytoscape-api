@@ -54,9 +54,41 @@ public interface CyAction extends Action, MenuListener, PopupMenuListener {
 
 	/**
 	 * Returns whether the action should be in the tool bar.
-	 * @return whether the action should be in the tool bar.
+	 * @return true if the action should be in the tool bar.
 	 */
 	boolean isInToolBar();
+	
+	/**
+	 * Returns whether the action should be in the <b>Node Table Panel</b>'s tool bar.
+	 * @return true if the action should be in the Node Table Panel's tool bar.
+	 */
+	default boolean isInNodeTableToolBar() {
+		return false;
+	}
+	
+	/**
+	 * Returns whether the action should be in the <b>Edge Table Panel</b>'s tool bar.
+	 * @return true if the action should be in the Edge Table Panel's tool bar.
+	 */
+	default boolean isInEdgeTableToolBar() {
+		return false;
+	}
+	
+	/**
+	 * Returns whether the action should be in the <b>Network Table Panel</b>'s tool bar.
+	 * @return true if the action should be in the Network Table Panel's tool bar.
+	 */
+	default boolean isInNetworkTableToolBar() {
+		return false;
+	}
+	
+	/**
+	 * Returns whether the action should be in the <b>Unassigned Tables Panel</b>'s tool bar.
+	 * @return true if the action should be in the Unassigned Tables Panel's tool bar.
+	 */
+	default boolean isInUnassignedTableToolBar() {
+		return false;
+	}
 
 	/**
 	 * Insert a separator before this menu item.  
@@ -144,6 +176,34 @@ public interface CyAction extends Action, MenuListener, PopupMenuListener {
  	 * To support configurable menus and tools, setIsInToolBar added for 3.6
  	 */
 	void setIsInToolBar(boolean b);
+	
+	/**
+ 	 * To support configurable menus and tools, added for 3.9
+ 	 */
+	default void setIsInNodeTableToolBar(boolean b) {
+		// Just ignore it here...
+	}
+	
+	/**
+	 * To support configurable menus and tools, added for 3.9
+	 */
+	default void setIsInEdgeTableToolBar(boolean b) {
+		// Just ignore it here...
+	}
+	
+	/**
+	 * To support configurable menus and tools, added for 3.9
+	 */
+	default void setIsInNetworkTableToolBar(boolean b) {
+		// Just ignore it here...
+	}
+	
+	/**
+	 * To support configurable menus and tools, added for 3.9
+	 */
+	default void setIsInUnassignedTableToolBar(boolean b) {
+		// Just ignore it here...
+	}
 	
 	/**
  	 * To support configurable menus and tools, setPreferredMenu added for 3.6

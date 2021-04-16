@@ -78,11 +78,14 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 	
 	// VPs that apply to an entire COLUMN or to the column header ======================================================
 	
-	public static final VisualProperty<Boolean> COLUMN_EDITABLE = new BooleanVisualProperty(true, 
-			"COLUMN_EDITABLE", "Column Editable", CyColumn.class);
-	
-	public static final VisualProperty<Boolean> COLUMN_VISIBLE = new BooleanVisualProperty(true, 
-			"COLUMN_VISIBLE", "Column Visible", CyColumn.class);
+	public static final VisualProperty<Boolean> COLUMN_EDITABLE = new BooleanVisualProperty(true, "COLUMN_EDITABLE",
+			"Column Editable", CyColumn.class);
+
+	public static final VisualProperty<Boolean> COLUMN_VISIBLE = new BooleanVisualProperty(true, "COLUMN_VISIBLE",
+			"Column Visible", CyColumn.class);
+
+	public static final VisualProperty<Boolean> COLUMN_SELECTED = new BooleanVisualProperty(false, "COLUMN_SELECTED",
+			"Column Selected", CyColumn.class);
 	
 	public static final VisualProperty<Double> COLUMN_GRAVITY = new DoubleVisualProperty(1.0, 
 			NONE_ZERO_POSITIVE_DOUBLE_RANGE, "COLUMN_GRAVITY", "Column Gravity", CyColumn.class);
@@ -146,6 +149,7 @@ public class BasicTableVisualLexicon extends AbstractVisualLexicon {
 		
 		addVisualProperty(COLUMN_EDITABLE, COLUMN);
 		addVisualProperty(COLUMN_VISIBLE, COLUMN);
+		addVisualProperty(COLUMN_SELECTED, COLUMN);
 		addVisualProperty(COLUMN_GRAVITY, COLUMN);
 		addVisualProperty(COLUMN_WIDTH, COLUMN);
 		addVisualProperty(COLUMN_FORMAT, COLUMN);

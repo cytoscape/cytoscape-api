@@ -16,6 +16,10 @@ import java.util.concurrent.TimeUnit;
  * by events, do not run too often. It can be used by code that fires events to avoid
  * firing too many events, or by code listening for events to avoid running the handler
  * too often.
+ * 
+ * @CyAPI.Api.Class
+ * @CyAPI.InModule event-api
+ * @since 3.8
  */
 public class DebounceTimer {
 
@@ -48,8 +52,8 @@ public class DebounceTimer {
 		this.store = Collections.synchronizedMap(new HashMap<>());
 		this.delay = delayMilliseconds;
 		
-		executor = new ScheduledThreadPoolExecutor(1, r -> {
-			Thread thread = Executors.defaultThreadFactory().newThread(r);
+		executor = new ScheduledThreadPoolExecutor(1, runnable -> {
+			Thread thread = Executors.defaultThreadFactory().newThread(runnable);
 			thread.setName(DebounceTimer.class.getSimpleName() + "_" + thread.getName());
 			return thread;
 		});
@@ -123,9 +127,9 @@ public class DebounceTimer {
 	
 	
 	/**
-	 * Releases resources.
+	 * Initiates a shutdown that will release resources, calls to debounce() will no longer be accepted. 
 	 */
-	public void shutdown() { 
+	public synchronized void shutdown() { 
 		executor.shutdown();
 	}
 	

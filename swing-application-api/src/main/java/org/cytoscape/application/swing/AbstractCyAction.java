@@ -6,8 +6,12 @@ import static org.cytoscape.work.ServiceProperties.INSERT_SEPARATOR_AFTER;
 import static org.cytoscape.work.ServiceProperties.INSERT_SEPARATOR_BEFORE;
 import static org.cytoscape.work.ServiceProperties.INSERT_TOOLBAR_SEPARATOR_AFTER;
 import static org.cytoscape.work.ServiceProperties.INSERT_TOOLBAR_SEPARATOR_BEFORE;
+import static org.cytoscape.work.ServiceProperties.IN_EDGE_TABLE_TOOL_BAR;
 import static org.cytoscape.work.ServiceProperties.IN_MENU_BAR;
+import static org.cytoscape.work.ServiceProperties.IN_NETWORK_TABLE_TOOL_BAR;
+import static org.cytoscape.work.ServiceProperties.IN_NODE_TABLE_TOOL_BAR;
 import static org.cytoscape.work.ServiceProperties.IN_TOOL_BAR;
+import static org.cytoscape.work.ServiceProperties.IN_UNASSIGNED_TABLE_TOOL_BAR;
 import static org.cytoscape.work.ServiceProperties.LARGE_ICON_URL;
 import static org.cytoscape.work.ServiceProperties.MENU_GRAVITY;
 import static org.cytoscape.work.ServiceProperties.PREFERRED_MENU;
@@ -32,6 +36,7 @@ import javax.swing.event.PopupMenuEvent;
 import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.application.CyUserLog;
 import org.cytoscape.view.model.CyNetworkViewManager;
+import org.cytoscape.work.ServiceProperties;
 import org.cytoscape.work.TaskFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,7 +47,7 @@ import org.slf4j.LoggerFactory;
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2018 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2021 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -69,9 +74,8 @@ import org.slf4j.LoggerFactory;
  * @CyAPI.Abstract.Class
  * @CyAPI.InModule swing-application-api
  */
+@SuppressWarnings("serial")
 public abstract class AbstractCyAction extends AbstractAction implements CyAction {
-	
-	private static final long serialVersionUID = -2245672104075936952L;
 	
 	private static final Logger logger = LoggerFactory.getLogger(CyUserLog.NAME);
 
@@ -117,9 +121,29 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	protected boolean useToggleButton;
 
 	/**
-	 * Indicates whether the action is in the toolbar.
+	 * Indicates whether the action is in the main toolbar.
 	 */
 	protected boolean inToolBar;
+	
+	/**
+	 * Indicates whether the action is in the Node Table Panel's toolbar.
+	 */
+	protected boolean inNodeTableToolBar;
+	
+	/**
+	 * Indicates whether the action is in the Edge Table Panel's toolbar.
+	 */
+	protected boolean inEdgeTableToolBar;
+	
+	/**
+	 * Indicates whether the action is in the Network Table Panel's toolbar.
+	 */
+	protected boolean inNetworkTableToolBar;
+	
+	/**
+	 * Indicates whether the action is in the Unassigned Tables Panel's toolbar.
+	 */
+	protected boolean inUnassignedTableToolBar;
 
 	/**
 	 * Indicates whether the action is in a menu.
@@ -167,14 +191,14 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 */
 	private final AbstractEnableSupport enabler;
 	
-	
 	/**
 	 * Creates a new AbstractCyAction object that is
 	 * always enabled.
 	 * @param name The name of the action.
 	 */
-	public AbstractCyAction(final String name) {
+	public AbstractCyAction(String name) {
 		super(name);
+		
 		this.enabler = new AlwaysEnabledEnableSupport(this);
 		addNameChangeListener();
 	}
@@ -199,9 +223,14 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * @param enableFor A string declaring which states this action should be enabled for. 
 	 * @param networkViewManager The network view manager that provides context for this action. 
 	 */
-	public AbstractCyAction(final String name, final CyApplicationManager applicationManager, final String enableFor,
-			final CyNetworkViewManager networkViewManager) {
+	public AbstractCyAction(
+			String name,
+			CyApplicationManager applicationManager,
+			String enableFor,
+			CyNetworkViewManager networkViewManager
+	) {
 		super(name);
+		
 		this.enabler = new ActionEnableSupport(this, enableFor, applicationManager, networkViewManager);
 		addNameChangeListener();
 	}
@@ -210,31 +239,38 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * Creates a new AbstractCyAction object.
 	 *
 	 * @param configProps
-	 *            A String-String Map of configuration metadata. This will
-	 *            usually be the Map provided by the OSGi service
-	 *            configuration. Available configuration keys include:
+	 *            A String-String Map of configuration metadata.
+	 *            This will usually be the Map provided by the OSGi service configuration.
+	 *            Available configuration keys include (see {@link ServiceProperties}):
 	 *            <ul>
-	 *            <li>title - (The title of the menu.)</li>
-	 *            <li>preferredMenu - (The preferred menu for the action.)</li>
-	 *            <li>largeIconURL - (The icon to be used for the toolbar.)</li>
-	 *            <li>smallIconURL - (The icon to be used for the menu.)</li>
-	 *            <li>tooltip - (The toolbar or menu tooltip.)</li>
-	 *            <li>inToolBar - (Whether the action should be in the toolbar.)</li>
-	 *            <li>inMenuBar - (Whether the action should be in a menu.)</li>
-	 *            <li>insertSeparatorBefore - (Whether a separator should be inserted before this menu item.)</li>
-	 *            <li>insertSeparatorAfter - (Whether a separator should be inserted after this menu item.)</li>
-	 *            <li>insertToolbarSeparatorBefore - (Whether a separator should be inserted before this toolbar item.)</li>
-	 *            <li>insertToolbarSeparatorAfter - (Whether a separator should be inserted after this toolbar item.)</li>
-	 *            <li>enableFor - (System state that the action should be enabled for. See {@link ActionEnableSupport} for more detail.)</li>
-	 *            <li>accelerator - (Accelerator key bindings.)</li>
-	 *            <li>menuGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the menu.)</li>
-	 *            <li>toolBarGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the toolbar.)</li>
+	 *            <li><code>title</code> - The title of the menu.</li>
+	 *            <li><code>preferredMenu</code> - The preferred menu for the action.</li>
+	 *            <li><code>largeIconURL</code> - The icon to be used for the toolbar.</li>
+	 *            <li><code>smallIconURL</code> - The icon to be used for the menu.</li>
+	 *            <li><code>tooltip</code> - The toolbar or menu tooltip.</li>
+	 *            <li><code>inToolBar</code> - Whether the action should be in the toolbar.</li>
+	 *            <li><code>inNodeTableToolBar</code> - Whether the action should be in the Node Table Panel's toolbar.</li>
+	 *            <li><code>inEdgeTableToolBar</code> - Whether the action should be in the Edge Table Panel's toolbar.</li>
+	 *            <li><code>inNetworkTableToolBar</code> - Whether the action should be in the Network Table Panel's toolbar.</li>
+	 *            <li><code>inUnassignedTableToolBar</code> - Whether the action should be in the Unassigned Tables Panel's toolbar.</li>
+	 *            <li><code>inMenuBar</code> - Whether the action should be in a menu.</li>
+	 *            <li><code>insertSeparatorBefore</code> - Whether a separator should be inserted before this menu item.</li>
+	 *            <li><code>insertSeparatorAfter</code> - Whether a separator should be inserted after this menu item.</li>
+	 *            <li><code>insertToolbarSeparatorBefore</code> - Whether a separator should be inserted before this toolbar item.</li>
+	 *            <li><code>insertToolbarSeparatorAfter</code> - Whether a separator should be inserted after this toolbar item.</li>
+	 *            <li><code>enableFor</code> - <i>Will only use this value if the TaskFactory is not a TaskFactoryPredicate!</i> See {@link ActionEnableSupport} for more detail.</li>
+	 *            <li><code>accelerator</code> - Accelerator key bindings.</li>
+	 *            <li><code>menuGravity</code> - Float value with 0.0 representing the top and larger values moving towards the bottom of the menu.</li>
+	 *            <li><code>toolBarGravity</code> - Float value with 0.0 representing the top and larger values moving towards the bottom of the toolbar.</li>
 	 *            </ul>
 	 * @param applicationManager
 	 *            The application manager providing context for this action.
 	 */
-	public AbstractCyAction(final Map<String, String> configProps, final CyApplicationManager applicationManager,
-			final CyNetworkViewManager networkViewManager) {
+	public AbstractCyAction(
+			Map<String, String> configProps,
+			CyApplicationManager applicationManager,
+			CyNetworkViewManager networkViewManager
+	) {
 		this(configProps.get(TITLE), applicationManager, configProps.get(ENABLE_FOR), networkViewManager);
 
 		configFromProps(configProps);
@@ -245,31 +281,35 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * Creates a new AbstractCyAction object.
 	 *
 	 * @param configProps
-	 *            A String-String Map of configuration metadata. This will
-	 *            usually be the Map provided by the OSGi service
-	 *            configuration. Available configuration keys include:
+	 *            A String-String Map of configuration metadata.
+	 *            This will usually be the Map provided by the OSGi service configuration.
+	 *            Available configuration keys include (see {@link ServiceProperties}):
 	 *            <ul>
-	 *            <li>title - (The title of the menu.)</li>
-	 *            <li>preferredMenu - (The preferred menu for the action.)</li>
-	 *            <li>largeIconURL - (The icon to be used for the toolbar.)</li>
-	 *            <li>smallIconURL - (The icon to be used for the menu.)</li>
-	 *            <li>tooltip - (The toolbar or menu tooltip.)</li>
-	 *            <li>inToolBar - (Whether the action should be in the toolbar.)</li>
-	 *            <li>inMenuBar - (Whether the action should be in a menu.)</li>
-	 *            <li>insertSeparatorBefore - (Whether a separator should be inserted before this menu item.)</li>
-	 *            <li>insertSeparatorAfter - (Whether a separator should be inserted after this menu item.)</li>
-	 *            <li>insertToolbarSeparatorBefore - (Whether a separator should be inserted before this toolbar item.)</li>
-	 *            <li>insertToolbarSeparatorAfter - (Whether a separator should be inserted after this toolbar item.)</li>
-	 *            <li>enableFor - (<i>Ingored in this constructor and TaskFactoryPredicate is used instead!</i>)</li>
-	 *            <li>accelerator - (Accelerator key bindings.)</li>
-	 *            <li>menuGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the menu.)</li>
-	 *            <li>toolBarGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the toolbar.)</li>
+	 *            <li><code>title</code> - The title of the menu.</li>
+	 *            <li><code>preferredMenu</code> - The preferred menu for the action.</li>
+	 *            <li><code>largeIconURL</code> - The icon to be used for the toolbar.</li>
+	 *            <li><code>smallIconURL</code> - The icon to be used for the menu.</li>
+	 *            <li><code>tooltip</code> - The toolbar or menu tooltip.</li>
+	 *            <li><code>inToolBar</code> - Whether the action should be in the toolbar.</li>
+	 *            <li><code>inNodeTableToolBar</code> - Whether the action should be in the Node Table Panel's toolbar.</li>
+	 *            <li><code>inEdgeTableToolBar</code> - Whether the action should be in the Edge Table Panel's toolbar.</li>
+	 *            <li><code>inNetworkTableToolBar</code> - Whether the action should be in the Network Table Panel's toolbar.</li>
+	 *            <li><code>inUnassignedTableToolBar</code> - Whether the action should be in the Unassigned Tables Panel's toolbar.</li>
+	 *            <li><code>inMenuBar</code> - Whether the action should be in a menu.</li>
+	 *            <li><code>insertSeparatorBefore</code> - Whether a separator should be inserted before this menu item.</li>
+	 *            <li><code>insertSeparatorAfter</code> - Whether a separator should be inserted after this menu item.</li>
+	 *            <li><code>insertToolbarSeparatorBefore</code> - Whether a separator should be inserted before this toolbar item.</li>
+	 *            <li><code>insertToolbarSeparatorAfter</code> - Whether a separator should be inserted after this toolbar item.</li>
+	 *            <li><code>enableFor</code> - <i>Will only use this value if the TaskFactory is not a TaskFactoryPredicate!</i> See {@link ActionEnableSupport} for more detail.</li>
+	 *            <li><code>accelerator</code> - Accelerator key bindings.</li>
+	 *            <li><code>menuGravity</code> - Float value with 0.0 representing the top and larger values moving towards the bottom of the menu.</li>
+	 *            <li><code>toolBarGravity</code> - Float value with 0.0 representing the top and larger values moving towards the bottom of the toolbar.</li>
 	 *            </ul>
 	 * @param predicate
 	 *            The task factory predicate that indicates whether or not this 
 	 *            action should be enabled.
 	 */
-	public AbstractCyAction(final Map<String, String> configProps, final TaskFactory predicate) {
+	public AbstractCyAction(Map<String, String> configProps, TaskFactory predicate) {
 		super(configProps.get(TITLE));
 		
 		this.enabler = new TaskFactoryEnableSupport(this, predicate);
@@ -281,26 +321,29 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 * Creates a new AbstractCyAction object.
 	 *
 	 * @param configProps
-	 *            A String-String Map of configuration metadata. This will
-	 *            usually be the Map provided by the OSGi service
-	 *            configuration. Available configuration keys include:
+	 *            A String-String Map of configuration metadata.
+	 *            This will usually be the Map provided by the OSGi service configuration.
+	 *            Available configuration keys include (see {@link ServiceProperties}):
 	 *            <ul>
-	 *            <li>title - (The title of the menu.)</li>
-	 *            <li>preferredMenu - (The preferred menu for the action.)</li>
-	 *            <li>largeIconURL - (The icon to be used for the toolbar.)</li>
-	 *            <li>smallIconURL - (The icon to be used for the menu.)</li>
-	 *            <li>tooltip - (The toolbar or menu tooltip.)</li>
-	 *            <li>inToolBar - (Whether the action should be in the toolbar.)</li>
-	 *            <li>inMenuBar - (Whether the action should be in a menu.)</li>
-	 *            <li>insertSeparatorBefore - (Whether a separator should be inserted before this menu item.)</li>
-	 *            <li>insertSeparatorAfter - (Whether a separator should be inserted after this menu item.)</li>
-	 *            <li>insertToolbarSeparatorBefore - (Whether a separator should be inserted before this toolbar item.)</li>
-	 *            <li>insertToolbarSeparatorAfter - (Whether a separator should be inserted after this toolbar item.)</li>
-	 *            <li>enableFor - (<i>Will only use this value if the TaskFactory is not a TaskFactoryPredicate!</i> 
-	 *                             See {@link ActionEnableSupport} for more detail.)</li>
-	 *            <li>accelerator - (Accelerator key bindings.)</li>
-	 *            <li>menuGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the menu.)</li>
-	 *            <li>toolBarGravity - (Float value with 0.0 representing the top and larger values moving towards the bottom of the toolbar.)</li>
+	 *            <li><code>title</code> - The title of the menu.</li>
+	 *            <li><code>preferredMenu</code> - The preferred menu for the action.</li>
+	 *            <li><code>largeIconURL</code> - The icon to be used for the toolbar.</li>
+	 *            <li><code>smallIconURL</code> - The icon to be used for the menu.</li>
+	 *            <li><code>tooltip</code> - The toolbar or menu tooltip.</li>
+	 *            <li><code>inToolBar</code> - Whether the action should be in the toolbar.</li>
+	 *            <li><code>inNodeTableToolBar</code> - Whether the action should be in the Node Table Panel's toolbar.</li>
+	 *            <li><code>inEdgeTableToolBar</code> - Whether the action should be in the Edge Table Panel's toolbar.</li>
+	 *            <li><code>inNetworkTableToolBar</code> - Whether the action should be in the Network Table Panel's toolbar.</li>
+	 *            <li><code>inUnassignedTableToolBar</code> - Whether the action should be in the Unassigned Tables Panel's toolbar.</li>
+	 *            <li><code>inMenuBar</code> - Whether the action should be in a menu.</li>
+	 *            <li><code>insertSeparatorBefore</code> - Whether a separator should be inserted before this menu item.</li>
+	 *            <li><code>insertSeparatorAfter</code> - Whether a separator should be inserted after this menu item.</li>
+	 *            <li><code>insertToolbarSeparatorBefore</code> - Whether a separator should be inserted before this toolbar item.</li>
+	 *            <li><code>insertToolbarSeparatorAfter</code> - Whether a separator should be inserted after this toolbar item.</li>
+	 *            <li><code>enableFor</code> - <i>Will only use this value if the TaskFactory is not a TaskFactoryPredicate!</i> See {@link ActionEnableSupport} for more detail.</li>
+	 *            <li><code>accelerator</code> - Accelerator key bindings.</li>
+	 *            <li><code>menuGravity</code> - Float value with 0.0 representing the top and larger values moving towards the bottom of the menu.</li>
+	 *            <li><code>toolBarGravity</code> - Float value with 0.0 representing the top and larger values moving towards the bottom of the toolbar.</li>
 	 *            </ul>
 	 * @param applicationManager
 	 *            The application manager providing context for this action.
@@ -310,17 +353,21 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *            TaskFactory is not used by the AbstractCyAction in any other way.  Any execution of tasks
 	 *            from this TaskFactory must be handled by a subclass.
 	 */
-	public AbstractCyAction(final Map<String, String> configProps, final CyApplicationManager applicationManager,
-			final CyNetworkViewManager networkViewManager, final TaskFactory factory) {
+	public AbstractCyAction(
+			Map<String, String> configProps,
+			CyApplicationManager applicationManager,
+			CyNetworkViewManager networkViewManager,
+			TaskFactory factory
+	) {
 		super(configProps.get(TITLE));
 		
-		final String enableFor = configProps.get(ENABLE_FOR);
+		var enableFor = configProps.get(ENABLE_FOR);
 		
 		if (enableFor == null) {
 			enabler = new TaskFactoryEnableSupport(this, factory);
 		} else {
-			TaskFactoryEnableSupport taskFactoryEnabler = new TaskFactoryEnableSupport((CyAction) null, factory);
-			ActionEnableSupport actionEnabler = new ActionEnableSupport((CyAction) null, enableFor, applicationManager, networkViewManager);
+			var taskFactoryEnabler = new TaskFactoryEnableSupport((CyAction) null, factory);
+			var actionEnabler = new ActionEnableSupport((CyAction) null, enableFor, applicationManager, networkViewManager);
 			enabler = new ConjunctionEnableSupport(this, actionEnabler, taskFactoryEnabler);
 		}
 		
@@ -328,79 +375,85 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		addNameChangeListener();
 	}
 
-	private void configFromProps(final Map<String, String> props) {
+	private void configFromProps(Map<String, String> props) {
 		configurationProperties = props;
 
-		final String prefMenu = props.get(PREFERRED_MENU);
-
-		if (prefMenu != null)
-			setPreferredMenu(prefMenu);
-
-		final URL largeIconURL = getURL(props.get(LARGE_ICON_URL));
+		// Icons
+		var largeIconURL = getURL(props.get(LARGE_ICON_URL));
 
 		if (largeIconURL != null) // Use image as icon
 			putValue(LARGE_ICON_KEY, new ImageIcon(largeIconURL));
 
-		final URL smallIconURL = getURL(props.get(SMALL_ICON_URL));
+		var smallIconURL = getURL(props.get(SMALL_ICON_URL));
 		
 		if (smallIconURL != null)
 			putValue(SMALL_ICON, new ImageIcon(smallIconURL));
 
-		final String tooltip = props.get(TOOLTIP);
+		// Tooltip
+		var tooltip = props.get(TOOLTIP);
 
 		if (tooltip != null)
 			putValue(SHORT_DESCRIPTION, tooltip);
 		
-		final String tooltipDesc = props.get(TOOLTIP_LONG_DESCRIPTION);
+		var tooltipDesc = props.get(TOOLTIP_LONG_DESCRIPTION);
 		
 		if (tooltipDesc != null)
 			putValue(LONG_DESCRIPTION, tooltipDesc);
 		
-		final URL tooltipImg = getURL(props.get(TOOLTIP_IMAGE));
+		var tooltipImg = getURL(props.get(TOOLTIP_IMAGE));
 		
 		if (tooltipImg != null)
 			toolTipImage = tooltipImg;
 
-		final String foundInToolBar = props.get(IN_TOOL_BAR);
-
-		if (foundInToolBar != null && Boolean.parseBoolean(foundInToolBar))
+		// Main ToolBar
+		if (isTrue(props.get(IN_TOOL_BAR)))
 			inToolBar = true;
+		
+		var prefMenu = props.get(PREFERRED_MENU);
 
-		final String foundInMenuBar = props.get(IN_MENU_BAR);
-
-		if (foundInMenuBar != null  && Boolean.parseBoolean(foundInMenuBar))
+		if (prefMenu != null)
+			setPreferredMenu(prefMenu);
+		
+		// Table ToolBars
+		if (isTrue(props.get(IN_NODE_TABLE_TOOL_BAR)))
+			inNodeTableToolBar = true;
+		
+		if (isTrue(props.get(IN_EDGE_TABLE_TOOL_BAR)))
+			inEdgeTableToolBar = true;
+		
+		if (isTrue(props.get(IN_NETWORK_TABLE_TOOL_BAR)))
+			inNetworkTableToolBar = true;
+		
+		if (isTrue(props.get(IN_UNASSIGNED_TABLE_TOOL_BAR)))
+			inUnassignedTableToolBar = true;
+		
+		// Menu Bar
+		if (isTrue(props.get(IN_MENU_BAR)))
 			inMenuBar = true;
 
-		final String foundInsertSeparatorBefore = props.get(INSERT_SEPARATOR_BEFORE);
-
-		if (foundInsertSeparatorBefore != null  && Boolean.parseBoolean(foundInsertSeparatorBefore))
+		// Separators
+		if (isTrue(props.get(INSERT_SEPARATOR_BEFORE)))
 			insertSeparatorBefore = true;
 
-		final String foundInsertSeparatorAfter = props.get(INSERT_SEPARATOR_AFTER);
-
-		if (foundInsertSeparatorAfter != null  && Boolean.parseBoolean(foundInsertSeparatorAfter))
+		if (isTrue(props.get(INSERT_SEPARATOR_AFTER)))
 			insertSeparatorAfter = true;
 		
-		final String foundInsertToolbarSeparatorBefore = props.get(INSERT_TOOLBAR_SEPARATOR_BEFORE);
-
-		if (foundInsertToolbarSeparatorBefore != null  && Boolean.parseBoolean(foundInsertToolbarSeparatorBefore))
+		if (isTrue(props.get(INSERT_TOOLBAR_SEPARATOR_BEFORE)))
 			insertToolbarSeparatorBefore = true;
 
-		final String foundInsertToolbarSeparatorAfter = props.get(INSERT_TOOLBAR_SEPARATOR_AFTER);
-
-		if (foundInsertToolbarSeparatorAfter != null  && Boolean.parseBoolean(foundInsertToolbarSeparatorAfter))
+		if (isTrue(props.get(INSERT_TOOLBAR_SEPARATOR_AFTER)))
 			insertToolbarSeparatorAfter = true;
 
-		final String keyComboString = props.get(ACCELERATOR);
+		var keyComboString = props.get(ACCELERATOR);
 
 		if (keyComboString != null) {
-			final KeyStroke command = AcceleratorParser.parse(keyComboString);
+			var command = AcceleratorParser.parse(keyComboString);
 
 			if (command != null)
 				setAcceleratorKeyStroke(command);
 		}
 
-		final String menuGravityString = props.get(MENU_GRAVITY);
+		var menuGravityString = props.get(MENU_GRAVITY);
 
 		if (menuGravityString != null) {
 			try {
@@ -410,7 +463,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 			}
 		}
 
-		final String toolbarGravityString = props.get(TOOL_BAR_GRAVITY);
+		var toolbarGravityString = props.get(TOOL_BAR_GRAVITY);
 
 		if (toolbarGravityString != null) {
 			try {
@@ -428,7 +481,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	 *
 	 * @param name The name of the action.
 	 */
-	public void setName(final String name) {
+	public void setName(String name) {
 		putValue(Action.NAME, name);
 	}
 
@@ -472,6 +525,45 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 	@Override
 	public void setIsInToolBar(boolean b) {
 		inToolBar = b;
+	}
+	
+	@Override
+	public boolean isInNodeTableToolBar() {
+		return inNodeTableToolBar;
+	}
+	
+	@Override
+	public void setIsInNodeTableToolBar(boolean b) {
+		inNodeTableToolBar = b;
+	}
+	
+	@Override
+	public boolean isInEdgeTableToolBar() {
+		return inEdgeTableToolBar;
+	}
+
+	@Override
+	public void setIsInEdgeTableToolBar(boolean b) {
+		this.inEdgeTableToolBar = b;
+	}
+
+	@Override
+	public boolean isInNetworkTableToolBar() {
+		return inNetworkTableToolBar;
+	}
+
+	@Override
+	public void setIsInNetworkTableToolBar(boolean b) {
+		this.inNetworkTableToolBar = b;
+	}
+
+	public boolean isInUnassignedTableToolBar() {
+		return inUnassignedTableToolBar;
+	}
+
+	@Override
+	public void setIsInUnassignedTableToolBar(boolean b) {
+		this.inUnassignedTableToolBar = b;
 	}
 
 	/**
@@ -669,7 +761,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		return configurationProperties;
 	}
 	
-	private URL getURL(final String s) {
+	private URL getURL(String s) {
 		if (s == null)
 			return null;
 
@@ -679,6 +771,10 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 			logger.warn("Incorrectly formatted URL string: '" + s + "'", e);
 			return null;
 		}
+	}
+	
+	private static boolean isTrue(String s) {
+		return s != null && Boolean.parseBoolean(s);
 	}
 	
 	private static class ConjunctionEnableSupport extends AbstractEnableSupport {
@@ -693,7 +789,7 @@ public abstract class AbstractCyAction extends AbstractAction implements CyActio
 		public void updateEnableState() {
 			boolean enabled = true;
 
-			for (AbstractEnableSupport enableSupport : enableSupports) {
+			for (var enableSupport : enableSupports) {
 				enableSupport.updateEnableState();
 				enabled &= enableSupport.isCurrentlyEnabled();
 

@@ -6,7 +6,7 @@ package org.cytoscape.application.swing;
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2013 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2021 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -24,14 +24,12 @@ package org.cytoscape.application.swing;
  * #L%
  */
 
-
-
 /**
  * An abstract, convenience implementation of ToolBarComponent.  
  * @CyAPI.Abstract.Class
  * @CyAPI.InModule swing-application-api
  */
-public abstract class AbstractToolBarComponent implements ToolBarComponent{
+public abstract class AbstractToolBarComponent implements ToolBarComponent {
 
 	/**
 	 * The gravity for this toolbar component.
@@ -55,6 +53,7 @@ public abstract class AbstractToolBarComponent implements ToolBarComponent{
 	 * Returns the gravity value for this toolbar component.
 	 * @return the gravity value for this toolbar component.
 	 */
+	@Override
 	public float getToolBarGravity() {
 		return toolbarGravity;
 	}

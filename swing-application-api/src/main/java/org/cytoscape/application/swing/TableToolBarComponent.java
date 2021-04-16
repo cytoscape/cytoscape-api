@@ -1,10 +1,11 @@
-package org.cytoscape.view.model.events;
+package org.cytoscape.application.swing;
 
-import org.cytoscape.event.CyListener;
+import org.cytoscape.model.CyIdentifiable;
+import org.cytoscape.model.CyTable;
 
 /*
  * #%L
- * Cytoscape View Model API (viewmodel-api)
+ * Cytoscape Swing Application API (swing-application-api)
  * $Id:$
  * $HeadURL:$
  * %%
@@ -27,13 +28,25 @@ import org.cytoscape.event.CyListener;
  */
 
 /**
- * Listener for {@linkplain TableViewChangedEvent}.
- * 
+ * An interface that allows a component to be registered as a service that will then be added
+ * to a Table Panel's toolbar.
  * @CyAPI.Spi.Interface
- * @CyAPI.InModule viewmodel-api
+ * @CyAPI.InModule swing-application-api
  */
-public interface TableViewChangedListener extends CyListener {
+public interface TableToolBarComponent extends ToolBarComponent {
 	
-	void handleEvent(TableViewChangedEvent<?> e);
-
+	/**
+	 * 
+	 * @return One of: {@link CyNode.class}, {@link CyEdge.class}, {@link CyNetwork.class},
+	 *         <code>null</code> (Unassigned Tables)
+	 */
+	Class<? extends CyIdentifiable> getTableType();
+	
+	/**
+	 * 
+	 * @param table
+	 * @return
+	 */
+	boolean isApplicable(CyTable table);
 }
+

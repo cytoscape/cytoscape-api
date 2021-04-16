@@ -49,6 +49,15 @@ public interface TableTaskFactory {
 	boolean isReady(CyTable table);
 	
 	/**
+	 * 
+	 * @param table
+	 * @return
+	 */
+	default boolean isApplicable(CyTable table) {
+    	return true;
+    }
+	
+	/**
      * 
      * @param table
      * @return
