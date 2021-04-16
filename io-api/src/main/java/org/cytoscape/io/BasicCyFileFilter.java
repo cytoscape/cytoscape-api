@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
  * $Id:$
  * $HeadURL:$
  * %%
- * Copyright (C) 2006 - 2018 The Cytoscape Consortium
+ * Copyright (C) 2006 - 2021 The Cytoscape Consortium
  * %%
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU Lesser General Public License as 
@@ -138,7 +138,7 @@ public class BasicCyFileFilter implements CyFileFilter {
 		if (strings != null) {
 			for (final String string : strings) {
 				if (string != null)
-					cleanedStrings.add(string.trim());
+					cleanedStrings.add(string.trim().toLowerCase());
 			}
 		}
 		
