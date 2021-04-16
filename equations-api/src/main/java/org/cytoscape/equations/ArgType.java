@@ -25,7 +25,6 @@ package org.cytoscape.equations;
  */
 
 import java.util.List;
-import java.util.ArrayList;
 
 
 /**
@@ -49,7 +48,7 @@ public enum ArgType {
 	BOOL(             false,   false,  new Class[] { Boolean.class, Double.class, Integer.class, Long.class, String.class }),
 
 	/** Any scalar argument. */
-	ANY(              false,   false,  new Class[] { Boolean.class, Double.class, Integer.class, Long.class, String.class }),
+	ANY(              false,   false,  new Class[] { Boolean.class, Double.class, Integer.class, Long.class, String.class, List.class }),
 
 	/** An non-empty sequence of arguments that consist of lists of integers and scalars that can be converted to an integer. */
 	INTS(             false,   true,   new Class[] { List.class, Integer.class, Long.class, Double.class, String.class, Boolean.class }),
