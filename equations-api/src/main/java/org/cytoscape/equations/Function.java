@@ -101,4 +101,15 @@ public interface Function {
 	 * @since 3.9
 	 */
 	default List<ArgDescriptor> getArgumentDescriptors() { return null; };
+
+	
+	/**
+	 * Used to provide help for users. Returns the category for a function. For example numeric functions such
+	 * as SIN, COS and SQRT could all return "Numeric" as their category.
+	 * 
+	 * This is an optional operation, may return null.
+	 * 
+	 * @since 3.9
+	 */
+	default String getCategoryName() { return null; };
 }
