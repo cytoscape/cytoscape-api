@@ -1,8 +1,7 @@
 package org.cytoscape.view.model.spacial;
 
 /**
- * Enumerator returned when querying a {@link SpacialIndex2D}, used to iterate over the
- * results of the query.
+ * Enumerator returned when querying a {@link SpacialIndex2D}, used to iterate over the results of the query.
  * <br><br>
  * Example usage:
  * 
@@ -34,12 +33,36 @@ package org.cytoscape.view.model.spacial;
  */
 public interface SpacialIndex2DEnumerator<K> {
 
+	/**
+	 * Number of elements to be returned by the enumerator.
+	 */
 	int size();
-	
+
+	/**
+	 * Returns true if this enumerator contains more elements.
+	 */
 	boolean hasNext();
-	
+
+	/**
+	 * Returns then next element.
+	 * 
+	 * @param extents Output parameter that will be loaded with the extents of the 2D object. 
+	 * Must have size at least 4. May be null.
+	 * 
+	 * @return The key associated with the 2D object.
+	 * 
+	 * @see SpacialIndex2D#X_MIN
+	 * @see SpacialIndex2D#X_MAX
+	 * @see SpacialIndex2D#Y_MIN
+	 * @see SpacialIndex2D#Y_MAX
+	 */
 	K nextExtents(float[] extents);
 	
+	/**
+	 * Returns then next element.
+	 * 
+	 * @return The key associated with the 2D object.
+	 */
 	default K next() {
 		return nextExtents(null);
 	}

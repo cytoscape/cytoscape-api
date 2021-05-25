@@ -5,6 +5,8 @@ package org.cytoscape.view.model.spacial;
  * (typically <code>View&lt;CyNode&gt;</code> objects)
  * in 2D space. Coordinates are stored as floats.
  *
+ * <p><b>Note: Since 3.9 you will typically be using {@link NetworkSpacialIndex2D} instead.</b></p>
+ * 
  * @param <K> The key type.
  * 
  * @CyAPI.Spi.Interface
