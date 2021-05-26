@@ -9,7 +9,15 @@ import org.cytoscape.view.model.AbstractVisualProperty;
 import org.cytoscape.view.model.DiscreteRange;
 import org.cytoscape.view.presentation.property.values.AbstractVisualPropertyValue;
 
-public class TableModeVisualProperty extends AbstractVisualProperty<TableMode> {
+
+/**
+ * Visual Property for TableMode values.
+ * 
+ * @CyAPI.Final.Class
+ * @CyAPI.InModule presentation-api
+ * @since 3.9
+ */
+public final class TableModeVisualProperty extends AbstractVisualProperty<TableMode> {
 	
 	public static final TableMode AUTO = new TableModeImpl("Auto", "AUTO");
 	public static final TableMode ALL = new TableModeImpl("All", "ALL");

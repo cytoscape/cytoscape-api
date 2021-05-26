@@ -32,10 +32,11 @@ import org.cytoscape.view.model.DiscreteRange;
 import org.cytoscape.view.model.Range;
 
 /**
- * Visual Property for {@link String} values.
+ * Visual Property for CellFormat values.
  * 
  * @CyAPI.Final.Class
  * @CyAPI.InModule presentation-api
+ * @since 3.9
  */
 public final class CellFormatVisualProperty extends AbstractVisualProperty<CellFormat> {
 
