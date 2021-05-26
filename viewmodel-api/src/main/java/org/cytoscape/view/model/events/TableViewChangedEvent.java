@@ -38,6 +38,7 @@ import org.cytoscape.view.model.table.CyTableView;
  * 
  * @CyAPI.Final.Class 
  * @CyAPI.InModule viewmodel-api
+ * @since 3.9
  */
 public final class TableViewChangedEvent<T> extends AbstractCyPayloadEvent<CyTableView, ViewChangeRecord<T>> {
 

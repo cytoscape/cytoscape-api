@@ -4,6 +4,12 @@ import org.cytoscape.event.AbstractCyEvent;
 import org.cytoscape.view.model.table.CyTableView;
 import org.cytoscape.view.model.table.CyTableViewManager;
 
+/**
+ * When a {@link CyTableView} is about to be destroyed, this event will be fired.
+ * @CyAPI.Final.Class
+ * @CyAPI.InModule viewmodel-api
+ * @since 3.9
+ */
 public class TableViewAboutToBeDestroyedEvent extends AbstractCyEvent<CyTableViewManager> {
 
 	private final CyTableView view;

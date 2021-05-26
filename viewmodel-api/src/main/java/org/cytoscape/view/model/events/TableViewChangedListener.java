@@ -31,6 +31,7 @@ import org.cytoscape.event.CyListener;
  * 
  * @CyAPI.Spi.Interface
  * @CyAPI.InModule viewmodel-api
+ * @since 3.9
  */
 public interface TableViewChangedListener extends CyListener {
 	

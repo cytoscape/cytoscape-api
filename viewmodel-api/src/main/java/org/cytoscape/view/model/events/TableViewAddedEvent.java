@@ -4,7 +4,14 @@ import org.cytoscape.event.AbstractCyEvent;
 import org.cytoscape.view.model.table.CyTableView;
 import org.cytoscape.view.model.table.CyTableViewManager;
 
-public class TableViewAddedEvent extends AbstractCyEvent<CyTableViewManager> {
+
+/**
+ * When a {@link CyTableView} is added to a {@link CyTableViewManager}, this event will be fired.
+ * @CyAPI.Final.Class
+ * @CyAPI.InModule viewmodel-api
+ * @since 3.9
+ */
+public final class TableViewAddedEvent extends AbstractCyEvent<CyTableViewManager> {
 
 	private final CyTableView view;
 	
