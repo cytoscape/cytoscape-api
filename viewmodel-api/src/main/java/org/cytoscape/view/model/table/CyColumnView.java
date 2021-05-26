@@ -8,7 +8,10 @@ import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualProperty;
 
 /**
+ * This interface is meant for internal use, it should not be used by Apps.
+ * 
  * @CyAPI.NoReference.Interface
+ * @since 3.9
  */
 public interface CyColumnView extends View<CyColumn> {
 	

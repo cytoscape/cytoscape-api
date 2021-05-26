@@ -7,6 +7,17 @@ import java.util.Map;
 
 import org.cytoscape.model.CyTableMetadata;
 
+/**
+ * A snapshot of information about a CyTable and its associated visual property values. 
+ * The interface is used internally to capture
+ * table information for serialization and shouldn't be needed for most
+ * normal use of tables.
+ * 
+ * @CyAPI.NoReference.Class
+ * @CyAPI.Api.Interface
+ * @CyAPI.InModule viewmodel-api
+ * @since 3.9
+ */
 public class CyTableViewMetadata {
 	
 	private final long savedTableSUID;
@@ -66,18 +77,11 @@ public class CyTableViewMetadata {
 	public Map<String,String> getBypassValues() {
 		return bypassValues;
 	}
-
 	
-	/**
-	 * @CyAPI.NoReference.Method
-	 */
 	public CyTableMetadata getUnderlyingTable() {
 		return underlyingTable;
 	}
 
-	/**
-	 * @CyAPI.NoReference.Method
-	 */
 	public void setUnderlyingTable(CyTableMetadata underlyingTable) {
 		this.underlyingTable = underlyingTable;
 	}
@@ -89,6 +93,5 @@ public class CyTableViewMetadata {
 	public Class<?> getPrimaryKeyListElementType() {
 		return primaryKeyListElementType;
 	}
-	
 	
 }

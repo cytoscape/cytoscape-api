@@ -11,13 +11,18 @@ import org.cytoscape.model.CyTable;
  * 
  * @CyAPI.Api.Interface
  * @CyAPI.InModule viewmodel-api
+ * 
+ * @since 3.9
  */
 public interface CyTableViewManager {
 
+	/**
+	 * Returns all table views known to this manager.
+	 */
 	Set<CyTableView> getTableViewSet();
 
 	/**
-	 * Returns the table view for the table.
+	 * Returns the table view for the given table.
 	 */
 	CyTableView getTableView(CyTable table);
 	
