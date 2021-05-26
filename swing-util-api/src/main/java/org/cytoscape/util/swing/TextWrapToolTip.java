@@ -11,8 +11,11 @@ import javax.swing.JToolTip;
 import javax.swing.JWindow;
 import javax.swing.plaf.basic.BasicToolTipUI;
 
-
-
+/**
+ * An extension of JToolTip that supports text wrapping.
+ * 
+ * @CyAPI.InModule swing-util-api
+ */
 @SuppressWarnings("serial")
 public class TextWrapToolTip extends JToolTip {
 

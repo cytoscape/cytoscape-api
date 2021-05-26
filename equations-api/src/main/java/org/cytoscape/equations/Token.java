@@ -2,6 +2,15 @@ package org.cytoscape.equations;
 
 import java.util.Objects;
 
+/**
+ * Represents the interpretation of a substring of an equation string.
+ * Provides the type of each token and its start/end location within the equation.
+ * 
+ * @CyAPI.Api.Interface
+ * @CyAPI.InModule equations-api
+ * 
+ * @since 3.9
+ */
 public final class Token {
 	
 	public enum Type {
