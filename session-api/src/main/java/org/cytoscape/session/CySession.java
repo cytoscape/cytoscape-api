@@ -257,7 +257,16 @@ public final class CySession {
     public Map<CyNetworkView, String> getViewVisualStyleMap() { return vsMap; }
     
 	/**
+	 * Note: This is NOT the correct way for Apps to access CyProperty settings. Creating a CySession object
+	 * is very resource intensive and is not required for accessing CyProperty objects. Instead acquire
+	 * the CyPropery object as a service in the CyActivator, eg...
+	 * <pre>
+	 * CyProperty&lt;Properties&gt; cyProperty = getService(bc, CyProperty.class, "(cyPropertyName=cytoscape3.props)");
+	 * </pre>
+	 * 
 	 * Returns a set of {@link CyProperty} objects defined for this session.
+	 * 
+	 * @CyAPI.NoReference.Method
 	 * @return A set of session related {@link CyProperty} objects. defined for this session.
 	 */
     public Set<CyProperty<?>> getProperties() { return properties; }

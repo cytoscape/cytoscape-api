@@ -120,6 +120,7 @@ public interface CyApplicationManager {
 
 	/** 
 	 * Releases all currently held references and resources. 
+	 * @CyAPI.NoReference.Method
 	 */
 	public void reset();
 	
