@@ -4,7 +4,14 @@ import org.cytoscape.application.CyApplicationManager;
 import org.cytoscape.event.AbstractCyEvent;
 import org.cytoscape.model.CyTable;
 
-public class SetCurrentTableEvent extends AbstractCyEvent<CyApplicationManager> {
+
+/**
+ * An event signaling that the a table has been set to current.
+ * @CyAPI.Final.Class
+ * @CyAPI.InModule application-api
+ * @since 3.9
+ */
+public final class SetCurrentTableEvent extends AbstractCyEvent<CyApplicationManager> {
 
 	private final CyTable table;
 	
@@ -12,7 +19,6 @@ public class SetCurrentTableEvent extends AbstractCyEvent<CyApplicationManager> 
 		super(source, SetCurrentTableListener.class);
 		this.table = table;
 	}
-	
 	
 	public CyTable getTable() {
 		return table;
