@@ -28,14 +28,14 @@ import org.cytoscape.event.AbstractCyEvent;
 import org.cytoscape.model.CyColumn;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.vizmap.TableVisualMappingManager;
-import org.cytoscape.view.vizmap.VisualMappingManager;
 import org.cytoscape.view.vizmap.VisualStyle;
 
 /**
- * Event fired when a {@link VisualStyle} is set to a network view through 
- * {@linkplain VisualMappingManager#setVisualStyle(VisualStyle, org.cytoscape.view.model.CyNetworkView)}.
+ * Event fired when a {@link VisualStyle} is set to a column view through 
+ * {@link TableVisualMappingManager#setVisualStyle(View, VisualStyle)}.
  * @CyAPI.Final.Class
  * @CyAPI.InModule vizmap-api
+ * @since 3.9
  */
 public final class ColumnVisualStyleSetEvent extends AbstractCyEvent<TableVisualMappingManager> {
 
@@ -45,9 +45,9 @@ public final class ColumnVisualStyleSetEvent extends AbstractCyEvent<TableVisual
 	/**
 	 * Creates the event.
 	 * 
-	 * @param source Source of this event.  This is always {@link VisualMappingManager}.
-	 * @param style The VisualStyle that was set to the network view.
-	 * @param view The target CyNetworkView.
+	 * @param source Source of this event.  This is always {@link TableVisualMappingManager}.
+	 * @param style The VisualStyle that was set to the column view.
+	 * @param view The target CyColumn view.
 	 */
 	public ColumnVisualStyleSetEvent(TableVisualMappingManager source, VisualStyle style, View<CyColumn> view) {
 		super(source, ColumnVisualStyleSetListener.class);
@@ -56,16 +56,15 @@ public final class ColumnVisualStyleSetEvent extends AbstractCyEvent<TableVisual
 	}
 
 	/**
-	 * Get the VisualStyle that was set to the network view.
-	 * @return The VisualStyle that was set to the network view.
+	 * Get the VisualStyle that was set to the column view.
+	 * @return The VisualStyle that was set to the column view.
 	 */
 	public VisualStyle getVisualStyle() {
 		return style;
 	}
 	
 	/**
-	 * Get the The target network view model.
-	 * @return The target CyNetworkView.
+	 * Get the The target column view model.
 	 */
 	public View<CyColumn> getColumnView() {
 		return view;

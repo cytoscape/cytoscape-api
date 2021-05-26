@@ -25,20 +25,15 @@ package org.cytoscape.view.vizmap.events.table;
  */
 
 import org.cytoscape.event.CyListener;
-import org.cytoscape.view.model.CyNetworkView;
 
 /**
  * Listener for {@linkplain ColumnVisualStyleSetEvent}.
  * @CyAPI.Spi.Interface
  * @CyAPI.InModule vizmap-api
+ * @since 3.9
  */
 public interface ColumnVisualStyleSetListener extends CyListener {
 
-	/**
-	 * Do something after a {@linkplain org.cytoscape.view.vizmap.VisualStyle} is set to a {@linkplain CyNetworkView}.
-	 * Usually, GUI components and managers executes this method to update their states.
-	 * 
-	 * @param e
-	 */
 	void handleEvent(ColumnVisualStyleSetEvent e);
+	
 }
