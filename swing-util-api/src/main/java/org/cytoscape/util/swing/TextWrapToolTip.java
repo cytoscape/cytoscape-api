@@ -2,6 +2,8 @@ package org.cytoscape.util.swing;
 
 import java.awt.Dimension;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 
 import javax.swing.CellRendererPane;
 import javax.swing.JComponent;
@@ -67,7 +69,13 @@ class TextWrapToolTipUI extends BasicToolTipUI {
 	public void paint(Graphics g, JComponent c) {
 		Dimension size = c.getSize();
 		textPane.setBackground(c.getBackground());
-		rendererPane.paintComponent(g, textPane, c, 1, 1, size.width - 1, size.height - 1, true);
+		
+		var g2 = (Graphics2D) g.create();
+		g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+		
+		rendererPane.paintComponent(g2, textPane, c, 1, 1, size.width - 1, size.height - 1, true);
+		
+		g2.dispose();
 	}
 
 	@Override
