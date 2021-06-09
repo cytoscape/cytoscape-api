@@ -4,7 +4,6 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Insets;
 import java.awt.RenderingHints;
 import java.awt.event.ActionListener;
 
@@ -76,10 +75,10 @@ public class DropDownMenuButton extends JButton {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 
-		final Dimension dim = getSize();
-		final Insets ins = getInsets();
-		final int x = dim.width - buttonIcon.getIconWidth() - ins.right;
-		final int y = ins.top + ((dim.height - ins.top - ins.bottom - buttonIcon.getIconHeight()) / 2);
+		var dim = getSize();
+		var ins = getInsets();
+		int x = dim.width - buttonIcon.getIconWidth() - ins.right;
+		int y = ins.top + ((dim.height - ins.top - ins.bottom - buttonIcon.getIconHeight()) / 2);
 		buttonIcon.paintIcon(this, g, x, y);
 	}
 
@@ -98,7 +97,7 @@ public class DropDownMenuButton extends JButton {
 	
 	@Override
 	public Dimension getPreferredSize() {
-		final Dimension d = super.getPreferredSize();
+		var d = super.getPreferredSize();
 		d.width += buttonIcon.getIconWidth() + TEXT_ARROW_GAP;
 		
 		return d;

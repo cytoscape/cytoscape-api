@@ -1,5 +1,10 @@
 package org.cytoscape.util.swing;
 
+import java.awt.Color;
+import java.awt.Component;
+
+import org.cytoscape.util.color.Palette;
+
 /*
  * #%L
  * Cytoscape Swing Utility API (swing-util-api)
@@ -24,13 +29,6 @@ package org.cytoscape.util.swing;
  * #L%
  */
 
-import java.awt.Color;
-import java.awt.Component;
-
-import org.cytoscape.util.color.Palette;
-import org.cytoscape.util.color.PaletteType;
-
-
 /**
  * This defines a color chooser that allows users to choose colors from a
  * palette and (optionally) change palettes.
@@ -40,12 +38,11 @@ import org.cytoscape.util.color.PaletteType;
  */
 public interface CyColorPaletteChooser {
 
-	public Color showDialog(final Component parent, final String title,
-	                        final Palette initialPalette, final Color initialColor, int colorCount);
+	Color showDialog(Component parent, String title, Palette initialPalette, Color initialColor, int colorCount);
 
-	public Palette showDialog(final Component parent, final String title,
-	                          final Palette initialPalette, int colorCount);
+	Palette showDialog(Component parent, String title, Palette initialPalette, int colorCount);
 
-	public Color getSelectedColor();
-	public Palette getSelectedPalette();
+	Color getSelectedColor();
+
+	Palette getSelectedPalette();
 }

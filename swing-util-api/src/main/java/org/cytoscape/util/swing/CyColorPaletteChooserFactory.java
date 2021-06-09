@@ -1,5 +1,7 @@
 package org.cytoscape.util.swing;
 
+import org.cytoscape.util.color.PaletteType;
+
 /*
  * #%L
  * Cytoscape Swing Utility API (swing-util-api)
@@ -24,13 +26,6 @@ package org.cytoscape.util.swing;
  * #L%
  */
 
-import java.awt.Color;
-import java.awt.Component;
-
-import org.cytoscape.util.color.Palette;
-import org.cytoscape.util.color.PaletteType;
-
-
 /**
  * This defines a color chooser that allows users to choose colors from a
  * palette and (optionally) change palettes.
@@ -39,5 +34,6 @@ import org.cytoscape.util.color.PaletteType;
  * @CyAPI.InModule swing-util-api
  */
 public interface CyColorPaletteChooserFactory {
-	public CyColorPaletteChooser getColorPaletteChooser(PaletteType type, boolean paletteOnly);
+	
+	CyColorPaletteChooser getColorPaletteChooser(PaletteType type, boolean paletteOnly);
 }
