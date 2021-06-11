@@ -1,6 +1,7 @@
 package org.cytoscape.view.presentation.annotations;
 
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.util.Map;
 import java.util.Set;
 import java.util.UUID;
@@ -140,6 +141,18 @@ public interface Annotation {
 	 */
 	public void moveAnnotation(Point2D location);
 
+	/**
+	 * Returns the bounds of the annotation.
+	 * @since 3.9
+	 */
+	public Rectangle2D getBounds();
+	
+	/**
+	 * Returns the bounds of the annotation, adjusted for rotation.
+	 * @since 3.9
+	 */
+	public Rectangle2D getRotatedBounds();
+	
 	/**
 	 * Get the x position of the annotation
 	 *
