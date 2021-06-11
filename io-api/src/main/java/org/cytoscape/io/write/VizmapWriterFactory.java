@@ -54,6 +54,9 @@ public interface VizmapWriterFactory extends CyWriterFactory {
 	 * @param os The stream to which the data will be written. 
 	 * @param networkStyles A list of network {@link org.cytoscape.view.vizmap.VisualStyle} objects to be written.
 	 * @param tableStyles A list of network {@link org.cytoscape.view.vizmap.VisualStyle} objects to be written.
+	 * @since 3.9
 	 */
-	CyWriter createWriter(OutputStream os, Set<VisualStyle> networkStyles, Set<VisualStyle> tableStyles);
+	default CyWriter createWriter(OutputStream os, Set<VisualStyle> networkStyles, Set<VisualStyle> tableStyles) {
+		return createWriter(os, networkStyles);
+	};
 }
