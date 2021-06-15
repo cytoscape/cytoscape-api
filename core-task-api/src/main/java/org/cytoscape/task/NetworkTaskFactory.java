@@ -2,6 +2,7 @@ package org.cytoscape.task;
 
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.work.TaskIterator;
+import org.cytoscape.work.Togglable;
 
 /*
  * #%L
@@ -49,10 +50,11 @@ public interface NetworkTaskFactory {
      */
     boolean isReady(CyNetwork network);
     
-    /**
+	/**
+     * If this task factory implements the {@link Togglable} interface then 
+     * this method determines if the button or check box is on or off.
      * 
-     * @param network
-     * @return
+     * @since 3.9
      */
     default boolean isOn(CyNetwork network) {
     	return false;

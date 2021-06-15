@@ -2,6 +2,7 @@ package org.cytoscape.task;
 
 import org.cytoscape.model.CyRow;
 import org.cytoscape.work.TaskIterator;
+import org.cytoscape.work.Togglable;
 
 /*
  * #%L
@@ -49,9 +50,10 @@ public interface RowTaskFactory {
 	boolean isReady(CyRow row);
 	
 	/**
+     * If this task factory implements the {@link Togglable} interface then 
+     * this method determines if the button or check box is on or off.
      * 
-     * @param row
-     * @return
+     * @since 3.9
      */
     default boolean isOn(CyRow row) {
     	return false;

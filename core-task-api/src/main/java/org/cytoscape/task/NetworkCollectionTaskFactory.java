@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.cytoscape.model.CyNetwork;
 import org.cytoscape.work.TaskIterator;
+import org.cytoscape.work.Togglable;
 
 /*
  * #%L
@@ -52,9 +53,10 @@ public interface NetworkCollectionTaskFactory {
 	boolean isReady(Collection<CyNetwork> networks);
 	
 	/**
+     * If this task factory implements the {@link Togglable} interface then 
+     * this method determines if the button or check box is on or off.
      * 
-     * @param networks
-     * @return
+     * @since 3.9
      */
     default boolean isOn(Collection<CyNetwork> networks) {
     	return false;

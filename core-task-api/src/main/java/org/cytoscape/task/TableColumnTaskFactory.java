@@ -2,6 +2,7 @@ package org.cytoscape.task;
 
 import org.cytoscape.model.CyColumn;
 import org.cytoscape.work.TaskIterator;
+import org.cytoscape.work.Togglable;
 
 /*
  * #%L
@@ -49,9 +50,10 @@ public interface TableColumnTaskFactory {
 	boolean isReady(CyColumn column);
 	
 	/**
+     * If this task factory implements the {@link Togglable} interface then 
+     * this method determines if the button or check box is on or off.
      * 
-     * @param column
-     * @return
+     * @since 3.9
      */
     default boolean isOn(CyColumn column) {
     	return false;

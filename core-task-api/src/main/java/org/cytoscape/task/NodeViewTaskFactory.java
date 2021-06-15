@@ -4,6 +4,7 @@ import org.cytoscape.model.CyNode;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.View;
 import org.cytoscape.work.TaskIterator;
+import org.cytoscape.work.Togglable;
 
 /*
  * #%L
@@ -57,10 +58,10 @@ public interface NodeViewTaskFactory {
 	boolean isReady(View<CyNode> nodeView, CyNetworkView networkView);
 	
 	/**
+     * If this task factory implements the {@link Togglable} interface then 
+     * this method determines if the button or check box is on or off.
      * 
-     * @param nodeView
-     * @param networkView
-     * @return
+     * @since 3.9
      */
     default boolean isOn(View<CyNode> nodeView, CyNetworkView networkView) {
     	return false;

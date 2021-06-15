@@ -4,6 +4,7 @@ import java.awt.geom.Point2D;
 
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.work.TaskIterator;
+import org.cytoscape.work.Togglable;
 
 /*
  * #%L
@@ -58,11 +59,10 @@ public interface NetworkViewLocationTaskFactory{
 	boolean isReady(CyNetworkView networkView, Point2D javaPt, Point2D xformPt);
 	
 	/**
+     * If this task factory implements the {@link Togglable} interface then 
+     * this method determines if the button or check box is on or off.
      * 
-     * @param networkView
-     * @param javaPt
-     * @param xformPt
-     * @return
+     * @since 3.9
      */
     default boolean isOn(CyNetworkView networkView, Point2D javaPt, Point2D xformPt) {
     	return false;
