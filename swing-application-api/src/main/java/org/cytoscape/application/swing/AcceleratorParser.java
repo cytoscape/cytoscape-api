@@ -75,15 +75,15 @@ final class AcceleratorParser {
 	private static final Map<String, Integer> MOD_MAP = new HashMap<>();
 
 	static {
-		MOD_MAP.put("command", Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
-		MOD_MAP.put("cmd", Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
-		MOD_MAP.put("meta", Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
-		MOD_MAP.put("control", Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
-		MOD_MAP.put("ctrl", Toolkit.getDefaultToolkit().getMenuShortcutKeyMask());
-		MOD_MAP.put("shift", InputEvent.SHIFT_MASK);
-		MOD_MAP.put("alt", InputEvent.ALT_MASK);
-		MOD_MAP.put("option", InputEvent.ALT_MASK);
-		MOD_MAP.put("opt", InputEvent.ALT_MASK);
+		MOD_MAP.put("command", Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx());
+		MOD_MAP.put("cmd", Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx());
+		MOD_MAP.put("meta", Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx());
+		MOD_MAP.put("control", Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx());
+		MOD_MAP.put("ctrl", Toolkit.getDefaultToolkit().getMenuShortcutKeyMaskEx());
+		MOD_MAP.put("shift", InputEvent.SHIFT_DOWN_MASK);
+		MOD_MAP.put("alt", InputEvent.ALT_DOWN_MASK);
+		MOD_MAP.put("option", InputEvent.ALT_DOWN_MASK);
+		MOD_MAP.put("opt", InputEvent.ALT_DOWN_MASK);
 		MOD_MAP.put("fn1", KeyEvent.VK_F1);
 		MOD_MAP.put("fn2", KeyEvent.VK_F2);
 		MOD_MAP.put("fn3", KeyEvent.VK_F3);
