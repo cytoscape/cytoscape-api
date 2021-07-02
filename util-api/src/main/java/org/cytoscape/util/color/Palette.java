@@ -87,6 +87,29 @@ public interface Palette {
 	public boolean isColorBlindSafe();
 
 	/**
+	 * Return true if the palette is reversable.
+	 *
+	 * @return true if the palette is reversable
+	 */
+	default public boolean isReversable() {return false;};
+
+	/**
+	 * Return true if the palette is reversed.
+	 *
+	 * @return true if the palette is reversed
+	 */
+	default public boolean isReversed() {return false;};
+
+	/**
+	 * Reverse the palette.  If this palette is reversable, setting
+   * <b>reverse</b> to true will cause the colors to be delivered
+   * in reverse order.
+	 *
+	 * @param reverse if true, reverse the colors, if false don't reverse the colors
+	 */
+	default public void reverse(boolean reverse) {};
+
+	/**
 	 * Return the string representation of this palette (usually the name)
 	 *
 	 * @return the palette name

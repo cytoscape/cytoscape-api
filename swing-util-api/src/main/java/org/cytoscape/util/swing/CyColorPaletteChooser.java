@@ -38,11 +38,40 @@ import org.cytoscape.util.color.Palette;
  */
 public interface CyColorPaletteChooser {
 
+  /**
+   * Display the chooser and return the Color the user chooses
+   *
+   * @param parent the component that the dialog should use to center on
+   * @param title the dialog title
+   * @param initialPalette a palette to use as the initial selected palette
+   * @param initialColor the initial selected color
+   * @param colorCount the number of colors to display for each palette
+   * @return the Color the user selects
+   */
 	Color showDialog(Component parent, String title, Palette initialPalette, Color initialColor, int colorCount);
 
+  /**
+   * Display the chooser and return the Palette the user chooses
+   *
+   * @param parent the component that the dialog should use to center on
+   * @param title the dialog title
+   * @param initialPalette a palette to use as the initial selected palette
+   * @param colorCount the number of colors to display for each palette
+   * @return the Palette the user selects
+   */
 	Palette showDialog(Component parent, String title, Palette initialPalette, int colorCount);
 
+  /**
+   * Return the Color the user selected
+   *
+   * @return the Color the user selects
+   */
 	Color getSelectedColor();
 
+  /**
+   * Return the palette the user selected
+   * 
+   * @return the Palette the user selects
+   */
 	Palette getSelectedPalette();
 }
