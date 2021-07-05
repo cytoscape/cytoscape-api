@@ -1,5 +1,12 @@
 package org.cytoscape.util.swing;
 
+import static org.junit.Assert.assertTrue;
+
+import javax.swing.JTable;
+import javax.swing.table.TableColumn;
+
+import org.junit.Test;
+
 /*
  * #%L
  * Cytoscape Swing Utility API (swing-util-api)
@@ -24,30 +31,26 @@ package org.cytoscape.util.swing;
  * #L%
  */
 
-import static org.junit.Assert.*;
-
-import javax.swing.JTable;
-import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableModel;
-
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
-
 public class ColumnResizerTest {
 	
 	@Test
 	public void testAdjustColumnPreferredWidths() {
-		JTable table = new JTable();
-		final TableColumn col = new TableColumn();
-		col.setHeaderValue("Test");
-		col.setWidth(1);
-		int w = col.getWidth();
-		table.addColumn(col);
-		ColumnResizer.adjustColumnPreferredWidths(table);
+		final String name = "Test";
 		
-		assertTrue(table.getColumn("Test").getWidth() == w);
+		var table = new JTable();
+		var col = new TableColumn();
+		col.setHeaderValue(name);
+		col.setMinWidth(1); // making sure the minimum width is not already bigger than our initial value
+		col.setPreferredWidth(1);
+		col.setWidth(1);
+		table.addColumn(col);
+		
+		ColumnResizer.adjustColumnPreferredWidths(table);
+		int w = table.getColumn(name).getWidth();
+		assertTrue(w > 1);
+		
+		col.setHeaderValue(name + name);
+		ColumnResizer.adjustColumnPreferredWidths(table);
+		assertTrue(table.getColumn(name + name).getWidth() > w);
 	}
-
 }
