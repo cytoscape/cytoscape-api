@@ -38,7 +38,6 @@ import com.sun.source.util.SimpleDocTreeVisitor;
 
 import jdk.javadoc.doclet.Taglet;
 
-@SuppressWarnings("restriction")
 public class InModuleTaglet implements Taglet {
 	public static final String NAME = "CyAPI.InModule";
 

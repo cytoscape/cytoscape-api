@@ -49,7 +49,7 @@ public class StaticClassTaglet extends AbstractApiTaglet {
 	 * The method that registers this taglet.
 	 * @param tagletMap The map used to which this taglet should be added.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public static void register(Map tagletMap) {
 		registerTaglet(tagletMap, new StaticClassTaglet());
 	}

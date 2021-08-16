@@ -115,7 +115,6 @@
 						reserved.</bottom>
 					<maxmemory>2g</maxmemory>
 					<additionalJOption>-J-Xmx2g</additionalJOption>
-					<additionalOptions>--frames</additionalOptions>
 					<includeDependencySources>true</includeDependencySources>
 					<dependencySourceIncludes>
 						<dependencySourceInclude>org.cytoscape:*</dependencySourceInclude>

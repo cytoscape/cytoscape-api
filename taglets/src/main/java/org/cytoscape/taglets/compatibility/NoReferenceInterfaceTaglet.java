@@ -16,6 +16,7 @@ public class NoReferenceInterfaceTaglet extends AbstractApiTaglet {
 	 * The method that registers this taglet.
 	 * @param tagletMap The map used to which this taglet should be added.
 	 */
+	@SuppressWarnings("rawtypes")
 	public static void register(Map tagletMap) {
 		registerTaglet(tagletMap, new NoReferenceInterfaceTaglet());
 	}

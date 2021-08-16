@@ -1,6 +1,18 @@
 
 package org.cytoscape.taglets.compatibility;
 
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+
+import javax.lang.model.element.Element;
+
+import com.sun.source.doctree.DocTree;
+import com.sun.source.doctree.TextTree;
+import com.sun.source.doctree.UnknownBlockTagTree;
+import com.sun.source.doctree.UnknownInlineTagTree;
+import com.sun.source.util.SimpleDocTreeVisitor;
+
 /*
  * #%L
  * Cytoscape Documentation Taglets
@@ -26,17 +38,6 @@ package org.cytoscape.taglets.compatibility;
  */
 
 import jdk.javadoc.doclet.Taglet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-
-import javax.lang.model.element.Element;
-
-import com.sun.source.doctree.DocTree;
-import com.sun.source.doctree.TextTree;
-import com.sun.source.doctree.UnknownBlockTagTree;
-import com.sun.source.doctree.UnknownInlineTagTree;
-import com.sun.source.util.SimpleDocTreeVisitor;
 
 /**
  * An abstract taglet for specifying the Cytoscape API documentation
@@ -99,7 +100,7 @@ abstract class AbstractApiTaglet implements Taglet {
     /**
 	 * Can be used by children to easily implement register(tagletMap).
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	static void registerTaglet(Map tagletMap, Taglet tag) {
 		if ( tagletMap.containsKey( tag.getName() ) )
 			tagletMap.remove(tag.getName());

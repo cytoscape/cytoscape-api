@@ -29,20 +29,21 @@ import java.util.Map;
 
 /**
  * A taglet that describes the versioning and upgrade policy for
- * enums.
+ * API interfaces.
  */
-public class EnumClassTaglet extends AbstractApiTaglet {
+public class ApiClassTaglet extends AbstractApiTaglet {
     
   	/**
 	 * Constructor.
 	 */
-	public EnumClassTaglet() {
-		super("CyAPI.Enum.Class",
-		      "Enum",
-			  "This class is an enum therefore can't be extended by users. " +
-			  "This means that we may add methods or <i>enum values</i> " +
-			  "for minor version updates. " +
-			  "Methods or enum values will only be removed for major version updates. " 
+	public ApiClassTaglet() {
+		super("CyAPI.Api.Class",
+		      "API Class",
+			  "We expect that this class will be used but not inherited by " +
+			  "developers using this class.  As such, we reserve the right to " + 
+			  "add methods to the class as part of minor version upgrades.  We " + 
+			  "will not remove methods for any changes other than major version " + 
+			  "upgrades."
 			  );
 	}
 
@@ -52,8 +53,7 @@ public class EnumClassTaglet extends AbstractApiTaglet {
 	 */
 	@SuppressWarnings("rawtypes")
 	public static void register(Map tagletMap) {
-		registerTaglet(tagletMap, new EnumClassTaglet());
+		registerTaglet(tagletMap, new ApiClassTaglet());
 	}
 	
-
 }
