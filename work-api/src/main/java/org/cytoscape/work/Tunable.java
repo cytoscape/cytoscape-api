@@ -253,6 +253,13 @@ public @interface Tunable {
 	 *    If the value of this parameter is "contains" then any matching text will be searched.  If the value
 	 *    is "begins" then only the beginning of the string will be searched.
 	 *   </li>
+	 *   <li>
+	 *    password: This is used for String tunables. If set to "true" then the input
+	 *    field will be masked by displaying '*' characters instead of the actual characters that the user types. 
+	 *    WARNING: This parameter is only supported by Cytoscape 3.10 or later. If an App that uses this parameter
+	 *    is run on an earlier version of Cytoscape then the password will be visible. Please set your App's minimum 
+	 *    Cytoscape version to 3.10 or later to ensure the password field is masked.
+	 *   </li>
 	 *  </ul>
 	 *
 	 *  Note: Blanks/spaces in values are significant!
