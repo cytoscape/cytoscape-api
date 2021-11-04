@@ -1,5 +1,9 @@
 package org.cytoscape.service.util.internal;
 
+import java.util.Dictionary;
+
+import org.osgi.framework.Bundle;
+
 /*
  * #%L
  * Cytoscape Service API (service-api)
@@ -25,7 +29,6 @@ package org.cytoscape.service.util.internal;
  */
 
 import org.osgi.framework.ServiceReference;
-import org.osgi.framework.Bundle;
 
 public class FakeServiceReference implements ServiceReference {
 
@@ -54,5 +57,9 @@ public class FakeServiceReference implements ServiceReference {
 	}
 	Object getObject() {
 		return obj;
+	}
+	@Override
+	public Dictionary getProperties() {
+		return null;
 	}
 }
