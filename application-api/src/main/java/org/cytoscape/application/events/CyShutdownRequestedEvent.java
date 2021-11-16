@@ -27,13 +27,18 @@ package org.cytoscape.application.events;
 import org.cytoscape.event.AbstractCyEvent;
 
 /**
- * An event fired immediately before Cytoscape will be shutdown. 
- * This event should only be fired synchronously
- * to allow all listeners time to clean up.
+ * An event fired immediately before Cytoscape will be shutdown to determine if the shutdown action should be aborted. 
+ * If the shutdown request is not aborted then a CyShutdownEvent will be fired immediately after this event.
+ *
+ * Apps should not listen for {@link CyShutdownRequestedEvent}. It is used internally by Cytoscape to prompt the user
+ * if they want to cancel exiting Cytoscape. Apps should only use {@link CyShutdownListener} to be notified
+ * of shutdown.
+ * 
  * @CyAPI.Final.Class
  * @CyAPI.InModule application-api
+ * @CyAPI.NoReference.Class
  */
-public final class CyShutdownEvent extends AbstractCyEvent<Object> {
+public final class CyShutdownRequestedEvent extends AbstractCyEvent<Object> {
 
 	private String reason;
 	private boolean force;
@@ -43,8 +48,8 @@ public final class CyShutdownEvent extends AbstractCyEvent<Object> {
 	 * @param source The object firing this event.
 	 * @param force If true, force the shutdown (no user prompt)
 	 */
-	public CyShutdownEvent(final Object source, boolean force) {
-		super(source, CyShutdownListener.class);
+	public CyShutdownRequestedEvent(final Object source, boolean force) {
+		super(source, CyShutdownRequestedListener.class);
 		reason = null;
 		this.force = force;
 	}
@@ -53,8 +58,8 @@ public final class CyShutdownEvent extends AbstractCyEvent<Object> {
 	 * Constructor.
 	 * @param source The object firing this event.
 	 */
-	public CyShutdownEvent(final Object source) {
-		super(source, CyShutdownListener.class);
+	public CyShutdownRequestedEvent(final Object source) {
+		super(source, CyShutdownRequestedListener.class);
 		reason = null;
 		this.force = false;
 	}
@@ -65,7 +70,6 @@ public final class CyShutdownEvent extends AbstractCyEvent<Object> {
 	 * @param why A user comprehensible message describing why the shutdown
 	 * was aborted.
 	 */
-	@Deprecated
 	public void abortShutdown(final String why) {
 		if ( why == null || why.equals("") )
 			return;
@@ -77,7 +81,6 @@ public final class CyShutdownEvent extends AbstractCyEvent<Object> {
 	 * Returns the reason that the application should not be shut down.
 	 * @return The reason that the application should not be shut down.
 	 */
-	@Deprecated
 	public String abortShutdownReason() {
 		return reason;
 	}
@@ -88,7 +91,6 @@ public final class CyShutdownEvent extends AbstractCyEvent<Object> {
 	 * @return true if no reason is provided to abort the shutdown and false
 	 * if anyone processing this event wants to prevent shutdown.
 	 */
-	@Deprecated
 	public boolean actuallyShutdown() {
 		return (reason == null || reason.length() <= 0);
 	}
@@ -96,7 +98,6 @@ public final class CyShutdownEvent extends AbstractCyEvent<Object> {
 	/**
 	 * Returns true if we want to force the shutdown without any user prompt
 	 */
-	@Deprecated
 	public boolean forceShutdown() {
 		return force;
 	}
