@@ -97,23 +97,23 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.osgi</groupId>
-			<artifactId>org.osgi.core</artifactId>
+			<artifactId>osgi.core</artifactId>
 			<version>${osgi.api.version}</version>
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.osgi</groupId>
-			<artifactId>org.osgi.compendium</artifactId>
+			<artifactId>osgi.cmpn</artifactId>
 			<version>${osgi.compendium.version}</version>
 			<scope>provided</scope>
 			<optional>true</optional>
 		</dependency>
-			<dependency>
-    <groupId>org.osgi</groupId>
-    <artifactId>org.osgi.util.tracker</artifactId>
-    <version>1.5.1</version>
-    <scope>provided</scope>
-</dependency>
+		<dependency>
+		    <groupId>org.osgi</groupId>
+		    <artifactId>org.osgi.util.tracker</artifactId>
+		    <version>1.5.1</version>
+		    <scope>provided</scope>
+		</dependency>
 		
 		<!-- for testing -->
 		<dependency>
