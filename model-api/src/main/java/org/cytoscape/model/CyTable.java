@@ -401,6 +401,7 @@ public interface CyTable extends CyIdentifiable {
 	 * Returns all the keys of a specified column that match the given value.
 	 * @param fullyQualifiedName the fully-qualified column name for which we want the row keys
 	 * @param value       the value for which we want the rows that contain it
+	 * @param type  the type of the key column
 	 * @return the keys, if any that contain the value "value" for the column "columnName"
 	 * @throws ClassCastException if the keys are not of the given type
 	 * @see CyTable#getMatchingKeys(String, String, Object, Class)
@@ -413,6 +414,7 @@ public interface CyTable extends CyIdentifiable {
 	 * @param columnName the column for which we want the row keys
 	 * @param namespace the namespace that contains the column
 	 * @param value       the value for which we want the rows that contain it
+	 * @param type  the type of the key column
 	 * @return the keys, if any that contain the value "value" for the column "columnName"
 	 * @throws ClassCastException if the keys are not of the given type
 	 */
