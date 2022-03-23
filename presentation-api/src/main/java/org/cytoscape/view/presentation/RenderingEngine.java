@@ -28,6 +28,7 @@ package org.cytoscape.view.presentation;
 import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.print.Printable;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.swing.Icon;
@@ -71,8 +72,12 @@ public interface RenderingEngine<T> extends CyDisposable {
 	 * Users can set each property using the setProperty method in {@linkplain Properties}.
 	 * 
 	 * @return property values.
+	 * @deprecated Use {@link RenderingEngine#printCanvas(Graphics, Map)} instead.
 	 */
-	Properties getProperties();
+	@Deprecated
+	default Properties getProperties() {
+		return new Properties();
+	}
 	
 	
 	/**
@@ -91,7 +96,7 @@ public interface RenderingEngine<T> extends CyDisposable {
 	 * 
 	 * @return Image object created from current window.
 	 */
-	public Image createImage(final int width, final int height);
+	public Image createImage(int width, int height);
 	
 
 	/**
@@ -106,14 +111,24 @@ public interface RenderingEngine<T> extends CyDisposable {
 	 * 
 	 * @return Icon rendered by this engine.
 	 */
-	<V> Icon createIcon(final VisualProperty<V> vp, final V value, final int width, final int height);
+	<V> Icon createIcon(VisualProperty<V> vp, V value, int width, int height);
 
 	/**
 	 * Render presentation on the given Java 2D Canvas.
 	 * 
 	 * @param printCanvas Graphics object provided by vector
 	 */
-	void printCanvas(final Graphics printCanvas);
+	void printCanvas(Graphics printCanvas);
+	
+	/**
+	 * Render presentation on the given Java 2D Canvas.
+	 * 
+	 * @param printCanvas Graphics object provided by vector
+	 * @param properties Used to configure the rendering output.
+	 */
+	default void printCanvas(Graphics printCanvas, Map<String,String> properties) {
+		printCanvas(printCanvas);
+	}
 	
 	/**
 	 * This method must return the same ID which is returned by the associated
