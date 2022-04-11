@@ -91,6 +91,12 @@ public interface RenderingEngine<T> extends CyDisposable {
 	/**
 	 * Render an {@linkplain Image} object from current visualization.
 	 * 
+	 * <p>
+	 * Note: If you would like to create an thumbnail image of a network for display
+	 * in the UI then the {@link NetworkImageFactory} service provides a more lightweight and
+	 * simpler API for that purpose.
+	 * </p>
+	 * 
 	 * @param width width of the image
 	 * @param height height of the image
 	 * 
@@ -116,12 +122,24 @@ public interface RenderingEngine<T> extends CyDisposable {
 	/**
 	 * Render presentation on the given Java 2D Canvas.
 	 * 
+	 * <p>
+	 * Note: If you would like to create an thumbnail image of a network for display
+	 * in the UI then the {@link NetworkImageFactory} service provides a more lightweight and
+	 * simpler API for that purpose.
+	 * </p>
+	 * 
 	 * @param printCanvas Graphics object provided by vector
 	 */
 	void printCanvas(Graphics printCanvas);
 	
 	/**
 	 * Render presentation on the given Java 2D Canvas.
+	 * 
+	 * <p>
+	 * Note: If you would like to create an thumbnail image of a network for display
+	 * in the UI then the {@link NetworkImageFactory} service provides a more lightweight and
+	 * simpler API for that purpose.
+	 * </p>
 	 * 
 	 * @param printCanvas Graphics object provided by vector
 	 * @param properties Used to configure the rendering output.
