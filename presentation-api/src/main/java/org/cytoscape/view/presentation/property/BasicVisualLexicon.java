@@ -15,6 +15,7 @@ import org.cytoscape.view.model.Visualizable;
 import org.cytoscape.view.presentation.property.values.ArrowShape;
 import org.cytoscape.view.presentation.property.values.BendFactory;
 import org.cytoscape.view.presentation.property.values.EdgeStacking;
+import org.cytoscape.view.presentation.property.values.LabelBackgroundShape;
 import org.cytoscape.view.presentation.property.values.LineType;
 import org.cytoscape.view.presentation.property.values.NodeShape;
 import org.cytoscape.view.presentation.property.values.ObjectPosition;
@@ -89,7 +90,31 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 	 */
 	public static final VisualProperty<Paint> NODE_LABEL_COLOR = new PaintVisualProperty(Color.BLACK, PAINT_RANGE,
 			"NODE_LABEL_COLOR", "Node Label Color", CyNode.class);
-
+	
+	/**
+	 * The shape of the node label background.
+	 * <p><strong>Property Type: </strong> {@link LabelBackgroundShapeVisualProperty} </p>
+	 */
+	public static final VisualProperty<LabelBackgroundShape> NODE_LABEL_BACKGROUND_SHAPE = new LabelBackgroundShapeVisualProperty(
+			LabelBackgroundShapeVisualProperty.NONE, "NODE_LABEL_BACKGROUND_SHAPE", "Node Label Background Shape", CyNode.class);
+	
+	/**
+	 * The color of the node label background.
+	 * <p><strong>Property Type: </strong> {@link Color} </p>
+	 * <p><strong>Property Range:</strong> A non-null color </p> 
+	 */
+	public static final VisualProperty<Paint> NODE_LABEL_BACKGROUND_COLOR = new PaintVisualProperty(Color.GRAY.brighter(), PAINT_RANGE,
+			"NODE_LABEL_BACKGROUND_COLOR", "Node Label Background Color", CyNode.class);
+	
+	/**
+	 * The opacity of the color of the node label background. Zero means totally transparent, and 255 means totally opaque.
+	 * <p><strong>Property Type: </strong> {@link Integer} </p>
+	 * <p><strong>Property Range:</strong> 0 &LT;= value &LT;= 255</p> 
+	 */
+	public static final VisualProperty<Integer> NODE_LABEL_BACKGROUND_TRANSPARENCY = new IntegerVisualProperty(255,
+			new ContinuousRange<>(Integer.class, 0, 255, true, true), "NODE_LABEL_BACKGROUND_TRANSPARENCY",
+			"Node Label Background Transparency", CyNode.class);
+	
 	/**
 	 * The text used for the node label.
 	 * <p><strong>Property Type: </strong> {@link String} </p>
@@ -302,6 +327,31 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 	public static final VisualProperty<Paint> EDGE_LABEL_COLOR = new PaintVisualProperty(Color.BLACK, PAINT_RANGE,
 			"EDGE_LABEL_COLOR", "Edge Label Color", CyEdge.class);
 
+	
+	/**
+	 * The shape of the edge label background.
+	 * <p><strong>Property Type: </strong> {@link LabelBackgroundShapeVisualProperty} </p>
+	 */
+	public static final VisualProperty<LabelBackgroundShape> EDGE_LABEL_BACKGROUND_SHAPE = new LabelBackgroundShapeVisualProperty(
+			LabelBackgroundShapeVisualProperty.NONE, "EDGE_LABEL_BACKGROUND_SHAPE", "Edge Label Background Shape", CyEdge.class);
+	
+	/**
+	 * The color of the edge label background.
+	 * <p><strong>Property Type: </strong> {@link Color} </p>
+	 * <p><strong>Property Range:</strong> A non-null color </p> 
+	 */
+	public static final VisualProperty<Paint> EDGE_LABEL_BACKGROUND_COLOR = new PaintVisualProperty(Color.GRAY.brighter(), PAINT_RANGE,
+			"EDGE_LABEL_BACKGROUND_COLOR", "Edge Label Background Color", CyEdge.class);
+	
+	/**
+	 * The opacity of the color of the node label background. Zero means totally transparent, and 255 means totally opaque.
+	 * <p><strong>Property Type: </strong> {@link Integer} </p>
+	 * <p><strong>Property Range:</strong> 0 &LT;= value &LT;= 255</p> 
+	 */
+	public static final VisualProperty<Integer> EDGE_LABEL_BACKGROUND_TRANSPARENCY = new IntegerVisualProperty(255,
+			new ContinuousRange<>(Integer.class, 0, 255, true, true), "EDGE_LABEL_BACKGROUND_TRANSPARENCY",
+			"Edge Label Background Transparency", CyEdge.class);
+	
 	/**
 	 * The text used for the edge label.
 	 * <p><strong>Property Type: </strong> {@link String} </p>
@@ -694,6 +744,9 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 		addVisualProperty(NODE_LABEL_WIDTH, NODE);
 		addVisualProperty(NODE_LABEL_POSITION, NODE);
 		addVisualProperty(NODE_LABEL_ROTATION, NODE);
+		addVisualProperty(NODE_LABEL_BACKGROUND_SHAPE, NODE);
+		addVisualProperty(NODE_LABEL_BACKGROUND_COLOR, NODE);
+		addVisualProperty(NODE_LABEL_BACKGROUND_TRANSPARENCY, NODE);
 
 		// Level 2: Children of edge Visual Property
 		addVisualProperty(EDGE_PAINT, EDGE);
@@ -717,6 +770,9 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 		addVisualProperty(EDGE_STACKING_DENSITY, EDGE);
 		addVisualProperty(EDGE_Z_ORDER, EDGE);
 		addVisualProperty(EDGE_LABEL_ROTATION, EDGE);
+		addVisualProperty(EDGE_LABEL_BACKGROUND_SHAPE, EDGE);
+		addVisualProperty(EDGE_LABEL_BACKGROUND_COLOR, EDGE);
+		addVisualProperty(EDGE_LABEL_BACKGROUND_TRANSPARENCY, EDGE);
 
 		// Level 3 - 4: Node-related VP
 		addVisualProperty(NODE_FILL_COLOR, NODE_PAINT);
@@ -798,6 +854,9 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 		addIdentifierMapping(CyNode.class, "nodeShowNestedNetwork", NODE_NESTED_NETWORK_IMAGE_VISIBLE);
 		addIdentifierMapping(CyNode.class, "nodeLabel", NODE_LABEL);
 		addIdentifierMapping(CyNode.class, "nodeLabelColor", NODE_LABEL_COLOR);
+		addIdentifierMapping(CyNode.class, "nodeLabelBackgroundShape", NODE_LABEL_BACKGROUND_SHAPE);
+		addIdentifierMapping(CyNode.class, "nodeLabelBackgroundColor", NODE_LABEL_BACKGROUND_COLOR);
+		addIdentifierMapping(CyNode.class, "nodeLabelBackgroundTransparency", NODE_LABEL_BACKGROUND_TRANSPARENCY);
 		addIdentifierMapping(CyNode.class, "nodeLabelWidth", NODE_LABEL_WIDTH);
 		addIdentifierMapping(CyNode.class, "nodeLabelOpacity", NODE_LABEL_TRANSPARENCY);
 		addIdentifierMapping(CyNode.class, "nodeToolTip", NODE_TOOLTIP);
@@ -815,6 +874,9 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 		addIdentifierMapping(CyEdge.class, "edgeLabel", EDGE_LABEL);
 		addIdentifierMapping(CyEdge.class, "edgeFont", EDGE_LABEL_FONT_FACE);
 		addIdentifierMapping(CyEdge.class, "edgeLabelColor", EDGE_LABEL_COLOR);
+		addIdentifierMapping(CyNode.class, "edgeLabelBackgroundShape", EDGE_LABEL_BACKGROUND_SHAPE);
+		addIdentifierMapping(CyNode.class, "edgeLabelBackgroundColor", EDGE_LABEL_BACKGROUND_COLOR);
+		addIdentifierMapping(CyNode.class, "edgeLabelBackgroundTransparency", EDGE_LABEL_BACKGROUND_TRANSPARENCY);
 		addIdentifierMapping(CyEdge.class, "edgeLabelOpacity", EDGE_LABEL_TRANSPARENCY);
 		addIdentifierMapping(CyEdge.class, "edgeFontSize", EDGE_LABEL_FONT_SIZE);
 		addIdentifierMapping(CyEdge.class, "edgeLabelWidth", EDGE_LABEL_WIDTH);
