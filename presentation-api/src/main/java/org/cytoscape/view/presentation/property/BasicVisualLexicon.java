@@ -548,6 +548,14 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 			0.0, ANGLE_DOUBLE_RANGE, "EDGE_LABEL_ROTATION", "Edge Label Rotation", CyEdge.class);
 	
 	/**
+	 * A value used to indicate that the edge label should be autorotated.
+	 * <p><strong>Property Type: </strong> {@link Boolean} </p>
+	 * <p><strong>Property Range:</strong>true|false</p> 
+	 */
+	public static final VisualProperty<Boolean> EDGE_LABEL_AUTOROTATE = new BooleanVisualProperty(
+			false, "EDGE_LABEL_AUTOROTATE", "Edge Label Autorotate", CyEdge.class);
+	
+	/**
 	 * If Edge Bend is defined, edges will be rendered as straight or curved lines. If this 
 	 * value is set to true, edges will be drawn as curved lines.
 	 */
@@ -770,6 +778,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 		addVisualProperty(EDGE_STACKING_DENSITY, EDGE);
 		addVisualProperty(EDGE_Z_ORDER, EDGE);
 		addVisualProperty(EDGE_LABEL_ROTATION, EDGE);
+		addVisualProperty(EDGE_LABEL_AUTOROTATE, EDGE);
 		addVisualProperty(EDGE_LABEL_BACKGROUND_SHAPE, EDGE);
 		addVisualProperty(EDGE_LABEL_BACKGROUND_COLOR, EDGE);
 		addVisualProperty(EDGE_LABEL_BACKGROUND_TRANSPARENCY, EDGE);
@@ -833,6 +842,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 		addIdentifierMapping(CyEdge.class, "edgeSourceArrowColor", EDGE_SOURCE_ARROW_UNSELECTED_PAINT);
 		addIdentifierMapping(CyEdge.class, "edgeTargetArrowColor", EDGE_TARGET_ARROW_UNSELECTED_PAINT);
 		addIdentifierMapping(CyEdge.class, "edgeLabelRotation", EDGE_LABEL_ROTATION);
+		addIdentifierMapping(CyEdge.class, "edgeLabelAutorotate", EDGE_LABEL_AUTOROTATE);
 
 		// 2.x VizMap Properties:
 		addIdentifierMapping(CyNetwork.class, "backgroundColor", NETWORK_BACKGROUND_PAINT);
