@@ -25,6 +25,7 @@ package org.cytoscape.view.vizmap.gui.editor;
  */
 
 import java.awt.Component;
+
 import org.cytoscape.view.model.VisualProperty;
 
 /**
@@ -54,6 +55,13 @@ public interface VisualPropertyValueEditor<V> {
 	 * @return the value generated from the value editor dialogue or null.
 	 */
 	<S extends V> V showEditor(Component parent, S initialValue, VisualProperty<S> vizPropBeingEdited);
+	
+	
+//	<S extends V> V showEditor(Component parent, S initialValue, VisualProperty<S> vizPropBeingEdited, RenderingEngine<?> renderingEngine);
+//	default <S extends V> V showEditor(Component parent, S initialValue, VisualProperty<S> vizPropBeingEdited, RenderingEngine<?> renderingEngine) {
+//		return showEditor(parent, initialValue, vizPropBeingEdited);
+//	}
+
 	
 	/**
 	 * Get type of the value to be edited.

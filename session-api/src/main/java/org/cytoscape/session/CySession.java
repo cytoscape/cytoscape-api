@@ -41,6 +41,7 @@ import org.cytoscape.model.CyTableMetadata;
 import org.cytoscape.property.CyProperty;
 import org.cytoscape.view.model.CyNetworkView;
 import org.cytoscape.view.model.table.CyTableViewMetadata;
+import org.cytoscape.view.vizmap.StyleAssociation;
 import org.cytoscape.view.vizmap.VisualStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -76,6 +77,7 @@ public final class CySession {
 	private final Set<CyProperty<?>> properties;
 	private final Set<VisualStyle> visualStyles;
 	private final Set<VisualStyle> tableStyles;
+	private final Set<StyleAssociation> columnStyleAssociations;
 	private final Map<String, List<File>> appFiles;
 	private final Map<Class<? extends CyIdentifiable>, Map<Object, ? extends CyIdentifiable>> objectMap;
 
@@ -90,6 +92,7 @@ public final class CySession {
 		vsMap = Collections.unmodifiableMap( b.vsMap == null ? new WeakHashMap<>() : b.vsMap );
 		properties = Collections.unmodifiableSet( b.properties == null ? new HashSet<>() : b.properties );
 		visualStyles = Collections.unmodifiableSet( b.visualStyles == null ? new HashSet<>() : b.visualStyles );
+		columnStyleAssociations = Collections.unmodifiableSet( b.columnStyleAssociations == null ? new HashSet<>() : b.columnStyleAssociations );
 		tableStyles = Collections.unmodifiableSet( b.tableStyles == null ? new HashSet<>() : b.tableStyles );
 		appFiles = Collections.unmodifiableMap( b.appFiles == null ? new HashMap<>() : b.appFiles );
 		objectMap =  Collections.unmodifiableMap( b.objectMap == null ? new HashMap<>() : b.objectMap );
@@ -109,6 +112,7 @@ public final class CySession {
 		private Set<CyProperty<?>> properties;
 		private Set<VisualStyle> visualStyles; 
 		private Set<VisualStyle> tableStyles;
+		private Set<StyleAssociation> columnStyleAssociations;
 		private Map<String, List<File>> appFiles;
 		private Map<Class<? extends CyIdentifiable>, Map<Object, ? extends CyIdentifiable>> objectMap;
 
@@ -201,6 +205,16 @@ public final class CySession {
 			return this;
 		}
     	
+    	/**
+		 * Returns an instance of Builder that has at least been configured with the specified properties.
+		 * @param associations All column style associations in this instance of Cytoscape.
+		 * @return An instance of Builder that has at least been configured with the specified properties.
+		 */
+    	public Builder columnStyleAssociations(final Set<StyleAssociation> associations) { 
+    		columnStyleAssociations = associations; 
+			return this;
+		}
+    	
 		/**
 		 * Returns an instance of Builder that has at least been configured with the specified app file list map.<br/>
 		 * The app name should follow the java class namespace convention (e.g. org.orgname.appname) in order to prevent
@@ -282,6 +296,12 @@ public final class CySession {
 	 * @return A Set of {@link org.cytoscape.view.vizmap.VisualStyle} objects
 	 */
     public Set<VisualStyle> getTableStyles() { return tableStyles; }
+    
+    /**
+	 * Returns a set containing all column style associations defined for this session.
+	 * @return A Set of {@link org.cytoscape.view.vizmap.StyleAssociation} objects
+	 */
+    public Set<StyleAssociation> getColumnStyleAssociations() { return columnStyleAssociations; }
 
 	/**
 	 * Returns a map of app names to lists of File objects that are stored as part of the session for the specified app.

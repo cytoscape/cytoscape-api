@@ -26,6 +26,7 @@ package org.cytoscape.io.read;
 
 import java.util.Set;
 
+import org.cytoscape.view.vizmap.StyleAssociation;
 import org.cytoscape.view.vizmap.VisualStyle;
 import org.cytoscape.work.Task;
 
@@ -53,4 +54,8 @@ public interface VizmapReader extends Task {
 	 * @return A list of table {@link org.cytoscape.view.vizmap.VisualStyle} objects.
 	 */
 	Set<VisualStyle> getTableVisualStyles();
+	
+	default Set<StyleAssociation> getColumnStyleAssociations() {
+		return null;
+	}
 }

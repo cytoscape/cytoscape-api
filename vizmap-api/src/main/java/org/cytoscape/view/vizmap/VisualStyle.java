@@ -141,7 +141,7 @@ public interface VisualStyle {
 	
 	
 	/**
-	 * Apply Visual Style to the entire table view.
+	 * Apply Visual Style to a column view.
 	 * 
 	 * @param networkView The view that the visual property should be applied to.
 	 * @throws NullPointerException if the specified networkView is null

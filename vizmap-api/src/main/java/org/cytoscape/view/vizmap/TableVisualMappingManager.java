@@ -1,8 +1,10 @@
 package org.cytoscape.view.vizmap;
 
+import java.util.Map;
 import java.util.Set;
 
 import org.cytoscape.model.CyColumn;
+import org.cytoscape.model.CyIdentifiable;
 import org.cytoscape.view.model.View;
 import org.cytoscape.view.model.VisualLexicon;
 import org.cytoscape.view.vizmap.events.VisualStyleAboutToBeRemovedEvent;
@@ -42,10 +44,45 @@ public interface TableVisualMappingManager {
 	 * @return Set of all registered VisualStyles.
 	 */
 	Set<VisualStyle> getAllVisualStyles();
+	
+	/**
+	 * Returns all available {@link VisualStyle}s managed by this object.
+	 * @return Set of all registered VisualStyles.
+	 */
+	Map<View<CyColumn>, VisualStyle> getAllVisualStylesMap();
+	
 
 	/**
 	 * Returns a Set of all {@link VisualLexicon}s.
 	 * @return a Set of all {@link VisualLexicon}s.
 	 */
 	Set<VisualLexicon> getAllVisualLexicon();
+	
+	
+	/**
+	 * Return default {@link VisualStyle}.  This is just an empty visual style.
+	 * @return default Visual Style.
+	 */
+	VisualStyle getDefaultVisualStyle();
+	
+	
+	void setAssociatedVisualStyle(VisualStyle networkVisualStyle, Class<? extends CyIdentifiable> tableType, String colName, VisualStyle columnVisualStyle);
+	
+	
+	Map<String,VisualStyle> getAssociatedColumnVisualStyles(VisualStyle networkVisualStyle, Class<? extends CyIdentifiable> tableType);
+	
+	
+	default VisualStyle getAssociatedColumnVisualStyle(VisualStyle networkVisualStyle, Class<? extends CyIdentifiable> tableType, String colName) {
+		var map = getAssociatedColumnVisualStyles(networkVisualStyle, tableType);
+		if(map == null)
+			return null;
+		return map.get(colName);
+	}
+	
+	
+	Set<VisualStyle> getAssociatedNetworkVisualStyles(VisualStyle columnVisualStyle);
+	
+	Set<StyleAssociation> getAssociations(VisualStyle columnVisualStyle);
+	
+	Set<StyleAssociation> getAllStyleAssociations();
 }

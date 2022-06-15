@@ -56,7 +56,8 @@ public final class ColumnVisualStyleSetEvent extends AbstractCyEvent<TableVisual
 	}
 
 	/**
-	 * Get the VisualStyle that was set to the column view.
+	 * Returns the VisualStyle that was set to the column view.
+	 * May be null if the VisualStyle was removed.
 	 * @return The VisualStyle that was set to the column view.
 	 */
 	public VisualStyle getVisualStyle() {
