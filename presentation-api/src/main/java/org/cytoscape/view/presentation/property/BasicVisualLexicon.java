@@ -425,6 +425,17 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 	public static final VisualProperty<Integer> EDGE_LABEL_TRANSPARENCY = new IntegerVisualProperty(255,
 			new ContinuousRange<>(Integer.class, 0, 255, true, true), "EDGE_LABEL_TRANSPARENCY",
 			"Edge Label Transparency", CyEdge.class);
+
+	/**
+	 * The anchor point on the edge relative to which the edge label will be positioned. 
+	 * Includes the anchor point of the target, the justification, and an x,y offset.
+	 * <p><strong>Property Type: </strong> {@link ObjectPosition} </p>
+	 * <p><strong>Property Range:</strong> A non-null ObjectPosition value.</p> 
+	 */
+	public static final VisualProperty<ObjectPosition> EDGE_LABEL_POSITION = new ObjectPositionVisualProperty(
+			ObjectPosition.DEFAULT_POSITION, "EDGE_LABEL_POSITION",
+			"Edge Label Position", CyEdge.class);
+
 	/**
 	 * The color of the whole edge (stroke and arrows) when selected.
 	 * <p><strong>Property Type: </strong> {@link Color} </p>
@@ -767,6 +778,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 		addVisualProperty(EDGE_LABEL_FONT_FACE, EDGE);
 		addVisualProperty(EDGE_LABEL_FONT_SIZE, EDGE);
 		addVisualProperty(EDGE_LABEL_TRANSPARENCY, EDGE);
+		addVisualProperty(EDGE_LABEL_POSITION, EDGE);
 		addVisualProperty(EDGE_TRANSPARENCY, EDGE);
 		addVisualProperty(EDGE_SOURCE_ARROW_SHAPE, EDGE);
 		addVisualProperty(EDGE_TARGET_ARROW_SHAPE, EDGE);
@@ -890,6 +902,7 @@ public class BasicVisualLexicon extends AbstractVisualLexicon {
 		addIdentifierMapping(CyEdge.class, "edgeLabelOpacity", EDGE_LABEL_TRANSPARENCY);
 		addIdentifierMapping(CyEdge.class, "edgeFontSize", EDGE_LABEL_FONT_SIZE);
 		addIdentifierMapping(CyEdge.class, "edgeLabelWidth", EDGE_LABEL_WIDTH);
+		addIdentifierMapping(CyEdge.class, "edgeLabelPosition", EDGE_LABEL_POSITION);
 		addIdentifierMapping(CyEdge.class, "edgeToolTip", EDGE_TOOLTIP);
 		addIdentifierMapping(CyEdge.class, "edgeHandleList", EDGE_BEND);
 	}
