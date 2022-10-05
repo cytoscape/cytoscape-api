@@ -46,6 +46,7 @@
 		<module>filter-api</module>
 		<module>jobs-api</module>
 		<module>util-api</module>
+		<module>cycl-api</module>
 		<module>api-bundle</module>
 	</modules>
 
