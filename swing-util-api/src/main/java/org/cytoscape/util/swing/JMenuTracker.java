@@ -163,6 +163,21 @@ public final class JMenuTracker {
 
 		return gravityTracker;
 	}
+	
+	/**
+	 * Removes the {@link MenuGravityTracker} associated with the passed menu name.
+	 */
+	public void removeGravityTracker(String menuName) {
+		var tracker = menuMap.remove(menuName);
+		
+		if (tracker != null) {
+			var menu = tracker.getMenu();
+			var parent = menu.getParent();
+			
+			if (parent != null)
+				parent.remove(menu);
+		}
+	}
 
 	enum ParseState {
 		LOOKING_FOR_OPENING_BRACKET, LOOKING_FOR_CLOSING_BRACKET, LOOKING_FOR_PERIOD;

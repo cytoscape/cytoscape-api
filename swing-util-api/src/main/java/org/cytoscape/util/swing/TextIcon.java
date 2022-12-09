@@ -126,6 +126,25 @@ public class TextIcon implements Icon {
 			this.disabledLayers.addAll(Arrays.asList(disabledLayers));
 	}
 	
+	/**
+	 * Create a new TextIcon from another TextIcon but with a new width/height.
+	 * @param icon
+	 * @param width the new icon width
+	 * @param height the new icon height
+	 */
+	public TextIcon(TextIcon icon, int width, int height) {
+		this(
+			icon.texts.clone(),
+			scaleFonts(icon.fonts, icon.width, width, icon.height, height),
+			icon.colors != null ? icon.colors.clone() : null,
+			width,
+			height
+		);
+		
+		if (icon.disabledLayers != null)
+			disabledLayers.addAll(icon.disabledLayers);
+	}
+
 	@Override
 	public void paintIcon(Component c, Graphics g, int x, int y) {
 		// Draw to an upscaled image first, to prevent the misaligned icon layers that happens
@@ -228,5 +247,21 @@ public class TextIcon implements Icon {
 		int yy = y + Math.round(((h - textHeight) / 2.0f) + lm.getAscent());
 		
 		g.drawString(text, xx, yy);
+	}
+	
+	private static Font[] scaleFonts(Font[] fonts, float width1, float width2, float height1, float height2) {
+		var newFonts = new Font[fonts.length];
+		
+		float s1 = width2 / width1;
+		float s2 = height2 / height1;
+		float s = Math.min(s1, s2);
+		
+		for (int i = 0; i < fonts.length; i++) {
+			var f = fonts[i];
+			var nf = f.deriveFont(f.getSize() * s);
+			newFonts[i] = nf;
+		}
+		
+		return newFonts;
 	}
 }
