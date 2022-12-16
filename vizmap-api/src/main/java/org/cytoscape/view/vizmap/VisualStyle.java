@@ -25,6 +25,7 @@ package org.cytoscape.view.vizmap;
  */
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.Set;
 
 import org.cytoscape.model.CyColumn;
@@ -60,7 +61,7 @@ public interface VisualStyle {
 	 *
 	 * @param title New title of this VisualStyle.
 	 */
-	void setTitle(final String title);
+	void setTitle(String title);
 	
 
 	/**
@@ -69,7 +70,7 @@ public interface VisualStyle {
 	 * @param mapping new VisualMappingFunction to be added.
 	 * @throws NullPointerException if the specified mapping is null
 	 */
-	void addVisualMappingFunction(final VisualMappingFunction<?, ?> mapping);
+	void addVisualMappingFunction(VisualMappingFunction<?, ?> mapping);
 	
 	
 	/**
@@ -80,7 +81,7 @@ public interface VisualStyle {
 	 * @param vp VisualMappingFunction associated with this VisualProperty will be removed.
 	 *
 	 */
-	void removeVisualMappingFunction(final VisualProperty<?> vp);
+	void removeVisualMappingFunction(VisualProperty<?> vp);
 
 	
 	/**
@@ -93,7 +94,7 @@ public interface VisualStyle {
 	 * @return mapping function for the VisualProperty.  If no mapping is available, this value is null.
 	 * 
 	 */
-	<V> VisualMappingFunction<?, V> getVisualMappingFunction(final VisualProperty<V> vp);
+	<V> VisualMappingFunction<?, V> getVisualMappingFunction(VisualProperty<V> vp);
 
 	
 	/**
@@ -115,8 +116,18 @@ public interface VisualStyle {
 	 *
 	 * @return  Style's default value for the VisualProperty.
 	 */
-	<V> V getDefaultValue(final VisualProperty<V> vp);
+	<V> V getDefaultValue(VisualProperty<V> vp);
 
+	
+	/**
+	 *  Returns all default values that were set in this style.
+	 *  These are the style's default values, not same as VisualProperty default.
+	 *
+	 * @return  All default values for this style.
+	 * @since 3.10
+	 */
+	<V> Map<VisualProperty<?>,Object> getAllDefaultValues();
+	
 	
 	/**
 	 *  Set default value for the VisualProperty.
@@ -128,7 +139,7 @@ public interface VisualStyle {
 	 * @param value Value to be set as default.  This can be child type of V.  For example, 
 	 * 				if V is Number, S can be Double, Integer, etc.
 	 */
-	<V, S extends V> void setDefaultValue(final VisualProperty<V> vp, final S value);
+	<V, S extends V> void setDefaultValue(VisualProperty<V> vp, S value);
 
 	
 	/**
@@ -137,7 +148,7 @@ public interface VisualStyle {
 	 * @param networkView The view that the visual property should be applied to.
 	 * @throws NullPointerException if the specified networkView is null
 	 */
-	void apply(final CyNetworkView networkView);
+	void apply(CyNetworkView networkView);
 	
 	
 	/**
@@ -146,7 +157,7 @@ public interface VisualStyle {
 	 * @param networkView The view that the visual property should be applied to.
 	 * @throws NullPointerException if the specified networkView is null
 	 */
-	void apply(final View<CyColumn> columnView);
+	void apply(View<CyColumn> columnView);
 
 
 	/**
@@ -156,7 +167,7 @@ public interface VisualStyle {
 	 * @param row Data table row for the view's model.  This is necessary for applying mapped values.
 	 * @param view The view that the visual property should be applied to.
 	 */
-	void apply(final CyRow row, final View<? extends CyIdentifiable> view);
+	void apply(CyRow row, View<? extends CyIdentifiable> view);
 	
 	/**
 	 * Get all dependencies for this style.
@@ -172,7 +183,7 @@ public interface VisualStyle {
 	 * 
 	 * @param dependency new dependency to be added 
 	 */
-	void addVisualPropertyDependency(final VisualPropertyDependency<?> dependency);
+	void addVisualPropertyDependency(VisualPropertyDependency<?> dependency);
 	
 	
 	/**
@@ -180,5 +191,5 @@ public interface VisualStyle {
 	 * 
 	 * @param dependency
 	 */
-	void removeVisualPropertyDependency(final VisualPropertyDependency<?> dependency);
+	void removeVisualPropertyDependency(VisualPropertyDependency<?> dependency);
 }
