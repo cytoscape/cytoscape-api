@@ -17,6 +17,9 @@ import java.util.HashMap;
  */
 public interface CyCLDevice
 {
+  /**
+   * The OpenCL list of device types.
+   */
   public enum DeviceTypes
   {
     CPU,

@@ -1,5 +1,8 @@
 package org.cytoscape.cycl;
 
+/**
+ * Interface to the OpenCL platforms available on this computer.
+ */
 public interface CyCLPlatform {
 
   /**

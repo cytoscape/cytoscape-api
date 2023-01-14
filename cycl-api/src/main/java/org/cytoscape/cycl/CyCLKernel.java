@@ -1,5 +1,8 @@
 package org.cytoscape.cycl;
 
+/**
+ * This provides an interface to OpenCL Kernels
+ */
 public interface CyCLKernel
 {
 

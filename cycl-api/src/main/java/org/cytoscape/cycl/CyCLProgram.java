@@ -1,5 +1,9 @@
 package org.cytoscape.cycl;
 
+/**
+ * Interface to an OpenCL program, including methods to get an OpenCL kernel
+ * by name and to get build information after the program has been created (see {@link CyCLDevice} addProgram method).
+ */
 public interface CyCLProgram
 {
 
