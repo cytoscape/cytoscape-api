@@ -68,6 +68,28 @@ public interface TaskMonitor {
 	public void setTitle(String title);
 
 	/**
+	 * Used by the {@code showMessage} and {@code setStatusMessage} methods to indicate the severity of the message.
+	 */
+	public static enum Level {
+		/**
+		 * A message that is informational to the user.
+		 */
+		INFO,
+
+		/**
+		 * A message that warns the user about recoverable errors the task has experienced.
+		 */
+		WARN,
+
+		/**
+		 * A message that informs the user that a non-recoverable error has occured.
+		 * Typically after an error message has been shown, the task should stop
+		 * execution.
+		 */
+		ERROR
+	}
+
+	/**
 	 * Sets the progress completed by the <code>Task</code>.
 	 *
 	 * @param progress A value between <code>0.0</code> and <code>1.0</code>. Any negative value
@@ -103,28 +125,6 @@ public interface TaskMonitor {
 	public void setStatusMessage(String statusMessage);
 
 	/**
-	 * Used by the {@code showMessage} method to indicate the severity of the message.
-	 */
-	public static enum Level {
-		/**
-		 * A message that is informational to the user.
-		 */
-		INFO,
-
-		/**
-		 * A message that warns the user about recoverable errors the task has experienced.
-		 */
-		WARN,
-
-		/**
-		 * A message that informs the user that a non-recoverable error has occured.
-		 * Typically after an error message has been shown, the task should stop
-		 * execution.
-		 */
-		ERROR
-	}
-
-	/**
 	 * Sets the status message that describes what the task is currently doing.
 	 * Status messages are succinct, user-friendly descriptions of a stage of the task's execution.
 	 * These messages should not contain formatting information such as HTML tags,
@@ -147,4 +147,30 @@ public interface TaskMonitor {
 	 * @param message A succinct description of what the task is currently doing.
 	 */
 	public void showMessage(Level level, String message);
+
+	/**
+	 * Sets the status message that describes what the task is currently doing, with a "wait" parameter.
+	 * Status messages are succinct, user-friendly descriptions of a stage of the task's execution.
+	 * These messages should not contain formatting information such as HTML tags,
+	 * since it is not guaranteed that the actual Task Monitor implementation will be able to render it
+	 * (for instance, the messages may be displayed in a console).
+	 * Status messages should not contain implementation details or debugging information either.
+	 *
+	 * <p>
+	 * This method can be called throughout the course of the <code>run</code> method.
+	 * </p>
+	 *
+	 * <p>
+	 * In the Swing task dialog, messages are shown temporarily
+	 * at the bottom until another invocation of {@code setStatusMessage}
+	 * or {@code showMessage}
+	 * or until the end of the task's execution. All messages
+	 * can be recalled by the user by opening the task history window.
+	 * </p>
+	 * @param level The severity of the message
+	 * @param message A succinct description of what the task is currently doing.
+	 * @param wait For {@code Level.WARN} and {@code Level.ERROR} the number of seconds to keep the
+   * dialog up.  This is ignored if it isn't a GUI implementation
+	 */
+	default public void showMessage(Level level, String message, int wait) { showMessage(level, message); }
 }
