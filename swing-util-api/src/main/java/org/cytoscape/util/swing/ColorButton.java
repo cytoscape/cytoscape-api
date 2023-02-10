@@ -100,7 +100,9 @@ public final class ColorButton extends JButton {
 				title = "Palettes";
 
 			var c = chooser.showDialog(ColorButton.this, title, palette, this.color, size);
-			ColorButton.this.setColor(c);
+			
+			if (c != null)
+				ColorButton.this.setColor(c);
 		});
 	}
 

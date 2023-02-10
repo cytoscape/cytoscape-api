@@ -39,39 +39,41 @@ import org.cytoscape.util.color.Palette;
 public interface CyColorPaletteChooser {
 
   /**
-   * Display the chooser and return the Color the user chooses
+   * Display the chooser and return the {@link Color} the user chooses--in case no color is selected
+   * or the action is cancelled, the return will be <code>null</code>.
    *
    * @param parent the component that the dialog should use to center on
    * @param title the dialog title
    * @param initialPalette a palette to use as the initial selected palette
    * @param initialColor the initial selected color
    * @param colorCount the number of colors to display for each palette
-   * @return the Color the user selects
+   * @return the Color the user selects or <code>null</code> if none is selected or the dialog is cancelled
    */
 	Color showDialog(Component parent, String title, Palette initialPalette, Color initialColor, int colorCount);
 
   /**
-   * Display the chooser and return the Palette the user chooses
+   * Display the chooser and return the {@link Palette} the user chooses--in case no palette is selected
+   * or the action is cancelled, the return will be <code>null</code>.
    *
    * @param parent the component that the dialog should use to center on
    * @param title the dialog title
    * @param initialPalette a palette to use as the initial selected palette
    * @param colorCount the number of colors to display for each palette
-   * @return the Palette the user selects
+   * @return the Palette the user selects or <code>null</code> if none is selected or the dialog is cancelled
    */
 	Palette showDialog(Component parent, String title, Palette initialPalette, int colorCount);
 
   /**
-   * Return the Color the user selected
+   * Return the {@link Color} the user selected.
    *
-   * @return the Color the user selects
+   * @return the Color the user selects or <code>null</code> if no color is selected
    */
 	Color getSelectedColor();
 
   /**
-   * Return the palette the user selected
+   * Return the {@link Palette} the user selected.
    * 
-   * @return the Palette the user selects
+   * @return the Palette the user selects or <code>null</code> if no palette is selected
    */
 	Palette getSelectedPalette();
 }
