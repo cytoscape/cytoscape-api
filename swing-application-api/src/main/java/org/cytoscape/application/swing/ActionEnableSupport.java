@@ -1,5 +1,13 @@
 package org.cytoscape.application.swing;
 
+import javax.swing.Action;
+import javax.swing.JMenuItem;
+
+import org.cytoscape.application.CyApplicationManager;
+import org.cytoscape.model.CyNetwork;
+import org.cytoscape.view.model.CyNetworkViewManager;
+import org.cytoscape.work.swing.DynamicSubmenuListener;
+
 /*
  * #%L
  * Cytoscape Swing Application API (swing-application-api)
@@ -23,18 +31,6 @@ package org.cytoscape.application.swing;
  * <http://www.gnu.org/licenses/lgpl-2.1.html>.
  * #L%
  */
-
-import java.util.Collection;
-import java.util.List;
-
-import javax.swing.Action;
-import javax.swing.JMenuItem;
-
-import org.cytoscape.application.CyApplicationManager;
-import org.cytoscape.model.CyNetwork;
-import org.cytoscape.view.model.CyNetworkView;
-import org.cytoscape.view.model.CyNetworkViewManager;
-import org.cytoscape.work.swing.DynamicSubmenuListener;
 
 /**
  * A class that allows the enabled state of an Action of JMenuItem to managed in 
@@ -113,10 +109,13 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 	 * See class documentation above for allowable values for this string.
 	 * @param applicationManager The application manager.
 	 */
-	public ActionEnableSupport(DynamicSubmenuListener submenuListener, String enableFor,
-			final CyApplicationManager applicationManager, final CyNetworkViewManager networkViewManager) {
+	public ActionEnableSupport(
+			DynamicSubmenuListener submenuListener,
+			String enableFor,
+			CyApplicationManager applicationManager,
+			CyNetworkViewManager networkViewManager
+	) {
 		super(submenuListener);
-
 		this.networkViewManager = networkViewManager;
 		this.enableFor = enableFor;
 		this.applicationManager = applicationManager;
@@ -129,7 +128,12 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 	 * See class documentation above for allowable values for this string.
 	 * @param applicationManager The application manager.
 	 */
-	public ActionEnableSupport(Action action, String enableFor, CyApplicationManager applicationManager, final CyNetworkViewManager networkViewManager) {
+	public ActionEnableSupport(
+			Action action,
+			String enableFor,
+			CyApplicationManager applicationManager,
+			CyNetworkViewManager networkViewManager
+	) {
 		super(action);
 		this.enableFor = enableFor;
 		this.applicationManager = applicationManager;
@@ -143,7 +147,12 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 	 * See class documentation above for allowable values for this string.
 	 * @param applicationManager The application manager.
 	 */
-	public ActionEnableSupport(JMenuItem menuItem, String enableFor, CyApplicationManager applicationManager, final CyNetworkViewManager networkViewManager) {
+	public ActionEnableSupport(
+			JMenuItem menuItem,
+			String enableFor,
+			CyApplicationManager applicationManager,
+			CyNetworkViewManager networkViewManager
+	) {
 		super(menuItem);
 		this.enableFor = enableFor;
 		this.applicationManager = applicationManager;
@@ -154,6 +163,7 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 	 * Updates the enable state for the specified action/menuListener/menuItem
 	 * for the specified enableFor description and the state of the system.
 	 */
+	@Override
 	public void updateEnableState() {
 		if (enableFor == null)
 			setEnabled(true);
@@ -193,17 +203,17 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 	 * Enable the action if the current network exists and is not null.
 	 */
 	private void enableForNetwork() {
-		final CyNetwork n = applicationManager.getCurrentNetwork();
+		var n = applicationManager.getCurrentNetwork();
 		setEnabled(n != null);
 	}
 	
 	private void enableForSingleNetwork() {
-		final CyNetwork n = applicationManager.getCurrentNetwork();
+		var n = applicationManager.getCurrentNetwork();
 		
 		if (n == null) {
 			setEnabled(false);
 		} else {
-			final List<CyNetwork> networks = applicationManager.getSelectedNetworks();
+			var networks = applicationManager.getSelectedNetworks();
 			setEnabled(networks.size() == 1 && networks.contains(n));
 		}
 	}
@@ -213,13 +223,13 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 	 * and no view is available for the network.
 	 */
 	private void enableForNetworkWithoutView() {
-		final CyNetwork n = applicationManager.getCurrentNetwork();
+		var n = applicationManager.getCurrentNetwork();
 
 		if (n == null) {
 			setEnabled(false);
 		} else {
 			// Network exists.
-			final Collection<CyNetworkView> views = networkViewManager.getNetworkViews(n);
+			var views = networkViewManager.getNetworkViews(n);
 			setEnabled(views.isEmpty());
 		}
 	}
@@ -228,7 +238,7 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 	 * Enable the action if the current network and view exist and are not null.
 	 */
 	private void enableForNetworkAndView() {
-		final CyNetworkView v = applicationManager.getCurrentNetworkView();
+		var v = applicationManager.getCurrentNetworkView();
 		setEnabled(v != null);
 	}
 
@@ -237,14 +247,16 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 	 * perform the action.
 	 */
 	private void enableForSelectedNodesOrEdges() {
-		final CyNetwork n = applicationManager.getCurrentNetwork();
+		var n = applicationManager.getCurrentNetwork();
 
 		// Disable if there is no current network or the current one is disposed (i.e. node/edge tables no longer exist)
 		if (n == null || n.getDefaultNodeTable() == null || n.getDefaultEdgeTable() == null)
 			setEnabled(false);
 		else
-			setEnabled( ((n.getDefaultNodeTable().countMatchingRows(CyNetwork.SELECTED, true) > 0) ||
-			             (n.getDefaultEdgeTable().countMatchingRows(CyNetwork.SELECTED, true) > 0)) ); 
+			setEnabled(
+					n.getDefaultNodeTable().countMatchingRows(CyNetwork.SELECTED, true) > 0 ||
+					n.getDefaultEdgeTable().countMatchingRows(CyNetwork.SELECTED, true) > 0
+			); 
 	}
 
 	/**
@@ -252,12 +264,12 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 	 * the action.
 	 */
 	private void enableForSelectedNodes() {
-		CyNetwork n = applicationManager.getCurrentNetwork();
+		var n = applicationManager.getCurrentNetwork();
 
 		if (n == null || n.getDefaultNodeTable() == null)
 			setEnabled(false);
 		else
-			setEnabled( (n.getDefaultNodeTable().countMatchingRows(CyNetwork.SELECTED, true) > 0) );
+			setEnabled(n.getDefaultNodeTable().countMatchingRows(CyNetwork.SELECTED, true) > 0);
 	}
 
 	/**
@@ -265,12 +277,12 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 	 * the action.
 	 */
 	private void enableForSelectedEdges() {
-		CyNetwork n = applicationManager.getCurrentNetwork();
+		var n = applicationManager.getCurrentNetwork();
 
 		if (n == null || n.getDefaultEdgeTable() == null)
 			setEnabled(false);
 		else
-			setEnabled( (n.getDefaultEdgeTable().countMatchingRows(CyNetwork.SELECTED, true) > 0) );
+			setEnabled(n.getDefaultEdgeTable().countMatchingRows(CyNetwork.SELECTED, true) > 0);
 	}
 
 	/**
