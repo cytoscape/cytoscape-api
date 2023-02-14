@@ -239,8 +239,8 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 	private void enableForSelectedNodesOrEdges() {
 		final CyNetwork n = applicationManager.getCurrentNetwork();
 
-		// Disable if there is no current network.
-		if (n == null)
+		// Disable if there is no current network or the current one is disposed (i.e. node/edge tables no longer exist)
+		if (n == null || n.getDefaultNodeTable() == null || n.getDefaultEdgeTable() == null)
 			setEnabled(false);
 		else
 			setEnabled( ((n.getDefaultNodeTable().countMatchingRows(CyNetwork.SELECTED, true) > 0) ||
@@ -254,7 +254,7 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 	private void enableForSelectedNodes() {
 		CyNetwork n = applicationManager.getCurrentNetwork();
 
-		if (n == null)
+		if (n == null || n.getDefaultNodeTable() == null)
 			setEnabled(false);
 		else
 			setEnabled( (n.getDefaultNodeTable().countMatchingRows(CyNetwork.SELECTED, true) > 0) );
@@ -267,7 +267,7 @@ public final class ActionEnableSupport extends AbstractEnableSupport {
 	private void enableForSelectedEdges() {
 		CyNetwork n = applicationManager.getCurrentNetwork();
 
-		if (n == null)
+		if (n == null || n.getDefaultEdgeTable() == null)
 			setEnabled(false);
 		else
 			setEnabled( (n.getDefaultEdgeTable().countMatchingRows(CyNetwork.SELECTED, true) > 0) );
