@@ -360,20 +360,16 @@ public class CyColumnSelector extends JPanel {
 						if ((isMac && e.isMetaDown()) || (!isMac && e.isControlDown()) || e.isShiftDown())
 							return; // Ignore!
 						
-					    int col = table.columnAtPoint(e.getPoint());
-					    
-						if (col == SELECTED_COL_IDX) {
-							int row = table.rowAtPoint(e.getPoint());
-							
-							// Restore previous multiple-row selection first
-						    if (previousSelectedRows != null && previousSelectedRows.contains(row)) {
-						    	for (int i : previousSelectedRows)
-						    		table.addRowSelectionInterval(i, i);
-						    }
-							
-							toggleSelection(row);
-							updateSelectionButtons();
-						}
+						int row = table.rowAtPoint(e.getPoint());
+						
+						// Restore previous multiple-row selection first
+					    if (previousSelectedRows != null && previousSelectedRows.contains(row)) {
+					    	for (int i : previousSelectedRows)
+					    		table.addRowSelectionInterval(i, i);
+					    }
+						
+						toggleSelection(row);
+						updateSelectionButtons();
 					}
 				});
 			}
