@@ -28,9 +28,9 @@ package org.cytoscape.util.swing;
 import java.awt.Component;
 import java.util.HashMap;
 import java.util.Map;
+
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
-
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -43,77 +43,89 @@ import org.slf4j.LoggerFactory;
  * @CyAPI.InModule swing-util-api
  */
 public final class MenuGravityTracker implements GravityTracker {
+	
 	private final static Logger logger = LoggerFactory.getLogger("org.cytoscape.application.userlog");
+	
 	private final JMenu menu;
 	private final Map<Component, Double> componentGravity;
 
-	/**
-	 * Constructor.
-	 * @param menu The JMenu associated with this MenuGravityTracker.
-	 */
-	public MenuGravityTracker(final JMenu menu) {
+	public MenuGravityTracker(JMenu menu) {
 		this.menu = menu;
-		this.componentGravity = new HashMap<Component, Double>();
+		this.componentGravity = new HashMap<>();
 	}
 
 	@Override
-	public JMenu getMenu() { return menu; }
-
-	@Override
-	public void addMenuItem(final JMenuItem newMenuItem, final double gravity) {
-                final int index = getInsertLocation(newMenuItem.getText(), gravity);
-                menu.insert(newMenuItem, index);
-                componentGravity.put(newMenuItem, gravity);
-                logger.debug("Inserted menu item: " + newMenuItem + " with gravity: " + gravity);
+	public JMenu getMenu() {
+		return menu;
 	}
 
 	@Override
-	public void addMenu(final JMenu newSubmenu, final double gravity) {
-                final int index = getInsertLocation(newSubmenu.getText(), gravity);
-                menu.insert(newSubmenu, index);
-                componentGravity.put(newSubmenu, gravity);
-                logger.debug("Inserted menu: " + newSubmenu + " with gravity: " + gravity);
+	public void addMenuItem(JMenuItem newMenuItem, double gravity) {
+		//newMenuItem.setText(newMenuItem.getText() + " (" + gravity + ")");
+		int index = getInsertLocation(newMenuItem.getText(), gravity);
+		menu.insert(newMenuItem, index);
+		componentGravity.put(newMenuItem, gravity);
+		logger.debug("Inserted menu item: " + newMenuItem + " with gravity: " + gravity);
 	}
 
 	@Override
-	public void addMenuSeparator(final double gravity) {
-                final int index = getInsertLocation("-", gravity);
-                menu.insertSeparator(index);
-                final Component separator = menu.getMenuComponent(index);
-                componentGravity.put(separator, gravity);
-                logger.debug("Inserted menu separator with gravity: " + gravity);
+	public void addMenu(JMenu newSubmenu, double gravity) {
+		//newSubmenu.setText(newSubmenu.getText() + " (" + gravity + ")");
+		int index = getInsertLocation(newSubmenu.getText(), gravity);
+		menu.insert(newSubmenu, index);
+		componentGravity.put(newSubmenu, gravity);
+		logger.debug("Inserted menu: " + newSubmenu + " with gravity: " + gravity);
 	}
 
 	@Override
-	public void removeComponent(final Component component) {
+	public void addMenuSeparator(double gravity) {
+		int index = getInsertLocation("-", gravity);
+		menu.insertSeparator(index);
+		Component separator = menu.getMenuComponent(index);
+		componentGravity.put(separator, gravity);
+		logger.debug("Inserted menu separator with gravity: " + gravity);
+	}
+
+	@Override
+	public void removeComponent(Component component) {
 		if (componentGravity.remove(component) != null)
 			menu.remove(component);
 	}
 
-	private int getInsertLocation(final String newMenuText, final double newGravity) {
-		if (newGravity == GravityTracker.USE_ALPHABETIC_ORDER) {
-			for (int i = 0; i < menu.getMenuComponentCount(); ++i) {
-				final Component item = menu.getMenuComponent(i);
-				if (item instanceof JMenu) {
-					final JMenu subMenu = (JMenu)item;
-					if (newMenuText.compareToIgnoreCase(subMenu.getText()) < 0)
+	private int getInsertLocation(String text, double gravity) {
+		int count = menu.getMenuComponentCount();
+		
+		if (gravity == USE_ALPHABETIC_ORDER) {
+			for (int i = 0; i < count; ++i) {
+				var item = menu.getMenuComponent(i);
+				var itemGrav = componentGravity.get(item);
+				
+				if(itemGrav != GravityTracker.USE_ALPHABETIC_ORDER) {
+					continue;
+				} else if (item instanceof JMenu subMenu) {
+					if (text.compareToIgnoreCase(subMenu.getText()) < 0) {
 						return i;
-				} else if (item instanceof JMenuItem) {
-					final JMenuItem menuItem = (JMenuItem)item;
-					if (newMenuText.compareToIgnoreCase(menuItem.getText()) < 0)
+					}
+				} else if (item instanceof JMenuItem menuItem) {
+					if (text.compareToIgnoreCase(menuItem.getText()) < 0) {
 						return i;
+					}
 				}
 			}
 		} else {
-			for (int i = 0; i < menu.getMenuComponentCount(); ++i) {
-				final Component item = menu.getMenuComponent(i);
-				Double gravity = componentGravity.get(item);
-				if (gravity != null && newGravity < gravity) {
+			for (int i = 0; i < count; ++i) {
+				var item = menu.getMenuComponent(i);
+				var itemGrav = componentGravity.get(item);
+				if (itemGrav == USE_ALPHABETIC_ORDER) {
+					return i;
+				}
+				if (itemGrav != null && gravity < itemGrav) {
 					return i;
 				}
 			}
 		}
 
-		return menu.getMenuComponentCount();
+		return count;
 	}
+	
 }

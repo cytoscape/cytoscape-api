@@ -1,5 +1,10 @@
 package org.cytoscape.util.swing;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertSame;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
 /*
  * #%L
  * Cytoscape Swing Utility API (swing-util-api)
@@ -32,7 +37,6 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 import javax.swing.JSeparator;
 
-import static org.junit.Assert.*;
 import org.junit.Test;
 
 
@@ -112,6 +116,110 @@ public abstract class AbstractGravityTrackerTest {
 		} else {
 			final JPopupMenu menu = (JPopupMenu)someMenu;
 			assertEquals(menu1, menu.getComponent(0));
+		}
+	}
+	
+	@Test
+	public void testAlphabeticOrdering1() {
+		var menuItemA = new JMenuItem("A");
+		var menuItemB = new JMenuItem("B");
+		var menuItemC = new JMenuItem("C");
+		var menuItemD = new JMenuItem("D");
+		var menuItemE = new JMenuItem("E");
+		
+		gravityTracker.addMenuItem(menuItemC, GravityTracker.USE_ALPHABETIC_ORDER);
+		gravityTracker.addMenuItem(menuItemA, GravityTracker.USE_ALPHABETIC_ORDER);
+		gravityTracker.addMenuItem(menuItemE, GravityTracker.USE_ALPHABETIC_ORDER);
+		gravityTracker.addMenuItem(menuItemD, GravityTracker.USE_ALPHABETIC_ORDER);
+		gravityTracker.addMenuItem(menuItemB, GravityTracker.USE_ALPHABETIC_ORDER);
+		
+		var comp = gravityTracker.getMenu();
+		if (comp instanceof JMenu menu) {
+			assertSame(menuItemA, menu.getMenuComponent(0));
+			assertSame(menuItemB, menu.getMenuComponent(1));
+			assertSame(menuItemC, menu.getMenuComponent(2));
+			assertSame(menuItemD, menu.getMenuComponent(3));
+			assertSame(menuItemE, menu.getMenuComponent(4));
+		} else if(comp instanceof JPopupMenu menu) {
+			assertSame(menuItemA, menu.getComponent(0));
+			assertSame(menuItemB, menu.getComponent(1));
+			assertSame(menuItemC, menu.getComponent(2));
+			assertSame(menuItemD, menu.getComponent(3));
+			assertSame(menuItemE, menu.getComponent(4));
+		} else {
+			fail("Not a menu!");
+		}
+	}
+	
+	@Test
+	public void testAlphabeticOrdering2() {
+		var menuItem1 = new JMenuItem("Normal 1");
+		var menuItem2 = new JMenuItem("Normal 2");
+		var menuItem3 = new JMenuItem("Normal 3");
+		var menuItemA = new JMenuItem("A");
+		var menuItemB = new JMenuItem("B");
+		var menuItemC = new JMenuItem("C");
+		
+		gravityTracker.addMenuItem(menuItemC, GravityTracker.USE_ALPHABETIC_ORDER);
+		gravityTracker.addMenuItem(menuItem2, 2.0);
+		gravityTracker.addMenuItem(menuItemA, GravityTracker.USE_ALPHABETIC_ORDER);
+		gravityTracker.addMenuItem(menuItem1, 1.0);
+		gravityTracker.addMenuItem(menuItem3, 3.0);
+		gravityTracker.addMenuItem(menuItemB, GravityTracker.USE_ALPHABETIC_ORDER);
+		
+		var comp = gravityTracker.getMenu();
+		if (comp instanceof JMenu menu) {
+			assertSame(menuItem1, menu.getMenuComponent(0));
+			assertSame(menuItem2, menu.getMenuComponent(1));
+			assertSame(menuItem3, menu.getMenuComponent(2));
+			assertSame(menuItemA, menu.getMenuComponent(3));
+			assertSame(menuItemB, menu.getMenuComponent(4));
+			assertSame(menuItemC, menu.getMenuComponent(5));
+		} else if(comp instanceof JPopupMenu menu) {
+			assertSame(menuItem1, menu.getComponent(0));
+			assertSame(menuItem2, menu.getComponent(1));
+			assertSame(menuItem3, menu.getComponent(2));
+			assertSame(menuItemA, menu.getComponent(3));
+			assertSame(menuItemB, menu.getComponent(4));
+			assertSame(menuItemC, menu.getComponent(5));
+		} else {
+			fail("Not a menu!");
+		}
+	}
+	
+	@Test
+	public void testAlphabeticOrdering3() {
+		var menuItemA = new JMenuItem("A");
+		var menuItemB = new JMenuItem("B");
+		var menuItemC = new JMenuItem("C");
+		var menuItem1 = new JMenuItem("Normal 1");
+		var menuItem2 = new JMenuItem("Normal 2");
+		var menuItem3 = new JMenuItem("Normal 3");
+		
+		gravityTracker.addMenuItem(menuItem1, 1.0);
+		gravityTracker.addMenuItem(menuItem3, 3.0);
+		gravityTracker.addMenuItem(menuItemC, GravityTracker.USE_ALPHABETIC_ORDER);
+		gravityTracker.addMenuItem(menuItem2, 2.0);
+		gravityTracker.addMenuItem(menuItemA, GravityTracker.USE_ALPHABETIC_ORDER);
+		gravityTracker.addMenuItem(menuItemB, GravityTracker.USE_ALPHABETIC_ORDER);
+		
+		var comp = gravityTracker.getMenu();
+		if (comp instanceof JMenu menu) {
+			assertSame(menuItem1, menu.getMenuComponent(0));
+			assertSame(menuItem2, menu.getMenuComponent(1));
+			assertSame(menuItem3, menu.getMenuComponent(2));
+			assertSame(menuItemA, menu.getMenuComponent(3));
+			assertSame(menuItemB, menu.getMenuComponent(4));
+			assertSame(menuItemC, menu.getMenuComponent(5));
+		} else if(comp instanceof JPopupMenu menu) {
+			assertSame(menuItem1, menu.getComponent(0));
+			assertSame(menuItem2, menu.getComponent(1));
+			assertSame(menuItem3, menu.getComponent(2));
+			assertSame(menuItemA, menu.getComponent(3));
+			assertSame(menuItemB, menu.getComponent(4));
+			assertSame(menuItemC, menu.getComponent(5));
+		} else {
+			fail("Not a menu!");
 		}
 	}
 }
