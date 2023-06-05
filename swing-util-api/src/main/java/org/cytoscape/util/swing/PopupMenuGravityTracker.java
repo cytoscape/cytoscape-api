@@ -101,9 +101,9 @@ public final class PopupMenuGravityTracker implements GravityTracker {
 		if (gravity == USE_ALPHABETIC_ORDER) {
 			for (int i = 0; i < count; ++i) {
 				var item = menu.getComponent(i);
-				var itemGrav = componentGravity.get(item);
+				var itemGrav = componentGravity.getOrDefault(item, USE_ALPHABETIC_ORDER);
 				
-				if(itemGrav != GravityTracker.USE_ALPHABETIC_ORDER) {
+				if(itemGrav != USE_ALPHABETIC_ORDER) {
 					continue;
 				} else if (item instanceof JMenu subMenu) {
 					if (text.compareToIgnoreCase(subMenu.getText()) < 0) {
@@ -118,7 +118,7 @@ public final class PopupMenuGravityTracker implements GravityTracker {
 		} else {
 			for (int i = 0; i < count; ++i) {
 				var item = menu.getComponent(i);
-				var itemGrav = componentGravity.get(item);
+				var itemGrav = componentGravity.getOrDefault(item, USE_ALPHABETIC_ORDER);
 				if (itemGrav == USE_ALPHABETIC_ORDER) {
 					return i;
 				}
