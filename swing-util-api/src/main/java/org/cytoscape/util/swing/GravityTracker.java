@@ -42,7 +42,10 @@ public interface GravityTracker {
 
 	/** Returns the JPopupMenu or JMenu that this gravity tracker tracks.
 	 *  @return the JPopupMenu or JMenu that this gravity tracker tracks
+	 *  @deprecated Apps should not call this method to insert menu items. 
+	 *     Register your menu items as services instead.
 	 */
+	@Deprecated
 	Component getMenu();
 
 	/** Adds a new menu item into a position based on "gravity" of the new item.
