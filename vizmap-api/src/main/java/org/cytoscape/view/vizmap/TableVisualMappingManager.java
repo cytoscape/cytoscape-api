@@ -36,10 +36,17 @@ import org.cytoscape.view.model.VisualLexicon;
 public interface TableVisualMappingManager {
 
 	/**
-	 * Set a {@link VisualStyle} directly to the target column view model.
+	 * <p>Set a {@link VisualStyle} directly to the target column view model.</p>
 	 * 
-	 * Note, if the target column is from a network node/edge table, then it will automatically
-	 * be associated with the network's current VisualStyle instead of being directly associated.
+	 * 
+	 * <p>Note: As of Cytoscape 3.10 the preferred way to create a visual style for use in the node or edge table
+	 * is to create a visual style and associate it with a network style using the setAssociatedVisualStyle(...) method.
+	 * The setVisualStyle(...) method should only be used by Apps to programmatically set styles on tables that are not 
+	 * registered with the CyNetworkTableManager.
+	 * </p>
+	 * 
+	 * <p>Note: If the target column is from a network node/edge table, then it will automatically
+	 * be associated with the network's current VisualStyle instead of being directly associated.</p>
 	 * 
 	 * @param visualStyle Visual Style to be set.  May be null.
 	 * @param columnView The target column view model.
