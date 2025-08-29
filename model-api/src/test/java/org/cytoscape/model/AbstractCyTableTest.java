@@ -395,7 +395,7 @@ public abstract class AbstractCyTableTest {
 	}
 
 	@Test
-	public void testDeleteColumnNoOpWithNonexistingColumn() {
+	public void testDeleteColumnNoOpWithNonexistentColumn() {
 		table.deleteColumn("x");
 	}
 
@@ -415,7 +415,7 @@ public abstract class AbstractCyTableTest {
 	}
 
 	@Test
-	public void testGetListWithANonExistantColumn() {
+	public void testGetListWithANonExistentColumn() {
 		assertNull(attrs.getList("x", String.class));
 	}
 
