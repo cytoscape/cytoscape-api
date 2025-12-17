@@ -85,11 +85,14 @@
   }
   </code></pre>
 
-  As seen above, to get started, you need to get the {@code CyCLFactory}, which gets registered at Cytoscape initialization time.  The
-  next step is to get a {@code CyCLDevice} from the factory.  Most everything else is done through the device.  The {@code CyCLDevice}
-  returned by {@code CyCLFactory.getDevice()} is the "best" (i.e. fastest) device available based on a simple benchmark that gets
+  As seen above, to get started, you need to get the {@link CyCLFactory}, which gets registered at Cytoscape initialization time.  The
+  next step is to get a {@link CyCLDevice} from the factory.  Most everything else is done through the device.  The {@link CyCLDevice}
+  returned by {@link CyCLFactory#getDevice} is the "best" (i.e. fastest) device available based on a simple benchmark that gets
   run at initialization time.
 
+  <h3>OpenCL Memory Management</h3>
+
+  <p>Unlike Java, OpenCL has no garbage collection, so we're required to manage memory directly.  This is done primarily through {@link CyCLBuffer} objects.  
 
  */
 package org.cytoscape.cycl;
