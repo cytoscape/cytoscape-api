@@ -62,13 +62,6 @@
 				<artifactId>mockito-core</artifactId>
 				<version>${mockito.version}</version>
 			</dependency>
-      <dependency>
-        <groupId>jakarta.xml.bind</groupId>
-        <artifactId>jakarta.xml.bind-api</artifactId>
-        <version>4.0.2</version>
-        <optional>true</optional>
-        <scope>provided</scope>
-			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
