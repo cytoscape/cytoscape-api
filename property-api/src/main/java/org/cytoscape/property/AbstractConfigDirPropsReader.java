@@ -38,7 +38,7 @@ import org.slf4j.LoggerFactory;
  * An abstract implementation of CyProperty&lt;Properties&gt; that attempts to read the specified
  * properties file first from the jar file running this code and then appends any properties
  * found in the local configuration directory to that properties object. The config
- * directory used is {@link CyProperty.DEFAULT_PROPS_CONFIG_DIR}.
+ * directory used is obtained via {@link CyConfigurationDirectory}.
  * <br/>
  * This class must be extended so that it will read from the proper jar file.  In general
  * simply implementing a constructor should be sufficient:
@@ -105,8 +105,7 @@ public abstract class AbstractConfigDirPropsReader implements CyProperty<Propert
 	private void readLocalModifications(String propFileName) throws Exception {
 		InputStream is = null;
 		try {
-			final File configDir = new File(System.getProperty("user.home"), CyProperty.DEFAULT_PROPS_CONFIG_DIR); 
-	        final File localPropsFile = new File(configDir,propFileName);
+			final File localPropsFile = new File(CyConfigurationDirectory.get(), propFileName);
 
 			if (localPropsFile.exists()) {
 				is = new FileInputStream(localPropsFile);
